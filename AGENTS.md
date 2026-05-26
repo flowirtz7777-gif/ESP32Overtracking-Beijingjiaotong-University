@@ -1,0 +1,305 @@
+# AGENTS.md — Project Context for OpenAI Codex / GitHub Copilot / 通用 AI 编程助手
+
+> 与 `CLAUDE.md` 同步维护；本文件偏向 Codex 风格，列出仓库结构、命令、约定与任务清单。
+
+---
+
+## Project Summary
+
+**ESP32-S3 + OpenMV dual-MCU real-time warning system for truck (incl. semi-trailer) right-turn inner-wheel-difference blind-zone hazard.**
+
+- Target hazard: pedestrian / e-bike crushed by trailer rear wheel during right turn
+- Approach: rigid-body kinematic prediction + radar + vision sensor fusion
+- Output: swept polygon of vehicle right edge over the next T_h seconds, multi-target risk grading, 3-level alarm
+
+---
+
+## Repo Layout
+
+```
+.
+├── ArduinoIDE/                 # ESP32 firmware (Arduino C++)
+│   ├── ESP32TruckOverTrackingWarningSystem.ino
+│   ├── config.h
+│   ├── sensors_alpha.{h,cpp}   # AS5600 -> alpha (rad)
+│   ├── sensors_phi.{h,cpp}     # potentiometer -> phi (rad)
+│   ├── speed_can.{h,cpp}       # TWAI -> v (m/s)   [needs decoder]
+│   ├── radar_ld2450.{h,cpp}    # HLK-LD2450 -> targets [needs frame parser]
+│   ├── utils.{h,cpp}           # LPF, angle unwrap
+│   ├── predictor.{h,cpp}       # TODO: kinematics + swept polygon
+│   ├── risk_eval.{h,cpp}       # TODO: point-in-poly, TTC
+│   ├── alarm_fsm.{h,cpp}       # TODO: 3-level state machine
+│   ├── alarm_out.{h,cpp}       # buzzer + LED
+│   └── vision_uart.{h,cpp}     # TODO: OpenMV link
+├── Matlab/                     # Simulation & algo verification
+│   ├── guacheweixianqu.m       # Legacy monolithic semi-trailer sim
+│   ├── pid3.m                  # Legacy single-vehicle sim
+│   └── (refactor target: vehicle_params.m / kinematics_step.m / predict_swept.m / ...)
+├── OpenMV/                     # TODO: vision coprocessor python
+├── overtrack.pdf               # Research / context
+├── PCB原理图.png                # Hardware schematic
+├── latex代码.txt                # Paper / proposal LaTeX draft
+├── README.md
+├── CLAUDE.md
+├── AGENTS.md
+└── .gitignore
+```
+
+---
+
+## Hardware (Combo B)
+
+| Role | Part | Interface |
+|---|---|---|
+| Master MCU | ESP32-S3-N16R8 | — |
+| Vision coproc | OpenMV H7 Plus | UART2 @ 115200 |
+| α sensor | AS5600 | I²C or analog (current: ADC pin 34) |
+| φ sensor | rotary potentiometer | ADC pin 35 |
+| Speed | OBD CAN | TWAI TX=GPIO5 / RX=GPIO4, default 500 kbps |
+| Radar | HLK-LD2450 | UART2 RX=16 / TX=17 @ 115200 |
+| Buzzer | passive piezo | GPIO12 |
+| LED | dual-color | GPIO13 |
+
+Body frame: origin at tractor rear-axle center **B**, x forward, y leftward.
+
+---
+
+## Coding Conventions
+
+### C++ (ESP32 / Arduino)
+
+- C++17, `float` for all physics (ESP32-S3 single-precision FPU)
+- Headers: `#pragma once`
+- Constants: `static constexpr` in `config.h`, no macros
+- Member naming: `_field`, getters `field()`
+- Variable naming: include unit suffix — `alpha_rad`, `v_mps`, `x_m`, `phi_rad`
+- Serial logs: tag prefix — `[SENS]`, `[PRED]`, `[RISK]`, `[ALRM]`, `[CAN]`
+- Avoid `delay()`; non-blocking polling, target main loop @ 50 Hz (`LOOP_DT_MS = 20`)
+- No floating point in ISRs
+
+### Python (OpenMV)
+
+- MicroPython subset, no external libs except OpenMV's `sensor`, `image`, `ml`, `pyb`/`machine`
+- Default resolution QVGA (320×240); switch to QQVGA when fps drops below 10
+- Models in `/sd/model/` or internal flash, `.tflite` int8 quantized
+- UART protocol with ESP32 (see below) — fixed binary, never ASCII
+
+### MATLAB
+
+- Use function files, not scripts dumping everything at top level
+- Function signatures must mirror C++ counterparts so Codex can move logic in either direction
+- Annotate units in comments
+
+### Git
+
+- Commit format: `<type>: <emoji> <summary>` (Chinese summary OK)
+  - types: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`
+- Branches: `main` (stable), `dev/<topic>`
+- Never commit binaries > 50 MB (use cloud storage + link in README)
+- Files containing secrets / credentials: never commit
+
+---
+
+## Build / Run
+
+### ESP32 firmware
+
+```bash
+# Arduino IDE 2.x (recommended)
+# Board: "ESP32S3 Dev Module"
+# Flash: 16 MB, PSRAM: OPI 8MB, Partition: Default with PSRAM
+# Open: ArduinoIDE/ESP32TruckOverTrackingWarningSystem.ino
+# Build & Upload via Arduino IDE GUI
+```
+
+### OpenMV firmware
+
+```python
+# Open OpenMV IDE -> Tools -> Run script
+# Or copy OpenMV/main.py to the camera's USB drive as main.py
+```
+
+### MATLAB simulation
+
+```matlab
+% Open MATLAB R2021b+, set workspace to repo root
+cd Matlab
+% Phase 1 entry point (will exist after refactor):
+sim_pid                % run with PID-driven inputs
+% Or replay real-vehicle CSV:
+sim_replay('logs/run_2026-05-26.csv')
+```
+
+---
+
+## Core Algorithms
+
+### Kinematics step (with l_h coupling — DO NOT OMIT)
+
+State `s = [xB, yB, theta, phi]`.
+
+```
+omega1   = v * sin(alpha) / l            % tractor yaw rate
+vB       = v * cos(alpha)
+v_Hx_t   =  vB*cos(phi) + l_h*omega1*sin(phi)
+v_Hy_t   = -vB*sin(phi) + l_h*omega1*cos(phi)
+omega2   = v_Hy_t / L                    % trailer yaw rate
+vT       = v_Hx_t
+
+xB     += vB*cos(theta)*dt
+yB     += vB*sin(theta)*dt
+theta  += omega1*dt
+phi    += (omega1 - omega2)*dt           % clamp |phi| <= phi_max
+```
+
+Derived points:
+```
+xA = xB + l*cos(theta),     yA = yB + l*sin(theta)
+xH = xB + l_h*cos(theta),   yH = yB + l_h*sin(theta)
+theta_t = theta - phi
+xT = xH - L*cos(theta_t),   yT = yH - L*sin(theta_t)
+```
+
+> WARNING: legacy `guacheweixianqu.m` omits the `l_h*omega1` coupling term in `omega2`.
+> Always use the coupled form when refactoring or porting.
+
+### Three-tier swept polygon (per main-loop tick)
+
+| Tier | T_h | dt_pred | meaning |
+|---|---|---|---|
+| `PolyW` | 2.0 s | 0.05 s | yellow warn |
+| `PolyA` | 1.0 s | 0.05 s | red alarm |
+| `PolyI` | 0.3 s | 0.05 s | imminent collision |
+
+Right-edge points at each predicted step: take A/B/H/T and offset by +W/2 along right normal:
+- A, B, H use **tractor heading** `theta` for normal
+- T uses **trailer heading** `theta_t` for normal (this is fixed vs. legacy bug)
+
+Build polygon: `[A_right(0..N)] -> [T_right(N..0)]` closed.
+
+### Risk evaluation (per radar/vision target i)
+
+```
+in_imm   = point_in_poly(p_i(0), PolyI)
+in_alarm = point_in_poly(p_i(0), PolyA)
+in_warn  = point_in_poly(p_i(0), PolyW)
+TTC_i    = min tau s.t. point_in_poly(p_i(tau), PolyA)   % CV extrapolation
+
+Risk_i = max:
+  in_imm   || TTC_i < 0.3  -> 3
+  in_alarm || TTC_i < 1.0  -> 2
+  in_warn  || TTC_i < 2.0  -> 1
+  else                     -> 0
+
+Risk_total = max_i Risk_i
+```
+
+### Alarm FSM (debouncing)
+
+```
+upgrade   if condition holds for >= 2 consecutive ticks (40 ms)
+downgrade if condition fails for >= 10 consecutive ticks (200 ms)
+output:
+  S=0  off
+  S=1  yellow LED solid
+  S=2  red LED solid + buzzer 250ms beep cycle
+  S=3  red LED solid + buzzer continuous
+```
+
+---
+
+## UART Protocol (OpenMV → ESP32)
+
+Frame:
+```
+0xAA 0x55 N obj1 ... objN CRC8
+each obj: cls(u8) x_mm(i16 LE) y_mm(i16 LE) w_mm(u16 LE) h_mm(u16 LE) conf(u8 0..100)
+```
+- `cls`: 0=unknown, 1=person, 2=bicycle/e-bike, 3=car
+- coords already in body frame (vision module pre-applies extrinsic calibration)
+- frame rate target ≥ 10 Hz
+
+---
+
+## Performance Budget (ESP32-S3, 240 MHz, single core)
+
+| Module | Budget |
+|---|---|
+| sensors + LPF | 0.5 ms |
+| predict_swept × 3 tiers | 0.3 ms |
+| CV target extrapolation | <0.1 ms |
+| point_in_poly × 3 × 3 | 0.2 ms |
+| FSM + I/O | <0.1 ms |
+| **Total** | **~2 ms** of 20 ms |
+
+Memory: <5 KB heap for polygons + target buffers.
+
+---
+
+## Roadmap & Acceptance Gates
+
+### Phase 1 — MATLAB / C++ kinematics parity (v0.1)
+
+- [ ] `Matlab/vehicle_params.m` with `l, l_h, L, W, phi_max`
+- [ ] `Matlab/kinematics_step.m` (signature-match with C++)
+- [ ] `Matlab/predict_swept.m`
+- [ ] Refactor `guacheweixianqu.m` to use the above
+- [ ] `ArduinoIDE/predictor.{h,cpp}`
+- [ ] **Gate**: identical input -> polygon vertex error < 1 mm vs. MATLAB
+
+### Phase 2 — Sensor / decoder wiring (v0.2)
+
+- [ ] `speed_can.cpp::speed_mps()` decoder (depends on real CAN dump)
+- [ ] `radar_ld2450.cpp::poll()` full LD2450 frame parser
+- [ ] α / φ calibration scripts
+- [ ] `risk_eval.{h,cpp}` + `alarm_fsm.{h,cpp}` + `alarm_out.{h,cpp}`
+- [ ] **Gate**: bench rig — manually rotate α/φ + a reflector, alarm levels transition correctly
+
+### Phase 3 — Vision fusion (v0.3)
+
+- [ ] OpenMV `main.py` with FOMO/MobileNet person model
+- [ ] `vision_uart.{h,cpp}` on ESP32 side
+- [ ] Spatial calibration (radar/vision extrinsics in `config.h`)
+- [ ] Fusion: track association + CV extrapolation
+- [ ] **Gate**: targets missed by either sensor get recovered by fusion
+
+### Phase 4 — Vehicle test & docs (v1.0)
+
+- [ ] Low-speed (5–15 km/h) field test, CSV logging
+- [ ] Application form, PCB final, user manual
+- [ ] Paper / patent draft
+
+---
+
+## Hard Constraints / DO-NOTs
+
+1. **Never** drop the `l_h * omega1` coupling term in trailer kinematics.
+2. **Never** assume same heading for tractor and trailer when projecting right-edge — A/B/H use `theta`, T uses `theta_t`.
+3. **Never** run heavy ML on ESP32 (model > 100 KB or >1 ms inference).
+4. **Never** block main loop with `delay()`. Use `millis()` non-blocking checks.
+5. **Never** print all polygon vertices over Serial in main loop (diagnostics only, gated by a flag).
+6. **Never** modify kinematics on one side (MATLAB or C++) without mirror-updating the other.
+7. **Never** commit ADC raw dumps, video files, or large `.bag` to git (use cloud + link).
+
+---
+
+## Quick Task Hints for AI Assistants
+
+When asked to:
+- "**修运动学**" / "**fix kinematics**" → see Phase 1 + the coupled form above
+- "**加视觉**" / "**add vision**" → start with OpenMV `main.py` + UART protocol
+- "**调报警**" / "**tune alarm**" → modify `alarm_fsm.cpp` thresholds in `config.h`, not code
+- "**生成报告**" / "**generate report**" → use `latex代码.txt` template + `MATLAB` figures
+- "**移植算法**" / "**port algorithm**" → MATLAB function `f.m` ↔ C++ `f()`, keep signatures identical
+
+For any change touching `predictor.{h,cpp}` or `kinematics_step.m`, update **both** sides and add a unit-test-style cross-check in Phase 1.
+
+---
+
+## Reference Documents (in repo root)
+
+- `overtrack.pdf` — overall research summary
+- `内轮差.pdf` — domestic engineering reference
+- `车辆转弯时内轮差的运动学理论模型.pdf` — primary kinematics reference
+- `铰链车右转内轮差区域范围确定方法_李英帅.pdf` — Li Yingshuai paper, basis of TF inner-wheel-diff definition
+- `附件1~5.pdf/docx/xlsx` — Beijing Jiaotong University 2026 challenge cup official forms

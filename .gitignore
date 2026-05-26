@@ -1,0 +1,62 @@
+# ============================================================
+# .gitignore — ESP32 Truck Overtracking Warning System
+# ============================================================
+
+# ------------- OS / Editor -------------
+Thumbs.db
+desktop.ini
+.DS_Store
+*~
+*.swp
+.vscode/
+.idea/
+*.code-workspace
+
+# ------------- Office temp files -------------
+~$*.docx
+~$*.xlsx
+~$*.pptx
+~$*.doc
+~$*.xls
+
+# ------------- Build artifacts (Arduino) -------------
+build/
+*.bin
+*.elf
+*.map
+*.hex
+*.uf2
+
+# Arduino IDE 2.x build output
+.ArduinoIDE/build/
+.cache/
+*.tmp.*
+
+# ------------- MATLAB -------------
+*.asv
+*.m~
+*.mat
+*.fig
+*.slxc
+slprj/
+
+# ------------- Python (for OpenMV / data tools) -------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# ------------- Logs / data captures -------------
+logs/
+*.log
+*.csv.bak
+data/raw/
+*.bag
+
+# ------------- Large model files -------------
+*.tflite.bak
+*.h5
+*.onnx
+*.pth
