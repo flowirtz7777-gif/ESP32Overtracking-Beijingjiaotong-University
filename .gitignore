@@ -72,3 +72,6 @@ package-lock.json
 # Useful artifacts (HTML / m / .md) are mirrored to repo root, so trae/ itself
 # should never be committed.
 trae/
+
+# Windows shortcuts: hardcoded absolute paths, never portable, must not be tracked.
+*.lnk

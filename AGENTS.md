@@ -112,6 +112,7 @@ PID-driven scenario generator is bundled in the repo:
 |---|---|
 | `pid工况仿真导出器.html` | Standalone web UI: configure vehicle params / reference heading / PID gains, simulate, export discrete CSV `(t, v, alpha, phi, ...)` |
 | `desktop-main.js` + `package.json` | Optional Electron desktop wrapper. Run with `npm install && npm run desktop:dev`. Not required — the HTML can be opened directly in any browser. |
+| `启动PID工况导出器.bat` | Windows one-click launcher. Double-click to start the Electron desktop wrapper without touching npm or PowerShell. Requires `trae/node_modules/electron/` to be present. |
 | `Matlab/load_pid_scenario.m` | MATLAB loader: returns a struct with `params / inputs / states / points / summary` |
 
 Recommended Phase-1 workflow:

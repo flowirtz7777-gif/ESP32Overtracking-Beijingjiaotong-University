@@ -71,6 +71,7 @@
 |---|---|
 | `pid工况仿真导出器.html` | 独立网页：配置车辆参数 / 参考航向 / PID 增益，仿真后导出离散 CSV `(t, v, α, φ, ...)` |
 | `desktop-main.js` + `package.json` | 可选 Electron 桌面壳。`npm install && npm run desktop:dev` 即可启动。**非必需**——HTML 双击就能用 |
+| `启动PID工况导出器.bat` | Windows 一键启动器，双击直接打开 Electron 版导出器，免开 PowerShell / 免敲 npm。依赖 `trae/node_modules/electron/` 存在 |
 | `Matlab/load_pid_scenario.m` | MATLAB 加载脚本：返回 `params / inputs / states / points / summary` 分组 struct |
 
 **Phase 1 工作流**：
