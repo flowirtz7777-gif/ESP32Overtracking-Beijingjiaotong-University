@@ -4,6 +4,57 @@
 
 ---
 
+## Section 0 — Required Reading: Modeling Philosophy
+
+Above this engineering handbook there is a **top-level design document** defining the project's modeling philosophy, the main-model-vs-baseline argumentation, and the redefined role of the legacy PID model:
+
+📘 **[`预测模型与对照模型构建思路.md`](预测模型与对照模型构建思路.md)** — read first
+
+Key points (must be internalized before making any modeling-related changes):
+
+- This project is fundamentally a **short-horizon risk prediction problem**, not a control problem nor long-term driver-intent recognition.
+- "Inner-wheel-difference hazard" is expressed as a **future short-horizon swept area** of the right vehicle edge — not a scalar TF distance.
+- Main model = realtime state input + short-horizon coupled-kinematics prediction + danger-zone construction + risk grading.
+- Baseline (control) model hierarchy used purely for argumentation (paper / proposal):
+  - Baseline 1: PID trajectory generator (conceptual contrast)
+  - Baseline 2: static dilated danger band (no prediction)
+  - Baseline 3: bicycle / single-body simplification (ignores trailer pose)
+- **PID is repositioned**: no longer the final on-board judging model, but a *scenario generator* and *contrast baseline*.
+
+### Top-level Verification Pipeline ⭐
+
+```
+                ┌──── Legacy PID Simulation ────┐
+                │  Reference heading → PID ctl  │
+                │  → emits discrete sequences:  │
+                │      v(t), alpha(t), phi(t)   │
+                └────────────┬──────────────────┘
+                             │
+                             │ treat these as if they were
+                             │ realtime sensor measurements
+                             ▼
+                ┌──── New Main Predictor ────────┐
+                │  ingest (v, alpha, phi) live   │
+                │  → short-horizon coupled       │
+                │    kinematics rollout          │
+                │  → 3-tier swept polygons       │
+                │  → simulated-target risk eval  │
+                └────────────┬──────────────────┘
+                             │
+                             ▼
+              compare against PID-simulator ground-truth trajectory
+              to validate geometric / temporal correctness
+```
+
+This pipeline simultaneously achieves:
+- A clean, smooth, controllable input set fed to the main model (PID acts as a virtual driver).
+- Full closed-loop validation of the main model **without a physical vehicle**.
+- A directly-publishable "Baseline 1 vs Main Model" comparison figure for the paper / proposal.
+
+Trigger this pipeline as soon as Phase 1's `kinematics_step.m` + `predict_swept.m` are in place — it constitutes the first end-to-end gate.
+
+---
+
 ## Project Summary
 
 **ESP32-S3 + OpenMV dual-MCU real-time warning system for truck (incl. semi-trailer) right-turn inner-wheel-difference blind-zone hazard.**
