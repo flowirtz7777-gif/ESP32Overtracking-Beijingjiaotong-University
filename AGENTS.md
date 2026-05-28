@@ -85,16 +85,52 @@ Trigger this pipeline as soon as Phase 1's `kinematics_step.m` + `predict_swept.
 ├── Matlab/                     # Simulation & algo verification
 │   ├── guacheweixianqu.m       # Legacy monolithic semi-trailer sim
 │   ├── pid3.m                  # Legacy single-vehicle sim
+│   ├── load_pid_scenario.m     # Read CSV exported by pid工况仿真导出器.html
 │   └── (refactor target: vehicle_params.m / kinematics_step.m / predict_swept.m / ...)
 ├── OpenMV/                     # TODO: vision coprocessor python
 ├── overtrack.pdf               # Research / context
 ├── PCB原理图.png                # Hardware schematic
 ├── latex代码.txt                # Paper / proposal LaTeX draft
+├── 预测模型与对照模型构建思路.md   # 📘 Top-level modeling philosophy
+├── pid工况仿真导出器.html         # PID scenario generator (interactive web UI)
+├── desktop-main.js              # Optional Electron wrapper for the HTML above
+├── package.json                 # Electron build config (node_modules ignored)
 ├── README.md
 ├── CLAUDE.md
 ├── AGENTS.md
 └── .gitignore
 ```
+
+---
+
+## PID Scenario Generator (Phase-1 helper)
+
+To validate the new main predictor before the physical vehicle is available, a
+PID-driven scenario generator is bundled in the repo:
+
+| File | Role |
+|---|---|
+| `pid工况仿真导出器.html` | Standalone web UI: configure vehicle params / reference heading / PID gains, simulate, export discrete CSV `(t, v, alpha, phi, ...)` |
+| `desktop-main.js` + `package.json` | Optional Electron desktop wrapper. Run with `npm install && npm run desktop:dev`. Not required — the HTML can be opened directly in any browser. |
+| `Matlab/load_pid_scenario.m` | MATLAB loader: returns a struct with `params / inputs / states / points / summary` |
+
+Recommended Phase-1 workflow:
+
+```
+1. Open  pid工况仿真导出器.html        → tune scenario, click "Export CSV"
+2. MATLAB:  scenario = load_pid_scenario('pid_scenario_*.csv');
+3. Treat scenario.inputs.{v_mps, alpha_rad, phi_rad} as virtual sensor data
+4. Feed into the new short-horizon predictor and compare swept area against
+   scenario.points.{A,B,H,T} (the PID ground truth)
+```
+
+**Constraints**:
+
+- The generated CSV is *not* real-world driver data — it is a smooth, controllable
+  surrogate. Do not over-claim accuracy in papers based on this alone.
+- Never commit `node_modules/`, `package-lock.json`, or `desktop-dist/` (already in `.gitignore`).
+- The `trae/` directory (trae IDE sandbox) is also ignored; useful artifacts in it
+  are mirrored to the repo root manually when promoted.
 
 ---
 

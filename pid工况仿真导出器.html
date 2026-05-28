@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PID 工况仿真导出器</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: rgba(11, 24, 44, 0.88);
+      --panel-strong: rgba(12, 29, 53, 0.98);
+      --line: rgba(121, 167, 255, 0.18);
+      --text: #ecf3ff;
+      --muted: #9fb6da;
+      --accent: #77c3ff;
+      --accent-2: #7df4b8;
+      --warn: #ffd86b;
+      --danger: #ff8a8a;
+      --shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+      --font-body: "Microsoft YaHei UI", "PingFang SC", "Segoe UI", sans-serif;
+      --font-display: "YouYuan", "STZhongsong", "Microsoft YaHei UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-body);
+      background:
+        radial-gradient(circle at top left, rgba(89, 140, 255, 0.22), transparent 34%),
+        radial-gradient(circle at top right, rgba(24, 207, 175, 0.16), transparent 28%),
+        linear-gradient(180deg, #07111f 0%, #09101a 100%);
+      color: var(--text);
+    }
+
+    .shell {
+      width: min(1480px, calc(100vw - 32px));
+      margin: 20px auto 36px;
+    }
+
+    .hero {
+      position: relative;
+      padding: 30px 32px;
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      background: linear-gradient(135deg, rgba(12, 27, 49, 0.96), rgba(8, 18, 34, 0.92));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -60% auto;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(127, 233, 184, 0.18), transparent 68%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid rgba(119, 195, 255, 0.22);
+      border-radius: 999px;
+      color: var(--accent);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(119, 195, 255, 0.08);
+    }
+
+    h1 {
+      margin: 18px 0 12px;
+      font-family: var(--font-display);
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.08;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .hero p {
+      max-width: 940px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 420px minmax(0, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .sidebar {
+      padding: 22px;
+      position: sticky;
+      top: 16px;
+      align-self: start;
+    }
+
+    .panel-title {
+      margin: 0 0 6px;
+      font-size: 22px;
+      font-family: var(--font-display);
+      letter-spacing: 0.03em;
+    }
+
+    .panel-subtitle {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .section {
+      padding: 16px 0 18px;
+      border-top: 1px solid rgba(121, 167, 255, 0.1);
+    }
+
+    .section:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .section h3 {
+      margin: 0 0 12px;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid rgba(121, 167, 255, 0.16);
+      background: rgba(6, 15, 28, 0.92);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 120ms ease, transform 120ms ease;
+    }
+
+    input:focus {
+      border-color: rgba(119, 195, 255, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 120ms ease, opacity 120ms ease, box-shadow 120ms ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    button.primary {
+      background: linear-gradient(135deg, #77c3ff, #79f1c5);
+      color: #03111c;
+      box-shadow: 0 16px 36px rgba(107, 209, 255, 0.28);
+    }
+
+    button.secondary {
+      background: rgba(119, 195, 255, 0.12);
+      color: var(--text);
+      border: 1px solid rgba(119, 195, 255, 0.2);
+    }
+
+    button.ghost {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .hint {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .content {
+      display: grid;
+      gap: 20px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      padding: 18px;
+    }
+
+    .stat-card {
+      padding: 18px;
+      border: 1px solid rgba(121, 167, 255, 0.12);
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(8, 18, 34, 0.92), rgba(7, 17, 31, 0.68));
+    }
+
+    .stat-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 28px;
+      font-family: var(--font-display);
+      color: var(--text);
+    }
+
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .chart-card {
+      padding: 18px 18px 16px;
+    }
+
+    .chart-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+
+    .chart-head h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .chart-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    canvas {
+      width: 100%;
+      height: 320px;
+      border-radius: 18px;
+      border: 1px solid rgba(121, 167, 255, 0.12);
+      background: linear-gradient(180deg, rgba(5, 12, 24, 0.92), rgba(10, 18, 32, 0.76));
+      display: block;
+    }
+
+    .table-card {
+      padding: 18px;
+    }
+
+    .table-toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .table-toolbar h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .table-toolbar p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .table-wrap {
+      overflow: auto;
+      border-radius: 18px;
+      border: 1px solid rgba(121, 167, 255, 0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1040px;
+      background: rgba(7, 17, 31, 0.82);
+    }
+
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(121, 167, 255, 0.08);
+      text-align: right;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+      position: sticky;
+      left: 0;
+      background: rgba(10, 20, 35, 0.98);
+    }
+
+    th {
+      color: var(--accent);
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      background: rgba(10, 20, 35, 0.98);
+      z-index: 1;
+    }
+
+    .file-box {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .mono {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(4, 11, 22, 0.88);
+      border: 1px solid rgba(121, 167, 255, 0.1);
+      border-radius: 18px;
+      padding: 14px 16px;
+      overflow: auto;
+      line-height: 1.7;
+    }
+
+    .status {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(121, 167, 255, 0.12);
+      color: var(--muted);
+      background: rgba(5, 11, 22, 0.78);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend i {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    @media (max-width: 1180px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .chart-grid,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <div class="eyebrow">PID Scenario Generator</div>
+      <h1>半挂车 PID 工况仿真与离散参数导出页面</h1>
+      <p>
+        本页面基于当前仓库中的 PID 半挂车仿真思路，生成可控、平滑、按时间排序的离散时序数据。
+        你可以在这里设置车速、轴距、牵引销位置、挂车轴距、PID 参数和参考航向规划，点击开始仿真后直接导出
+        <strong>MATLAB 友好的 CSV 文件</strong>，用于后续主预测模型回放、危险区构造和对照验证。
+      </p>
+    </section>
+
+    <div class="layout">
+      <aside class="panel sidebar">
+        <h2 class="panel-title">参数配置</h2>
+        <p class="panel-subtitle">
+          以现有半挂车 PID 仿真为基础，导出 <span class="mono">v(t), alpha(t), phi(t)</span> 及关键几何状态。
+        </p>
+
+        <form id="sim-form">
+          <section class="section">
+            <h3>车辆几何</h3>
+            <div class="grid">
+              <div class="field">
+                <label for="l">牵引车轴距 l (m)</label>
+                <input id="l" name="l" type="number" step="0.1" value="4.0" />
+              </div>
+              <div class="field">
+                <label for="l_h">后轴到牵引销 l_h (m)</label>
+                <input id="l_h" name="l_h" type="number" step="0.1" value="1.8" />
+              </div>
+              <div class="field">
+                <label for="L">挂车轴距 L (m)</label>
+                <input id="L" name="L" type="number" step="0.1" value="13.5" />
+              </div>
+              <div class="field">
+                <label for="width">等效车宽 W (m)</label>
+                <input id="width" name="width" type="number" step="0.1" value="2.0" />
+              </div>
+            </div>
+          </section>
+
+          <section class="section">
+            <h3>仿真节拍</h3>
+            <div class="grid">
+              <div class="field">
+                <label for="speed">恒定前轮速度 v_A (m/s)</label>
+                <input id="speed" name="speed" type="number" step="0.1" value="3.0" />
+              </div>
+              <div class="field">
+                <label for="totalTime">总时长 T_end (s)</label>
+                <input id="totalTime" name="totalTime" type="number" step="1" value="35" />
+              </div>
+              <div class="field">
+                <label for="dt">时间步长 dt (s)</label>
+                <input id="dt" name="dt" type="number" step="0.01" value="0.02" />
+              </div>
+              <div class="field">
+                <label for="smoothing">转向平滑系数</label>
+                <input id="smoothing" name="smoothing" type="number" step="0.01" value="0.95" />
+              </div>
+            </div>
+          </section>
+
+          <section class="section">
+            <h3>参考航向</h3>
+            <div class="grid">
+              <div class="field">
+                <label for="thetaStartDeg">起始航向 (deg)</label>
+                <input id="thetaStartDeg" name="thetaStartDeg" type="number" step="1" value="90" />
+              </div>
+              <div class="field">
+                <label for="thetaEndDeg">结束航向 (deg)</label>
+                <input id="thetaEndDeg" name="thetaEndDeg" type="number" step="1" value="0" />
+              </div>
+              <div class="field">
+                <label for="t1">保持起始航向到 t1 (s)</label>
+                <input id="t1" name="t1" type="number" step="0.5" value="3" />
+              </div>
+              <div class="field">
+                <label for="t2">收敛到结束航向的 t2 (s)</label>
+                <input id="t2" name="t2" type="number" step="0.5" value="15" />
+              </div>
+            </div>
+          </section>
+
+          <section class="section">
+            <h3>PID 参数</h3>
+            <div class="grid">
+              <div class="field">
+                <label for="kpTheta">Kp_theta</label>
+                <input id="kpTheta" name="kpTheta" type="number" step="0.01" value="0.8" />
+              </div>
+              <div class="field">
+                <label for="kiTheta">Ki_theta</label>
+                <input id="kiTheta" name="kiTheta" type="number" step="0.01" value="0.02" />
+              </div>
+              <div class="field">
+                <label for="kdTheta">Kd_theta</label>
+                <input id="kdTheta" name="kdTheta" type="number" step="0.01" value="0.02" />
+              </div>
+              <div class="field">
+                <label for="integralThetaLimit">外环积分限幅</label>
+                <input id="integralThetaLimit" name="integralThetaLimit" type="number" step="0.1" value="0.4" />
+              </div>
+              <div class="field">
+                <label for="kpPhi">Kp_phi</label>
+                <input id="kpPhi" name="kpPhi" type="number" step="0.01" value="0.3" />
+              </div>
+              <div class="field">
+                <label for="kiPhi">Ki_phi</label>
+                <input id="kiPhi" name="kiPhi" type="number" step="0.01" value="0.01" />
+              </div>
+              <div class="field">
+                <label for="kdPhi">Kd_phi</label>
+                <input id="kdPhi" name="kdPhi" type="number" step="0.01" value="0.01" />
+              </div>
+              <div class="field">
+                <label for="integralPhiLimit">内环积分限幅</label>
+                <input id="integralPhiLimit" name="integralPhiLimit" type="number" step="0.1" value="0.2" />
+              </div>
+            </div>
+          </section>
+
+          <section class="section">
+            <h3>物理限幅</h3>
+            <div class="grid">
+              <div class="field">
+                <label for="alphaLimitDeg">转向角限幅 (deg)</label>
+                <input id="alphaLimitDeg" name="alphaLimitDeg" type="number" step="1" value="30" />
+              </div>
+              <div class="field">
+                <label for="phiLimitDeg">铰接角限幅 (deg)</label>
+                <input id="phiLimitDeg" name="phiLimitDeg" type="number" step="1" value="15" />
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="primary" type="submit">开始仿真</button>
+              <button class="secondary" type="button" id="download-btn" disabled>导出 CSV</button>
+              <button class="ghost" type="button" id="reset-btn">恢复默认</button>
+            </div>
+
+            <div class="hint">
+              导出文件字段包含时间、参考航向、牵引车航向、挂车航向、车速、转向角、铰接角以及
+              A / B / H / T 各关键点坐标，适合后续在 MATLAB 中用 <span class="mono">readtable</span> 直接读取。
+            </div>
+          </section>
+        </form>
+
+        <div class="status" id="status-box">
+          当前尚未运行仿真。点击“开始仿真”后，这里会显示样本点数、导出文件名和参数检查信息。
+        </div>
+      </aside>
+
+      <main class="content">
+        <section class="panel stats" id="stats">
+          <div class="stat-card">
+            <span>离散点数</span>
+            <strong id="stat-samples">0</strong>
+          </div>
+          <div class="stat-card">
+            <span>实际最大转向角</span>
+            <strong id="stat-alpha">0.00°</strong>
+          </div>
+          <div class="stat-card">
+            <span>最大铰接角</span>
+            <strong id="stat-phi">0.00°</strong>
+          </div>
+          <div class="stat-card">
+            <span>末端挂车位置</span>
+            <strong id="stat-tail">(0.00, 0.00)</strong>
+          </div>
+        </section>
+
+        <section class="chart-grid">
+          <article class="panel chart-card">
+            <div class="chart-head">
+              <div>
+                <h3>轨迹预览</h3>
+                <p>牵引车前轴 A、后轴 B、挂车后轴 T 的离散轨迹</p>
+              </div>
+            </div>
+            <canvas id="trajectory-canvas" width="880" height="500"></canvas>
+            <div class="legend">
+              <span><i style="background:#77c3ff"></i>前轴 A</span>
+              <span><i style="background:#7df4b8"></i>后轴 B</span>
+              <span><i style="background:#ffd86b"></i>挂车后轴 T</span>
+            </div>
+          </article>
+
+          <article class="panel chart-card">
+            <div class="chart-head">
+              <div>
+                <h3>角度时序</h3>
+                <p>查看 PID 参考航向、实际航向、转向角和铰接角变化</p>
+              </div>
+            </div>
+            <canvas id="angles-canvas" width="880" height="500"></canvas>
+            <div class="legend">
+              <span><i style="background:#ff8a8a"></i>参考航向</span>
+              <span><i style="background:#77c3ff"></i>实际航向</span>
+              <span><i style="background:#7df4b8"></i>转向角 alpha</span>
+              <span><i style="background:#ffd86b"></i>铰接角 phi</span>
+            </div>
+          </article>
+        </section>
+
+        <section class="panel table-card">
+          <div class="table-toolbar">
+            <div>
+              <h3>离散参数预览</h3>
+              <p>预览全时段抽样行，避免只看到起始直行阶段；导出文件仍包含完整时序数据</p>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>time_s</th>
+                  <th>v_input_mps</th>
+                  <th>theta_ref_deg</th>
+                  <th>theta_deg</th>
+                  <th>theta_t_deg</th>
+                  <th>alpha_deg</th>
+                  <th>phi_deg</th>
+                  <th>xA_m</th>
+                  <th>yA_m</th>
+                  <th>xB_m</th>
+                  <th>yB_m</th>
+                  <th>xH_m</th>
+                  <th>yH_m</th>
+                  <th>xT_m</th>
+                  <th>yT_m</th>
+                </tr>
+              </thead>
+              <tbody id="preview-body">
+                <tr>
+                  <td colspan="15" style="text-align:center;color:#9fb6da;">等待仿真结果</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel file-box">
+          <h3 style="margin:0;font-size:18px;">MATLAB 读取示例</h3>
+          <div class="mono" id="matlab-snippet">data = readtable('pid_scenario.csv');</div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const defaultConfig = {
+      l: 4.0,
+      l_h: 1.8,
+      L: 13.5,
+      width: 2.0,
+      speed: 3.0,
+      totalTime: 35.0,
+      dt: 0.02,
+      smoothing: 0.95,
+      thetaStartDeg: 90.0,
+      thetaEndDeg: 0.0,
+      t1: 3.0,
+      t2: 15.0,
+      kpTheta: 0.8,
+      kiTheta: 0.02,
+      kdTheta: 0.02,
+      integralThetaLimit: 0.4,
+      kpPhi: 0.3,
+      kiPhi: 0.01,
+      kdPhi: 0.01,
+      integralPhiLimit: 0.2,
+      alphaLimitDeg: 30.0,
+      phiLimitDeg: 15.0
+    };
+
+    const form = document.getElementById("sim-form");
+    const previewBody = document.getElementById("preview-body");
+    const downloadBtn = document.getElementById("download-btn");
+    const resetBtn = document.getElementById("reset-btn");
+    const statusBox = document.getElementById("status-box");
+    const matlabSnippet = document.getElementById("matlab-snippet");
+
+    let lastSimulation = null;
+
+    function deg2rad(value) {
+      return value * Math.PI / 180;
+    }
+
+    function rad2deg(value) {
+      return value * 180 / Math.PI;
+    }
+
+    function clamp(value, min, max) {
+      return Math.min(Math.max(value, min), max);
+    }
+
+    function wrapPi(angle) {
+      return Math.atan2(Math.sin(angle), Math.cos(angle));
+    }
+
+    function parseConfig() {
+      const formData = new FormData(form);
+      const config = {};
+      for (const [key, value] of formData.entries()) {
+        config[key] = Number(value);
+      }
+
+      if (config.dt <= 0) {
+        throw new Error("时间步长 dt 必须大于 0。");
+      }
+      if (config.totalTime <= 0) {
+        throw new Error("总时长必须大于 0。");
+      }
+      if (config.t2 <= config.t1) {
+        throw new Error("t2 必须大于 t1。");
+      }
+      if (config.l <= 0 || config.l_h < 0 || config.L <= 0) {
+        throw new Error("车辆几何参数必须为正值。");
+      }
+      if (config.speed <= 0) {
+        throw new Error("恒定前轮速度必须大于 0。");
+      }
+
+      return config;
+    }
+
+    function buildTimeArray(totalTime, dt) {
+      const count = Math.floor(totalTime / dt) + 1;
+      const list = new Array(count);
+      for (let i = 0; i < count; i += 1) {
+        list[i] = i * dt;
+      }
+      return list;
+    }
+
+    function buildReferenceHeading(time, config) {
+      const thetaStart = deg2rad(config.thetaStartDeg);
+      const thetaEnd = deg2rad(config.thetaEndDeg);
+      if (time <= config.t1) {
+        return thetaStart;
+      }
+      if (time <= config.t2) {
+        const ratio = (time - config.t1) / (config.t2 - config.t1);
+        return thetaStart + (thetaEnd - thetaStart) * ratio;
+      }
+      return thetaEnd;
+    }
+
+    function simulatePidScenario(config) {
+      const t = buildTimeArray(config.totalTime, config.dt);
+      const N = t.length;
+      const l = config.l;
+      const l_h = config.l_h;
+      const L = config.L;
+      const vA = config.speed;
+      const alphaLimit = deg2rad(config.alphaLimitDeg);
+      const phiLimit = deg2rad(config.phiLimitDeg);
+
+      const xA = Array(N).fill(0);
+      const yA = Array(N).fill(0);
+      const xB = Array(N).fill(0);
+      const yB = Array(N).fill(0);
+      const xH = Array(N).fill(0);
+      const yH = Array(N).fill(0);
+      const xT = Array(N).fill(0);
+      const yT = Array(N).fill(0);
+      const theta = Array(N).fill(0);
+      const thetaT = Array(N).fill(0);
+      const thetaRef = Array(N).fill(0);
+      const alpha = Array(N).fill(0);
+      const phi = Array(N).fill(0);
+      const eTheta = Array(N).fill(0);
+      const ePhi = Array(N).fill(0);
+
+      xB[0] = 0;
+      yB[0] = 0;
+      xA[0] = 0;
+      yA[0] = l;
+      theta[0] = deg2rad(config.thetaStartDeg);
+      xH[0] = xB[0] + l_h * Math.cos(theta[0]);
+      yH[0] = yB[0] + l_h * Math.sin(theta[0]);
+      phi[0] = 0;
+      thetaT[0] = theta[0] - phi[0];
+      xT[0] = xH[0] - L * Math.cos(thetaT[0]);
+      yT[0] = yH[0] - L * Math.sin(thetaT[0]);
+
+      let integralTheta = 0;
+      let integralPhi = 0;
+      let prevETheta = 0;
+      let prevEPhi = 0;
+
+      for (let k = 0; k < N; k += 1) {
+        thetaRef[k] = buildReferenceHeading(t[k], config);
+      }
+
+      for (let k = 0; k < N - 1; k += 1) {
+        const thetaK = Math.atan2(yA[k] - yB[k], xA[k] - xB[k]);
+        theta[k] = thetaK;
+        thetaT[k] = thetaK - phi[k];
+
+        const errTheta = wrapPi(thetaRef[k] - thetaK);
+        eTheta[k] = errTheta;
+        integralTheta = clamp(
+          integralTheta + errTheta * config.dt,
+          -config.integralThetaLimit,
+          config.integralThetaLimit
+        );
+        const derivativeTheta = (errTheta - prevETheta) / config.dt;
+        const alpha1 = config.kpTheta * errTheta
+          + config.kiTheta * integralTheta
+          + config.kdTheta * derivativeTheta;
+
+        const errPhi = -phi[k];
+        ePhi[k] = errPhi;
+        integralPhi = clamp(
+          integralPhi + errPhi * config.dt,
+          -config.integralPhiLimit,
+          config.integralPhiLimit
+        );
+        const derivativePhi = (errPhi - prevEPhi) / config.dt;
+        const deltaAlpha = config.kpPhi * errPhi
+          + config.kiPhi * integralPhi
+          + config.kdPhi * derivativePhi;
+
+        let alphaK = alpha1 + deltaAlpha;
+        if (k > 0) {
+          alphaK = config.smoothing * alpha[k - 1] + (1 - config.smoothing) * alphaK;
+        }
+        alphaK = clamp(alphaK, -alphaLimit, alphaLimit);
+        alpha[k] = alphaK;
+
+        const vB = vA * Math.cos(alphaK);
+        const vBx = vB * Math.cos(thetaK);
+        const vBy = vB * Math.sin(thetaK);
+        const vAx = vA * Math.cos(thetaK + alphaK);
+        const vAy = vA * Math.sin(thetaK + alphaK);
+
+        xA[k + 1] = xA[k] + vAx * config.dt;
+        yA[k + 1] = yA[k] + vAy * config.dt;
+        xB[k + 1] = xB[k] + vBx * config.dt;
+        yB[k + 1] = yB[k] + vBy * config.dt;
+
+        const currentL = Math.hypot(xA[k + 1] - xB[k + 1], yA[k + 1] - yB[k + 1]);
+        const deltaL = currentL - l;
+        if (Math.abs(deltaL) > 1e-5 && currentL > 1e-9) {
+          const adjustX = ((xA[k + 1] - xB[k + 1]) / currentL) * deltaL;
+          const adjustY = ((yA[k + 1] - yB[k + 1]) / currentL) * deltaL;
+          xB[k + 1] += adjustX;
+          yB[k + 1] += adjustY;
+        }
+
+        const thetaNext = Math.atan2(yA[k + 1] - yB[k + 1], xA[k + 1] - xB[k + 1]);
+        theta[k + 1] = thetaNext;
+
+        const dphiDt = (vA * Math.sin(alphaK) / l) - (vB * Math.sin(phi[k]) / L);
+        phi[k + 1] = clamp(phi[k] + dphiDt * config.dt, -phiLimit, phiLimit);
+
+        xH[k + 1] = xB[k + 1] + l_h * Math.cos(thetaNext);
+        yH[k + 1] = yB[k + 1] + l_h * Math.sin(thetaNext);
+
+        const thetaTNext = thetaNext - phi[k + 1];
+        thetaT[k + 1] = thetaTNext;
+        xT[k + 1] = xH[k + 1] - L * Math.cos(thetaTNext);
+        yT[k + 1] = yH[k + 1] - L * Math.sin(thetaTNext);
+
+        prevETheta = errTheta;
+        prevEPhi = errPhi;
+      }
+
+      if (N > 1) {
+        alpha[N - 1] = alpha[N - 2];
+        eTheta[N - 1] = eTheta[N - 2];
+        ePhi[N - 1] = ePhi[N - 2];
+      }
+
+      const rows = [];
+      for (let i = 0; i < N; i += 1) {
+        rows.push({
+          time_s: t[i],
+          dt_s: config.dt,
+          v_input_mps: vA,
+          l_m: l,
+          l_h_m: l_h,
+          L_m: L,
+          width_m: config.width,
+          theta_ref_rad: thetaRef[i],
+          theta_ref_deg: rad2deg(thetaRef[i]),
+          theta_rad: theta[i],
+          theta_deg: rad2deg(theta[i]),
+          theta_t_rad: thetaT[i],
+          theta_t_deg: rad2deg(thetaT[i]),
+          alpha_rad: alpha[i],
+          alpha_deg: rad2deg(alpha[i]),
+          phi_rad: phi[i],
+          phi_deg: rad2deg(phi[i]),
+          e_theta_rad: eTheta[i],
+          e_phi_rad: ePhi[i],
+          xA_m: xA[i],
+          yA_m: yA[i],
+          xB_m: xB[i],
+          yB_m: yB[i],
+          xH_m: xH[i],
+          yH_m: yH[i],
+          xT_m: xT[i],
+          yT_m: yT[i]
+        });
+      }
+
+      return {
+        config,
+        rows,
+        arrays: { t, xA, yA, xB, yB, xT, yT, thetaRef, theta, thetaT, alpha, phi },
+        stats: {
+          samples: N,
+          actualMaxAlphaDeg: Math.max(...alpha.map((item) => Math.abs(rad2deg(item)))),
+          maxPhiDeg: Math.max(...phi.map((item) => Math.abs(rad2deg(item)))),
+          tailX: xT[N - 1],
+          tailY: yT[N - 1]
+        }
+      };
+    }
+
+    function formatNumber(value, digits = 4) {
+      return Number.isFinite(value) ? value.toFixed(digits) : "";
+    }
+
+    function buildCsv(simulation) {
+      const headers = [
+        "time_s", "dt_s", "v_input_mps",
+        "l_m", "l_h_m", "L_m", "width_m",
+        "theta_ref_rad", "theta_ref_deg",
+        "theta_rad", "theta_deg",
+        "theta_t_rad", "theta_t_deg",
+        "alpha_rad", "alpha_deg",
+        "phi_rad", "phi_deg",
+        "e_theta_rad", "e_phi_rad",
+        "xA_m", "yA_m", "xB_m", "yB_m",
+        "xH_m", "yH_m", "xT_m", "yT_m"
+      ];
+
+      const lines = [headers.join(",")];
+      for (const row of simulation.rows) {
+        const line = headers.map((key) => {
+          const value = row[key];
+          return typeof value === "number" ? formatNumber(value, 6) : value;
+        });
+        lines.push(line.join(","));
+      }
+      return lines.join("\n");
+    }
+
+    function buildFilename() {
+      const now = new Date();
+      const pad = (value) => String(value).padStart(2, "0");
+      return `pid_scenario_${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}_${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}.csv`;
+    }
+
+    function buildPreviewRows(rows, maxCount = 14) {
+      if (rows.length <= maxCount) {
+        return rows;
+      }
+
+      const previewRows = [];
+      const used = new Set();
+
+      for (let i = 0; i < maxCount; i += 1) {
+        const index = Math.round(i * (rows.length - 1) / (maxCount - 1));
+        if (!used.has(index)) {
+          used.add(index);
+          previewRows.push(rows[index]);
+        }
+      }
+
+      return previewRows;
+    }
+
+    function renderTable(simulation) {
+      const rows = buildPreviewRows(simulation.rows, 14);
+      previewBody.innerHTML = rows.map((row) => `
+        <tr>
+          <td>${formatNumber(row.time_s, 2)}</td>
+          <td>${formatNumber(row.v_input_mps, 2)}</td>
+          <td>${formatNumber(row.theta_ref_deg, 2)}</td>
+          <td>${formatNumber(row.theta_deg, 2)}</td>
+          <td>${formatNumber(row.theta_t_deg, 2)}</td>
+          <td>${formatNumber(row.alpha_deg, 2)}</td>
+          <td>${formatNumber(row.phi_deg, 2)}</td>
+          <td>${formatNumber(row.xA_m, 3)}</td>
+          <td>${formatNumber(row.yA_m, 3)}</td>
+          <td>${formatNumber(row.xB_m, 3)}</td>
+          <td>${formatNumber(row.yB_m, 3)}</td>
+          <td>${formatNumber(row.xH_m, 3)}</td>
+          <td>${formatNumber(row.yH_m, 3)}</td>
+          <td>${formatNumber(row.xT_m, 3)}</td>
+          <td>${formatNumber(row.yT_m, 3)}</td>
+        </tr>
+      `).join("");
+    }
+
+    function updateStats(simulation) {
+      document.getElementById("stat-samples").textContent = String(simulation.stats.samples);
+      document.getElementById("stat-alpha").textContent = `${formatNumber(simulation.stats.actualMaxAlphaDeg, 2)}°`;
+      document.getElementById("stat-phi").textContent = `${formatNumber(simulation.stats.maxPhiDeg, 2)}°`;
+      document.getElementById("stat-tail").textContent = `(${formatNumber(simulation.stats.tailX, 2)}, ${formatNumber(simulation.stats.tailY, 2)})`;
+    }
+
+    function drawAxes(ctx, width, height, margin, labels) {
+      ctx.strokeStyle = "rgba(121, 167, 255, 0.18)";
+      ctx.lineWidth = 1;
+
+      for (let i = 0; i <= 4; i += 1) {
+        const y = margin.top + ((height - margin.top - margin.bottom) * i / 4);
+        ctx.beginPath();
+        ctx.moveTo(margin.left, y);
+        ctx.lineTo(width - margin.right, y);
+        ctx.stroke();
+      }
+
+      for (let i = 0; i <= 6; i += 1) {
+        const x = margin.left + ((width - margin.left - margin.right) * i / 6);
+        ctx.beginPath();
+        ctx.moveTo(x, margin.top);
+        ctx.lineTo(x, height - margin.bottom);
+        ctx.stroke();
+      }
+
+      ctx.fillStyle = "rgba(236, 243, 255, 0.76)";
+      ctx.font = "12px Microsoft YaHei UI";
+      ctx.fillText(labels.x, width - margin.right - 48, height - 10);
+      ctx.save();
+      ctx.translate(18, margin.top + 24);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText(labels.y, 0, 0);
+      ctx.restore();
+    }
+
+    function drawTrajectoryChart(simulation) {
+      const canvas = document.getElementById("trajectory-canvas");
+      const ctx = canvas.getContext("2d");
+      const width = canvas.width;
+      const height = canvas.height;
+      ctx.clearRect(0, 0, width, height);
+
+      const margin = { top: 24, right: 24, bottom: 44, left: 52 };
+      const xs = simulation.arrays.xA.concat(simulation.arrays.xB, simulation.arrays.xT);
+      const ys = simulation.arrays.yA.concat(simulation.arrays.yB, simulation.arrays.yT);
+      const minX = Math.min(...xs);
+      const maxX = Math.max(...xs);
+      const minY = Math.min(...ys);
+      const maxY = Math.max(...ys);
+      const spanX = Math.max(maxX - minX, 1);
+      const spanY = Math.max(maxY - minY, 1);
+      const scale = Math.min(
+        (width - margin.left - margin.right) / spanX,
+        (height - margin.top - margin.bottom) / spanY
+      );
+
+      function mapPoint(x, y) {
+        return {
+          x: margin.left + (x - minX) * scale,
+          y: height - margin.bottom - (y - minY) * scale
+        };
+      }
+
+      drawAxes(ctx, width, height, margin, { x: "X / m", y: "Y / m" });
+
+      const series = [
+        { x: simulation.arrays.xA, y: simulation.arrays.yA, color: "#77c3ff" },
+        { x: simulation.arrays.xB, y: simulation.arrays.yB, color: "#7df4b8" },
+        { x: simulation.arrays.xT, y: simulation.arrays.yT, color: "#ffd86b" }
+      ];
+
+      for (const item of series) {
+        ctx.beginPath();
+        item.x.forEach((value, index) => {
+          const point = mapPoint(value, item.y[index]);
+          if (index === 0) ctx.moveTo(point.x, point.y);
+          else ctx.lineTo(point.x, point.y);
+        });
+        ctx.strokeStyle = item.color;
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+      }
+    }
+
+    function drawAngleChart(simulation) {
+      const canvas = document.getElementById("angles-canvas");
+      const ctx = canvas.getContext("2d");
+      const width = canvas.width;
+      const height = canvas.height;
+      ctx.clearRect(0, 0, width, height);
+
+      const margin = { top: 24, right: 24, bottom: 44, left: 56 };
+      drawAxes(ctx, width, height, margin, { x: "Time / s", y: "Angle / deg" });
+
+      const t = simulation.arrays.t;
+      const series = [
+        { values: simulation.arrays.thetaRef.map(rad2deg), color: "#ff8a8a" },
+        { values: simulation.arrays.theta.map(rad2deg), color: "#77c3ff" },
+        { values: simulation.arrays.alpha.map(rad2deg), color: "#7df4b8" },
+        { values: simulation.arrays.phi.map(rad2deg), color: "#ffd86b" }
+      ];
+
+      const allValues = series.flatMap((item) => item.values);
+      let minY = Math.min(...allValues);
+      let maxY = Math.max(...allValues);
+      if (Math.abs(maxY - minY) < 1e-6) {
+        minY -= 1;
+        maxY += 1;
+      }
+      const spanX = Math.max(t[t.length - 1] - t[0], 1);
+      const spanY = Math.max(maxY - minY, 1);
+
+      function mapPoint(x, y) {
+        return {
+          x: margin.left + ((x - t[0]) / spanX) * (width - margin.left - margin.right),
+          y: height - margin.bottom - ((y - minY) / spanY) * (height - margin.top - margin.bottom)
+        };
+      }
+
+      for (const item of series) {
+        ctx.beginPath();
+        item.values.forEach((value, index) => {
+          const point = mapPoint(t[index], value);
+          if (index === 0) ctx.moveTo(point.x, point.y);
+          else ctx.lineTo(point.x, point.y);
+        });
+        ctx.strokeStyle = item.color;
+        ctx.lineWidth = 2.1;
+        ctx.stroke();
+      }
+    }
+
+    function updateStatus(message) {
+      statusBox.textContent = message;
+    }
+
+    function handleSimulation() {
+      try {
+        const config = parseConfig();
+        const simulation = simulatePidScenario(config);
+        const csv = buildCsv(simulation);
+        const filename = buildFilename();
+
+        lastSimulation = { simulation, csv, filename };
+        downloadBtn.disabled = false;
+
+        renderTable(simulation);
+        updateStats(simulation);
+        drawTrajectoryChart(simulation);
+        drawAngleChart(simulation);
+
+        matlabSnippet.textContent = [
+          `data = readtable('${filename}');`,
+          "t = data.time_s;",
+          "alpha = data.alpha_rad;",
+          "phi = data.phi_rad;",
+          "theta = data.theta_rad;"
+        ].join("\n");
+
+        updateStatus(
+          `仿真已完成：共生成 ${simulation.stats.samples} 个离散时刻点。导出文件名将为 ${filename}。` +
+          ` 当前使用恒定速度 ${formatNumber(config.speed, 2)} m/s，时间步长 ${formatNumber(config.dt, 3)} s。`
+        );
+      } catch (error) {
+        lastSimulation = null;
+        downloadBtn.disabled = true;
+        updateStatus(`参数检查未通过：${error.message}`);
+      }
+    }
+
+    function downloadCsv() {
+      if (!lastSimulation) return;
+      const blob = new Blob([lastSimulation.csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = lastSimulation.filename;
+      anchor.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function resetDefaults() {
+      Object.entries(defaultConfig).forEach(([key, value]) => {
+        const field = form.elements.namedItem(key);
+        if (field) {
+          field.value = value;
+        }
+      });
+      updateStatus("已恢复默认参数。可以直接开始仿真，导出一份基于当前 PID 工况的 CSV 文件。");
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      handleSimulation();
+    });
+
+    downloadBtn.addEventListener("click", downloadCsv);
+    resetBtn.addEventListener("click", resetDefaults);
+
+    resetDefaults();
+    handleSimulation();
+  </script>
+</body>
+</html>

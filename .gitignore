@@ -60,3 +60,15 @@ data/raw/
 *.h5
 *.onnx
 *.pth
+
+# ------------- Node / Electron (PID scenario desktop wrapper) -------------
+node_modules/
+desktop-dist/
+npm-debug.log*
+package-lock.json
+
+# ------------- IDE / Sandbox workspaces -------------
+# trae IDE working directory: keeps a sandboxed copy of files + node_modules.
+# Useful artifacts (HTML / m / .md) are mirrored to repo root, so trae/ itself
+# should never be committed.
+trae/

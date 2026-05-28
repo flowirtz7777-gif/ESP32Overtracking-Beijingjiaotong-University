@@ -63,6 +63,33 @@
 
 ---
 
+## 1.5 PID 工况生成器（Phase-1 辅助工具，与 AGENTS.md 同步）
+
+为在无真车条件下验证主预测器，仓库中提供一组 PID 驱动的工况生成工具：
+
+| 文件 | 角色 |
+|---|---|
+| `pid工况仿真导出器.html` | 独立网页：配置车辆参数 / 参考航向 / PID 增益，仿真后导出离散 CSV `(t, v, α, φ, ...)` |
+| `desktop-main.js` + `package.json` | 可选 Electron 桌面壳。`npm install && npm run desktop:dev` 即可启动。**非必需**——HTML 双击就能用 |
+| `Matlab/load_pid_scenario.m` | MATLAB 加载脚本：返回 `params / inputs / states / points / summary` 分组 struct |
+
+**Phase 1 工作流**：
+
+```
+1. 打开 pid工况仿真导出器.html       → 调参，点击"导出 CSV"
+2. MATLAB: scenario = load_pid_scenario('pid_scenario_*.csv');
+3. 把 scenario.inputs.{v_mps, alpha_rad, phi_rad} 当作虚拟传感器数据
+4. 喂给新主预测器，与 scenario.points.{A,B,H,T} 真值轨迹对比扫掠区域
+```
+
+**约束**：
+
+- 该 CSV **不是**真车数据，是平滑可控的替身。论文里别仅凭它声称真实精度
+- `node_modules/`、`package-lock.json`、`desktop-dist/` 永远不进 git（已在 `.gitignore`）
+- `trae/` 目录是 trae IDE 沙箱，也已忽略；里面的产物升级到正式版时手动复制到仓库根
+
+---
+
 ## 2. 硬件架构（组合 B）
 
 ```
@@ -137,6 +164,7 @@ Matlab/
 ├── risk_eval.m            # 风险等级算子
 ├── sim_pid.m              # PID 仿真台架（生成测试输入）
 ├── sim_replay.m           # 实测 csv 回放
+├── load_pid_scenario.m    # ★ 已存在：加载 pid工况仿真导出器.html 导出的 CSV
 └── guacheweixianqu.m      # 历史一体化脚本（逐步重构）
 ```
 
