@@ -122,12 +122,11 @@ function out = run_phase1_demo(csv_path)
     for ii = 1:numel(keyframes)
         k  = keyframes(ii);
         s0 = truth(k, :);
-        % α̇ 用前向差分估计；端点退化时置 0
-        if k < N
-            alpha_dot = (alpha(k+1) - alpha(k)) / dt;
-        else
-            alpha_dot = 0;
-        end
+        % α̇ 默认关闭（设为 0，对应"短时 α 保持当前值"假设）
+        % 历史经验：用相邻两点 dt=0.02s 差分估 α̇ 在 PID 输出含高频抖动时
+        % 会引入大量噪声，2 秒外推被放大成多边形发散。
+        % 如需启用线性外推，可改用 LPF 后的 α̇ 序列。
+        alpha_dot = 0;
         polys.W{ii} = predict_swept(s0, alpha(k), v(k), p, horizons.W, dt_pred, alpha_dot);
         polys.A{ii} = predict_swept(s0, alpha(k), v(k), p, horizons.A, dt_pred, alpha_dot);
         polys.I{ii} = predict_swept(s0, alpha(k), v(k), p, horizons.I, dt_pred, alpha_dot);

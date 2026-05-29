@@ -38,6 +38,14 @@ function poly = predict_swept(s0, alpha_now, v_now, p, T_h, dt_pred, alpha_dot)
         alpha_dot = 0;
     end
 
+    % α_dot 合理性限幅：方向盘单次操作角速率上限取 ±π rad/s ≈ ±180°/s
+    % （F1 方向盘极限也只到 ~720°/s，对货车 180°/s 已经是非常激进的工况）
+    % 噪声差分常常超过这个量级 → 直接夹到这里再被外推使用，避免预测炸窗
+    ALPHA_DOT_MAX = pi;
+    if abs(alpha_dot) > ALPHA_DOT_MAX
+        alpha_dot = sign(alpha_dot) * ALPHA_DOT_MAX;
+    end
+
     half_w = 0.5 * p.width;
     N      = floor(T_h / dt_pred);     % 步数
     M      = N + 1;                    % 包含起点
