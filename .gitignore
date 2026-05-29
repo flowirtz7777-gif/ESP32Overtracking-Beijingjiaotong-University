@@ -56,6 +56,13 @@ logs/
 data/raw/
 *.bag
 
+# ------------- MATLAB demo run outputs -------------
+# Each run of run_phase1_demo creates a timestamped subfolder under Matlab/runs/.
+# Keep README, ignore everything else (figures regenerate every run).
+Matlab/runs/*
+!Matlab/runs/README.md
+!Matlab/runs/.gitkeep
+
 # ------------- Large model files -------------
 *.tflite.bak
 *.h5

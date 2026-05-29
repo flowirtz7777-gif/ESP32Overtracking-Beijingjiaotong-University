@@ -4,15 +4,23 @@ function out = run_phase1_demo(csv_path)
 %   out = run_phase1_demo()              % 弹文件选择框
 %   out = run_phase1_demo(csv_path)      % 直接加载指定 CSV
 %
+%   时间尺度（与 CLAUDE.md / AGENTS.md 一致）：
+%     T_h_W = 2.0 s     PolyW  黄色警告     最远预测窗口
+%     T_h_A = 1.0 s     PolyA  红色报警     中距
+%     T_h_I = 0.3 s     PolyI  立即危险     最近
+%     dt_pred = 0.05 s  预测内部积分步长（每个 T_h 切成 N 段）
+%     主循环 (ESP32 端) 节拍 = 20 ms / 50 Hz （此 demo 在 MATLAB 端按等时间间隔取关键帧近似）
+%
 %   流程：
 %     1. 用 load_pid_scenario 读 CSV (输入 v(t), alpha(t)；真值 xB, yB, theta, phi 等)
 %     2. 用 kinematics_step 从 t=0 起逐步推演，得到"我们重写的运动学"轨迹
 %     3. 与 CSV 真值轨迹做差，输出最大/RMS 误差（验收门控：< 1mm 视为通过）
-%     4. 在若干关键时刻调 predict_swept 得到三层扫掠多边形 (PolyW/PolyA/PolyI)
+%     4. 在均匀分布的关键时刻调 predict_swept 得到三层扫掠多边形 (PolyW/PolyA/PolyI)
 %     5. 画图：
 %          Figure 1: 轨迹叠加（CSV 真值 vs MATLAB 重算）
 %          Figure 2: 状态误差 (xB, yB, theta, phi)
 %          Figure 3: 三层扫掠多边形 + 几个虚拟雷达目标 + 判内结果
+%     6. 自动归档到 Matlab/runs/<timestamp>__<csv_name>/
 %
 %   输出 out (struct)：
 %     scenario      : load_pid_scenario 原始返回
@@ -22,6 +30,7 @@ function out = run_phase1_demo(csv_path)
 %     error_rms     : 各分量 RMS 误差
 %     polys         : 关键时刻的多边形 cell{tier}{frame}
 %     pass_gate     : 是否通过 < 1mm 验收门控
+%     run_dir       : 本次结果归档目录绝对路径
 
     if nargin < 1 || isempty(csv_path)
         scenario = load_pid_scenario();
@@ -30,8 +39,31 @@ function out = run_phase1_demo(csv_path)
     end
 
     p = vehicle_params(scenario.params);
-    fprintf('\n[PHASE-1] 车型参数: l=%.2f  l_h=%.2f  L=%.2f  W=%.2f  phi_max=%.1f°\n', ...
+
+    % ---------- 时间尺度参数（集中在此） ----------
+    T_h_W   = 2.0;     % 黄色警告：未来 2 秒车身扫过区域
+    T_h_A   = 1.0;     % 红色报警：未来 1 秒
+    T_h_I   = 0.3;     % 立即危险：未来 0.3 秒
+    dt_pred = 0.05;    % 预测内部积分步长 (s)
+    n_keyframes = 6;   % 演示用：取均匀分布的 6 个时刻画扫掠多边形
+
+    % ---------- 准备归档目录 ----------
+    run_dir = local_make_run_dir(scenario.file_name);
+    fprintf('\n[PHASE-1] 输出归档目录: %s\n', run_dir);
+    fprintf('[PHASE-1] 车型参数: l=%.2f  l_h=%.2f  L=%.2f  W=%.2f  phi_max=%.1f°\n', ...
         p.l, p.l_h, p.L, p.width, rad2deg(p.phi_max));
+
+    % ---------- 时间尺度解释（每次都打印一遍，避免遗忘） ----------
+    fprintf('\n[PHASE-1] 时间尺度配置：\n');
+    fprintf('  PolyW (黄)  T_h = %.2fs    dt_pred=%.3fs   步数=%d\n', T_h_W, dt_pred, round(T_h_W/dt_pred));
+    fprintf('  PolyA (橙)  T_h = %.2fs    dt_pred=%.3fs   步数=%d\n', T_h_A, dt_pred, round(T_h_A/dt_pred));
+    fprintf('  PolyI (红)  T_h = %.2fs    dt_pred=%.3fs   步数=%d\n', T_h_I, dt_pred, round(T_h_I/dt_pred));
+    v_avg = mean(scenario.inputs.v_mps);
+    fprintf('  本工况平均车速 = %.2f m/s (%.1f km/h)\n', v_avg, v_avg*3.6);
+    fprintf('  对应纵向覆盖距离: PolyW≈%.1fm  PolyA≈%.1fm  PolyI≈%.2fm\n', ...
+        v_avg*T_h_W, v_avg*T_h_A, v_avg*T_h_I);
+    fprintf('  ESP32 主循环 = 20ms (50Hz) → 每 20ms 重做一次完整 predict + 判内\n');
+    fprintf('  本 demo 在 MATLAB 端只取 %d 个关键帧画图（避免多边形重叠）\n', n_keyframes);
 
     %% ---------------------- 1) 运动学回放 ----------------------
     t        = scenario.time_s;
@@ -76,18 +108,12 @@ function out = run_phase1_demo(csv_path)
         fprintf('  ⚠️ 位置最大误差 ≥ 1mm，请检查积分方案 / dt 与 HTML 端是否一致\n');
     end
 
-    %% ---------------------- 2) 三层扫掠多边形（关键帧） ----------------------
-    % 选 5 个时间点：起始、转弯前、转弯峰值、稳定后、结束
-    [~, idx_peak] = max(abs(alpha));
-    keyframes = unique([1, ...
-                        max(2, round(0.2*N)), ...
-                        idx_peak, ...
-                        max(2, round(0.7*N)), ...
-                        N]);
-    keyframes = keyframes(keyframes <= N);
+    %% ---------------------- 2) 三层扫掠多边形（均匀关键帧） ----------------------
+    % 用等时间间隔取关键帧，演示"每隔一段时间预测一次"的语义
+    keyframes = round(linspace(1, N, n_keyframes));
+    keyframes = unique(keyframes);
 
-    horizons = struct('W', 2.0, 'A', 1.0, 'I', 0.3);
-    dt_pred  = 0.05;
+    horizons = struct('W', T_h_W, 'A', T_h_A, 'I', T_h_I);
 
     polys = struct('W', {cell(1, numel(keyframes))}, ...
                    'A', {cell(1, numel(keyframes))}, ...
@@ -202,7 +228,7 @@ function out = run_phase1_demo(csv_path)
     title('三层扫掠多边形覆盖 + 虚拟雷达目标风险等级 (0=安全 / 1=黄 / 2=橙 / 3=红)', 'FontWeight', 'bold');
     legend('Location', 'best');
 
-    %% ---------------------- 输出 ----------------------
+    %% ---------------------- 输出 + 归档 ----------------------
     out = struct();
     out.scenario   = scenario;
     out.params     = p;
@@ -215,8 +241,22 @@ function out = run_phase1_demo(csv_path)
     out.target_risk = risk;
     out.pass_gate  = pass_gate;
     out.figures    = [fig1 fig2 fig3];
+    out.horizons   = horizons;
+    out.dt_pred    = dt_pred;
+    out.run_dir    = run_dir;
 
-    fprintf('\n[PHASE-1] 演示完成。三幅图已生成；out struct 已返回。\n\n');
+    % 保存三幅图
+    saveas(fig1, fullfile(run_dir, '01_traj_replay.png'));
+    saveas(fig2, fullfile(run_dir, '02_state_error.png'));
+    saveas(fig3, fullfile(run_dir, '03_swept_polygons.png'));
+
+    % 写 summary.txt
+    local_write_summary(run_dir, scenario, p, horizons, dt_pred, ...
+                        err_max, err_rms, pass_gate, keyframes, v_avg);
+
+    fprintf('\n[PHASE-1] 演示完成。\n');
+    fprintf('          三幅图与 summary.txt 已保存到:\n');
+    fprintf('          %s\n\n', run_dir);
 end
 
 
@@ -238,5 +278,79 @@ function targets = make_demo_targets(truth, k_end, p)
         offset = 0.6 + 1.2*rand();
         back   = -0.5 + 1.0*rand();
         targets(i, :) = [T_x, T_y] + offset*right_normal + back*[cos(theta_t), sin(theta_t)];
+    end
+end
+
+
+function run_dir = local_make_run_dir(csv_file_name)
+%LOCAL_MAKE_RUN_DIR  在 Matlab/runs/ 下创建带时间戳和 CSV 名的子目录。
+    this_file = mfilename('fullpath');
+    matlab_dir = fileparts(this_file);
+    runs_root = fullfile(matlab_dir, 'runs');
+    if ~exist(runs_root, 'dir')
+        mkdir(runs_root);
+    end
+
+    [~, csv_stem, ~] = fileparts(char(csv_file_name));
+    if isempty(csv_stem)
+        csv_stem = 'unnamed';
+    end
+    timestamp = datestr(now, 'yyyymmdd_HHMMSS');
+    run_dir = fullfile(runs_root, sprintf('%s__%s', timestamp, csv_stem));
+    if ~exist(run_dir, 'dir')
+        mkdir(run_dir);
+    end
+end
+
+
+function local_write_summary(run_dir, scenario, p, horizons, dt_pred, ...
+                              err_max, err_rms, pass_gate, keyframes, v_avg)
+%LOCAL_WRITE_SUMMARY  把本次测试的关键数据写成可读的 summary.txt
+    fid = fopen(fullfile(run_dir, 'summary.txt'), 'w', 'n', 'UTF-8');
+    if fid < 0, return; end
+    cu = onCleanup(@() fclose(fid));
+
+    fprintf(fid, '========================================\n');
+    fprintf(fid, '  Phase 1 测试摘要\n');
+    fprintf(fid, '========================================\n\n');
+
+    fprintf(fid, '生成时间        : %s\n', datestr(now, 'yyyy-mm-dd HH:MM:SS'));
+    fprintf(fid, '工况 CSV        : %s\n', char(scenario.file_name));
+    fprintf(fid, '采样数          : %d\n', scenario.row_count);
+    fprintf(fid, 'CSV dt          : %.4f s\n', scenario.dt_s);
+    fprintf(fid, '总时长          : %.2f s\n', scenario.summary.duration_s);
+    fprintf(fid, '平均车速        : %.2f m/s (%.1f km/h)\n', v_avg, v_avg*3.6);
+    fprintf(fid, '\n');
+
+    fprintf(fid, '---- 车型参数 ----\n');
+    fprintf(fid, 'l       (牵引车轴距)    = %.3f m\n', p.l);
+    fprintf(fid, 'l_h     (后悬长 B→H)    = %.3f m\n', p.l_h);
+    fprintf(fid, 'L       (挂车轴距 H→T)  = %.3f m\n', p.L);
+    fprintf(fid, 'width   (等效车宽)      = %.3f m\n', p.width);
+    fprintf(fid, 'phi_max (铰接角限幅)    = %.2f°\n', rad2deg(p.phi_max));
+    fprintf(fid, '\n');
+
+    fprintf(fid, '---- 时间尺度 ----\n');
+    fprintf(fid, 'PolyW T_h = %.2f s   纵向覆盖 ≈ %.2f m   含义=黄色警告\n', horizons.W, v_avg*horizons.W);
+    fprintf(fid, 'PolyA T_h = %.2f s   纵向覆盖 ≈ %.2f m   含义=红色报警\n', horizons.A, v_avg*horizons.A);
+    fprintf(fid, 'PolyI T_h = %.2f s   纵向覆盖 ≈ %.2f m   含义=立即危险\n', horizons.I, v_avg*horizons.I);
+    fprintf(fid, 'dt_pred 预测内部步长     = %.3f s\n', dt_pred);
+    fprintf(fid, 'ESP32 主循环 (硬件端)    = 0.020 s (50 Hz)\n');
+    fprintf(fid, '本 demo 关键帧索引       = %s\n', mat2str(keyframes));
+    fprintf(fid, '\n');
+
+    fprintf(fid, '---- 运动学等价性误差 (MATLAB 重算 vs CSV 真值) ----\n');
+    fprintf(fid, '              max abs        RMS\n');
+    fprintf(fid, 'xB    : %12.6f m %12.6f m\n', err_max(1), err_rms(1));
+    fprintf(fid, 'yB    : %12.6f m %12.6f m\n', err_max(2), err_rms(2));
+    fprintf(fid, 'theta : %12.6f rad %10.6f rad\n', err_max(3), err_rms(3));
+    fprintf(fid, 'phi   : %12.6f rad %10.6f rad\n', err_max(4), err_rms(4));
+    fprintf(fid, '\n');
+
+    fprintf(fid, '---- 验收门控 (Phase 1 Gate) ----\n');
+    if pass_gate
+        fprintf(fid, '位置最大误差 < 1 mm，✅ 通过\n');
+    else
+        fprintf(fid, '位置最大误差 ≥ 1 mm，⚠️ 未通过 — 请检查积分方案 (Euler vs RK4) / dt 一致性\n');
     end
 end

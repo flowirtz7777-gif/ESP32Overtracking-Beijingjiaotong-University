@@ -193,12 +193,25 @@ Matlab/
 **Phase 1 一键跑**：
 
 ```matlab
-out = run_phase1_demo();         % 弹文件框选 CSV
+out = run_phase1_demo();         % 弹文件框选 CSV（默认目录 Matlab/scenarios/）
 % 或
 out = run_phase1_demo('pid_scenario_*.csv');
 ```
 
 输出三幅图 + 误差报告；通过门控 = `out.pass_gate == true`（位置最大误差 < 1mm）。
+**自动归档**：每次执行会在 `Matlab/runs/<时间戳>__<csv名>/` 下保存三张 PNG + summary.txt。
+
+**时间尺度速查表**（与代码常量一致）：
+
+| 多边形 | T_h（预测窗口） | 含义 | 在 5/10/15 m·s⁻¹ 下纵向覆盖 |
+|---|---|---|---|
+| `PolyW` | 2.0 s | 黄色警告 | ~10 / 20 / 30 m |
+| `PolyA` | 1.0 s | 红色报警 | ~5 / 10 / 15 m |
+| `PolyI` | 0.3 s | 立即危险 | ~1.5 / 3 / 4.5 m |
+
+- 预测内部积分步长 `dt_pred = 0.05 s`（每 T_h 切 N 段）
+- ESP32 主循环 `LOOP_DT_MS = 20 ms / 50 Hz` → 每 20ms 重做一次完整 predict + 判内
+- 多边形横向宽度 = 车宽 W（约 2.5 m），从车身右外侧 +W/2 起延伸
 
 ---
 
