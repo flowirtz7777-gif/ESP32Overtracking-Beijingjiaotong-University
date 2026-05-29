@@ -1377,6 +1377,7 @@
           l_h_m: l_h,
           L_m: L,
           width_m: config.width,
+          phi_max_rad: phiLimit,
           theta_ref_rad: thetaRef[i],
           theta_ref_deg: rad2deg(thetaRef[i]),
           theta_rad: theta[i],
@@ -1421,7 +1422,7 @@
     function buildCsv(simulation) {
       const headers = [
         "time_s", "dt_s", "v_input_mps",
-        "l_m", "l_h_m", "L_m", "width_m",
+        "l_m", "l_h_m", "L_m", "width_m", "phi_max_rad",
         "theta_ref_rad", "theta_ref_deg",
         "theta_rad", "theta_deg",
         "theta_t_rad", "theta_t_deg",
