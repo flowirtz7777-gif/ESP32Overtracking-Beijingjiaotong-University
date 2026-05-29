@@ -75,3 +75,9 @@ trae/
 
 # Windows shortcuts: hardcoded absolute paths, never portable, must not be tracked.
 *.lnk
+
+# ------------- AI agent runtime state -------------
+# Anthropic / superpowers session state directories (contain ephemeral logs)
+.superpowers/
+.claude/
+.cursor/

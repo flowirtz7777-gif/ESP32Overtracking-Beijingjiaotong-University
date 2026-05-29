@@ -169,15 +169,29 @@ OpenMV/
 
 ```
 Matlab/
-├── vehicle_params.m       # 车型参数 struct
-├── kinematics_step.m      # 一步运动学（与 C++ 移植对照）
-├── predict_swept.m        # 在线扫掠多边形预测
-├── risk_eval.m            # 风险等级算子
-├── sim_pid.m              # PID 仿真台架（生成测试输入）
-├── sim_replay.m           # 实测 csv 回放
-├── load_pid_scenario.m    # ★ 已存在：加载 pid工况仿真导出器.html 导出的 CSV
-└── guacheweixianqu.m      # 历史一体化脚本（逐步重构）
+├── vehicle_params.m       # ✅ 车型参数 struct（与 C++ VehicleParams 对齐）
+├── kinematics_step.m      # ✅ 一步严格运动学（含 l_h 耦合）
+├── derive_points.m        # ✅ 从最小状态派生 A/B/H/T 几何点
+├── predict_swept.m        # ✅ 三层扫掠多边形（包络法）
+├── point_in_poly.m        # ✅ 射线法判内
+├── run_phase1_demo.m      # ✅ Phase 1 顶层 demo：CSV → 回放 → 预测 → 误差报告
+├── load_pid_scenario.m    # ✅ 读取 pid工况仿真导出器.html 导出的 CSV
+├── sim_pid.m              # 待办：PID 仿真台架（生成测试输入）
+├── sim_replay.m           # 待办：实测 csv 回放
+├── risk_eval.m            # 待办：风险等级算子（多边形+目标→Risk）
+├── pid3.m                 # 历史：单车 PID 仿真
+└── guacheweixianqu.m      # 历史：半挂车 PID + 扫掠区一体化（已识别 4 处问题，待删）
 ```
+
+**Phase 1 一键跑**：
+
+```matlab
+out = run_phase1_demo();         % 弹文件框选 CSV
+% 或
+out = run_phase1_demo('pid_scenario_*.csv');
+```
+
+输出三幅图 + 误差报告；通过门控 = `out.pass_gate == true`（位置最大误差 < 1mm）。
 
 ---
 

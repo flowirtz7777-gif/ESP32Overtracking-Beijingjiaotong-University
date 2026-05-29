@@ -91,10 +91,16 @@ Trigger this pipeline as soon as Phase 1's `kinematics_step.m` + `predict_swept.
 │   ├── alarm_out.{h,cpp}       # buzzer + LED
 │   └── vision_uart.{h,cpp}     # TODO: OpenMV link
 ├── Matlab/                     # Simulation & algo verification
+│   ├── vehicle_params.m        # ✅ vehicle parameter struct
+│   ├── kinematics_step.m       # ✅ one-step rigorous kinematics (l_h coupled)
+│   ├── derive_points.m         # ✅ derive A/B/H/T from minimal state
+│   ├── predict_swept.m         # ✅ 3-tier swept polygon (envelope)
+│   ├── point_in_poly.m         # ✅ ray-casting point-in-polygon
+│   ├── run_phase1_demo.m       # ✅ Phase-1 top demo: CSV → replay → predict → error report
+│   ├── load_pid_scenario.m     # ✅ Read CSV exported by pid工况仿真导出器.html
 │   ├── guacheweixianqu.m       # Legacy monolithic semi-trailer sim
 │   ├── pid3.m                  # Legacy single-vehicle sim
-│   ├── load_pid_scenario.m     # Read CSV exported by pid工况仿真导出器.html
-│   └── (refactor target: vehicle_params.m / kinematics_step.m / predict_swept.m / ...)
+│   └── (TODO: sim_replay.m / risk_eval.m)
 ├── OpenMV/                     # TODO: vision coprocessor python
 ├── overtrack.pdf               # Research / context
 ├── PCB原理图.png                # Hardware schematic
