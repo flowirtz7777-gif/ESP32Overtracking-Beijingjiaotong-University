@@ -45,7 +45,7 @@ function out = run_phase1_demo(csv_path)
     T_h_A   = 1.0;     % 红色报警：未来 1 秒
     T_h_I   = 0.3;     % 立即危险：未来 0.3 秒
     dt_pred = 0.01;    % 预测内部积分步长 (s) — 与 ESP32 主循环 50 Hz 兼容
-    n_keyframes = 10;  % 演示用：取均匀分布的 10 个时刻画扫掠多边形
+    n_keyframes = 20;  % 演示用：取均匀分布的 20 个时刻画扫掠多边形
 
     % ---------- 准备归档目录 ----------
     run_dir = local_make_run_dir(scenario.file_name);
@@ -291,7 +291,7 @@ function out = run_phase1_demo(csv_path)
                 strjoin(arrayfun(@(ii) sprintf('%.2f', t(keyframes(ii))), hit_frames_W, 'UniformOutput', false), ', '));
         end
         if numel(title_lines) == 1
-            title_lines{end+1} = '所有 10 个关键帧均未命中（车不会扫到）';
+            title_lines{end+1} = sprintf('所有 %d 个关键帧均未命中（车不会扫到）', numel(keyframes));
         end
         title(title_lines, 'FontWeight', 'normal', 'FontSize', 9);
         xlabel('X (m)'); ylabel('Y (m)');
