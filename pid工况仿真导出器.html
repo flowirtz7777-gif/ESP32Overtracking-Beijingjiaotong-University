@@ -1339,7 +1339,14 @@
         const thetaNext = Math.atan2(yA[k + 1] - yB[k + 1], xA[k + 1] - xB[k + 1]);
         theta[k + 1] = thetaNext;
 
-        const dphiDt = (vA * Math.sin(alphaK) / l) - (vB * Math.sin(phi[k]) / L);
+        // 铰接动力学（与 Matlab/kinematics_step.m + ArduinoIDE/predictor.h 严格一致）
+        // omega1 = vA*sin(alpha)/l                    牵引车横摆率
+        // omega2 = (-vB*sin(phi) + l_h*omega1*cos(phi)) / L   挂车横摆率（含 l_h 耦合）
+        // dphi/dt = omega1 - omega2
+        //         = vA*sin(alpha)/l + vB*sin(phi)/L - l_h*omega1*cos(phi)/L
+        const omega1 = (vA * Math.sin(alphaK)) / l;
+        const omega2 = (-vB * Math.sin(phi[k]) + l_h * omega1 * Math.cos(phi[k])) / L;
+        const dphiDt = omega1 - omega2;
         phi[k + 1] = clamp(phi[k] + dphiDt * config.dt, -phiLimit, phiLimit);
 
         xH[k + 1] = xB[k + 1] + l_h * Math.cos(thetaNext);

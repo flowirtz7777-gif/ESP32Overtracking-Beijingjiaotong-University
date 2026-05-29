@@ -332,8 +332,9 @@ function out = run_phase1_demo(csv_path)
         end
     end
 
-    sgtitle('三层扫掠预测 — 每个目标只显示抓到它的预测帧（PolyW/A/I）', ...
-            'FontWeight', 'bold', 'FontSize', 12);
+    sgtitle({'三层扫掠预测 — 每个目标只显示抓到它的预测帧（PolyW/A/I）', ...
+             '注：PolyW⊃PolyA⊃PolyI（嵌套），同一帧可能被多层同时抓到，故各层命中次数之和 ≥ 命中帧数'}, ...
+            'FontWeight', 'bold', 'FontSize', 11);
 
     %% ---------------------- 输出 + 归档 ----------------------
     out = struct();
