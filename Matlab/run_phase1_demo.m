@@ -214,20 +214,32 @@ function out = run_phase1_demo(csv_path)
 
     % 子图 1：全局总览（仅画车体轨迹 + 目标点 + 风险颜色）
     subplot(2, n_cols, 1);
-    plot(scenario.points.B(:,1), scenario.points.B(:,2), '-', 'LineWidth', 1.4, 'Color', [0.55 0.55 0.55]); hold on;
-    plot(scenario.points.T(:,1), scenario.points.T(:,2), '-', 'LineWidth', 1.4, 'Color', [0.55 0.55 0.55]);
-    plot(scenario.points.A(:,1), scenario.points.A(:,2), '-', 'LineWidth', 1.0, 'Color', [0.80 0.30 0.30]);
+    plot(scenario.points.B(:,1), scenario.points.B(:,2), '-', 'LineWidth', 1.4, 'Color', [0.55 0.55 0.55], 'DisplayName', '牵引车后轴 B'); hold on;
+    plot(scenario.points.T(:,1), scenario.points.T(:,2), '-', 'LineWidth', 1.4, 'Color', [0.55 0.55 0.55], 'HandleVisibility', 'off');
+    plot(scenario.points.A(:,1), scenario.points.A(:,2), '-', 'LineWidth', 1.0, 'Color', [0.80 0.30 0.30], 'DisplayName', '前轮 A');
     grid on; axis equal;
+
+    % 风险等级"假"句柄用于图例
+    h_risk = gobjects(1, 4);
+    for r = 0:3
+        h_risk(r+1) = scatter(NaN, NaN, 80, risk_colors(r+1,:), 'filled', ...
+                              'MarkerEdgeColor', 'k', 'DisplayName', ...
+                              sprintf('风险 %d = %s', r, risk_label{r+1}));
+    end
+
     for j = 1:n_targets
         c = risk_colors(risk(j)+1, :);
         scatter(radar_targets(j,1), radar_targets(j,2), 110, c, 'filled', ...
-                'MarkerEdgeColor', 'k', 'LineWidth', 0.8);
+                'MarkerEdgeColor', 'k', 'LineWidth', 0.8, 'HandleVisibility', 'off');
+        n_hit_total_frames = numel(union(union(find(hits(j,:,1)), find(hits(j,:,2))), find(hits(j,:,3))));
         text(radar_targets(j,1)+0.25, radar_targets(j,2), ...
-             sprintf('R%d (%s)', j, risk_label{risk(j)+1}), ...
+             sprintf('R%d (%d/%d)', j, n_hit_total_frames, numel(keyframes)), ...
              'FontSize', 9, 'Color', c*0.6, 'FontWeight', 'bold');
     end
-    title({'总览：车体轨迹 + 雷达目标', '点颜色 = 整段最严重风险等级'}, 'FontWeight', 'bold', 'FontSize', 10);
+    title({'总览：车体轨迹 + 雷达目标', '点颜色 = 整段最严重风险等级，括号 = 命中帧数/总帧数'}, ...
+          'FontWeight', 'bold', 'FontSize', 10);
     xlabel('X (m)'); ylabel('Y (m)');
+    legend('Location', 'best', 'FontSize', 7.5, 'Box', 'off');
 
     % --- 每个目标一个子图 ---
     for j = 1:n_targets
@@ -241,19 +253,33 @@ function out = run_phase1_demo(csv_path)
         hit_frames_A = find(hits(j, :, 2));
         hit_frames_W = find(hits(j, :, 3));
 
-        % 画 PolyW (最远，先画最底层)
+        n_hit_I = numel(hit_frames_I);
+        n_hit_A = numel(hit_frames_A);
+        n_hit_W = numel(hit_frames_W);
+        n_total_frames = numel(keyframes);
+
+        % 画 PolyW (最远，先画最底层) — 第一个保留 handle 给 legend
+        h_W_legend = []; h_A_legend = []; h_I_legend = [];
         for ii = hit_frames_W
-            fill(polys.W{ii}(:,1), polys.W{ii}(:,2), color_W, ...
+            h_tmp = fill(polys.W{ii}(:,1), polys.W{ii}(:,2), color_W, ...
                  'FaceAlpha', 0.15, 'EdgeColor', color_W*0.7, 'LineWidth', 0.6);
+            if isempty(h_W_legend), h_W_legend = h_tmp; else, set(h_tmp,'HandleVisibility','off'); end
         end
         for ii = hit_frames_A
-            fill(polys.A{ii}(:,1), polys.A{ii}(:,2), color_A, ...
+            h_tmp = fill(polys.A{ii}(:,1), polys.A{ii}(:,2), color_A, ...
                  'FaceAlpha', 0.28, 'EdgeColor', color_A*0.7, 'LineWidth', 0.8);
+            if isempty(h_A_legend), h_A_legend = h_tmp; else, set(h_tmp,'HandleVisibility','off'); end
         end
         for ii = hit_frames_I
-            fill(polys.I{ii}(:,1), polys.I{ii}(:,2), color_I, ...
+            h_tmp = fill(polys.I{ii}(:,1), polys.I{ii}(:,2), color_I, ...
                  'FaceAlpha', 0.42, 'EdgeColor', color_I*0.7, 'LineWidth', 1.0);
+            if isempty(h_I_legend), h_I_legend = h_tmp; else, set(h_tmp,'HandleVisibility','off'); end
         end
+
+        % 设置 legend DisplayName
+        if ~isempty(h_W_legend), set(h_W_legend, 'DisplayName', sprintf('PolyW (T_h=2.0s, %d 次)', n_hit_W)); end
+        if ~isempty(h_A_legend), set(h_A_legend, 'DisplayName', sprintf('PolyA (T_h=1.0s, %d 次)', n_hit_A)); end
+        if ~isempty(h_I_legend), set(h_I_legend, 'DisplayName', sprintf('PolyI (T_h=0.3s, %d 次)', n_hit_I)); end
 
         % 画所有关键帧的车体后轴位置（小灰点），让"哪一帧"的位置更直观
         for ii = 1:numel(keyframes)
@@ -272,12 +298,14 @@ function out = run_phase1_demo(csv_path)
         % 突出显示当前目标
         c = risk_colors(risk(j)+1, :);
         scatter(radar_targets(j,1), radar_targets(j,2), 130, c, 'filled', ...
-                'MarkerEdgeColor', 'k', 'LineWidth', 1.0);
+                'MarkerEdgeColor', 'k', 'LineWidth', 1.0, 'HandleVisibility', 'off');
         text(radar_targets(j,1)+0.25, radar_targets(j,2), sprintf('R%d', j), ...
              'FontSize', 11, 'Color', c*0.5, 'FontWeight', 'bold');
 
-        % 子图标题：用文字直接列出哪几帧抓到
-        title_lines = {sprintf('R%d  风险=%s', j, risk_label{risk(j)+1})};
+        % 子图标题：命中次数统计 + 命中时间列表
+        n_hit_total_frames = numel(union(union(hit_frames_W, hit_frames_A), hit_frames_I));
+        title_lines = {sprintf('R%d  风险=%s  命中 %d/%d 帧 (PolyI:%d  PolyA:%d  PolyW:%d)', ...
+            j, risk_label{risk(j)+1}, n_hit_total_frames, n_total_frames, n_hit_I, n_hit_A, n_hit_W)};
         if ~isempty(hit_frames_I)
             title_lines{end+1} = sprintf('PolyI 命中: t = %s s', ...
                 strjoin(arrayfun(@(ii) sprintf('%.2f', t(keyframes(ii))), hit_frames_I, 'UniformOutput', false), ', '));
@@ -295,6 +323,13 @@ function out = run_phase1_demo(csv_path)
         end
         title(title_lines, 'FontWeight', 'normal', 'FontSize', 9);
         xlabel('X (m)'); ylabel('Y (m)');
+
+        % 加图例（仅显示有命中的层）
+        legend_handles = [h_W_legend, h_A_legend, h_I_legend];
+        legend_handles = legend_handles(~cellfun(@isempty, num2cell(legend_handles)));
+        if ~isempty(legend_handles)
+            legend(legend_handles, 'Location', 'best', 'FontSize', 7.5, 'Box', 'off');
+        end
     end
 
     sgtitle('三层扫掠预测 — 每个目标只显示抓到它的预测帧（PolyW/A/I）', ...
