@@ -368,23 +368,42 @@ end
 
 
 function targets = make_demo_targets(truth, k_end, p)
-%MAKE_DEMO_TARGETS  生成几个虚拟雷达目标，分布在车身右后方常见盲区。
-    % 取整段轨迹中段的车体右侧若干点作为模拟"行人/电动车"位置
+%MAKE_DEMO_TARGETS  在车身右后方盲区生成 5 个虚拟雷达目标。
+%
+%   策略（修订）:
+%     旧逻辑取轨迹后段位置 + 当前 T 点偏移混合 → 目标常落到"车未来要去的地方"，
+%     与短时扫掠区(只覆盖 6m 内)无重叠，形成全员未命中的退化 demo。
+%
+%     新逻辑：
+%       1. 等间隔从轨迹**前 70%** 取 5 个采样点（保证每个目标都会被扫到）
+%       2. 严格用每点的瞬时挂车姿态投影到右侧 W/2 + (0.4 ~ 1.5 m) 范围
+%       3. 沿车体纵向再加少量后偏，形成"挂车右后方盲区"
+
     N = size(truth, 1);
-    sample_idx = round(linspace(round(0.4*N), min(N, k_end), 5));
+    last_idx = round(min(0.7*N, double(k_end)));
+    sample_idx = round(linspace(round(0.15*N), last_idx, 5));
+
     targets = zeros(numel(sample_idx), 2);
     for i = 1:numel(sample_idx)
         k = sample_idx(i);
         theta_t = truth(k, 3) - truth(k, 4);
-        right_normal = [sin(theta_t), -cos(theta_t)];
-        % 距 T 点 (0.8 ~ 1.6 m) 的右后方
+
+        % 挂车后轴 T 点世界坐标
         cT = cos(truth(k, 3));
         sT = sin(truth(k, 3));
         T_x = truth(k, 1) + p.l_h*cT - p.L*cos(theta_t);
         T_y = truth(k, 2) + p.l_h*sT - p.L*sin(theta_t);
-        offset = 0.6 + 1.2*rand();
-        back   = -0.5 + 1.0*rand();
-        targets(i, :) = [T_x, T_y] + offset*right_normal + back*[cos(theta_t), sin(theta_t)];
+
+        % 挂车体系右侧法向 + 纵向后偏
+        right_normal   = [ sin(theta_t), -cos(theta_t)];   % 右
+        forward_normal = [ cos(theta_t),  sin(theta_t)];   % 挂车前向
+
+        side_offset = (p.width * 0.5) + 0.4 + 1.1 * rand();   % 0.4~1.5 m 外
+        back_offset = -(0.2 + 1.6 * rand());                  % 0.2~1.8 m 后
+
+        targets(i, :) = [T_x, T_y] ...
+                        + side_offset * right_normal ...
+                        + back_offset * forward_normal;
     end
 end
 
