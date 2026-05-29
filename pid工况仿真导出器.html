@@ -1,129 +1,132 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark">
+<html lang="zh-CN" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PID 工况仿真导出器</title>
   <style>
     /* ============================================================
-       THEME: Industrial SCADA / HMI Panel Aesthetic
-       Two modes: DARK (factory night) & LIGHT (control room day)
+       NATURE JOURNAL APPENDIX STYLE — COOL ACADEMIC
        ============================================================ */
 
-    /* ----- DARK THEME (default) ----- */
-    [data-theme="dark"] {
-      --bg: #1c1e23;
-      --bg-pattern: rgba(255,255,255,0.018);
-      --panel-bg: #24272e;
-      --panel-bg-alt: #2a2d35;
-      --panel-border: #363a44;
-      --panel-accent: #f0a800;
-      --text: #e2e4e8;
-      --text-heading: #ffffff;
-      --text-muted: #8e929b;
-      --text-dim: #5f636e;
-      --accent: #f0a800;
-      --accent-glow: rgba(240,168,0,0.18);
-      --green: #3cc96e;
-      --green-bg: rgba(60,201,110,0.10);
-      --red: #f25652;
-      --red-bg: rgba(242,86,82,0.10);
-      --orange: #f08c30;
-      --orange-bg: rgba(240,140,48,0.10);
-      --blue: #4da6e8;
-      --blue-bg: rgba(77,166,232,0.10);
-      --input-bg: #1a1d22;
-      --input-border: #3a3e48;
-      --input-focus: #f0a800;
-      --btn-primary-bg: #f0a800;
-      --btn-primary-text: #1a1c20;
-      --btn-primary-hover: #f5b920;
-      --btn-secondary-bg: rgba(240,168,0,0.10);
-      --btn-secondary-text: #f0a800;
-      --btn-secondary-border: rgba(240,168,0,0.22);
-      --btn-ghost-bg: rgba(255,255,255,0.03);
-      --btn-ghost-text: #8e929b;
-      --btn-ghost-border: rgba(255,255,255,0.07);
-      --stat-bg: #1e2128;
-      --stat-border: #333842;
-      --canvas-bg: #1e2128;
-      --canvas-grid: rgba(255,255,255,0.06);
-      --canvas-text: rgba(226,228,232,0.65);
-      --table-bg: #1e2128;
-      --table-header-bg: #252830;
-      --table-border: rgba(255,255,255,0.05);
-      --table-stripe: rgba(255,255,255,0.015);
-      --code-bg: #1a1d22;
-      --code-border: #333842;
-      --status-bg: #1a1d22;
-      --status-border: #363a44;
-      --hero-gradient: linear-gradient(165deg, #24272e 0%, #1c1e23 60%, #1a1d22 100%);
-      --section-divider: rgba(255,255,255,0.05);
-      --toggle-track: #3a3e48;
-      --toggle-track-active: #f0a800;
-      --toggle-knob: #e2e4e8;
-      --shadow: 0 1px 3px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.25);
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
-      --entry-badge-bg: #1e2128;
-      --entry-badge-border: #363a44;
+    /* ----- LIGHT THEME: Ivory Paper ----- */
+    [data-theme="light"] {
+      --bg: #faf8f4;
+      --panel-bg: #ffffff;
+      --panel-bg-alt: #f5f2ec;
+      --border: #dde2e8;
+      --divider: #eef0f4;
+      --text: #1e2a3a;
+      --text-heading: #101a28;
+      --text-muted: #5a6a7e;
+      --text-dim: #8a96a6;
+      --accent: #2563a0;
+      --accent-hover: #3b82c4;
+      --accent-light: rgba(37,99,160,0.06);
+      --accent-glow: rgba(37,99,160,0.15);
+      --green: #2d7d3e;
+      --green-bg: rgba(45,125,62,0.06);
+      --red: #c4554d;
+      --red-bg: rgba(196,85,77,0.06);
+      --orange: #c47a2e;
+      --orange-bg: rgba(196,122,46,0.06);
+      --blue: #2563a0;
+      --blue-bg: rgba(37,99,160,0.06);
+      --input-bg: #faf8f4;
+      --input-border: #d0d5dc;
+      --input-focus: #2563a0;
+      --btn-primary-bg: #1e2a3a;
+      --btn-primary-text: #ffffff;
+      --btn-primary-hover: #2d3f54;
+      --btn-secondary-bg: #ffffff;
+      --btn-secondary-text: #1e2a3a;
+      --btn-secondary-border: #d0d5dc;
+      --btn-secondary-hover: #f5f2ec;
+      --btn-ghost-bg: transparent;
+      --btn-ghost-text: #5a6a7e;
+      --btn-ghost-border: #e8e4de;
+      --btn-ghost-hover: #f5f2ec;
+      --stat-bg: #ffffff;
+      --stat-border: #dde2e8;
+      --canvas-bg: #faf8f4;
+      --canvas-grid: rgba(0,0,0,0.06);
+      --canvas-text: rgba(30,42,58,0.50);
+      --table-bg: #ffffff;
+      --table-header-bg: #f5f2ec;
+      --table-border: #e8e4de;
+      --table-stripe: rgba(0,0,0,0.012);
+      --code-bg: #f3f0ea;
+      --code-border: transparent;
+      --code-color: #1e2a3a;
+      --status-bg: #f5f2ec;
+      --status-border: #e8e4de;
+      --section-divider: #eef0f4;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+      --shadow: 0 2px 8px rgba(0,0,0,0.05);
+      --toggle-color: #5a6a7e;
+      --toggle-hover: #1e2a3a;
+      --entry-badge-bg: #ffffff;
+      --entry-badge-border: #dde2e8;
     }
 
-    /* ----- LIGHT THEME (control room day) ----- */
-    [data-theme="light"] {
-      --bg: #ece7de;
-      --bg-pattern: rgba(0,0,0,0.025);
-      --panel-bg: #f7f4ee;
-      --panel-bg-alt: #f0ede5;
-      --panel-border: #d5d0c6;
-      --panel-accent: #c45a10;
-      --text: #3d3933;
-      --text-heading: #1e1c18;
-      --text-muted: #6e6962;
-      --text-dim: #9e9992;
-      --accent: #c45a10;
-      --accent-glow: rgba(196,90,16,0.10);
-      --green: #2d7d3e;
-      --green-bg: rgba(45,125,62,0.08);
-      --red: #c62828;
-      --red-bg: rgba(198,40,40,0.08);
-      --orange: #c45a10;
-      --orange-bg: rgba(196,90,16,0.08);
-      --blue: #1a6fb5;
-      --blue-bg: rgba(26,111,181,0.08);
-      --input-bg: #faf8f3;
-      --input-border: #d5d0c6;
-      --input-focus: #c45a10;
-      --btn-primary-bg: #3d3933;
-      --btn-primary-text: #f7f4ee;
-      --btn-primary-hover: #4f4a42;
-      --btn-secondary-bg: rgba(61,57,51,0.06);
-      --btn-secondary-text: #3d3933;
-      --btn-secondary-border: rgba(61,57,51,0.18);
-      --btn-ghost-bg: rgba(0,0,0,0.02);
-      --btn-ghost-text: #6e6962;
-      --btn-ghost-border: rgba(0,0,0,0.08);
-      --stat-bg: #f0ede5;
-      --stat-border: #dcd8ce;
-      --canvas-bg: #faf8f3;
-      --canvas-grid: rgba(0,0,0,0.06);
-      --canvas-text: rgba(61,57,51,0.55);
-      --table-bg: #faf8f3;
-      --table-header-bg: #f0ede5;
-      --table-border: rgba(0,0,0,0.05);
-      --table-stripe: rgba(0,0,0,0.012);
-      --code-bg: #f0ede5;
-      --code-border: #dcd8ce;
-      --status-bg: #f0ede5;
-      --status-border: #dcd8ce;
-      --hero-gradient: linear-gradient(165deg, #f7f4ee 0%, #f0ede5 60%, #e8e3d8 100%);
-      --section-divider: rgba(0,0,0,0.06);
-      --toggle-track: #c5c0b8;
-      --toggle-track-active: #c45a10;
-      --toggle-knob: #faf8f3;
-      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.06);
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --entry-badge-bg: #f0ede5;
-      --entry-badge-border: #dcd8ce;
+    /* ----- DARK THEME: Deep Navy Slate ----- */
+    [data-theme="dark"] {
+      --bg: #141c28;
+      --panel-bg: #1a2332;
+      --panel-bg-alt: #161f2c;
+      --border: #242e3d;
+      --divider: #1e2a3a;
+      --text: #d0dae8;
+      --text-heading: #e8eef8;
+      --text-muted: #7a8aa0;
+      --text-dim: #4a5a6e;
+      --accent: #5b9bd5;
+      --accent-hover: #7ab8e8;
+      --accent-light: rgba(91,155,213,0.08);
+      --accent-glow: rgba(91,155,213,0.18);
+      --green: #4a9a5e;
+      --green-bg: rgba(74,154,94,0.08);
+      --red: #d9726b;
+      --red-bg: rgba(217,114,107,0.08);
+      --orange: #d4913c;
+      --orange-bg: rgba(212,145,60,0.08);
+      --blue: #5b9bd5;
+      --blue-bg: rgba(91,155,213,0.08);
+      --input-bg: #111923;
+      --input-border: #2a3545;
+      --input-focus: #5b9bd5;
+      --btn-primary-bg: #5b9bd5;
+      --btn-primary-text: #0d1520;
+      --btn-primary-hover: #7ab8e8;
+      --btn-secondary-bg: #1a2332;
+      --btn-secondary-text: #d0dae8;
+      --btn-secondary-border: #2a3545;
+      --btn-secondary-hover: #1f2a3a;
+      --btn-ghost-bg: transparent;
+      --btn-ghost-text: #7a8aa0;
+      --btn-ghost-border: #1e2a3a;
+      --btn-ghost-hover: #1a2332;
+      --stat-bg: #1a2332;
+      --stat-border: #242e3d;
+      --canvas-bg: #111923;
+      --canvas-grid: rgba(255,255,255,0.05);
+      --canvas-text: rgba(208,218,232,0.45);
+      --table-bg: #1a2332;
+      --table-header-bg: #161f2c;
+      --table-border: #1e2a3a;
+      --table-stripe: rgba(255,255,255,0.012);
+      --code-bg: #111923;
+      --code-border: transparent;
+      --code-color: #d0dae8;
+      --status-bg: #161f2c;
+      --status-border: #242e3d;
+      --section-divider: #1e2a3a;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+      --shadow: 0 2px 8px rgba(0,0,0,0.18);
+      --toggle-color: #7a8aa0;
+      --toggle-hover: #d0dae8;
+      --entry-badge-bg: #1a2332;
+      --entry-badge-border: #242e3d;
     }
 
     /* ============================================================
@@ -134,188 +137,106 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: "Segoe UI", "Microsoft YaHei UI", "PingFang SC", system-ui, sans-serif;
-      font-size: 14px;
-      line-height: 1.6;
+      font-family: "Microsoft YaHei UI", "PingFang SC", "Times New Roman", Georgia, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
       color: var(--text);
       background-color: var(--bg);
-      background-image:
-        linear-gradient(var(--bg-pattern) 1px, transparent 1px),
-        linear-gradient(90deg, var(--bg-pattern) 1px, transparent 1px);
-      background-size: 32px 32px;
-      transition: background-color 0.35s ease, color 0.35s ease;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     /* ============================================================
-       TOP BAR (theme toggle + branding)
+       TOP BAR
        ============================================================ */
     .top-bar {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 16px;
-      padding: 14px 28px;
-      max-width: 1480px;
+      padding: 12px 32px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
     .theme-toggle {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 6px;
+      font-family: "Times New Roman", "Microsoft YaHei UI", serif;
+      font-size: 14px;
+      color: var(--toggle-color);
       cursor: pointer;
-      background: none;
       border: none;
-      padding: 0;
-      font-family: inherit;
+      background: none;
+      padding: 4px 0;
+      transition: color 0.2s;
+      letter-spacing: 0.04em;
     }
 
-    .theme-toggle-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      user-select: none;
-      transition: color 0.3s;
+    .theme-toggle:hover {
+      color: var(--toggle-hover);
     }
 
-    .theme-toggle-track {
-      position: relative;
-      width: 48px;
-      height: 26px;
-      border-radius: 3px;
-      background: var(--toggle-track);
-      border: 1px solid var(--panel-border);
-      transition: background 0.3s, border-color 0.3s;
-      flex-shrink: 0;
-    }
-
-    .theme-toggle-track::after {
-      content: '';
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 20px;
-      height: 20px;
-      border-radius: 2px;
-      background: var(--toggle-knob);
-      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), background 0.3s;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    }
-
-    [data-theme="light"] .theme-toggle-track::after {
-      transform: translateX(22px);
-    }
-
-    .theme-toggle:hover .theme-toggle-track {
-      border-color: var(--accent);
-    }
-
-    .theme-icon {
-      font-size: 15px;
+    .theme-toggle-icon {
+      font-size: 16px;
       line-height: 1;
-      opacity: 0.7;
-      transition: opacity 0.3s;
     }
 
     /* ============================================================
-       SHELL / MAIN CONTAINER
+       SHELL
        ============================================================ */
     .shell {
-      width: min(1480px, calc(100vw - 32px));
+      width: min(1100px, calc(100vw - 40px));
       margin: 0 auto 48px;
     }
 
     /* ============================================================
-       HERO HEADER
+       HERO
        ============================================================ */
     .hero {
-      position: relative;
-      padding: 32px 36px 28px;
-      background: var(--hero-gradient);
-      border: 1px solid var(--panel-border);
-      border-left: 4px solid var(--accent);
-      box-shadow: var(--shadow);
-      margin-bottom: 20px;
-      transition: background 0.35s, border-color 0.35s;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0; right: 0;
-      width: 72px; height: 72px;
-      background:
-        linear-gradient(135deg, transparent 49.5%, var(--accent) 49.5%, var(--accent) 50.5%, transparent 50.5%);
-      opacity: 0.12;
-      pointer-events: none;
+      padding: 0 0 32px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--divider);
+      transition: border-color 0.3s;
     }
 
     .hero-top {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 14px;
+      gap: 14px;
+      margin-bottom: 20px;
     }
 
     .hero-logo-img {
       height: 52px;
       width: auto;
       flex-shrink: 0;
-      opacity: 0.92;
-    }
-
-    .status-indicator {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 5px 12px;
-      border: 1px solid var(--green);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--green);
-      background: var(--green-bg);
-    }
-
-    .status-indicator::before {
-      content: '';
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 6px var(--green);
-      animation: pulse-dot 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+      display: block;
     }
 
     .hero h1 {
       margin: 0 0 12px;
-      font-family: "Bahschrift", "DIN Alternate", "YouYuan", "Microsoft YaHei UI", sans-serif;
-      font-size: clamp(28px, 3.8vw, 44px);
-      font-weight: 600;
-      line-height: 1.12;
-      letter-spacing: 0.01em;
+      font-family: "STZhongsong", "YouYuan", "SimSun", serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      line-height: 1.2;
       color: var(--text-heading);
-      transition: color 0.35s;
+      transition: color 0.3s;
     }
 
-    .hero h1 span {
+    .hero h1 em {
+      font-family: "Times New Roman", Georgia, serif;
+      font-style: italic;
       color: var(--accent);
     }
 
     .hero-desc {
-      max-width: 920px;
-      margin: 0;
+      max-width: 780px;
+      margin: 0 0 16px;
+      font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
+      font-size: 15px;
       color: var(--text-muted);
-      font-size: 14px;
       line-height: 1.8;
-      transition: color 0.35s;
+      transition: color 0.3s;
     }
 
     .hero-desc strong {
@@ -324,141 +245,101 @@
     }
 
     /* ============================================================
-       ENTRY POINTS ROW
+       ENTRY BADGES
        ============================================================ */
     .entry-points {
       display: flex;
       gap: 10px;
-      margin-top: 18px;
       flex-wrap: wrap;
     }
 
     .entry-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 7px 14px;
-      font-size: 11px;
-      font-weight: 500;
+      gap: 6px;
+      padding: 5px 12px;
+      font-family: "Times New Roman", "Microsoft YaHei UI", serif;
+      font-size: 13px;
       color: var(--text-muted);
       background: var(--entry-badge-bg);
       border: 1px solid var(--entry-badge-border);
-      letter-spacing: 0.03em;
       transition: background 0.3s, border-color 0.3s, color 0.3s;
       white-space: nowrap;
     }
 
     .entry-badge .badge-icon {
-      font-size: 14px;
-      line-height: 1;
+      font-size: 13px;
       flex-shrink: 0;
     }
 
     .entry-badge .badge-key {
-      font-family: "Cascadia Code", "JetBrains Mono", "Consolas", monospace;
-      font-size: 10px;
-      opacity: 0.7;
-      margin-left: 2px;
+      font-family: "Times New Roman", "Courier New", monospace;
+      font-size: 12px;
+      opacity: 0.65;
     }
 
     /* ============================================================
-       MAIN LAYOUT: sidebar + content
+       SECTION HEADERS
        ============================================================ */
-    .layout {
-      display: grid;
-      grid-template-columns: 424px minmax(0, 1fr);
-      gap: 20px;
-    }
-
-    /* ============================================================
-       PANEL BASE
-       ============================================================ */
-    .panel {
-      background: var(--panel-bg);
-      border: 1px solid var(--panel-border);
-      box-shadow: var(--shadow-sm);
-      transition: background 0.35s, border-color 0.35s;
-    }
-
-    .panel-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--section-divider);
-    }
-
-    .panel-header .dot {
-      width: 9px; height: 9px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .panel-header .dot.active { background: var(--green); box-shadow: 0 0 6px var(--green); }
-    .panel-header .dot.info { background: var(--blue); box-shadow: 0 0 6px var(--blue); }
-
-    .panel-header h2, .panel-header h3 {
-      margin: 0;
-      font-family: "Bahschrift", "DIN Alternate", "YouYuan", "Microsoft YaHei UI", sans-serif;
-      font-size: 15px;
+    .section-header {
+      font-family: "STZhongsong", "YouYuan", "SimSun", serif;
+      font-size: 19px;
       font-weight: 600;
-      letter-spacing: 0.04em;
       color: var(--text-heading);
-      text-transform: uppercase;
+      margin: 0 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--divider);
+      transition: color 0.3s, border-color 0.3s;
     }
 
-    .panel-body {
-      padding: 18px 20px;
+    .section-header .enum {
+      font-family: "Times New Roman", Georgia, serif;
+      font-weight: 700;
+      color: var(--text-dim);
+      margin-right: 8px;
+      font-size: 16px;
     }
 
     /* ============================================================
-       SIDEBAR
+       PANELS (paper sections)
        ============================================================ */
-    .sidebar {
-      position: sticky;
-      top: 16px;
-      align-self: start;
-      max-height: calc(100vh - 48px);
-      overflow-y: auto;
+    .paper-section {
+      background: var(--panel-bg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      transition: background 0.3s, border-color 0.3s;
     }
 
-    .sidebar .panel-body {
-      padding: 14px 18px;
+    /* ============================================================
+       PARAMETER CONFIG
+       ============================================================ */
+    .param-group {
+      margin-bottom: 18px;
     }
 
-    .section {
-      padding: 14px 0;
-      border-top: 1px solid var(--section-divider);
-    }
+    .param-group:last-child { margin-bottom: 0; }
 
-    .section:first-of-type { border-top: none; padding-top: 0; }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin: 0 0 12px;
-      font-size: 11px;
+    .param-group-title {
+      font-family: "Times New Roman", "Microsoft YaHei UI", serif;
+      font-size: 13px;
       font-weight: 700;
-      letter-spacing: 0.10em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--accent);
+      margin: 0 0 10px;
+      transition: color 0.3s;
     }
 
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--section-divider);
-    }
-
-    /* ============================================================
-       FORM FIELDS
-       ============================================================ */
-    .grid {
+    .param-row {
       display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .param-row.cols-2 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
     }
 
     .field {
@@ -467,14 +348,18 @@
       gap: 5px;
     }
 
-    .field.full { grid-column: 1 / -1; }
-
-    label {
+    .field label {
+      font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
+      font-size: 14px;
       color: var(--text-muted);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
       transition: color 0.3s;
+    }
+
+    .field label .unit {
+      font-family: "Times New Roman", Georgia, serif;
+      font-style: italic;
+      opacity: 0.75;
+      font-size: 13px;
     }
 
     input {
@@ -482,9 +367,9 @@
       border: 1px solid var(--input-border);
       background: var(--input-bg);
       color: var(--text);
-      padding: 10px 12px;
-      font-size: 13px;
-      font-family: "Cascadia Code", "JetBrains Mono", "Consolas", "Microsoft YaHei UI", monospace;
+      padding: 11px 12px;
+      font-family: "Times New Roman", "Microsoft YaHei UI", serif;
+      font-size: 15px;
       outline: none;
       transition: border-color 0.2s ease, background 0.3s, color 0.3s;
     }
@@ -497,7 +382,6 @@
     input[type="number"] {
       -moz-appearance: textfield;
     }
-
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
       -webkit-appearance: none;
@@ -511,35 +395,33 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 16px;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--divider);
     }
 
     button {
       border: none;
-      padding: 10px 16px;
-      font-size: 13px;
+      padding: 11px 20px;
+      font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
+      font-size: 15px;
       font-weight: 600;
-      font-family: inherit;
-      letter-spacing: 0.03em;
       cursor: pointer;
       transition: all 0.18s ease;
-      text-transform: uppercase;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    button:active { transform: scale(0.97); }
+    button:active { transform: scale(0.98); }
 
     button.primary {
       background: var(--btn-primary-bg);
       color: var(--btn-primary-text);
-      font-weight: 700;
     }
 
     button.primary:hover {
       background: var(--btn-primary-hover);
-      box-shadow: 0 2px 12px var(--accent-glow);
     }
 
     button.secondary {
@@ -549,7 +431,7 @@
     }
 
     button.secondary:hover {
-      background: var(--btn-secondary-border);
+      background: var(--btn-secondary-hover);
     }
 
     button.ghost {
@@ -559,43 +441,52 @@
     }
 
     button.ghost:hover {
-      color: var(--text);
-      border-color: var(--text-dim);
+      background: var(--btn-ghost-hover);
     }
 
     button:disabled {
       opacity: 0.4;
       cursor: not-allowed;
       transform: none !important;
-      box-shadow: none !important;
     }
 
     /* ============================================================
-       HINT TEXT
+       HINT
        ============================================================ */
     .hint {
       margin-top: 12px;
+      font-family: "Microsoft YaHei UI", "Times New Roman", sans-serif;
+      font-size: 14px;
       color: var(--text-dim);
-      font-size: 11px;
       line-height: 1.7;
       transition: color 0.3s;
     }
 
     .hint .mono-inline {
-      font-family: "Cascadia Code", "JetBrains Mono", "Consolas", monospace;
-      font-size: 10px;
+      font-family: "Consolas", "Cascadia Code", "Courier New", monospace;
+      font-size: 13px;
       background: var(--code-bg);
       padding: 2px 6px;
-      border: 1px solid var(--code-border);
+      transition: background 0.3s;
     }
 
     /* ============================================================
-       CONTENT AREA
+       STATUS
        ============================================================ */
-    .content {
-      display: grid;
-      gap: 20px;
-      align-content: start;
+    .status {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-left: 3px solid var(--green);
+      background: var(--status-bg);
+      font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      transition: background 0.3s, border-color 0.3s, color 0.3s;
+    }
+
+    .status.error {
+      border-left-color: var(--red);
     }
 
     /* ============================================================
@@ -611,105 +502,86 @@
       padding: 18px 20px;
       background: var(--stat-bg);
       border: 1px solid var(--stat-border);
-      position: relative;
-      overflow: hidden;
-      transition: background 0.35s, border-color 0.35s;
+      text-align: center;
+      transition: background 0.3s, border-color 0.3s;
     }
-
-    .stat-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 3px;
-    }
-
-    .stat-card:nth-child(1)::after { background: var(--blue); }
-    .stat-card:nth-child(2)::after { background: var(--orange); }
-    .stat-card:nth-child(3)::after { background: var(--red); }
-    .stat-card:nth-child(4)::after { background: var(--green); }
 
     .stat-card span {
       display: block;
-      color: var(--text-muted);
-      font-size: 10px;
+      font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
+      font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
+      color: var(--text-dim);
       margin-bottom: 6px;
       transition: color 0.3s;
     }
 
     .stat-card strong {
       display: block;
-      font-size: 26px;
-      font-family: "Cascadia Code", "JetBrains Mono", "Consolas", "Microsoft YaHei UI", monospace;
-      font-weight: 500;
+      font-family: "Times New Roman", Georgia, serif;
+      font-size: 28px;
+      font-weight: 600;
       color: var(--text-heading);
-      letter-spacing: -0.02em;
       transition: color 0.3s;
     }
 
     /* ============================================================
-       CHART PANELS
+       CHARTS
        ============================================================ */
     .chart-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
+      gap: 16px;
     }
 
-    .chart-card .panel-body {
-      padding: 14px 16px;
+    .chart-card-inner {
+      padding: 18px;
     }
 
-    .chart-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-
-    .chart-head h3 {
-      margin: 0;
-      font-family: "Bahschrift", "DIN Alternate", "YouYuan", "Microsoft YaHei UI", sans-serif;
-      font-size: 14px;
+    .chart-label {
+      font-family: "STZhongsong", "YouYuan", "SimSun", serif;
+      font-size: 16px;
       font-weight: 600;
-      letter-spacing: 0.04em;
       color: var(--text-heading);
-      text-transform: uppercase;
+      margin: 0 0 2px;
+      transition: color 0.3s;
     }
 
-    .chart-head p {
-      margin: 0;
+    .chart-caption {
+      font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
+      font-size: 13px;
       color: var(--text-dim);
-      font-size: 11px;
+      margin: 0 0 14px;
+      font-style: italic;
       transition: color 0.3s;
     }
 
     canvas {
       width: 100%;
-      height: 310px;
+      height: 320px;
       display: block;
-      border: 1px solid var(--panel-border);
+      border: 1px solid var(--border);
       background: var(--canvas-bg);
-      transition: background 0.35s, border-color 0.35s;
+      transition: background 0.3s, border-color 0.3s;
     }
 
     .legend {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
-      color: var(--text-muted);
-      font-size: 11px;
+      gap: 16px;
       margin-top: 10px;
+      font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
+      font-size: 13px;
+      color: var(--text-muted);
       transition: color 0.3s;
     }
 
     .legend span {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
     }
 
     .legend i {
@@ -720,55 +592,68 @@
     }
 
     /* ============================================================
-       TABLE PANEL
+       TABLE
        ============================================================ */
-    .table-toolbar {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--section-divider);
-    }
-
-    .table-toolbar h3 {
-      margin: 0;
-      font-family: "Bahschrift", "DIN Alternate", "YouYuan", "Microsoft YaHei UI", sans-serif;
-      font-size: 14px;
+    .table-title {
+      font-family: "STZhongsong", "YouYuan", "SimSun", serif;
+      font-size: 16px;
       font-weight: 600;
-      letter-spacing: 0.04em;
       color: var(--text-heading);
-      text-transform: uppercase;
+      margin: 0 0 4px;
+      transition: color 0.3s;
     }
 
-    .table-toolbar p {
-      margin: 0;
+    .table-caption {
+      font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
+      font-size: 13px;
       color: var(--text-dim);
-      font-size: 11px;
+      margin: 0 0 14px;
+      font-style: italic;
       transition: color 0.3s;
     }
 
     .table-wrap {
       overflow: auto;
-      max-height: 380px;
+      max-height: 420px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 1040px;
+      min-width: 1200px;
       background: var(--table-bg);
-      font-size: 11px;
-      transition: background 0.35s;
+      transition: background 0.3s;
     }
 
     th, td {
-      padding: 9px 12px;
+      padding: 7px 11px;
       border-bottom: 1px solid var(--table-border);
       text-align: right;
       white-space: nowrap;
-      font-family: "Cascadia Code", "JetBrains Mono", "Consolas", "Microsoft YaHei UI", monospace;
-      transition: border-color 0.35s;
+      font-size: 13px;
+      transition: border-color 0.3s;
+    }
+
+    thead tr:first-child th {
+      font-family: "Times New Roman", Georgia, serif;
+      font-weight: 600;
+      color: var(--text);
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      vertical-align: bottom;
+      border-bottom: 2px solid var(--text);
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    thead tr:last-child th {
+      font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
+      font-weight: 400;
+      color: var(--text-dim);
+      font-size: 12px;
+      border-bottom: 2px solid var(--text);
+      vertical-align: top;
+      padding-top: 2px;
+      transition: border-color 0.3s, color 0.3s;
     }
 
     th:first-child, td:first-child {
@@ -780,114 +665,67 @@
     }
 
     th {
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 10px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
       position: sticky;
       top: 0;
-      background: var(--table-header-bg);
+      background: var(--table-bg);
       z-index: 2;
-      transition: background 0.35s;
+    }
+
+    tbody td {
+      font-family: "Times New Roman", Georgia, serif;
+      transition: background 0.3s;
     }
 
     tr:nth-child(even) td {
       background: var(--table-stripe);
     }
 
+    tr:last-child td {
+      border-bottom: 2px solid var(--text);
+    }
+
     /* ============================================================
-       CODE / MATLAB SNIPPET
+       MATLAB CODE BLOCK
        ============================================================ */
     .code-box {
       background: var(--code-bg);
-      border: 1px solid var(--code-border);
-      padding: 16px 18px;
-      font-family: "Cascadia Code", "JetBrains Mono", "Consolas", monospace;
-      font-size: 12px;
-      color: var(--text);
+      padding: 18px 22px;
+      font-family: "Consolas", "Cascadia Code", "Courier New", monospace;
+      font-size: 14px;
+      color: var(--code-color);
       line-height: 1.8;
       overflow: auto;
-      transition: background 0.35s, border-color 0.35s, color 0.35s;
-      white-space: pre;
+      transition: background 0.3s, color 0.3s;
       position: relative;
+      white-space: pre;
     }
 
     .code-box::before {
       content: 'MATLAB';
       position: absolute;
-      top: 8px; right: 12px;
-      font-size: 9px;
+      top: 8px;
+      right: 14px;
+      font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
+      font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.12em;
       color: var(--text-dim);
     }
 
-    .code-box code {
-      color: var(--blue);
-    }
-
     /* ============================================================
-       STATUS BAR
+       SCROLLBAR
        ============================================================ */
-    .status {
-      margin-top: 12px;
-      padding: 12px 14px;
-      border: 1px solid var(--status-border);
-      background: var(--status-bg);
-      color: var(--text-muted);
-      font-size: 12px;
-      line-height: 1.7;
-      transition: background 0.35s, border-color 0.35s, color 0.35s;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-    }
-
-    .status::before {
-      content: '◉';
-      color: var(--green);
-      font-size: 10px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .status.error::before {
-      color: var(--red);
-    }
-
-    /* ============================================================
-       SCROLLBAR STYLING
-       ============================================================ */
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--panel-bg);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--panel-border);
-      border-radius: 3px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--text-dim);
-    }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
 
     /* ============================================================
        RESPONSIVE
        ============================================================ */
-    @media (max-width: 1180px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        position: static;
-        max-height: none;
+    @media (max-width: 1000px) {
+      .param-row {
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .chart-grid,
@@ -896,17 +734,33 @@
       }
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 640px) {
+      .shell {
+        width: calc(100vw - 20px);
+      }
+
+      .paper-section {
+        padding: 16px;
+      }
+
+      .param-row {
+        grid-template-columns: 1fr;
+      }
+
       .stats {
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .hero {
-        padding: 20px;
+      .hero h1 {
+        font-size: 22px;
+      }
+
+      .hero-top {
+        flex-wrap: wrap;
       }
 
       .top-bar {
-        padding: 10px 16px;
+        padding: 10px 12px;
       }
     }
   </style>
@@ -914,330 +768,315 @@
 <body>
 
   <!-- ============================================================
-       TOP BAR: Theme Toggle
+       TOP BAR
        ============================================================ -->
   <div class="top-bar">
-    <button class="theme-toggle" id="theme-toggle" title="切换深浅色主题" aria-label="切换深浅色主题">
-      <span class="theme-icon">◑</span>
-      <span class="theme-toggle-label" id="theme-label">DARK</span>
-      <span class="theme-toggle-track"></span>
+    <button class="theme-toggle" id="theme-toggle" title="切换深/浅色主题" aria-label="切换主题">
+      <span class="theme-toggle-icon" id="theme-icon">◐</span>
+      <span id="theme-label">Light</span>
     </button>
   </div>
 
   <!-- ============================================================
-       SHELL (main container)
+       SHELL
        ============================================================ -->
   <div class="shell">
 
-    <!-- ===== HERO HEADER ===== -->
+    <!-- ===== ① HERO ===== -->
     <section class="hero">
       <div class="hero-top">
-        <img class="hero-logo-img" src="交大校徽.png" alt="北京交通大学" />
-        <img class="hero-logo-img" src="交大校徽2.jpg" alt="北京交通大学" />
-        <span class="status-indicator">System Online</span>
+        <img class="hero-logo-img" src="交大校徽.png" alt="北京交通大学校徽" />
+        <img class="hero-logo-img" src="交大校徽2.jpg" alt="北京交通大学校徽" />
       </div>
-      <h1>半挂车 <span>PID</span> 工况仿真与离散参数导出</h1>
+      <h1>半挂车 <em>PID</em> 工况仿真与离散参数导出</h1>
       <p class="hero-desc">
-        基于当前仓库中的 PID 半挂车仿真思路，生成可控、平滑、按时间排序的离散时序数据。
+        基于 PID 半挂车仿真思路，生成可控、平滑、按时间排序的离散时序数据。
         设置车速、轴距、牵引销位置、挂车轴距、PID 参数和参考航向规划，点击开始仿真后直接导出
         <strong>MATLAB 友好的 CSV 文件</strong>，用于后续主预测模型回放、危险区构造和对照验证。
       </p>
       <div class="entry-points">
         <span class="entry-badge">
-          <span class="badge-icon">🌐</span> Web 直接打开
+          <span class="badge-icon">&#x1F310;</span> Web &#xB7; HTML &#x76F4;&#x63A5;&#x6253;&#x5F00;
           <span class="badge-key">.html</span>
         </span>
         <span class="entry-badge">
-          <span class="badge-icon">⚡</span> BAT 启动器
-          <span class="badge-key">启动PID工况导出器.bat</span>
+          <span class="badge-icon">&#x26A1;</span> BAT &#x542F;&#x52A8;&#x5668;
+          <span class="badge-key">&#x542F;&#x52A8;PID&#x5DE5;&#x51B5;&#x5BFC;&#x51FA;&#x5668;.bat</span>
         </span>
         <span class="entry-badge">
-          <span class="badge-icon">🖥️</span> 桌面快捷方式
-          <span class="badge-key">PID工况仿真导出器.lnk</span>
+          <span class="badge-icon">&#x1F5A5;&#xFE0F;</span> &#x684C;&#x9762;&#x5FEB;&#x6377;&#x65B9;&#x5F0F;
+          <span class="badge-key">PID&#x5DE5;&#x51B5;&#x4EFF;&#x771F;&#x5BFC;&#x51FA;&#x5668;.lnk</span>
         </span>
       </div>
     </section>
 
-    <!-- ===== MAIN LAYOUT ===== -->
-    <div class="layout">
+    <!-- ===== ② PARAMETER CONFIG ===== -->
+    <section class="paper-section">
+      <h2 class="section-header"><span class="enum">1.</span>参数配置</h2>
+      <p style="margin:0 0 18px;font-family:'Microsoft YaHei UI','PingFang SC',sans-serif;font-size:15px;color:var(--text-muted);line-height:1.7;">
+        以半挂车 PID 仿真为基础，导出 <span class="mono-inline">v(t), α(t), φ(t)</span> 及关键几何状态。
+      </p>
 
-      <!-- ===== SIDEBAR: Parameters ===== -->
-      <aside class="panel sidebar">
-        <div class="panel-header">
-          <span class="dot active"></span>
-          <h2>参数配置</h2>
-        </div>
-        <div class="panel-body">
-          <p style="margin:0 0 14px;font-size:12px;color:var(--text-muted);line-height:1.7;">
-            以半挂车 PID 仿真为基础，导出
-            <span class="mono-inline">v(t), α(t), φ(t)</span> 及关键几何状态。
-          </p>
+      <form id="sim-form">
 
-          <form id="sim-form">
-
-            <!-- Vehicle Geometry -->
-            <div class="section">
-              <h3 class="section-title">车辆几何</h3>
-              <div class="grid">
-                <div class="field">
-                  <label for="l">牵引车轴距 l (m)</label>
-                  <input id="l" name="l" type="number" step="0.1" value="4.0" />
-                </div>
-                <div class="field">
-                  <label for="l_h">后轴到牵引销 l_h (m)</label>
-                  <input id="l_h" name="l_h" type="number" step="0.1" value="1.8" />
-                </div>
-                <div class="field">
-                  <label for="L">挂车轴距 L (m)</label>
-                  <input id="L" name="L" type="number" step="0.1" value="13.5" />
-                </div>
-                <div class="field">
-                  <label for="width">等效车宽 W (m)</label>
-                  <input id="width" name="width" type="number" step="0.1" value="2.0" />
-                </div>
-              </div>
+        <div class="param-group">
+          <h3 class="param-group-title">Vehicle Geometry &mdash; 车辆几何</h3>
+          <div class="param-row">
+            <div class="field">
+              <label for="l">牵引车轴距 <span class="unit">l / m</span></label>
+              <input id="l" name="l" type="number" step="0.1" value="4.0" />
             </div>
-
-            <!-- Simulation Timing -->
-            <div class="section">
-              <h3 class="section-title">仿真节拍</h3>
-              <div class="grid">
-                <div class="field">
-                  <label for="speed">恒定前轮速度 v_A (m/s)</label>
-                  <input id="speed" name="speed" type="number" step="0.1" value="3.0" />
-                </div>
-                <div class="field">
-                  <label for="totalTime">总时长 T_end (s)</label>
-                  <input id="totalTime" name="totalTime" type="number" step="1" value="35" />
-                </div>
-                <div class="field">
-                  <label for="dt">时间步长 dt (s)</label>
-                  <input id="dt" name="dt" type="number" step="0.01" value="0.02" />
-                </div>
-                <div class="field">
-                  <label for="smoothing">转向平滑系数</label>
-                  <input id="smoothing" name="smoothing" type="number" step="0.01" value="0.95" />
-                </div>
-              </div>
+            <div class="field">
+              <label for="l_h">后轴到牵引销 <span class="unit">l&#x2095; / m</span></label>
+              <input id="l_h" name="l_h" type="number" step="0.1" value="1.8" />
             </div>
-
-            <!-- Reference Heading -->
-            <div class="section">
-              <h3 class="section-title">参考航向</h3>
-              <div class="grid">
-                <div class="field">
-                  <label for="thetaStartDeg">起始航向 (deg)</label>
-                  <input id="thetaStartDeg" name="thetaStartDeg" type="number" step="1" value="90" />
-                </div>
-                <div class="field">
-                  <label for="thetaEndDeg">结束航向 (deg)</label>
-                  <input id="thetaEndDeg" name="thetaEndDeg" type="number" step="1" value="0" />
-                </div>
-                <div class="field">
-                  <label for="t1">保持起始航向到 t1 (s)</label>
-                  <input id="t1" name="t1" type="number" step="0.5" value="3" />
-                </div>
-                <div class="field">
-                  <label for="t2">收敛到结束航向的 t2 (s)</label>
-                  <input id="t2" name="t2" type="number" step="0.5" value="15" />
-                </div>
-              </div>
+            <div class="field">
+              <label for="L">挂车轴距 <span class="unit">L / m</span></label>
+              <input id="L" name="L" type="number" step="0.1" value="13.5" />
             </div>
-
-            <!-- PID Parameters -->
-            <div class="section">
-              <h3 class="section-title">PID 参数</h3>
-              <div class="grid">
-                <div class="field">
-                  <label for="kpTheta">Kp_theta</label>
-                  <input id="kpTheta" name="kpTheta" type="number" step="0.01" value="0.8" />
-                </div>
-                <div class="field">
-                  <label for="kiTheta">Ki_theta</label>
-                  <input id="kiTheta" name="kiTheta" type="number" step="0.01" value="0.02" />
-                </div>
-                <div class="field">
-                  <label for="kdTheta">Kd_theta</label>
-                  <input id="kdTheta" name="kdTheta" type="number" step="0.01" value="0.02" />
-                </div>
-                <div class="field">
-                  <label for="integralThetaLimit">外环积分限幅</label>
-                  <input id="integralThetaLimit" name="integralThetaLimit" type="number" step="0.1" value="0.4" />
-                </div>
-                <div class="field">
-                  <label for="kpPhi">Kp_phi</label>
-                  <input id="kpPhi" name="kpPhi" type="number" step="0.01" value="0.3" />
-                </div>
-                <div class="field">
-                  <label for="kiPhi">Ki_phi</label>
-                  <input id="kiPhi" name="kiPhi" type="number" step="0.01" value="0.01" />
-                </div>
-                <div class="field">
-                  <label for="kdPhi">Kd_phi</label>
-                  <input id="kdPhi" name="kdPhi" type="number" step="0.01" value="0.01" />
-                </div>
-                <div class="field">
-                  <label for="integralPhiLimit">内环积分限幅</label>
-                  <input id="integralPhiLimit" name="integralPhiLimit" type="number" step="0.1" value="0.2" />
-                </div>
-              </div>
-            </div>
-
-            <!-- Physical Limits -->
-            <div class="section">
-              <h3 class="section-title">物理限幅</h3>
-              <div class="grid">
-                <div class="field">
-                  <label for="alphaLimitDeg">转向角限幅 (deg)</label>
-                  <input id="alphaLimitDeg" name="alphaLimitDeg" type="number" step="1" value="30" />
-                </div>
-                <div class="field">
-                  <label for="phiLimitDeg">铰接角限幅 (deg)</label>
-                  <input id="phiLimitDeg" name="phiLimitDeg" type="number" step="1" value="15" />
-                </div>
-              </div>
-
-              <div class="actions">
-                <button class="primary" type="submit">▶ 开始仿真</button>
-                <button class="secondary" type="button" id="download-btn" disabled>⬇ 导出 CSV</button>
-                <button class="ghost" type="button" id="reset-btn">↺ 恢复默认</button>
-              </div>
-
-              <div class="hint">
-                导出文件字段包含时间、参考航向、牵引车航向、挂车航向、车速、转向角、铰接角以及
-                A / B / H / T 各关键点坐标，适合后续在 MATLAB 中用 <span class="mono-inline">readtable</span> 直接读取。
-              </div>
-            </div>
-          </form>
-
-          <div class="status" id="status-box">
-            当前尚未运行仿真。点击"开始仿真"后，这里会显示样本点数、导出文件名和参数检查信息。
-          </div>
-        </div>
-      </aside>
-
-      <!-- ===== CONTENT AREA ===== -->
-      <main class="content">
-
-        <!-- Stats Row -->
-        <div class="stats" id="stats">
-          <div class="stat-card">
-            <span>离散点数</span>
-            <strong id="stat-samples">0</strong>
-          </div>
-          <div class="stat-card">
-            <span>实际最大转向角</span>
-            <strong id="stat-alpha">0.00°</strong>
-          </div>
-          <div class="stat-card">
-            <span>最大铰接角</span>
-            <strong id="stat-phi">0.00°</strong>
-          </div>
-          <div class="stat-card">
-            <span>末端挂车位置</span>
-            <strong id="stat-tail">(0.00, 0.00)</strong>
-          </div>
-        </div>
-
-        <!-- Chart Grid -->
-        <div class="chart-grid">
-          <div class="panel chart-card">
-            <div class="panel-header">
-              <span class="dot info"></span>
-              <h3>轨迹预览</h3>
-            </div>
-            <div class="panel-body">
-              <div class="chart-head">
-                <p>牵引车前轴 A、后轴 B、挂车后轴 T 的离散轨迹</p>
-              </div>
-              <canvas id="trajectory-canvas" width="860" height="480"></canvas>
-              <div class="legend">
-                <span><i style="background:#4da6e8"></i>前轴 A</span>
-                <span><i style="background:#3cc96e"></i>后轴 B</span>
-                <span><i style="background:#f0a800"></i>挂车后轴 T</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel chart-card">
-            <div class="panel-header">
-              <span class="dot info"></span>
-              <h3>角度时序</h3>
-            </div>
-            <div class="panel-body">
-              <div class="chart-head">
-                <p>查看 PID 参考航向、实际航向、转向角和铰接角变化</p>
-              </div>
-              <canvas id="angles-canvas" width="860" height="480"></canvas>
-              <div class="legend">
-                <span><i style="background:#f25652"></i>参考航向</span>
-                <span><i style="background:#4da6e8"></i>实际航向</span>
-                <span><i style="background:#3cc96e"></i>转向角 α</span>
-                <span><i style="background:#f0a800"></i>铰接角 φ</span>
-              </div>
+            <div class="field">
+              <label for="width">等效车宽 <span class="unit">W / m</span></label>
+              <input id="width" name="width" type="number" step="0.1" value="2.0" />
             </div>
           </div>
         </div>
 
-        <!-- Data Preview Table -->
-        <div class="panel">
-          <div class="table-toolbar">
-            <div>
-              <h3>离散参数预览</h3>
-              <p>预览全时段抽样行，避免只看到起始直行阶段；导出文件仍包含完整时序数据</p>
+        <div class="param-group">
+          <h3 class="param-group-title">Simulation Timing &mdash; 仿真节拍</h3>
+          <div class="param-row">
+            <div class="field">
+              <label for="speed">恒定前轮速度 <span class="unit">v&#x2090; / m&#xB7;s&#x207B;&#xB9;</span></label>
+              <input id="speed" name="speed" type="number" step="0.1" value="3.0" />
+            </div>
+            <div class="field">
+              <label for="totalTime">总时长 <span class="unit">T<sub>end</sub> / s</span></label>
+              <input id="totalTime" name="totalTime" type="number" step="1" value="35" />
+            </div>
+            <div class="field">
+              <label for="dt">时间步长 <span class="unit">dt / s</span></label>
+              <input id="dt" name="dt" type="number" step="0.01" value="0.02" />
+            </div>
+            <div class="field">
+              <label for="smoothing">转向平滑系数</label>
+              <input id="smoothing" name="smoothing" type="number" step="0.01" value="0.95" />
             </div>
           </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>time_s</th>
-                  <th>v_input_mps</th>
-                  <th>theta_ref_deg</th>
-                  <th>theta_deg</th>
-                  <th>theta_t_deg</th>
-                  <th>alpha_deg</th>
-                  <th>phi_deg</th>
-                  <th>xA_m</th>
-                  <th>yA_m</th>
-                  <th>xB_m</th>
-                  <th>yB_m</th>
-                  <th>xH_m</th>
-                  <th>yH_m</th>
-                  <th>xT_m</th>
-                  <th>yT_m</th>
-                </tr>
-              </thead>
-              <tbody id="preview-body">
-                <tr>
-                  <td colspan="15" style="text-align:center;color:var(--text-dim);">等待仿真结果</td>
-                </tr>
-              </tbody>
-            </table>
+        </div>
+
+        <div class="param-group">
+          <h3 class="param-group-title">Reference Heading &mdash; 参考航向</h3>
+          <div class="param-row">
+            <div class="field">
+              <label for="thetaStartDeg">起始航向 <span class="unit">/ deg</span></label>
+              <input id="thetaStartDeg" name="thetaStartDeg" type="number" step="1" value="90" />
+            </div>
+            <div class="field">
+              <label for="thetaEndDeg">结束航向 <span class="unit">/ deg</span></label>
+              <input id="thetaEndDeg" name="thetaEndDeg" type="number" step="1" value="0" />
+            </div>
+            <div class="field">
+              <label for="t1">保持起始航向到 <span class="unit">t&#x2081; / s</span></label>
+              <input id="t1" name="t1" type="number" step="0.5" value="3" />
+            </div>
+            <div class="field">
+              <label for="t2">收敛到结束航向的 <span class="unit">t&#x2082; / s</span></label>
+              <input id="t2" name="t2" type="number" step="0.5" value="15" />
+            </div>
           </div>
         </div>
 
-        <!-- MATLAB Code Snippet -->
-        <div class="panel">
-          <div class="panel-header">
-            <span class="dot info"></span>
-            <h3>MATLAB 读取示例</h3>
+        <div class="param-group">
+          <h3 class="param-group-title">PID Gains &mdash; PID 参数</h3>
+          <div class="param-row" style="margin-bottom:10px;">
+            <div class="field">
+              <label for="kpTheta"><em>K</em><sub>p,θ</sub></label>
+              <input id="kpTheta" name="kpTheta" type="number" step="0.01" value="0.8" />
+            </div>
+            <div class="field">
+              <label for="kiTheta"><em>K</em><sub>i,θ</sub></label>
+              <input id="kiTheta" name="kiTheta" type="number" step="0.01" value="0.02" />
+            </div>
+            <div class="field">
+              <label for="kdTheta"><em>K</em><sub>d,θ</sub></label>
+              <input id="kdTheta" name="kdTheta" type="number" step="0.01" value="0.02" />
+            </div>
+            <div class="field">
+              <label for="integralThetaLimit">外环积分限幅</label>
+              <input id="integralThetaLimit" name="integralThetaLimit" type="number" step="0.1" value="0.4" />
+            </div>
           </div>
-          <div class="code-box" id="matlab-snippet">data = readtable('pid_scenario.csv');</div>
+          <div class="param-row">
+            <div class="field">
+              <label for="kpPhi"><em>K</em><sub>p,φ</sub></label>
+              <input id="kpPhi" name="kpPhi" type="number" step="0.01" value="0.3" />
+            </div>
+            <div class="field">
+              <label for="kiPhi"><em>K</em><sub>i,φ</sub></label>
+              <input id="kiPhi" name="kiPhi" type="number" step="0.01" value="0.01" />
+            </div>
+            <div class="field">
+              <label for="kdPhi"><em>K</em><sub>d,φ</sub></label>
+              <input id="kdPhi" name="kdPhi" type="number" step="0.01" value="0.01" />
+            </div>
+            <div class="field">
+              <label for="integralPhiLimit">内环积分限幅</label>
+              <input id="integralPhiLimit" name="integralPhiLimit" type="number" step="0.1" value="0.2" />
+            </div>
+          </div>
         </div>
 
-      </main>
-    </div>
+        <div class="param-group">
+          <h3 class="param-group-title">Physical Limits &mdash; 物理限幅</h3>
+          <div class="param-row cols-2">
+            <div class="field">
+              <label for="alphaLimitDeg">转向角限幅 <span class="unit">α<sub>max</sub> / deg</span></label>
+              <input id="alphaLimitDeg" name="alphaLimitDeg" type="number" step="1" value="30" />
+            </div>
+            <div class="field">
+              <label for="phiLimitDeg">铰接角限幅 <span class="unit">φ<sub>max</sub> / deg</span></label>
+              <input id="phiLimitDeg" name="phiLimitDeg" type="number" step="1" value="15" />
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="primary" type="submit">&#x25B6; 开始仿真</button>
+          <button class="secondary" type="button" id="download-btn" disabled>&#x2B07; 导出 CSV</button>
+          <button class="ghost" type="button" id="reset-btn">&#x21BA; 恢复默认</button>
+        </div>
+
+        <div class="hint">
+          导出文件字段包含时间、参考航向、牵引车航向、挂车航向、车速、转向角、铰接角以及 A / B / H / T 各关键点坐标，适合后续在 MATLAB 中用 <span class="mono-inline">readtable</span> 直接读取。
+        </div>
+      </form>
+
+      <div class="status" id="status-box">
+        当前尚未运行仿真。点击"开始仿真"后，这里会显示样本点数、导出文件名和参数检查信息。
+      </div>
+    </section>
+
+    <!-- ===== ③ STATS CARDS ===== -->
+    <section class="paper-section" id="stats-section">
+      <h2 class="section-header"><span class="enum">2.</span>仿真统计</h2>
+      <div class="stats" id="stats">
+        <div class="stat-card">
+          <span>离散点数 &middot; Samples</span>
+          <strong id="stat-samples">0</strong>
+        </div>
+        <div class="stat-card">
+          <span>最大转向角 &middot; max |α|</span>
+          <strong id="stat-alpha">0.00°</strong>
+        </div>
+        <div class="stat-card">
+          <span>最大铰接角 &middot; max |φ|</span>
+          <strong id="stat-phi">0.00°</strong>
+        </div>
+        <div class="stat-card">
+          <span>末端挂车位置 &middot; T(N)</span>
+          <strong id="stat-tail">(0.00, 0.00)</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ④ CHARTS ===== -->
+    <section class="paper-section">
+      <h2 class="section-header"><span class="enum">3.</span>可视化</h2>
+      <div class="chart-grid">
+        <!-- Trajectory -->
+        <div class="chart-card-inner">
+          <div class="chart-label">轨迹预览</div>
+          <p class="chart-caption">Fig. 1. Discrete trajectory of key points — 牵引车前轴 A、后轴 B、挂车后轴 T</p>
+          <canvas id="trajectory-canvas" width="780" height="440"></canvas>
+          <div class="legend">
+            <span><i style="background:#2563a0"></i>前轴 A (Front axle)</span>
+            <span><i style="background:#2d7d3e"></i>后轴 B (Rear axle)</span>
+            <span><i style="background:#c47a2e"></i>挂车后轴 T (Trailer axle)</span>
+          </div>
+        </div>
+
+        <!-- Angles -->
+        <div class="chart-card-inner">
+          <div class="chart-label">角度时序</div>
+          <p class="chart-caption">Fig. 2. Reference heading vs. actual angles — 参考航向、实际航向、转向角和铰接角变化</p>
+          <canvas id="angles-canvas" width="780" height="440"></canvas>
+          <div class="legend">
+            <span><i style="background:#c4554d"></i>参考航向 θ<sub>ref</sub></span>
+            <span><i style="background:#2563a0"></i>实际航向 θ</span>
+            <span><i style="background:#2d7d3e"></i>转向角 α</span>
+            <span><i style="background:#c47a2e"></i>铰接角 φ</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ⑤ TABLE ===== -->
+    <section class="paper-section">
+      <h2 class="section-header"><span class="enum">4.</span>离散参数预览</h2>
+      <div class="table-title">Table 1. Discrete Parameter Preview</div>
+      <p class="table-caption">预览全时段抽样行（避免只看到起始直行阶段）；导出文件仍包含完整时序数据。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>time_s</th>
+              <th>v_input_mps</th>
+              <th>theta_ref_deg</th>
+              <th>theta_deg</th>
+              <th>theta_t_deg</th>
+              <th>alpha_deg</th>
+              <th>phi_deg</th>
+              <th>xA_m</th>
+              <th>yA_m</th>
+              <th>xB_m</th>
+              <th>yB_m</th>
+              <th>xH_m</th>
+              <th>yH_m</th>
+              <th>xT_m</th>
+              <th>yT_m</th>
+            </tr>
+            <tr>
+              <th>时间 /s</th>
+              <th>输入车速 /m&middot;s<sup>&minus;1</sup></th>
+              <th>参考航向 /&deg;</th>
+              <th>牵引车航向 /&deg;</th>
+              <th>挂车航向 /&deg;</th>
+              <th>转向角 /&deg;</th>
+              <th>铰接角 /&deg;</th>
+              <th>前轴A X/m</th>
+              <th>前轴A Y/m</th>
+              <th>后轴B X/m</th>
+              <th>后轴B Y/m</th>
+              <th>鞍座H X/m</th>
+              <th>鞍座H Y/m</th>
+              <th>挂车后轴T X/m</th>
+              <th>挂车后轴T Y/m</th>
+            </tr>
+          </thead>
+          <tbody id="preview-body">
+            <tr>
+              <td colspan="15" style="text-align:center;color:var(--text-dim);font-family:'Microsoft YaHei UI','Times New Roman',sans-serif;">等待仿真结果</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== ⑥ MATLAB SNIPPET ===== -->
+    <section class="paper-section">
+      <h2 class="section-header"><span class="enum">5.</span>MATLAB 读取示例</h2>
+      <div class="code-box" id="matlab-snippet">data = readtable('pid_scenario.csv');</div>
+    </section>
+
   </div>
 
   <!-- ============================================================
        SCRIPTS
-       All simulation logic preserved EXACTLY from original.
-       Only chart color references updated for theme compatibility.
+       All simulation logic EXACTLY preserved.
+       Chart colors updated for Nature palette.
        ============================================================ -->
   <script>
     /* ==========================================================
-       THEME MANAGEMENT (new)
+       THEME MANAGEMENT
        ========================================================== */
     (function initTheme() {
       const saved = localStorage.getItem('pid-sim-theme');
@@ -1259,8 +1098,12 @@
     function updateThemeUI() {
       const theme = document.documentElement.getAttribute('data-theme');
       const label = document.getElementById('theme-label');
+      const icon = document.getElementById('theme-icon');
       if (label) {
-        label.textContent = theme === 'dark' ? 'DARK' : 'LIGHT';
+        label.textContent = theme === 'dark' ? 'Dark' : 'Light';
+      }
+      if (icon) {
+        icon.textContent = theme === 'dark' ? '◑' : '◐';
       }
     }
 
@@ -1278,14 +1121,14 @@
        ========================================================== */
     function chartGridColor() {
       return document.documentElement.getAttribute('data-theme') === 'dark'
-        ? 'rgba(255,255,255,0.06)'
+        ? 'rgba(255,255,255,0.05)'
         : 'rgba(0,0,0,0.06)';
     }
 
     function chartTextColor() {
       return document.documentElement.getAttribute('data-theme') === 'dark'
-        ? 'rgba(226,228,232,0.65)'
-        : 'rgba(61,57,51,0.55)';
+        ? 'rgba(208,218,232,0.50)'
+        : 'rgba(30,42,58,0.50)';
     }
 
     /* ==========================================================
@@ -1649,7 +1492,8 @@
     }
 
     /* ==========================================================
-       CHART DRAWING — theme-aware colors, logic preserved
+       CHART DRAWING — theme-aware, Nature palette
+       Logic preserved, colors updated.
        ========================================================== */
     function drawAxes(ctx, width, height, margin, labels) {
       ctx.strokeStyle = chartGridColor();
@@ -1672,8 +1516,8 @@
       }
 
       ctx.fillStyle = chartTextColor();
-      ctx.font = "11px 'Segoe UI','Microsoft YaHei UI',sans-serif";
-      ctx.fillText(labels.x, width - margin.right - 40, height - 8);
+      ctx.font = "12px 'Times New Roman', Georgia, serif";
+      ctx.fillText(labels.x, width - margin.right - 36, height - 8);
       ctx.save();
       ctx.translate(16, margin.top + 24);
       ctx.rotate(-Math.PI / 2);
@@ -1712,9 +1556,9 @@
       drawAxes(ctx, width, height, margin, { x: "X / m", y: "Y / m" });
 
       const series = [
-        { x: simulation.arrays.xA, y: simulation.arrays.yA, color: "#4da6e8" },
-        { x: simulation.arrays.xB, y: simulation.arrays.yB, color: "#3cc96e" },
-        { x: simulation.arrays.xT, y: simulation.arrays.yT, color: "#f0a800" }
+        { x: simulation.arrays.xA, y: simulation.arrays.yA, color: "#2563a0" },
+        { x: simulation.arrays.xB, y: simulation.arrays.yB, color: "#2d7d3e" },
+        { x: simulation.arrays.xT, y: simulation.arrays.yT, color: "#c47a2e" }
       ];
 
       for (const item of series) {
@@ -1742,10 +1586,10 @@
 
       const t = simulation.arrays.t;
       const series = [
-        { values: simulation.arrays.thetaRef.map(rad2deg), color: "#f25652" },
-        { values: simulation.arrays.theta.map(rad2deg), color: "#4da6e8" },
-        { values: simulation.arrays.alpha.map(rad2deg), color: "#3cc96e" },
-        { values: simulation.arrays.phi.map(rad2deg), color: "#f0a800" }
+        { values: simulation.arrays.thetaRef.map(rad2deg), color: "#c4554d" },
+        { values: simulation.arrays.theta.map(rad2deg), color: "#2563a0" },
+        { values: simulation.arrays.alpha.map(rad2deg), color: "#2d7d3e" },
+        { values: simulation.arrays.phi.map(rad2deg), color: "#c47a2e" }
       ];
 
       const allValues = series.flatMap((item) => item.values);

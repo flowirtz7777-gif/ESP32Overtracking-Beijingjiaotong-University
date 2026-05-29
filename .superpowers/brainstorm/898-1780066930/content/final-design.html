@@ -1,0 +1,174 @@
+<h2>最终设计确认：Nature 学术期刊风格</h2>
+<p class="subtitle">综合三个选择得出的完整设计方案。以下展示各区域的预期效果，供最终确认。</p>
+
+<div class="section">
+  <h3>设计总结</h3>
+</div>
+
+<table style="width:100%;font-size:13px;border-collapse:collapse;margin-bottom:20px;">
+  <tr style="border-bottom:1px solid var(--border);">
+    <td style="padding:8px 12px;font-weight:600;width:120px;">布局</td>
+    <td style="padding:8px 12px;">分区段落式 — 全页垂直滚动，Hero → 参数区 → 统计卡 → 图表 → 表格 → MATLAB片段，每块是独立板块</td>
+  </tr>
+  <tr style="border-bottom:1px solid var(--border);">
+    <td style="padding:8px 12px;font-weight:600;">字体</td>
+    <td style="padding:8px 12px;">标题：华文中宋/STZhongsong / YouYuan（中文衬线）；正文：Microsoft YaHei UI / PingFang；数字/代码：Consolas / Cascadia</td>
+  </tr>
+  <tr style="border-bottom:1px solid var(--border);">
+    <td style="padding:8px 12px;font-weight:600;">浅色</td>
+    <td style="padding:8px 12px;">象牙白底 #faf8f4 · 深蓝灰文字 #1e2a3a · 藏蓝强调 #2563a0</td>
+  </tr>
+  <tr style="border-bottom:1px solid var(--border);">
+    <td style="padding:8px 12px;font-weight:600;">深色</td>
+    <td style="padding:8px 12px;">深蓝黑板岩底 #141c28 · 浅蓝灰文字 #d0dae8 · 钴蓝强调 #5b9bd5</td>
+  </tr>
+  <tr>
+    <td style="padding:8px 12px;font-weight:600;">关键视觉</td>
+    <td style="padding:8px 12px;">细线分隔 · 顶部细横线装饰 · 圆角极小(4px) · 大面积留白 · 表格横线为主无竖线 · Canvas图表学术蓝绿色系</td>
+  </tr>
+</table>
+
+<div class="section">
+  <h3>页面结构预览（浅色模式）</h3>
+</div>
+
+<!-- HERO MOCKUP -->
+<div class="mockup" style="margin-bottom:16px;">
+  <div class="mockup-header">① Hero 头部 — 校徽 + 标题 + 三入口</div>
+  <div class="mockup-body" style="padding:24px 28px;background:#faf8f4;border-bottom:1px solid #d0d0d0;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <div style="width:48px;height:48px;background:#e0e0e0;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#888;">校徽</div>
+      <div>
+        <div style="font-family:Georgia,serif;font-size:18px;font-weight:700;color:#1e2a3a;">北京交通大学</div>
+        <div style="font-size:10px;color:#7a8a9e;letter-spacing:0.06em;">BEIJING JIAOTONG UNIVERSITY</div>
+      </div>
+    </div>
+    <h1 style="font-family:'STZhongsong','YouYuan',serif;font-size:28px;font-weight:700;color:#1e2a3a;margin:0 0 8px;">半挂车 PID 工况仿真与离散参数导出</h1>
+    <p style="font-size:13px;color:#5a6a7e;margin:0 0 12px;max-width:700px;line-height:1.7;">基于 PID 半挂车仿真思路，生成可控、平滑、按时间排序的离散时序数据……</p>
+    <div style="display:flex;gap:10px;">
+      <span style="font-size:10px;color:#7a8a9e;border:1px solid #d0d5dc;padding:4px 10px;border-radius:3px;">🌐 Web 直接打开</span>
+      <span style="font-size:10px;color:#7a8a9e;border:1px solid #d0d5dc;padding:4px 10px;border-radius:3px;">⚡ BAT 启动器</span>
+      <span style="font-size:10px;color:#7a8a9e;border:1px solid #d0d5dc;padding:4px 10px;border-radius:3px;">🖥️ 桌面快捷方式</span>
+    </div>
+  </div>
+</div>
+
+<!-- PARAMS MOCKUP -->
+<div class="mockup" style="margin-bottom:16px;">
+  <div class="mockup-header">② 参数配置区 — 水平分区，不再侧边栏</div>
+  <div class="mockup-body" style="padding:20px 24px;background:#faf8f4;">
+    <h3 style="font-family:'STZhongsong','YouYuan',serif;font-size:16px;color:#1e2a3a;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #e8e4dc;">参数配置</h3>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
+      <div><div style="font-size:10px;color:#7a8a9e;margin-bottom:4px;">牵引车轴距 l (m)</div><div style="padding:7px 10px;border:1px solid #d0d5dc;border-radius:3px;font-size:12px;font-family:Consolas,monospace;">4.0</div></div>
+      <div><div style="font-size:10px;color:#7a8a9e;margin-bottom:4px;">后轴到牵引销 l_h (m)</div><div style="padding:7px 10px;border:1px solid #d0d5dc;border-radius:3px;font-size:12px;font-family:Consolas,monospace;">1.8</div></div>
+      <div><div style="font-size:10px;color:#7a8a9e;margin-bottom:4px;">挂车轴距 L (m)</div><div style="padding:7px 10px;border:1px solid #d0d5dc;border-radius:3px;font-size:12px;font-family:Consolas,monospace;">13.5</div></div>
+      <div><div style="font-size:10px;color:#7a8a9e;margin-bottom:4px;">等效车宽 W (m)</div><div style="padding:7px 10px;border:1px solid #d0d5dc;border-radius:3px;font-size:12px;font-family:Consolas,monospace;">2.0</div></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:14px;">
+      <div style="padding:8px 16px;background:#1e2a3a;color:#faf8f4;font-size:12px;font-weight:600;border-radius:3px;">▶ 开始仿真</div>
+      <div style="padding:8px 16px;border:1px solid #d0d5dc;color:#5a6a7e;font-size:12px;font-weight:600;border-radius:3px;">⬇ 导出 CSV</div>
+      <div style="padding:8px 16px;border:1px solid #e8e4dc;color:#7a8a9e;font-size:12px;border-radius:3px;">↺ 恢复默认</div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="mockup" style="margin-bottom:16px;">
+  <div class="mockup-header">③ 统计卡片 — 横向排列，学术图表风格</div>
+  <div class="mockup-body" style="padding:20px 24px;background:#faf8f4;display:flex;gap:16px;">
+    <div style="flex:1;border:1px solid #e8e4dc;padding:16px;border-radius:3px;text-align:center;">
+      <div style="font-size:10px;color:#7a8a9e;text-transform:uppercase;letter-spacing:0.06em;">离散点数</div>
+      <div style="font-family:Consolas,monospace;font-size:22px;color:#1e2a3a;font-weight:600;">1,751</div>
+    </div>
+    <div style="flex:1;border:1px solid #e8e4dc;padding:16px;border-radius:3px;text-align:center;">
+      <div style="font-size:10px;color:#7a8a9e;text-transform:uppercase;letter-spacing:0.06em;">最大转向角</div>
+      <div style="font-family:Consolas,monospace;font-size:22px;color:#1e2a3a;font-weight:600;">28.37°</div>
+    </div>
+    <div style="flex:1;border:1px solid #e8e4dc;padding:16px;border-radius:3px;text-align:center;">
+      <div style="font-size:10px;color:#7a8a9e;text-transform:uppercase;letter-spacing:0.06em;">最大铰接角</div>
+      <div style="font-family:Consolas,monospace;font-size:22px;color:#1e2a3a;font-weight:600;">6.84°</div>
+    </div>
+    <div style="flex:1;border:1px solid #e8e4dc;padding:16px;border-radius:3px;text-align:center;">
+      <div style="font-size:10px;color:#7a8a9e;text-transform:uppercase;letter-spacing:0.06em;">末端挂车位置</div>
+      <div style="font-family:Consolas,monospace;font-size:22px;color:#1e2a3a;font-weight:600;">(48.12, 5.67)</div>
+    </div>
+  </div>
+</div>
+
+<!-- CHARTS -->
+<div class="mockup" style="margin-bottom:16px;">
+  <div class="mockup-header">④ 图表区 — 双栏学术图表 + 下划线图例</div>
+  <div class="mockup-body" style="padding:20px 24px;background:#faf8f4;display:flex;gap:16px;">
+    <div style="flex:1;border:1px solid #e8e4dc;padding:16px;border-radius:3px;">
+      <div style="font-family:'STZhongsong',serif;font-size:14px;color:#1e2a3a;margin-bottom:4px;">轨迹预览</div>
+      <div style="font-size:10px;color:#7a8a9e;margin-bottom:12px;">Fig. 1 — Discrete trajectory of key points</div>
+      <div style="height:100px;background:#f0ede5;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:12px;border:1px dashed #ddd;">Canvas Chart Placeholder</div>
+    </div>
+    <div style="flex:1;border:1px solid #e8e4dc;padding:16px;border-radius:3px;">
+      <div style="font-family:'STZhongsong',serif;font-size:14px;color:#1e2a3a;margin-bottom:4px;">角度时序</div>
+      <div style="font-size:10px;color:#7a8a9e;margin-bottom:12px;">Fig. 2 — Reference heading vs. actual angles</div>
+      <div style="height:100px;background:#f0ede5;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:12px;border:1px dashed #ddd;">Canvas Chart Placeholder</div>
+    </div>
+  </div>
+</div>
+
+<!-- TABLE -->
+<div class="mockup" style="margin-bottom:16px;">
+  <div class="mockup-header">⑤ 数据表 — 表格横线为主，无竖线（Nature 表格风格）</div>
+  <div class="mockup-body" style="padding:20px 24px;background:#faf8f4;">
+    <div style="font-family:'STZhongsong',serif;font-size:14px;color:#1e2a3a;margin-bottom:4px;">Table 1. Discrete Parameter Preview</div>
+    <div style="font-size:10px;color:#7a8a9e;margin-bottom:12px;">Preview of sampled rows across the full time span</div>
+    <table style="width:100%;border-collapse:collapse;font-size:10px;font-family:Consolas,monospace;">
+      <thead>
+        <tr style="border-bottom:2px solid #1e2a3a;border-top:2px solid #1e2a3a;">
+          <td style="padding:6px 8px;font-weight:600;color:#1e2a3a;">time_s</td><td style="padding:6px 8px;font-weight:600;color:#1e2a3a;">theta_ref_deg</td><td style="padding:6px 8px;font-weight:600;color:#1e2a3a;">alpha_deg</td><td style="padding:6px 8px;font-weight:600;color:#1e2a3a;">xA_m</td><td style="padding:6px 8px;font-weight:600;color:#1e2a3a;">yT_m</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e8e4dc;"><td style="padding:6px 8px;">0.00</td><td style="padding:6px 8px;">90.00</td><td style="padding:6px 8px;">0.00</td><td style="padding:6px 8px;">0.000</td><td style="padding:6px 8px;">-13.500</td></tr>
+        <tr style="border-bottom:1px solid #e8e4dc;"><td style="padding:6px 8px;">5.84</td><td style="padding:6px 8px;">78.80</td><td style="padding:6px 8px;">2.15</td><td style="padding:6px 8px;">3.412</td><td style="padding:6px 8px;">-12.891</td></tr>
+        <tr style="border-bottom:1px solid #e8e4dc;"><td style="padding:6px 8px;">17.50</td><td style="padding:6px 8px;">45.00</td><td style="padding:6px 8px;">19.34</td><td style="padding:6px 8px;">24.771</td><td style="padding:6px 8px;">-1.203</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- DEEP DARK -->
+<div class="section">
+  <h3>深色模式预览</h3>
+</div>
+
+<div class="mockup" style="margin-bottom:16px;">
+  <div class="mockup-header">深色模式 — 深蓝黑板岩底</div>
+  <div class="mockup-body" style="padding:24px 28px;background:#141c28;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <div style="width:48px;height:48px;background:#1e2a3a;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#4a6a8a;">校徽</div>
+      <div>
+        <div style="font-family:Georgia,serif;font-size:18px;font-weight:700;color:#d0dae8;">北京交通大学</div>
+        <div style="font-size:10px;color:#5a7a9e;letter-spacing:0.06em;">BEIJING JIAOTONG UNIVERSITY</div>
+      </div>
+    </div>
+    <h1 style="font-family:'STZhongsong','YouYuan',serif;font-size:28px;font-weight:700;color:#e8eef8;margin:0 0 8px;">半挂车 PID 工况仿真与离散参数导出</h1>
+    <p style="font-size:13px;color:#7a8aa0;margin:0 0 12px;line-height:1.7;">基于 PID 半挂车仿真思路，生成可控、平滑、按时间排序的离散时序数据……</p>
+    <div style="display:flex;gap:8px;">
+      <div style="padding:6px 14px;background:#1e2a3a;border-radius:3px;font-family:Consolas,monospace;font-size:11px;color:#d0dae8;">▶ 开始仿真</div>
+      <div style="padding:6px 14px;border:1px solid #2a3a4e;border-radius:3px;font-size:11px;color:#7a8aa0;">⬇ 导出 CSV</div>
+      <div style="padding:6px 14px;border:1px solid #1e2a3a;border-radius:3px;font-size:11px;color:#5a6a7e;">↺ 恢复默认</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>关键变化总结</h3>
+  <ul style="font-size:13px;line-height:1.8;color:#5a6a7e;">
+    <li>❌ 不再有侧边栏 — 参数区横向展开成独立板块</li>
+    <li>❌ 不再有圆形按钮、发光、动画脉冲、SCADA 元素</li>
+    <li>✅ 全页单栏垂直滚动，每个功能块是独立章节</li>
+    <li>✅ 宋体/楷体标题 + 细横线分隔 + 小圆角(3-4px)</li>
+    <li>✅ 表格 Nature 风格：顶底粗线 + 行间细线、无竖线</li>
+    <li>✅ 图表加 Fig. 编号标注（论文附录风格）</li>
+    <li>✅ 主题切换按钮改为简洁文字链接或小图标（不抢眼）</li>
+    <li>✅ Canvas 图表配色调整为学术蓝/绿/橙/红（Nature 调色板）</li>
+    <li>✅ 功能完全不变，JS 逻辑一模一样</li>
+  </ul>
+</div>
