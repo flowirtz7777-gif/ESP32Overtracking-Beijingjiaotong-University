@@ -10,75 +10,63 @@ function poly = predict_swept(s0, alpha_now, v_now, p, T_h, dt_pred, alpha_dot)
 %     v_now     当前车速 (m/s)
 %     p         vehicle_params struct
 %     T_h       预测时间窗 (s)，建议 0.3 / 1.0 / 2.0 三档
-%     dt_pred   预测内部步长 (s)，建议 0.05
-%     alpha_dot (可选) 转向角速率 (rad/s)。
-%               若提供：α(τ) = α0 + α_dot * τ，并夹紧到 [−π/2, π/2]
-%               若省略或为 NaN：α(τ) = α0 (保持不变)
+%     dt_pred   预测内部步长 (s)，建议 0.01
+%     alpha_dot (可选) 转向角速率 (rad/s)；建议默认 0（短时保持假设）
 %
 %   输出：
-%     poly  闭合多边形顶点 (N×2)，逆时针走向：
-%             [A_right(0..k_end)] -> [T_right(k_end..0)]
-%           最后一行与第一行相同以闭合
+%     poly  闭合简单多边形顶点 (N×2)，最后一行 = 第一行
+%           **凸包**，保证不自相交
 %
-%   说明：
-%     - 主循环每步用 kinematics_step 推进
-%     - 每一步取 A、T 两点的右侧法向偏移 (+W/2) 得到右沿点
-%       A 用 牵引车航向 theta；T 用 挂车航向 theta_t (= theta - phi)
-%     - 这样形成的多边形包络从车头到挂车尾的整段右侧扫掠区域
-%     - B、H 落在 A-T 的连线附近（同一刚体），无需重复加入边界
+%   构造方法（修订版，2026-05-30）：
+%     旧逻辑用 [A_right(0..M); T_right(M..0); close] 构造一个"梯形包络"，
+%     但车体右沿是 V 形折线 (H 处因 φ 折弯)，把它当直线连导致两端线段交叉，
+%     形成漏斗 / 蝴蝶结自相交多边形。
 %
-%   设计权衡：
-%     - 顶点数 = 2*(k+1)，其中 k = ceil(T_h/dt_pred)；T_h=2.0, dt_pred=0.05 时 ≈ 82 顶点
-%     - 用包络法替代栅格化，保证 ESP32 端 point_in_poly 复杂度 O(N)
+%     新逻辑：每时刻收集 4 个右半车体关键点 (A_right, B, T, T_right) 的位置，
+%     再对所有时刻所有点取凸包。凸包数学上保证简单多边形 (无自相交)。
+%     B、T 在车体中心线上，A_right、T_right 在外右沿，4 点合起来覆盖
+%     "车体右半边"，凸包包络整个右半边在 t∈[0,T_h] 占据的空间。
+%
+%   性能：
+%     T_h=2.0, dt_pred=0.01 → M=200, 4*(M+1)=804 候选点
+%     凸包后顶点 ~30-60 个 (取决于转弯激烈程度)，远低于 ESP32 端 64 顶点上限
 
-    if nargin < 7
-        alpha_dot = 0;
-    end
-    if isempty(alpha_dot) || ~isfinite(alpha_dot)
-        alpha_dot = 0;
-    end
-
-    % α_dot 合理性限幅：方向盘单次操作角速率上限取 ±π rad/s ≈ ±180°/s
-    % （F1 方向盘极限也只到 ~720°/s，对货车 180°/s 已经是非常激进的工况）
-    % 噪声差分常常超过这个量级 → 直接夹到这里再被外推使用，避免预测炸窗
+    if nargin < 7, alpha_dot = 0; end
+    if isempty(alpha_dot) || ~isfinite(alpha_dot), alpha_dot = 0; end
     ALPHA_DOT_MAX = pi;
     if abs(alpha_dot) > ALPHA_DOT_MAX
         alpha_dot = sign(alpha_dot) * ALPHA_DOT_MAX;
     end
 
     half_w = 0.5 * p.width;
-    N      = floor(T_h / dt_pred);     % 步数
-    M      = N + 1;                    % 包含起点
+    M      = floor(T_h / dt_pred);
 
-    A_right = zeros(M, 2);
-    T_right = zeros(M, 2);
+    % 每个时间步收集 4 个右半车体关键点
+    pts_pool = zeros((M+1) * 4, 2);
 
-    s = s0(:);   % 列向量
+    s   = s0(:);
     tau = 0;
-    for k = 1:M
-        % 派生几何点
-        pts = derive_points(s, p);
+    idx = 1;
+    for k = 1:M+1
+        d   = derive_points(s, p);
+        cT  = cos(s(3));         sT  = sin(s(3));
+        cTt = cos(d.theta_t);    sTt = sin(d.theta_t);
 
-        % A 用牵引车航向的右法向 ( sinθ, -cosθ )
-        cT = cos(s(3));
-        sT = sin(s(3));
-        A_right(k, :) = pts.A + half_w * [ sT, -cT ];
+        pts_pool(idx,   :) = d.A + half_w * [ sT,  -cT ];     % A_right (前轮右)
+        pts_pool(idx+1, :) = d.B;                              % B (后轴中心)
+        pts_pool(idx+2, :) = d.T;                              % T (挂车后轴中心)
+        pts_pool(idx+3, :) = d.T + half_w * [ sTt, -cTt ];    % T_right (挂车后轮右)
+        idx = idx + 4;
 
-        % T 用挂车航向的右法向 ( sinθ_t, -cosθ_t )
-        cTt = cos(pts.theta_t);
-        sTt = sin(pts.theta_t);
-        T_right(k, :) = pts.T + half_w * [ sTt, -cTt ];
-
-        % 推进到 τ + dt
-        if k < M
+        if k <= M
             alpha_tau = alpha_now + alpha_dot * tau;
-            % 物理限幅（与硬件 α 量程一致）
             alpha_tau = max(min(alpha_tau, deg2rad(40)), -deg2rad(40));
             s   = kinematics_step(s, alpha_tau, v_now, p, dt_pred);
             tau = tau + dt_pred;
         end
     end
 
-    % 包络多边形：A_right 正向 + T_right 反向 + 闭合
-    poly = [ A_right; flipud(T_right); A_right(1, :) ];
+    % 凸包（自动闭合：convhull 返回的索引序列首尾相同）
+    K    = convhull(pts_pool(:,1), pts_pool(:,2));
+    poly = pts_pool(K, :);
 end
