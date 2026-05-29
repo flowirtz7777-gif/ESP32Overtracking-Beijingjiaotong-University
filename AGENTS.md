@@ -4,6 +4,14 @@
 
 ---
 
+## Section 0 — Autonomy Rules (Highest Priority)
+
+**Execute immediately without asking**: file edits, creates, renames, git add/commit/push, running commands, refactoring, force push, deleting a single file, changes touching credentials/secrets.
+
+**The only operation requiring prior confirmation**: bulk deletion of multiple files or directories (`rm -rf`, `Remove-Item -Recurse`, etc.).
+
+---
+
 ## Section 0 — Required Reading: Modeling Philosophy
 
 Above this engineering handbook there is a **top-level design document** defining the project's modeling philosophy, the main-model-vs-baseline argumentation, and the redefined role of the legacy PID model:
