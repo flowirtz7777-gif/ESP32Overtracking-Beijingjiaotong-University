@@ -1340,12 +1340,12 @@
         theta[k + 1] = thetaNext;
 
         // 铰接动力学（与 Matlab/kinematics_step.m + ArduinoIDE/predictor.h 严格一致）
-        // omega1 = vA*sin(alpha)/l                    牵引车横摆率
-        // omega2 = (-vB*sin(phi) + l_h*omega1*cos(phi)) / L   挂车横摆率（含 l_h 耦合）
+        // omega1 = vA*sin(alpha)/l                              牵引车横摆率
+        // omega2 = (vB*sin(phi) + l_h*omega1*cos(phi)) / L      挂车横摆率（含 l_h 耦合）
         // dphi/dt = omega1 - omega2
-        //         = vA*sin(alpha)/l + vB*sin(phi)/L - l_h*omega1*cos(phi)/L
+        // 直行时 (alpha=0, omega1=0): dphi/dt = -vB*sin(phi)/L → phi 自然回正
         const omega1 = (vA * Math.sin(alphaK)) / l;
-        const omega2 = (-vB * Math.sin(phi[k]) + l_h * omega1 * Math.cos(phi[k])) / L;
+        const omega2 = (vB * Math.sin(phi[k]) + l_h * omega1 * Math.cos(phi[k])) / L;
         const dphiDt = omega1 - omega2;
         phi[k + 1] = clamp(phi[k] + dphiDt * config.dt, -phiLimit, phiLimit);
 

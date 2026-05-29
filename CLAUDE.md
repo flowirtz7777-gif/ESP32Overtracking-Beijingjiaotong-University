@@ -224,15 +224,15 @@ out = run_phase1_demo('pid_scenario_*.csv');
 ```
 ω1     = v · sin(α) / l                   // 牵引车横摆率
 vB     = v · cos(α)
-v_Hxt  =  vB·cos(φ) + l_h·ω1·sin(φ)       // 鞍座 H 在挂车体系下纵向速度
-v_Hyt  = -vB·sin(φ) + l_h·ω1·cos(φ)
-ω2     = v_Hyt / L                        // 挂车横摆率
-vT     = v_Hxt
+ω2     = ( vB·sin(φ) + l_h·ω1·cos(φ) ) / L   // 挂车横摆率（含 l_h 耦合，严格推导）
+vT     =   vB·cos(φ) - l_h·ω1·sin(φ)         // 挂车纵向速度（备用）
 
 xB    += vB·cos(θ)·dt
 yB    += vB·sin(θ)·dt
 θ     += ω1·dt
 φ     += (ω1 − ω2)·dt    并约束 |φ| ≤ φ_max
+
+// 直行时 α=0, ω1=0  →  dφ/dt = -vB·sin(φ)/L  →  φ 自然回正
 ```
 
 派生（不是独立状态）：

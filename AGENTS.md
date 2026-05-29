@@ -252,15 +252,15 @@ State `s = [xB, yB, theta, phi]`.
 ```
 omega1   = v * sin(alpha) / l            % tractor yaw rate
 vB       = v * cos(alpha)
-v_Hx_t   =  vB*cos(phi) + l_h*omega1*sin(phi)
-v_Hy_t   = -vB*sin(phi) + l_h*omega1*cos(phi)
-omega2   = v_Hy_t / L                    % trailer yaw rate
-vT       = v_Hx_t
+omega2   = ( vB*sin(phi) + l_h*omega1*cos(phi) ) / L   % trailer yaw rate (l_h coupled, rigorous derivation)
+vT       =   vB*cos(phi) - l_h*omega1*sin(phi)         % trailer longitudinal speed (informational)
 
 xB     += vB*cos(theta)*dt
 yB     += vB*sin(theta)*dt
 theta  += omega1*dt
 phi    += (omega1 - omega2)*dt           % clamp |phi| <= phi_max
+
+% Straight running (alpha=0, omega1=0): dphi/dt = -vB*sin(phi)/L → phi self-converges to 0
 ```
 
 Derived points:

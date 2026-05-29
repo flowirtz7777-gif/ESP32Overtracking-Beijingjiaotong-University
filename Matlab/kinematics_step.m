@@ -21,9 +21,9 @@ function s2 = kinematics_step(s, alpha, v, p, dt)
 %       omega1 = v * sin(alpha) / l                     % 牵引车横摆率
 %       vB     = v * cos(alpha)                         % 牵引车后轴中心纵向速度
 %
-%       v_Hx_t =  vB*cos(phi) + l_h*omega1*sin(phi)     % 鞍座 H 在挂车体系下纵向速度
-%       v_Hy_t = -vB*sin(phi) + l_h*omega1*cos(phi)     %                       横向速度
-%       omega2 = v_Hy_t / L                             % 挂车横摆率（关键耦合项）
+%       % 严格推导（在 H 点匹配两侧速度，投影到挂车体系）：
+%       omega2 = ( vB*sin(phi) + l_h*omega1*cos(phi) ) / L     % 挂车横摆率
+%       v_T    = vB*cos(phi) - l_h*omega1*sin(phi)             % 挂车纵向速度 (备用)
 %
 %       xB    += vB*cos(theta)*dt
 %       yB    += vB*sin(theta)*dt
@@ -31,7 +31,10 @@ function s2 = kinematics_step(s, alpha, v, p, dt)
 %       phi   += (omega1 - omega2)*dt
 %       phi    = clamp(phi, -phi_max, +phi_max)
 %
-%   ⚠️ 旧版 guacheweixianqu.m 漏了 omega2 中的 l_h*omega1 耦合项；新代码统一使用此函数。
+%   直行时（alpha=0, omega1=0）: dphi/dt = -vB*sin(phi)/L → phi 自然回正 ✓
+%
+%   ⚠️ 旧版 guacheweixianqu.m 漏了 l_h 耦合项；
+%      早期 v0 推导 omega2 公式时 vB*sin(phi) 符号反了导致 phi 不收敛——已于 2026-05-30 修正。
 
     if numel(s) ~= 4
         error('kinematics_step:BadState', 'state 向量必须为 4 维 [xB,yB,theta,phi]');
@@ -50,14 +53,12 @@ function s2 = kinematics_step(s, alpha, v, p, dt)
     omega1 = v * sin(alpha) / l;
     vB     = v * cos(alpha);
 
-    % ---------- 鞍座 H 在挂车体系下的速度（耦合关键） ----------
-    cphi = cos(phi);
-    sphi = sin(phi);
-    v_Hx_t =  vB*cphi + l_h*omega1*sphi;
-    v_Hy_t = -vB*sphi + l_h*omega1*cphi;
-
-    % ---------- 挂车横摆率 ----------
-    omega2 = v_Hy_t / L;
+    % ---------- 挂车横摆率（含 l_h 鞍座偏置耦合） ----------
+    % 严格推导：在 H 点匹配两侧速度，投影到挂车体系：
+    %   v_T   = vB*cos(phi) - l_h*omega1*sin(phi)            % 纵向（T 点滚动方向）
+    %   omega2*L = vB*sin(phi) + l_h*omega1*cos(phi)         % 横向 → 决定挂车横摆率
+    omega2 = ( vB*sin(phi) + l_h*omega1*cos(phi) ) / L;
+    vT     = vB*cos(phi) - l_h*omega1*sin(phi);  %#ok<NASGU>  保留备用
 
     % ---------- 欧拉积分 ----------
     xB_n    = xB    + vB*cos(theta)*dt;
