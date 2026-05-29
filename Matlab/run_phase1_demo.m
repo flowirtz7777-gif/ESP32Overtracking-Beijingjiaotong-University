@@ -44,8 +44,8 @@ function out = run_phase1_demo(csv_path)
     T_h_W   = 2.0;     % 黄色警告：未来 2 秒车身扫过区域
     T_h_A   = 1.0;     % 红色报警：未来 1 秒
     T_h_I   = 0.3;     % 立即危险：未来 0.3 秒
-    dt_pred = 0.05;    % 预测内部积分步长 (s)
-    n_keyframes = 6;   % 演示用：取均匀分布的 6 个时刻画扫掠多边形
+    dt_pred = 0.01;    % 预测内部积分步长 (s) — 与 ESP32 主循环 50 Hz 兼容
+    n_keyframes = 10;  % 演示用：取均匀分布的 10 个时刻画扫掠多边形
 
     % ---------- 准备归档目录 ----------
     run_dir = local_make_run_dir(scenario.file_name);
@@ -160,73 +160,145 @@ function out = run_phase1_demo(csv_path)
     subplot(2,2,4); plot(t, rad2deg(err(:,4))*3600, 'LineWidth', 1.6); grid on;
     xlabel('t (s)'); ylabel('Δφ (arcsec)'); title('φ 误差');
 
-    % --- Figure 3: 三层扫掠多边形 + 虚拟雷达目标 ---
-    fig3 = figure('Name', 'Phase 1 — 三层扫掠预测 + 虚拟雷达目标', 'Position', [160 160 1100 700]);
-    plot(scenario.points.B(:,1), scenario.points.B(:,2), '-', 'LineWidth', 1.5, 'Color', [0.5 0.5 0.5], 'DisplayName', 'CSV: B 轨迹'); hold on; grid on; axis equal;
-    plot(scenario.points.T(:,1), scenario.points.T(:,2), '-', 'LineWidth', 1.5, 'Color', [0.5 0.5 0.5], 'HandleVisibility', 'off');
+    % --- Figure 3: 每个雷达目标各占一个子图，仅显示「抓到它」的那些预测帧 ---
+    %
+    % 设计动机:
+    %   把所有 keyframes × 3 tiers 的多边形堆在一张图上，会把"哪几次判断
+    %   抓到了 R1"这个语义信息淹没在视觉重叠里。
+    %   改成：对每个目标，先扫描所有关键帧，记录「哪些帧的哪一层抓到它」，
+    %   然后仅把这些帧的相应多边形画出来，并在标题里说出
+    %   「R1 在 t=0.6s/0.8s/1.0s 三次判断中被 PolyA/PolyA/PolyW 抓到」。
 
     color_W = [1.00 0.85 0.25];   % 黄
     color_A = [1.00 0.55 0.15];   % 橙
     color_I = [0.95 0.20 0.20];   % 红
 
-    % 演示用虚拟雷达目标（车体右后方常见盲区）
+    % 雷达目标（车体右后方常见盲区，固定随机种子让结果可复现）
+    rng(42);
     radar_targets = make_demo_targets(truth, keyframes(end), p);
+    n_targets = size(radar_targets, 1);
 
-    legend_added = false(1, 3);
+    % 对每个目标 × 每个关键帧 × 每一层，做判内标记
+    % hits(j,ii,tier)  : 目标 j 是否被关键帧 ii 的 tier 抓到
+    %   tier: 1=I, 2=A, 3=W (从最严重到最缓和)
+    hits = false(n_targets, numel(keyframes), 3);
     for ii = 1:numel(keyframes)
-        k = keyframes(ii);
-
-        % 由远到近画，让 PolyI 盖在最上面
-        h_W = fill(polys.W{ii}(:,1), polys.W{ii}(:,2), color_W, 'FaceAlpha', 0.18, 'EdgeColor', color_W*0.7, 'LineWidth', 0.8);
-        h_A = fill(polys.A{ii}(:,1), polys.A{ii}(:,2), color_A, 'FaceAlpha', 0.30, 'EdgeColor', color_A*0.7, 'LineWidth', 0.8);
-        h_I = fill(polys.I{ii}(:,1), polys.I{ii}(:,2), color_I, 'FaceAlpha', 0.45, 'EdgeColor', color_I*0.7, 'LineWidth', 1.2);
-
-        if ~legend_added(1)
-            set(h_W, 'DisplayName', 'PolyW (T_h=2.0s 黄色警告)'); legend_added(1) = true;
-        else, set(h_W, 'HandleVisibility', 'off'); end
-        if ~legend_added(2)
-            set(h_A, 'DisplayName', 'PolyA (T_h=1.0s 红色报警)'); legend_added(2) = true;
-        else, set(h_A, 'HandleVisibility', 'off'); end
-        if ~legend_added(3)
-            set(h_I, 'DisplayName', 'PolyI (T_h=0.3s 立即危险)'); legend_added(3) = true;
-        else, set(h_I, 'HandleVisibility', 'off'); end
-
-        % 时间标签
-        text(scenario.points.B(k,1), scenario.points.B(k,2), sprintf('  t=%.1fs', t(k)), ...
-             'FontSize', 9, 'Color', [0.2 0.2 0.2]);
+        in_I = point_in_poly(radar_targets(:,1), radar_targets(:,2), polys.I{ii});
+        in_A = point_in_poly(radar_targets(:,1), radar_targets(:,2), polys.A{ii});
+        in_W = point_in_poly(radar_targets(:,1), radar_targets(:,2), polys.W{ii});
+        hits(:, ii, 1) = in_I;
+        hits(:, ii, 2) = in_A;
+        hits(:, ii, 3) = in_W;
     end
 
-    % 雷达目标 + 判内
-    in_W = false(size(radar_targets,1), 1);
-    in_A = false(size(radar_targets,1), 1);
-    in_I = false(size(radar_targets,1), 1);
-    for ii = 1:numel(keyframes)
-        in_W = in_W | point_in_poly(radar_targets(:,1), radar_targets(:,2), polys.W{ii});
-        in_A = in_A | point_in_poly(radar_targets(:,1), radar_targets(:,2), polys.A{ii});
-        in_I = in_I | point_in_poly(radar_targets(:,1), radar_targets(:,2), polys.I{ii});
+    % 全局风险（任一时刻任一层抓到，取最严重）
+    risk = zeros(n_targets, 1);
+    for j = 1:n_targets
+        if any(any(hits(j, :, 1))),     risk(j) = 3;
+        elseif any(any(hits(j, :, 2))), risk(j) = 2;
+        elseif any(any(hits(j, :, 3))), risk(j) = 1;
+        else,                            risk(j) = 0;
+        end
     end
 
-    risk = zeros(size(radar_targets,1), 1);
-    risk(in_W) = 1;
-    risk(in_A) = 2;
-    risk(in_I) = 3;
+    risk_colors = [0.30 0.70 0.30;   % 0 安全 绿
+                   1.00 0.85 0.25;   % 1 警告 黄
+                   1.00 0.55 0.15;   % 2 报警 橙
+                   0.95 0.20 0.20];  % 3 立即 红
+    risk_label = {'安全', '警告', '报警', '立即危险'};
 
-    risk_colors = [0.30 0.70 0.30;
-                   1.00 0.85 0.25;
-                   1.00 0.55 0.15;
-                   0.95 0.20 0.20];
+    % --- 子图布局：1 个全局图 + n_targets 个目标专图 ---
+    n_cols = max(2, ceil((n_targets + 1)/2));
+    fig3 = figure('Name', 'Phase 1 — 每个目标的命中预测帧', ...
+                  'Position', [120 80 380*n_cols 720]);
 
-    for j = 1:size(radar_targets,1)
+    % 子图 1：全局总览（仅画车体轨迹 + 目标点 + 风险颜色）
+    subplot(2, n_cols, 1);
+    plot(scenario.points.B(:,1), scenario.points.B(:,2), '-', 'LineWidth', 1.4, 'Color', [0.55 0.55 0.55]); hold on;
+    plot(scenario.points.T(:,1), scenario.points.T(:,2), '-', 'LineWidth', 1.4, 'Color', [0.55 0.55 0.55]);
+    plot(scenario.points.A(:,1), scenario.points.A(:,2), '-', 'LineWidth', 1.0, 'Color', [0.80 0.30 0.30]);
+    grid on; axis equal;
+    for j = 1:n_targets
         c = risk_colors(risk(j)+1, :);
-        scatter(radar_targets(j,1), radar_targets(j,2), 90, c, 'filled', ...
-                'MarkerEdgeColor', 'k', 'LineWidth', 0.8, 'HandleVisibility', 'off');
-        text(radar_targets(j,1)+0.2, radar_targets(j,2), sprintf('R%d (%d)', j, risk(j)), ...
-             'FontSize', 8.5, 'Color', c*0.6);
+        scatter(radar_targets(j,1), radar_targets(j,2), 110, c, 'filled', ...
+                'MarkerEdgeColor', 'k', 'LineWidth', 0.8);
+        text(radar_targets(j,1)+0.25, radar_targets(j,2), ...
+             sprintf('R%d (%s)', j, risk_label{risk(j)+1}), ...
+             'FontSize', 9, 'Color', c*0.6, 'FontWeight', 'bold');
+    end
+    title({'总览：车体轨迹 + 雷达目标', '点颜色 = 整段最严重风险等级'}, 'FontWeight', 'bold', 'FontSize', 10);
+    xlabel('X (m)'); ylabel('Y (m)');
+
+    % --- 每个目标一个子图 ---
+    for j = 1:n_targets
+        subplot(2, n_cols, 1 + j);
+        plot(scenario.points.B(:,1), scenario.points.B(:,2), '-', 'LineWidth', 1.0, 'Color', [0.7 0.7 0.7]); hold on;
+        plot(scenario.points.T(:,1), scenario.points.T(:,2), '-', 'LineWidth', 1.0, 'Color', [0.7 0.7 0.7]);
+        grid on; axis equal;
+
+        % 找到所有抓到本目标的 (帧, 层) 组合
+        hit_frames_I = find(hits(j, :, 1));
+        hit_frames_A = find(hits(j, :, 2));
+        hit_frames_W = find(hits(j, :, 3));
+
+        % 画 PolyW (最远，先画最底层)
+        for ii = hit_frames_W
+            fill(polys.W{ii}(:,1), polys.W{ii}(:,2), color_W, ...
+                 'FaceAlpha', 0.15, 'EdgeColor', color_W*0.7, 'LineWidth', 0.6);
+        end
+        for ii = hit_frames_A
+            fill(polys.A{ii}(:,1), polys.A{ii}(:,2), color_A, ...
+                 'FaceAlpha', 0.28, 'EdgeColor', color_A*0.7, 'LineWidth', 0.8);
+        end
+        for ii = hit_frames_I
+            fill(polys.I{ii}(:,1), polys.I{ii}(:,2), color_I, ...
+                 'FaceAlpha', 0.42, 'EdgeColor', color_I*0.7, 'LineWidth', 1.0);
+        end
+
+        % 画所有关键帧的车体后轴位置（小灰点），让"哪一帧"的位置更直观
+        for ii = 1:numel(keyframes)
+            k = keyframes(ii);
+            scatter(scenario.points.B(k,1), scenario.points.B(k,2), 16, ...
+                    [0.3 0.3 0.3], 'filled', 'HandleVisibility', 'off');
+        end
+
+        % 标记抓到的关键帧时间
+        for ii = union(union(hit_frames_W, hit_frames_A), hit_frames_I)
+            k = keyframes(ii);
+            text(scenario.points.B(k,1), scenario.points.B(k,2), ...
+                 sprintf(' t=%.2fs', t(k)), 'FontSize', 7.5, 'Color', [0.3 0.3 0.3]);
+        end
+
+        % 突出显示当前目标
+        c = risk_colors(risk(j)+1, :);
+        scatter(radar_targets(j,1), radar_targets(j,2), 130, c, 'filled', ...
+                'MarkerEdgeColor', 'k', 'LineWidth', 1.0);
+        text(radar_targets(j,1)+0.25, radar_targets(j,2), sprintf('R%d', j), ...
+             'FontSize', 11, 'Color', c*0.5, 'FontWeight', 'bold');
+
+        % 子图标题：用文字直接列出哪几帧抓到
+        title_lines = {sprintf('R%d  风险=%s', j, risk_label{risk(j)+1})};
+        if ~isempty(hit_frames_I)
+            title_lines{end+1} = sprintf('PolyI 命中: t = %s s', ...
+                strjoin(arrayfun(@(ii) sprintf('%.2f', t(keyframes(ii))), hit_frames_I, 'UniformOutput', false), ', '));
+        end
+        if ~isempty(hit_frames_A)
+            title_lines{end+1} = sprintf('PolyA 命中: t = %s s', ...
+                strjoin(arrayfun(@(ii) sprintf('%.2f', t(keyframes(ii))), hit_frames_A, 'UniformOutput', false), ', '));
+        end
+        if ~isempty(hit_frames_W)
+            title_lines{end+1} = sprintf('PolyW 命中: t = %s s', ...
+                strjoin(arrayfun(@(ii) sprintf('%.2f', t(keyframes(ii))), hit_frames_W, 'UniformOutput', false), ', '));
+        end
+        if numel(title_lines) == 1
+            title_lines{end+1} = '所有 10 个关键帧均未命中（车不会扫到）';
+        end
+        title(title_lines, 'FontWeight', 'normal', 'FontSize', 9);
+        xlabel('X (m)'); ylabel('Y (m)');
     end
 
-    xlabel('X (m)'); ylabel('Y (m)');
-    title('三层扫掠多边形覆盖 + 虚拟雷达目标风险等级 (0=安全 / 1=黄 / 2=橙 / 3=红)', 'FontWeight', 'bold');
-    legend('Location', 'best');
+    sgtitle('三层扫掠预测 — 每个目标只显示抓到它的预测帧（PolyW/A/I）', ...
+            'FontWeight', 'bold', 'FontSize', 12);
 
     %% ---------------------- 输出 + 归档 ----------------------
     out = struct();
