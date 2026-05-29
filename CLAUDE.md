@@ -7,7 +7,7 @@
 
 ## 0. 操作权限约定（最高优先级）
 
-**直接执行，不需要询问**：文件编辑、新建、重命名、git add/commit/push、运行命令、重构代码、force push、删除单个文件、改动密钥/凭证相关内容。
+**直接执行，不需要询问**：文件编辑、新建、重命名、git add/commit/push、运行命令、重构代码、force push、删除单个文件、改动密钥/凭证相关内容、任何 PowerShell / shell 命令。
 
 **唯一需要事先确认的操作**：批量删除多个文件或目录（`rm -rf`、`Remove-Item -Recurse` 等）。
 

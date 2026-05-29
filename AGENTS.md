@@ -6,7 +6,7 @@
 
 ## Section 0 — Autonomy Rules (Highest Priority)
 
-**Execute immediately without asking**: file edits, creates, renames, git add/commit/push, running commands, refactoring, force push, deleting a single file, changes touching credentials/secrets.
+**Execute immediately without asking**: file edits, creates, renames, git add/commit/push, running commands, refactoring, force push, deleting a single file, changes touching credentials/secrets, any PowerShell / shell commands.
 
 **The only operation requiring prior confirmation**: bulk deletion of multiple files or directories (`rm -rf`, `Remove-Item -Recurse`, etc.).
 
