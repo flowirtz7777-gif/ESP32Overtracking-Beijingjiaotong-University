@@ -1,5 +1,5 @@
 function poly = predict_swept(s0, alpha_now, v_now, p, T_h, dt_pred, alpha_dot)
-%PREDICT_SWEPT  从当前状态 s0 向前推 T_h 秒，构造右侧车身扫掠多边形。
+%PREDICT_SWEPT  挂车右侧外缘在 [0, T_h] 扫过的区域 → 简单闭合多边形。
 %
 %   poly = predict_swept(s0, alpha_now, v_now, p, T_h, dt_pred)
 %   poly = predict_swept(s0, alpha_now, v_now, p, T_h, dt_pred, alpha_dot)
@@ -9,27 +9,37 @@ function poly = predict_swept(s0, alpha_now, v_now, p, T_h, dt_pred, alpha_dot)
 %     alpha_now 当前前轮转向角 (rad)
 %     v_now     当前车速 (m/s)
 %     p         vehicle_params struct
-%     T_h       预测时间窗 (s)，建议 0.3 / 1.0 / 2.0 三档
-%     dt_pred   预测内部步长 (s)，建议 0.01
-%     alpha_dot (可选) 转向角速率 (rad/s)；建议默认 0（短时保持假设）
+%     T_h       预测时间窗 (s)
+%     dt_pred   预测内部步长 (s)
+%     alpha_dot (可选) 转向角速率，默认 0（α 短时保持）
 %
 %   输出：
-%     poly  闭合简单多边形顶点 (N×2)，最后一行 = 第一行
-%           **凸包**，保证不自相交
+%     poly  闭合简单多边形 (N×2)，最后一行 = 第一行
 %
-%   构造方法（修订版，2026-05-30）：
-%     旧逻辑用 [A_right(0..M); T_right(M..0); close] 构造一个"梯形包络"，
-%     但车体右沿是 V 形折线 (H 处因 φ 折弯)，把它当直线连导致两端线段交叉，
-%     形成漏斗 / 蝴蝶结自相交多边形。
+%   ===== 多边形构造（用户定义版） =====
+%   只考虑挂车（H→T 段），忽略牵引车头扫掠。挂车右侧外缘是 H→T 这根直棍
+%   向右法向偏移 W/2 后形成的两个端点：
+%       H_right = H + (W/2) · (sin θ_t, -cos θ_t)
+%       T_right = T + (W/2) · (sin θ_t, -cos θ_t)
+%   挂车在每个时刻自身是直的 (H_right_t → T_right_t 一根直线)，所以扫掠区
+%   有 4 条边：
 %
-%     新逻辑：每时刻收集 4 个右半车体关键点 (A_right, B, T, T_right) 的位置，
-%     再对所有时刻所有点取凸包。凸包数学上保证简单多边形 (无自相交)。
-%     B、T 在车体中心线上，A_right、T_right 在外右沿，4 点合起来覆盖
-%     "车体右半边"，凸包包络整个右半边在 t∈[0,T_h] 占据的空间。
+%        H_right₀ ── (H_right 曲线) ── H_right_E
+%             │                              │
+%             │  起始车身右沿       结束车身右沿
+%             │                              │
+%        T_right₀ ── (T_right 曲线) ── T_right_E
 %
-%   性能：
-%     T_h=2.0, dt_pred=0.01 → M=200, 4*(M+1)=804 候选点
-%     凸包后顶点 ~30-60 个 (取决于转弯激烈程度)，远低于 ESP32 端 64 顶点上限
+%   顶点序列：
+%       H_right₀ → ... → H_right_E → T_right_E → ... → T_right₀ → 闭合 H_right₀
+%
+%   说明：
+%     - H_right 与 T_right 用挂车航向 θ_t = θ - φ 投影到右法向
+%     - 不再使用之前的 A_right（牵引车前轮右），因为按用户指示忽略车头扫掠
+%
+%   TODO（已在 TODO.md 登记）：
+%     - 左侧扫掠区（防左转 / 道路左侧目标）：把 +W/2 改成 -W/2 同样构造
+%     - 双侧合并区域：左 + 右两个多边形
 
     if nargin < 7, alpha_dot = 0; end
     if isempty(alpha_dot) || ~isfinite(alpha_dot), alpha_dot = 0; end
@@ -41,22 +51,18 @@ function poly = predict_swept(s0, alpha_now, v_now, p, T_h, dt_pred, alpha_dot)
     half_w = 0.5 * p.width;
     M      = floor(T_h / dt_pred);
 
-    % 每个时间步收集 4 个右半车体关键点
-    pts_pool = zeros((M+1) * 4, 2);
+    H_right = zeros(M+1, 2);
+    T_right = zeros(M+1, 2);
 
     s   = s0(:);
     tau = 0;
-    idx = 1;
     for k = 1:M+1
         d   = derive_points(s, p);
-        cT  = cos(s(3));         sT  = sin(s(3));
-        cTt = cos(d.theta_t);    sTt = sin(d.theta_t);
+        cTt = cos(d.theta_t);
+        sTt = sin(d.theta_t);
 
-        pts_pool(idx,   :) = d.A + half_w * [ sT,  -cT ];     % A_right (前轮右)
-        pts_pool(idx+1, :) = d.B;                              % B (后轴中心)
-        pts_pool(idx+2, :) = d.T;                              % T (挂车后轴中心)
-        pts_pool(idx+3, :) = d.T + half_w * [ sTt, -cTt ];    % T_right (挂车后轮右)
-        idx = idx + 4;
+        H_right(k, :) = d.H + half_w * [ sTt, -cTt ];
+        T_right(k, :) = d.T + half_w * [ sTt, -cTt ];
 
         if k <= M
             alpha_tau = alpha_now + alpha_dot * tau;
@@ -66,7 +72,17 @@ function poly = predict_swept(s0, alpha_now, v_now, p, T_h, dt_pred, alpha_dot)
         end
     end
 
-    % 凸包（自动闭合：convhull 返回的索引序列首尾相同）
-    K    = convhull(pts_pool(:,1), pts_pool(:,2));
-    poly = pts_pool(K, :);
+    % 顶点顺序：
+    %   H_right₀ → H_right₁ → ... → H_right_E
+    %   → T_right_E → T_right_{E-1} → ... → T_right₀
+    %   → 闭合回 H_right₀
+    %
+    % 4 类边：
+    %   - H_right 曲线段：上沿（挂车前端右角的真实轨迹）
+    %   - 结束车身右沿：H_right_E → T_right_E（直，t=T_h 挂车右沿）
+    %   - T_right 反曲线段：下沿（挂车后端右角真实轨迹反向）
+    %   - 起始车身右沿：T_right₀ → H_right₀（直，t=0 挂车右沿，由闭合自动产生）
+    poly = [ H_right; ...                 % H_right₀ ... H_right_E   (M+1 点)
+             flipud(T_right); ...         % T_right_E ... T_right₀   (M+1 点)
+             H_right(1, :) ];             % 闭合
 end
