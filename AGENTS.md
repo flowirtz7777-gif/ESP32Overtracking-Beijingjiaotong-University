@@ -135,11 +135,18 @@ PID-driven scenario generator is bundled in the repo:
 
 ```
 1. Open  pid工况仿真导出器.html        → tune scenario, click "Export CSV"
+   ├─ Electron launcher: save dialog defaults to Matlab/scenarios/
+   └─ Plain browser   : downloads to Downloads/, move to Matlab/scenarios/ manually
 2. MATLAB:  scenario = load_pid_scenario('pid_scenario_*.csv');
+   ├─ filename only   → auto-resolved under Matlab/scenarios/
+   ├─ full path       → used as-is
+   └─ no argument     → file picker opens at Matlab/scenarios/
 3. Treat scenario.inputs.{v_mps, alpha_rad, phi_rad} as virtual sensor data
 4. Feed into the new short-horizon predictor and compare swept area against
    scenario.points.{A,B,H,T} (the PID ground truth)
 ```
+
+**Unified directory**: all PID scenario CSVs live in `Matlab/scenarios/`; both the loader and the Electron exporter default to this path.
 
 **Constraints**:
 

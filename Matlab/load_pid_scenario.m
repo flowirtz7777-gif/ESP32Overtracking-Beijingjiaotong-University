@@ -4,6 +4,10 @@ function scenario = load_pid_scenario(csv_path)
 %
 %   Input:
 %     csv_path : CSV file path exported from "pid工况仿真导出器.html"
+%                解析顺序：
+%                  1) 绝对路径 / 工作目录可见 → 直接用
+%                  2) 仅文件名 → 在 Matlab/scenarios/ 内查找
+%                  3) 省略 → 弹文件框，默认打开 Matlab/scenarios/
 %
 %   Output:
 %     scenario : struct with grouped fields for later prediction / replay
@@ -14,15 +18,32 @@ function scenario = load_pid_scenario(csv_path)
 %     alpha_rad = scenario.inputs.alpha_rad;
 %     phi_rad = scenario.inputs.phi_rad;
 %     xT_m = scenario.points.T(:, 1);
-%
-%   If csv_path is omitted, a file picker will be shown.
+
+    scenarios_dir = local_default_scenarios_dir();
 
     if nargin < 1 || isempty(csv_path)
-        [file_name, folder_path] = uigetfile('*.csv', '选择 PID 工况 CSV 文件');
+        if exist(scenarios_dir, 'dir')
+            picker_init = fullfile(scenarios_dir, '*.csv');
+        else
+            picker_init = '*.csv';
+        end
+        [file_name, folder_path] = uigetfile(picker_init, '选择 PID 工况 CSV 文件');
         if isequal(file_name, 0)
             error('load_pid_scenario:NoFileSelected', '未选择 CSV 文件。');
         end
         csv_path = fullfile(folder_path, file_name);
+    elseif ~exist(csv_path, 'file')
+        % 仅文件名时回退到 scenarios 目录
+        candidate = fullfile(scenarios_dir, csv_path);
+        if exist(candidate, 'file')
+            csv_path = candidate;
+        else
+            error( ...
+                'load_pid_scenario:NotFound', ...
+                'CSV 文件未找到:\n  - %s\n  - %s', ...
+                csv_path, candidate ...
+            );
+        end
     end
 
     table_data = readtable(csv_path);
@@ -104,4 +125,12 @@ end
 function name = local_basename(file_path)
     [~, name_only, ext] = fileparts(file_path);
     name = [name_only, ext];
+end
+
+function scenarios_dir = local_default_scenarios_dir()
+%LOCAL_DEFAULT_SCENARIOS_DIR  返回 <repo>/Matlab/scenarios 的绝对路径。
+%   通过本文件 (load_pid_scenario.m) 自身位置反推，不依赖当前工作目录。
+    this_file = mfilename('fullpath');
+    matlab_dir = fileparts(this_file);            % .../Matlab
+    scenarios_dir = fullfile(matlab_dir, 'scenarios');
 end

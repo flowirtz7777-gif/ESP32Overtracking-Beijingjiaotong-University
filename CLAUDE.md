@@ -88,10 +88,17 @@
 
 ```
 1. 打开 pid工况仿真导出器.html       → 调参，点击"导出 CSV"
+   ├─ Electron 启动器：保存对话框默认指向 Matlab/scenarios/
+   └─ 浏览器直开：下载到默认 Downloads，需手动移到 Matlab/scenarios/
 2. MATLAB: scenario = load_pid_scenario('pid_scenario_*.csv');
+   ├─ 仅传文件名 → 自动到 Matlab/scenarios/ 找
+   ├─ 传完整路径 → 直接用
+   └─ 不传参数  → 弹文件框，默认打开 Matlab/scenarios/
 3. 把 scenario.inputs.{v_mps, alpha_rad, phi_rad} 当作虚拟传感器数据
 4. 喂给新主预测器，与 scenario.points.{A,B,H,T} 真值轨迹对比扫掠区域
 ```
+
+**统一目录约定**：所有 PID 工况 CSV 集中在 `Matlab/scenarios/`，loader 默认查找该路径，Electron 导出默认存该路径。
 
 **约束**：
 

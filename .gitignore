@@ -52,6 +52,7 @@ venv/
 logs/
 *.log
 *.csv.bak
+*.local.csv
 data/raw/
 *.bag
 

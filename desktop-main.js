@@ -1,5 +1,16 @@
 const { app, BrowserWindow, shell, session } = require("electron");
 const path = require("path");
+const fs = require("fs");
+
+const SCENARIOS_DIR = path.join(__dirname, "Matlab", "scenarios");
+
+function ensureScenariosDir() {
+  try {
+    fs.mkdirSync(SCENARIOS_DIR, { recursive: true });
+  } catch (err) {
+    console.warn("[scenarios] mkdir failed:", err.message);
+  }
+}
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -26,11 +37,13 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  ensureScenariosDir();
+
   const electronSession = session.defaultSession;
   electronSession.on("will-download", (event, item) => {
     item.setSaveDialogOptions({
       title: "导出 PID 工况 CSV",
-      defaultPath: item.getFilename()
+      defaultPath: path.join(SCENARIOS_DIR, item.getFilename())
     });
   });
 
