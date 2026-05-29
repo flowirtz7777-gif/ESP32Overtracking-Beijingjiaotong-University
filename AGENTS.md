@@ -115,7 +115,9 @@ PID-driven scenario generator is bundled in the repo:
 | `启动PID工况导出器.bat` | Windows one-click launcher. Double-click to start the Electron desktop wrapper without touching npm or PowerShell. Requires `trae/node_modules/electron/` to be present. |
 | `Matlab/load_pid_scenario.m` | MATLAB loader: returns a struct with `params / inputs / states / points / summary` |
 
-Recommended Phase-1 workflow:
+**UI design**: Industrial SCADA/HMI control-panel aesthetic with dark/light theme toggle (persisted via `localStorage`). Three launch-method badges displayed at the top (Web / BAT / Desktop shortcut). Standalone single-file HTML, zero external dependencies.
+
+**Recommended Phase-1 workflow**:
 
 ```
 1. Open  pid工况仿真导出器.html        → tune scenario, click "Export CSV"

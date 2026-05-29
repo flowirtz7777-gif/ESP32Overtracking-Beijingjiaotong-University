@@ -74,6 +74,8 @@
 | `启动PID工况导出器.bat` | Windows 一键启动器，双击直接打开 Electron 版导出器，免开 PowerShell / 免敲 npm。依赖 `trae/node_modules/electron/` 存在 |
 | `Matlab/load_pid_scenario.m` | MATLAB 加载脚本：返回 `params / inputs / states / points / summary` 分组 struct |
 
+**UI 设计**：工业 SCADA/HMI 控制台风格，支持深色/浅色主题切换（`localStorage` 持久化），右上角工业翘板开关控制。页面顶部展示三种启动入口徽章（Web / BAT / 桌面快捷方式）。纯单文件 HTML，无外部依赖。
+
 **Phase 1 工作流**：
 
 ```
