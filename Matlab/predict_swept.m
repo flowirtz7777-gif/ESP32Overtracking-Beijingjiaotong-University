@@ -72,17 +72,61 @@ function poly = predict_swept(s0, alpha_now, v_now, p, T_h, dt_pred, alpha_dot)
         end
     end
 
-    % 顶点顺序：
-    %   H_right₀ → H_right₁ → ... → H_right_E
-    %   → T_right_E → T_right_{E-1} → ... → T_right₀
-    %   → 闭合回 H_right₀
+    % ===== B2: 自相交多边形拆分，只保留"朝弯心方向"的区域 =====
+    % 用 polyshape 用偶奇规则自动消除自相交、剔除外甩三角。
+    % 物理依据：后轮没有转向能力，转弯时挂车后端往弯心外甩，
+    %           T_right 弧与终点车身边交叉形成的"外甩三角"是车
+    %           离开过的空地，不会撞到行人，应从危险区中排除。
     %
-    % 4 类边：
-    %   - H_right 曲线段：上沿（挂车前端右角的真实轨迹）
-    %   - 结束车身右沿：H_right_E → T_right_E（直，t=T_h 挂车右沿）
-    %   - T_right 反曲线段：下沿（挂车后端右角真实轨迹反向）
-    %   - 起始车身右沿：T_right₀ → H_right₀（直，t=0 挂车右沿，由闭合自动产生）
-    poly = [ H_right; ...                 % H_right₀ ... H_right_E   (M+1 点)
-             flipud(T_right); ...         % T_right_E ... T_right₀   (M+1 点)
-             H_right(1, :) ];             % 闭合
+    %   原始构造的多边形（自相交）：
+    %     Hr_0 → ... → Hr_M → Tr_M → ... → Tr_0 → 闭合
+    %   起点车身边 Tr_0→Hr_0 与终点车身边 Hr_M→Tr_M 在右转激烈时
+    %   会交叉，产生 X 形 / 漏斗形。
+    %
+    %   polyshape 用偶奇规则把它分成多个区域，"外甩三角"会被识别
+    %   为独立区域。我们保留**面积最大**的区域作为有效危险区。
+
+    boundary_pts = [H_right; flipud(T_right)];
+
+    try
+        % 'Simplify' = true 让 polyshape 自动消除自相交
+        warning('off', 'MATLAB:polyshape:repairedBySimplify');
+        ps = polyshape(boundary_pts(:,1), boundary_pts(:,2), 'Simplify', true);
+        warning('on',  'MATLAB:polyshape:repairedBySimplify');
+
+        if ps.NumRegions >= 1
+            if ps.NumRegions == 1
+                bx = ps.Vertices(:,1);
+                by = ps.Vertices(:,2);
+                bx = bx(~isnan(bx));
+                by = by(~isnan(by));
+            else
+                % 多区域：选面积最大的一块（外甩三角通常较小）
+                regs  = regions(ps);
+                areas = arrayfun(@area, regs);
+                [~, idx_max] = max(areas);
+                bx = regs(idx_max).Vertices(:,1);
+                by = regs(idx_max).Vertices(:,2);
+                bx = bx(~isnan(bx));
+                by = by(~isnan(by));
+            end
+
+            if numel(bx) >= 3
+                poly = [bx, by];
+                if ~isequal(poly(1,:), poly(end,:))
+                    poly = [poly; poly(1,:)];   % 闭合
+                end
+            else
+                % 退化（面积太小），回退到原始构造
+                poly = [boundary_pts; boundary_pts(1,:)];
+            end
+        else
+            poly = [boundary_pts; boundary_pts(1,:)];
+        end
+    catch ME
+        % polyshape 异常时回退到原始多边形（不丢可用性）
+        warning('predict_swept:polyshapeFallback', ...
+            'polyshape 处理失败 (%s)，回退到原始自相交多边形', ME.message);
+        poly = [boundary_pts; boundary_pts(1,:)];
+    end
 end

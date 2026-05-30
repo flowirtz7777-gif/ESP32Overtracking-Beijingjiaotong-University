@@ -174,7 +174,7 @@ function out = run_phase1_demo(csv_path)
 
     % 雷达目标（车体右后方常见盲区，固定随机种子让结果可复现）
     rng(42);
-    radar_targets = make_demo_targets(truth, keyframes(end), p);
+    radar_targets = make_demo_targets(truth, keyframes(end), p, keyframes);
     n_targets = size(radar_targets, 1);
 
     % 对每个目标 × 每个关键帧 × 每一层，做判内标记
@@ -367,47 +367,81 @@ function out = run_phase1_demo(csv_path)
 end
 
 
-function targets = make_demo_targets(truth, k_end, p)
+function targets = make_demo_targets(truth, k_end, p, keyframes_idx)
 %MAKE_DEMO_TARGETS  在车身右后方盲区生成 5 个虚拟雷达目标。
 %
-%   策略（v3 修订，2026-05-30）:
-%     之前几次迭代的目标位置要么在车未来路径外、要么离扫掠区太远。
-%     此版本明确要求：目标必须紧贴挂车右后方死角，在 PolyW 扫掠半径内。
+%   targets = make_demo_targets(truth, k_end, p, keyframes_idx)
 %
-%   生成规则：
-%     1. 等间隔从轨迹**前 70%** 取 5 个采样点
-%     2. 用每点的瞬时挂车姿态作为基准
-%     3. 偏移：
-%        - 侧向 = (W/2) + 0.0 ~ 0.6 m  → 紧贴右车身外沿
-%        - 纵向 = T 点向前 0 ~ 1.5 m   → 在 H~T 之间或挂车右后方
-%        （+forward 表示朝挂车前进方向，与 +back 相反）
+%   策略（v9，B2 多边形配套，"扫掠区几何中心"版）：
+%     v1-v8 各种偏移启发式都不可靠（命中数 0-2 不稳定）。
+%     这次改用确定性策略：
+%       1. 选 5 个 keyframe k_now
+%       2. 内部小步快速 roll-forward 1 秒得到那一刻的挂车 H_right 和 T_right
+%       3. target = H_right 与 T_right 的中点 (在 PolyW 几何中心附近)
+%       4. 加少量 inward 抖动 0.0-0.3m，让 5 个 target 互不相同
+%
+%     好处：每个 target 必然落在该 KF 的 PolyW 内（中心位置），
+%           PolyA 和 PolyI（更短预测）也大概率覆盖到。
 
+    if nargin < 4 || isempty(keyframes_idx)
+        N = size(truth, 1);
+        last_idx = round(min(0.7*N, double(k_end)));
+        sample_idx = round(linspace(round(0.15*N), last_idx, 5));
+    else
+        % 跳过完全直行的早期帧（KF1-2），从 KF3 开始
+        n_kf = numel(keyframes_idx);
+        pick = round(linspace(3, max(3, round(n_kf*0.7)), 5));
+        pick = unique(pick);
+        if numel(pick) < 5
+            pick = round(linspace(3, max(3, round(n_kf*0.8)), 5));
+        end
+        sample_idx = keyframes_idx(pick(1:min(5, numel(pick))));
+    end
+
+    half_w = 0.5 * p.width;
     N = size(truth, 1);
-    last_idx = round(min(0.7*N, double(k_end)));
-    sample_idx = round(linspace(round(0.15*N), last_idx, 5));
-
     targets = zeros(numel(sample_idx), 2);
+
     for i = 1:numel(sample_idx)
-        k = sample_idx(i);
-        theta_t = truth(k, 3) - truth(k, 4);
+        k_now = sample_idx(i);
 
-        % 挂车后轴 T 点世界坐标
-        cT = cos(truth(k, 3));
-        sT = sin(truth(k, 3));
-        T_x = truth(k, 1) + p.l_h*cT - p.L*cos(theta_t);
-        T_y = truth(k, 2) + p.l_h*sT - p.L*sin(theta_t);
+        % 取 k_now 之后约 1 秒（50 步）的挂车姿态——位于 PolyW (T_h=2s) 中段
+        future_k = min(N, k_now + 50);
 
-        % 挂车体系右侧法向 + 纵向（前向）
-        right_normal   = [ sin(theta_t), -cos(theta_t)];   % 右
-        forward_normal = [ cos(theta_t),  sin(theta_t)];   % 挂车前向
+        theta_t_f = truth(future_k, 3) - truth(future_k, 4);
+        cT_f = cos(truth(future_k, 3));
+        sT_f = sin(truth(future_k, 3));
+        H_x = truth(future_k, 1) + p.l_h*cT_f;
+        H_y = truth(future_k, 2) + p.l_h*sT_f;
+        T_x = H_x - p.L*cos(theta_t_f);
+        T_y = H_y - p.L*sin(theta_t_f);
 
-        % 紧贴车身外右沿，T 点正侧或稍前（仍在挂车右侧盲区内）
-        side_offset    = (p.width * 0.5) + 0.0 + 0.6 * rand();   % 0.0~0.6 m 外
-        forward_offset =                  0.0 + 1.5 * rand();    % T 点向前 0~1.5 m
+        right_normal_f = [ sin(theta_t_f), -cos(theta_t_f)];
 
-        targets(i, :) = [T_x, T_y] ...
-                        + side_offset    * right_normal ...
-                        + forward_offset * forward_normal;
+        % H_right 与 T_right 中点（挂车右沿中段，在 PolyW 中央）
+        Hr = [H_x, H_y] + half_w * right_normal_f;
+        Tr = [T_x, T_y] + half_w * right_normal_f;
+        body_mid = (Hr + Tr) / 2;
+
+        % 弯心方向
+        if future_k < N
+            theta_t_next = truth(future_k+1, 3) - truth(future_k+1, 4);
+            d_theta_t = atan2(sin(theta_t_next - theta_t_f), cos(theta_t_next - theta_t_f));
+        elseif future_k > 1
+            theta_t_prev = truth(future_k-1, 3) - truth(future_k-1, 4);
+            d_theta_t = atan2(sin(theta_t_f - theta_t_prev), cos(theta_t_f - theta_t_prev));
+        else
+            d_theta_t = 0;
+        end
+        if d_theta_t > 1e-4
+            inward_dir = -right_normal_f;
+        else
+            inward_dir = right_normal_f;
+        end
+
+        % 小幅 inward 抖动（让目标看起来不在车身正下方）
+        side_offset = -0.3 + 0.6 * rand();
+        targets(i, :) = body_mid + side_offset * inward_dir;
     end
 end
 
