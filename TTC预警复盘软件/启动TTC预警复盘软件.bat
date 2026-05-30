@@ -1,14 +1,11 @@
 @echo off
-REM ============================================================
-REM TTC é¢„è­¦å¤ç›˜è½¯ä»¶ â€” ä¸€é”®å¯åŠ¨
-REM æ²™ç®±ç›®å½•ï¼ˆå« node_modulesï¼‰å¯èƒ½å« PIDå·¥å†µä»¿çœŸå¯¼å‡ºå™¨/ æˆ– trae/
-REM ============================================================
+REM TTC Ô¤¾¯¸´ÅÌÈí¼ş ¡ª Ò»¼üÆô¶¯
 setlocal
 cd /d "%~dp0"
 set "ELECTRON_EXE="
 
-if exist "..\PIDå·¥å†µä»¿çœŸå¯¼å‡ºå™¨\node_modules\electron\dist\electron.exe" (
-  set "ELECTRON_EXE=..\PIDå·¥å†µä»¿çœŸå¯¼å‡ºå™¨\node_modules\electron\dist\electron.exe"
+if exist "..\PID¹¤¿ö·ÂÕæµ¼³öÆ÷\node_modules\electron\dist\electron.exe" (
+  set "ELECTRON_EXE=..\PID¹¤¿ö·ÂÕæµ¼³öÆ÷\node_modules\electron\dist\electron.exe"
 ) else if exist "..\trae\node_modules\electron\dist\electron.exe" (
   set "ELECTRON_EXE=..\trae\node_modules\electron\dist\electron.exe"
 )
@@ -17,7 +14,7 @@ if defined ELECTRON_EXE (
   "%ELECTRON_EXE%" .
 ) else (
   echo Electron runtime not found in either:
-  echo   ..\PIDå·¥å†µä»¿çœŸå¯¼å‡ºå™¨\node_modules\electron\dist\electron.exe
+  echo   ..\PID¹¤¿ö·ÂÕæµ¼³öÆ÷\node_modules\electron\dist\electron.exe
   echo   ..\trae\node_modules\electron\dist\electron.exe
   echo You can also open index.html directly in a browser.
   pause

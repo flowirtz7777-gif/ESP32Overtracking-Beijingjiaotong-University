@@ -1,27 +1,22 @@
 @echo off
-REM ============================================================
-REM PID å·¥å†µä»¿çœŸå¯¼å‡ºå™¨ â€” ä¸€é”®å¯åŠ¨ (æ— éœ€ npm)
-REM ç›´æ¥è°ƒç”¨ Electron å¯åŠ¨æ ¹ç›®å½•ä¸‹çš„ desktop-main.js + HTML
-REM æ²™ç®±ç›®å½•ï¼ˆå« node_modulesï¼‰å¯èƒ½å« PIDå·¥å†µä»¿çœŸå¯¼å‡ºå™¨/ æˆ– trae/
-REM ============================================================
-chcp 65001 >nul
+REM PID ¹¤¿ö·ÂÕæµ¼³öÆ÷ ¡ª Ò»¼üÆô¶¯ (ÎŞĞè npm)
 setlocal
 set "REPO_DIR=%~dp0"
 set "ELECTRON_EXE="
 
-if exist "%REPO_DIR%PIDå·¥å†µä»¿çœŸå¯¼å‡ºå™¨\node_modules\electron\dist\electron.exe" (
-  set "ELECTRON_EXE=%REPO_DIR%PIDå·¥å†µä»¿çœŸå¯¼å‡ºå™¨\node_modules\electron\dist\electron.exe"
+if exist "%REPO_DIR%PID¹¤¿ö·ÂÕæµ¼³öÆ÷\node_modules\electron\dist\electron.exe" (
+  set "ELECTRON_EXE=%REPO_DIR%PID¹¤¿ö·ÂÕæµ¼³öÆ÷\node_modules\electron\dist\electron.exe"
 ) else if exist "%REPO_DIR%trae\node_modules\electron\dist\electron.exe" (
   set "ELECTRON_EXE=%REPO_DIR%trae\node_modules\electron\dist\electron.exe"
 )
 
 if not defined ELECTRON_EXE (
     echo.
-    echo [é”™è¯¯] æœªæ‰¾åˆ° Electron å¯æ‰§è¡Œæ–‡ä»¶
-    echo   1) %REPO_DIR%PIDå·¥å†µä»¿çœŸå¯¼å‡ºå™¨\node_modules\electron\dist\electron.exe
-    echo   2) %REPO_DIR%trae\node_modules\electron\dist\electron.exe
-    echo ä»»æ„ä¸€ä¸ªæ²™ç®±ç›®å½•é‡Œå®Œæ•´ npm install åå†è¯•ã€‚
-    echo ä¹Ÿå¯ä»¥ç›´æ¥åŒå‡» pidå·¥å†µä»¿çœŸå¯¼å‡ºå™¨.html åœ¨æµè§ˆå™¨ä¸­ä½¿ç”¨ã€‚
+    echo [Error] Electron not found in either:
+    echo   %REPO_DIR%PID¹¤¿ö·ÂÕæµ¼³öÆ÷\node_modules\electron\dist\electron.exe
+    echo   %REPO_DIR%trae\node_modules\electron\dist\electron.exe
+    echo.
+    echo You can also double-click pid¹¤¿ö·ÂÕæµ¼³öÆ÷.html in a browser.
     echo.
     pause
     exit /b 1
