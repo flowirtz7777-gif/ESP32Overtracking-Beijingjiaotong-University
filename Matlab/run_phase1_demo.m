@@ -211,11 +211,10 @@ function out = run_phase1_demo(csv_path)
     fig3 = figure('Name', 'Phase 1 — 每个目标的命中预测帧', ...
                   'Position', [120 80 380*n_cols 720]);
 
-    % 子图 1：全局总览（仅画车体轨迹 + 目标点 + 风险颜色）
+    % 子图 1：全局总览（仅画 H 与 T 轨迹 + 目标点 + 风险颜色）
     subplot(2, n_cols, 1);
-    plot(scenario.points.B(:,1), scenario.points.B(:,2), '-', 'LineWidth', 1.4, 'Color', [0.55 0.55 0.55], 'DisplayName', '牵引车后轴 B'); hold on;
-    plot(scenario.points.T(:,1), scenario.points.T(:,2), '-', 'LineWidth', 1.4, 'Color', [0.55 0.55 0.55], 'HandleVisibility', 'off');
-    plot(scenario.points.A(:,1), scenario.points.A(:,2), '-', 'LineWidth', 1.0, 'Color', [0.80 0.30 0.30], 'DisplayName', '前轮 A');
+    plot(scenario.points.H(:,1), scenario.points.H(:,2), '-', 'LineWidth', 1.4, 'Color', [0.20 0.40 0.85], 'DisplayName', '挂车前端 H'); hold on;
+    plot(scenario.points.T(:,1), scenario.points.T(:,2), '-', 'LineWidth', 1.4, 'Color', [0.20 0.65 0.30], 'DisplayName', '挂车后端 T');
     grid on; axis equal;
 
     % 风险等级"假"句柄用于图例
@@ -243,8 +242,8 @@ function out = run_phase1_demo(csv_path)
     % --- 每个目标一个子图 ---
     for j = 1:n_targets
         subplot(2, n_cols, 1 + j);
-        plot(scenario.points.B(:,1), scenario.points.B(:,2), '-', 'LineWidth', 1.0, 'Color', [0.7 0.7 0.7]); hold on;
-        plot(scenario.points.T(:,1), scenario.points.T(:,2), '-', 'LineWidth', 1.0, 'Color', [0.7 0.7 0.7]);
+        plot(scenario.points.H(:,1), scenario.points.H(:,2), '-', 'LineWidth', 1.0, 'Color', [0.45 0.55 0.85]); hold on;
+        plot(scenario.points.T(:,1), scenario.points.T(:,2), '-', 'LineWidth', 1.0, 'Color', [0.45 0.70 0.50]);
         grid on; axis equal;
 
         % 找到所有抓到本目标的 (帧, 层) 组合
@@ -280,17 +279,17 @@ function out = run_phase1_demo(csv_path)
         if ~isempty(h_A_legend), set(h_A_legend, 'DisplayName', sprintf('PolyA (T_h=1.0s, %d 次)', n_hit_A)); end
         if ~isempty(h_I_legend), set(h_I_legend, 'DisplayName', sprintf('PolyI (T_h=0.3s, %d 次)', n_hit_I)); end
 
-        % 画所有关键帧的车体后轴位置（小灰点），让"哪一帧"的位置更直观
+        % 画所有关键帧的挂车前端 H 位置（小灰点），让"哪一帧"的位置更直观
         for ii = 1:numel(keyframes)
             k = keyframes(ii);
-            scatter(scenario.points.B(k,1), scenario.points.B(k,2), 16, ...
+            scatter(scenario.points.H(k,1), scenario.points.H(k,2), 16, ...
                     [0.3 0.3 0.3], 'filled', 'HandleVisibility', 'off');
         end
 
         % 标记抓到的关键帧时间
         for ii = union(union(hit_frames_W, hit_frames_A), hit_frames_I)
             k = keyframes(ii);
-            text(scenario.points.B(k,1), scenario.points.B(k,2), ...
+            text(scenario.points.H(k,1), scenario.points.H(k,2), ...
                  sprintf(' t=%.2fs', t(k)), 'FontSize', 7.5, 'Color', [0.3 0.3 0.3]);
         end
 
