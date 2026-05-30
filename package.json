@@ -14,10 +14,12 @@
     "directories": {
       "output": "desktop-dist"
     },
+    "icon": "交大校徽.png",
     "files": [
       "desktop-main.js",
       "pid工况仿真导出器.html",
-      "package.json"
+      "package.json",
+      "交大校徽.png"
     ],
     "win": {
       "target": [

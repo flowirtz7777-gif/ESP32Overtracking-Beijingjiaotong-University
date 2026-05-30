@@ -21,6 +21,7 @@ function createWindow() {
     autoHideMenuBar: true,
     backgroundColor: "#07111f",
     title: "PID工况仿真导出器",
+    icon: path.join(__dirname, "交大校徽.png"),
     webPreferences: {
       contextIsolation: true,
       sandbox: true,
