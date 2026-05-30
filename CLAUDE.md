@@ -436,6 +436,7 @@ S = 当前等级 ∈ {0,1,2,3}
 - ❌ 在中断里调用浮点函数 / `Serial.print`
 - ❌ 直接从 OpenMV 摄像头到雷达坐标系做大量浮点变换（应在 ESP32 上做）
 - ❌ 修改既有运动学公式时不同步更新 MATLAB 与 C++ 两端（必须配对修改）
+- ❌ **BAT 启动器写中文路径不要直接用 cmd if exist**：cmd.exe 默认 GBK 解码，UTF-8 BAT 会乱码，GBK BAT 又不能跨 IDE 编辑。**正确做法**：BAT 只做一行 `powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0launch.ps1"`，所有路径逻辑放进 launch.ps1（PowerShell 原生 Unicode 安全）。当前实现见 `TTC预警复盘软件/launch.ps1` + `启动TTC预警复盘软件.bat`。
 
 ---
 

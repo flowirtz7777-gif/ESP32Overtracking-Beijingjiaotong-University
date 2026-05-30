@@ -393,6 +393,7 @@ Memory: <5 KB heap for polygons + target buffers.
 5. **Never** print all polygon vertices over Serial in main loop (diagnostics only, gated by a flag).
 6. **Never** modify kinematics on one side (MATLAB or C++) without mirror-updating the other.
 7. **Never** commit ADC raw dumps, video files, or large `.bag` to git (use cloud + link).
+8. **Never** put Chinese paths inside Windows `.bat` files using raw `cmd if exist` checks. cmd.exe defaults to GBK; a UTF-8 BAT shows as garbled bytes, a GBK BAT can't be safely edited by modern IDEs/AI tools. **Correct pattern**: keep BAT to a single line `powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0launch.ps1"` and put all path / discovery logic inside `launch.ps1` (PowerShell is Unicode-safe). See `TTC预警复盘软件/launch.ps1`.
 
 ---
 
