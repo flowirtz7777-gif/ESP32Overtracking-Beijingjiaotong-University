@@ -56,6 +56,9 @@ logs/
 data/raw/
 *.bag
 
+# TTC 复盘软件每次"导出 CSV"会落到这里，属于运行时日志，不入仓库
+TTC预警复盘软件/报警日志/*.csv
+
 # ------------- MATLAB demo run outputs -------------
 # Each run of run_phase1_demo creates a timestamped subfolder under Matlab/runs/.
 # Keep README, ignore everything else (figures regenerate every run).
