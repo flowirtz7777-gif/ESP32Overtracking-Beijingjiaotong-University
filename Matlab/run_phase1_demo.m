@@ -171,6 +171,7 @@ function out = run_phase1_demo(csv_path)
     color_W = [1.00 0.85 0.25];   % 黄
     color_A = [1.00 0.55 0.15];   % 橙
     color_I = [0.95 0.20 0.20];   % 红
+    color_body = [0.35 0.35 0.35]; % 当前挂车车身占用区
 
     % 雷达目标（车体右后方常见盲区，固定随机种子让结果可复现）
     rng(42);
@@ -185,6 +186,13 @@ function out = run_phase1_demo(csv_path)
         in_I = point_in_poly(radar_targets(:,1), radar_targets(:,2), polys.I{ii});
         in_A = point_in_poly(radar_targets(:,1), radar_targets(:,2), polys.A{ii});
         in_W = point_in_poly(radar_targets(:,1), radar_targets(:,2), polys.W{ii});
+        % 兜底判定：若目标已经落在当前挂车矩形占用区内，说明右外缘
+        % 已经扫过该点；此时不能只依赖"未来外缘扫掠带"。
+        body_now = make_current_trailer_body(truth(keyframes(ii), :), p);
+        in_body_now = point_in_poly(radar_targets(:,1), radar_targets(:,2), body_now);
+        in_I = in_I | in_body_now;
+        in_A = in_A | in_body_now;
+        in_W = in_W | in_body_now;
         hits(:, ii, 1) = in_I;
         hits(:, ii, 2) = in_A;
         hits(:, ii, 3) = in_W;
@@ -257,7 +265,7 @@ function out = run_phase1_demo(csv_path)
         n_total_frames = numel(keyframes);
 
         % 画 PolyW (最远，先画最底层) — 第一个保留 handle 给 legend
-        h_W_legend = []; h_A_legend = []; h_I_legend = [];
+        h_W_legend = []; h_A_legend = []; h_I_legend = []; h_body_legend = [];
         for ii = hit_frames_W
             h_tmp = fill(polys.W{ii}(:,1), polys.W{ii}(:,2), color_W, ...
                  'FaceAlpha', 0.15, 'EdgeColor', color_W*0.7, 'LineWidth', 0.6);
@@ -269,6 +277,15 @@ function out = run_phase1_demo(csv_path)
             if isempty(h_A_legend), h_A_legend = h_tmp; else, set(h_tmp,'HandleVisibility','off'); end
         end
         for ii = hit_frames_I
+            body_now = make_current_trailer_body(truth(keyframes(ii), :), p);
+            h_body_tmp = fill(body_now(:,1), body_now(:,2), color_body, ...
+                 'FaceAlpha', 0.16, 'EdgeColor', color_body, 'LineWidth', 0.8);
+            if isempty(h_body_legend)
+                h_body_legend = h_body_tmp;
+            else
+                set(h_body_tmp,'HandleVisibility','off');
+            end
+
             h_tmp = fill(polys.I{ii}(:,1), polys.I{ii}(:,2), color_I, ...
                  'FaceAlpha', 0.42, 'EdgeColor', color_I*0.7, 'LineWidth', 1.0);
             if isempty(h_I_legend), h_I_legend = h_tmp; else, set(h_tmp,'HandleVisibility','off'); end
@@ -278,6 +295,7 @@ function out = run_phase1_demo(csv_path)
         if ~isempty(h_W_legend), set(h_W_legend, 'DisplayName', sprintf('PolyW (T_h=2.0s, %d 次)', n_hit_W)); end
         if ~isempty(h_A_legend), set(h_A_legend, 'DisplayName', sprintf('PolyA (T_h=1.0s, %d 次)', n_hit_A)); end
         if ~isempty(h_I_legend), set(h_I_legend, 'DisplayName', sprintf('PolyI (T_h=0.3s, %d 次)', n_hit_I)); end
+        if ~isempty(h_body_legend), set(h_body_legend, 'DisplayName', 'BodyNow 当前挂车车身'); end
 
         % 画所有关键帧的挂车前端 H 位置（小灰点），让"哪一帧"的位置更直观
         for ii = 1:numel(keyframes)
@@ -323,7 +341,7 @@ function out = run_phase1_demo(csv_path)
         xlabel('X (m)'); ylabel('Y (m)');
 
         % 加图例（仅显示有命中的层）
-        legend_handles = [h_W_legend, h_A_legend, h_I_legend];
+        legend_handles = [h_W_legend, h_A_legend, h_I_legend, h_body_legend];
         legend_handles = legend_handles(~cellfun(@isempty, num2cell(legend_handles)));
         if ~isempty(legend_handles)
             legend(legend_handles, 'Location', 'best', 'FontSize', 7.5, 'Box', 'off');
@@ -363,6 +381,22 @@ function out = run_phase1_demo(csv_path)
     fprintf('\n[PHASE-1] 演示完成。\n');
     fprintf('          三幅图与 summary.txt 已保存到:\n');
     fprintf('          %s\n\n', run_dir);
+end
+
+
+function body_poly = make_current_trailer_body(s, p)
+%MAKE_CURRENT_TRAILER_BODY  当前挂车矩形占用区（H-T 线段按车宽扩展）。
+    d = derive_points(s, p);
+    half_w = 0.5 * p.width;
+    right_normal = [sin(d.theta_t), -cos(d.theta_t)];
+    left_normal = -right_normal;
+
+    H_right = d.H + half_w * right_normal;
+    T_right = d.T + half_w * right_normal;
+    T_left  = d.T + half_w * left_normal;
+    H_left  = d.H + half_w * left_normal;
+
+    body_poly = [H_right; T_right; T_left; H_left; H_right];
 end
 
 

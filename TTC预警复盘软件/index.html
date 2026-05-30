@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TTC预警复盘软件</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1118;
+      --panel: #121b26;
+      --panel2: #172331;
+      --line: #2a3a4d;
+      --text: #e8eef6;
+      --muted: #91a1b5;
+      --blue: #5b8def;
+      --green: #56b36f;
+      --yellow: #e9c84a;
+      --orange: #f39a35;
+      --red: #e85d5d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Microsoft YaHei", "Segoe UI", Arial, sans-serif;
+      overflow: hidden;
+    }
+    header {
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      border-bottom: 1px solid var(--line);
+      background: #0d1621;
+    }
+    h1 { margin: 0; font-size: 18px; letter-spacing: 0; }
+    .sub { color: var(--muted); font-size: 12px; }
+    main {
+      height: calc(100vh - 58px);
+      display: grid;
+      grid-template-columns: 330px minmax(520px, 1fr) 360px;
+      gap: 12px;
+      padding: 12px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      min-height: 0;
+      overflow: hidden;
+    }
+    .side, .right {
+      display: flex;
+      flex-direction: column;
+    }
+    .block {
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .block:last-child { border-bottom: 0; }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #f4f7fb;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    button, input[type="file"], textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: var(--panel2);
+      color: var(--text);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font: inherit;
+    }
+    button {
+      cursor: pointer;
+      font-weight: 650;
+    }
+    button.primary { background: #2457b8; border-color: #3b73e1; }
+    button.playing { background: #7b2b2b; border-color: #d15d5d; }
+    button:disabled { opacity: 0.45; cursor: not-allowed; }
+    label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin: 8px 0 5px;
+    }
+    textarea {
+      min-height: 74px;
+      resize: vertical;
+      font-family: Consolas, monospace;
+      font-size: 12px;
+    }
+    .status {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      min-height: 36px;
+    }
+    .params {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      font-size: 12px;
+    }
+    .metric {
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #0f1823;
+    }
+    .metric span { display: block; color: var(--muted); }
+    .metric strong { font-size: 15px; }
+    .stage {
+      display: grid;
+      grid-template-rows: 1fr 72px;
+      gap: 10px;
+      min-height: 0;
+    }
+    .canvas-wrap {
+      min-height: 0;
+      background: #eef2f6;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #d6dde6;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .controls {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 100px 1fr 150px 86px;
+      gap: 10px;
+      align-items: center;
+    }
+    input[type="range"] { width: 100%; }
+    .time { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 13px; }
+    .legend {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 8px;
+    }
+    .swatch {
+      width: 11px;
+      height: 11px;
+      display: inline-block;
+      border-radius: 3px;
+      margin-right: 6px;
+      vertical-align: -1px;
+    }
+    .log-toolbar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .log {
+      overflow: auto;
+      min-height: 0;
+      font-size: 12px;
+      font-family: Consolas, monospace;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 6px 5px; border-bottom: 1px solid var(--line); text-align: left; }
+    th { color: var(--muted); position: sticky; top: 0; background: var(--panel); }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>TTC预警复盘软件</h1>
+      <div class="sub">后验 true TTC 复盘 + 当前 PolyW/A/I 预测窗口对照</div>
+    </div>
+    <div class="sub" id="source-label">当前设置</div>
+  </header>
+  <main>
+    <section class="side">
+      <div class="block">
+        <h2>1. 场景与目标</h2>
+        <button id="use-current" class="primary">继续应用当前设置</button>
+        <label>导入场景 CSV</label>
+        <input id="scenario-file" type="file" accept=".csv,text/csv" />
+        <label>导入目标 CSV（x,y / x_m,y_m）</label>
+        <input id="target-file" type="file" accept=".csv,text/csv" />
+        <label>手动目标中心点</label>
+        <textarea id="target-text">1.034546627,9.064921825; 5.165832032,24.046315542; 15.162112188,34.264469347; 25.335459623,36.779763982; 41.480453564,38.856137380</textarea>
+        <div class="row">
+          <button id="apply-target-text">应用手动目标</button>
+          <button id="reset-targets">默认目标</button>
+        </div>
+        <button id="start-sim" class="primary" style="margin-top:8px;">启动模拟</button>
+        <p class="status" id="load-status">使用内置默认 PID 工况与 MATLAB demo 目标点。</p>
+      </div>
+      <div class="block">
+        <h2>2. 车辆参数</h2>
+        <div class="params" id="param-grid"></div>
+      </div>
+      <div class="block">
+        <h2>3. 图例</h2>
+        <div class="legend">
+          <div><span class="swatch" style="background:rgba(233,200,74,.45)"></span>PolyW 2.0s</div>
+          <div><span class="swatch" style="background:rgba(243,154,53,.45)"></span>PolyA 1.0s</div>
+          <div><span class="swatch" style="background:rgba(232,93,93,.5)"></span>PolyI 0.3s</div>
+          <div><span class="swatch" style="background:rgba(80,80,80,.35)"></span>BodyNow</div>
+          <div><span class="swatch" style="background:#56b36f"></span>安全</div>
+          <div><span class="swatch" style="background:#e9c84a"></span>TTC&lt;2s</div>
+          <div><span class="swatch" style="background:#f39a35"></span>TTC&lt;1s</div>
+          <div><span class="swatch" style="background:#e85d5d"></span>TTC&lt;0.3s</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage">
+      <div class="canvas-wrap"><canvas id="scene"></canvas></div>
+      <div class="controls">
+        <button id="play">自动播放</button>
+        <input id="time-slider" type="range" min="0" max="0" step="1" value="0" />
+        <div>
+          <label style="margin-top:0">播放速度 <span id="speed-label">1.0x</span></label>
+          <input id="speed-slider" type="range" min="0.25" max="4" step="0.25" value="1" />
+        </div>
+        <div class="time" id="time-readout">0.00 / 0.00 s</div>
+      </div>
+    </section>
+
+    <section class="right">
+      <div class="block">
+        <h2>当前报警状态</h2>
+        <div class="params" id="risk-grid"></div>
+      </div>
+      <div class="block" style="flex:1; min-height:0; display:flex; flex-direction:column;">
+        <h2>报警日志</h2>
+        <div class="log-toolbar">
+          <button id="export-log">导出 CSV</button>
+          <button id="clear-log">清空日志</button>
+        </div>
+        <div class="log">
+          <table>
+            <thead><tr><th>t/s</th><th>目标</th><th>等级</th><th>TTC/s</th><th>事件</th></tr></thead>
+            <tbody id="log-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const DEFAULT_TARGETS = [
+      [1.034546627, 9.064921825],
+      [5.165832032, 24.046315542],
+      [15.162112188, 34.264469347],
+      [25.335459623, 36.779763982],
+      [41.480453564, 38.856137380]
+    ];
+
+    const cfgDefault = {
+      l: 4.0, l_h: 1.8, L: 13.5, width: 2.0, speed: 3.0,
+      totalTime: 35.0, dt: 0.02, smoothing: 0.95,
+      thetaStartDeg: 90, thetaEndDeg: 0, t1: 3, t2: 15,
+      kpTheta: 0.8, kiTheta: 0.02, kdTheta: 0.02, integralThetaLimit: 0.4,
+      kpPhi: 0.3, kiPhi: 0.01, kdPhi: 0.01, integralPhiLimit: 0.2,
+      alphaLimitDeg: 30, phiLimitDeg: 15
+    };
+
+    let data = simulateDefault(cfgDefault);
+    let cfg = readConfigFromData(data);
+    let targets = DEFAULT_TARGETS.map(p => [...p]);
+    let currentIndex = 0;
+    let playing = false;
+    let lastTick = 0;
+    let riskPrev = [];
+    let alarmLog = [];
+
+    const canvas = document.getElementById("scene");
+    const ctx = canvas.getContext("2d");
+    const slider = document.getElementById("time-slider");
+    const playBtn = document.getElementById("play");
+    const speedSlider = document.getElementById("speed-slider");
+
+    function deg2rad(v) { return v * Math.PI / 180; }
+    function rad2deg(v) { return v * 180 / Math.PI; }
+    function clamp(v, lo, hi) { return Math.min(Math.max(v, lo), hi); }
+    function wrapPi(a) { return Math.atan2(Math.sin(a), Math.cos(a)); }
+
+    function buildReferenceHeading(time, c) {
+      const a = deg2rad(c.thetaStartDeg), b = deg2rad(c.thetaEndDeg);
+      if (time <= c.t1) return a;
+      if (time <= c.t2) return a + (b - a) * ((time - c.t1) / (c.t2 - c.t1));
+      return b;
+    }
+
+    function simulateDefault(c) {
+      const n = Math.floor(c.totalTime / c.dt) + 1;
+      const cols = {};
+      ["time_s","dt_s","v_input_mps","l_m","l_h_m","L_m","width_m","phi_max_rad","theta_ref_rad","theta_rad","theta_t_rad","alpha_rad","phi_rad","xA_m","yA_m","xB_m","yB_m","xH_m","yH_m","xT_m","yT_m"].forEach(k => cols[k] = Array(n).fill(0));
+      const alphaLimit = deg2rad(c.alphaLimitDeg), phiLimit = deg2rad(c.phiLimitDeg);
+      cols.yA_m[0] = c.l;
+      cols.theta_rad[0] = deg2rad(c.thetaStartDeg);
+      cols.xH_m[0] = c.l_h * Math.cos(cols.theta_rad[0]);
+      cols.yH_m[0] = c.l_h * Math.sin(cols.theta_rad[0]);
+      cols.theta_t_rad[0] = cols.theta_rad[0];
+      cols.xT_m[0] = cols.xH_m[0] - c.L * Math.cos(cols.theta_t_rad[0]);
+      cols.yT_m[0] = cols.yH_m[0] - c.L * Math.sin(cols.theta_t_rad[0]);
+      let intTheta = 0, intPhi = 0, prevTheta = 0, prevPhi = 0;
+      for (let i = 0; i < n; i++) {
+        cols.time_s[i] = i * c.dt; cols.dt_s[i] = c.dt; cols.v_input_mps[i] = c.speed;
+        cols.l_m[i] = c.l; cols.l_h_m[i] = c.l_h; cols.L_m[i] = c.L; cols.width_m[i] = c.width; cols.phi_max_rad[i] = phiLimit;
+        cols.theta_ref_rad[i] = buildReferenceHeading(cols.time_s[i], c);
+      }
+      for (let k = 0; k < n - 1; k++) {
+        const theta = Math.atan2(cols.yA_m[k] - cols.yB_m[k], cols.xA_m[k] - cols.xB_m[k]);
+        cols.theta_rad[k] = theta; cols.theta_t_rad[k] = theta - cols.phi_rad[k];
+        const eTheta = wrapPi(cols.theta_ref_rad[k] - theta);
+        intTheta = clamp(intTheta + eTheta * c.dt, -c.integralThetaLimit, c.integralThetaLimit);
+        const alpha1 = c.kpTheta * eTheta + c.kiTheta * intTheta + c.kdTheta * ((eTheta - prevTheta) / c.dt);
+        const ePhi = -cols.phi_rad[k];
+        intPhi = clamp(intPhi + ePhi * c.dt, -c.integralPhiLimit, c.integralPhiLimit);
+        let alpha = alpha1 + c.kpPhi * ePhi + c.kiPhi * intPhi + c.kdPhi * ((ePhi - prevPhi) / c.dt);
+        if (k > 0) alpha = c.smoothing * cols.alpha_rad[k - 1] + (1 - c.smoothing) * alpha;
+        alpha = clamp(alpha, -alphaLimit, alphaLimit);
+        cols.alpha_rad[k] = alpha;
+        const vB = c.speed * Math.cos(alpha);
+        cols.xA_m[k + 1] = cols.xA_m[k] + c.speed * Math.cos(theta + alpha) * c.dt;
+        cols.yA_m[k + 1] = cols.yA_m[k] + c.speed * Math.sin(theta + alpha) * c.dt;
+        cols.xB_m[k + 1] = cols.xB_m[k] + vB * Math.cos(theta) * c.dt;
+        cols.yB_m[k + 1] = cols.yB_m[k] + vB * Math.sin(theta) * c.dt;
+        const currentL = Math.hypot(cols.xA_m[k + 1] - cols.xB_m[k + 1], cols.yA_m[k + 1] - cols.yB_m[k + 1]);
+        const deltaL = currentL - c.l;
+        if (Math.abs(deltaL) > 1e-5 && currentL > 1e-9) {
+          cols.xB_m[k + 1] += ((cols.xA_m[k + 1] - cols.xB_m[k + 1]) / currentL) * deltaL;
+          cols.yB_m[k + 1] += ((cols.yA_m[k + 1] - cols.yB_m[k + 1]) / currentL) * deltaL;
+        }
+        const thetaNext = Math.atan2(cols.yA_m[k + 1] - cols.yB_m[k + 1], cols.xA_m[k + 1] - cols.xB_m[k + 1]);
+        cols.theta_rad[k + 1] = thetaNext;
+        const omega1 = c.speed * Math.sin(alpha) / c.l;
+        const omega2 = (vB * Math.sin(cols.phi_rad[k]) + c.l_h * omega1 * Math.cos(cols.phi_rad[k])) / c.L;
+        cols.phi_rad[k + 1] = clamp(cols.phi_rad[k] + (omega1 - omega2) * c.dt, -phiLimit, phiLimit);
+        cols.xH_m[k + 1] = cols.xB_m[k + 1] + c.l_h * Math.cos(thetaNext);
+        cols.yH_m[k + 1] = cols.yB_m[k + 1] + c.l_h * Math.sin(thetaNext);
+        cols.theta_t_rad[k + 1] = thetaNext - cols.phi_rad[k + 1];
+        cols.xT_m[k + 1] = cols.xH_m[k + 1] - c.L * Math.cos(cols.theta_t_rad[k + 1]);
+        cols.yT_m[k + 1] = cols.yH_m[k + 1] - c.L * Math.sin(cols.theta_t_rad[k + 1]);
+        prevTheta = eTheta; prevPhi = ePhi;
+      }
+      cols.alpha_rad[n - 1] = cols.alpha_rad[n - 2];
+      return cols;
+    }
+
+    function readConfigFromData(d) {
+      return {
+        l: d.l_m?.[0] ?? 4, l_h: d.l_h_m?.[0] ?? 1.8, L: d.L_m?.[0] ?? 13.5,
+        width: d.width_m?.[0] ?? 2, speed: d.v_input_mps?.[0] ?? 3,
+        dt: d.time_s?.length > 1 ? d.time_s[1] - d.time_s[0] : 0.02,
+        phiLimitDeg: d.phi_max_rad?.[0] ? rad2deg(d.phi_max_rad[0]) : 15
+      };
+    }
+
+    function parseCSV(text) {
+      const lines = text.trim().split(/\r?\n/).filter(Boolean);
+      const headers = lines[0].split(",").map(s => s.trim());
+      const cols = Object.fromEntries(headers.map(h => [h, []]));
+      for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(",");
+        headers.forEach((h, j) => cols[h].push(Number(values[j])));
+      }
+      return cols;
+    }
+
+    function parseTargetsCSV(text) {
+      const rows = parseCSV(text);
+      const pick = [["x","y"],["x_m","y_m"],["target_x_m","target_y_m"]].find(([x,y]) => rows[x] && rows[y]);
+      if (!pick) throw new Error("目标 CSV 需要 x,y 或 x_m,y_m 列");
+      return rows[pick[0]].map((x, i) => [x, rows[pick[1]][i]]);
+    }
+
+    function parseTargetText(text) {
+      return text.replace(/;/g, "\n").split(/\r?\n/).map(s => s.trim()).filter(Boolean).map(item => {
+        const p = item.replace(/,/g, " ").split(/\s+/).map(Number);
+        if (p.length !== 2 || p.some(v => !Number.isFinite(v))) throw new Error("目标格式错误: " + item);
+        return p;
+      });
+    }
+
+    function stateAt(k) { return [data.xB_m[k], data.yB_m[k], data.theta_rad[k], data.phi_rad[k]]; }
+    function derive(s) {
+      const [xB,yB,theta,phi] = s, thetaT = theta - phi;
+      const H = [xB + cfg.l_h * Math.cos(theta), yB + cfg.l_h * Math.sin(theta)];
+      return { A:[xB + cfg.l * Math.cos(theta), yB + cfg.l * Math.sin(theta)], B:[xB,yB], H, T:[H[0] - cfg.L * Math.cos(thetaT), H[1] - cfg.L * Math.sin(thetaT)], thetaT };
+    }
+    function kinStep(s, alpha, v, dt) {
+      const [xB,yB,theta,phi] = s;
+      const omega1 = v * Math.sin(alpha) / cfg.l, vB = v * Math.cos(alpha);
+      const omega2 = (vB * Math.sin(phi) + cfg.l_h * omega1 * Math.cos(phi)) / cfg.L;
+      const lim = deg2rad(cfg.phiLimitDeg);
+      return [xB + vB * Math.cos(theta) * dt, yB + vB * Math.sin(theta) * dt, theta + omega1 * dt, clamp(phi + (omega1 - omega2) * dt, -lim, lim)];
+    }
+    function bodyPoly(s) {
+      const d = derive(s), hw = cfg.width / 2, rn = [Math.sin(d.thetaT), -Math.cos(d.thetaT)];
+      return [[d.H[0]+hw*rn[0], d.H[1]+hw*rn[1]], [d.T[0]+hw*rn[0], d.T[1]+hw*rn[1]], [d.T[0]-hw*rn[0], d.T[1]-hw*rn[1]], [d.H[0]-hw*rn[0], d.H[1]-hw*rn[1]]];
+    }
+    function sweptRaw(s0, alpha, v, horizon, dt = 0.02) {
+      let s = [...s0], hr = [], tr = [], steps = Math.floor(horizon / dt), hw = cfg.width / 2;
+      for (let i = 0; i <= steps; i++) {
+        const d = derive(s), rn = [Math.sin(d.thetaT), -Math.cos(d.thetaT)];
+        hr.push([d.H[0]+hw*rn[0], d.H[1]+hw*rn[1]]);
+        tr.push([d.T[0]+hw*rn[0], d.T[1]+hw*rn[1]]);
+        if (i < steps) s = kinStep(s, alpha, v, dt);
+      }
+      return hr.concat(tr.reverse());
+    }
+    function pointInPoly(p, poly) {
+      let inside = false, j = poly.length - 1;
+      for (let i = 0; i < poly.length; i++) {
+        const xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1];
+        if (((yi > p[1]) !== (yj > p[1])) && (p[0] < (xj - xi) * (p[1] - yi) / ((yj - yi) || 1e-300) + xi)) inside = !inside;
+        j = i;
+      }
+      return inside;
+    }
+    function ttcRisk(k) {
+      const res = targets.map(() => ({risk:0, ttc:Infinity}));
+      for (let j = 0; j < targets.length; j++) {
+        for (let kk = k; kk < Math.min(data.time_s.length, k + Math.floor(2 / cfg.dt) + 1); kk++) {
+          if (pointInPoly(targets[j], bodyPoly(stateAt(kk)))) {
+            res[j].ttc = data.time_s[kk] - data.time_s[k];
+            break;
+          }
+        }
+        if (res[j].ttc < 0.3) res[j].risk = 3;
+        else if (res[j].ttc < 1.0) res[j].risk = 2;
+        else if (res[j].ttc < 2.0) res[j].risk = 1;
+      }
+      return res;
+    }
+
+    function resizeCanvas() {
+      const r = canvas.getBoundingClientRect();
+      canvas.width = Math.max(600, Math.floor(r.width * devicePixelRatio));
+      canvas.height = Math.max(360, Math.floor(r.height * devicePixelRatio));
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    }
+    function bounds() {
+      const xs = [...data.xA_m, ...data.xB_m, ...data.xH_m, ...data.xT_m, ...targets.map(p => p[0])];
+      const ys = [...data.yA_m, ...data.yB_m, ...data.yH_m, ...data.yT_m, ...targets.map(p => p[1])];
+      return {minX: Math.min(...xs)-4, maxX: Math.max(...xs)+4, minY: Math.min(...ys)-4, maxY: Math.max(...ys)+4};
+    }
+    function projector() {
+      const b = bounds(), w = canvas.clientWidth, h = canvas.clientHeight, sx = w/(b.maxX-b.minX), sy = h/(b.maxY-b.minY), s = Math.min(sx, sy);
+      const ox = (w - (b.maxX-b.minX)*s)/2, oy = (h - (b.maxY-b.minY)*s)/2;
+      return p => [ox + (p[0]-b.minX)*s, h - (oy + (p[1]-b.minY)*s)];
+    }
+    function drawPoly(poly, project, fill, stroke, alpha) {
+      ctx.save(); ctx.globalAlpha = alpha; ctx.beginPath();
+      poly.forEach((p,i) => { const q = project(p); if (i) ctx.lineTo(q[0],q[1]); else ctx.moveTo(q[0],q[1]); });
+      ctx.closePath(); ctx.fillStyle = fill; ctx.strokeStyle = stroke; ctx.lineWidth = 1; ctx.fill(); ctx.stroke(); ctx.restore();
+    }
+    function drawLine(points, project, color, width = 1) {
+      ctx.beginPath(); points.forEach((p,i) => { const q = project(p); if (i) ctx.lineTo(q[0],q[1]); else ctx.moveTo(q[0],q[1]); });
+      ctx.strokeStyle = color; ctx.lineWidth = width; ctx.stroke();
+    }
+    function render() {
+      resizeCanvas();
+      const k = currentIndex, project = projector();
+      ctx.clearRect(0,0,canvas.clientWidth,canvas.clientHeight);
+      ctx.fillStyle = "#f4f7fb"; ctx.fillRect(0,0,canvas.clientWidth,canvas.clientHeight);
+      const grid = 10, b = bounds();
+      ctx.strokeStyle = "#dde4ec"; ctx.lineWidth = 1;
+      for (let x = Math.ceil(b.minX/grid)*grid; x < b.maxX; x += grid) drawLine([[x,b.minY],[x,b.maxY]], project, "#dde4ec");
+      for (let y = Math.ceil(b.minY/grid)*grid; y < b.maxY; y += grid) drawLine([[b.minX,y],[b.maxX,y]], project, "#dde4ec");
+
+      drawLine(data.xH_m.map((x,i)=>[x,data.yH_m[i]]), project, "#3568d4", 2);
+      drawLine(data.xT_m.map((x,i)=>[x,data.yT_m[i]]), project, "#2f9d52", 2);
+      drawLine(data.xB_m.map((x,i)=>[x,data.yB_m[i]]), project, "#555", 1);
+
+      const s = stateAt(k), alpha = data.alpha_rad[k], v = data.v_input_mps[k];
+      drawPoly(sweptRaw(s, alpha, v, 2.0), project, "#e9c84a", "#b99b20", .18);
+      drawPoly(sweptRaw(s, alpha, v, 1.0), project, "#f39a35", "#bd6f1e", .23);
+      drawPoly(sweptRaw(s, alpha, v, 0.3), project, "#e85d5d", "#a93d3d", .30);
+      drawPoly(bodyPoly(s), project, "#333", "#111", .18);
+
+      const d = derive(s);
+      drawPoly(bodyPoly(s), project, "#777", "#444", .26);
+      drawPoly(bodyPoly([data.xB_m[k], data.yB_m[k], data.theta_rad[k], data.phi_rad[k]]), project, "#f58518", "#99500f", .18);
+      const tractor = (() => {
+        const A = d.A, B = d.B, h = [A[0]-B[0], A[1]-B[1]], len = Math.hypot(h[0],h[1]) || 1, rn = [h[1]/len, -h[0]/len], hw = cfg.width/2;
+        return [[A[0]+hw*rn[0],A[1]+hw*rn[1]],[A[0]-hw*rn[0],A[1]-hw*rn[1]],[B[0]-hw*rn[0],B[1]-hw*rn[1]],[B[0]+hw*rn[0],B[1]+hw*rn[1]]];
+      })();
+      drawPoly(tractor, project, "#4c78a8", "#31517a", .35);
+
+      const risks = ttcRisk(k);
+      const colors = ["#56b36f","#e9c84a","#f39a35","#e85d5d"];
+      targets.forEach((p,i) => {
+        const q = project(p); ctx.save(); ctx.globalAlpha = .55; ctx.beginPath(); ctx.arc(q[0],q[1],8,0,Math.PI*2); ctx.fillStyle = colors[risks[i].risk]; ctx.fill(); ctx.strokeStyle = "#111"; ctx.stroke(); ctx.restore();
+        ctx.strokeStyle = "#111"; ctx.beginPath(); ctx.moveTo(q[0]-5,q[1]); ctx.lineTo(q[0]+5,q[1]); ctx.moveTo(q[0],q[1]-5); ctx.lineTo(q[0],q[1]+5); ctx.stroke();
+        ctx.fillStyle = "#111"; ctx.font = "12px Segoe UI"; ctx.fillText(`R${i+1}`, q[0]+10, q[1]+4);
+      });
+
+      ctx.fillStyle = "#111"; ctx.font = "13px Consolas";
+      ctx.fillText(`t=${data.time_s[k].toFixed(2)}s  alpha=${rad2deg(data.alpha_rad[k]).toFixed(2)}deg  phi=${rad2deg(data.phi_rad[k]).toFixed(2)}deg`, 14, 22);
+      updateRiskGrid(risks);
+      updateLog(k, risks);
+    }
+
+    function updateParamGrid() {
+      const items = [["l",cfg.l],["l_h",cfg.l_h],["L",cfg.L],["width",cfg.width],["speed",cfg.speed],["dt",cfg.dt],["phi_max",cfg.phiLimitDeg + " deg"],["samples",data.time_s.length]];
+      document.getElementById("param-grid").innerHTML = items.map(([k,v]) => `<div class="metric"><span>${k}</span><strong>${typeof v === "number" ? v.toFixed(3) : v}</strong></div>`).join("");
+    }
+    function updateRiskGrid(risks) {
+      document.getElementById("risk-grid").innerHTML = risks.map((r,i) => `<div class="metric"><span>R${i+1}</span><strong>Risk ${r.risk}</strong><span>${Number.isFinite(r.ttc) ? "TTC " + r.ttc.toFixed(2) + "s" : "TTC --"}</span></div>`).join("");
+    }
+    function updateLog(k, risks) {
+      risks.forEach((r,i) => {
+        const prev = riskPrev[i] ?? 0;
+        if (r.risk !== prev) {
+          alarmLog.push({t:data.time_s[k], target:`R${i+1}`, risk:r.risk, ttc:r.ttc, event:r.risk > prev ? "UP" : "DOWN"});
+        }
+      });
+      riskPrev = risks.map(r => r.risk);
+      renderLog();
+    }
+    function renderLog() {
+      document.getElementById("log-body").innerHTML = alarmLog.slice(-300).map(e => `<tr><td>${e.t.toFixed(2)}</td><td>${e.target}</td><td>${e.risk}</td><td>${Number.isFinite(e.ttc)?e.ttc.toFixed(2):"--"}</td><td>${e.event}</td></tr>`).join("");
+    }
+    function resetPlayback() {
+      slider.max = data.time_s.length - 1; slider.value = 0; currentIndex = 0; riskPrev = targets.map(()=>0); alarmLog = []; updateParamGrid(); render();
+      document.getElementById("time-readout").textContent = `0.00 / ${data.time_s[data.time_s.length-1].toFixed(2)} s`;
+    }
+
+    async function readFile(file) { return await file.text(); }
+    document.getElementById("use-current").onclick = () => { data = simulateDefault(cfgDefault); cfg = readConfigFromData(data); targets = DEFAULT_TARGETS.map(p=>[...p]); document.getElementById("load-status").textContent = "已恢复当前默认设置。"; document.getElementById("source-label").textContent = "默认 PID 工况"; resetPlayback(); };
+    document.getElementById("scenario-file").onchange = async e => { const file = e.target.files[0]; if (!file) return; data = parseCSV(await readFile(file)); cfg = readConfigFromData(data); document.getElementById("load-status").textContent = `已导入场景: ${file.name}`; document.getElementById("source-label").textContent = file.name; resetPlayback(); };
+    document.getElementById("target-file").onchange = async e => { const file = e.target.files[0]; if (!file) return; targets = parseTargetsCSV(await readFile(file)); document.getElementById("load-status").textContent = `已导入目标: ${file.name}`; resetPlayback(); };
+    document.getElementById("apply-target-text").onclick = () => { targets = parseTargetText(document.getElementById("target-text").value); document.getElementById("load-status").textContent = "已应用手动目标点。"; resetPlayback(); };
+    document.getElementById("reset-targets").onclick = () => { targets = DEFAULT_TARGETS.map(p=>[...p]); document.getElementById("load-status").textContent = "已恢复默认目标点。"; resetPlayback(); };
+    document.getElementById("start-sim").onclick = () => { document.getElementById("load-status").textContent = "模拟已启动，可拖动滑条或自动播放。"; resetPlayback(); };
+    slider.oninput = () => { currentIndex = Number(slider.value); document.getElementById("time-readout").textContent = `${data.time_s[currentIndex].toFixed(2)} / ${data.time_s[data.time_s.length-1].toFixed(2)} s`; render(); };
+    speedSlider.oninput = () => document.getElementById("speed-label").textContent = `${Number(speedSlider.value).toFixed(2)}x`;
+    playBtn.onclick = () => { playing = !playing; playBtn.textContent = playing ? "停止播放" : "自动播放"; playBtn.classList.toggle("playing", playing); lastTick = performance.now(); requestAnimationFrame(loop); };
+    function loop(ts) {
+      if (!playing) return;
+      const speed = Number(speedSlider.value), elapsed = (ts - lastTick) / 1000 * speed;
+      lastTick = ts;
+      let nextTime = data.time_s[currentIndex] + elapsed;
+      currentIndex = Math.min(data.time_s.length - 1, Math.searchSorted ? Math.searchSorted(data.time_s,nextTime) : data.time_s.findIndex(v => v >= nextTime));
+      if (currentIndex < 0) currentIndex = data.time_s.length - 1;
+      slider.value = currentIndex; slider.oninput();
+      if (currentIndex >= data.time_s.length - 1) { playing = false; playBtn.textContent = "自动播放"; playBtn.classList.remove("playing"); return; }
+      requestAnimationFrame(loop);
+    }
+    document.getElementById("export-log").onclick = () => {
+      const csv = "time_s,target,risk,ttc_s,event\n" + alarmLog.map(e => `${e.t.toFixed(3)},${e.target},${e.risk},${Number.isFinite(e.ttc)?e.ttc.toFixed(3):""},${e.event}`).join("\n");
+      const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], {type:"text/csv;charset=utf-8"})); a.download = `ttc_alarm_log_${new Date().toISOString().replace(/[:.]/g,"-")}.csv`; a.click(); URL.revokeObjectURL(a.href);
+    };
+    document.getElementById("clear-log").onclick = () => { alarmLog = []; renderLog(); };
+    window.onresize = render;
+    resetPlayback();
+  </script>
+</body>
+</html>

@@ -265,14 +265,39 @@ xT = xH - L·cos(θ_t),   yT = yH - L·sin(θ_t)
 
 ### 4.3 风险评估
 
+#### 在线主判警口径（必须保持）
+
+在线实车端只能使用当前传感器输入 `(v, alpha, phi)` 做短时预测，不能使用 CSV 后验真值轨迹反推。主判警逻辑保持：
+
+1. 先判当前挂车车身占用区 `BodyNow`。若目标中心点已经落入当前 `H-T` 挂车矩形投影内，直接 `Risk_i = 3`。
+2. 若未命中 `BodyNow`，再按 `predict_swept` 输出的三层预测多边形 `PolyI / PolyA / PolyW` 判目标中心点。
+3. 后验 true TTC 只能用于 MATLAB/Python 复盘评估，不得替代在线主判警。
+
+`BodyNow` 构造方式：
+
+```
+d = derive_points(s, p)
+right_normal = [sin(d.theta_t), -cos(d.theta_t)]
+BodyNow = [
+  H + W/2 * right_normal
+  T + W/2 * right_normal
+  T - W/2 * right_normal
+  H - W/2 * right_normal
+]
+```
+
+此兜底用于修复“目标已经被右外缘扫过、当前位于挂车车身内部，但未来外缘扫掠多边形不再覆盖它”的漏判。`Matlab/run_phase1_demo.m` 已实现此逻辑；后续 `ArduinoIDE/risk_eval.{h,cpp}` 必须同步实现。
+
 每个雷达 / 视觉目标 i：
 ```
+in_body = point_in_poly(p_i(0), BodyNow)
 in_imm   = point_in_poly(p_i(0), PolyI)
 in_alarm = point_in_poly(p_i(0), PolyA)
 in_warn  = point_in_poly(p_i(0), PolyW)
 TTC_i    = 首次 point_in_poly(p_i(τ), PolyA) 的 τ
 
 Risk_i = max:
+  in_body                 → 3
   in_imm   || TTC_i < 0.3 → 3
   in_alarm || TTC_i < 1.0 → 2
   in_warn  || TTC_i < 2.0 → 1
@@ -280,6 +305,32 @@ Risk_i = max:
 
 Risk_total = max_i(Risk_i)
 ```
+
+#### 复盘口径（不要搬到在线端）
+
+`Matlab/truck_slider_sim.py` 是 TTC 复盘/可视化程序：它读取已导出的完整 CSV 真值轨迹，用未来真实车身占用来计算 true TTC、检查 Poly 判警是否过晚。它可以揭示 R3 这类“真实还有 2 秒但当前恒定 alpha 预测尚未覆盖”的提前量问题，但它不是实车在线算法。
+
+#### R3 报警偏晚问题（必须记住）
+
+`pid_scenario_20260530_020804.csv` 中 R3 是当前最重要的复盘反例：
+
+```
+R3 = (15.162112188, 34.264469347)
+真实挂车车身覆盖时间 ≈ 16.24 s - 18.12 s
+
+t = 14.24 s: true TTC ≈ 2.00 s
+t = 15.24 s: true TTC ≈ 1.00 s
+t = 16.00 s: true TTC ≈ 0.24 s
+```
+
+当前在线预测默认 `alpha(τ)=alpha_now`。该假设稳定、适合早期硬件实现，但在弯道后段 / 转向角快速回正阶段可能低估后续挂车右侧车身外缘（尤其前中段）的扫掠趋势，导致 R3 这类目标的 Poly 首次报警偏晚。驾驶员/系统反应时间叠加后，首次高等级报警可能已经不足以避免碰撞。
+
+不要把这个问题粗略描述成“挂车尾部扫到人”。半挂车转弯时后轴/尾部常相对弯心外甩，远离内轮差危险区；更典型的内侧挤压来自 H 到挂车中部一带的右侧车身外缘向弯心内侧切入。尾部是否会扫到目标取决于目标位置与外甩方向，不能一概而论。
+
+注意边界：
+- 不要把后验 true TTC 当作在线算法输入；实车没有完整未来真值轨迹。
+- R3 复盘用于评估“当前 poly 主算法提前量是否足够”，不是替代 `predict_swept`。
+- 后续改进应优先做：低通后的 `alpha_dot` 短时外推、与 `alpha_dot=0` 分支取并集、目标宽度/安全半径膨胀、批量复盘统计 true TTC 与 poly 首次报警时间差。
 
 ### 4.4 报警状态机（滞回防抖）
 

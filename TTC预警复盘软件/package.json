@@ -1,0 +1,13 @@
+{
+  "name": "ttc-warning-replay",
+  "version": "0.1.0",
+  "description": "Desktop replay app for TTC warning review",
+  "main": "desktop-main.js",
+  "private": true,
+  "scripts": {
+    "desktop:dev": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^37.2.0"
+  }
+}
