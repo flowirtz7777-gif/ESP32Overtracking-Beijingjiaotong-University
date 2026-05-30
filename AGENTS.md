@@ -10,6 +10,8 @@
 
 **The only operation requiring prior confirmation**: bulk deletion of multiple files or directories (`rm -rf`, `Remove-Item -Recurse`, etc.).
 
+**Mandatory release retrospective**: after every `vX.Y.Z` tag, write a new `工作复盘/vX.Y.Z_<topic>.md` following the template in `工作复盘/README.md`. The retrospective file is a frozen snapshot — once committed, it should not be edited later.
+
 ---
 
 ## Section 0 — Required Reading: Modeling Philosophy

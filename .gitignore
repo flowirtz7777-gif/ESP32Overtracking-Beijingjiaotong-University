@@ -81,6 +81,10 @@ package-lock.json
 # should never be committed.
 trae/
 
+# 同一沙箱被改名后的目录（用户/Trae IDE 把 trae/ 改成 PID工况仿真导出器/）。
+# 仍然是沙箱副本 + node_modules，不进仓库。
+PID工况仿真导出器/
+
 # Windows shortcuts: hardcoded absolute paths, never portable, must not be tracked.
 *.lnk
 
