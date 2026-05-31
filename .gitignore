@@ -60,17 +60,23 @@ data/raw/
 TTC预警复盘软件/报警日志/*.csv
 
 # ------------- MATLAB demo run outputs -------------
-# Each run of run_phase1_demo creates a timestamped subfolder under Matlab/runs/.
-# Keep README, ignore everything else (figures regenerate every run).
-Matlab/runs/*
-!Matlab/runs/README.md
-!Matlab/runs/.gitkeep
+# Each alpha-prediction sim folder has a runs/ subdir with timestamped outputs.
+# Keep README, ignore the generated figures.
+**/runs/*
+!**/runs/README.md
+!**/runs/.gitkeep
 
 # ------------- Large model files -------------
 *.tflite.bak
 *.h5
 *.onnx
 *.pth
+
+# ------------- Installers / binaries that slipped into the folder -------------
+*.msi
+*.exe
+*.zip
+*.7z
 
 # ------------- Node / Electron (PID scenario desktop wrapper) -------------
 node_modules/

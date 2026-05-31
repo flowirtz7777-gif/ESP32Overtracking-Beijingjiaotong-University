@@ -176,21 +176,34 @@ OpenMV/
 
 ### 3.3 MATLAB 仿真（地面真值 / 算法验证）
 
+> **目录结构（2026-05-30 重组）**：原 `Matlab/` 改名为 `alpha一阶保持仿真/`（方案 0 基线：α(τ)=α₀ 恒定保持）。
+> α 预测的其它方案各自独立成文件夹（每个含 `runs/` 出图子目录）：
+>
+> ```
+> alpha一阶保持仿真/      # 方案 0：α 恒定保持（基线，最完整）
+> alpha线性外推仿真/      # 方案 A：α(τ)=α₀+α̇·τ（LPF 后）
+> alpha多假设并集仿真/    # 方案 B：保持/继续打/回正 三假设取并集 ⭐主推
+> alpha扇形包络仿真/      # 方案 C：最坏情况扇形包络（对照上界）
+> alpha二阶外推仿真/      # 方案 D：α(τ)=α₀+α̇·τ+½α̈·τ²
+> matlab/                # 历史脚本归档（pid3.m / guacheweixianqu.m / 两个 txt）
+> ```
+
+每个 alpha 方案文件夹内的核心文件（与基线一致的部分）：
+
 ```
-Matlab/
+<方案文件夹>/
 ├── vehicle_params.m       # ✅ 车型参数 struct（与 C++ VehicleParams 对齐）
 ├── kinematics_step.m      # ✅ 一步严格运动学（含 l_h 耦合）
 ├── derive_points.m        # ✅ 从最小状态派生 A/B/H/T 几何点
-├── predict_swept.m        # ✅ 三层扫掠多边形（包络法）
+├── predict_swept.m        # ✅ 三层扫掠多边形（α 外推方式因方案而异）
 ├── point_in_poly.m        # ✅ 射线法判内
-├── run_phase1_demo.m      # ✅ Phase 1 顶层 demo：CSV → 回放 → 预测 → 误差报告
+├── run_phase1_demo.m      # ✅ 顶层 demo：CSV → 回放 → 预测 → 误差报告
 ├── load_pid_scenario.m    # ✅ 读取 pid工况仿真导出器.html 导出的 CSV
-├── sim_pid.m              # 待办：PID 仿真台架（生成测试输入）
-├── sim_replay.m           # 待办：实测 csv 回放
-├── risk_eval.m            # 待办：风险等级算子（多边形+目标→Risk）
-├── pid3.m                 # 历史：单车 PID 仿真
-└── guacheweixianqu.m      # 历史：半挂车 PID + 扫掠区一体化（已识别 4 处问题，待删）
+├── scenarios/             # PID 工况 CSV（共用）
+└── runs/                  # 自动归档出图（gitignore，仅留 README）
 ```
+
+> 路径全部用 `mfilename('fullpath')` 自反推，**不依赖文件夹叫什么名字**，重命名安全。
 
 **Phase 1 一键跑**：
 
