@@ -185,6 +185,7 @@ OpenMV/
 > alpha多假设并集仿真/    # 方案 B：保持/继续打/回正 三假设取并集 ⭐主推
 > alpha扇形包络仿真/      # 方案 C：最坏情况扇形包络（对照上界）
 > alpha二阶外推仿真/      # 方案 D：α(τ)=α₀+α̇·τ+½α̈·τ²
+> alpha方案对比/          # 五方案横向对比脚本 compare_alpha_schemes.m
 > matlab/                # 历史脚本归档（pid3.m / guacheweixianqu.m / 两个 txt）
 > ```
 
@@ -215,6 +216,19 @@ out = run_phase1_demo('pid_scenario_*.csv');
 
 输出三幅图 + 误差报告；通过门控 = `out.pass_gate == true`（位置最大误差 < 1mm）。
 **自动归档**：每次执行会在 `Matlab/runs/<时间戳>__<csv名>/` 下保存三张 PNG + summary.txt。
+
+**五方案横向对比**（论文/答辩用的"基线 vs 改进"图）：
+
+```matlab
+cd alpha方案对比
+out = compare_alpha_schemes();                                   % 默认 020804 工况
+out = compare_alpha_schemes('pid_scenario_20260530_020148.csv'); % 指定工况
+```
+
+同一条 CSV 下跑 0/A/B/C/D 五方案，输出 PolyW 几何叠加 + 平均扫掠面积柱状 +
+PolyA 报警提前量（`lead = 物理接触时刻 − 首次预测命中时刻`）三张对比图。
+靠 MATLAB「当前目录函数优先于路径」规则：先 `addpath` 基线拿公共函数，
+再 `cd` 进各方案目录调用其专属 `predict_swept`，互不污染。详见 `alpha方案对比/README.md`。
 
 **时间尺度速查表**（与代码常量一致）：
 
