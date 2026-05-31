@@ -7,7 +7,7 @@ function out = compare_alpha_schemes(csv_name)
 %   被对比的 5 个方案（各自独立文件夹，predict_swept 签名一致）：
 %     0  alpha一阶保持仿真     hold    α(τ)=α_now                （基线）
 %     A  alpha线性外推仿真     linear  α(τ)=α_now+α̇·τ
-%     B  alpha多假设并集仿真   union   保持∪继续打∪回正 三假设并集  ⭐主推
+%     B  alpha多假设并集仿真   union   保持∪继续打∪回正 三假设并集  保守并集对照
 %     C  alpha扇形包络仿真     fan     α(τ)∈[α₀-rate·τ, α₀+rate·τ] 包络（上界）
 %     D  alpha二阶外推仿真     quad    α(τ)=α₀+α̇·τ+½α̈·τ²
 %
@@ -117,7 +117,7 @@ function out = compare_alpha_schemes(csv_name)
     % ---------- 可视化 ----------
     scheme_colors = [0.45 0.45 0.45;   % 0 灰
                      0.20 0.55 0.85;   % A 蓝
-                     0.90 0.30 0.25;   % B 红 (主推)
+                     0.90 0.30 0.25;   % B 红 (保守并集对照)
                      0.95 0.65 0.15;   % C 橙
                      0.45 0.30 0.70];  % D 紫
     labels = {schemes.label};

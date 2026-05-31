@@ -182,7 +182,7 @@ OpenMV/
 > ```
 > alpha一阶保持仿真/      # 方案 0：α 恒定保持（基线，最完整）
 > alpha线性外推仿真/      # 方案 A：α(τ)=α₀+α̇·τ（LPF 后）
-> alpha多假设并集仿真/    # 方案 B：保持/继续打/回正 三假设取并集 ⭐主推
+> alpha多假设并集仿真/    # 方案 B：保持/继续打/回正 三假设取并集（保守并集对照）
 > alpha扇形包络仿真/      # 方案 C：最坏情况扇形包络（对照上界）
 > alpha二阶外推仿真/      # 方案 D：α(τ)=α₀+α̇·τ+½α̈·τ²
 > alpha方案对比/          # 五方案横向对比脚本 compare_alpha_schemes.m
@@ -361,6 +361,57 @@ t = 16.00 s: true TTC ≈ 0.24 s
 - R3 复盘用于评估“当前 poly 主算法提前量是否足够”，不是替代 `predict_swept`。
 - 后续改进应优先做：低通后的 `alpha_dot` 短时外推、与 `alpha_dot=0` 分支取并集、目标宽度/安全半径膨胀、批量复盘统计 true TTC 与 poly 首次报警时间差。
 
+#### 转弯全过程盲区分析（2026-06-01 新增）
+
+`转弯全过程盲区分析软件/` 是从“出弯时间测试”扩展出来的桌面/HTML 工具，当前用于研究右转全过程中哪些扫掠边界点在在线 PolyW 首次报警时已经没有足够反应时间。这里的“盲区”不是静态视觉不可见区，而是时间安全概念：
+
+```text
+lead_W = true_contact_time_s - first_PolyW_s
+若 lead_W < reaction_threshold_s，则记为 BLINDSPOT_REACTION_INSUFFICIENT。
+```
+
+关键口径：
+- 目标点可以由软件沿整段真实扫掠边界生成，也可以导入固定目标点 CSV；边界点只是离线靶标。
+- 判警过程仍然只用当前帧 `(v, alpha, phi)` 做在线短时 PolyW/A/I 预测，不能用未来真值反推。
+- 默认不启用 EXIT 扩窗，不启用安全膨胀，用来观察原始一阶保持 Poly 在入弯、弯中、出弯全过程的反应时间不足分布。
+- 边界点判内默认使用 `tolerance_m = 0.05`，因为点常贴在 swept polygon 边界线上。
+- `t < 2.0 s` 的起步段标记为 `STARTUP_TRUNCATED`，因为仿真开始前缺少历史预测窗口，应单独解释。
+
+软件输出目录固定为：
+
+```text
+转弯全过程盲区分析软件/目标点CSV/
+转弯全过程盲区分析软件/边界点盲区日志/
+转弯全过程盲区分析软件/logs/
+```
+
+MATLAB 批量扫描脚本：
+
+```matlab
+cd('C:/Users/Admin/Desktop/小挑资料/转弯全过程盲区分析软件')
+out = scan_ttc_threshold_blindspots();
+```
+
+当前默认扫描参数：
+
+```text
+sampling_spacing_m = 0.1
+tolerance_m = 0.05
+max_boundary_points = 2000
+warmup_ignore_s = 2.0
+thresholds_s = 0.1:0.1:3.0
+T_h_W = 2.0
+dt_pred = 0.02
+```
+
+阈值叠加图颜色口径：越小的阈值越红/橙，表示更紧迫；只有在较大阈值下才成为盲区的点偏蓝/紫。筛选图由 `plot_threshold_filtered_blindspots.m` 生成，例如：
+
+```matlab
+out = plot_threshold_filtered_blindspots(scan_dir, [2.0 1.5 1.0]);
+```
+
+这会输出 `threshold_blindspot_overlay_le_2.0s.png`、`..._le_1.5s.png`、`..._le_1.0s.png`。黑色 `x` 表示 `POLYW_NO_HIT`，浅灰点表示 `STARTUP_TRUNCATED`。
+
 ### 4.4 报警状态机（滞回防抖）
 
 ```
@@ -463,7 +514,7 @@ S = 当前等级 ∈ {0,1,2,3}
 - ❌ 在中断里调用浮点函数 / `Serial.print`
 - ❌ 直接从 OpenMV 摄像头到雷达坐标系做大量浮点变换（应在 ESP32 上做）
 - ❌ 修改既有运动学公式时不同步更新 MATLAB 与 C++ 两端（必须配对修改）
-- ❌ **BAT 启动器写中文路径不要直接用 cmd if exist**：cmd.exe 默认 GBK 解码，UTF-8 BAT 会乱码，GBK BAT 又不能跨 IDE 编辑。**正确做法**：BAT 只做一行 `powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0launch.ps1"`，所有路径逻辑放进 launch.ps1（PowerShell 原生 Unicode 安全）。当前实现见 `TTC预警复盘软件/launch.ps1` + `启动TTC预警复盘软件.bat`。
+- ❌ **BAT 启动器写中文路径不要直接用 cmd if exist**：cmd.exe 默认 GBK 解码，UTF-8 BAT 会乱码，GBK BAT 又不能跨 IDE 编辑。**正确做法**：BAT 只做一行 `powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0launch.ps1"`，所有路径逻辑放进 launch.ps1（PowerShell 原生 Unicode 安全）。当前实现见 `TTC预警复盘软件/launch.ps1` + `启动TTC预警复盘软件.bat`，以及 `转弯全过程盲区分析软件/launch.ps1` + `启动转弯全过程盲区分析软件.bat`。
 
 ---
 
