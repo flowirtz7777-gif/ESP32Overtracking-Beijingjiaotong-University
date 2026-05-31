@@ -1,0 +1,1190 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>转弯全过程盲区分析软件</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1118;
+      --panel: #121b26;
+      --panel2: #172331;
+      --line: #2a3a4d;
+      --text: #e8eef6;
+      --muted: #91a1b5;
+      --blue: #5b8def;
+      --green: #56b36f;
+      --yellow: #e9c84a;
+      --orange: #f39a35;
+      --red: #e85d5d;
+      --cyan: #53c9d8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Microsoft YaHei", "Segoe UI", Arial, sans-serif;
+      overflow: hidden;
+    }
+    header {
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      border-bottom: 1px solid var(--line);
+      background: #0d1621;
+    }
+    h1 { margin: 0; font-size: 18px; letter-spacing: 0; }
+    .sub { color: var(--muted); font-size: 12px; }
+    main {
+      height: calc(100vh - 58px);
+      display: grid;
+      grid-template-columns: 340px minmax(560px, 1fr) 390px;
+      gap: 12px;
+      padding: 12px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      min-height: 0;
+      overflow: hidden;
+    }
+    .side, .right { display: flex; flex-direction: column; }
+    .block {
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .block:last-child { border-bottom: 0; }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #f4f7fb;
+    }
+    label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin: 8px 0 5px;
+    }
+    button, input[type="file"], input[type="number"], input[type="range"], select {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: var(--panel2);
+      color: var(--text);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font: inherit;
+    }
+    input[type="range"] { padding: 0; }
+    button {
+      cursor: pointer;
+      font-weight: 650;
+    }
+    button.primary { background: #2457b8; border-color: #3b73e1; }
+    button.playing { background: #7b2b2b; border-color: #d15d5d; }
+    button:disabled { opacity: 0.45; cursor: not-allowed; }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .status {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      min-height: 38px;
+    }
+    .params, .metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      font-size: 12px;
+    }
+    .metric {
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #0f1823;
+      min-width: 0;
+    }
+    .metric span { display: block; color: var(--muted); margin-bottom: 3px; }
+    .metric strong {
+      display: block;
+      font-size: 14px;
+      color: var(--text);
+      word-break: break-word;
+    }
+    .canvas-wrap {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #f7f9fb;
+    }
+    .canvas-wrap:fullscreen {
+      background: #f7f9fb;
+    }
+    .plot-stack {
+      position: absolute;
+      inset: 0 0 76px 0;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 1px;
+      background: #dbe3ec;
+    }
+    .plot-panel {
+      position: relative;
+      min-height: 0;
+      background: #f7f9fb;
+      overflow: hidden;
+    }
+    .canvas-wrap.focus-poly .plot-stack,
+    .canvas-wrap.focus-diagnosis .plot-stack {
+      grid-template-rows: 1fr;
+    }
+    .canvas-wrap.focus-poly #diagnosis-panel,
+    .canvas-wrap.focus-diagnosis #poly-panel {
+      display: none;
+    }
+    .plot-title {
+      position: absolute;
+      left: 12px;
+      top: 10px;
+      z-index: 2;
+      padding: 5px 8px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.84);
+      border: 1px solid #d7dfe8;
+      color: #243244;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .fullscreen-btn {
+      position: absolute;
+      right: 12px;
+      bottom: 10px;
+      z-index: 3;
+      width: auto;
+      min-width: 74px;
+      padding: 6px 9px;
+      background: rgba(15,24,35,0.86);
+      border-color: rgba(42,58,77,0.9);
+      color: #eef4fb;
+      font-size: 12px;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: #f7f9fb;
+    }
+    .controls {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      display: grid;
+      grid-template-columns: 110px 1fr 160px 120px;
+      gap: 10px;
+      align-items: center;
+      background: rgba(11, 17, 24, 0.88);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      backdrop-filter: blur(8px);
+    }
+    .time {
+      font-variant-numeric: tabular-nums;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: right;
+    }
+    .legend {
+      position: absolute;
+      right: 12px;
+      top: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px 12px;
+      color: #243244;
+      font-size: 12px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid #d7dfe8;
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+    .swatch {
+      display: inline-block;
+      width: 11px;
+      height: 11px;
+      border-radius: 2px;
+      margin-right: 6px;
+      vertical-align: -1px;
+      border: 1px solid rgba(0,0,0,0.16);
+    }
+    .log-toolbar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .log {
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      min-height: 0;
+      flex: 1;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+    th, td {
+      padding: 7px 8px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      white-space: nowrap;
+    }
+    th {
+      position: sticky;
+      top: 0;
+      background: #0f1823;
+      z-index: 1;
+    }
+    .warn { color: var(--yellow); }
+    .bad { color: var(--red); }
+    .good { color: var(--green); }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>转弯全过程盲区分析软件</h1>
+      <div class="sub">全过程边界点离线生成，PolyW/A/I 在线预测判警；盲区=报警时没有充足反应时间的点</div>
+    </div>
+    <div class="sub" id="source-label">未导入 CSV</div>
+  </header>
+  <main>
+    <section class="side">
+      <div class="block">
+        <h2>1. 场景 CSV</h2>
+        <label>导入 PID / MATLAB 导出 CSV</label>
+        <input id="scenario-file" type="file" accept=".csv,text/csv" />
+        <div class="status" id="load-status">请选择包含 time_s、alpha_rad、phi_rad、xB_m、yB_m、theta_rad 的 CSV。</div>
+        <button id="use-default" class="primary">使用内置示例工况</button>
+      </div>
+      <div class="block">
+        <h2>2. 全过程边界点</h2>
+        <div class="row">
+          <div>
+            <label>采样间距 / m</label>
+            <input id="spacing" type="number" min="0.1" max="2" step="0.05" value="0.35" />
+          </div>
+          <div>
+            <label>判内容差 / m</label>
+            <input id="grid-size" type="number" min="0.00" max="0.30" step="0.01" value="0.05" />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+        <label>反应时间阈值 / s</label>
+            <input id="lead-threshold" type="number" min="0.1" max="3" step="0.1" value="1.0" />
+          </div>
+          <div>
+            <label>最大边界点数</label>
+            <input id="max-targets" type="number" min="50" max="2500" step="50" value="700" />
+          </div>
+        </div>
+        <label>忽略起始截断 / s</label>
+        <input id="warmup-ignore" type="number" min="0" max="5" step="0.1" value="2.0" />
+        <label>导入固定目标点 CSV</label>
+        <input id="target-file" type="file" accept=".csv,text/csv" />
+        <button id="build-targets" class="primary" style="margin-top:10px;">生成全过程边界点并分析</button>
+        <button id="refresh-analysis" style="margin-top:8px;">按当前参数刷新分析</button>
+        <button id="export-targets" style="margin-top:8px;">导出当前目标点 CSV</button>
+      </div>
+      <div class="block">
+        <h2>3. 在线预测窗口</h2>
+        <div class="params" id="window-grid"></div>
+      </div>
+      <div class="block">
+        <h2>车辆参数</h2>
+        <div class="params" id="param-grid"></div>
+      </div>
+    </section>
+
+    <section class="canvas-wrap" id="canvas-wrap">
+      <div class="plot-stack">
+        <div class="plot-panel" id="poly-panel">
+          <canvas id="scene-poly"></canvas>
+          <div class="plot-title">在线 Poly 预测区</div>
+          <button class="fullscreen-btn" data-fullscreen="poly-panel">全屏</button>
+          <div class="legend">
+            <div><span class="swatch" style="background:#f6d94a"></span>PolyW</div>
+            <div><span class="swatch" style="background:#f29b38"></span>PolyA</div>
+            <div><span class="swatch" style="background:#e85d5d"></span>PolyI</div>
+            <div><span class="swatch" style="background:#53c9d8"></span>当前挂车</div>
+            <div><span class="swatch" style="background:#d9b900"></span>W内目标</div>
+            <div><span class="swatch" style="background:#7a3e12"></span>A/I内目标</div>
+          </div>
+        </div>
+        <div class="plot-panel" id="diagnosis-panel">
+          <canvas id="scene-diagnosis"></canvas>
+          <div class="plot-title">全过程盲区分析结果</div>
+          <button class="fullscreen-btn" data-fullscreen="diagnosis-panel">全屏</button>
+          <div class="legend">
+            <div><span class="swatch" style="background:#e85d5d"></span>盲区点</div>
+            <div><span class="swatch" style="background:#56b36f"></span>反应充足</div>
+            <div><span class="swatch" style="background:#9aa6b2"></span>未命中</div>
+            <div><span class="swatch" style="background:#5b8def"></span>起始截断</div>
+          </div>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="play">自动播放</button>
+        <input id="time-slider" type="range" min="0" max="0" step="1" value="0" />
+        <div>
+          <label style="margin:0 0 4px;">播放速度 <span id="speed-label">1.0x</span></label>
+          <input id="speed-slider" type="range" min="0.25" max="6" step="0.25" value="1" />
+        </div>
+        <div class="time" id="time-readout">0.00 / 0.00 s</div>
+      </div>
+    </section>
+
+    <section class="right">
+      <div class="block">
+        <h2>全过程盲区摘要</h2>
+        <div class="metrics" id="summary-grid"></div>
+      </div>
+      <div class="block" style="flex:1; min-height:0; display:flex; flex-direction:column;">
+        <h2>边界点盲区日志</h2>
+        <div class="log-toolbar">
+          <button id="export-log">导出 CSV</button>
+          <button id="show-late">只看盲区点</button>
+        </div>
+        <div class="log">
+          <table>
+            <thead>
+              <tr><th>目标</th><th>接触/s</th><th>W首报/s</th><th>提前/s</th><th>阶段</th></tr>
+            </thead>
+            <tbody id="log-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const DEG = Math.PI / 180;
+    const DEFAULT_TARGETS = [];
+    const HORIZONS = { W: 2.0, A: 1.0, I: 0.3 };
+    const DT_PRED = 0.02;
+    const PHASE_NAMES = ["IDLE", "ENTRY", "MID", "EXIT", "DONE"];
+
+    const cfgDefault = {
+      l: 4.0, l_h: 1.8, L: 13.5, width: 2.0, speed: 3.0,
+      totalTime: 35.0, dt: 0.02, thetaStartDeg: 90, thetaEndDeg: 0,
+      t1: 3, t2: 15, kpTheta: 0.8, kiTheta: 0.02, kdTheta: 0.02,
+      integralThetaLimit: 0.4, kpPhi: 0.3, kiPhi: 0.01, kdPhi: 0.01,
+      integralPhiLimit: 0.2, alphaLimitDeg: 30, phiLimitDeg: 15
+    };
+
+    let data = simulateDefault(cfgDefault);
+    let cfg = readConfigFromData(data);
+    let phase = computePhase(data);
+    let targets = DEFAULT_TARGETS;
+    let logRows = [];
+    let showLateOnly = false;
+    let currentIndex = 0;
+    let playing = false;
+    let lastTick = 0;
+    let view = null;
+
+    const canvasPoly = document.getElementById("scene-poly");
+    const canvasDiagnosis = document.getElementById("scene-diagnosis");
+    let canvas = canvasPoly;
+    let ctx = canvas.getContext("2d");
+    const slider = document.getElementById("time-slider");
+    const playBtn = document.getElementById("play");
+    const speedSlider = document.getElementById("speed-slider");
+
+    function deg2rad(v) { return v * DEG; }
+    function rad2deg(v) { return v / DEG; }
+    function wrapPi(a) { return Math.atan2(Math.sin(a), Math.cos(a)); }
+    function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+    function fmt(v, n = 2) { return Number.isFinite(v) ? Number(v).toFixed(n) : "--"; }
+
+    function buildReferenceHeading(time, c) {
+      const a = deg2rad(c.thetaStartDeg), b = deg2rad(c.thetaEndDeg);
+      if (time <= c.t1) return a;
+      if (time <= c.t2) return a + (b - a) * ((time - c.t1) / (c.t2 - c.t1));
+      return b;
+    }
+
+    function simulateDefault(c) {
+      const n = Math.floor(c.totalTime / c.dt) + 1;
+      const cols = {};
+      ["time_s","dt_s","v_input_mps","l_m","l_h_m","L_m","width_m","phi_max_rad","theta_ref_rad","theta_rad","theta_t_rad","alpha_rad","phi_rad","xA_m","yA_m","xB_m","yB_m","xH_m","yH_m","xT_m","yT_m"].forEach(k => cols[k] = Array(n).fill(0));
+      const alphaLimit = deg2rad(c.alphaLimitDeg), phiLimit = deg2rad(c.phiLimitDeg);
+      cols.yA_m[0] = c.l;
+      cols.theta_rad[0] = deg2rad(c.thetaStartDeg);
+      cols.xH_m[0] = c.l_h * Math.cos(cols.theta_rad[0]);
+      cols.yH_m[0] = c.l_h * Math.sin(cols.theta_rad[0]);
+      cols.xT_m[0] = cols.xH_m[0] - c.L * Math.cos(cols.theta_rad[0]);
+      cols.yT_m[0] = cols.yH_m[0] - c.L * Math.sin(cols.theta_rad[0]);
+      let intTheta = 0, intPhi = 0, prevTheta = 0, prevPhi = 0;
+      for (let i = 0; i < n; i++) {
+        cols.time_s[i] = i * c.dt; cols.dt_s[i] = c.dt; cols.v_input_mps[i] = c.speed;
+        cols.l_m[i] = c.l; cols.l_h_m[i] = c.l_h; cols.L_m[i] = c.L; cols.width_m[i] = c.width; cols.phi_max_rad[i] = phiLimit;
+        cols.theta_ref_rad[i] = buildReferenceHeading(cols.time_s[i], c);
+      }
+      for (let k = 0; k < n - 1; k++) {
+        const theta = Math.atan2(cols.yA_m[k] - cols.yB_m[k], cols.xA_m[k] - cols.xB_m[k]);
+        cols.theta_rad[k] = theta; cols.theta_t_rad[k] = theta - cols.phi_rad[k];
+        const eTheta = wrapPi(cols.theta_ref_rad[k] - theta);
+        intTheta = clamp(intTheta + eTheta * c.dt, -c.integralThetaLimit, c.integralThetaLimit);
+        const dTheta = (eTheta - prevTheta) / c.dt; prevTheta = eTheta;
+        let alphaCmd = c.kpTheta * eTheta + c.kiTheta * intTheta + c.kdTheta * dTheta;
+        alphaCmd = clamp(alphaCmd, -alphaLimit, alphaLimit);
+        const ePhi = -cols.phi_rad[k];
+        intPhi = clamp(intPhi + ePhi * c.dt, -c.integralPhiLimit, c.integralPhiLimit);
+        const dPhi = (ePhi - prevPhi) / c.dt; prevPhi = ePhi;
+        const alphaPhi = c.kpPhi * ePhi + c.kiPhi * intPhi + c.kdPhi * dPhi;
+        cols.alpha_rad[k] = clamp(0.95 * alphaCmd + 0.05 * alphaPhi, -alphaLimit, alphaLimit);
+        const s2 = stepState([cols.xB_m[k], cols.yB_m[k], theta, cols.phi_rad[k]], cols.alpha_rad[k], c.speed, {l:c.l,l_h:c.l_h,L:c.L,width:c.width,phi_max:phiLimit}, c.dt);
+        cols.xB_m[k+1] = s2[0]; cols.yB_m[k+1] = s2[1]; cols.theta_rad[k+1] = s2[2]; cols.phi_rad[k+1] = s2[3];
+        const d = derivePoints(s2, {l:c.l,l_h:c.l_h,L:c.L,width:c.width,phi_max:phiLimit});
+        cols.xA_m[k+1] = d.A[0]; cols.yA_m[k+1] = d.A[1]; cols.xH_m[k+1] = d.H[0]; cols.yH_m[k+1] = d.H[1]; cols.xT_m[k+1] = d.T[0]; cols.yT_m[k+1] = d.T[1]; cols.theta_t_rad[k+1] = d.theta_t;
+      }
+      return cols;
+    }
+
+    function parseCSV(text) {
+      const lines = text.trim().split(/\r?\n/).filter(Boolean);
+      const headers = lines[0].split(",").map(s => s.trim().replace(/^\uFEFF/, ""));
+      const cols = Object.fromEntries(headers.map(h => [h, []]));
+      for (let i = 1; i < lines.length; i++) {
+        const values = splitCSVLine(lines[i]);
+        headers.forEach((h, idx) => {
+          const raw = (values[idx] ?? "").trim();
+          const num = Number(raw);
+          cols[h].push(raw !== "" && Number.isFinite(num) ? num : raw);
+        });
+      }
+      return cols;
+    }
+
+    function splitCSVLine(line) {
+      const out = [];
+      let cur = "", quote = false;
+      for (let i = 0; i < line.length; i++) {
+        const ch = line[i];
+        if (ch === '"') {
+          quote = !quote;
+        } else if (ch === "," && !quote) {
+          out.push(cur);
+          cur = "";
+        } else {
+          cur += ch;
+        }
+      }
+      out.push(cur);
+      return out;
+    }
+
+    function parseTargetsCSV(text) {
+      const rows = parseCSV(text);
+      const pick = [["x_m","y_m"],["x","y"],["target_x_m","target_y_m"]].find(([x,y]) => rows[x] && rows[y]);
+      if (!pick) throw new Error("目标 CSV 需要 x_m,y_m 或 x,y 列");
+      const n = rows[pick[0]].length;
+      const parsed = [];
+      for (let i = 0; i < n; i++) {
+        const x = Number(rows[pick[0]][i]);
+        const y = Number(rows[pick[1]][i]);
+        if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
+        const name = rows.target?.[i] || rows.name?.[i] || rows.target_id?.[i] || `B${parsed.length + 1}`;
+        const idxRaw = rows.true_contact_idx?.[i] ?? rows.contact_idx?.[i];
+        const timeRaw = rows.true_contact_time_s?.[i] ?? rows.contact_time_s?.[i];
+        let contactIdx = Number.isFinite(Number(idxRaw)) ? Math.max(0, Math.min(data.time_s.length - 1, Math.round(Number(idxRaw)) - 1)) : NaN;
+        if (!Number.isFinite(contactIdx) && Number.isFinite(Number(timeRaw))) {
+          contactIdx = nearestTimeIndex(Number(timeRaw));
+        }
+        if (!Number.isFinite(contactIdx)) {
+          contactIdx = refineContactIndex([x, y], nearestSpatialIndex([x, y]));
+        }
+        parsed.push({id: parsed.length + 1, name: String(name), x, y, trueContactIdx: contactIdx});
+      }
+      return parsed;
+    }
+
+    function refreshAnalysis(statusText = "已按当前参数刷新盲区分析。") {
+      if (!targets.length) {
+        document.getElementById("load-status").textContent = "当前没有目标点，请先生成或导入目标点 CSV。";
+        return;
+      }
+      analyzeTargets();
+      fitView();
+      render();
+      document.getElementById("load-status").textContent = statusText;
+    }
+
+    function nearestTimeIndex(timeValue) {
+      let best = 0, bestDist = Infinity;
+      for (let i = 0; i < data.time_s.length; i++) {
+        const d = Math.abs(data.time_s[i] - timeValue);
+        if (d < bestDist) { best = i; bestDist = d; }
+      }
+      return best;
+    }
+
+    function nearestSpatialIndex(pt) {
+      let best = 0, bestDist = Infinity;
+      const step = Math.max(1, Math.floor(data.time_s.length / 1000));
+      for (let i = 0; i < data.time_s.length; i += step) {
+        const d = distPointToSegment(pt, [data.xH_m[i], data.yH_m[i]], [data.xT_m[i], data.yT_m[i]]);
+        if (d < bestDist) { best = i; bestDist = d; }
+      }
+      return best;
+    }
+
+    function readConfigFromData(d) {
+      const dt = d.time_s?.length > 1 ? d.time_s[1] - d.time_s[0] : 0.02;
+      return {
+        l: d.l_m?.[0] ?? 4.0,
+        l_h: d.l_h_m?.[0] ?? 1.8,
+        L: d.L_m?.[0] ?? 13.5,
+        width: d.width_m?.[0] ?? 2.0,
+        phi_max: d.phi_max_rad?.[0] ?? deg2rad(15),
+        speed: d.v_input_mps?.[0] ?? d.v_mps?.[0] ?? 3.0,
+        dt
+      };
+    }
+
+    function normalizeData(d) {
+      if (!d.time_s) throw new Error("CSV 缺少 time_s");
+      if (!d.alpha_rad) throw new Error("CSV 缺少 alpha_rad");
+      if (!d.phi_rad) throw new Error("CSV 缺少 phi_rad");
+      if (!d.xB_m || !d.yB_m || !d.theta_rad) throw new Error("CSV 缺少 xB_m/yB_m/theta_rad");
+      if (!d.v_input_mps && !d.v_mps) d.v_input_mps = Array(d.time_s.length).fill(3);
+      if (!d.xH_m || !d.yH_m || !d.xT_m || !d.yT_m) {
+        const c = readConfigFromData(d);
+        d.xH_m = []; d.yH_m = []; d.xT_m = []; d.yT_m = []; d.theta_t_rad = [];
+        for (let i = 0; i < d.time_s.length; i++) {
+          const pts = derivePoints([d.xB_m[i], d.yB_m[i], d.theta_rad[i], d.phi_rad[i]], c);
+          d.xH_m[i] = pts.H[0]; d.yH_m[i] = pts.H[1]; d.xT_m[i] = pts.T[0]; d.yT_m[i] = pts.T[1]; d.theta_t_rad[i] = pts.theta_t;
+        }
+      }
+      return d;
+    }
+
+    function stepState(s, alpha, v, p, dt) {
+      const [xB, yB, theta, phi] = s;
+      const omega1 = v * Math.sin(alpha) / p.l;
+      const vB = v * Math.cos(alpha);
+      const omega2 = (vB * Math.sin(phi) + p.l_h * omega1 * Math.cos(phi)) / p.L;
+      const phiMax = p.phi_max ?? deg2rad(45);
+      return [
+        xB + vB * Math.cos(theta) * dt,
+        yB + vB * Math.sin(theta) * dt,
+        theta + omega1 * dt,
+        clamp(phi + (omega1 - omega2) * dt, -phiMax, phiMax)
+      ];
+    }
+
+    function derivePoints(s, p) {
+      const [xB, yB, theta, phi] = s;
+      const A = [xB + p.l * Math.cos(theta), yB + p.l * Math.sin(theta)];
+      const H = [xB + p.l_h * Math.cos(theta), yB + p.l_h * Math.sin(theta)];
+      const theta_t = theta - phi;
+      const T = [H[0] - p.L * Math.cos(theta_t), H[1] - p.L * Math.sin(theta_t)];
+      return {A, H, T, theta, theta_t};
+    }
+
+    function bodyPolyAt(k) {
+      const thetaT = data.theta_t_rad?.[k] ?? (data.theta_rad[k] - data.phi_rad[k]);
+      const nR = [Math.sin(thetaT), -Math.cos(thetaT)];
+      const hw = cfg.width * 0.5;
+      const H = [data.xH_m[k], data.yH_m[k]], T = [data.xT_m[k], data.yT_m[k]];
+      return [
+        [H[0] + hw*nR[0], H[1] + hw*nR[1]],
+        [T[0] + hw*nR[0], T[1] + hw*nR[1]],
+        [T[0] - hw*nR[0], T[1] - hw*nR[1]],
+        [H[0] - hw*nR[0], H[1] - hw*nR[1]]
+      ];
+    }
+
+    function rightEdgePoint(k, u) {
+      const thetaT = data.theta_t_rad?.[k] ?? (data.theta_rad[k] - data.phi_rad[k]);
+      const nR = [Math.sin(thetaT), -Math.cos(thetaT)];
+      const hw = cfg.width * 0.5;
+      const H = [data.xH_m[k], data.yH_m[k]], T = [data.xT_m[k], data.yT_m[k]];
+      const P = [H[0] + (T[0]-H[0]) * u, H[1] + (T[1]-H[1]) * u];
+      return [P[0] + hw*nR[0], P[1] + hw*nR[1]];
+    }
+
+    function computePhase(d) {
+      const n = d.time_s.length;
+      const out = Array(n).fill(0);
+      let state = 0, startTheta = d.theta_rad[0], exitCount = 0, doneCount = 0;
+      const alphaStart = 2 * DEG, exitAngle = 75 * DEG;
+      for (let i = 1; i < n; i++) {
+        const alpha = d.alpha_rad[i] ?? 0;
+        const alphaPrev = d.alpha_rad[i-1] ?? alpha;
+        const phi = d.phi_rad[i] ?? 0;
+        const dt = Math.max(1e-6, d.time_s[i] - d.time_s[i-1]);
+        const alphaDot = (alpha - alphaPrev) / dt;
+        if (state === 0 && Math.abs(alpha) > alphaStart) {
+          state = 1; startTheta = d.theta_rad[i];
+        }
+        if (state === 1) {
+          const hdg = Math.abs(wrapPi(d.theta_rad[i] - startTheta));
+          if (hdg > 25 * DEG) state = 2;
+        }
+        if (state === 2) {
+          const hdg = Math.abs(wrapPi(d.theta_rad[i] - startTheta));
+          const returning = Math.abs(alpha) < Math.abs(alphaPrev) || alpha * alphaDot < 0;
+          const phiLag = Math.abs(phi) > 4 * DEG;
+          if (hdg >= exitAngle && (returning || phiLag)) exitCount += 1; else exitCount = 0;
+          if (exitCount >= 2) state = 3;
+        }
+        if (state === 3) {
+          if (Math.abs(alpha) < 1 * DEG && Math.abs(phi) < 2 * DEG) doneCount += 1; else doneCount = 0;
+          if (doneCount >= 10) state = 4;
+        }
+        out[i] = state;
+      }
+      return out;
+    }
+
+    function predictSwept(k0, horizon) {
+      const M = Math.max(1, Math.floor(horizon / DT_PRED));
+      let s = [data.xB_m[k0], data.yB_m[k0], data.theta_rad[k0], data.phi_rad[k0]];
+      const alpha = data.alpha_rad[k0] ?? 0;
+      const v = (data.v_input_mps ?? data.v_mps)[k0] ?? cfg.speed;
+      const Hright = [], Tright = [];
+      for (let i = 0; i <= M; i++) {
+        const d = derivePoints(s, cfg);
+        const nR = [Math.sin(d.theta_t), -Math.cos(d.theta_t)];
+        const hw = cfg.width * 0.5;
+        Hright.push([d.H[0] + hw*nR[0], d.H[1] + hw*nR[1]]);
+        Tright.push([d.T[0] + hw*nR[0], d.T[1] + hw*nR[1]]);
+        if (i < M) s = stepState(s, alpha, v, cfg, DT_PRED);
+      }
+      return Hright.concat(Tright.reverse());
+    }
+
+    function pointInPoly(p, poly) {
+      let inside = false;
+      for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+        const xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1];
+        const intersect = ((yi > p[1]) !== (yj > p[1])) && (p[0] < (xj - xi) * (p[1] - yi) / ((yj - yi) || 1e-12) + xi);
+        if (intersect) inside = !inside;
+      }
+      return inside;
+    }
+
+    function pointInPolyTol(p, poly, tol) {
+      if (pointInPoly(p, poly)) return true;
+      if (!Number.isFinite(tol) || tol <= 0) return false;
+      for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+        if (distPointToSegment(p, poly[j], poly[i]) <= tol) return true;
+      }
+      return false;
+    }
+
+    function distPointToSegment(p, a, b) {
+      const vx = b[0] - a[0], vy = b[1] - a[1];
+      const wx = p[0] - a[0], wy = p[1] - a[1];
+      const len2 = vx*vx + vy*vy;
+      const u = len2 > 0 ? clamp((wx*vx + wy*vy) / len2, 0, 1) : 0;
+      const dx = p[0] - (a[0] + u*vx);
+      const dy = p[1] - (a[1] + u*vy);
+      return Math.hypot(dx, dy);
+    }
+
+    function generateBoundaryTargets() {
+      const spacing = Number(document.getElementById("spacing").value);
+      const maxTargets = Number(document.getElementById("max-targets").value);
+      const stepK = Math.max(1, Math.round(spacing / Math.max(0.01, cfg.speed * cfg.dt)));
+      const lateralStep = Math.max(0.08, spacing / Math.max(3, Math.ceil(cfg.L / spacing)));
+      const raw = [];
+      for (let k = 0; k < data.time_s.length; k += stepK) {
+        for (let dist = 0; dist <= cfg.L + 1e-6; dist += lateralStep) {
+          raw.push({p: rightEdgePoint(k, dist / cfg.L), contactIdx: k});
+        }
+      }
+      const seen = new Map();
+      const uniq = [];
+      for (const r of raw) {
+        const key = `${Math.round(r.p[0]/spacing)},${Math.round(r.p[1]/spacing)}`;
+        if (!seen.has(key)) {
+          seen.set(key, true);
+          uniq.push({x:r.p[0], y:r.p[1], contactIdx:r.contactIdx});
+        }
+      }
+      const stride = Math.max(1, Math.ceil(uniq.length / maxTargets));
+      targets = uniq.filter((_, i) => i % stride === 0).slice(0, maxTargets).map((r, i) => ({
+        id: i + 1,
+        name: `B${i + 1}`,
+        x: r.x,
+        y: r.y,
+        trueContactIdx: refineContactIndex([r.x, r.y], r.contactIdx)
+      }));
+      document.getElementById("load-status").textContent = `已生成 ${targets.length} 个转弯全过程右侧扫掠边界点。`;
+    }
+
+    function refineContactIndex(pt, aroundIdx) {
+      const tol = Number(document.getElementById("grid-size").value);
+      const span = Math.max(10, Math.round(1.0 / cfg.dt));
+      const lo = Math.max(0, aroundIdx - span), hi = Math.min(data.time_s.length - 1, aroundIdx + span);
+      for (let k = lo; k <= hi; k++) {
+        if (pointInPolyTol(pt, bodyPolyAt(k), tol)) return k;
+      }
+      return aroundIdx;
+    }
+
+    function analyzeTargets() {
+      const first = targets.map(t => ({
+        ...t,
+        firstW: NaN, firstA: NaN, firstI: NaN,
+        phaseW: "", leadW: NaN, risk: 0
+      }));
+      const tol = Number(document.getElementById("grid-size").value);
+      for (let k = 0; k < data.time_s.length; k++) {
+        const polyW = predictSwept(k, HORIZONS.W);
+        const polyA = predictSwept(k, HORIZONS.A);
+        const polyI = predictSwept(k, HORIZONS.I);
+        for (const row of first) {
+          const pt = [row.x, row.y];
+          if (!Number.isFinite(row.firstW) && pointInPolyTol(pt, polyW, tol)) {
+            row.firstW = k;
+            row.phaseW = PHASE_NAMES[phase[k]];
+          }
+          if (!Number.isFinite(row.firstA) && pointInPolyTol(pt, polyA, tol)) row.firstA = k;
+          if (!Number.isFinite(row.firstI) && pointInPolyTol(pt, polyI, tol)) row.firstI = k;
+        }
+      }
+      const threshold = Number(document.getElementById("lead-threshold").value);
+      const warmupIgnore = Number(document.getElementById("warmup-ignore").value);
+      logRows = first.map(row => {
+        const tContact = data.time_s[row.trueContactIdx];
+        const tW = Number.isFinite(row.firstW) ? data.time_s[row.firstW] : NaN;
+        const tA = Number.isFinite(row.firstA) ? data.time_s[row.firstA] : NaN;
+        const tI = Number.isFinite(row.firstI) ? data.time_s[row.firstI] : NaN;
+        const leadW = Number.isFinite(tW) ? tContact - tW : NaN;
+        const category = tContact < warmupIgnore ? "startup" : (!Number.isFinite(tW) ? "miss" : (leadW < threshold ? "late" : "ok"));
+        row.leadW = leadW;
+        row.risk = Number.isFinite(tI) ? 3 : Number.isFinite(tA) ? 2 : Number.isFinite(tW) ? 1 : 0;
+        row.category = category;
+        const eventName = category === "startup" ? "STARTUP_TRUNCATED" : (category === "miss" ? "POLYW_NO_HIT" : (category === "late" ? "BLINDSPOT_REACTION_INSUFFICIENT" : "REACTION_TIME_SUFFICIENT"));
+        return {
+          time_s: tW,
+          target: row.name,
+          risk: row.risk,
+          ttc_s: leadW,
+          event: eventName,
+          phase: row.phaseW || "",
+        source: "PolyW_online",
+          x_m: row.x,
+          y_m: row.y,
+          true_contact_time_s: tContact,
+          lead_s: leadW,
+          first_PolyA_s: tA,
+          first_PolyI_s: tI,
+          contact_phase: PHASE_NAMES[phase[row.trueContactIdx]]
+          , tolerance_m: tol
+          , warmup_ignore_s: warmupIgnore
+        };
+      }).sort((a, b) => (a.true_contact_time_s - b.true_contact_time_s) || ((a.time_s || Infinity) - (b.time_s || Infinity)));
+      renderLog();
+      updateSummary();
+    }
+
+    function resetPlayback() {
+      phase = computePhase(data);
+      slider.max = data.time_s.length - 1;
+      slider.value = 0;
+      currentIndex = 0;
+      playing = false;
+      playBtn.textContent = "自动播放";
+      playBtn.classList.remove("playing");
+      targets = [];
+      logRows = [];
+      updateParamGrid();
+      updateWindowGrid();
+      updateSummary();
+      renderLog();
+      fitView();
+      render();
+    }
+
+    function updateParamGrid() {
+      const items = [["l",cfg.l],["l_h",cfg.l_h],["L",cfg.L],["width",cfg.width],["speed",cfg.speed],["dt",cfg.dt],["phi_max",rad2deg(cfg.phi_max).toFixed(1)+" deg"],["samples",data.time_s.length]];
+      document.getElementById("param-grid").innerHTML = items.map(([k,v]) => `<div class="metric"><span>${k}</span><strong>${typeof v === "number" ? v.toFixed(3) : v}</strong></div>`).join("");
+    }
+
+    function updateWindowGrid() {
+      const items = [["PolyW",HORIZONS.W+" s"],["PolyA",HORIZONS.A+" s"],["PolyI",HORIZONS.I+" s"],["dt_pred",DT_PRED+" s"]];
+      document.getElementById("window-grid").innerHTML = items.map(([k,v]) => `<div class="metric"><span>${k}</span><strong>${v}</strong></div>`).join("");
+    }
+
+    function updateSummary() {
+      const exitIdx = phase.findIndex(v => v === 3);
+      const threshold = Number(document.getElementById("lead-threshold").value);
+      const lateCount = logRows.filter(r => r.event === "BLINDSPOT_REACTION_INSUFFICIENT").length;
+      const okCount = logRows.filter(r => r.event === "REACTION_TIME_SUFFICIENT").length;
+      const missCount = logRows.filter(r => r.event === "POLYW_NO_HIT").length;
+      const startupCount = logRows.filter(r => r.event === "STARTUP_TRUNCATED").length;
+      const firstLate = logRows.find(r => r.event === "BLINDSPOT_REACTION_INSUFFICIENT");
+      const items = [
+        ["EXIT首触发", exitIdx >= 0 ? data.time_s[exitIdx].toFixed(2)+" s" : "未触发"],
+        ["边界点数", targets.length],
+        [`盲区点`, lateCount],
+        [`充足 / 未命中`, `${okCount} / ${missCount}`],
+        ["起始截断", startupCount],
+        ["首个盲区点", firstLate ? `${firstLate.target} @ ${firstLate.true_contact_time_s.toFixed(2)}s` : "--"],
+        ["反应阈值", `${threshold.toFixed(1)} s`]
+      ];
+      document.getElementById("summary-grid").innerHTML = items.map(([k,v]) => `<div class="metric"><span>${k}</span><strong>${v}</strong></div>`).join("");
+    }
+
+    function renderLog() {
+      const rows = showLateOnly ? logRows.filter(r => r.event === "BLINDSPOT_REACTION_INSUFFICIENT") : logRows;
+      document.getElementById("log-body").innerHTML = rows.slice(0, 700).map(r => {
+        const cls = r.event === "BLINDSPOT_REACTION_INSUFFICIENT" ? "bad" : "good";
+        return `<tr><td>${r.target}</td><td>${fmt(r.true_contact_time_s)}</td><td>${fmt(r.time_s)}</td><td class="${cls}">${fmt(r.lead_s)}</td><td>${r.phase || "--"}</td></tr>`;
+      }).join("");
+    }
+
+    function fitView() {
+      const xs = [], ys = [];
+      for (let i = 0; i < data.time_s.length; i += Math.max(1, Math.floor(data.time_s.length / 700))) {
+        xs.push(data.xB_m[i], data.xH_m[i], data.xT_m[i]);
+        ys.push(data.yB_m[i], data.yH_m[i], data.yT_m[i]);
+      }
+      for (const t of targets) { xs.push(t.x); ys.push(t.y); }
+      const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+      view = {minX:minX-4, maxX:maxX+4, minY:minY-4, maxY:maxY+4};
+    }
+
+    function resizeCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+      canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function toScreen(p) {
+      const rect = canvas.getBoundingClientRect();
+      const w = rect.width, h = rect.height;
+      const sx = w / (view.maxX - view.minX);
+      const sy = h / (view.maxY - view.minY);
+      const s = Math.min(sx, sy) * 0.92;
+      const cx = (view.minX + view.maxX) / 2, cy = (view.minY + view.maxY) / 2;
+      return [w/2 + (p[0]-cx)*s, h/2 - (p[1]-cy)*s];
+    }
+
+    function drawPoly(poly, fill, stroke, alpha = 0.25, width = 1) {
+      if (!poly || poly.length < 3) return;
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.beginPath();
+      poly.forEach((p, i) => {
+        const q = toScreen(p);
+        if (i === 0) ctx.moveTo(q[0], q[1]); else ctx.lineTo(q[0], q[1]);
+      });
+      ctx.closePath();
+      ctx.fillStyle = fill; ctx.strokeStyle = stroke; ctx.lineWidth = width;
+      ctx.fill(); ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawLine(points, color, width = 1, alpha = 1) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.beginPath();
+      points.forEach((p, i) => {
+        const q = toScreen(p);
+        if (i === 0) ctx.moveTo(q[0], q[1]); else ctx.lineTo(q[0], q[1]);
+      });
+      ctx.strokeStyle = color; ctx.lineWidth = width; ctx.stroke();
+      ctx.restore();
+    }
+
+    function beginCanvas(targetCanvas) {
+      canvas = targetCanvas;
+      ctx = canvas.getContext("2d");
+      resizeCanvas();
+      if (!view) fitView();
+      const rect = canvas.getBoundingClientRect();
+      ctx.clearRect(0, 0, rect.width, rect.height);
+      ctx.fillStyle = "#f7f9fb";
+      ctx.fillRect(0, 0, rect.width, rect.height);
+      return rect;
+    }
+
+    function drawPaths() {
+      const pathH = [], pathT = [];
+      for (let i = 0; i < data.time_s.length; i += Math.max(1, Math.floor(data.time_s.length / 900))) {
+        pathH.push([data.xH_m[i], data.yH_m[i]]);
+        pathT.push([data.xT_m[i], data.yT_m[i]]);
+      }
+      drawLine(pathH, "#86a6c8", 1.1, 0.85);
+      drawLine(pathT, "#6fb37f", 1.1, 0.85);
+    }
+
+    function drawCurrentTrailer(k, color = "#111", alpha = 0.9) {
+      const d = derivePoints([data.xB_m[k], data.yB_m[k], data.theta_rad[k], data.phi_rad[k]], cfg);
+      drawLine([d.H, d.T], color, 3, alpha);
+      const Hs = toScreen(d.H), Ts = toScreen(d.T);
+      ctx.fillStyle = color;
+      ctx.font = "12px Consolas";
+      ctx.fillText("H", Hs[0]+5, Hs[1]-5);
+      ctx.fillText("T", Ts[0]+5, Ts[1]-5);
+    }
+
+    function renderPolyPanel() {
+      const rect = beginCanvas(canvasPoly);
+      drawPaths();
+      const k = currentIndex;
+      const polyW = predictSwept(k, HORIZONS.W);
+      const polyA = predictSwept(k, HORIZONS.A);
+      const polyI = predictSwept(k, HORIZONS.I);
+      drawPoly(polyW, "#f6d94a", "#b69c20", 0.22, 1);
+      drawPoly(polyA, "#f29b38", "#b06318", 0.28, 1.2);
+      drawPoly(polyI, "#e85d5d", "#9f3030", 0.36, 1.4);
+      drawPoly(bodyPolyAt(k), "#53c9d8", "#228596", 0.34, 1.4);
+      drawCurrentTrailer(k);
+
+      drawRealtimePolyHits(polyW, polyA, polyI);
+
+      ctx.fillStyle = "#172331"; ctx.font = "13px Consolas";
+      ctx.fillText(`t=${data.time_s[k].toFixed(2)}s  phase=${PHASE_NAMES[phase[k]]}  alpha=${rad2deg(data.alpha_rad[k]).toFixed(2)}deg  phi=${rad2deg(data.phi_rad[k]).toFixed(2)}deg`, 14, rect.height - 16);
+    }
+
+    function drawRealtimePolyHits(polyW, polyA, polyI) {
+      const tol = Number(document.getElementById("grid-size").value);
+      let countW = 0, countA = 0, countI = 0;
+      for (const row of logRows) {
+        const pt = [row.x_m, row.y_m];
+        const inI = pointInPolyTol(pt, polyI, tol);
+        const inA = !inI && pointInPolyTol(pt, polyA, tol);
+        const inW = !inI && !inA && pointInPolyTol(pt, polyW, tol);
+        if (!inI && !inA && !inW) continue;
+
+        let color = "#d9b900", radius = 2.2, alpha = 0.62;
+        if (inI) {
+          color = "#8f1f1f"; radius = 3.1; alpha = 0.86; countI += 1;
+        } else if (inA) {
+          color = "#7a3e12"; radius = 2.7; alpha = 0.76; countA += 1;
+        } else {
+          countW += 1;
+        }
+        const q = toScreen(pt);
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = color;
+        ctx.beginPath(); ctx.arc(q[0], q[1], radius, 0, Math.PI*2); ctx.fill();
+        ctx.restore();
+      }
+      const rect = canvas.getBoundingClientRect();
+      ctx.fillStyle = "#243244";
+      ctx.font = "12px Consolas";
+      ctx.fillText(`hits now: W-only=${countW}  A-only=${countA}  I=${countI}`, 14, rect.height - 34);
+    }
+
+    function renderDiagnosisPanel() {
+      const rect = beginCanvas(canvasDiagnosis);
+      drawPaths();
+      const k = currentIndex;
+      drawPoly(bodyPolyAt(k), "#111111", "#111111", 0.08, 1.0);
+      drawCurrentTrailer(k, "#111", 0.72);
+
+      for (const row of logRows) {
+        const q = toScreen([row.x_m, row.y_m]);
+        let color = "#9aa6b2";
+        let radius = 2.2;
+        if (row.event === "BLINDSPOT_REACTION_INSUFFICIENT") {
+          color = "#e85d5d";
+          radius = 3.2;
+        } else if (row.event === "REACTION_TIME_SUFFICIENT") {
+          color = "#56b36f";
+          radius = 2.4;
+        } else if (row.event === "STARTUP_TRUNCATED") {
+          color = "#5b8def";
+          radius = 2.3;
+        }
+        ctx.save();
+        ctx.globalAlpha = row.event === "POLYW_NO_HIT" ? 0.48 : 0.68;
+        ctx.fillStyle = color;
+        ctx.beginPath(); ctx.arc(q[0], q[1], radius, 0, Math.PI*2); ctx.fill();
+        ctx.restore();
+      }
+
+      const lateCount = logRows.filter(r => r.event === "BLINDSPOT_REACTION_INSUFFICIENT").length;
+      const okCount = logRows.filter(r => r.event === "REACTION_TIME_SUFFICIENT").length;
+      const missCount = logRows.filter(r => r.event === "POLYW_NO_HIT").length;
+      const startupCount = logRows.filter(r => r.event === "STARTUP_TRUNCATED").length;
+      ctx.fillStyle = "#172331";
+      ctx.font = "13px Consolas";
+      ctx.fillText(`blindspot=${lateCount}  sufficient=${okCount}  miss=${missCount}  startup=${startupCount}`, 14, rect.height - 16);
+    }
+
+    function render() {
+      if (!view) fitView();
+      const k = currentIndex;
+      renderPolyPanel();
+      renderDiagnosisPanel();
+      document.getElementById("time-readout").textContent = `${data.time_s[k].toFixed(2)} / ${data.time_s[data.time_s.length-1].toFixed(2)} s`;
+    }
+
+    async function readFile(file) { return await file.text(); }
+
+    document.getElementById("scenario-file").onchange = async e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      try {
+        data = normalizeData(parseCSV(await readFile(file)));
+        cfg = readConfigFromData(data);
+        document.getElementById("source-label").textContent = file.name;
+        document.getElementById("load-status").textContent = `已导入场景: ${file.name}`;
+        resetPlayback();
+      } catch (err) {
+        document.getElementById("load-status").textContent = `导入失败: ${err.message}`;
+      }
+    };
+    document.getElementById("use-default").onclick = () => {
+      data = simulateDefault(cfgDefault);
+      cfg = readConfigFromData(data);
+      document.getElementById("source-label").textContent = "内置示例工况";
+      document.getElementById("load-status").textContent = "已载入内置示例工况。";
+      resetPlayback();
+    };
+    document.getElementById("target-file").onchange = async e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      try {
+        targets = parseTargetsCSV(await readFile(file));
+        refreshAnalysis(`已导入固定目标点: ${file.name}  (N=${targets.length})`);
+      } catch (err) {
+        document.getElementById("load-status").textContent = `目标导入失败: ${err.message}`;
+      }
+    };
+    document.getElementById("build-targets").onclick = () => {
+      generateBoundaryTargets();
+      refreshAnalysis(`已生成并分析 ${targets.length} 个全过程边界点。`);
+    };
+    document.getElementById("refresh-analysis").onclick = () => refreshAnalysis();
+    slider.oninput = () => {
+      currentIndex = Number(slider.value);
+      render();
+    };
+    speedSlider.oninput = () => document.getElementById("speed-label").textContent = `${Number(speedSlider.value).toFixed(2)}x`;
+    playBtn.onclick = () => {
+      playing = !playing;
+      playBtn.textContent = playing ? "停止播放" : "自动播放";
+      playBtn.classList.toggle("playing", playing);
+      lastTick = performance.now();
+      requestAnimationFrame(loop);
+    };
+    function loop(ts) {
+      if (!playing) return;
+      const elapsed = (ts - lastTick) / 1000 * Number(speedSlider.value);
+      lastTick = ts;
+      const nextTime = data.time_s[currentIndex] + elapsed;
+      let idx = data.time_s.findIndex(v => v >= nextTime);
+      if (idx < 0) idx = data.time_s.length - 1;
+      currentIndex = idx;
+      slider.value = idx;
+      render();
+      if (currentIndex >= data.time_s.length - 1) {
+        playing = false;
+        playBtn.textContent = "自动播放";
+        playBtn.classList.remove("playing");
+        return;
+      }
+      requestAnimationFrame(loop);
+    }
+    document.getElementById("show-late").onclick = () => {
+      showLateOnly = !showLateOnly;
+      document.getElementById("show-late").textContent = showLateOnly ? "显示全部" : "只看盲区点";
+      renderLog();
+    };
+    const canvasWrap = document.getElementById("canvas-wrap");
+    document.querySelectorAll("[data-fullscreen]").forEach(btn => {
+      btn.onclick = () => {
+        const mode = btn.dataset.fullscreen === "poly-panel" ? "focus-poly" : "focus-diagnosis";
+        if (!document.fullscreenElement) {
+          canvasWrap.classList.remove("focus-poly", "focus-diagnosis");
+          canvasWrap.classList.add(mode);
+          canvasWrap.requestFullscreen?.();
+        } else {
+          if (canvasWrap.classList.contains(mode)) {
+            document.exitFullscreen?.();
+          } else {
+            canvasWrap.classList.remove("focus-poly", "focus-diagnosis");
+            canvasWrap.classList.add(mode);
+            setTimeout(render, 80);
+          }
+        }
+      };
+    });
+    document.addEventListener("fullscreenchange", () => {
+      if (!document.fullscreenElement) {
+        canvasWrap.classList.remove("focus-poly", "focus-diagnosis");
+      }
+      setTimeout(render, 80);
+    });
+    document.getElementById("export-log").onclick = () => {
+      const header = "time_s,target,risk,ttc_s,event,phase,source,x_m,y_m,true_contact_time_s,lead_s,first_PolyA_s,first_PolyI_s,contact_phase,tolerance_m,warmup_ignore_s";
+      const lines = logRows.map(r => [r.time_s,r.target,r.risk,r.ttc_s,r.event,r.phase,r.source,r.x_m,r.y_m,r.true_contact_time_s,r.lead_s,r.first_PolyA_s,r.first_PolyI_s,r.contact_phase,r.tolerance_m,r.warmup_ignore_s].map(v => Number.isFinite(v) ? Number(v).toFixed(3) : (v ?? "")).join(","));
+      const csv = header + "\n" + lines.join("\n");
+      saveCsv("logs", `turn_blindspot_boundary_log_${timestampForFile()}.csv`, csv);
+    };
+    document.getElementById("export-targets").onclick = () => {
+      const header = "target,x_m,y_m,true_contact_time_s,true_contact_idx,contact_phase";
+      const lines = targets.map(t => [
+        t.name,
+        t.x.toFixed(6),
+        t.y.toFixed(6),
+        data.time_s[t.trueContactIdx].toFixed(6),
+        t.trueContactIdx + 1,
+        PHASE_NAMES[phase[t.trueContactIdx]]
+      ].join(","));
+      const csv = header + "\n" + lines.join("\n");
+      saveCsv("targets", `turn_blindspot_boundary_targets_${timestampForFile()}.csv`, csv);
+    };
+
+    function timestampForFile() {
+      return new Date().toISOString().replace(/[:.]/g, "-");
+    }
+
+    async function saveCsv(kind, filename, csv) {
+      if (window.blindspotApp?.saveCsv) {
+        try {
+          const filePath = await window.blindspotApp.saveCsv(kind, filename, csv);
+          document.getElementById("load-status").textContent = `已保存: ${filePath}`;
+          return;
+        } catch (err) {
+          document.getElementById("load-status").textContent = `固定目录保存失败，改为浏览器下载: ${err.message}`;
+        }
+      }
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([csv], {type:"text/csv;charset=utf-8"}));
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+    window.onresize = render;
+    resetPlayback();
+  </script>
+</body>
+</html>

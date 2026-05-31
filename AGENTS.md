@@ -307,6 +307,60 @@ Risk_i = max:
 Risk_total = max_i Risk_i
 ```
 
+### Turn Whole-Process Blindspot Analysis Tool
+
+`转弯全过程盲区分析软件/` is a desktop/HTML analysis tool derived from the former turn-exit timing tester. It is used to find right-turn swept-boundary points where the online PolyW warning happens without enough reaction time.
+
+In this tool, "blindspot" is a temporal safety definition, not merely a static visual occlusion:
+
+```text
+lead_W = true_contact_time_s - first_PolyW_s
+if lead_W < reaction_threshold_s:
+    event = BLINDSPOT_REACTION_INSUFFICIENT
+```
+
+Rules to preserve:
+- Boundary target points are offline test targets. They may be generated along the whole true swept boundary or imported from a fixed target CSV.
+- The warning calculation must still use only the current-frame online predictor `(v, alpha, phi) -> PolyW/A/I`; do not use future ground truth for online warning.
+- Default analysis keeps EXIT expansion and safety inflation disabled, so it exposes the raw alpha-hold Poly behavior over entry, mid-turn, and exit.
+- Use `tolerance_m = 0.05` by default because generated points lie on polygon boundaries.
+- Points with `t < 2.0 s` are labeled `STARTUP_TRUNCATED`, since the simulation lacks pre-start historical prediction windows.
+
+Fixed desktop export folders:
+
+```text
+转弯全过程盲区分析软件/目标点CSV/
+转弯全过程盲区分析软件/边界点盲区日志/
+转弯全过程盲区分析软件/logs/
+```
+
+MATLAB threshold scan:
+
+```matlab
+cd('C:/Users/Admin/Desktop/小挑资料/转弯全过程盲区分析软件')
+out = scan_ttc_threshold_blindspots();
+```
+
+Current defaults:
+
+```text
+sampling_spacing_m = 0.1
+tolerance_m = 0.05
+max_boundary_points = 2000
+warmup_ignore_s = 2.0
+thresholds_s = 0.1:0.1:3.0
+T_h_W = 2.0
+dt_pred = 0.02
+```
+
+Threshold overlay color convention: smaller critical thresholds are red/orange and higher-only thresholds are blue/purple. Filtered overlays are generated with:
+
+```matlab
+out = plot_threshold_filtered_blindspots(scan_dir, [2.0 1.5 1.0]);
+```
+
+This creates `threshold_blindspot_overlay_le_2.0s.png`, `..._le_1.5s.png`, and `..._le_1.0s.png`. Black `x` marks `POLYW_NO_HIT`; faint gray marks `STARTUP_TRUNCATED`.
+
 ### Alarm FSM (debouncing)
 
 ```
@@ -393,7 +447,7 @@ Memory: <5 KB heap for polygons + target buffers.
 5. **Never** print all polygon vertices over Serial in main loop (diagnostics only, gated by a flag).
 6. **Never** modify kinematics on one side (MATLAB or C++) without mirror-updating the other.
 7. **Never** commit ADC raw dumps, video files, or large `.bag` to git (use cloud + link).
-8. **Never** put Chinese paths inside Windows `.bat` files using raw `cmd if exist` checks. cmd.exe defaults to GBK; a UTF-8 BAT shows as garbled bytes, a GBK BAT can't be safely edited by modern IDEs/AI tools. **Correct pattern**: keep BAT to a single line `powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0launch.ps1"` and put all path / discovery logic inside `launch.ps1` (PowerShell is Unicode-safe). See `TTC预警复盘软件/launch.ps1`.
+8. **Never** put Chinese paths inside Windows `.bat` files using raw `cmd if exist` checks. cmd.exe defaults to GBK; a UTF-8 BAT shows as garbled bytes, a GBK BAT can't be safely edited by modern IDEs/AI tools. **Correct pattern**: keep BAT to a single line `powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0launch.ps1"` and put all path / discovery logic inside `launch.ps1` (PowerShell is Unicode-safe). See `TTC预警复盘软件/launch.ps1` and `转弯全过程盲区分析软件/launch.ps1`.
 
 ---
 
