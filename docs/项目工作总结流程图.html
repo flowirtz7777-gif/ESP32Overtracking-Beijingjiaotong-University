@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>项目工作总结流程图</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --ink: #1f2937;
+      --muted: #667085;
+      --line: #cfd8e3;
+      --blue: #2f6fbb;
+      --green: #2f8f67;
+      --orange: #c97718;
+      --red: #be3b3b;
+      --purple: #7a5bb8;
+      --card: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Microsoft YaHei", "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    header {
+      padding: 28px 36px 18px;
+      background: #fff;
+      border-bottom: 1px solid #e5e9f0;
+    }
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    main {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 28px 32px 48px;
+    }
+    .summary {
+      background: #eef6ff;
+      border-left: 5px solid var(--blue);
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin-bottom: 26px;
+      font-weight: 600;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(240px, 1fr));
+      gap: 22px;
+      align-items: start;
+    }
+    .lane {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .lane-title {
+      font-size: 16px;
+      font-weight: 700;
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: #fff;
+      text-align: center;
+    }
+    .lane.model .lane-title { background: var(--blue); }
+    .lane.problem .lane-title { background: var(--orange); }
+    .lane.tool .lane-title { background: var(--green); }
+    .lane.unify .lane-title { background: var(--purple); }
+    .node {
+      position: relative;
+      background: var(--card);
+      border: 1px solid #d9e1ec;
+      border-radius: 8px;
+      padding: 13px 14px;
+      box-shadow: 0 8px 22px rgba(29, 45, 68, 0.07);
+      min-height: 92px;
+    }
+    .node::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -15px;
+      width: 2px;
+      height: 15px;
+      background: var(--line);
+    }
+    .node:last-child::after { display: none; }
+    .node h2 {
+      margin: 0 0 6px;
+      font-size: 16px;
+      line-height: 1.35;
+    }
+    .node p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .tag {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: #edf2f7;
+      color: #46566d;
+      font-size: 12px;
+      font-family: Consolas, "Microsoft YaHei", monospace;
+    }
+    .cause {
+      margin: 24px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+    }
+    .cause-card {
+      background: #fff;
+      border: 1px solid #dde5ef;
+      border-radius: 8px;
+      padding: 15px;
+    }
+    .cause-card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+    .arrow {
+      color: var(--blue);
+      font-weight: 700;
+    }
+    .foot {
+      margin-top: 28px;
+      padding: 16px 18px;
+      background: #fff7ed;
+      border-left: 5px solid var(--orange);
+      border-radius: 8px;
+      color: #5f3b13;
+    }
+    @media (max-width: 1100px) {
+      .flow { grid-template-columns: repeat(2, minmax(260px, 1fr)); }
+      .cause { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      header { padding: 22px 18px 14px; }
+      main { padding: 20px 16px 36px; }
+      .flow { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>半挂车右转盲区预警项目工作总结流程图</h1>
+    <div class="subtitle">按“问题发现 → 工具建设 → 算法统一 → 当前成果”的因果顺序整理</div>
+  </header>
+
+  <main>
+    <div class="summary">
+      一句话总结：本项目已经从“能预测半挂车右转扫掠区”推进到“能用统一 CFG 策略和 segment_swept 裁判，系统评估右转全过程中报警提前量不足的盲区点分布”。
+    </div>
+
+    <section class="flow">
+      <div class="lane model">
+        <div class="lane-title">一、主模型建立</div>
+        <div class="node">
+          <h2>项目目标确定</h2>
+          <p>面向半挂车右转内轮差风险，识别行人/非机动车进入挂车右侧扫掠危险区的情况。</p>
+          <span class="tag">right-turn blind zone</span>
+        </div>
+        <div class="node">
+          <h2>建模定位</h2>
+          <p>将项目定义为短时风险预测问题，而不是车辆控制或长期驾驶意图识别问题。</p>
+          <span class="tag">short-horizon prediction</span>
+        </div>
+        <div class="node">
+          <h2>半挂车运动学</h2>
+          <p>基于实时 v、alpha、phi 推演 B/H/T 等关键点，保留 l_h * omega1 耦合项。</p>
+          <span class="tag">kinematics_step</span>
+        </div>
+        <div class="node">
+          <h2>三层预测区</h2>
+          <p>构造 PolyW / PolyA / PolyI，对应预警、报警、立即危险三个时间尺度。</p>
+          <span class="tag">PolyW / PolyA / PolyI</span>
+        </div>
+      </div>
+
+      <div class="lane problem">
+        <div class="lane-title">二、问题发现</div>
+        <div class="node">
+          <h2>PID 工况导出</h2>
+          <p>用 PID 工况仿真导出器生成可控 CSV，作为没有实车时的虚拟传感器输入。</p>
+          <span class="tag">v(t), alpha(t), phi(t)</span>
+        </div>
+        <div class="node">
+          <h2>Phase 1 验证链</h2>
+          <p>CSV 回放、MATLAB 重算、扫掠区预测、真值轨迹对比，形成早期闭环验证。</p>
+          <span class="tag">CSV replay</span>
+        </div>
+        <div class="node">
+          <h2>R3 晚报暴露</h2>
+          <p>R3 位于出弯边缘，首次 Poly 报警偏晚，提示出弯阶段预测窗口可能不足。</p>
+          <span class="tag">R3 late warning</span>
+        </div>
+        <div class="node">
+          <h2>TTC 复盘定位</h2>
+          <p>TTC 用于后验真实接触和提前量复盘，不替代在线 Poly 预测判警。</p>
+          <span class="tag">true-TTC replay</span>
+        </div>
+      </div>
+
+      <div class="lane tool">
+        <div class="lane-title">三、工具链扩展</div>
+        <div class="node">
+          <h2>出弯状态机</h2>
+          <p>针对正交路口，使用累计航向角、alpha 回正、phi 滞后判断 ENTRY / MID / EXIT。</p>
+          <span class="tag">EXIT phase</span>
+        </div>
+        <div class="node">
+          <h2>全过程盲区分析</h2>
+          <p>将问题从 R3 出弯扩展到入弯、弯中、出弯全过程的时间盲区分析。</p>
+          <span class="tag">lead_W &lt; threshold</span>
+        </div>
+        <div class="node">
+          <h2>边界点与日志</h2>
+          <p>沿真实扫掠边界生成目标点，记录 first_PolyW、true_contact_time、lead_W 和事件类型。</p>
+          <span class="tag">boundary targets</span>
+        </div>
+        <div class="node">
+          <h2>阈值扫描</h2>
+          <p>用 MATLAB 扫描 0.1 到 3.0 秒反应时间阈值，生成盲区点分布与叠加图。</p>
+          <span class="tag">threshold scan</span>
+        </div>
+      </div>
+
+      <div class="lane unify">
+        <div class="lane-title">四、算法统一</div>
+        <div class="node">
+          <h2>CFG 策略系统</h2>
+          <p>用 JSON 统一状态机阈值与 default / EXIT 阶段预测窗口，支持导入、导出和配置生成器。</p>
+          <span class="tag">strategy CFG</span>
+        </div>
+        <div class="node">
+          <h2>扩窗非单调问题</h2>
+          <p>发现长窗口大 Poly 可能自交退化，导致 3s 扩窗反而漏掉 2s 已覆盖点。</p>
+          <span class="tag">large Poly issue</span>
+        </div>
+        <div class="node">
+          <h2>segment_swept 裁判</h2>
+          <p>改为按相邻预测步右沿形成的小四边形逐段判内，保证扩窗只增加后续扫掠段。</p>
+          <span class="tag">segment_swept</span>
+        </div>
+        <div class="node">
+          <h2>统一与标记</h2>
+          <p>网页、MATLAB 校验、阈值扫描、正交路口 demo 统计命中统一；TTC 保持后验复盘定位。</p>
+          <span class="tag">single judging logic</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cause">
+      <div class="cause-card">
+        <h3>关键因果链 1</h3>
+        <p>R3 出弯晚报 <span class="arrow">→</span> 讨论出弯识别 <span class="arrow">→</span> 引入正交路口状态机 <span class="arrow">→</span> 形成 EXIT 扩窗策略。</p>
+      </div>
+      <div class="cause-card">
+        <h3>关键因果链 2</h3>
+        <p>全过程存在反应不足点 <span class="arrow">→</span> 建立盲区分析软件 <span class="arrow">→</span> 生成边界点 <span class="arrow">→</span> 阈值扫描分布规律。</p>
+      </div>
+      <div class="cause-card">
+        <h3>关键因果链 3</h3>
+        <p>扩窗结果不稳定 <span class="arrow">→</span> 发现大 Poly 自交问题 <span class="arrow">→</span> 改用 segment_swept <span class="arrow">→</span> 统一裁判口径。</p>
+      </div>
+    </section>
+
+    <div class="foot">
+      当前边界：TTC 软件不参与 CFG 扩窗裁判；MATLAB 正交路口图暂时仍画 Poly 形状参考；权威统计结果以 segment_swept 日志和阈值扫描为准。
+    </div>
+  </main>
+</body>
+</html>

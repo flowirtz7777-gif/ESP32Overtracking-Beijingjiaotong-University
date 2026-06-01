@@ -1,8 +1,10 @@
-function out = run_phase1_demo(csv_path)
+function out = run_phase1_demo(csv_path, target_csv_path)
 %RUN_PHASE1_DEMO  Phase 1 验证主入口：CSV → 运动学回放 → 三层扫掠预测 → 误差报告。
 %
 %   out = run_phase1_demo()              % 弹文件选择框
 %   out = run_phase1_demo(csv_path)      % 直接加载指定 CSV
+%   out = run_phase1_demo(csv_path, target_csv_path)
+%                                      % 使用固定目标集 CSV
 %
 %   时间尺度（与 CLAUDE.md / AGENTS.md 一致）：
 %     T_h_W = 2.0 s     PolyW  黄色警告     最远预测窗口
@@ -36,6 +38,9 @@ function out = run_phase1_demo(csv_path)
         scenario = load_pid_scenario();
     else
         scenario = load_pid_scenario(csv_path);
+    end
+    if nargin < 2
+        target_csv_path = '';
     end
 
     p = vehicle_params(scenario.params);
@@ -173,9 +178,18 @@ function out = run_phase1_demo(csv_path)
     color_I = [0.95 0.20 0.20];   % 红
     color_body = [0.35 0.35 0.35]; % 当前挂车车身占用区
 
-    % 雷达目标（车体右后方常见盲区，固定随机种子让结果可复现）
-    rng(42);
-    radar_targets = make_demo_targets(truth, keyframes(end), p, keyframes);
+    % 雷达目标：若传入固定目标集 CSV，则使用 CSV；否则保持原 demo 自动目标。
+    if isempty(target_csv_path)
+        rng(42);
+        radar_targets = make_demo_targets(truth, keyframes(end), p, keyframes);
+        target_source = "auto_demo_targets";
+        fprintf('[PHASE-1] 使用自动 demo 目标点 (N=%d)\n', size(radar_targets, 1));
+    else
+        target_csv_path = local_resolve_target_csv(target_csv_path);
+        radar_targets = load_target_set(target_csv_path);
+        target_source = string(target_csv_path);
+        fprintf('[PHASE-1] 使用固定目标集 CSV: %s  (N=%d)\n', char(target_csv_path), size(radar_targets, 1));
+    end
     n_targets = size(radar_targets, 1);
 
     % 对每个目标 × 每个关键帧 × 每一层，做判内标记
@@ -362,6 +376,7 @@ function out = run_phase1_demo(csv_path)
     out.polys      = polys;
     out.keyframes  = keyframes;
     out.targets    = radar_targets;
+    out.target_source = target_source;
     out.target_risk = risk;
     out.pass_gate  = pass_gate;
     out.figures    = [fig1 fig2 fig3];
@@ -376,7 +391,7 @@ function out = run_phase1_demo(csv_path)
 
     % 写 summary.txt
     local_write_summary(run_dir, scenario, p, horizons, dt_pred, ...
-                        err_max, err_rms, pass_gate, keyframes, v_avg);
+                        err_max, err_rms, pass_gate, keyframes, v_avg, target_source, n_targets);
 
     fprintf('\n[PHASE-1] 演示完成。\n');
     fprintf('          三幅图与 summary.txt 已保存到:\n');
@@ -397,6 +412,75 @@ function body_poly = make_current_trailer_body(s, p)
     H_left  = d.H + half_w * left_normal;
 
     body_poly = [H_right; T_right; T_left; H_left; H_right];
+end
+
+
+function target_csv_path = local_resolve_target_csv(target_csv_path)
+%LOCAL_RESOLVE_TARGET_CSV  支持绝对路径或本目录 targets/ 下的文件名。
+    target_csv_path = string(target_csv_path);
+    if strlength(target_csv_path) == 0
+        target_csv_path = local_pick_target_csv();
+        return;
+    end
+
+    pth = char(target_csv_path);
+    if exist(pth, 'file')
+        target_csv_path = string(pth);
+        return;
+    end
+
+    this_dir = fileparts(mfilename('fullpath'));
+    candidate = fullfile(this_dir, 'targets', pth);
+    if exist(candidate, 'file')
+        target_csv_path = string(candidate);
+        return;
+    end
+
+    error('run_phase1_demo:TargetCsvNotFound', '未找到目标集 CSV: %s', pth);
+end
+
+
+function target_csv_path = local_pick_target_csv()
+%LOCAL_PICK_TARGET_CSV  弹窗选择固定目标集 CSV。
+    this_dir = fileparts(mfilename('fullpath'));
+    target_dir = fullfile(this_dir, 'targets');
+    if ~exist(target_dir, 'dir')
+        mkdir(target_dir);
+    end
+    [fn, fp] = uigetfile({'*.csv','Target CSV (*.csv)'}, ...
+        '选择固定目标集 CSV', target_dir);
+    if isequal(fn, 0)
+        target_csv_path = "";
+    else
+        target_csv_path = string(fullfile(fp, fn));
+    end
+end
+
+
+function targets = load_target_set(target_csv_path)
+%LOAD_TARGET_SET  读取固定目标集 CSV，支持 x/y、x_m/y_m、target_x_m/target_y_m。
+    tbl = readtable(target_csv_path, 'TextType', 'string');
+    names = string(tbl.Properties.VariableNames);
+    candidates = [
+        "x", "y";
+        "x_m", "y_m";
+        "target_x_m", "target_y_m"
+    ];
+    for i = 1:size(candidates, 1)
+        ix = find(strcmpi(names, candidates(i, 1)), 1);
+        iy = find(strcmpi(names, candidates(i, 2)), 1);
+        if ~isempty(ix) && ~isempty(iy)
+            targets = [tbl{:, ix}, tbl{:, iy}];
+            targets = double(targets);
+            targets = targets(all(isfinite(targets), 2), :);
+            if isempty(targets)
+                error('run_phase1_demo:EmptyTargetCsv', '目标集 CSV 中没有有效坐标。');
+            end
+            return;
+        end
+    end
+    error('run_phase1_demo:BadTargetCsv', ...
+        '目标集 CSV 需要包含 x,y 或 x_m,y_m 或 target_x_m,target_y_m 列。');
 end
 
 
@@ -501,7 +585,7 @@ end
 
 
 function local_write_summary(run_dir, scenario, p, horizons, dt_pred, ...
-                              err_max, err_rms, pass_gate, keyframes, v_avg)
+                              err_max, err_rms, pass_gate, keyframes, v_avg, target_source, n_targets)
 %LOCAL_WRITE_SUMMARY  把本次测试的关键数据写成可读的 summary.txt
     fid = fopen(fullfile(run_dir, 'summary.txt'), 'w', 'n', 'UTF-8');
     if fid < 0, return; end
@@ -517,6 +601,8 @@ function local_write_summary(run_dir, scenario, p, horizons, dt_pred, ...
     fprintf(fid, 'CSV dt          : %.4f s\n', scenario.dt_s);
     fprintf(fid, '总时长          : %.2f s\n', scenario.summary.duration_s);
     fprintf(fid, '平均车速        : %.2f m/s (%.1f km/h)\n', v_avg, v_avg*3.6);
+    fprintf(fid, '目标点来源      : %s\n', char(target_source));
+    fprintf(fid, '目标点数量      : %d\n', n_targets);
     fprintf(fid, '\n');
 
     fprintf(fid, '---- 车型参数 ----\n');
