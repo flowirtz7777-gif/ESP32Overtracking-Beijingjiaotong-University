@@ -1,7 +1,8 @@
-function phase = orthogonal_turn_phase(theta, alpha, phi, dt)
+function phase = orthogonal_turn_phase(theta, alpha, phi, dt, state_machine)
 %ORTHOGONAL_TURN_PHASE  正交路口转弯阶段识别（离线复盘版，因果量）。
 %
 %   phase = orthogonal_turn_phase(theta, alpha, phi, dt)
+%   phase = orthogonal_turn_phase(theta, alpha, phi, dt, state_machine)
 %
 %   输出 phase:
 %     0 = IDLE / 尚未进入有效转弯
@@ -19,16 +20,25 @@ function phase = orthogonal_turn_phase(theta, alpha, phi, dt)
     phase = zeros(N, 1);
     if N == 0, return; end
 
-    alpha_start_th = deg2rad(2.0);
-    alpha_done_th  = deg2rad(1.0);
-    phi_done_th    = deg2rad(2.0);
-    exit_heading_th = deg2rad(75.0);
-    done_heading_th = deg2rad(88.0);
-    phi_lag_th      = deg2rad(3.0);
+    if nargin < 5 || isempty(state_machine)
+        state_machine = struct();
+    end
 
-    enter_count_need = 2;
-    exit_count_need  = 3;
-    done_count_need  = 10;
+    alpha_start_th = deg2rad(local_field(state_machine, 'alpha_start_deg', 2.0));
+    alpha_done_th  = deg2rad(local_field(state_machine, 'done_alpha_abs_deg_max', 1.0));
+    phi_done_th    = deg2rad(local_field(state_machine, 'done_phi_abs_deg_max', 2.0));
+    mid_heading_th = deg2rad(local_field(state_machine, 'mid_heading_delta_deg', 25.0));
+    exit_heading_th = deg2rad(local_field(state_machine, 'exit_heading_delta_deg_min', 75.0));
+    done_heading_th = deg2rad(local_field(state_machine, 'done_heading_delta_deg_min', 88.0));
+    phi_lag_th      = deg2rad(local_field(state_machine, 'exit_phi_abs_deg_min', 4.0));
+    require_alpha_returning = logical(local_field(state_machine, 'exit_require_alpha_returning', true));
+
+    enter_count_need = round(local_field(state_machine, 'enter_hold_frames', 2));
+    exit_count_need  = round(local_field(state_machine, 'exit_hold_frames', 2));
+    done_count_need  = round(local_field(state_machine, 'done_hold_frames', 10));
+    enter_count_need = max(1, enter_count_need);
+    exit_count_need = max(1, exit_count_need);
+    done_count_need = max(1, done_count_need);
 
     state = 0;
     theta_start = theta(1);
@@ -62,7 +72,7 @@ function phase = orthogonal_turn_phase(theta, alpha, phi, dt)
 
             case 1  % ENTRY
                 delta_heading = turn_sign * (theta_unwrap(k) - theta_start);
-                if delta_heading >= deg2rad(25)
+                if delta_heading >= mid_heading_th
                     state = 2;
                 end
 
@@ -71,7 +81,7 @@ function phase = orthogonal_turn_phase(theta, alpha, phi, dt)
                 alpha_returning = (a * alpha_dot(k) < 0) && abs(a) > alpha_done_th;
                 trailer_lagging = abs(ph) >= phi_lag_th;
                 exit_candidate = (delta_heading >= exit_heading_th) && ...
-                                 (trailer_lagging || alpha_returning);
+                                 ((require_alpha_returning && alpha_returning) || trailer_lagging || ~require_alpha_returning);
                 if exit_candidate
                     exit_count = exit_count + 1;
                 else
@@ -101,5 +111,14 @@ function phase = orthogonal_turn_phase(theta, alpha, phi, dt)
         end
 
         phase(k) = state;
+    end
+end
+
+
+function value = local_field(s, name, default_value)
+    if isfield(s, name) && ~isempty(s.(name))
+        value = s.(name);
+    else
+        value = default_value;
     end
 end

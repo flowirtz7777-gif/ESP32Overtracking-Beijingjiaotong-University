@@ -1,16 +1,18 @@
-function out = run_phase1_demo(csv_path, target_csv_path)
+function out = run_phase1_demo(csv_path, target_csv_path, strategy_cfg_json)
 %RUN_PHASE1_DEMO  Phase 1 验证主入口：CSV → 运动学回放 → 三层扫掠预测 → 误差报告。
 %
 %   out = run_phase1_demo()              % 弹文件选择框
 %   out = run_phase1_demo(csv_path)      % 直接加载指定 CSV
 %   out = run_phase1_demo(csv_path, target_csv_path)
 %                                      % 使用固定目标集 CSV
+%   out = run_phase1_demo(csv_path, target_csv_path, strategy_cfg_json)
+%                                      % 使用与盲区分析软件一致的 CFG 策略
 %
 %   时间尺度（与 CLAUDE.md / AGENTS.md 一致）：
 %     T_h_W = 2.0 s     PolyW  黄色警告     最远预测窗口
 %     T_h_A = 1.0 s     PolyA  红色报警     中距
 %     T_h_I = 0.3 s     PolyI  立即危险     最近
-%     dt_pred = 0.05 s  预测内部积分步长（每个 T_h 切成 N 段）
+%     dt_pred 由 CFG strategies.*.dt_pred 定义
 %     主循环 (ESP32 端) 节拍 = 20 ms / 50 Hz （此 demo 在 MATLAB 端按等时间间隔取关键帧近似）
 %
 %   流程：
@@ -45,15 +47,23 @@ function out = run_phase1_demo(csv_path, target_csv_path)
     if nargin < 2
         target_csv_path = '';
     end
+    if nargin < 3
+        strategy_cfg_json = '';
+    end
 
-    % ---------- 时间尺度参数（集中在此） ----------
-    T_h_W   = 2.0;     % 黄色警告：未来 2 秒车身扫过区域
-    T_h_A   = 1.0;     % 红色报警：未来 1 秒
-    T_h_I   = 0.3;     % 立即危险：未来 0.3 秒
-    T_h_W_exit = 3.0;  % 出弯阶段：扩大黄色预警窗口
-    T_h_A_exit = 1.5;  % 出弯阶段：扩大报警窗口
-    T_h_I_exit = 0.5;  % 出弯阶段：小幅扩大立即危险窗口
-    dt_pred = 0.01;    % 预测内部积分步长 (s) — 与 ESP32 主循环 50 Hz 兼容
+    strategy_cfg = local_load_strategy_cfg(strategy_cfg_json);
+    default_strategy = local_strategy_for_phase(strategy_cfg, 0);
+    exit_strategy = local_strategy_for_phase(strategy_cfg, 3);
+
+    % ---------- 时间尺度参数（与 CFG 统一） ----------
+    T_h_W   = default_strategy.T_h_W;   % 黄色警告：未来车身扫过区域
+    T_h_A   = default_strategy.T_h_A;   % 红色报警
+    T_h_I   = default_strategy.T_h_I;   % 立即危险
+    T_h_W_exit = exit_strategy.T_h_W;   % 出弯阶段黄色预警窗口
+    T_h_A_exit = exit_strategy.T_h_A;   % 出弯阶段报警窗口
+    T_h_I_exit = exit_strategy.T_h_I;   % 出弯阶段立即危险窗口
+    dt_pred = default_strategy.dt_pred;
+    dt_pred_exit = exit_strategy.dt_pred;
     n_keyframes = 20;       % 全局稀疏关键帧
     exit_kf_dt_s = 0.25;    % EXIT 阶段额外密集关键帧间隔
 
@@ -62,14 +72,15 @@ function out = run_phase1_demo(csv_path, target_csv_path)
     fprintf('\n[PHASE-1] 输出归档目录: %s\n', run_dir);
     fprintf('[PHASE-1] 车型参数: l=%.2f  l_h=%.2f  L=%.2f  W=%.2f  phi_max=%.1f°\n', ...
         p.l, p.l_h, p.L, p.width, rad2deg(p.phi_max));
+    fprintf('[PHASE-1] 策略 CFG: %s\n', strategy_cfg.name);
 
     % ---------- 时间尺度解释（每次都打印一遍，避免遗忘） ----------
     fprintf('\n[PHASE-1] 时间尺度配置：\n');
     fprintf('  PolyW (黄)  T_h = %.2fs    dt_pred=%.3fs   步数=%d\n', T_h_W, dt_pred, round(T_h_W/dt_pred));
     fprintf('  PolyA (橙)  T_h = %.2fs    dt_pred=%.3fs   步数=%d\n', T_h_A, dt_pred, round(T_h_A/dt_pred));
     fprintf('  PolyI (红)  T_h = %.2fs    dt_pred=%.3fs   步数=%d\n', T_h_I, dt_pred, round(T_h_I/dt_pred));
-    fprintf('  EXIT 出弯阶段窗口: PolyW=%.2fs  PolyA=%.2fs  PolyI=%.2fs\n', ...
-        T_h_W_exit, T_h_A_exit, T_h_I_exit);
+    fprintf('  EXIT 出弯阶段窗口: PolyW=%.2fs  PolyA=%.2fs  PolyI=%.2fs  dt_pred=%.3fs\n', ...
+        T_h_W_exit, T_h_A_exit, T_h_I_exit, dt_pred_exit);
     v_avg = mean(scenario.inputs.v_mps);
     fprintf('  本工况平均车速 = %.2f m/s (%.1f km/h)\n', v_avg, v_avg*3.6);
     fprintf('  对应纵向覆盖距离: PolyW≈%.1fm  PolyA≈%.1fm  PolyI≈%.2fm\n', ...
@@ -101,7 +112,7 @@ function out = run_phase1_demo(csv_path, target_csv_path)
 
     % CSV 真值
     truth = [xB_csv, yB_csv, th_csv, phi_csv];
-    phase = orthogonal_turn_phase(th_csv, alpha, phi_csv, dt);
+    phase = orthogonal_turn_phase(th_csv, alpha, phi_csv, dt, strategy_cfg.state_machine);
     exit_idx = find(phase == 3, 1, 'first');
     if ~isempty(exit_idx)
         fprintf('[PHASE-1] 正交路口状态机: EXIT 首次触发 t=%.2fs (idx=%d)\n', t(exit_idx), exit_idx);
@@ -140,8 +151,14 @@ function out = run_phase1_demo(csv_path, target_csv_path)
     keyframes = [keyframes_sparse, keyframes_exit];
     keyframes = unique(keyframes);
 
-    horizons = struct('W', T_h_W, 'A', T_h_A, 'I', T_h_I);
-    horizons_exit = struct('W', T_h_W_exit, 'A', T_h_A_exit, 'I', T_h_I_exit);
+    horizons = struct('W', T_h_W, 'A', T_h_A, 'I', T_h_I, ...
+        'dt_pred', dt_pred, 'alpha_mode', default_strategy.alpha_mode, ...
+        'safety_expand_m', default_strategy.safety_expand_m, ...
+        'safety_expand_enabled', default_strategy.safety_expand_enabled);
+    horizons_exit = struct('W', T_h_W_exit, 'A', T_h_A_exit, 'I', T_h_I_exit, ...
+        'dt_pred', dt_pred_exit, 'alpha_mode', exit_strategy.alpha_mode, ...
+        'safety_expand_m', exit_strategy.safety_expand_m, ...
+        'safety_expand_enabled', exit_strategy.safety_expand_enabled);
     keyframe_phase = phase(keyframes);
     keyframe_horizons = repmat(horizons, 1, numel(keyframes));
     for ii = 1:numel(keyframes)
@@ -153,6 +170,9 @@ function out = run_phase1_demo(csv_path, target_csv_path)
     polys = struct('W', {cell(1, numel(keyframes))}, ...
                    'A', {cell(1, numel(keyframes))}, ...
                    'I', {cell(1, numel(keyframes))});
+    swept_edges = struct('W', {cell(1, numel(keyframes))}, ...
+                         'A', {cell(1, numel(keyframes))}, ...
+                         'I', {cell(1, numel(keyframes))});
 
     for ii = 1:numel(keyframes)
         k  = keyframes(ii);
@@ -163,9 +183,12 @@ function out = run_phase1_demo(csv_path, target_csv_path)
         % 如需启用线性外推，可改用 LPF 后的 α̇ 序列。
         alpha_dot = 0;
         h = keyframe_horizons(ii);
-        polys.W{ii} = predict_swept(s0, alpha(k), v(k), p, h.W, dt_pred, alpha_dot);
-        polys.A{ii} = predict_swept(s0, alpha(k), v(k), p, h.A, dt_pred, alpha_dot);
-        polys.I{ii} = predict_swept(s0, alpha(k), v(k), p, h.I, dt_pred, alpha_dot);
+        polys.W{ii} = predict_swept(s0, alpha(k), v(k), p, h.W, h.dt_pred, alpha_dot);
+        polys.A{ii} = predict_swept(s0, alpha(k), v(k), p, h.A, h.dt_pred, alpha_dot);
+        polys.I{ii} = predict_swept(s0, alpha(k), v(k), p, h.I, h.dt_pred, alpha_dot);
+        swept_edges.W{ii} = local_predict_right_edge_sequence(s0, alpha(k), v(k), p, h.W, h.dt_pred);
+        swept_edges.A{ii} = local_predict_right_edge_sequence(s0, alpha(k), v(k), p, h.A, h.dt_pred);
+        swept_edges.I{ii} = local_predict_right_edge_sequence(s0, alpha(k), v(k), p, h.I, h.dt_pred);
 
         % 预留：出弯阶段安全膨胀接口。当前暂不启用，避免同时改变时间窗和空间边界。
         % if keyframe_phase(ii) == 3
@@ -223,15 +246,18 @@ function out = run_phase1_demo(csv_path, target_csv_path)
     fprintf('[PHASE-1] 使用固定目标集 CSV: %s  (N=%d)\n', char(target_csv_path), size(radar_targets,1));
     n_targets = size(radar_targets, 1);
 
-    % 对每个目标 × 每个关键帧 × 每一层，做判内标记
+    % 对每个目标 × 每个关键帧 × 每一层，做判内标记。
+    % 统计命中使用 segment_swept，与转弯全过程盲区分析软件一致；
+    % polys.W/A/I 只保留为可视化参考。
     % hits(j,ii,tier)  : 目标 j 是否被关键帧 ii 的 tier 抓到
     %   tier: 1=I, 2=A, 3=W (从最严重到最缓和)
     hits = false(n_targets, numel(keyframes), 3);
     hits_body = false(n_targets, numel(keyframes));
+    hit_tolerance_m = 0.05;
     for ii = 1:numel(keyframes)
-        in_I = point_in_poly(radar_targets(:,1), radar_targets(:,2), polys.I{ii});
-        in_A = point_in_poly(radar_targets(:,1), radar_targets(:,2), polys.A{ii});
-        in_W = point_in_poly(radar_targets(:,1), radar_targets(:,2), polys.W{ii});
+        in_I = local_points_in_swept_segments_tol(radar_targets, swept_edges.I{ii}, hit_tolerance_m);
+        in_A = local_points_in_swept_segments_tol(radar_targets, swept_edges.A{ii}, hit_tolerance_m);
+        in_W = local_points_in_swept_segments_tol(radar_targets, swept_edges.W{ii}, hit_tolerance_m);
         % 兜底判定：若目标已经落在当前挂车矩形占用区内，说明右外缘
         % 已经扫过该点；此时不能只依赖"未来外缘扫掠带"。
         body_now = make_current_trailer_body(truth(keyframes(ii), :), p);
@@ -311,6 +337,10 @@ function out = run_phase1_demo(csv_path, target_csv_path)
         n_hit_W = numel(hit_frames_W);
         n_total_frames = numel(keyframes);
 
+        % MATLAB 绘图暂不切换到 segment_swept 小四边形显示：
+        % 这里仍画 predict_swept 生成的大 Poly，作为形状参考。
+        % 统计命中 / 日志 / 风险等级已在上方使用 segment_swept。
+        % 若后续需要与网页显示完全一致，再增加显示模式开关。
         % 画 PolyW (最远，先画最底层) — 第一个保留 handle 给 legend
         h_W_legend = []; h_A_legend = []; h_I_legend = []; h_body_legend = [];
         for ii = hit_frames_W
@@ -388,18 +418,23 @@ function out = run_phase1_demo(csv_path, target_csv_path)
     out.error_max  = err_max;
     out.error_rms  = err_rms;
     out.polys      = polys;
+    out.swept_edges = swept_edges;
     out.keyframes  = keyframes;
     out.targets    = radar_targets;
     out.target_risk = risk;
     out.phase      = phase;
     out.keyframe_phase = keyframe_phase;
     out.horizons_exit = horizons_exit;
+    out.strategy_cfg = strategy_cfg;
     out.hits = hits;
     out.hits_body = hits_body;
     out.pass_gate  = pass_gate;
     out.figures    = [fig1 fig2 fig3];
     out.horizons   = horizons;
     out.dt_pred    = dt_pred;
+    out.dt_pred_exit = dt_pred_exit;
+    out.hit_method = "segment_swept";
+    out.hit_tolerance_m = hit_tolerance_m;
     out.run_dir    = run_dir;
 
     % 保存三幅图
@@ -408,12 +443,12 @@ function out = run_phase1_demo(csv_path, target_csv_path)
     saveas(fig3, fullfile(run_dir, '03_swept_polygons.png'));
 
     hit_log = local_write_hit_log(run_dir, radar_targets, t, truth, p, ...
-                                  keyframes, phase, keyframe_phase, hits, hits_body);
+                                  keyframes, phase, keyframe_phase, keyframe_horizons, hits, hits_body, strategy_cfg, hit_tolerance_m);
     out.hit_log = hit_log;
 
     % 写 summary.txt
-    local_write_summary(run_dir, scenario, p, horizons, horizons_exit, dt_pred, ...
-                        err_max, err_rms, pass_gate, keyframes, v_avg, phase, t);
+    local_write_summary(run_dir, scenario, p, horizons, horizons_exit, ...
+                        err_max, err_rms, pass_gate, keyframes, v_avg, phase, t, strategy_cfg, hit_tolerance_m);
 
     fprintf('\n[PHASE-1] 演示完成。\n');
     fprintf('          三幅图与 summary.txt 已保存到:\n');
@@ -463,11 +498,11 @@ end
 
 
 function hit_log = local_write_hit_log(run_dir, targets, t, truth, p, ...
-                                       keyframes, phase, keyframe_phase, hits, hits_body)
+                                       keyframes, phase, keyframe_phase, keyframe_horizons, hits, hits_body, strategy_cfg, hit_tolerance_m)
 %LOCAL_WRITE_HIT_LOG  写出 TTC 风格的逐事件命中日志与实际接触时间。
     n_targets = size(targets, 1);
     hit_log = struct();
-    rows = cell(0, 15);
+    rows = cell(0, 25);
 
     for j = 1:n_targets
         target_name = sprintf('R%d', j);
@@ -497,12 +532,12 @@ function hit_log = local_write_hit_log(run_dir, targets, t, truth, p, ...
         if isnan(t_body_true)
             rows(end+1,:) = {NaN, target_name, 0, NaN, 'NO_CONTACT', '', ...
                 'BodyNow_truth', targets(j,1), targets(j,2), t_body_true, NaN, ...
-                false, false, false, false}; %#ok<AGROW>
+                false, false, false, false, 'truth_body', strategy_cfg.name, NaN, NaN, NaN, NaN, '', 0, false, hit_tolerance_m}; %#ok<AGROW>
         else
             k_contact = local_nearest_time_index(t, t_body_true);
             rows(end+1,:) = {t_body_true, target_name, 3, 0, 'TRUE_CONTACT', ...
                 phase_name(phase(k_contact)), 'BodyNow_truth', targets(j,1), targets(j,2), ...
-                t_body_true, 0, false, false, false, true}; %#ok<AGROW>
+                t_body_true, 0, false, false, false, true, 'truth_body', strategy_cfg.name, NaN, NaN, NaN, NaN, '', 0, false, hit_tolerance_m}; %#ok<AGROW>
         end
 
         first_events = { ...
@@ -519,16 +554,18 @@ function hit_log = local_write_hit_log(run_dir, targets, t, truth, p, ...
             if isempty(idx)
                 rows(end+1,:) = {NaN, target_name, 0, NaN, miss_event, '', source, ...
                     targets(j,1), targets(j,2), t_body_true, NaN, ...
-                    false, false, false, false}; %#ok<AGROW>
+                    false, false, false, false, 'segment_swept', strategy_cfg.name, NaN, NaN, NaN, NaN, '', 0, false, hit_tolerance_m}; %#ok<AGROW>
             else
                 k = keyframes(idx);
+                h = keyframe_horizons(idx);
                 t_hit = t(k);
                 lead_s = local_lead(t_body_true, t_hit);
                 rows(end+1,:) = {t_hit, target_name, risk_level, lead_s, hit_event, ...
                     phase_name(keyframe_phase(idx)), source, targets(j,1), targets(j,2), ...
                     t_body_true, lead_s, ...
                     strcmp(source, 'PolyW'), strcmp(source, 'PolyA'), strcmp(source, 'PolyI'), ...
-                    strcmp(source, 'BodyNow_keyframe')}; %#ok<AGROW>
+                    strcmp(source, 'BodyNow_keyframe'), 'segment_swept', strategy_cfg.name, ...
+                    h.W, h.A, h.I, h.dt_pred, h.alpha_mode, h.safety_expand_m, h.safety_expand_enabled, hit_tolerance_m}; %#ok<AGROW>
             end
         end
 
@@ -543,9 +580,12 @@ function hit_log = local_write_hit_log(run_dir, targets, t, truth, p, ...
             source = local_source_from_hits(hit_W, hit_A, hit_I, hit_B);
             t_hit = t(keyframes(ii));
             lead_s = local_lead(t_body_true, t_hit);
+            h = keyframe_horizons(ii);
             rows(end+1,:) = {t_hit, target_name, risk_level, lead_s, 'FRAME_HIT', ...
                 phase_name(keyframe_phase(ii)), source, targets(j,1), targets(j,2), ...
-                t_body_true, lead_s, hit_W, hit_A, hit_I, hit_B}; %#ok<AGROW>
+                t_body_true, lead_s, hit_W, hit_A, hit_I, hit_B, ...
+                'segment_swept', strategy_cfg.name, h.W, h.A, h.I, h.dt_pred, h.alpha_mode, ...
+                h.safety_expand_m, h.safety_expand_enabled, hit_tolerance_m}; %#ok<AGROW>
         end
     end
 
@@ -557,7 +597,9 @@ function hit_log = local_write_hit_log(run_dir, targets, t, truth, p, ...
     tbl = cell2table(rows, 'VariableNames', { ...
         'time_s','target','risk','ttc_s','event','phase','source', ...
         'x_m','y_m','true_contact_time_s','lead_s', ...
-        'hit_PolyW','hit_PolyA','hit_PolyI','hit_BodyNow_keyframe'});
+        'hit_PolyW','hit_PolyA','hit_PolyI','hit_BodyNow_keyframe', ...
+        'hit_method','cfg_name','T_h_W_s','T_h_A_s','T_h_I_s','dt_pred_s', ...
+        'alpha_mode','safety_expand_m','safety_expand_enabled','tolerance_m'});
     writetable(tbl, fullfile(run_dir, '04_hit_log.csv'), 'Encoding', 'UTF-8');
 end
 
@@ -629,11 +671,86 @@ function t_contact = local_first_body_contact_time(target, t, truth, p)
     t_contact = NaN;
     for k = 1:numel(t)
         body_now = make_current_trailer_body(truth(k,:), p);
-        if point_in_poly(target(1), target(2), body_now)
+        if local_point_in_poly_tol(target, body_now, 0.05)
             t_contact = t(k);
             return;
         end
     end
+end
+
+
+function edge_seq = local_predict_right_edge_sequence(s0, alpha_now, v_now, p, T_h, dt_pred)
+%LOCAL_PREDICT_RIGHT_EDGE_SEQUENCE  预测挂车右沿 H/T 序列，用于 segment_swept 判定。
+    M = max(1, floor(T_h / dt_pred));
+    s = s0(:);
+    edge_seq = struct('H', cell(M+1, 1), 'T', cell(M+1, 1));
+    half_w = 0.5 * p.width;
+    for i = 1:(M+1)
+        d = derive_points(s, p);
+        right_normal = [sin(d.theta_t), -cos(d.theta_t)];
+        edge_seq(i).H = d.H + half_w * right_normal;
+        edge_seq(i).T = d.T + half_w * right_normal;
+        if i <= M
+            s = kinematics_step(s, alpha_now, v_now, p, dt_pred);
+        end
+    end
+end
+
+
+function inside = local_points_in_swept_segments_tol(points, edge_seq, tolerance_m)
+%LOCAL_POINTS_IN_SWEPT_SEGMENTS_TOL  与盲区分析软件一致的逐段扫掠判定。
+    inside = false(size(points, 1), 1);
+    if numel(edge_seq) < 2 || isempty(points)
+        return;
+    end
+    for i = 1:(numel(edge_seq)-1)
+        pending = find(~inside);
+        if isempty(pending), break; end
+        quad = [edge_seq(i).H; edge_seq(i+1).H; edge_seq(i+1).T; edge_seq(i).T; edge_seq(i).H];
+        inside(pending) = local_points_in_poly_tol(points(pending, :), quad, tolerance_m);
+    end
+end
+
+
+function inside = local_points_in_poly_tol(points, poly, tolerance_m)
+    inside = point_in_poly(points(:,1), points(:,2), poly);
+    if tolerance_m <= 0 || all(inside)
+        return;
+    end
+
+    if isequal(poly(1,:), poly(end,:))
+        poly2 = poly(1:end-1, :);
+    else
+        poly2 = poly;
+    end
+
+    pending = find(~inside);
+    min_d2 = inf(numel(pending), 1);
+    pnt = points(pending, :);
+    n = size(poly2, 1);
+    for i = 1:n
+        j = i + 1;
+        if j > n, j = 1; end
+        a = poly2(i, :);
+        b = poly2(j, :);
+        v = b - a;
+        len2 = dot(v, v);
+        if len2 <= eps
+            d2 = sum((pnt - a).^2, 2);
+        else
+            u = ((pnt(:,1)-a(1))*v(1) + (pnt(:,2)-a(2))*v(2)) ./ len2;
+            u = max(0, min(1, u));
+            proj = a + u .* v;
+            d2 = sum((pnt - proj).^2, 2);
+        end
+        min_d2 = min(min_d2, d2);
+    end
+    inside(pending) = min_d2 <= tolerance_m^2;
+end
+
+
+function inside = local_point_in_poly_tol(point, poly, tolerance_m)
+    inside = local_points_in_poly_tol(point, poly, tolerance_m);
 end
 
 
@@ -737,8 +854,8 @@ function run_dir = local_make_run_dir(csv_file_name)
 end
 
 
-function local_write_summary(run_dir, scenario, p, horizons, horizons_exit, dt_pred, ...
-                              err_max, err_rms, pass_gate, keyframes, v_avg, phase, t)
+function local_write_summary(run_dir, scenario, p, horizons, horizons_exit, ...
+                              err_max, err_rms, pass_gate, keyframes, v_avg, phase, t, strategy_cfg, hit_tolerance_m)
 %LOCAL_WRITE_SUMMARY  把本次测试的关键数据写成可读的 summary.txt
     fid = fopen(fullfile(run_dir, 'summary.txt'), 'w', 'n', 'UTF-8');
     if fid < 0, return; end
@@ -750,6 +867,7 @@ function local_write_summary(run_dir, scenario, p, horizons, horizons_exit, dt_p
 
     fprintf(fid, '生成时间        : %s\n', datestr(now, 'yyyy-mm-dd HH:MM:SS'));
     fprintf(fid, '工况 CSV        : %s\n', char(scenario.file_name));
+    fprintf(fid, '策略 CFG        : %s\n', strategy_cfg.name);
     fprintf(fid, '采样数          : %d\n', scenario.row_count);
     fprintf(fid, 'CSV dt          : %.4f s\n', scenario.dt_s);
     fprintf(fid, '总时长          : %.2f s\n', scenario.summary.duration_s);
@@ -770,7 +888,10 @@ function local_write_summary(run_dir, scenario, p, horizons, horizons_exit, dt_p
     fprintf(fid, 'PolyI T_h = %.2f s   纵向覆盖 ≈ %.2f m   含义=立即危险\n', horizons.I, v_avg*horizons.I);
     fprintf(fid, 'EXIT 阶段 PolyW T_h = %.2f s   PolyA T_h = %.2f s   PolyI T_h = %.2f s\n', ...
         horizons_exit.W, horizons_exit.A, horizons_exit.I);
-    fprintf(fid, 'dt_pred 预测内部步长     = %.3f s\n', dt_pred);
+    fprintf(fid, '默认 dt_pred 预测内部步长 = %.3f s\n', horizons.dt_pred);
+    fprintf(fid, 'EXIT dt_pred 预测内部步长 = %.3f s\n', horizons_exit.dt_pred);
+    fprintf(fid, '统计命中方法             = segment_swept\n');
+    fprintf(fid, '统计判内容差             = %.3f m\n', hit_tolerance_m);
     fprintf(fid, 'ESP32 主循环 (硬件端)    = 0.020 s (50 Hz)\n');
     fprintf(fid, '本 demo 关键帧索引       = %s\n', mat2str(keyframes));
     fprintf(fid, '\n');
@@ -804,5 +925,90 @@ function local_write_summary(run_dir, scenario, p, horizons, horizons_exit, dt_p
         fprintf(fid, '位置最大误差 < 1 mm，✅ 通过\n');
     else
         fprintf(fid, '位置最大误差 ≥ 1 mm，⚠️ 未通过 — 请检查积分方案 (Euler vs RK4) / dt 一致性\n');
+    end
+end
+
+
+function cfg = local_load_strategy_cfg(cfg_json)
+%LOCAL_LOAD_STRATEGY_CFG  读取与转弯全过程盲区分析软件一致的 CFG。
+    cfg = local_default_strategy_cfg();
+    if nargin < 1 || isempty(cfg_json)
+        cfg_json = fullfile(fileparts(fileparts(mfilename('fullpath'))), ...
+            '转弯全过程盲区分析软件', 'CFG配置', 'exit_window_test_cfg.json');
+    end
+    if isstring(cfg_json), cfg_json = char(cfg_json); end
+    if exist(cfg_json, 'file')
+        raw = jsondecode(fileread(cfg_json));
+        cfg = local_merge_strategy_cfg(cfg, raw);
+        cfg.path = string(cfg_json);
+    else
+        warning('run_phase1_demo:CfgNotFound', '未找到 CFG: %s，将使用内置默认 CFG。', cfg_json);
+        cfg.path = "";
+    end
+end
+
+
+function cfg = local_default_strategy_cfg()
+    cfg = struct();
+    cfg.name = "exit_window_test_cfg_builtin";
+    cfg.version = "1.0";
+    cfg.description = "内置 CFG 仅作兜底；正常应读取转弯全过程盲区分析软件/CFG配置/*.json。";
+    cfg.state_machine = struct( ...
+        'alpha_start_deg', 2.0, ...
+        'mid_heading_delta_deg', 25.0, ...
+        'exit_heading_delta_deg_min', 75.0, ...
+        'exit_require_alpha_returning', true, ...
+        'exit_phi_abs_deg_min', 4.0, ...
+        'exit_hold_frames', 2, ...
+        'done_alpha_abs_deg_max', 1.0, ...
+        'done_phi_abs_deg_max', 2.0, ...
+        'done_hold_frames', 10);
+    base = struct('T_h_W', 2.0, 'T_h_A', 1.0, 'T_h_I', 0.3, ...
+        'dt_pred', 0.02, 'alpha_mode', "hold", ...
+        'safety_expand_m', 0.0, 'safety_expand_enabled', false);
+    exit_strategy = base;
+    exit_strategy.T_h_W = 3.0;
+    exit_strategy.T_h_A = 1.5;
+    exit_strategy.T_h_I = 0.5;
+    cfg.strategies = struct('default', base, 'EXIT', exit_strategy);
+end
+
+
+function cfg = local_merge_strategy_cfg(cfg, raw)
+    if isfield(raw, 'name'), cfg.name = string(raw.name); end
+    if isfield(raw, 'version'), cfg.version = string(raw.version); end
+    if isfield(raw, 'description'), cfg.description = string(raw.description); end
+    if isfield(raw, 'state_machine')
+        cfg.state_machine = local_merge_struct(cfg.state_machine, raw.state_machine);
+    end
+    if isfield(raw, 'strategies')
+        if isfield(raw.strategies, 'default')
+            cfg.strategies.default = local_merge_struct(cfg.strategies.default, raw.strategies.default);
+        end
+        if isfield(raw.strategies, 'EXIT')
+            cfg.strategies.EXIT = local_merge_struct(cfg.strategies.default, raw.strategies.EXIT);
+        elseif isfield(raw.strategies, 'exit')
+            cfg.strategies.EXIT = local_merge_struct(cfg.strategies.default, raw.strategies.exit);
+        else
+            cfg.strategies.EXIT = cfg.strategies.default;
+        end
+    end
+end
+
+
+function out = local_merge_struct(base, extra)
+    out = base;
+    names = fieldnames(extra);
+    for i = 1:numel(names)
+        out.(names{i}) = extra.(names{i});
+    end
+end
+
+
+function strat = local_strategy_for_phase(cfg, phase_id)
+    if double(phase_id) == 3
+        strat = cfg.strategies.EXIT;
+    else
+        strat = cfg.strategies.default;
     end
 end

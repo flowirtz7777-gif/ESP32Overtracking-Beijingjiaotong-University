@@ -15,6 +15,34 @@
 
 该分支用于讨论 R3 类出弯目标报警偏晚问题，不直接替代主程序。
 
+## CFG 统一口径
+
+本分支已改为读取 `转弯全过程盲区分析软件/CFG配置/*.json`，不再维护一套独立的硬编码扩窗口径。默认不传第三参数时，会读取：
+
+```text
+../转弯全过程盲区分析软件/CFG配置/exit_window_test_cfg.json
+```
+
+也可以显式指定 CFG：
+
+```matlab
+out = run_phase1_demo( ...
+    'pid_scenario_20260530_020804.csv', ...
+    'targets_exit.csv', ...
+    'C:/Users/Admin/Desktop/小挑资料/转弯全过程盲区分析软件/CFG配置/default_cfg.json');
+```
+
+CFG 同时控制：
+
+```text
+state_machine.*                 出弯状态机阈值和滞回帧数
+strategies.default.T_h_W/A/I    非 EXIT 阶段预测窗口
+strategies.EXIT.T_h_W/A/I       EXIT 阶段预测窗口
+strategies.*.dt_pred            对应状态下的预测积分步长
+```
+
+`alpha_mode` 当前仍只执行 `hold`；`safety_expand_m / safety_expand_enabled` 只记录，不启用几何膨胀。
+
 ## 状态机
 
 `orthogonal_turn_phase.m` 输出：
@@ -27,18 +55,18 @@
 4 DONE   转弯结束
 ```
 
-当前没有真实转向灯输入，暂用 `|alpha| > 2°` 作为开始转弯触发。进入 EXIT 的主要依据：
+当前没有真实转向灯输入，暂用 CFG 里的 `alpha_start_deg` 作为开始转弯触发。进入 EXIT 的主要依据：
 
 ```text
 累计航向变化 >= 75°
 并且 alpha 正在回正 或 phi 仍有滞后
 ```
 
-状态机含简单计数滞回，避免阈值附近抖动。
+状态机含简单计数滞回，避免阈值附近抖动。具体阈值以导入的 CFG 为准。
 
 ## 预测窗口策略
 
-普通阶段：
+普通阶段默认：
 
 ```text
 PolyW = 2.0 s
@@ -46,7 +74,7 @@ PolyA = 1.0 s
 PolyI = 0.3 s
 ```
 
-EXIT 出弯阶段：
+EXIT 出弯阶段默认：
 
 ```text
 PolyW = 3.0 s
@@ -54,14 +82,14 @@ PolyA = 1.5 s
 PolyI = 0.5 s
 ```
 
-安全膨胀接口已在 `run_phase1_demo.m` 中预留但注释掉，当前不启用：
+安全膨胀字段已在 CFG 中预留，当前不启用：
 
 ```matlab
-% if keyframe_phase(ii) == 3
-%     polys.W{ii} = inflate_poly(polys.W{ii}, 0.30);
-%     polys.A{ii} = inflate_poly(polys.A{ii}, 0.20);
-% end
+strategies.*.safety_expand_m
+strategies.*.safety_expand_enabled
 ```
+
+注意：本 MATLAB demo 的统计命中已使用与盲区分析软件一致的 `segment_swept` 判定；MATLAB 图中暂时仍绘制 PolyW/A/I 大多边形，只作为可视化参考，暂不加入网页端的 `segment_swept / Poly` 显示模式开关。盲区数量、阈值扫描、跨 CFG 统计结论仍应以 `转弯全过程盲区分析软件` 的逐帧裁判链为准。
 
 ## 固定目标集 CSV
 
@@ -114,7 +142,9 @@ time_s,target,risk,ttc_s,event
 
 ```text
 phase,source,x_m,y_m,true_contact_time_s,lead_s,
-hit_PolyW,hit_PolyA,hit_PolyI,hit_BodyNow_keyframe
+hit_PolyW,hit_PolyA,hit_PolyI,hit_BodyNow_keyframe,
+hit_method,cfg_name,T_h_W_s,T_h_A_s,T_h_I_s,dt_pred_s,
+alpha_mode,safety_expand_m,safety_expand_enabled,tolerance_m
 ```
 
 主要事件含义：

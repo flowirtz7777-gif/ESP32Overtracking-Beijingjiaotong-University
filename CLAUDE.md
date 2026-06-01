@@ -412,6 +412,24 @@ out = plot_threshold_filtered_blindspots(scan_dir, [2.0 1.5 1.0]);
 
 这会输出 `threshold_blindspot_overlay_le_2.0s.png`、`..._le_1.5s.png`、`..._le_1.0s.png`。黑色 `x` 表示 `POLYW_NO_HIT`，浅灰点表示 `STARTUP_TRUNCATED`。
 
+2026-06-01 追加：软件支持导入/导出策略 CFG（JSON）。CFG 定义在线状态机阈值以及不同状态下的 `T_h_W / T_h_A / T_h_I / dt_pred`，导入后刷新分析会按状态选择预测窗口。当前示例文件为：
+
+```text
+转弯全过程盲区分析软件/CFG配置/default_exit_window_cfg.json
+```
+
+当前已实现 `default` 与 `EXIT` 两套策略，`EXIT` 可扩大预测时间窗；`alpha_mode` 字段暂只按 `hold` 执行，`safety_expand_m / safety_expand_enabled` 已保存在 CFG 和日志中但暂不启用几何膨胀，作为后续算法实验预留口。
+
+目标点 CSV 导入/导出约定：新导出的目标点 CSV 除 `target,x_m,y_m,true_contact_time_s,true_contact_idx,contact_phase` 外，还写入 `sampling_spacing_m,tolerance_m,max_boundary_points,warmup_ignore_s`。导入目标点 CSV 时，软件会用这些列回填“采样间距、判内容差、最大边界点数、忽略起始截断”；反应时间阈值不跟随目标 CSV，仍由界面手动设置。
+
+场景 CSV 与目标点 CSV 必须解耦：场景 CSV 只放车辆运动/车辆参数，目标点 CSV 独立导入。软件切换场景或使用内置工况时不得清空目标点；应保留目标点，并基于新场景重新估计 `trueContactIdx` 与报警日志。
+
+`CFG配置生成器/` 是独立的白底黑字配置小工具，用于生成盲区分析软件可导入的策略 CFG。桌面入口为 `CFG配置生成器.lnk` 或 `CFG配置生成器/启动CFG配置生成器.bat`。桌面模式下点击“保存 CFG”会写入 `转弯全过程盲区分析软件/CFG配置/`。
+
+盲区分析软件的日志命中方法为 `segment_swept`：分析计算不再用整段预测窗口拼成一个总多边形后判内，而是按相邻预测步的右边缘形成小扫掠四边形逐段判内。原因是 EXIT 扩窗后总多边形可能自交/退化，导致 3s 窗口反而漏掉 2s 窗口已覆盖的点，破坏扩窗单调性。在线预测区提供显示模式开关：默认 `segment_swept 判定区`，逐段画出真正参与判定的小扫掠四边形；`Poly 大多边形参考` 只作为旧版轮廓可视化。实时命中点跟随显示模式切换，日志与盲区数量始终以 `segment_swept` 为准。
+
+CFG 扩窗一致性清单见 `docs/CFG扩窗算法一致性说明.md`。当前必须统一的裁判链是：`转弯全过程盲区分析软件/index.html`、`validate_turn_exit_targets.m`、`scan_ttc_threshold_blindspots.m`、`CFG配置生成器/index.html`；`正交路口出弯状态机仿真/run_phase1_demo.m` 作为 MATLAB 可视化/对照 demo，也必须读取同一份 CFG。MATLAB 校验第 6 参数 `strategy_cfg_json` 可传入 CFG；阈值扫描 `opts.strategy_cfg_json` 可传入 CFG；正交路口 demo 第 3 参数 `strategy_cfg_json` 可传入 CFG。正交路口 demo 的统计命中、日志、风险等级已使用 `segment_swept`，但 MATLAB 图暂不加入网页端的 `segment_swept / Poly` 显示开关，仍画 PolyW/A/I 大多边形作为形状参考。`TTC预警复盘软件` 和 `alpha一阶保持仿真/truck_slider_sim.py` 当前定位为 true-TTC/可视化复盘，不作为 CFG 扩窗统计裁判。
+
 ### 4.4 报警状态机（滞回防抖）
 
 ```

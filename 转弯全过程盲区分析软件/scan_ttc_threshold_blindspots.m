@@ -40,17 +40,24 @@ function out = scan_ttc_threshold_blindspots(scenario_csv, opts)
     alpha = scenario.inputs.alpha_rad;
     phi = scenario.inputs.phi_rad;
     truth = [scenario.states.xB_m, scenario.states.yB_m, scenario.states.theta_rad, phi];
-    phase = orthogonal_turn_phase(scenario.states.theta_rad, alpha, phi, scenario.dt_s);
+    strategy_cfg = local_load_strategy_cfg(opts.strategy_cfg_json);
+    phase = local_phase_from_cfg(scenario.states.theta_rad, alpha, phi, t, strategy_cfg);
 
     fprintf('\n[SCAN] 场景: %s\n', string(scenario.file_name));
-    fprintf('[SCAN] 参数: spacing=%.2fm, tolerance=%.2fm, max_points=%d, warmup=%.2fs, thresholds=%.1f:%.1f:%.1f\n', ...
+    if numel(opts.thresholds_s) >= 2
+        threshold_text = sprintf('%.1f:%.1f:%.1f', ...
+            opts.thresholds_s(1), opts.thresholds_s(2) - opts.thresholds_s(1), opts.thresholds_s(end));
+    else
+        threshold_text = sprintf('%.1f', opts.thresholds_s(1));
+    end
+    fprintf('[SCAN] 参数: spacing=%.2fm, tolerance=%.2fm, max_points=%d, warmup=%.2fs, thresholds=%s, CFG=%s, hit=segment_swept\n', ...
         opts.sampling_spacing_m, opts.tolerance_m, opts.max_boundary_points, opts.warmup_ignore_s, ...
-        opts.thresholds_s(1), opts.thresholds_s(2)-opts.thresholds_s(1), opts.thresholds_s(end));
+        threshold_text, strategy_cfg.name);
 
     targets = local_generate_boundary_targets(scenario, p, opts);
     fprintf('[SCAN] 生成边界点: %d\n', height(targets));
 
-    hit = local_compute_first_polyw_hits(targets, t, v, alpha, truth, p, opts);
+    hit = local_compute_first_polyw_hits(targets, t, v, alpha, truth, p, opts, phase, strategy_cfg);
     result_tbl = targets;
     result_tbl.first_PolyW_s = hit.first_PolyW_s;
     result_tbl.lead_W_s = result_tbl.true_contact_time_s - result_tbl.first_PolyW_s;
@@ -108,6 +115,7 @@ function out = scan_ttc_threshold_blindspots(scenario_csv, opts)
     out.out_dir = out_dir;
     out.figure = fig;
     out.png_path = png_path;
+    out.strategy_cfg = strategy_cfg;
 end
 
 
@@ -119,6 +127,7 @@ function opts = local_defaults(opts)
     opts = local_set_default(opts, 'thresholds_s', 0.1:0.1:3.0);
     opts = local_set_default(opts, 'T_h_W', 2.0);
     opts = local_set_default(opts, 'dt_pred', 0.02);
+    opts = local_set_default(opts, 'strategy_cfg_json', '');
 end
 
 
@@ -190,7 +199,7 @@ function idx = local_refine_contact_idx(point, around_idx, t, truth, p, toleranc
 end
 
 
-function hit = local_compute_first_polyw_hits(targets, t, v, alpha, truth, p, opts)
+function hit = local_compute_first_polyw_hits(targets, t, v, alpha, truth, p, opts, phase, strategy_cfg)
     n_targets = height(targets);
     first_idx = nan(n_targets, 1);
     points = [targets.x_m, targets.y_m];
@@ -200,8 +209,9 @@ function hit = local_compute_first_polyw_hits(targets, t, v, alpha, truth, p, op
         if isempty(pending)
             break;
         end
-        polyW = predict_swept(truth(k,:), alpha(k), v(k), p, opts.T_h_W, opts.dt_pred, 0);
-        inside = local_points_in_poly_tol(points(pending, :), polyW, opts.tolerance_m);
+        strat = local_strategy_for_phase(strategy_cfg, phase(k));
+        edgeW = local_predict_right_edge_sequence(truth(k,:), alpha(k), v(k), p, strat.T_h_W, strat.dt_pred);
+        inside = local_points_in_swept_segments_tol(points(pending, :), edgeW, opts.tolerance_m);
         first_idx(pending(inside)) = k;
         if mod(k, 100) == 0
             fprintf('[SCAN] PolyW replay %.1f%%, pending=%d\n', 100*k/numel(t), nnz(isnan(first_idx)));
@@ -256,7 +266,11 @@ function fig = local_plot_scan(tbl, count_tbl, scenario, opts)
     colormap(ax, flipud(turbo));
     cb = colorbar(ax);
     cb.Label.String = '首次成为盲区的反应时间阈值 / s';
-    clim(ax, [opts.thresholds_s(1), opts.thresholds_s(end)]);
+    if numel(opts.thresholds_s) >= 2 && opts.thresholds_s(end) > opts.thresholds_s(1)
+        clim(ax, [opts.thresholds_s(1), opts.thresholds_s(end)]);
+    else
+        clim(ax, opts.thresholds_s(1) + [-0.05, 0.05]);
+    end
     xlabel(ax, 'X (m)');
     ylabel(ax, 'Y (m)');
     title(ax, {'不同反应时间阈值下盲区点叠加分布', ...
@@ -309,6 +323,181 @@ function inside = local_points_in_poly_tol(points, poly, tolerance_m)
         min_d2 = min(min_d2, d2);
     end
     inside(pending) = min_d2 <= tolerance_m^2;
+end
+
+
+function inside = local_points_in_swept_segments_tol(points, edge_seq, tolerance_m)
+    inside = false(size(points, 1), 1);
+    if numel(edge_seq) < 2 || isempty(points)
+        return;
+    end
+    for i = 1:(numel(edge_seq)-1)
+        pending = find(~inside);
+        if isempty(pending), break; end
+        quad = [edge_seq(i).H; edge_seq(i+1).H; edge_seq(i+1).T; edge_seq(i).T; edge_seq(i).H];
+        inside(pending) = local_points_in_poly_tol(points(pending, :), quad, tolerance_m);
+    end
+end
+
+
+function cfg = local_load_strategy_cfg(cfg_json)
+    cfg = local_default_strategy_cfg();
+    if nargin < 1 || isempty(cfg_json)
+        return;
+    end
+    if isstring(cfg_json), cfg_json = char(cfg_json); end
+    if exist(cfg_json, 'file')
+        raw = jsondecode(fileread(cfg_json));
+    else
+        raw = jsondecode(cfg_json);
+    end
+    cfg = local_merge_strategy_cfg(cfg, raw);
+end
+
+
+function cfg = local_default_strategy_cfg()
+    cfg = struct();
+    cfg.name = "default_matlab_cfg";
+    cfg.version = "1.0";
+    cfg.state_machine = struct( ...
+        'alpha_start_deg', 2.0, ...
+        'mid_heading_delta_deg', 25.0, ...
+        'exit_heading_delta_deg_min', 75.0, ...
+        'exit_require_alpha_returning', true, ...
+        'exit_phi_abs_deg_min', 4.0, ...
+        'exit_hold_frames', 2, ...
+        'done_alpha_abs_deg_max', 1.0, ...
+        'done_phi_abs_deg_max', 2.0, ...
+        'done_hold_frames', 10);
+    base = struct('T_h_W', 2.0, 'T_h_A', 1.0, 'T_h_I', 0.3, ...
+        'dt_pred', 0.02, 'alpha_mode', "hold", ...
+        'safety_expand_m', 0.0, 'safety_expand_enabled', false);
+    cfg.strategies = struct('default', base, 'EXIT', base);
+end
+
+
+function cfg = local_merge_strategy_cfg(cfg, raw)
+    if isfield(raw, 'name'), cfg.name = string(raw.name); end
+    if isfield(raw, 'version'), cfg.version = string(raw.version); end
+    if isfield(raw, 'state_machine')
+        cfg.state_machine = local_merge_struct(cfg.state_machine, raw.state_machine);
+    end
+    if isfield(raw, 'strategies')
+        if isfield(raw.strategies, 'default')
+            cfg.strategies.default = local_merge_struct(cfg.strategies.default, raw.strategies.default);
+        end
+        if isfield(raw.strategies, 'EXIT')
+            cfg.strategies.EXIT = local_merge_struct(cfg.strategies.default, raw.strategies.EXIT);
+        elseif isfield(raw.strategies, 'exit')
+            cfg.strategies.EXIT = local_merge_struct(cfg.strategies.default, raw.strategies.exit);
+        else
+            cfg.strategies.EXIT = cfg.strategies.default;
+        end
+    end
+end
+
+
+function out = local_merge_struct(base, override)
+    out = base;
+    names = fieldnames(override);
+    for i = 1:numel(names)
+        out.(names{i}) = override.(names{i});
+    end
+end
+
+
+function phase = local_phase_from_cfg(theta, alpha, phi, t, cfg)
+    n = numel(theta);
+    phase = zeros(n, 1);
+    if n == 0, return; end
+    sm = cfg.state_machine;
+    state = 0;
+    start_theta = theta(1);
+    exit_count = 0;
+    done_count = 0;
+    theta_unwrap = unwrap(theta(:));
+    alpha = alpha(:);
+    phi = phi(:);
+    t = t(:);
+
+    for k = 2:n
+        a = alpha(k);
+        ap = alpha(k-1);
+        ph = phi(k);
+        dt = max(1e-6, t(k) - t(k-1));
+        alpha_dot = (a - ap) / dt;
+
+        if state == 0 && abs(a) > deg2rad(sm.alpha_start_deg)
+            state = 1;
+            start_theta = theta_unwrap(k);
+        end
+        if state == 1
+            hdg = abs(local_wrap_pi(theta_unwrap(k) - start_theta));
+            if hdg > deg2rad(sm.mid_heading_delta_deg)
+                state = 2;
+            end
+        end
+        if state == 2
+            hdg = abs(local_wrap_pi(theta_unwrap(k) - start_theta));
+            returning = abs(a) < abs(ap) || a * alpha_dot < 0;
+            phi_lag = abs(ph) > deg2rad(sm.exit_phi_abs_deg_min);
+            require_returning = ~isfield(sm, 'exit_require_alpha_returning') || sm.exit_require_alpha_returning;
+            exit_ok = hdg >= deg2rad(sm.exit_heading_delta_deg_min) && ...
+                ((require_returning && returning) || phi_lag || ~require_returning);
+            if exit_ok
+                exit_count = exit_count + 1;
+            else
+                exit_count = 0;
+            end
+            if exit_count >= sm.exit_hold_frames
+                state = 3;
+            end
+        end
+        if state == 3
+            done_ok = abs(a) < deg2rad(sm.done_alpha_abs_deg_max) && ...
+                abs(ph) < deg2rad(sm.done_phi_abs_deg_max);
+            if done_ok
+                done_count = done_count + 1;
+            else
+                done_count = 0;
+            end
+            if done_count >= sm.done_hold_frames
+                state = 4;
+            end
+        end
+        phase(k) = state;
+    end
+end
+
+
+function strat = local_strategy_for_phase(cfg, phase_id)
+    if double(phase_id) == 3
+        strat = cfg.strategies.EXIT;
+    else
+        strat = cfg.strategies.default;
+    end
+end
+
+
+function edge_seq = local_predict_right_edge_sequence(s0, alpha_now, v_now, p, T_h, dt_pred)
+    M = max(1, floor(T_h / dt_pred));
+    s = s0;
+    edge_seq = struct('H', cell(M+1, 1), 'T', cell(M+1, 1));
+    half_w = 0.5 * p.width;
+    for i = 1:(M+1)
+        d = derive_points(s, p);
+        right_normal = [sin(d.theta_t), -cos(d.theta_t)];
+        edge_seq(i).H = d.H + half_w * right_normal;
+        edge_seq(i).T = d.T + half_w * right_normal;
+        if i <= M
+            s = kinematics_step(s, alpha_now, v_now, p, dt_pred);
+        end
+    end
+end
+
+
+function a = local_wrap_pi(a)
+    a = atan2(sin(a), cos(a));
 end
 
 

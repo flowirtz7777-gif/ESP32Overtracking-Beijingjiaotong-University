@@ -1,20 +1,21 @@
-function report = validate_turn_exit_targets(scenario_csv, target_csv, web_log_csv, tolerance_m, warmup_ignore_s)
+function report = validate_turn_exit_targets(scenario_csv, target_csv, web_log_csv, tolerance_m, warmup_ignore_s, strategy_cfg_json)
 %VALIDATE_TURN_EXIT_TARGETS  用 MATLAB 复算转弯全过程盲区分析软件的边界点 Poly 判定。
 %
 %   report = validate_turn_exit_targets(scenario_csv, target_csv)
 %   report = validate_turn_exit_targets(scenario_csv, target_csv, web_log_csv)
 %   report = validate_turn_exit_targets(scenario_csv, target_csv, web_log_csv, tolerance_m)
 %   report = validate_turn_exit_targets(scenario_csv, target_csv, web_log_csv, tolerance_m, warmup_ignore_s)
+%   report = validate_turn_exit_targets(scenario_csv, target_csv, web_log_csv, tolerance_m, warmup_ignore_s, strategy_cfg_json)
 %
 %   用途：
 %     1. 读取转弯全过程盲区分析软件导出的目标点 CSV。
-%     2. 对每一帧做一次在线 PolyW/A/I 预测，alpha 一阶保持，不启用 EXIT 扩窗。
+%     2. 对每一帧做一次在线 PolyW/A/I 预测，alpha 一阶保持；若传入 CFG，则按状态机启用分状态窗口。
 %     3. 对每个目标点记录 MATLAB 版 first_PolyW/A/I 与 lead_W。
 %     4. 若提供软件日志 CSV，则按 target 对比 Web 与 MATLAB 的 first_PolyW/lead_W。
 %
 %   注意：
-%     - 这里使用本工程 MATLAB predict_swept，包含 polyshape 后处理；
-%       它比网页端轻量 JS 版本更接近正式算法，应作为校验裁判。
+%     - 为与网页软件一致，统计判定使用 segment_swept：相邻预测步右边缘
+%       形成小扫掠四边形逐段判内，而不是整窗大多边形。
 %     - 目标点 CSV 至少需要 x_m,y_m；若有 true_contact_time_s 则直接使用，
 %       否则用逐帧 BodyNow 重新寻找真实接触时间。
 %     - 全过程边界测试点常位于扫掠边界线上；默认 tolerance_m=0.05，
@@ -41,6 +42,9 @@ function report = validate_turn_exit_targets(scenario_csv, target_csv, web_log_c
     if nargin < 5 || isempty(warmup_ignore_s)
         warmup_ignore_s = 2.0;
     end
+    if nargin < 6
+        strategy_cfg_json = '';
+    end
 
     script_dir = fileparts(mfilename('fullpath'));
     algo_dir = fullfile(fileparts(script_dir), '正交路口出弯状态机仿真');
@@ -55,21 +59,17 @@ function report = validate_turn_exit_targets(scenario_csv, target_csv, web_log_c
     alpha = scenario.inputs.alpha_rad;
     phi = scenario.inputs.phi_rad;
     truth = [scenario.states.xB_m, scenario.states.yB_m, scenario.states.theta_rad, phi];
-    phase = orthogonal_turn_phase(scenario.states.theta_rad, alpha, phi, scenario.dt_s);
+    strategy_cfg = local_load_strategy_cfg(strategy_cfg_json);
+    phase = local_phase_from_cfg(scenario.states.theta_rad, alpha, phi, t, strategy_cfg);
 
     targets = local_read_targets(target_tbl);
     n_targets = size(targets.xy, 1);
     n = numel(t);
 
-    T_h_W = 2.0;
-    T_h_A = 1.0;
-    T_h_I = 0.3;
-    dt_pred = 0.02;
-
     fprintf('\n[VALIDATE] 场景: %s\n', string(scenario.file_name));
     fprintf('[VALIDATE] 目标数: %d\n', n_targets);
-    fprintf('[VALIDATE] 在线预测: 每 %.3fs 一帧, PolyW/A/I = %.1f/%.1f/%.1fs, dt_pred=%.3fs, tol=%.3fm, warmup_ignore=%.2fs\n', ...
-        scenario.dt_s, T_h_W, T_h_A, T_h_I, dt_pred, tolerance_m, warmup_ignore_s);
+    fprintf('[VALIDATE] CFG: %s, hit_method=segment_swept, tol=%.3fm, warmup_ignore=%.2fs\n', ...
+        strategy_cfg.name, tolerance_m, warmup_ignore_s);
 
     first_W_idx = nan(n_targets, 1);
     first_A_idx = nan(n_targets, 1);
@@ -77,9 +77,10 @@ function report = validate_turn_exit_targets(scenario_csv, target_csv, web_log_c
 
     for k = 1:n
         s0 = truth(k, :);
-        polyW = predict_swept(s0, alpha(k), v(k), p, T_h_W, dt_pred, 0);
-        polyA = predict_swept(s0, alpha(k), v(k), p, T_h_A, dt_pred, 0);
-        polyI = predict_swept(s0, alpha(k), v(k), p, T_h_I, dt_pred, 0);
+        strat = local_strategy_for_phase(strategy_cfg, phase(k));
+        edgeW = local_predict_right_edge_sequence(s0, alpha(k), v(k), p, strat.T_h_W, strat.dt_pred);
+        edgeA = local_predict_right_edge_sequence(s0, alpha(k), v(k), p, strat.T_h_A, strat.dt_pred);
+        edgeI = local_predict_right_edge_sequence(s0, alpha(k), v(k), p, strat.T_h_I, strat.dt_pred);
 
         pending_W = isnan(first_W_idx);
         pending_A = isnan(first_A_idx);
@@ -87,19 +88,19 @@ function report = validate_turn_exit_targets(scenario_csv, target_csv, web_log_c
 
         idxs = find(pending_W).';
         for j = idxs
-            if local_point_in_poly_tol(targets.xy(j,:), polyW, tolerance_m)
+            if local_point_in_swept_segments_tol(targets.xy(j,:), edgeW, tolerance_m)
                 first_W_idx(j) = k;
             end
         end
         idxs = find(pending_A).';
         for j = idxs
-            if local_point_in_poly_tol(targets.xy(j,:), polyA, tolerance_m)
+            if local_point_in_swept_segments_tol(targets.xy(j,:), edgeA, tolerance_m)
                 first_A_idx(j) = k;
             end
         end
         idxs = find(pending_I).';
         for j = idxs
-            if local_point_in_poly_tol(targets.xy(j,:), polyI, tolerance_m)
+            if local_point_in_swept_segments_tol(targets.xy(j,:), edgeI, tolerance_m)
                 first_I_idx(j) = k;
             end
         end
@@ -173,6 +174,8 @@ function report = validate_turn_exit_targets(scenario_csv, target_csv, web_log_c
     report.run_dir = run_dir;
     report.params = p;
     report.phase = phase;
+    report.strategy_cfg = strategy_cfg;
+    report.hit_method = "segment_swept";
     report.tolerance_m = tolerance_m;
     report.warmup_ignore_s = warmup_ignore_s;
 end
@@ -360,4 +363,178 @@ function name = local_phase_name(phase_id)
     labels = ["IDLE", "ENTRY", "MID", "EXIT", "DONE"];
     idx = max(1, min(numel(labels), double(phase_id) + 1));
     name = labels(idx);
+end
+
+
+function cfg = local_load_strategy_cfg(cfg_json)
+    cfg = local_default_strategy_cfg();
+    if nargin < 1 || isempty(cfg_json)
+        return;
+    end
+    if isstring(cfg_json), cfg_json = char(cfg_json); end
+    if exist(cfg_json, 'file')
+        raw = jsondecode(fileread(cfg_json));
+    else
+        raw = jsondecode(cfg_json);
+    end
+    cfg = local_merge_strategy_cfg(cfg, raw);
+end
+
+
+function cfg = local_default_strategy_cfg()
+    cfg = struct();
+    cfg.name = "default_matlab_cfg";
+    cfg.version = "1.0";
+    cfg.state_machine = struct( ...
+        'alpha_start_deg', 2.0, ...
+        'mid_heading_delta_deg', 25.0, ...
+        'exit_heading_delta_deg_min', 75.0, ...
+        'exit_require_alpha_returning', true, ...
+        'exit_phi_abs_deg_min', 4.0, ...
+        'exit_hold_frames', 2, ...
+        'done_alpha_abs_deg_max', 1.0, ...
+        'done_phi_abs_deg_max', 2.0, ...
+        'done_hold_frames', 10);
+    base = struct('T_h_W', 2.0, 'T_h_A', 1.0, 'T_h_I', 0.3, ...
+        'dt_pred', 0.02, 'alpha_mode', "hold", ...
+        'safety_expand_m', 0.0, 'safety_expand_enabled', false);
+    cfg.strategies = struct('default', base, 'EXIT', base);
+end
+
+
+function cfg = local_merge_strategy_cfg(cfg, raw)
+    if isfield(raw, 'name'), cfg.name = string(raw.name); end
+    if isfield(raw, 'version'), cfg.version = string(raw.version); end
+    if isfield(raw, 'state_machine')
+        cfg.state_machine = local_merge_struct(cfg.state_machine, raw.state_machine);
+    end
+    if isfield(raw, 'strategies')
+        if isfield(raw.strategies, 'default')
+            cfg.strategies.default = local_merge_struct(cfg.strategies.default, raw.strategies.default);
+        end
+        if isfield(raw.strategies, 'EXIT')
+            cfg.strategies.EXIT = local_merge_struct(cfg.strategies.default, raw.strategies.EXIT);
+        elseif isfield(raw.strategies, 'exit')
+            cfg.strategies.EXIT = local_merge_struct(cfg.strategies.default, raw.strategies.exit);
+        else
+            cfg.strategies.EXIT = cfg.strategies.default;
+        end
+    end
+end
+
+
+function out = local_merge_struct(base, override)
+    out = base;
+    names = fieldnames(override);
+    for i = 1:numel(names)
+        out.(names{i}) = override.(names{i});
+    end
+end
+
+
+function phase = local_phase_from_cfg(theta, alpha, phi, t, cfg)
+    n = numel(theta);
+    phase = zeros(n, 1);
+    if n == 0, return; end
+    sm = cfg.state_machine;
+    state = 0;
+    start_theta = theta(1);
+    exit_count = 0;
+    done_count = 0;
+    theta_unwrap = unwrap(theta(:));
+    alpha = alpha(:);
+    phi = phi(:);
+    t = t(:);
+
+    for k = 2:n
+        a = alpha(k);
+        ap = alpha(k-1);
+        ph = phi(k);
+        dt = max(1e-6, t(k) - t(k-1));
+        alpha_dot = (a - ap) / dt;
+
+        if state == 0 && abs(a) > deg2rad(sm.alpha_start_deg)
+            state = 1;
+            start_theta = theta_unwrap(k);
+        end
+        if state == 1
+            hdg = abs(local_wrap_pi(theta_unwrap(k) - start_theta));
+            if hdg > deg2rad(sm.mid_heading_delta_deg)
+                state = 2;
+            end
+        end
+        if state == 2
+            hdg = abs(local_wrap_pi(theta_unwrap(k) - start_theta));
+            returning = abs(a) < abs(ap) || a * alpha_dot < 0;
+            phi_lag = abs(ph) > deg2rad(sm.exit_phi_abs_deg_min);
+            require_returning = ~isfield(sm, 'exit_require_alpha_returning') || sm.exit_require_alpha_returning;
+            exit_ok = hdg >= deg2rad(sm.exit_heading_delta_deg_min) && ...
+                ((require_returning && returning) || phi_lag || ~require_returning);
+            if exit_ok
+                exit_count = exit_count + 1;
+            else
+                exit_count = 0;
+            end
+            if exit_count >= sm.exit_hold_frames
+                state = 3;
+            end
+        end
+        if state == 3
+            done_ok = abs(a) < deg2rad(sm.done_alpha_abs_deg_max) && ...
+                abs(ph) < deg2rad(sm.done_phi_abs_deg_max);
+            if done_ok
+                done_count = done_count + 1;
+            else
+                done_count = 0;
+            end
+            if done_count >= sm.done_hold_frames
+                state = 4;
+            end
+        end
+        phase(k) = state;
+    end
+end
+
+
+function strat = local_strategy_for_phase(cfg, phase_id)
+    if double(phase_id) == 3
+        strat = cfg.strategies.EXIT;
+    else
+        strat = cfg.strategies.default;
+    end
+end
+
+
+function edge_seq = local_predict_right_edge_sequence(s0, alpha_now, v_now, p, T_h, dt_pred)
+    M = max(1, floor(T_h / dt_pred));
+    s = s0;
+    edge_seq = struct('H', cell(M+1, 1), 'T', cell(M+1, 1));
+    half_w = 0.5 * p.width;
+    for i = 1:(M+1)
+        d = derive_points(s, p);
+        right_normal = [sin(d.theta_t), -cos(d.theta_t)];
+        edge_seq(i).H = d.H + half_w * right_normal;
+        edge_seq(i).T = d.T + half_w * right_normal;
+        if i <= M
+            s = kinematics_step(s, alpha_now, v_now, p, dt_pred);
+        end
+    end
+end
+
+
+function inside = local_point_in_swept_segments_tol(point, edge_seq, tolerance_m)
+    inside = false;
+    if numel(edge_seq) < 2, return; end
+    for i = 1:(numel(edge_seq)-1)
+        quad = [edge_seq(i).H; edge_seq(i+1).H; edge_seq(i+1).T; edge_seq(i).T; edge_seq(i).H];
+        if local_point_in_poly_tol(point, quad, tolerance_m)
+            inside = true;
+            return;
+        end
+    end
+end
+
+
+function a = local_wrap_pi(a)
+    a = atan2(sin(a), cos(a));
 end

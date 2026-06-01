@@ -21,7 +21,8 @@ function createWindow() {
 ipcMain.handle("save-csv", async (_event, payload) => {
   const dirs = {
     targets: path.join(__dirname, "目标点CSV"),
-    logs: path.join(__dirname, "边界点盲区日志")
+    logs: path.join(__dirname, "边界点盲区日志"),
+    cfg: path.join(__dirname, "CFG配置")
   };
   const dir = dirs[payload.kind];
   if (!dir) throw new Error("Unknown CSV kind");

@@ -52,15 +52,20 @@ index.html
 - `导出当前目标点 CSV`
 - `导出 CSV`：导出当前盲区分析日志
 - `按当前参数刷新分析`：导入固定目标点后，修改反应时间阈值、判内容差、起始截断等参数，再点击此按钮重新计算并刷新图表。
+- `导入策略 CFG / JSON`：导入在线状态机和分状态预测窗口配置。
+- `导出当前 CFG`：保存当前策略配置，桌面模式下写入 `CFG配置/`。
 
 桌面软件模式下，导出路径固定为：
 
 ```text
 C:\Users\Admin\Desktop\小挑资料\转弯全过程盲区分析软件\目标点CSV
 C:\Users\Admin\Desktop\小挑资料\转弯全过程盲区分析软件\边界点盲区日志
+C:\Users\Admin\Desktop\小挑资料\转弯全过程盲区分析软件\CFG配置
 ```
 
 若直接用浏览器打开 `index.html`，由于浏览器不能直接写入固定本地目录，会退回普通下载。
+
+场景 CSV 只应包含车辆运动与车辆参数相关信息，不应混入目标点。目标点 CSV 是独立输入；切换场景 CSV 或点击 `使用内置示例工况` 时，软件会保留已导入的目标点，并按新的车辆轨迹重新估计目标首次接触时刻和报警结果。
 
 目标点 CSV 支持列名：
 
@@ -77,14 +82,29 @@ target
 true_contact_time_s
 true_contact_idx
 contact_phase
+sampling_spacing_m
+tolerance_m
+max_boundary_points
+warmup_ignore_s
 ```
 
 若没有 `true_contact_time_s / true_contact_idx`，软件会根据当前场景轨迹自动估计目标首次接触帧。
 
+导入目标点 CSV 时，软件会自动读取并回填以下界面配置：
+
+```text
+sampling_spacing_m    -> 采样间距
+tolerance_m           -> 判内容差
+max_boundary_points   -> 最大边界点数
+warmup_ignore_s       -> 忽略起始截断
+```
+
+反应时间阈值 `reaction_threshold_s` 不属于目标点 CSV，目前仍保留为界面分析参数，需要手动设置。
+
 日志字段接近 TTC 报警日志格式：
 
 ```text
-time_s,target,risk,ttc_s,event,phase,source,x_m,y_m,true_contact_time_s,lead_s
+time_s,target,risk,ttc_s,event,phase,state,source,hit_method,cfg_name,T_h_W_s,T_h_A_s,T_h_I_s,dt_pred_s,alpha_mode,safety_expand_m,safety_expand_enabled,x_m,y_m,true_contact_time_s,lead_s
 ```
 
 主要事件：
@@ -95,6 +115,65 @@ REACTION_TIME_SUFFICIENT         反应时间充足
 POLYW_NO_HIT                     PolyW 未命中
 STARTUP_TRUNCATED                起始截断点
 ```
+
+在线判定命中方法为 `segment_swept`：软件将预测窗口拆成相邻时刻右边缘形成的小扫掠四边形逐段判内，而不是把整个预测窗口拼成一个大多边形后一次性判内。这样扩展预测时间窗只会增加后续小扫掠段，避免长窗口多边形自交导致“扩窗反而漏报”的非单调问题。
+
+在线预测区图提供“预测区显示模式”开关：
+
+```text
+segment_swept 判定区  默认模式，逐段绘制真正参与日志/统计判定的小扫掠四边形
+Poly 大多边形参考     保留旧的大 Poly 可视化，用于观察整体轮廓
+```
+
+两种模式都会同步切换图内实时命中点的口径；盲区日志与数量始终以 `segment_swept` 为准。
+
+## 策略 CFG
+
+CFG 是 JSON 文件，用来定义在线状态机和不同状态下的预测策略。导入 CFG 后，软件会重新计算 `IDLE / ENTRY / MID / EXIT / DONE` 状态，并在刷新分析时按状态选择 PolyW/A/I 时间窗。
+
+最小示例见：
+
+```text
+CFG配置/default_exit_window_cfg.json
+```
+
+核心结构：
+
+```json
+{
+  "name": "default_exit_window_cfg",
+  "state_machine": {
+    "alpha_start_deg": 2.0,
+    "mid_heading_delta_deg": 25.0,
+    "exit_heading_delta_deg_min": 75.0,
+    "exit_require_alpha_returning": true,
+    "exit_phi_abs_deg_min": 4.0,
+    "exit_hold_frames": 2
+  },
+  "strategies": {
+    "default": {
+      "T_h_W": 2.0,
+      "T_h_A": 1.0,
+      "T_h_I": 0.3,
+      "dt_pred": 0.02,
+      "alpha_mode": "hold",
+      "safety_expand_m": 0.0,
+      "safety_expand_enabled": false
+    },
+    "EXIT": {
+      "T_h_W": 3.0,
+      "T_h_A": 1.5,
+      "T_h_I": 0.5,
+      "dt_pred": 0.02,
+      "alpha_mode": "hold",
+      "safety_expand_m": 0.0,
+      "safety_expand_enabled": false
+    }
+  }
+}
+```
+
+注意：当前版本已经记录 `safety_expand_m / safety_expand_enabled`，但暂不启用几何膨胀；这是为后续策略评估预留的字段。`alpha_mode` 目前也只实现 `hold`，用于保持和主算法一致。
 
 ## MATLAB 校验
 
@@ -120,6 +199,13 @@ report = validate_turn_exit_targets('C:/path/to/pid_scenario.csv', 'C:/path/to/t
 report = validate_turn_exit_targets(scenario_csv, target_csv, '', 0.05, 2.0);
 ```
 
+第六个参数可选，用于指定策略 CFG。若传入 CFG，MATLAB 校验会使用与网页一致的状态机、分状态预测窗口和 `segment_swept` 命中口径：
+
+```matlab
+report = validate_turn_exit_targets(scenario_csv, target_csv, '', 0.05, 2.0, ...
+    'C:/Users/Admin/Desktop/小挑资料/转弯全过程盲区分析软件/CFG配置/exit_window_test_cfg.json');
+```
+
 校验脚本使用 `正交路口出弯状态机仿真/predict_swept.m`，包含 MATLAB `polyshape` 后处理，因此它应作为网页端轻量 JS 预测的裁判。输出位于：
 
 ```text
@@ -135,6 +221,14 @@ logs/matlab_validate_*/web_vs_matlab_compare.csv
 ```matlab
 cd('C:/Users/Admin/Desktop/小挑资料/转弯全过程盲区分析软件')
 out = scan_ttc_threshold_blindspots();
+```
+
+如需用指定 CFG 扫描：
+
+```matlab
+opts = struct();
+opts.strategy_cfg_json = 'C:/Users/Admin/Desktop/小挑资料/转弯全过程盲区分析软件/CFG配置/exit_window_test_cfg.json';
+out = scan_ttc_threshold_blindspots('C:/path/to/pid_scenario.csv', opts);
 ```
 
 当前默认参数：

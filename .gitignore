@@ -62,6 +62,8 @@ TTC预警复盘软件/报警日志/*.csv
 # 转弯全过程盲区分析软件：带时间戳的运行时导出（目标点/盲区日志），不入仓库。
 # 但保留固定测试输入（如"标准测试用.csv"）。
 转弯全过程盲区分析软件/目标点CSV/turn_exit_boundary_targets_*.csv
+转弯全过程盲区分析软件/目标点CSV/turn_blindspot_boundary_targets_*.csv
+转弯全过程盲区分析软件/目标点CSV/*_旧版备份.csv
 转弯全过程盲区分析软件/边界点盲区日志/*.csv
 
 # ------------- MATLAB demo run outputs -------------

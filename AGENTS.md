@@ -361,6 +361,24 @@ out = plot_threshold_filtered_blindspots(scan_dir, [2.0 1.5 1.0]);
 
 This creates `threshold_blindspot_overlay_le_2.0s.png`, `..._le_1.5s.png`, and `..._le_1.0s.png`. Black `x` marks `POLYW_NO_HIT`; faint gray marks `STARTUP_TRUNCATED`.
 
+The software now supports importing/exporting a strategy CFG JSON. The CFG defines online state-machine thresholds and per-state prediction windows (`T_h_W / T_h_A / T_h_I / dt_pred`). The example file is:
+
+```text
+转弯全过程盲区分析软件/CFG配置/default_exit_window_cfg.json
+```
+
+Currently implemented strategies are `default` and `EXIT`; EXIT can enlarge prediction horizons. `alpha_mode` is recorded but currently executes as `hold`; `safety_expand_m / safety_expand_enabled` are stored in CFG and logs but geometry inflation is intentionally not enabled yet.
+
+Target CSV import/export convention: newly exported target CSVs include `sampling_spacing_m,tolerance_m,max_boundary_points,warmup_ignore_s` in addition to target coordinates/contact fields. Importing a target CSV updates the UI controls for sampling spacing, geometry tolerance, max boundary points, and startup truncation. Reaction-time threshold is not stored in the target CSV and remains a manual analysis setting.
+
+Scenario CSV and target CSV must remain decoupled: scenario CSVs contain only vehicle motion/vehicle parameters; target CSVs are independent. Switching scenario CSVs or using the built-in scenario must not clear imported targets. The software should keep targets and recompute `trueContactIdx` plus warning logs against the new trajectory.
+
+`CFG配置生成器/` is a separate minimal white-background Windows-style CFG builder. It generates strategy CFG JSON files for the blindspot analysis software. Launch via the desktop shortcut `CFG配置生成器.lnk` or `CFG配置生成器/启动CFG配置生成器.bat`. In desktop mode, `保存 CFG` writes to `转弯全过程盲区分析软件/CFG配置/`.
+
+Blindspot analysis logs use `hit_method=segment_swept`: statistical hit testing splits the prediction window into adjacent-step right-edge swept quadrilaterals instead of one large polygon. This preserves horizon monotonicity; extending EXIT from 2s to 3s only adds later swept segments. The online prediction panel has a display-mode selector: default `segment_swept 判定区` draws the actual swept quadrilaterals used by logs/statistics; `Poly 大多边形参考` keeps the old large-Poly outline as a visual reference. Realtime hit dots follow the selected display mode, while logs and blindspot counts always use `segment_swept`.
+
+CFG expansion consistency checklist lives at `docs/CFG扩窗算法一致性说明.md`. The required synchronized chain is `转弯全过程盲区分析软件/index.html`, `validate_turn_exit_targets.m`, `scan_ttc_threshold_blindspots.m`, and `CFG配置生成器/index.html`; `正交路口出弯状态机仿真/run_phase1_demo.m` is a MATLAB visualization/comparison demo and must also read the same CFG. MATLAB validation accepts a 6th `strategy_cfg_json` argument; threshold scanning accepts `opts.strategy_cfg_json`; the orthogonal-intersection demo accepts a 3rd `strategy_cfg_json` argument. The orthogonal-intersection demo uses `segment_swept` for statistical hits, logs, and risk levels, but its MATLAB figures intentionally still draw large PolyW/A/I polygons as shape references and do not yet include the web app's `segment_swept / Poly` display switch. `TTC预警复盘软件` and `alpha一阶保持仿真/truck_slider_sim.py` remain true-TTC/visual replay tools, not CFG expansion statistical judges.
+
 ### Alarm FSM (debouncing)
 
 ```

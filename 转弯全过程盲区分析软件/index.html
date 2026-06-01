@@ -53,7 +53,7 @@
       min-height: 0;
       overflow: hidden;
     }
-    .side, .right { display: flex; flex-direction: column; }
+    .side, .right { display: flex; flex-direction: column; overflow: auto; }
     .block {
       padding: 12px;
       border-bottom: 1px solid var(--line);
@@ -99,6 +99,18 @@
       font-size: 12px;
       line-height: 1.5;
       min-height: 38px;
+    }
+    .cfg-summary {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #0f1823;
+      max-height: 118px;
+      overflow: auto;
+      word-break: break-word;
     }
     .params, .metrics {
       display: grid;
@@ -313,6 +325,18 @@
       <div class="block">
         <h2>3. 在线预测窗口</h2>
         <div class="params" id="window-grid"></div>
+        <label>预测区显示模式</label>
+        <select id="swept-display-mode">
+          <option value="segment">segment_swept 判定区</option>
+          <option value="poly">Poly 大多边形参考</option>
+        </select>
+      </div>
+      <div class="block">
+        <h2>4. CFG 策略</h2>
+        <label>导入策略 CFG / JSON</label>
+        <input id="cfg-file" type="file" accept=".json,.cfg,application/json,text/plain" />
+        <div class="cfg-summary" id="cfg-summary"></div>
+        <button id="export-cfg" style="margin-top:8px;">导出当前 CFG</button>
       </div>
       <div class="block">
         <h2>车辆参数</h2>
@@ -384,9 +408,43 @@
   <script>
     const DEG = Math.PI / 180;
     const DEFAULT_TARGETS = [];
-    const HORIZONS = { W: 2.0, A: 1.0, I: 0.3 };
-    const DT_PRED = 0.02;
     const PHASE_NAMES = ["IDLE", "ENTRY", "MID", "EXIT", "DONE"];
+    const DEFAULT_STRATEGY_CFG = {
+      name: "baseline_hold_exit_window_cfg",
+      version: "1.0",
+      description: "默认一阶保持策略；EXIT 阶段扩大预测窗口，安全膨胀字段保留但不启用。",
+      state_machine: {
+        alpha_start_deg: 2.0,
+        mid_heading_delta_deg: 25.0,
+        exit_heading_delta_deg_min: 75.0,
+        exit_require_alpha_returning: true,
+        exit_phi_abs_deg_min: 4.0,
+        exit_hold_frames: 2,
+        done_alpha_abs_deg_max: 1.0,
+        done_phi_abs_deg_max: 2.0,
+        done_hold_frames: 10
+      },
+      strategies: {
+        default: {
+          T_h_W: 2.0,
+          T_h_A: 1.0,
+          T_h_I: 0.3,
+          dt_pred: 0.02,
+          alpha_mode: "hold",
+          safety_expand_m: 0.0,
+          safety_expand_enabled: false
+        },
+        EXIT: {
+          T_h_W: 3.0,
+          T_h_A: 1.5,
+          T_h_I: 0.5,
+          dt_pred: 0.02,
+          alpha_mode: "hold",
+          safety_expand_m: 0.0,
+          safety_expand_enabled: false
+        }
+      }
+    };
 
     const cfgDefault = {
       l: 4.0, l_h: 1.8, L: 13.5, width: 2.0, speed: 3.0,
@@ -398,6 +456,7 @@
 
     let data = simulateDefault(cfgDefault);
     let cfg = readConfigFromData(data);
+    let strategyCfg = normalizeStrategyCfg(DEFAULT_STRATEGY_CFG);
     let phase = computePhase(data);
     let targets = DEFAULT_TARGETS;
     let logRows = [];
@@ -406,6 +465,7 @@
     let playing = false;
     let lastTick = 0;
     let view = null;
+    let analysisRunId = 0;
 
     const canvasPoly = document.getElementById("scene-poly");
     const canvasDiagnosis = document.getElementById("scene-diagnosis");
@@ -420,6 +480,74 @@
     function wrapPi(a) { return Math.atan2(Math.sin(a), Math.cos(a)); }
     function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
     function fmt(v, n = 2) { return Number.isFinite(v) ? Number(v).toFixed(n) : "--"; }
+    function finiteOr(v, fallback) {
+      const n = Number(v);
+      return Number.isFinite(n) ? n : fallback;
+    }
+    function deepMerge(base, override) {
+      const out = Array.isArray(base) ? [...base] : {...base};
+      if (!override || typeof override !== "object") return out;
+      for (const [key, value] of Object.entries(override)) {
+        if (value && typeof value === "object" && !Array.isArray(value) && base?.[key] && typeof base[key] === "object" && !Array.isArray(base[key])) {
+          out[key] = deepMerge(base[key], value);
+        } else {
+          out[key] = value;
+        }
+      }
+      return out;
+    }
+    function normalizeStrategyCfg(raw) {
+      const merged = deepMerge(DEFAULT_STRATEGY_CFG, raw || {});
+      const normalizeStrategy = (s, fallback) => ({
+        T_h_W: Math.max(0.02, finiteOr(s?.T_h_W, fallback.T_h_W)),
+        T_h_A: Math.max(0.02, finiteOr(s?.T_h_A, fallback.T_h_A)),
+        T_h_I: Math.max(0.02, finiteOr(s?.T_h_I, fallback.T_h_I)),
+        dt_pred: Math.max(0.005, finiteOr(s?.dt_pred, fallback.dt_pred)),
+        alpha_mode: String(s?.alpha_mode || fallback.alpha_mode || "hold"),
+        safety_expand_m: Math.max(0, finiteOr(s?.safety_expand_m, fallback.safety_expand_m || 0)),
+        safety_expand_enabled: Boolean(s?.safety_expand_enabled)
+      });
+      const def = normalizeStrategy(merged.strategies?.default, DEFAULT_STRATEGY_CFG.strategies.default);
+      const normalized = {
+        ...merged,
+        name: String(merged.name || "unnamed_cfg"),
+        version: String(merged.version || "1.0"),
+        description: String(merged.description || ""),
+        state_machine: {
+          ...DEFAULT_STRATEGY_CFG.state_machine,
+          ...(merged.state_machine || {})
+        },
+        strategies: {default: def}
+      };
+      for (const [key, value] of Object.entries(merged.strategies || {})) {
+        if (key === "default") continue;
+        normalized.strategies[key.toUpperCase()] = normalizeStrategy(value, def);
+      }
+      const exitRaw = raw?.strategies?.EXIT ?? raw?.strategies?.exit ?? merged.strategies?.EXIT ?? merged.strategies?.exit;
+      normalized.strategies.EXIT = normalizeStrategy(exitRaw, normalized.strategies.EXIT || def);
+      return normalized;
+    }
+    function strategyForPhaseName(name) {
+      return strategyCfg.strategies[name] || strategyCfg.strategies.default;
+    }
+    function strategyForIndex(k) {
+      return strategyForPhaseName(PHASE_NAMES[phase[k]] || "default");
+    }
+    function cfgSummaryText() {
+      const sm = strategyCfg.state_machine;
+      const def = strategyCfg.strategies.default;
+      const ex = strategyCfg.strategies.EXIT || def;
+      return [
+        `CFG: ${strategyCfg.name} v${strategyCfg.version}`,
+        `EXIT: heading>=${finiteOr(sm.exit_heading_delta_deg_min, 75)}deg, phi>=${finiteOr(sm.exit_phi_abs_deg_min, 4)}deg, hold=${finiteOr(sm.exit_hold_frames, 2)}帧`,
+        `default W/A/I=${def.T_h_W}/${def.T_h_A}/${def.T_h_I}s, dt=${def.dt_pred}s`,
+        `EXIT W/A/I=${ex.T_h_W}/${ex.T_h_A}/${ex.T_h_I}s, dt=${ex.dt_pred}s`
+      ].join("\n");
+    }
+    function updateCfgSummary() {
+      const el = document.getElementById("cfg-summary");
+      if (el) el.textContent = cfgSummaryText();
+    }
 
     function buildReferenceHeading(time, c) {
       const a = deg2rad(c.thetaStartDeg), b = deg2rad(c.thetaEndDeg);
@@ -468,7 +596,7 @@
 
     function parseCSV(text) {
       const lines = text.trim().split(/\r?\n/).filter(Boolean);
-      const headers = lines[0].split(",").map(s => s.trim().replace(/^\uFEFF/, ""));
+      const headers = splitCSVLine(lines[0]).map(s => s.trim().replace(/^\uFEFF/, ""));
       const cols = Object.fromEntries(headers.map(h => [h, []]));
       for (let i = 1; i < lines.length; i++) {
         const values = splitCSVLine(lines[i]);
@@ -501,6 +629,11 @@
 
     function parseTargetsCSV(text) {
       const rows = parseCSV(text);
+      applyTargetCSVSettings(rows);
+      return parseTargetsRows(rows);
+    }
+
+    function parseTargetsRows(rows) {
       const pick = [["x_m","y_m"],["x","y"],["target_x_m","target_y_m"]].find(([x,y]) => rows[x] && rows[y]);
       if (!pick) throw new Error("目标 CSV 需要 x_m,y_m 或 x,y 列");
       const n = rows[pick[0]].length;
@@ -524,15 +657,79 @@
       return parsed;
     }
 
-    function refreshAnalysis(statusText = "已按当前参数刷新盲区分析。") {
+    function firstFiniteColumnValue(rows, names) {
+      for (const name of names) {
+        if (!rows[name] || !rows[name].length) continue;
+        for (const raw of rows[name]) {
+          const v = Number(raw);
+          if (Number.isFinite(v)) return v;
+        }
+      }
+      return NaN;
+    }
+
+    function setInputIfFinite(id, value) {
+      if (!Number.isFinite(value)) return false;
+      const el = document.getElementById(id);
+      if (!el) return false;
+      el.value = String(value);
+      return true;
+    }
+
+    function applyTargetCSVSettings(rows) {
+      const imported = [];
+      const mapping = [
+        {
+          id: "spacing",
+          label: "采样间距",
+          names: ["sampling_spacing_m", "spacing_m", "target_spacing_m"]
+        },
+        {
+          id: "grid-size",
+          label: "判内容差",
+          names: ["tolerance_m", "grid_size_m", "poly_tolerance_m"]
+        },
+        {
+          id: "max-targets",
+          label: "最大边界点数",
+          names: ["max_boundary_points", "max_targets", "max_target_count"]
+        },
+        {
+          id: "warmup-ignore",
+          label: "起始截断",
+          names: ["warmup_ignore_s", "startup_truncation_s", "start_truncate_s"]
+        }
+      ];
+      for (const item of mapping) {
+        const value = firstFiniteColumnValue(rows, item.names);
+        if (setInputIfFinite(item.id, value)) imported.push(`${item.label}=${value}`);
+      }
+      return imported;
+    }
+
+    async function refreshAnalysis(statusText = "已按当前参数刷新盲区分析。") {
       if (!targets.length) {
         document.getElementById("load-status").textContent = "当前没有目标点，请先生成或导入目标点 CSV。";
         return;
       }
-      analyzeTargets();
-      fitView();
-      render();
-      document.getElementById("load-status").textContent = statusText;
+      const refreshBtn = document.getElementById("refresh-analysis");
+      if (refreshBtn) {
+        refreshBtn.disabled = true;
+        refreshBtn.textContent = "分析中...";
+      }
+      try {
+        await analyzeTargets(statusText);
+        fitView();
+        render();
+        document.getElementById("load-status").textContent = statusText;
+      } catch (err) {
+        document.getElementById("load-status").textContent = `分析失败: ${err.message}`;
+      } finally {
+        if (refreshBtn) {
+          refreshBtn.disabled = false;
+          refreshBtn.textContent = "按当前参数刷新分析";
+        }
+      }
     }
 
     function nearestTimeIndex(timeValue) {
@@ -633,7 +830,16 @@
       const n = d.time_s.length;
       const out = Array(n).fill(0);
       let state = 0, startTheta = d.theta_rad[0], exitCount = 0, doneCount = 0;
-      const alphaStart = 2 * DEG, exitAngle = 75 * DEG;
+      const sm = strategyCfg.state_machine || DEFAULT_STRATEGY_CFG.state_machine;
+      const alphaStart = finiteOr(sm.alpha_start_deg, 2) * DEG;
+      const midAngle = finiteOr(sm.mid_heading_delta_deg, 25) * DEG;
+      const exitAngle = finiteOr(sm.exit_heading_delta_deg_min, 75) * DEG;
+      const exitPhiMin = finiteOr(sm.exit_phi_abs_deg_min, 4) * DEG;
+      const exitHoldFrames = Math.max(1, Math.round(finiteOr(sm.exit_hold_frames, 2)));
+      const doneAlphaMax = finiteOr(sm.done_alpha_abs_deg_max, 1) * DEG;
+      const donePhiMax = finiteOr(sm.done_phi_abs_deg_max, 2) * DEG;
+      const doneHoldFrames = Math.max(1, Math.round(finiteOr(sm.done_hold_frames, 10)));
+      const requireReturning = sm.exit_require_alpha_returning !== false;
       for (let i = 1; i < n; i++) {
         const alpha = d.alpha_rad[i] ?? 0;
         const alphaPrev = d.alpha_rad[i-1] ?? alpha;
@@ -645,26 +851,28 @@
         }
         if (state === 1) {
           const hdg = Math.abs(wrapPi(d.theta_rad[i] - startTheta));
-          if (hdg > 25 * DEG) state = 2;
+          if (hdg > midAngle) state = 2;
         }
         if (state === 2) {
           const hdg = Math.abs(wrapPi(d.theta_rad[i] - startTheta));
           const returning = Math.abs(alpha) < Math.abs(alphaPrev) || alpha * alphaDot < 0;
-          const phiLag = Math.abs(phi) > 4 * DEG;
-          if (hdg >= exitAngle && (returning || phiLag)) exitCount += 1; else exitCount = 0;
-          if (exitCount >= 2) state = 3;
+          const phiLag = Math.abs(phi) > exitPhiMin;
+          const exitOk = hdg >= exitAngle && ((requireReturning && returning) || phiLag || !requireReturning);
+          if (exitOk) exitCount += 1; else exitCount = 0;
+          if (exitCount >= exitHoldFrames) state = 3;
         }
         if (state === 3) {
-          if (Math.abs(alpha) < 1 * DEG && Math.abs(phi) < 2 * DEG) doneCount += 1; else doneCount = 0;
-          if (doneCount >= 10) state = 4;
+          if (Math.abs(alpha) < doneAlphaMax && Math.abs(phi) < donePhiMax) doneCount += 1; else doneCount = 0;
+          if (doneCount >= doneHoldFrames) state = 4;
         }
         out[i] = state;
       }
       return out;
     }
 
-    function predictSwept(k0, horizon) {
-      const M = Math.max(1, Math.floor(horizon / DT_PRED));
+    function predictSwept(k0, horizon, strategy = strategyForIndex(k0)) {
+      const dtPred = Math.max(0.005, strategy?.dt_pred ?? 0.02);
+      const M = Math.max(1, Math.floor(horizon / dtPred));
       let s = [data.xB_m[k0], data.yB_m[k0], data.theta_rad[k0], data.phi_rad[k0]];
       const alpha = data.alpha_rad[k0] ?? 0;
       const v = (data.v_input_mps ?? data.v_mps)[k0] ?? cfg.speed;
@@ -675,9 +883,39 @@
         const hw = cfg.width * 0.5;
         Hright.push([d.H[0] + hw*nR[0], d.H[1] + hw*nR[1]]);
         Tright.push([d.T[0] + hw*nR[0], d.T[1] + hw*nR[1]]);
-        if (i < M) s = stepState(s, alpha, v, cfg, DT_PRED);
+        if (i < M) s = stepState(s, alpha, v, cfg, dtPred);
       }
       return Hright.concat(Tright.reverse());
+    }
+
+    function predictRightEdgeSequence(k0, horizon, strategy = strategyForIndex(k0)) {
+      const dtPred = Math.max(0.005, strategy?.dt_pred ?? 0.02);
+      const M = Math.max(1, Math.floor(horizon / dtPred));
+      let s = [data.xB_m[k0], data.yB_m[k0], data.theta_rad[k0], data.phi_rad[k0]];
+      const alpha = data.alpha_rad[k0] ?? 0;
+      const v = (data.v_input_mps ?? data.v_mps)[k0] ?? cfg.speed;
+      const seq = [];
+      for (let i = 0; i <= M; i++) {
+        const d = derivePoints(s, cfg);
+        const nR = [Math.sin(d.theta_t), -Math.cos(d.theta_t)];
+        const hw = cfg.width * 0.5;
+        seq.push({
+          H: [d.H[0] + hw*nR[0], d.H[1] + hw*nR[1]],
+          T: [d.T[0] + hw*nR[0], d.T[1] + hw*nR[1]]
+        });
+        if (i < M) s = stepState(s, alpha, v, cfg, dtPred);
+      }
+      return seq;
+    }
+
+    function pointInSweptSegmentsTol(pt, edgeSeq, tol) {
+      if (!edgeSeq || edgeSeq.length < 2) return false;
+      for (let i = 0; i < edgeSeq.length - 1; i++) {
+        const a = edgeSeq[i], b = edgeSeq[i + 1];
+        const quad = [a.H, b.H, b.T, a.T];
+        if (pointInPolyTol(pt, quad, tol)) return true;
+      }
+      return false;
     }
 
     function pointInPoly(p, poly) {
@@ -750,7 +988,21 @@
       return aroundIdx;
     }
 
-    function analyzeTargets() {
+    function rebindTargetsToCurrentScenario() {
+      if (!targets.length) return;
+      targets = targets.map((t, i) => ({
+        ...t,
+        id: t.id ?? i + 1,
+        trueContactIdx: refineContactIndex([t.x, t.y], nearestSpatialIndex([t.x, t.y]))
+      }));
+    }
+
+    function sleepFrame() {
+      return new Promise(resolve => setTimeout(resolve, 0));
+    }
+
+    async function analyzeTargets(doneText = "已按当前参数刷新盲区分析。") {
+      const runId = ++analysisRunId;
       const first = targets.map(t => ({
         ...t,
         firstW: NaN, firstA: NaN, firstI: NaN,
@@ -758,19 +1010,32 @@
       }));
       const tol = Number(document.getElementById("grid-size").value);
       for (let k = 0; k < data.time_s.length; k++) {
-        const polyW = predictSwept(k, HORIZONS.W);
-        const polyA = predictSwept(k, HORIZONS.A);
-        const polyI = predictSwept(k, HORIZONS.I);
+        if (runId !== analysisRunId) return;
+        const strategy = strategyForIndex(k);
+        const edgeW = predictRightEdgeSequence(k, strategy.T_h_W, strategy);
+        const edgeA = predictRightEdgeSequence(k, strategy.T_h_A, strategy);
+        const edgeI = predictRightEdgeSequence(k, strategy.T_h_I, strategy);
         for (const row of first) {
+          if (Number.isFinite(row.firstW) && Number.isFinite(row.firstA) && Number.isFinite(row.firstI)) continue;
           const pt = [row.x, row.y];
-          if (!Number.isFinite(row.firstW) && pointInPolyTol(pt, polyW, tol)) {
+          if (!Number.isFinite(row.firstW) && pointInSweptSegmentsTol(pt, edgeW, tol)) {
             row.firstW = k;
             row.phaseW = PHASE_NAMES[phase[k]];
+            row.strategyW = strategy;
+            row.stateW = PHASE_NAMES[phase[k]];
           }
-          if (!Number.isFinite(row.firstA) && pointInPolyTol(pt, polyA, tol)) row.firstA = k;
-          if (!Number.isFinite(row.firstI) && pointInPolyTol(pt, polyI, tol)) row.firstI = k;
+          if (!Number.isFinite(row.firstA) && pointInSweptSegmentsTol(pt, edgeA, tol)) row.firstA = k;
+          if (!Number.isFinite(row.firstI) && pointInSweptSegmentsTol(pt, edgeI, tol)) row.firstI = k;
+        }
+        if (k % 20 === 0) {
+          const remaining = first.some(row => !Number.isFinite(row.firstW) || !Number.isFinite(row.firstA) || !Number.isFinite(row.firstI));
+          if (!remaining) break;
+          const pct = Math.round(k / Math.max(1, data.time_s.length - 1) * 100);
+          document.getElementById("load-status").textContent = `正在分析目标点... ${pct}% (${k}/${data.time_s.length - 1})`;
+          await sleepFrame();
         }
       }
+      if (runId !== analysisRunId) return;
       const threshold = Number(document.getElementById("lead-threshold").value);
       const warmupIgnore = Number(document.getElementById("warmup-ignore").value);
       logRows = first.map(row => {
@@ -791,7 +1056,17 @@
           ttc_s: leadW,
           event: eventName,
           phase: row.phaseW || "",
-        source: "PolyW_online",
+          state: row.stateW || row.phaseW || "",
+          source: "PolyW_online_cfg_segment_swept",
+          hit_method: "segment_swept",
+          cfg_name: strategyCfg.name,
+          T_h_W_s: row.strategyW?.T_h_W ?? NaN,
+          T_h_A_s: row.strategyW?.T_h_A ?? NaN,
+          T_h_I_s: row.strategyW?.T_h_I ?? NaN,
+          dt_pred_s: row.strategyW?.dt_pred ?? NaN,
+          alpha_mode: row.strategyW?.alpha_mode ?? "",
+          safety_expand_m: row.strategyW?.safety_expand_m ?? 0,
+          safety_expand_enabled: Boolean(row.strategyW?.safety_expand_enabled),
           x_m: row.x,
           y_m: row.y,
           true_contact_time_s: tContact,
@@ -805,9 +1080,12 @@
       }).sort((a, b) => (a.true_contact_time_s - b.true_contact_time_s) || ((a.time_s || Infinity) - (b.time_s || Infinity)));
       renderLog();
       updateSummary();
+      document.getElementById("load-status").textContent = doneText;
     }
 
-    function resetPlayback() {
+    function resetPlayback(options = {}) {
+      analysisRunId += 1;
+      const keepTargets = options.keepTargets ?? true;
       phase = computePhase(data);
       slider.max = data.time_s.length - 1;
       slider.value = 0;
@@ -815,10 +1093,15 @@
       playing = false;
       playBtn.textContent = "自动播放";
       playBtn.classList.remove("playing");
-      targets = [];
+      if (keepTargets) {
+        rebindTargetsToCurrentScenario();
+      } else {
+        targets = [];
+      }
       logRows = [];
       updateParamGrid();
       updateWindowGrid();
+      updateCfgSummary();
       updateSummary();
       renderLog();
       fitView();
@@ -831,7 +1114,14 @@
     }
 
     function updateWindowGrid() {
-      const items = [["PolyW",HORIZONS.W+" s"],["PolyA",HORIZONS.A+" s"],["PolyI",HORIZONS.I+" s"],["dt_pred",DT_PRED+" s"]];
+      const def = strategyCfg.strategies.default;
+      const ex = strategyCfg.strategies.EXIT || def;
+      const items = [
+        ["default W/A/I", `${def.T_h_W}/${def.T_h_A}/${def.T_h_I} s`],
+        ["EXIT W/A/I", `${ex.T_h_W}/${ex.T_h_A}/${ex.T_h_I} s`],
+        ["default dt", `${def.dt_pred} s`],
+        ["EXIT dt", `${ex.dt_pred} s`]
+      ];
       document.getElementById("window-grid").innerHTML = items.map(([k,v]) => `<div class="metric"><span>${k}</span><strong>${v}</strong></div>`).join("");
     }
 
@@ -843,6 +1133,7 @@
       const missCount = logRows.filter(r => r.event === "POLYW_NO_HIT").length;
       const startupCount = logRows.filter(r => r.event === "STARTUP_TRUNCATED").length;
       const firstLate = logRows.find(r => r.event === "BLINDSPOT_REACTION_INSUFFICIENT");
+      const exitStrategy = strategyCfg.strategies.EXIT || strategyCfg.strategies.default;
       const items = [
         ["EXIT首触发", exitIdx >= 0 ? data.time_s[exitIdx].toFixed(2)+" s" : "未触发"],
         ["边界点数", targets.length],
@@ -850,7 +1141,9 @@
         [`充足 / 未命中`, `${okCount} / ${missCount}`],
         ["起始截断", startupCount],
         ["首个盲区点", firstLate ? `${firstLate.target} @ ${firstLate.true_contact_time_s.toFixed(2)}s` : "--"],
-        ["反应阈值", `${threshold.toFixed(1)} s`]
+        ["反应阈值", `${threshold.toFixed(1)} s`],
+        ["当前CFG", strategyCfg.name],
+        ["EXIT PolyW", `${exitStrategy.T_h_W.toFixed(2)} s`]
       ];
       document.getElementById("summary-grid").innerHTML = items.map(([k,v]) => `<div class="metric"><span>${k}</span><strong>${v}</strong></div>`).join("");
     }
@@ -907,6 +1200,32 @@
       ctx.restore();
     }
 
+    function drawSweptSegments(edgeSeq, fill, stroke, alpha = 0.16, width = 0.55, stride = 1) {
+      if (!edgeSeq || edgeSeq.length < 2) return;
+      const n = edgeSeq.length - 1;
+      const step = Math.max(1, Math.round(stride));
+      ctx.save();
+      for (let i = 0; i < n; i += step) {
+        const a = edgeSeq[i];
+        const b = edgeSeq[i + 1];
+        if (!a || !b) continue;
+        const quad = [a.H, b.H, b.T, a.T];
+        ctx.globalAlpha = alpha;
+        ctx.beginPath();
+        quad.forEach((p, j) => {
+          const q = toScreen(p);
+          if (j === 0) ctx.moveTo(q[0], q[1]); else ctx.lineTo(q[0], q[1]);
+        });
+        ctx.closePath();
+        ctx.fillStyle = fill;
+        ctx.strokeStyle = stroke;
+        ctx.lineWidth = width;
+        ctx.fill();
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
     function drawLine(points, color, width = 1, alpha = 1) {
       ctx.save();
       ctx.globalAlpha = alpha;
@@ -955,29 +1274,46 @@
       const rect = beginCanvas(canvasPoly);
       drawPaths();
       const k = currentIndex;
-      const polyW = predictSwept(k, HORIZONS.W);
-      const polyA = predictSwept(k, HORIZONS.A);
-      const polyI = predictSwept(k, HORIZONS.I);
-      drawPoly(polyW, "#f6d94a", "#b69c20", 0.22, 1);
-      drawPoly(polyA, "#f29b38", "#b06318", 0.28, 1.2);
-      drawPoly(polyI, "#e85d5d", "#9f3030", 0.36, 1.4);
+      const strategy = strategyForIndex(k);
+      const displayMode = document.getElementById("swept-display-mode")?.value || "segment";
+      const polyW = displayMode === "poly" ? predictSwept(k, strategy.T_h_W, strategy) : null;
+      const polyA = displayMode === "poly" ? predictSwept(k, strategy.T_h_A, strategy) : null;
+      const polyI = displayMode === "poly" ? predictSwept(k, strategy.T_h_I, strategy) : null;
+      const edgeW = predictRightEdgeSequence(k, strategy.T_h_W, strategy);
+      const edgeA = predictRightEdgeSequence(k, strategy.T_h_A, strategy);
+      const edgeI = predictRightEdgeSequence(k, strategy.T_h_I, strategy);
+      if (displayMode === "poly") {
+        drawPoly(polyW, "#f6d94a", "#b69c20", 0.22, 1);
+        drawPoly(polyA, "#f29b38", "#b06318", 0.28, 1.2);
+        drawPoly(polyI, "#e85d5d", "#9f3030", 0.36, 1.4);
+      } else {
+        drawSweptSegments(edgeW, "#f6d94a", "#b69c20", 0.12, 0.45, 1);
+        drawSweptSegments(edgeA, "#f29b38", "#b06318", 0.18, 0.6, 1);
+        drawSweptSegments(edgeI, "#e85d5d", "#9f3030", 0.28, 0.8, 1);
+      }
       drawPoly(bodyPolyAt(k), "#53c9d8", "#228596", 0.34, 1.4);
       drawCurrentTrailer(k);
 
-      drawRealtimePolyHits(polyW, polyA, polyI);
+      drawRealtimePolyHits({displayMode, polyW, polyA, polyI, edgeW, edgeA, edgeI});
 
       ctx.fillStyle = "#172331"; ctx.font = "13px Consolas";
-      ctx.fillText(`t=${data.time_s[k].toFixed(2)}s  phase=${PHASE_NAMES[phase[k]]}  alpha=${rad2deg(data.alpha_rad[k]).toFixed(2)}deg  phi=${rad2deg(data.phi_rad[k]).toFixed(2)}deg`, 14, rect.height - 16);
+      ctx.fillText(`t=${data.time_s[k].toFixed(2)}s  phase=${PHASE_NAMES[phase[k]]}  mode=${displayMode}  W/A/I=${strategy.T_h_W}/${strategy.T_h_A}/${strategy.T_h_I}s  alpha=${rad2deg(data.alpha_rad[k]).toFixed(2)}deg  phi=${rad2deg(data.phi_rad[k]).toFixed(2)}deg`, 14, rect.height - 16);
     }
 
-    function drawRealtimePolyHits(polyW, polyA, polyI) {
+    function drawRealtimePolyHits(pred) {
       const tol = Number(document.getElementById("grid-size").value);
       let countW = 0, countA = 0, countI = 0;
       for (const row of logRows) {
         const pt = [row.x_m, row.y_m];
-        const inI = pointInPolyTol(pt, polyI, tol);
-        const inA = !inI && pointInPolyTol(pt, polyA, tol);
-        const inW = !inI && !inA && pointInPolyTol(pt, polyW, tol);
+        const inI = pred.displayMode === "poly"
+          ? pointInPolyTol(pt, pred.polyI, tol)
+          : pointInSweptSegmentsTol(pt, pred.edgeI, tol);
+        const inA = !inI && (pred.displayMode === "poly"
+          ? pointInPolyTol(pt, pred.polyA, tol)
+          : pointInSweptSegmentsTol(pt, pred.edgeA, tol));
+        const inW = !inI && !inA && (pred.displayMode === "poly"
+          ? pointInPolyTol(pt, pred.polyW, tol)
+          : pointInSweptSegmentsTol(pt, pred.edgeW, tol));
         if (!inI && !inA && !inW) continue;
 
         let color = "#d9b900", radius = 2.2, alpha = 0.62;
@@ -998,7 +1334,7 @@
       const rect = canvas.getBoundingClientRect();
       ctx.fillStyle = "#243244";
       ctx.font = "12px Consolas";
-      ctx.fillText(`hits now: W-only=${countW}  A-only=${countA}  I=${countI}`, 14, rect.height - 34);
+      ctx.fillText(`hits now (${pred.displayMode}): W-only=${countW}  A-only=${countA}  I=${countI}`, 14, rect.height - 34);
     }
 
     function renderDiagnosisPanel() {
@@ -1055,34 +1391,65 @@
         data = normalizeData(parseCSV(await readFile(file)));
         cfg = readConfigFromData(data);
         document.getElementById("source-label").textContent = file.name;
-        document.getElementById("load-status").textContent = `已导入场景: ${file.name}`;
-        resetPlayback();
+        resetPlayback({keepTargets: true});
+        if (targets.length) {
+          await refreshAnalysis(`已导入场景: ${file.name}，已保留 ${targets.length} 个目标点并按新场景重算分析。`);
+        } else {
+          document.getElementById("load-status").textContent = `已导入场景: ${file.name}。`;
+        }
       } catch (err) {
         document.getElementById("load-status").textContent = `导入失败: ${err.message}`;
       }
     };
-    document.getElementById("use-default").onclick = () => {
+    document.getElementById("use-default").onclick = async () => {
       data = simulateDefault(cfgDefault);
       cfg = readConfigFromData(data);
       document.getElementById("source-label").textContent = "内置示例工况";
-      document.getElementById("load-status").textContent = "已载入内置示例工况。";
-      resetPlayback();
+      resetPlayback({keepTargets: true});
+      if (targets.length) {
+        await refreshAnalysis(`已载入内置示例工况，已保留 ${targets.length} 个目标点并重算分析。`);
+      } else {
+        document.getElementById("load-status").textContent = "已载入内置示例工况。";
+      }
     };
     document.getElementById("target-file").onchange = async e => {
       const file = e.target.files[0];
       if (!file) return;
       try {
-        targets = parseTargetsCSV(await readFile(file));
-        refreshAnalysis(`已导入固定目标点: ${file.name}  (N=${targets.length})`);
+        const text = await readFile(file);
+        const rows = parseCSV(text);
+        const importedSettings = applyTargetCSVSettings(rows);
+        targets = parseTargetsRows(rows);
+        const suffix = importedSettings.length ? `；已从CSV读取配置: ${importedSettings.join("，")}` : "；CSV 未包含可同步配置，保留当前界面设置";
+        await refreshAnalysis(`已导入固定目标点: ${file.name}  (N=${targets.length})${suffix}`);
       } catch (err) {
         document.getElementById("load-status").textContent = `目标导入失败: ${err.message}`;
       }
     };
-    document.getElementById("build-targets").onclick = () => {
-      generateBoundaryTargets();
-      refreshAnalysis(`已生成并分析 ${targets.length} 个全过程边界点。`);
+    document.getElementById("cfg-file").onchange = async e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      try {
+        strategyCfg = normalizeStrategyCfg(JSON.parse(await readFile(file)));
+        phase = computePhase(data);
+        updateWindowGrid();
+        updateCfgSummary();
+        if (targets.length) {
+          await refreshAnalysis(`已导入 CFG: ${file.name}，并按新策略刷新分析。`);
+        } else {
+          render();
+          document.getElementById("load-status").textContent = `已导入 CFG: ${file.name}`;
+        }
+      } catch (err) {
+        document.getElementById("load-status").textContent = `CFG 导入失败: ${err.message}`;
+      }
     };
-    document.getElementById("refresh-analysis").onclick = () => refreshAnalysis();
+    document.getElementById("build-targets").onclick = async () => {
+      generateBoundaryTargets();
+      await refreshAnalysis(`已生成并分析 ${targets.length} 个全过程边界点。`);
+    };
+    document.getElementById("refresh-analysis").onclick = async () => await refreshAnalysis();
+    document.getElementById("swept-display-mode").onchange = () => render();
     slider.oninput = () => {
       currentIndex = Number(slider.value);
       render();
@@ -1144,20 +1511,32 @@
       setTimeout(render, 80);
     });
     document.getElementById("export-log").onclick = () => {
-      const header = "time_s,target,risk,ttc_s,event,phase,source,x_m,y_m,true_contact_time_s,lead_s,first_PolyA_s,first_PolyI_s,contact_phase,tolerance_m,warmup_ignore_s";
-      const lines = logRows.map(r => [r.time_s,r.target,r.risk,r.ttc_s,r.event,r.phase,r.source,r.x_m,r.y_m,r.true_contact_time_s,r.lead_s,r.first_PolyA_s,r.first_PolyI_s,r.contact_phase,r.tolerance_m,r.warmup_ignore_s].map(v => Number.isFinite(v) ? Number(v).toFixed(3) : (v ?? "")).join(","));
+      const header = "time_s,target,risk,ttc_s,event,phase,state,source,hit_method,cfg_name,T_h_W_s,T_h_A_s,T_h_I_s,dt_pred_s,alpha_mode,safety_expand_m,safety_expand_enabled,x_m,y_m,true_contact_time_s,lead_s,first_PolyA_s,first_PolyI_s,contact_phase,tolerance_m,warmup_ignore_s";
+      const lines = logRows.map(r => [r.time_s,r.target,r.risk,r.ttc_s,r.event,r.phase,r.state,r.source,r.hit_method,r.cfg_name,r.T_h_W_s,r.T_h_A_s,r.T_h_I_s,r.dt_pred_s,r.alpha_mode,r.safety_expand_m,r.safety_expand_enabled,r.x_m,r.y_m,r.true_contact_time_s,r.lead_s,r.first_PolyA_s,r.first_PolyI_s,r.contact_phase,r.tolerance_m,r.warmup_ignore_s].map(v => Number.isFinite(v) ? Number(v).toFixed(3) : (v ?? "")).join(","));
       const csv = header + "\n" + lines.join("\n");
       saveCsv("logs", `turn_blindspot_boundary_log_${timestampForFile()}.csv`, csv);
     };
+    document.getElementById("export-cfg").onclick = () => {
+      const json = JSON.stringify(strategyCfg, null, 2);
+      saveText("cfg", `turn_blindspot_strategy_cfg_${timestampForFile()}.json`, json, "application/json;charset=utf-8");
+    };
     document.getElementById("export-targets").onclick = () => {
-      const header = "target,x_m,y_m,true_contact_time_s,true_contact_idx,contact_phase";
+      const spacing = Number(document.getElementById("spacing").value);
+      const tol = Number(document.getElementById("grid-size").value);
+      const maxTargets = Number(document.getElementById("max-targets").value);
+      const warmupIgnore = Number(document.getElementById("warmup-ignore").value);
+      const header = "target,x_m,y_m,true_contact_time_s,true_contact_idx,contact_phase,sampling_spacing_m,tolerance_m,max_boundary_points,warmup_ignore_s";
       const lines = targets.map(t => [
         t.name,
         t.x.toFixed(6),
         t.y.toFixed(6),
         data.time_s[t.trueContactIdx].toFixed(6),
         t.trueContactIdx + 1,
-        PHASE_NAMES[phase[t.trueContactIdx]]
+        PHASE_NAMES[phase[t.trueContactIdx]],
+        Number.isFinite(spacing) ? spacing.toFixed(6) : "",
+        Number.isFinite(tol) ? tol.toFixed(6) : "",
+        Number.isFinite(maxTargets) ? Math.round(maxTargets) : "",
+        Number.isFinite(warmupIgnore) ? warmupIgnore.toFixed(6) : ""
       ].join(","));
       const csv = header + "\n" + lines.join("\n");
       saveCsv("targets", `turn_blindspot_boundary_targets_${timestampForFile()}.csv`, csv);
@@ -1168,9 +1547,13 @@
     }
 
     async function saveCsv(kind, filename, csv) {
+      return saveText(kind, filename, csv, "text/csv;charset=utf-8");
+    }
+
+    async function saveText(kind, filename, content, mimeType) {
       if (window.blindspotApp?.saveCsv) {
         try {
-          const filePath = await window.blindspotApp.saveCsv(kind, filename, csv);
+          const filePath = await window.blindspotApp.saveCsv(kind, filename, content);
           document.getElementById("load-status").textContent = `已保存: ${filePath}`;
           return;
         } catch (err) {
@@ -1178,7 +1561,7 @@
         }
       }
       const a = document.createElement("a");
-      a.href = URL.createObjectURL(new Blob([csv], {type:"text/csv;charset=utf-8"}));
+      a.href = URL.createObjectURL(new Blob([content], {type:mimeType}));
       a.download = filename;
       a.click();
       URL.revokeObjectURL(a.href);
