@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CFG 配置生成器</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #555555;
+      --line: #d0d0d0;
+      --panel: #f7f7f7;
+      --blue: #005fb8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+      font-size: 14px;
+    }
+    header {
+      padding: 18px 24px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    main {
+      display: grid;
+      grid-template-columns: minmax(560px, 720px) 1fr;
+      gap: 18px;
+      padding: 18px 24px 24px;
+      min-height: calc(100vh - 74px);
+    }
+    section {
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .section-title {
+      padding: 10px 12px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--line);
+      font-weight: 600;
+    }
+    .section-body { padding: 12px; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 14px;
+    }
+    label {
+      display: block;
+      margin-bottom: 4px;
+      color: #222;
+      font-size: 13px;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      font: inherit;
+      color: var(--text);
+    }
+    input, select, textarea {
+      border: 1px solid #9f9f9f;
+      background: #fff;
+      padding: 6px 8px;
+      border-radius: 2px;
+      min-height: 32px;
+    }
+    input[type="checkbox"] {
+      width: auto;
+      min-height: auto;
+      margin-right: 7px;
+      vertical-align: -1px;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+    .full { grid-column: 1 / -1; }
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      margin-top: 5px;
+    }
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    button {
+      min-height: 34px;
+      border: 1px solid #8f8f8f;
+      background: #f3f3f3;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+    button.primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+    button:active { transform: translateY(1px); }
+    .status {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      min-height: 20px;
+    }
+    pre {
+      margin: 0;
+      padding: 12px;
+      height: calc(100vh - 146px);
+      overflow: auto;
+      border: 1px solid var(--line);
+      background: #fbfbfb;
+      font: 12px Consolas, "Courier New", monospace;
+      white-space: pre;
+    }
+    .stack { display: grid; gap: 14px; }
+    .checkbox-line {
+      display: flex;
+      align-items: center;
+      min-height: 32px;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CFG 配置生成器</h1>
+    <div class="subtitle">生成“转弯全过程盲区分析软件”可导入的状态机与预测窗口配置。</div>
+  </header>
+
+  <main>
+    <div class="stack">
+      <section>
+        <div class="section-title">基本信息</div>
+        <div class="section-body grid">
+          <div>
+            <label for="cfg-name">配置名称</label>
+            <input id="cfg-name" value="exit_window_test_cfg" />
+          </div>
+          <div>
+            <label for="cfg-version">版本</label>
+            <input id="cfg-version" value="1.0" />
+          </div>
+          <div class="full">
+            <label for="cfg-description">说明</label>
+            <textarea id="cfg-description">EXIT 阶段扩大预测窗口；安全膨胀暂不启用。</textarea>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title">状态机</div>
+        <div class="section-body grid">
+          <div>
+            <label for="alpha-start">ENTRY 触发 alpha / deg</label>
+            <input id="alpha-start" type="number" step="0.1" value="2.0" />
+          </div>
+          <div>
+            <label for="mid-heading">MID 航向变化 / deg</label>
+            <input id="mid-heading" type="number" step="0.5" value="25.0" />
+          </div>
+          <div>
+            <label for="exit-heading">EXIT 航向变化 / deg</label>
+            <input id="exit-heading" type="number" step="0.5" value="75.0" />
+          </div>
+          <div>
+            <label for="exit-phi">EXIT phi 滞后 / deg</label>
+            <input id="exit-phi" type="number" step="0.1" value="4.0" />
+          </div>
+          <div>
+            <label for="exit-hold">EXIT 保持帧数</label>
+            <input id="exit-hold" type="number" step="1" value="2" />
+          </div>
+          <div class="checkbox-line">
+            <label><input id="exit-returning" type="checkbox" checked />要求 alpha 回正趋势</label>
+          </div>
+          <div>
+            <label for="done-alpha">DONE alpha / deg</label>
+            <input id="done-alpha" type="number" step="0.1" value="1.0" />
+          </div>
+          <div>
+            <label for="done-phi">DONE phi / deg</label>
+            <input id="done-phi" type="number" step="0.1" value="2.0" />
+          </div>
+          <div>
+            <label for="done-hold">DONE 保持帧数</label>
+            <input id="done-hold" type="number" step="1" value="10" />
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title">预测窗口</div>
+        <div class="section-body grid">
+          <div>
+            <label for="def-w">默认 PolyW / s</label>
+            <input id="def-w" type="number" step="0.05" value="2.0" />
+          </div>
+          <div>
+            <label for="exit-w">EXIT PolyW / s</label>
+            <input id="exit-w" type="number" step="0.05" value="3.0" />
+          </div>
+          <div>
+            <label for="def-a">默认 PolyA / s</label>
+            <input id="def-a" type="number" step="0.05" value="1.0" />
+          </div>
+          <div>
+            <label for="exit-a">EXIT PolyA / s</label>
+            <input id="exit-a" type="number" step="0.05" value="1.5" />
+          </div>
+          <div>
+            <label for="def-i">默认 PolyI / s</label>
+            <input id="def-i" type="number" step="0.05" value="0.3" />
+          </div>
+          <div>
+            <label for="exit-i">EXIT PolyI / s</label>
+            <input id="exit-i" type="number" step="0.05" value="0.5" />
+          </div>
+          <div>
+            <label for="def-dt">默认 dt_pred / s</label>
+            <input id="def-dt" type="number" step="0.005" value="0.02" />
+          </div>
+          <div>
+            <label for="exit-dt">EXIT dt_pred / s</label>
+            <input id="exit-dt" type="number" step="0.005" value="0.02" />
+          </div>
+          <div>
+            <label for="def-expand">默认安全膨胀 / m</label>
+            <input id="def-expand" type="number" step="0.01" value="0.0" />
+          </div>
+          <div>
+            <label for="exit-expand">EXIT 安全膨胀 / m</label>
+            <input id="exit-expand" type="number" step="0.01" value="0.0" />
+          </div>
+          <div class="checkbox-line">
+            <label><input id="enable-expand" type="checkbox" />启用安全膨胀字段</label>
+          </div>
+          <div>
+            <label for="alpha-mode">alpha 模式</label>
+            <select id="alpha-mode">
+              <option value="hold">hold</option>
+              <option value="limited_return">limited_return</option>
+              <option value="linear">linear</option>
+            </select>
+            <div class="hint">当前盲区分析软件只执行 hold，其余值先作为配置记录。</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title">操作</div>
+        <div class="section-body">
+          <input id="import-file" type="file" accept=".json,.cfg,application/json,text/plain" />
+          <div class="actions">
+            <button id="reset">恢复默认</button>
+            <button id="copy">复制 JSON</button>
+            <button id="save" class="primary">保存 CFG</button>
+          </div>
+          <div class="status" id="status"></div>
+        </div>
+      </section>
+    </div>
+
+    <section>
+      <div class="section-title">JSON 预览</div>
+      <div class="section-body">
+        <pre id="preview"></pre>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const fieldIds = [
+      "cfg-name","cfg-version","cfg-description","alpha-start","mid-heading","exit-heading","exit-phi","exit-hold",
+      "exit-returning","done-alpha","done-phi","done-hold","def-w","exit-w","def-a","exit-a","def-i","exit-i",
+      "def-dt","exit-dt","def-expand","exit-expand","enable-expand","alpha-mode"
+    ];
+
+    const defaults = {
+      "cfg-name": "exit_window_test_cfg",
+      "cfg-version": "1.0",
+      "cfg-description": "EXIT 阶段扩大预测窗口；安全膨胀暂不启用。",
+      "alpha-start": 2.0,
+      "mid-heading": 25.0,
+      "exit-heading": 75.0,
+      "exit-phi": 4.0,
+      "exit-hold": 2,
+      "exit-returning": true,
+      "done-alpha": 1.0,
+      "done-phi": 2.0,
+      "done-hold": 10,
+      "def-w": 2.0,
+      "exit-w": 3.0,
+      "def-a": 1.0,
+      "exit-a": 1.5,
+      "def-i": 0.3,
+      "exit-i": 0.5,
+      "def-dt": 0.02,
+      "exit-dt": 0.02,
+      "def-expand": 0.0,
+      "exit-expand": 0.0,
+      "enable-expand": false,
+      "alpha-mode": "hold"
+    };
+
+    function el(id) { return document.getElementById(id); }
+    function num(id, fallback = 0) {
+      const value = Number(el(id).value);
+      return Number.isFinite(value) ? value : fallback;
+    }
+    function text(id) { return String(el(id).value || "").trim(); }
+    function checked(id) { return Boolean(el(id).checked); }
+
+    function buildCfg() {
+      const alphaMode = text("alpha-mode") || "hold";
+      const expandEnabled = checked("enable-expand");
+      return {
+        name: text("cfg-name") || "unnamed_cfg",
+        version: text("cfg-version") || "1.0",
+        description: text("cfg-description"),
+        state_machine: {
+          alpha_start_deg: num("alpha-start", 2.0),
+          mid_heading_delta_deg: num("mid-heading", 25.0),
+          exit_heading_delta_deg_min: num("exit-heading", 75.0),
+          exit_require_alpha_returning: checked("exit-returning"),
+          exit_phi_abs_deg_min: num("exit-phi", 4.0),
+          exit_hold_frames: Math.max(1, Math.round(num("exit-hold", 2))),
+          done_alpha_abs_deg_max: num("done-alpha", 1.0),
+          done_phi_abs_deg_max: num("done-phi", 2.0),
+          done_hold_frames: Math.max(1, Math.round(num("done-hold", 10)))
+        },
+        strategies: {
+          default: {
+            T_h_W: num("def-w", 2.0),
+            T_h_A: num("def-a", 1.0),
+            T_h_I: num("def-i", 0.3),
+            dt_pred: num("def-dt", 0.02),
+            alpha_mode: alphaMode,
+            safety_expand_m: num("def-expand", 0.0),
+            safety_expand_enabled: expandEnabled
+          },
+          EXIT: {
+            T_h_W: num("exit-w", 3.0),
+            T_h_A: num("exit-a", 1.5),
+            T_h_I: num("exit-i", 0.5),
+            dt_pred: num("exit-dt", 0.02),
+            alpha_mode: alphaMode,
+            safety_expand_m: num("exit-expand", 0.0),
+            safety_expand_enabled: expandEnabled
+          }
+        }
+      };
+    }
+
+    function updatePreview() {
+      el("preview").textContent = JSON.stringify(buildCfg(), null, 2);
+    }
+
+    function setValue(id, value) {
+      const node = el(id);
+      if (!node) return;
+      if (node.type === "checkbox") node.checked = Boolean(value);
+      else node.value = value;
+    }
+
+    function loadDefaults() {
+      for (const [id, value] of Object.entries(defaults)) setValue(id, value);
+      updatePreview();
+      el("status").textContent = "已恢复默认配置。";
+    }
+
+    function loadCfg(cfg) {
+      setValue("cfg-name", cfg.name ?? defaults["cfg-name"]);
+      setValue("cfg-version", cfg.version ?? defaults["cfg-version"]);
+      setValue("cfg-description", cfg.description ?? "");
+      const sm = cfg.state_machine || {};
+      const def = cfg.strategies?.default || {};
+      const ex = cfg.strategies?.EXIT || cfg.strategies?.exit || {};
+      setValue("alpha-start", sm.alpha_start_deg ?? defaults["alpha-start"]);
+      setValue("mid-heading", sm.mid_heading_delta_deg ?? defaults["mid-heading"]);
+      setValue("exit-heading", sm.exit_heading_delta_deg_min ?? defaults["exit-heading"]);
+      setValue("exit-returning", sm.exit_require_alpha_returning ?? defaults["exit-returning"]);
+      setValue("exit-phi", sm.exit_phi_abs_deg_min ?? defaults["exit-phi"]);
+      setValue("exit-hold", sm.exit_hold_frames ?? defaults["exit-hold"]);
+      setValue("done-alpha", sm.done_alpha_abs_deg_max ?? defaults["done-alpha"]);
+      setValue("done-phi", sm.done_phi_abs_deg_max ?? defaults["done-phi"]);
+      setValue("done-hold", sm.done_hold_frames ?? defaults["done-hold"]);
+      setValue("def-w", def.T_h_W ?? defaults["def-w"]);
+      setValue("def-a", def.T_h_A ?? defaults["def-a"]);
+      setValue("def-i", def.T_h_I ?? defaults["def-i"]);
+      setValue("def-dt", def.dt_pred ?? defaults["def-dt"]);
+      setValue("def-expand", def.safety_expand_m ?? defaults["def-expand"]);
+      setValue("exit-w", ex.T_h_W ?? defaults["exit-w"]);
+      setValue("exit-a", ex.T_h_A ?? defaults["exit-a"]);
+      setValue("exit-i", ex.T_h_I ?? defaults["exit-i"]);
+      setValue("exit-dt", ex.dt_pred ?? defaults["exit-dt"]);
+      setValue("exit-expand", ex.safety_expand_m ?? defaults["exit-expand"]);
+      setValue("enable-expand", Boolean(def.safety_expand_enabled || ex.safety_expand_enabled));
+      setValue("alpha-mode", def.alpha_mode || ex.alpha_mode || defaults["alpha-mode"]);
+      updatePreview();
+    }
+
+    function filename() {
+      const base = (text("cfg-name") || "strategy_cfg").replace(/[<>:"/\\|?*\s]+/g, "_");
+      return `${base}.json`;
+    }
+
+    async function saveCfg() {
+      const json = JSON.stringify(buildCfg(), null, 2);
+      if (window.cfgBuilder?.saveCfg) {
+        try {
+          const path = await window.cfgBuilder.saveCfg(filename(), json);
+          el("status").textContent = `已保存: ${path}`;
+          return;
+        } catch (err) {
+          el("status").textContent = `固定目录保存失败，改为浏览器下载: ${err.message}`;
+        }
+      }
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([json], {type: "application/json;charset=utf-8"}));
+      a.download = filename();
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    fieldIds.forEach(id => {
+      const node = el(id);
+      if (node) node.addEventListener("input", updatePreview);
+      if (node) node.addEventListener("change", updatePreview);
+    });
+    el("reset").onclick = loadDefaults;
+    el("save").onclick = saveCfg;
+    el("copy").onclick = async () => {
+      await navigator.clipboard.writeText(JSON.stringify(buildCfg(), null, 2));
+      el("status").textContent = "JSON 已复制到剪贴板。";
+    };
+    el("import-file").onchange = async event => {
+      const file = event.target.files[0];
+      if (!file) return;
+      try {
+        loadCfg(JSON.parse(await file.text()));
+        el("status").textContent = `已导入: ${file.name}`;
+      } catch (err) {
+        el("status").textContent = `导入失败: ${err.message}`;
+      }
+    };
+    updatePreview();
+  </script>
+</body>
+</html>

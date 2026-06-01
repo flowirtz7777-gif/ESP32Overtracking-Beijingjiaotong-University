@@ -1,0 +1,36 @@
+{
+  "name": "exit_window_test_cfg",
+  "version": "1.0",
+  "description": "EXIT 阶段扩大预测窗口；安全膨胀暂不启用。",
+  "state_machine": {
+    "alpha_start_deg": 2,
+    "mid_heading_delta_deg": 25,
+    "exit_heading_delta_deg_min": 75,
+    "exit_require_alpha_returning": true,
+    "exit_phi_abs_deg_min": 4,
+    "exit_hold_frames": 2,
+    "done_alpha_abs_deg_max": 1,
+    "done_phi_abs_deg_max": 2,
+    "done_hold_frames": 10
+  },
+  "strategies": {
+    "default": {
+      "T_h_W": 2,
+      "T_h_A": 1,
+      "T_h_I": 0.3,
+      "dt_pred": 0.02,
+      "alpha_mode": "hold",
+      "safety_expand_m": 0,
+      "safety_expand_enabled": false
+    },
+    "EXIT": {
+      "T_h_W": 3,
+      "T_h_A": 1.5,
+      "T_h_I": 0.5,
+      "dt_pred": 0.02,
+      "alpha_mode": "hold",
+      "safety_expand_m": 0,
+      "safety_expand_enabled": false
+    }
+  }
+}
