@@ -110,6 +110,22 @@ PID工况仿真导出器/
 .claude/
 .cursor/
 
+# ------------- PPT generation tools & outputs (do not track) -------------
+generated_render/
+ppt_outline.md
+tools/audit_replica_v2_media.py
+tools/build_editable_ppt_inventory.py
+tools/build_editable_replica_v2.py
+tools/build_ppt_image2_editable_rebuild.py
+tools/make_ppt_geometry_reference.m
+tools/make_remaining_ppt_academic_figures.py
+tools/package_exact_origin_images_pptx.py
+tools/render_opening_report_images.py
+tools/sync_editable_asset_anchors.py
+tools/update_codex_ppt_deck_spec_slides_6_8.py
+tools/update_codex_ppt_deck_spec_slides_9_20.py
+文本资料/26 小挑.pptx
+
 # ------------- Opening report drafts / extracted text -------------
 generated_text/
 文本资料/*开题报告*.docx
