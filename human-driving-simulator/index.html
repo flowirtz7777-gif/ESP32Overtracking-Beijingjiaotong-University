@@ -1,0 +1,1232 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>人工驾驶半挂车工况仿真器</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef2f6;
+      --panel: #ffffff;
+      --panel-soft: #f7f9fb;
+      --ink: #172232;
+      --muted: #607086;
+      --line: #d9e1ea;
+      --accent: #245f9b;
+      --accent-dark: #184a7b;
+      --green: #287b4f;
+      --amber: #b56a1f;
+      --red: #b94945;
+      --shadow: 0 8px 24px rgba(23, 34, 50, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Microsoft YaHei UI", "PingFang SC", Arial, sans-serif;
+    }
+
+    button, input { font: inherit; }
+
+    .shell {
+      width: min(1440px, calc(100% - 32px));
+      margin: 24px auto 40px;
+    }
+
+    .hero, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 26px 30px;
+      border-top: 4px solid var(--accent);
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "STZhongsong", "SimSun", serif;
+      font-size: clamp(26px, 3vw, 38px);
+      letter-spacing: 0.03em;
+    }
+
+    .hero p:last-child {
+      max-width: 900px;
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(300px, 370px) minmax(0, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+      align-items: start;
+    }
+
+    .sidebar { display: grid; gap: 18px; }
+    .panel { padding: 20px; }
+
+    .panel-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      font-family: "STZhongsong", "SimSun", serif;
+      font-size: 18px;
+    }
+
+    .panel-title small {
+      color: var(--muted);
+      font-family: "Times New Roman", serif;
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    .param-group + .param-group { margin-top: 18px; }
+
+    .param-group h3 {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .field {
+      display: grid;
+      gap: 5px;
+    }
+
+    .field label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--panel-soft);
+      color: var(--ink);
+      font-family: "Times New Roman", serif;
+      font-size: 15px;
+    }
+
+    .field input:focus {
+      outline: 2px solid rgba(36, 95, 155, 0.2);
+      border-color: var(--accent);
+    }
+
+    .field input:disabled,
+    .field input[readonly] { opacity: 0.65; }
+
+    .key-help {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .key-card {
+      padding: 10px 4px;
+      border: 1px solid var(--line);
+      background: var(--panel-soft);
+      text-align: center;
+    }
+
+    kbd {
+      display: inline-grid;
+      place-items: center;
+      min-width: 32px;
+      height: 30px;
+      border: 1px solid #aebbc9;
+      border-bottom-width: 3px;
+      border-radius: 5px;
+      background: #fff;
+      color: var(--ink);
+      font-family: "Times New Roman", serif;
+      font-weight: 700;
+    }
+
+    .key-card span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .control-note {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .ime-warning {
+      margin: 0 0 12px;
+      padding: 10px 12px;
+      border-left: 4px solid var(--amber);
+      background: #fff8ed;
+      color: #714411;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    .actions button {
+      min-height: 42px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .actions button:disabled { opacity: 0.42; cursor: not-allowed; }
+    .primary { background: var(--accent); color: #fff; }
+    .primary:hover:not(:disabled) { background: var(--accent-dark); }
+    .danger { background: #fff; border-color: var(--red) !important; color: var(--red); }
+    .ghost { background: var(--panel-soft); border-color: var(--line) !important; color: var(--ink); }
+
+    .main-column { display: grid; gap: 18px; min-width: 0; }
+
+    .hud {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .hud-item {
+      min-width: 0;
+      padding: 12px;
+      border-left: 3px solid var(--line);
+      background: var(--panel-soft);
+    }
+
+    .hud-item span {
+      display: block;
+      overflow: hidden;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-overflow: ellipsis;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .hud-item strong {
+      display: block;
+      margin-top: 5px;
+      overflow: hidden;
+      font-family: "Times New Roman", serif;
+      font-size: 18px;
+      font-variant-numeric: tabular-nums;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .hud-item.status-driving { border-left-color: var(--green); }
+    .hud-item.status-stopped { border-left-color: var(--amber); }
+
+    .keyboard-debug {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .debug-item {
+      min-width: 0;
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      background: var(--panel-soft);
+    }
+
+    .debug-item span {
+      display: block;
+      color: var(--muted);
+      font-family: "Times New Roman", serif;
+      font-size: 11px;
+    }
+
+    .debug-item code {
+      display: block;
+      margin-top: 4px;
+      overflow: hidden;
+      color: var(--ink);
+      font-family: Consolas, monospace;
+      font-size: 12px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .debug-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .debug-actions button {
+      padding: 9px 13px;
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      background: #fff;
+      color: var(--accent);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .debug-actions button:disabled { opacity: 0.42; cursor: not-allowed; }
+
+    .canvas-wrap {
+      position: relative;
+      min-height: 590px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #f9fbfd;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 590px;
+      touch-action: none;
+    }
+
+    canvas:focus {
+      outline: 3px solid rgba(36, 95, 155, 0.28);
+      outline-offset: -3px;
+    }
+
+    .canvas-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 6px 9px;
+      border: 1px solid rgba(36, 95, 155, 0.24);
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--accent);
+      font-size: 11px;
+      pointer-events: none;
+    }
+
+    .status-box {
+      min-height: 48px;
+      padding: 13px 15px;
+      border-left: 4px solid var(--accent);
+      background: #f4f8fc;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .status-box.error {
+      border-left-color: var(--red);
+      background: #fff4f3;
+      color: #873c39;
+    }
+
+    @media (max-width: 1050px) {
+      .workspace { grid-template-columns: 1fr; }
+      .sidebar { grid-template-columns: 1fr 1fr; }
+      .sidebar .panel:first-child { grid-row: span 2; }
+    }
+
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 16px, 1440px); margin-top: 8px; }
+      .hero, .panel { padding: 16px; }
+      .sidebar { grid-template-columns: 1fr; }
+      .sidebar .panel:first-child { grid-row: auto; }
+      .hud { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .keyboard-debug { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .canvas-wrap { min-height: 470px; }
+      canvas { height: 470px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <p class="eyebrow">Human-in-the-loop · M1</p>
+      <h1>人工驾驶半挂车工况仿真器</h1>
+      <p>本工具用于通过 WASD 人工驾驶半挂车，为后续 CSV 导出和 MATLAB 回放做准备。当前版本仅实现实时驾驶、耦合运动学、HUD 与画布可视化。</p>
+    </header>
+
+    <div class="workspace">
+      <aside class="sidebar">
+        <section class="panel">
+          <h2 class="panel-title">参数配置 <small>SI units</small></h2>
+          <div class="param-group">
+            <h3>车辆几何参数</h3>
+            <div class="field-grid">
+              <div class="field"><label for="l">牵引车轴距 l / m</label><input id="l" type="number" min="0.1" step="0.1" value="4.0" /></div>
+              <div class="field"><label for="l_h">后轴到牵引销 l_h / m</label><input id="l_h" type="number" min="0" step="0.1" value="1.8" /></div>
+              <div class="field"><label for="L">挂车轴距 L / m</label><input id="L" type="number" min="0.1" step="0.1" value="13.5" /></div>
+              <div class="field"><label for="width">等效车宽 W / m</label><input id="width" type="number" min="0.1" step="0.1" value="2.0" /></div>
+              <div class="field"><label for="phiLimitDeg">铰接角限幅 / deg</label><input id="phiLimitDeg" type="number" min="1" max="89" step="1" value="15" /></div>
+            </div>
+          </div>
+
+          <div class="param-group">
+            <h3>人工驾驶参数</h3>
+            <div class="field-grid">
+              <div class="field"><label for="dt">主循环 dt / s</label><input id="dt" type="number" min="0.005" max="0.1" step="0.005" value="0.02" /></div>
+              <div class="field"><label for="a_max">最大加速度 / m·s⁻²</label><input id="a_max" type="number" min="0" step="0.1" value="0.6" /></div>
+              <div class="field"><label for="b_max">最大制动减速度 / m·s⁻²</label><input id="b_max" type="number" min="0" step="0.1" value="2.5" /></div>
+              <div class="field"><label for="v_max">最大车速 / m·s⁻¹</label><input id="v_max" type="number" min="0.1" step="0.5" value="10" /></div>
+              <div class="field"><label for="alphaLimitDeg">转向角限幅 / deg</label><input id="alphaLimitDeg" type="number" min="1" max="89" step="1" value="30" /></div>
+              <div class="field"><label for="steerRateDeg">转向速率 / deg·s⁻¹</label><input id="steerRateDeg" type="number" min="1" step="1" value="45" /></div>
+              <div class="field"><label for="returnRateDeg">回正速率 / deg·s⁻¹</label><input id="returnRateDeg" type="number" min="1" step="1" value="60" /></div>
+              <div class="field"><label for="dragLinear">线性阻力系数</label><input id="dragLinear" type="number" min="0" step="0.01" value="0.05" /></div>
+              <div class="field"><label for="dragQuad">二次阻力系数</label><input id="dragQuad" type="number" min="0" step="0.01" value="0.01" /></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2 class="panel-title">驾驶控制 <small>Keyboard</small></h2>
+          <p class="ime-warning">驾驶前请切换到英文输入法（EN）。中文输入法/IME 可能拦截 W/A/S/D，导致车辆不响应。</p>
+          <div class="key-help" aria-label="WASD 控制说明">
+            <div class="key-card"><kbd>W</kbd><span>油门</span></div>
+            <div class="key-card"><kbd>S</kbd><span>刹车</span></div>
+            <div class="key-card"><kbd>A</kbd><span>左转</span></div>
+            <div class="key-card"><kbd>D</kbd><span>右转</span></div>
+          </div>
+          <p class="control-note">方向键可作为备用尝试，但推荐使用英文输入法下的 WASD。W 与 S 同时按下时采用<strong>刹车优先</strong>。A 与 D 同时按下时视为无转向输入，方向按回正速率回到零位。离开当前浏览器窗口会自动释放全部按键。</p>
+        </section>
+
+        <section class="panel">
+          <h2 class="panel-title">操作</h2>
+          <div class="actions">
+            <button class="primary" id="start-btn" type="button">开始驾驶</button>
+            <button class="danger" id="stop-btn" type="button" disabled>结束驾驶</button>
+            <button class="ghost" id="reset-btn" type="button">重置</button>
+          </div>
+        </section>
+      </aside>
+
+      <section class="main-column">
+        <section class="panel">
+          <h2 class="panel-title">实时 HUD <small>50 Hz simulation</small></h2>
+          <div class="hud">
+            <div class="hud-item"><span>time_s</span><strong id="hud-time">0.00 s</strong></div>
+            <div class="hud-item"><span>v_mps</span><strong id="hud-v">0.000</strong></div>
+            <div class="hud-item"><span>accel_mps2</span><strong id="hud-accel">0.000</strong></div>
+            <div class="hud-item"><span>alpha_deg</span><strong id="hud-alpha">0.00°</strong></div>
+            <div class="hud-item"><span>phi_deg</span><strong id="hud-phi">0.00°</strong></div>
+            <div class="hud-item"><span>theta_deg</span><strong id="hud-theta">0.00°</strong></div>
+            <div class="hud-item"><span>theta_t_deg</span><strong id="hud-theta-t">0.00°</strong></div>
+            <div class="hud-item"><span>xB, yB</span><strong id="hud-position">0.00, 0.00</strong></div>
+            <div class="hud-item"><span>W / S / A / D</span><strong id="hud-keys">—</strong></div>
+            <div class="hud-item" id="hud-status-card"><span>运行状态</span><strong id="hud-status">未开始</strong></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2 class="panel-title">Keyboard Debug <small>capture-phase diagnostics</small></h2>
+          <div class="keyboard-debug">
+            <div class="debug-item"><span>lastKeydownCode</span><code id="debug-keydown-code">—</code></div>
+            <div class="debug-item"><span>lastKeydownKey</span><code id="debug-keydown-key">—</code></div>
+            <div class="debug-item"><span>event.isComposing</span><code id="debug-is-composing">false</code></div>
+            <div class="debug-item"><span>event.keyCode</span><code id="debug-key-code">—</code></div>
+            <div class="debug-item"><span>imeHint</span><code id="debug-ime-hint">建议使用英文输入法（EN）</code></div>
+            <div class="debug-item"><span>lastKeyupCode</span><code id="debug-keyup-code">—</code></div>
+            <div class="debug-item"><span>mapCodeToKeyResult</span><code id="debug-map-result">—</code></div>
+            <div class="debug-item"><span>keydownSetResult</span><code id="debug-keydown-result">—</code></div>
+            <div class="debug-item"><span>pressedKeysJson</span><code id="debug-pressed-json">{"w":false,"a":false,"s":false,"d":false}</code></div>
+            <div class="debug-item"><span>clearKeysCount</span><code id="debug-clear-count">0</code></div>
+            <div class="debug-item"><span>lastClearReason</span><code id="debug-clear-reason">—</code></div>
+            <div class="debug-item"><span>activeElement tagName</span><code id="debug-active-tag">BODY</code></div>
+            <div class="debug-item"><span>isRunning</span><code id="debug-running">false</code></div>
+            <div class="debug-item"><span>ignoredReason</span><code id="debug-ignored">not running</code></div>
+          </div>
+          <div class="debug-actions">
+            <button id="debug-w-btn" type="button" disabled>模拟 W 按下 1 秒</button>
+            <button id="debug-d-btn" type="button" disabled>模拟 D 按下 1 秒</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2 class="panel-title">车辆与轨迹 <small>x → right · y → up</small></h2>
+          <div class="canvas-wrap">
+            <canvas id="sim-canvas" tabindex="0" aria-label="半挂车实时仿真画布，点击后可使用 WASD 驾驶"></canvas>
+            <div class="canvas-badge">视图跟随 B 点 · 网格 2 m</div>
+          </div>
+        </section>
+
+        <div class="status-box" id="status-box" role="status" aria-live="polite">参数就绪。点击“开始驾驶”，然后使用 WASD 控制车辆。</div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    "use strict";
+
+    const DEG = Math.PI / 180;
+    const DEFAULT_PARAMS = Object.freeze({
+      l: 4.0,
+      l_h: 1.8,
+      L: 13.5,
+      width: 2.0,
+      phiLimitDeg: 15,
+      dt: 0.02,
+      a_max: 0.6,
+      b_max: 2.5,
+      v_max: 10,
+      alphaLimitDeg: 30,
+      steerRateDeg: 45,
+      returnRateDeg: 60,
+      dragLinear: 0.05,
+      dragQuad: 0.01
+    });
+
+    const PARAM_IDS = Object.keys(DEFAULT_PARAMS);
+    const pressedKeys = { w: false, a: false, s: false, d: false };
+    const canvas = document.getElementById("sim-canvas");
+    const ctx = canvas.getContext("2d");
+    const startButton = document.getElementById("start-btn");
+    const stopButton = document.getElementById("stop-btn");
+    const resetButton = document.getElementById("reset-btn");
+    const debugWButton = document.getElementById("debug-w-btn");
+    const debugDButton = document.getElementById("debug-d-btn");
+    const statusBox = document.getElementById("status-box");
+
+    const keyboardDebug = {
+      lastKeydownCode: "—",
+      lastKeydownKey: "—",
+      isComposing: false,
+      keyCode: "—",
+      imeHint: "建议使用英文输入法（EN）",
+      lastKeyupCode: "—",
+      mapCodeToKeyResult: "—",
+      keydownSetResult: "—",
+      ignoredReason: "not running",
+      clearKeysCount: 0,
+      lastClearReason: "—"
+    };
+    const debugHoldTimers = { w: null, d: null };
+
+    let params = null;
+    let state = null;
+    let points = null;
+    let telemetry = null;
+    let trail = [];
+    let simulationTimer = null;
+    let runStatus = "idle";
+
+    function clamp(value, min, max) {
+      return Math.min(Math.max(value, min), max);
+    }
+
+    function moveToward(value, target, maxDelta) {
+      if (value < target) return Math.min(value + maxDelta, target);
+      if (value > target) return Math.max(value - maxDelta, target);
+      return target;
+    }
+
+    function radToDeg(value) {
+      return value / DEG;
+    }
+
+    function parseParams() {
+      const parsed = {};
+      for (const id of PARAM_IDS) {
+        const value = Number(document.getElementById(id).value);
+        if (!Number.isFinite(value)) {
+          throw new Error(`参数 ${id} 必须是有效数字。`);
+        }
+        parsed[id] = value;
+      }
+
+      if (parsed.l <= 0 || parsed.L <= 0 || parsed.width <= 0 || parsed.l_h < 0) {
+        throw new Error("车辆轴距和车宽必须大于 0，l_h 不能小于 0。");
+      }
+      if (parsed.dt <= 0 || parsed.dt > 0.1) {
+        throw new Error("主循环 dt 必须在 (0, 0.1] 秒范围内。");
+      }
+      if (parsed.a_max < 0 || parsed.b_max < 0 || parsed.v_max <= 0) {
+        throw new Error("加速度、制动参数不能为负，最大车速必须大于 0。");
+      }
+      if (parsed.alphaLimitDeg <= 0 || parsed.alphaLimitDeg >= 90 || parsed.phiLimitDeg <= 0 || parsed.phiLimitDeg >= 90) {
+        throw new Error("转向角和铰接角限幅必须在 0° 到 90° 之间。");
+      }
+      if (parsed.steerRateDeg <= 0 || parsed.returnRateDeg <= 0 || parsed.dragLinear < 0 || parsed.dragQuad < 0) {
+        throw new Error("转向/回正速率必须大于 0，阻力系数不能为负。");
+      }
+
+      return {
+        ...parsed,
+        phiLimit: parsed.phiLimitDeg * DEG,
+        alphaLimit: parsed.alphaLimitDeg * DEG,
+        steerRate: parsed.steerRateDeg * DEG,
+        returnRate: parsed.returnRateDeg * DEG
+      };
+    }
+
+    function resetState() {
+      stopTimerOnly();
+      clearPressedKeys("resetState");
+      runStatus = "idle";
+      params = parseParams();
+      state = { xB: 0, yB: 0, theta: 0, phi: 0 };
+      telemetry = { time: 0, v: 0, accel: 0, alpha: 0 };
+      points = derivePoints(state, params);
+      trail = [{ x: state.xB, y: state.yB }];
+      setInputsDisabled(false);
+      startButton.disabled = false;
+      stopButton.disabled = true;
+      debugWButton.disabled = true;
+      debugDButton.disabled = true;
+      keyboardDebug.ignoredReason = "not running";
+      setStatus("参数就绪。点击“开始驾驶”，然后使用 WASD 控制车辆。");
+      updateHud();
+      drawScene();
+    }
+
+    function startSimulation() {
+      if (runStatus !== "idle") return;
+      try {
+        params = parseParams();
+      } catch (error) {
+        setStatus(error.message, true);
+        return;
+      }
+
+      runStatus = "running";
+      setInputsDisabled(true);
+      startButton.disabled = true;
+      stopButton.disabled = false;
+      debugWButton.disabled = false;
+      debugDButton.disabled = false;
+      setStatus("驾驶中：W 油门、S 刹车、A 左转、D 右转。参数在结束或重置前锁定。");
+      updateHud();
+      if (document.activeElement && typeof document.activeElement.blur === "function") {
+        document.activeElement.blur();
+      }
+      canvas.focus();
+      // click 的默认焦点处理结束后再聚焦一次，避免按钮重新夺回焦点。
+      window.setTimeout(() => canvas.focus(), 0);
+
+      // 固定步长主循环：每次回调严格推进一个 dt，不用实际墙钟间隔积分。
+      simulationTimer = window.setInterval(simulationTick, params.dt * 1000);
+    }
+
+    function stopSimulation() {
+      if (runStatus !== "running") return;
+      stopTimerOnly();
+      clearPressedKeys("stopSimulation");
+      telemetry.accel = 0;
+      runStatus = "stopped";
+      stopButton.disabled = true;
+      startButton.disabled = true;
+      debugWButton.disabled = true;
+      debugDButton.disabled = true;
+      setInputsDisabled(false);
+      setStatus(`驾驶已停止：仿真时长 ${telemetry.time.toFixed(2)} s。点击“重置”开始新工况。`);
+      updateHud();
+      drawScene();
+    }
+
+    function stopTimerOnly() {
+      if (simulationTimer !== null) {
+        window.clearInterval(simulationTimer);
+        simulationTimer = null;
+      }
+    }
+
+    function simulationTick() {
+      const dt = params.dt;
+      updateControls(dt);
+
+      const previousV = telemetry.v;
+      const brake = pressedKeys.s ? 1 : 0;
+      // W 与 S 同时按下时刹车优先，避免一边加速一边制动造成含糊状态。
+      const throttle = pressedKeys.w && !pressedKeys.s ? 1 : 0;
+      const throttleForce = params.a_max * throttle;
+      const brakeForce = params.b_max * brake;
+      const drag = params.dragLinear * previousV + params.dragQuad * previousV * previousV;
+      const requestedAccel = throttleForce - brakeForce - drag;
+      telemetry.v = clamp(previousV + requestedAccel * dt, 0, params.v_max);
+      telemetry.accel = (telemetry.v - previousV) / dt;
+
+      state = stepState(
+        state,
+        { v: telemetry.v, alpha: telemetry.alpha },
+        params,
+        dt
+      );
+      telemetry.time += dt;
+      points = derivePoints(state, params);
+      trail.push({ x: state.xB, y: state.yB });
+      if (trail.length > 20000) trail.shift();
+
+      updateHud();
+      drawScene();
+    }
+
+    function updateControls(dt) {
+      const leftOnly = pressedKeys.a && !pressedKeys.d;
+      const rightOnly = pressedKeys.d && !pressedKeys.a;
+
+      if (leftOnly) {
+        telemetry.alpha += params.steerRate * dt;
+      } else if (rightOnly) {
+        telemetry.alpha -= params.steerRate * dt;
+      } else {
+        telemetry.alpha = moveToward(telemetry.alpha, 0, params.returnRate * dt);
+      }
+
+      telemetry.alpha = clamp(telemetry.alpha, -params.alphaLimit, params.alphaLimit);
+    }
+
+    function stepState(currentState, input, vehicleParams, dt) {
+      const { xB, yB, theta, phi } = currentState;
+      const { v, alpha } = input;
+
+      // 与 MATLAB kinematics_step.m 一致的半挂车耦合运动学。
+      const omega1 = v * Math.sin(alpha) / vehicleParams.l;
+      const vB = v * Math.cos(alpha);
+      // l_h * omega1 * cos(phi) 是鞍座偏置耦合项，不能省略。
+      const omega2 = (
+        vB * Math.sin(phi) + vehicleParams.l_h * omega1 * Math.cos(phi)
+      ) / vehicleParams.L;
+      const phiRate = omega1 - omega2;
+
+      return {
+        xB: xB + vB * Math.cos(theta) * dt,
+        yB: yB + vB * Math.sin(theta) * dt,
+        theta: theta + omega1 * dt,
+        phi: clamp(phi + phiRate * dt, -vehicleParams.phiLimit, vehicleParams.phiLimit)
+      };
+    }
+
+    function derivePoints(currentState, vehicleParams) {
+      const { xB, yB, theta, phi } = currentState;
+      const cosTheta = Math.cos(theta);
+      const sinTheta = Math.sin(theta);
+      const B = { x: xB, y: yB };
+      const A = { x: xB + vehicleParams.l * cosTheta, y: yB + vehicleParams.l * sinTheta };
+      const H = { x: xB + vehicleParams.l_h * cosTheta, y: yB + vehicleParams.l_h * sinTheta };
+      const theta_t = theta - phi;
+      const T = {
+        x: H.x - vehicleParams.L * Math.cos(theta_t),
+        y: H.y - vehicleParams.L * Math.sin(theta_t)
+      };
+      return { A, B, H, T, theta_t };
+    }
+
+    function updateHud() {
+      const activeKeys = [
+        ["w", "W"],
+        ["a", "A"],
+        ["s", "S"],
+        ["d", "D"]
+      ].filter(([key]) => pressedKeys[key])
+        .map(([, label]) => label)
+        .join(" + ") || "—";
+      const labels = { idle: "未开始", running: "驾驶中", stopped: "已停止" };
+
+      document.getElementById("hud-time").textContent = `${telemetry.time.toFixed(2)} s`;
+      document.getElementById("hud-v").textContent = telemetry.v.toFixed(3);
+      document.getElementById("hud-accel").textContent = telemetry.accel.toFixed(3);
+      document.getElementById("hud-alpha").textContent = `${radToDeg(telemetry.alpha).toFixed(2)}°`;
+      document.getElementById("hud-phi").textContent = `${radToDeg(state.phi).toFixed(2)}°`;
+      document.getElementById("hud-theta").textContent = `${radToDeg(state.theta).toFixed(2)}°`;
+      document.getElementById("hud-theta-t").textContent = `${radToDeg(points.theta_t).toFixed(2)}°`;
+      document.getElementById("hud-position").textContent = `${state.xB.toFixed(2)}, ${state.yB.toFixed(2)}`;
+      document.getElementById("hud-keys").textContent = activeKeys;
+      document.getElementById("hud-status").textContent = labels[runStatus];
+
+      const statusCard = document.getElementById("hud-status-card");
+      statusCard.classList.toggle("status-driving", runStatus === "running");
+      statusCard.classList.toggle("status-stopped", runStatus === "stopped");
+      updateKeyboardDebug();
+    }
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      const pixelWidth = Math.round(rect.width * dpr);
+      const pixelHeight = Math.round(rect.height * dpr);
+      if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
+        canvas.width = pixelWidth;
+        canvas.height = pixelHeight;
+      }
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      return { width: rect.width, height: rect.height };
+    }
+
+    function drawScene() {
+      const size = resizeCanvas();
+      ctx.clearRect(0, 0, size.width, size.height);
+      ctx.fillStyle = "#f9fbfd";
+      ctx.fillRect(0, 0, size.width, size.height);
+
+      const totalLength = params.l + params.L + params.l_h;
+      const scale = clamp(Math.min(size.width, size.height) / (totalLength + 12), 12, 30);
+      const center = { x: size.width * 0.52, y: size.height * 0.50 };
+      const view = { size, scale, center, origin: points.B };
+
+      drawGrid(view);
+      drawTrail(view);
+      drawVehicle(view);
+      drawHeading(view);
+      drawKeyPoints(view);
+      drawLegend(size);
+    }
+
+    function worldToCanvas(point, view) {
+      return {
+        x: view.center.x + (point.x - view.origin.x) * view.scale,
+        y: view.center.y - (point.y - view.origin.y) * view.scale
+      };
+    }
+
+    function drawGrid(view) {
+      const gridStep = 2;
+      const halfWorldW = view.size.width / (2 * view.scale);
+      const halfWorldH = view.size.height / (2 * view.scale);
+      const minX = view.origin.x - halfWorldW;
+      const maxX = view.origin.x + halfWorldW;
+      const minY = view.origin.y - halfWorldH;
+      const maxY = view.origin.y + halfWorldH;
+
+      ctx.save();
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = "#e2e8ef";
+      ctx.beginPath();
+      for (let x = Math.floor(minX / gridStep) * gridStep; x <= maxX; x += gridStep) {
+        const p = worldToCanvas({ x, y: view.origin.y }, view);
+        ctx.moveTo(p.x, 0);
+        ctx.lineTo(p.x, view.size.height);
+      }
+      for (let y = Math.floor(minY / gridStep) * gridStep; y <= maxY; y += gridStep) {
+        const p = worldToCanvas({ x: view.origin.x, y }, view);
+        ctx.moveTo(0, p.y);
+        ctx.lineTo(view.size.width, p.y);
+      }
+      ctx.stroke();
+
+      drawWorldAxis("x", view);
+      drawWorldAxis("y", view);
+      ctx.restore();
+    }
+
+    function drawWorldAxis(axis, view) {
+      ctx.save();
+      ctx.strokeStyle = "#b8c5d2";
+      ctx.fillStyle = "#718096";
+      ctx.lineWidth = 1.4;
+      ctx.font = "11px Times New Roman";
+      if (axis === "x") {
+        const y = worldToCanvas({ x: 0, y: 0 }, view).y;
+        if (y >= 0 && y <= view.size.height) {
+          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(view.size.width, y); ctx.stroke();
+          ctx.fillText("world x", view.size.width - 48, y - 6);
+        }
+      } else {
+        const x = worldToCanvas({ x: 0, y: 0 }, view).x;
+        if (x >= 0 && x <= view.size.width) {
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, view.size.height); ctx.stroke();
+          ctx.fillText("world y", x + 6, 14);
+        }
+      }
+      ctx.restore();
+    }
+
+    function drawTrail(view) {
+      if (trail.length < 2) return;
+      ctx.save();
+      ctx.strokeStyle = "#287b4f";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      trail.forEach((point, index) => {
+        const p = worldToCanvas(point, view);
+        if (index === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+      });
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function buildOrientedRectangle(rear, front, width, rearExtension, frontExtension) {
+      const dx = front.x - rear.x;
+      const dy = front.y - rear.y;
+      const length = Math.max(Math.hypot(dx, dy), 1e-9);
+      const ux = dx / length;
+      const uy = dy / length;
+      const nx = -uy;
+      const ny = ux;
+      const r = { x: rear.x - ux * rearExtension, y: rear.y - uy * rearExtension };
+      const f = { x: front.x + ux * frontExtension, y: front.y + uy * frontExtension };
+      const halfWidth = width / 2;
+      return [
+        { x: r.x + nx * halfWidth, y: r.y + ny * halfWidth },
+        { x: f.x + nx * halfWidth, y: f.y + ny * halfWidth },
+        { x: f.x - nx * halfWidth, y: f.y - ny * halfWidth },
+        { x: r.x - nx * halfWidth, y: r.y - ny * halfWidth }
+      ];
+    }
+
+    function drawVehicle(view) {
+      const tractor = buildOrientedRectangle(points.B, points.A, params.width, 1.0, 0.8);
+      const trailer = buildOrientedRectangle(points.T, points.H, params.width, 1.2, 0.25);
+      drawPolygon(trailer, view, "rgba(181, 106, 31, 0.23)", "#a45d18");
+      drawPolygon(tractor, view, "rgba(36, 95, 155, 0.24)", "#245f9b");
+
+      const cabLength = Math.min(params.l * 0.42, 1.8);
+      const cabRear = {
+        x: points.A.x - Math.cos(state.theta) * cabLength,
+        y: points.A.y - Math.sin(state.theta) * cabLength
+      };
+      const cab = buildOrientedRectangle(cabRear, points.A, params.width * 0.94, 0, 0.65);
+      drawPolygon(cab, view, "rgba(36, 95, 155, 0.55)", "#184a7b");
+    }
+
+    function drawPolygon(polygon, view, fill, stroke) {
+      ctx.save();
+      ctx.beginPath();
+      polygon.forEach((point, index) => {
+        const p = worldToCanvas(point, view);
+        if (index === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+      });
+      ctx.closePath();
+      ctx.fillStyle = fill;
+      ctx.strokeStyle = stroke;
+      ctx.lineWidth = 2;
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawHeading(view) {
+      const start = worldToCanvas(points.B, view);
+      const arrowLength = 3.2 * view.scale;
+      const end = {
+        x: start.x + Math.cos(state.theta) * arrowLength,
+        y: start.y - Math.sin(state.theta) * arrowLength
+      };
+      ctx.save();
+      ctx.strokeStyle = "#b94945";
+      ctx.fillStyle = "#b94945";
+      ctx.lineWidth = 2.2;
+      ctx.beginPath(); ctx.moveTo(start.x, start.y); ctx.lineTo(end.x, end.y); ctx.stroke();
+      const angle = Math.atan2(end.y - start.y, end.x - start.x);
+      ctx.beginPath();
+      ctx.moveTo(end.x, end.y);
+      ctx.lineTo(end.x - 10 * Math.cos(angle - 0.45), end.y - 10 * Math.sin(angle - 0.45));
+      ctx.lineTo(end.x - 10 * Math.cos(angle + 0.45), end.y - 10 * Math.sin(angle + 0.45));
+      ctx.closePath(); ctx.fill();
+      ctx.restore();
+    }
+
+    function drawKeyPoints(view) {
+      const styles = {
+        A: "#245f9b",
+        B: "#287b4f",
+        H: "#7d4ab0",
+        T: "#b56a1f"
+      };
+      ctx.save();
+      ctx.font = "bold 12px Times New Roman";
+      for (const name of ["A", "B", "H", "T"]) {
+        const p = worldToCanvas(points[name], view);
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 4.2, 0, Math.PI * 2);
+        ctx.fillStyle = styles[name];
+        ctx.fill();
+        ctx.fillStyle = "#172232";
+        ctx.fillText(name, p.x + 7, p.y - 7);
+      }
+      ctx.restore();
+    }
+
+    function drawLegend(size) {
+      const items = [
+        ["#245f9b", "牵引车"],
+        ["#b56a1f", "挂车"],
+        ["#287b4f", "B 点轨迹"],
+        ["#b94945", "牵引车朝向"]
+      ];
+      const boxWidth = 116;
+      const boxHeight = 22 + items.length * 20;
+      const x = 12;
+      const y = size.height - boxHeight - 12;
+      ctx.save();
+      ctx.fillStyle = "rgba(255,255,255,0.90)";
+      ctx.strokeStyle = "#d9e1ea";
+      ctx.fillRect(x, y, boxWidth, boxHeight);
+      ctx.strokeRect(x, y, boxWidth, boxHeight);
+      ctx.font = "11px Microsoft YaHei UI";
+      items.forEach(([color, label], index) => {
+        const rowY = y + 20 + index * 20;
+        ctx.fillStyle = color;
+        ctx.fillRect(x + 10, rowY - 8, 17, 3);
+        ctx.fillStyle = "#435268";
+        ctx.fillText(label, x + 34, rowY - 3);
+      });
+      ctx.restore();
+    }
+
+    function setInputsDisabled(disabled) {
+      PARAM_IDS.forEach((id) => {
+        document.getElementById(id).disabled = disabled;
+      });
+    }
+
+    function setStatus(message, isError = false) {
+      statusBox.textContent = message;
+      statusBox.classList.toggle("error", isError);
+    }
+
+    function clearPressedKeys(reason) {
+      Object.keys(pressedKeys).forEach((key) => { pressedKeys[key] = false; });
+      Object.keys(debugHoldTimers).forEach((key) => {
+        if (debugHoldTimers[key] !== null) {
+          window.clearTimeout(debugHoldTimers[key]);
+          debugHoldTimers[key] = null;
+        }
+      });
+      keyboardDebug.clearKeysCount += 1;
+      keyboardDebug.lastClearReason = reason;
+      if (telemetry) updateHud();
+    }
+
+    function mapCodeToKey(code) {
+      if (code === "KeyW") return "w";
+      if (code === "KeyA") return "a";
+      if (code === "KeyS") return "s";
+      if (code === "KeyD") return "d";
+      if (code === "ArrowUp") return "w";
+      if (code === "ArrowDown") return "s";
+      if (code === "ArrowLeft") return "a";
+      if (code === "ArrowRight") return "d";
+      return null;
+    }
+
+    function resolveEventKey(event) {
+      const codeKey = mapCodeToKey(event.code);
+      if (codeKey !== null) {
+        return { key: codeKey, result: `${event.code} -> ${codeKey}` };
+      }
+
+      // 兼容极少数不提供 event.code 的浏览器；正常浏览器绝不依赖 event.key。
+      if (!event.code) {
+        const normalizedKey = String(event.key).toLowerCase();
+        if (normalizedKey === "w" || normalizedKey === "a" || normalizedKey === "s" || normalizedKey === "d") {
+          return { key: normalizedKey, result: `(code unavailable) event.key -> ${normalizedKey}` };
+        }
+        const fallbackArrows = {
+          arrowup: "w",
+          arrowdown: "s",
+          arrowleft: "a",
+          arrowright: "d"
+        };
+        if (fallbackArrows[normalizedKey]) {
+          return { key: fallbackArrows[normalizedKey], result: `(code unavailable) event.key -> ${fallbackArrows[normalizedKey]}` };
+        }
+      }
+
+      return { key: null, result: `${event.code || "(empty)"} -> null` };
+    }
+
+    function recordImeDebug(event) {
+      keyboardDebug.isComposing = event.isComposing === true;
+      keyboardDebug.keyCode = Number.isFinite(event.keyCode) ? String(event.keyCode) : "—";
+      keyboardDebug.imeHint = keyboardDebug.isComposing || event.keyCode === 229
+        ? "可能处于中文输入法组合状态，请切换英文输入法（EN）。方向键可作为备用尝试。"
+        : "建议使用英文输入法（EN）";
+    }
+
+    function isEditableTarget(target) {
+      if (!target || typeof target.tagName !== "string") return false;
+      const tagName = target.tagName.toLowerCase();
+      return tagName === "input"
+        || tagName === "textarea"
+        || tagName === "select"
+        || target.isContentEditable
+        || Boolean(target.closest && target.closest("[contenteditable='true']"));
+    }
+
+    function handleKeyDown(event) {
+      keyboardDebug.lastKeydownCode = event.code || "(empty)";
+      keyboardDebug.lastKeydownKey = String(event.key);
+      recordImeDebug(event);
+      const resolved = resolveEventKey(event);
+      const key = resolved.key;
+      keyboardDebug.mapCodeToKeyResult = resolved.result;
+      if (key === null) {
+        keyboardDebug.ignoredReason = "unsupported key";
+        updateKeyboardDebug();
+        return;
+      }
+
+      if (runStatus !== "running") {
+        keyboardDebug.ignoredReason = "not running";
+        updateHud();
+        return;
+      }
+
+      if (isEditableTarget(event.target)) {
+        keyboardDebug.ignoredReason = "focus in input";
+        updateHud();
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+      if (typeof event.stopImmediatePropagation === "function") {
+        event.stopImmediatePropagation();
+      }
+      pressedKeys[key] = true;
+      keyboardDebug.keydownSetResult = `${event.code} -> pressedKeys.${key} = true`;
+      keyboardDebug.ignoredReason = "—";
+      updateHud();
+    }
+
+    function handleKeyUp(event) {
+      recordImeDebug(event);
+      const key = resolveEventKey(event).key;
+      if (key === null) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+      if (typeof event.stopImmediatePropagation === "function") {
+        event.stopImmediatePropagation();
+      }
+      pressedKeys[key] = false;
+      keyboardDebug.lastKeyupCode = event.code;
+      keyboardDebug.ignoredReason = "—";
+      updateHud();
+    }
+
+    function updateKeyboardDebug() {
+      const activeElement = document.activeElement;
+      const activeTag = activeElement && activeElement.tagName ? activeElement.tagName : "—";
+      document.getElementById("debug-keydown-code").textContent = keyboardDebug.lastKeydownCode;
+      document.getElementById("debug-keydown-key").textContent = keyboardDebug.lastKeydownKey;
+      document.getElementById("debug-is-composing").textContent = String(keyboardDebug.isComposing);
+      document.getElementById("debug-key-code").textContent = keyboardDebug.keyCode;
+      document.getElementById("debug-ime-hint").textContent = keyboardDebug.imeHint;
+      document.getElementById("debug-keyup-code").textContent = keyboardDebug.lastKeyupCode;
+      document.getElementById("debug-map-result").textContent = keyboardDebug.mapCodeToKeyResult;
+      document.getElementById("debug-keydown-result").textContent = keyboardDebug.keydownSetResult;
+      document.getElementById("debug-pressed-json").textContent = JSON.stringify(pressedKeys);
+      document.getElementById("debug-clear-count").textContent = String(keyboardDebug.clearKeysCount);
+      document.getElementById("debug-clear-reason").textContent = keyboardDebug.lastClearReason;
+      document.getElementById("debug-active-tag").textContent = activeTag;
+      document.getElementById("debug-running").textContent = String(runStatus === "running");
+      document.getElementById("debug-ignored").textContent = keyboardDebug.ignoredReason;
+    }
+
+    function simulateKeyHold(control) {
+      if (runStatus !== "running") {
+        keyboardDebug.ignoredReason = "not running";
+        updateKeyboardDebug();
+        return;
+      }
+      if (debugHoldTimers[control] !== null) window.clearTimeout(debugHoldTimers[control]);
+      pressedKeys[control] = true;
+      keyboardDebug.keydownSetResult = `simulated -> pressedKeys.${control} = true`;
+      keyboardDebug.ignoredReason = `simulated ${control.toUpperCase()}`;
+      updateHud();
+      debugHoldTimers[control] = window.setTimeout(() => {
+        pressedKeys[control] = false;
+        debugHoldTimers[control] = null;
+        keyboardDebug.ignoredReason = "—";
+        updateHud();
+      }, 1000);
+    }
+
+    function focusCanvas() {
+      try {
+        canvas.focus({ preventScroll: true });
+      } catch {
+        canvas.focus();
+      }
+    }
+
+    startButton.addEventListener("click", startSimulation);
+    stopButton.addEventListener("click", stopSimulation);
+    debugWButton.addEventListener("click", () => simulateKeyHold("w"));
+    debugDButton.addEventListener("click", () => simulateKeyHold("d"));
+    resetButton.addEventListener("click", () => {
+      PARAM_IDS.forEach((id) => {
+        document.getElementById(id).value = DEFAULT_PARAMS[id];
+      });
+      try {
+        resetState();
+      } catch (error) {
+        setStatus(error.message, true);
+      }
+    });
+    window.addEventListener("keydown", handleKeyDown, true);
+    window.addEventListener("keyup", handleKeyUp, true);
+    window.addEventListener("blur", () => clearPressedKeys("window blur"));
+    document.addEventListener("focusin", (event) => {
+      if (isEditableTarget(event.target)) {
+        keyboardDebug.ignoredReason = "focus in input";
+        updateKeyboardDebug();
+      } else {
+        updateKeyboardDebug();
+      }
+    });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) clearPressedKeys("visibilitychange hidden");
+    });
+    canvas.addEventListener("click", () => {
+      focusCanvas();
+      keyboardDebug.ignoredReason = "—";
+      updateKeyboardDebug();
+    });
+    window.addEventListener("resize", drawScene);
+    window.addEventListener("beforeunload", stopTimerOnly);
+
+    PARAM_IDS.forEach((id) => {
+      document.getElementById(id).addEventListener("change", () => {
+        if (runStatus !== "idle") return;
+        try {
+          params = parseParams();
+          points = derivePoints(state, params);
+          setStatus("参数已更新。点击“开始驾驶”使用当前参数。");
+          drawScene();
+        } catch (error) {
+          setStatus(error.message, true);
+        }
+      });
+    });
+
+    resetState();
+  </script>
+</body>
+</html>
