@@ -352,6 +352,37 @@
     .csv-table th { background: var(--panel-soft); color: var(--muted); }
     .csv-table tbody tr:last-child td { border-bottom: 0; }
 
+    .phase-summary,
+    .replay-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .phase-summary .debug-item code,
+    .replay-summary .debug-item code { white-space: normal; word-break: break-word; }
+
+    .replay-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+      align-items: center;
+    }
+
+    .replay-controls button,
+    .replay-controls select {
+      min-height: 38px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .replay-controls button { cursor: pointer; font-weight: 700; }
+    .replay-controls button:disabled { opacity: 0.42; cursor: not-allowed; }
+
     .canvas-wrap {
       position: relative;
       min-height: 590px;
@@ -414,6 +445,7 @@
       .hud { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .keyboard-debug { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .csv-summary { grid-template-columns: 1fr; }
+      .phase-summary, .replay-summary { grid-template-columns: 1fr; }
       .canvas-wrap { min-height: 470px; }
       canvas { height: 470px; }
     }
@@ -422,9 +454,9 @@
 <body>
   <main class="shell">
     <header class="hero">
-      <p class="eyebrow">Human-in-the-loop · M1</p>
+      <p class="eyebrow">Human-in-the-loop · M1 + M2 + M3</p>
       <h1>人工驾驶半挂车工况仿真器</h1>
-      <p>本工具用于通过 WASD 人工驾驶半挂车，为后续 CSV 导出和 MATLAB 回放做准备。当前版本仅实现实时驾驶、耦合运动学、HUD 与画布可视化。</p>
+      <p>本工具用于通过 WASD 人工驾驶半挂车，导出 PID 兼容工况与阶段日志，并可在浏览器中回放已导出的工况 CSV。</p>
     </header>
 
     <div class="workspace">
@@ -477,6 +509,7 @@
             <button class="danger" id="stop-btn" type="button" disabled>结束驾驶</button>
             <button class="ghost" id="reset-btn" type="button">重置</button>
             <button class="secondary" id="export-btn" type="button">导出 CSV</button>
+            <button class="secondary" id="export-phase-btn" type="button">导出 phase_log</button>
           </div>
         </section>
       </aside>
@@ -539,6 +572,43 @@
         </section>
 
         <section class="panel">
+          <h2 class="panel-title">phase_log 状态 <small>driving phases · M3</small></h2>
+          <div class="phase-summary">
+            <div class="debug-item"><span>当前阶段</span><code id="phase-current">—</code></div>
+            <div class="debug-item"><span>已记录阶段数</span><code id="phase-count">0</code></div>
+            <div class="debug-item"><span>当前阶段持续时间</span><code id="phase-duration">0.00 s</code></div>
+          </div>
+          <div class="csv-status" id="phase-status" role="status" aria-live="polite">暂无 phase_log 可导出。</div>
+          <div class="csv-table-wrap">
+            <table class="csv-table">
+              <thead><tr><th>ID</th><th>phase_name</th><th>start_time_s</th><th>end_time_s</th><th>duration_s</th><th>正交相位</th><th>event</th></tr></thead>
+              <tbody id="phase-preview-body"><tr><td colspan="7" style="text-align:center">暂无阶段</td></tr></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2 class="panel-title">Replay 回放 <small>local scenario CSV · M3</small></h2>
+          <input id="replay-file-input" type="file" accept=".csv,text/csv" hidden />
+          <div class="replay-summary">
+            <div class="debug-item"><span>文件名</span><code id="replay-filename">未加载</code></div>
+            <div class="debug-item"><span>数据行数 / 时间范围</span><code id="replay-range">0 行</code></div>
+            <div class="debug-item"><span>当前帧 / 回放时间</span><code id="replay-position">—</code></div>
+          </div>
+          <div class="replay-controls">
+            <button class="secondary" id="replay-load-btn" type="button">加载 CSV</button>
+            <button id="replay-play-btn" type="button" disabled>播放</button>
+            <button id="replay-pause-btn" type="button" disabled>暂停</button>
+            <button id="replay-stop-btn" type="button" disabled>停止 / 回到开头</button>
+            <label for="replay-speed">回放速度</label>
+            <select id="replay-speed"><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="2">2x</option></select>
+            <label for="replay-progress">进度</label>
+            <input id="replay-progress" type="range" min="0" max="0" value="0" step="1" disabled />
+          </div>
+          <div class="csv-status" id="replay-status" role="status" aria-live="polite">请选择 M2 导出的 human_scenario CSV。</div>
+        </section>
+
+        <section class="panel">
           <h2 class="panel-title">车辆与轨迹 <small>x → right · y → up</small></h2>
           <div class="canvas-wrap">
             <canvas id="sim-canvas" tabindex="0" aria-label="半挂车实时仿真画布，点击后可使用 WASD 驾驶"></canvas>
@@ -568,6 +638,16 @@
       "xH_m", "yH_m", "xT_m", "yT_m",
       "accel_mps2"
     ]);
+    const PHASE_LOG_HEADERS = Object.freeze([
+      "phase_id", "phase_name", "start_time_s", "end_time_s", "duration_s",
+      "start_row", "end_row", "start_v_mps", "end_v_mps",
+      "start_alpha_deg", "end_alpha_deg", "start_phi_deg", "end_phi_deg", "note",
+      "time_s", "phase", "event", "alpha_deg", "phi_deg", "heading_delta_deg"
+    ]);
+    const REPLAY_REQUIRED_HEADERS = Object.freeze([
+      "time_s", "xA_m", "yA_m", "xB_m", "yB_m", "xH_m", "yH_m", "xT_m", "yT_m",
+      "theta_rad", "theta_t_rad", "alpha_deg", "phi_deg", "v_input_mps"
+    ]);
     const DEFAULT_PARAMS = Object.freeze({
       l: 4.0,
       l_h: 1.8,
@@ -593,6 +673,14 @@
     const stopButton = document.getElementById("stop-btn");
     const resetButton = document.getElementById("reset-btn");
     const exportButton = document.getElementById("export-btn");
+    const exportPhaseButton = document.getElementById("export-phase-btn");
+    const replayFileInput = document.getElementById("replay-file-input");
+    const replayLoadButton = document.getElementById("replay-load-btn");
+    const replayPlayButton = document.getElementById("replay-play-btn");
+    const replayPauseButton = document.getElementById("replay-pause-btn");
+    const replayStopButton = document.getElementById("replay-stop-btn");
+    const replaySpeedSelect = document.getElementById("replay-speed");
+    const replayProgress = document.getElementById("replay-progress");
     const debugWButton = document.getElementById("debug-w-btn");
     const debugDButton = document.getElementById("debug-d-btn");
     const statusBox = document.getElementById("status-box");
@@ -619,7 +707,20 @@
     let trail = [];
     let scenarioRecords = [];
     let exportFilename = "";
+    let scenarioTimestamp = "";
     let csvExportStatus = "暂无数据可导出。开始驾驶后将按固定时间步记录。";
+    let phaseRecords = [];
+    let currentPhase = null;
+    let nextPhaseId = 1;
+    let phaseExportStatus = "暂无 phase_log 可导出。";
+    let orthogonalFsm = null;
+    let replayRows = [];
+    let replayFilename = "";
+    let replayIndex = 0;
+    let replayStatus = "empty";
+    let replayAnimationId = null;
+    let replayWallStartMs = 0;
+    let replayDataStartTime = 0;
     let simulationTimer = null;
     let runStatus = "idle";
 
@@ -674,6 +775,7 @@
 
     function resetState() {
       stopTimerOnly();
+      clearReplay();
       clearPressedKeys("resetState");
       runStatus = "idle";
       params = parseParams();
@@ -682,8 +784,14 @@
       points = derivePoints(state, params);
       trail = [{ x: state.xB, y: state.yB }];
       scenarioRecords = [];
-      exportFilename = buildCsvFilename();
+      scenarioTimestamp = buildTimestamp();
+      exportFilename = buildCsvFilename(scenarioTimestamp);
       csvExportStatus = "暂无数据可导出。开始驾驶后将按固定时间步记录。";
+      phaseRecords = [];
+      currentPhase = null;
+      nextPhaseId = 1;
+      phaseExportStatus = "暂无 phase_log 可导出。";
+      orthogonalFsm = createOrthogonalFsm();
       setInputsDisabled(false);
       startButton.disabled = false;
       stopButton.disabled = true;
@@ -693,11 +801,17 @@
       setStatus("参数就绪。点击“开始驾驶”，然后使用 WASD 控制车辆。");
       updateHud();
       updateCsvPanel();
+      updatePhasePanel();
+      updateReplayPanel();
       drawScene();
     }
 
     function startSimulation() {
       if (runStatus !== "idle") return;
+      if (replayRows.length > 0) {
+        setStatus("已加载 Replay 数据。请先点击“重置”清除回放，再开始人工驾驶。", true);
+        return;
+      }
       try {
         params = parseParams();
       } catch (error) {
@@ -711,11 +825,17 @@
       stopButton.disabled = false;
       debugWButton.disabled = false;
       debugDButton.disabled = false;
-      exportFilename = buildCsvFilename();
+      scenarioTimestamp = buildTimestamp();
+      exportFilename = buildCsvFilename(scenarioTimestamp);
       csvExportStatus = "正在记录人工驾驶数据。";
       recordCurrentFrame();
+      orthogonalFsm = createOrthogonalFsm();
+      updatePhaseLog(0);
       setStatus("驾驶中：W 油门、S 刹车、A 左转、D 右转。参数在结束或重置前锁定。");
       updateHud();
+      updateCsvPanel();
+      updatePhasePanel();
+      updateReplayPanel();
       if (document.activeElement && typeof document.activeElement.blur === "function") {
         document.activeElement.blur();
       }
@@ -732,6 +852,7 @@
       stopTimerOnly();
       clearPressedKeys("stopSimulation");
       telemetry.accel = 0;
+      closeCurrentPhase(scenarioRecords.length - 1, "驾驶结束");
       runStatus = "stopped";
       stopButton.disabled = true;
       startButton.disabled = true;
@@ -741,9 +862,14 @@
       csvExportStatus = scenarioRecords.length > 0
         ? `记录已停止，共 ${scenarioRecords.length} 行，可以导出 CSV。`
         : "暂无数据可导出。";
+      phaseExportStatus = phaseRecords.length > 0
+        ? `阶段记录已结束，共 ${phaseRecords.length} 个阶段，可以导出 phase_log。`
+        : "暂无 phase_log 可导出。";
       setStatus(`驾驶已停止：仿真时长 ${telemetry.time.toFixed(2)} s。点击“重置”开始新工况。`);
       updateHud();
       updateCsvPanel();
+      updatePhasePanel();
+      updateReplayPanel();
       drawScene();
     }
 
@@ -780,9 +906,11 @@
       trail.push({ x: state.xB, y: state.yB });
       if (trail.length > 20000) trail.shift();
       recordCurrentFrame();
+      updatePhaseLog(scenarioRecords.length - 1);
 
       updateHud();
       updateCsvPanel();
+      updatePhasePanel();
       drawScene();
     }
 
@@ -873,10 +1001,134 @@
       });
     }
 
-    function buildCsvFilename() {
+    function createOrthogonalFsm() {
+      return { phase: "IDLE", startHeading: state ? state.theta : 0, hold: 0 };
+    }
+
+    function updateOrthogonalFsm() {
+      const alphaAbsDeg = Math.abs(radToDeg(telemetry.alpha));
+      const headingDeltaDeg = Math.abs(radToDeg(state.theta - orthogonalFsm.startHeading));
+      const rules = {
+        IDLE: { next: "ENTRY", event: "FIRST_ENTRY", condition: alphaAbsDeg >= 2, frames: 2 },
+        ENTRY: { next: "MID", event: "ENTER_MID", condition: headingDeltaDeg >= 25, frames: 2 },
+        MID: { next: "EXIT", event: "ENTER_EXIT", condition: headingDeltaDeg >= 75, frames: 2 },
+        EXIT: { next: "DONE", event: "ENTER_DONE", condition: headingDeltaDeg >= 88, frames: 10 }
+      };
+      const rule = rules[orthogonalFsm.phase];
+      let event = "";
+      if (rule) {
+        orthogonalFsm.hold = rule.condition ? orthogonalFsm.hold + 1 : 0;
+        if (orthogonalFsm.hold >= rule.frames) {
+          orthogonalFsm.phase = rule.next;
+          orthogonalFsm.hold = 0;
+          event = rule.event;
+        }
+      }
+      return { phase: orthogonalFsm.phase, event, headingDeltaDeg };
+    }
+
+    function classifyDrivingPhase() {
+      const alphaDeg = radToDeg(telemetry.alpha);
+      if (pressedKeys.s) return "brake";
+      if ((pressedKeys.a && !pressedKeys.d) || alphaDeg >= 1) return "left_turn";
+      if ((pressedKeys.d && !pressedKeys.a) || alphaDeg <= -1) return "right_turn";
+      if (pressedKeys.w && telemetry.accel > 0.02) return "accelerate";
+      if (pressedKeys.w && telemetry.v > 0.05) return "straight";
+      if (telemetry.v > 0.05) return "coast";
+      return "idle";
+    }
+
+    function phaseNote(name) {
+      const notes = {
+        idle: "静止或未明显运动", accelerate: "油门加速", brake: "制动",
+        left_turn: "左转", right_turn: "右转", straight: "有速度且无明显转向", coast: "无油门/刹车滑行"
+      };
+      return notes[name] || "";
+    }
+
+    function beginPhase(name, rowIndex, orthogonal) {
+      const row = scenarioRecords[rowIndex];
+      currentPhase = {
+        phase_id: nextPhaseId++,
+        phase_name: name,
+        start_time_s: row.time_s,
+        start_row: rowIndex,
+        start_v_mps: row.v_input_mps,
+        start_alpha_deg: row.alpha_deg,
+        start_phi_deg: row.phi_deg,
+        note: phaseNote(name),
+        orthogonalEvents: orthogonal.event ? [orthogonal.event] : []
+      };
+    }
+
+    function makePhaseRecord(phase, endRowIndex, extraNote = "") {
+      const safeEndIndex = clamp(endRowIndex, phase.start_row, scenarioRecords.length - 1);
+      const row = scenarioRecords[safeEndIndex];
+      const event = phase.orthogonalEvents.join("|");
+      return {
+        phase_id: phase.phase_id,
+        phase_name: phase.phase_name,
+        start_time_s: phase.start_time_s,
+        end_time_s: row.time_s,
+        duration_s: Math.max(0, row.time_s - phase.start_time_s),
+        start_row: phase.start_row,
+        end_row: safeEndIndex,
+        start_v_mps: phase.start_v_mps,
+        end_v_mps: row.v_input_mps,
+        start_alpha_deg: phase.start_alpha_deg,
+        end_alpha_deg: row.alpha_deg,
+        start_phi_deg: phase.start_phi_deg,
+        end_phi_deg: row.phi_deg,
+        note: [phase.note, extraNote].filter(Boolean).join("；"),
+        time_s: row.time_s,
+        phase: orthogonalFsm.phase,
+        event,
+        alpha_deg: row.alpha_deg,
+        phi_deg: row.phi_deg,
+        heading_delta_deg: Math.abs(radToDeg(row.theta_rad - orthogonalFsm.startHeading))
+      };
+    }
+
+    function closeCurrentPhase(endRowIndex, extraNote = "") {
+      if (!currentPhase || scenarioRecords.length === 0) return;
+      phaseRecords.push(makePhaseRecord(currentPhase, endRowIndex, extraNote));
+      currentPhase = null;
+    }
+
+    function updatePhaseLog(rowIndex) {
+      const orthogonal = updateOrthogonalFsm();
+      const name = classifyDrivingPhase();
+      if (!currentPhase) {
+        beginPhase(name, rowIndex, orthogonal);
+      } else if (currentPhase.phase_name !== name) {
+        closeCurrentPhase(rowIndex - 1);
+        beginPhase(name, rowIndex, orthogonal);
+      } else if (orthogonal.event) {
+        currentPhase.orthogonalEvents.push(orthogonal.event);
+      }
+      phaseExportStatus = `正在记录阶段：${name}；正交相位：${orthogonal.phase}。`;
+    }
+
+    function getPhaseRows(includeCurrent = true) {
+      const rows = phaseRecords.slice();
+      if (includeCurrent && currentPhase && scenarioRecords.length > 0) {
+        rows.push(makePhaseRecord(currentPhase, scenarioRecords.length - 1));
+      }
+      return rows;
+    }
+
+    function buildTimestamp() {
       const now = new Date();
       const pad = (value) => String(value).padStart(2, "0");
-      return `human_scenario_${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}_${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}.csv`;
+      return `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}_${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
+    }
+
+    function buildCsvFilename(timestamp = buildTimestamp()) {
+      return `human_scenario_${timestamp}.csv`;
+    }
+
+    function buildPhaseFilename() {
+      return `human_phase_log_${scenarioTimestamp || buildTimestamp()}.csv`;
     }
 
     function formatCsvNumber(value) {
@@ -891,6 +1143,33 @@
       return lines.join("\n");
     }
 
+    function escapeCsvValue(value) {
+      if (typeof value === "number") return formatCsvNumber(value);
+      const text = String(value ?? "");
+      return /[",\r\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+    }
+
+    function buildPhaseCsv() {
+      const lines = [PHASE_LOG_HEADERS.join(",")];
+      for (const row of getPhaseRows(true)) {
+        lines.push(PHASE_LOG_HEADERS.map((field) => escapeCsvValue(row[field])).join(","));
+      }
+      return lines.join("\n");
+    }
+
+    function downloadTextFile(content, filename) {
+      const blob = new Blob(["\ufeff", content], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = filename;
+      anchor.style.display = "none";
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 0);
+    }
+
     function exportCsv() {
       if (scenarioRecords.length === 0) {
         csvExportStatus = "暂无数据可导出。请先开始驾驶并产生记录。";
@@ -898,18 +1177,22 @@
         return;
       }
 
-      const blob = new Blob([buildCsv()], { type: "text/csv;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const anchor = document.createElement("a");
-      anchor.href = url;
-      anchor.download = exportFilename;
-      anchor.style.display = "none";
-      document.body.appendChild(anchor);
-      anchor.click();
-      anchor.remove();
-      window.setTimeout(() => URL.revokeObjectURL(url), 0);
+      downloadTextFile(buildCsv(), exportFilename);
       csvExportStatus = `已导出 ${exportFilename}，共 ${scenarioRecords.length} 行。`;
       updateCsvPanel();
+    }
+
+    function exportPhaseLog() {
+      const rows = getPhaseRows(true);
+      if (rows.length === 0) {
+        phaseExportStatus = "暂无 phase_log 可导出。请先完成一段人工驾驶。";
+        updatePhasePanel();
+        return;
+      }
+      const filename = buildPhaseFilename();
+      downloadTextFile(buildPhaseCsv(), filename);
+      phaseExportStatus = `已导出 ${filename}，共 ${rows.length} 个阶段。`;
+      updatePhasePanel();
     }
 
     function updateCsvPanel() {
@@ -939,6 +1222,219 @@
       `).join("");
     }
 
+    function updatePhasePanel() {
+      const rows = getPhaseRows(true);
+      const live = currentPhase && scenarioRecords.length > 0
+        ? makePhaseRecord(currentPhase, scenarioRecords.length - 1)
+        : null;
+      document.getElementById("phase-current").textContent = live
+        ? `${live.phase_name} / ${live.phase}`
+        : "—";
+      document.getElementById("phase-count").textContent = String(rows.length);
+      document.getElementById("phase-duration").textContent = `${live ? live.duration_s.toFixed(2) : "0.00"} s`;
+      document.getElementById("phase-status").textContent = phaseExportStatus;
+
+      const body = document.getElementById("phase-preview-body");
+      if (rows.length === 0) {
+        body.innerHTML = '<tr><td colspan="7" style="text-align:center">暂无阶段</td></tr>';
+        return;
+      }
+      body.innerHTML = rows.slice(-8).map((row) => `
+        <tr>
+          <td>${row.phase_id}</td><td>${row.phase_name}</td>
+          <td>${row.start_time_s.toFixed(2)}</td><td>${row.end_time_s.toFixed(2)}</td>
+          <td>${row.duration_s.toFixed(2)}</td><td>${row.phase}</td><td>${row.event || "—"}</td>
+        </tr>
+      `).join("");
+    }
+
+    function parseCsvLine(line) {
+      const values = [];
+      let value = "";
+      let quoted = false;
+      for (let index = 0; index < line.length; index += 1) {
+        const char = line[index];
+        if (char === '"') {
+          if (quoted && line[index + 1] === '"') {
+            value += '"';
+            index += 1;
+          } else {
+            quoted = !quoted;
+          }
+        } else if (char === "," && !quoted) {
+          values.push(value.trim());
+          value = "";
+        } else {
+          value += char;
+        }
+      }
+      values.push(value.trim());
+      return values;
+    }
+
+    function parseReplayCsv(text) {
+      const lines = String(text).replace(/^\ufeff/, "").split(/\r?\n/).filter((line) => line.trim() !== "");
+      if (lines.length < 2) throw new Error("CSV 至少需要表头和一行数据。");
+      const headers = parseCsvLine(lines[0]);
+      const missing = REPLAY_REQUIRED_HEADERS.filter((field) => !headers.includes(field));
+      if (missing.length > 0) throw new Error(`缺少关键字段：${missing.join(", ")}`);
+
+      const rows = [];
+      for (let lineIndex = 1; lineIndex < lines.length; lineIndex += 1) {
+        const values = parseCsvLine(lines[lineIndex]);
+        const row = {};
+        headers.forEach((header, index) => { row[header] = Number(values[index]); });
+        const invalid = REPLAY_REQUIRED_HEADERS.find((field) => !Number.isFinite(row[field]));
+        if (invalid) throw new Error(`第 ${lineIndex + 1} 行字段 ${invalid} 不是有效数字。`);
+        if (rows.length > 0 && row.time_s < rows[rows.length - 1].time_s) {
+          throw new Error(`第 ${lineIndex + 1} 行 time_s 小于上一行，无法按时间回放。`);
+        }
+        rows.push(row);
+      }
+      return rows;
+    }
+
+    async function loadReplayFile(file) {
+      if (!file) return;
+      if (runStatus === "running") {
+        document.getElementById("replay-status").textContent = "正在人工驾驶，必须先结束驾驶才能加载 Replay。";
+        replayFileInput.value = "";
+        return;
+      }
+      pauseReplay();
+      try {
+        const rows = parseReplayCsv(await file.text());
+        replayRows = rows;
+        replayFilename = file.name;
+        replayIndex = 0;
+        replayStatus = "ready";
+        replayProgress.max = String(rows.length - 1);
+        replayProgress.value = "0";
+        replayProgress.disabled = false;
+        startButton.disabled = true;
+        applyReplayFrame(0);
+        document.getElementById("replay-status").textContent = "CSV 加载成功，可以播放、拖动进度或选择倍速。Replay 不会写入驾驶记录。";
+      } catch (error) {
+        clearReplay();
+        document.getElementById("replay-status").textContent = `加载失败：${error.message}`;
+      } finally {
+        replayFileInput.value = "";
+        updateReplayPanel();
+      }
+    }
+
+    function applyReplayFrame(index) {
+      if (replayRows.length === 0) return;
+      replayIndex = clamp(index, 0, replayRows.length - 1);
+      const row = replayRows[replayIndex];
+      const phiRad = Number.isFinite(row.phi_rad) ? row.phi_rad : row.phi_deg * DEG;
+      state = { xB: row.xB_m, yB: row.yB_m, theta: row.theta_rad, phi: phiRad };
+      points = {
+        A: { x: row.xA_m, y: row.yA_m }, B: { x: row.xB_m, y: row.yB_m },
+        H: { x: row.xH_m, y: row.yH_m }, T: { x: row.xT_m, y: row.yT_m },
+        theta_t: row.theta_t_rad
+      };
+      telemetry = {
+        time: row.time_s,
+        v: row.v_input_mps,
+        accel: Number.isFinite(row.accel_mps2) ? row.accel_mps2 : 0,
+        alpha: Number.isFinite(row.alpha_rad) ? row.alpha_rad : row.alpha_deg * DEG
+      };
+      const first = replayRows[0];
+      params = {
+        ...params,
+        l: Number.isFinite(row.l_m) ? row.l_m : params.l,
+        l_h: Number.isFinite(row.l_h_m) ? row.l_h_m : params.l_h,
+        L: Number.isFinite(row.L_m) ? row.L_m : params.L,
+        width: Number.isFinite(row.width_m) ? row.width_m : params.width,
+        phiLimit: Number.isFinite(row.phi_max_rad) ? row.phi_max_rad : params.phiLimit
+      };
+      trail = replayRows.slice(0, replayIndex + 1).map((item) => ({ x: item.xB_m, y: item.yB_m }));
+      if (trail.length === 0) trail = [{ x: first.xB_m, y: first.yB_m }];
+      replayProgress.value = String(replayIndex);
+      updateHud();
+      updateReplayPanel();
+      drawScene();
+    }
+
+    function playReplay() {
+      if (runStatus === "running") {
+        document.getElementById("replay-status").textContent = "正在人工驾驶，不能开始 Replay。";
+        return;
+      }
+      if (replayRows.length === 0 || replayStatus === "playing") return;
+      if (replayIndex >= replayRows.length - 1) applyReplayFrame(0);
+      replayStatus = "playing";
+      replayWallStartMs = performance.now();
+      replayDataStartTime = replayRows[replayIndex].time_s;
+      updateReplayPanel();
+      replayAnimationId = window.requestAnimationFrame(replayStep);
+    }
+
+    function replayStep(nowMs) {
+      if (replayStatus !== "playing") return;
+      const speed = Number(replaySpeedSelect.value) || 1;
+      const targetTime = replayDataStartTime + (nowMs - replayWallStartMs) / 1000 * speed;
+      let nextIndex = replayIndex;
+      while (nextIndex + 1 < replayRows.length && replayRows[nextIndex + 1].time_s <= targetTime) nextIndex += 1;
+      if (nextIndex !== replayIndex) applyReplayFrame(nextIndex);
+      if (replayIndex >= replayRows.length - 1) {
+        replayStatus = "ended";
+        replayAnimationId = null;
+        document.getElementById("replay-status").textContent = "回放完成。可点击播放重新开始，或停止回到开头。";
+        updateReplayPanel();
+        return;
+      }
+      replayAnimationId = window.requestAnimationFrame(replayStep);
+    }
+
+    function pauseReplay() {
+      if (replayAnimationId !== null) window.cancelAnimationFrame(replayAnimationId);
+      replayAnimationId = null;
+      if (replayStatus === "playing") replayStatus = "paused";
+      updateReplayPanel();
+    }
+
+    function stopReplay() {
+      pauseReplay();
+      if (replayRows.length === 0) return;
+      replayStatus = "ready";
+      applyReplayFrame(0);
+      document.getElementById("replay-status").textContent = "已停止并回到第一帧。";
+      updateReplayPanel();
+    }
+
+    function clearReplay() {
+      if (replayAnimationId !== null) window.cancelAnimationFrame(replayAnimationId);
+      replayAnimationId = null;
+      replayRows = [];
+      replayFilename = "";
+      replayIndex = 0;
+      replayStatus = "empty";
+      if (replayProgress) {
+        replayProgress.max = "0";
+        replayProgress.value = "0";
+        replayProgress.disabled = true;
+      }
+      if (runStatus === "idle" && startButton) startButton.disabled = false;
+    }
+
+    function updateReplayPanel() {
+      const hasData = replayRows.length > 0;
+      document.getElementById("replay-filename").textContent = replayFilename || "未加载";
+      document.getElementById("replay-range").textContent = hasData
+        ? `${replayRows.length} 行 · ${replayRows[0].time_s.toFixed(2)}–${replayRows[replayRows.length - 1].time_s.toFixed(2)} s`
+        : "0 行";
+      document.getElementById("replay-position").textContent = hasData
+        ? `${replayIndex + 1} / ${replayRows.length} · ${replayRows[replayIndex].time_s.toFixed(2)} s`
+        : "—";
+      replayPlayButton.disabled = !hasData || replayStatus === "playing";
+      replayPauseButton.disabled = replayStatus !== "playing";
+      replayStopButton.disabled = !hasData;
+      replayLoadButton.disabled = runStatus === "running";
+      replaySpeedSelect.disabled = !hasData;
+    }
+
     function updateHud() {
       const activeKeys = [
         ["w", "W"],
@@ -949,6 +1445,7 @@
         .map(([, label]) => label)
         .join(" + ") || "—";
       const labels = { idle: "未开始", running: "驾驶中", stopped: "已停止" };
+      const replayLabels = { ready: "回放已加载", playing: "回放中", paused: "回放已暂停", ended: "回放完成" };
 
       document.getElementById("hud-time").textContent = `${telemetry.time.toFixed(2)} s`;
       document.getElementById("hud-v").textContent = telemetry.v.toFixed(3);
@@ -959,11 +1456,11 @@
       document.getElementById("hud-theta-t").textContent = `${radToDeg(points.theta_t).toFixed(2)}°`;
       document.getElementById("hud-position").textContent = `${state.xB.toFixed(2)}, ${state.yB.toFixed(2)}`;
       document.getElementById("hud-keys").textContent = activeKeys;
-      document.getElementById("hud-status").textContent = labels[runStatus];
+      document.getElementById("hud-status").textContent = replayRows.length > 0 ? replayLabels[replayStatus] : labels[runStatus];
 
       const statusCard = document.getElementById("hud-status-card");
-      statusCard.classList.toggle("status-driving", runStatus === "running");
-      statusCard.classList.toggle("status-stopped", runStatus === "stopped");
+      statusCard.classList.toggle("status-driving", runStatus === "running" || replayStatus === "playing");
+      statusCard.classList.toggle("status-stopped", runStatus === "stopped" || replayStatus === "paused" || replayStatus === "ended");
       updateKeyboardDebug();
     }
 
@@ -1372,6 +1869,19 @@
     startButton.addEventListener("click", startSimulation);
     stopButton.addEventListener("click", stopSimulation);
     exportButton.addEventListener("click", exportCsv);
+    exportPhaseButton.addEventListener("click", exportPhaseLog);
+    replayLoadButton.addEventListener("click", () => replayFileInput.click());
+    replayFileInput.addEventListener("change", () => loadReplayFile(replayFileInput.files[0]));
+    replayPlayButton.addEventListener("click", playReplay);
+    replayPauseButton.addEventListener("click", pauseReplay);
+    replayStopButton.addEventListener("click", stopReplay);
+    replayProgress.addEventListener("input", () => {
+      if (replayRows.length === 0) return;
+      pauseReplay();
+      replayStatus = "paused";
+      applyReplayFrame(Number(replayProgress.value));
+      document.getElementById("replay-status").textContent = "已定位到所选回放帧。";
+    });
     debugWButton.addEventListener("click", () => simulateKeyHold("w"));
     debugDButton.addEventListener("click", () => simulateKeyHold("d"));
     resetButton.addEventListener("click", () => {
@@ -1404,7 +1914,10 @@
       updateKeyboardDebug();
     });
     window.addEventListener("resize", drawScene);
-    window.addEventListener("beforeunload", stopTimerOnly);
+    window.addEventListener("beforeunload", () => {
+      stopTimerOnly();
+      pauseReplay();
+    });
 
     PARAM_IDS.forEach((id) => {
       document.getElementById(id).addEventListener("change", () => {

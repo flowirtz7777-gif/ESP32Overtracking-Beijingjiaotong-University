@@ -1,6 +1,6 @@
 # 人工驾驶半挂车工况仿真器
 
-当前版本：**M1 + M2 — 浏览器人工驾驶、实时运动学仿真与 PID 兼容 CSV 导出**。
+当前版本：**M1 + M2 + M3 — 浏览器人工驾驶、PID 兼容 CSV、phase_log 与 Replay**。
 
 本工具使用纯 HTML、CSS 和 JavaScript 实现，不依赖框架、npm 或 Electron。它用于通过 WASD 人工驾驶半挂车，并将每个固定时间步的真实车辆状态导出为 PID 工况兼容 CSV，为 MATLAB 验证与后续 M3 回放准备数据。
 
@@ -29,6 +29,17 @@
 - 结束驾驶后仍可导出；
 - 没有数据时点击导出会提示“暂无数据可导出”；
 - 重置会清空全部 CSV 记录并生成新的预计文件名。
+
+## M3 已实现
+
+- 自动识别 `idle`、`accelerate`、`brake`、`left_turn`、`right_turn`、`straight`、`coast` 驾驶阶段；
+- 阶段变化时自动关闭上一阶段并开启新阶段，记录起止时间、数据行、速度、转向角和铰接角；
+- 同时记录大纲中的正交转弯五相 `IDLE / ENTRY / MID / EXIT / DONE` 及切换事件；
+- 导出与当前工况共用时间戳的 `human_phase_log_YYYYMMDD_HHMMSS.csv`；
+- 加载 M2 导出的本地 `human_scenario_*.csv`，检查关键字段并显示明确错误；
+- Replay 支持播放、暂停、停止回到开头、进度拖动以及 `0.5x / 1x / 2x` 倍速；
+- 回放直接使用 CSV 中的 A/B/H/T、航向、车速、转向角和铰接角，不重新积分，也不会写入 M2 驾驶记录；
+- 人工驾驶与 Replay 相互隔离；重置会停止并清除 Replay、主 CSV 记录和 phase_log。
 
 ## 如何运行
 
@@ -61,6 +72,41 @@ xA_m,yA_m,xB_m,yB_m,xH_m,yH_m,xT_m,yT_m,accel_mps2
 - `e_theta_rad = 0`、`e_phi_rad = 0`；
 - 额外的 `accel_mps2` 位于原 PID 兼容字段之后，现有按字段名读取的工具可以忽略该列。
 
+## phase_log 记录与导出
+
+1. 点击“开始驾驶”，phase_log 与主工况 CSV 同时开始记录。
+2. 驾驶过程中可在“phase_log 状态”查看当前阶段、阶段数量、持续时间和最近阶段。
+3. 点击“结束驾驶”关闭最后一个阶段。
+4. 点击“导出 phase_log”下载日志。无阶段数据时页面会提示“暂无 phase_log 可导出”。
+
+主工况与阶段日志复用同一时间戳，例如：
+
+```text
+human_scenario_20260802_153000.csv
+human_phase_log_20260802_153000.csv
+```
+
+phase_log 字段：
+
+```text
+phase_id,phase_name,start_time_s,end_time_s,duration_s,start_row,end_row,
+start_v_mps,end_v_mps,start_alpha_deg,end_alpha_deg,start_phi_deg,end_phi_deg,note,
+time_s,phase,event,alpha_deg,phi_deg,heading_delta_deg
+```
+
+前 14 个字段描述人工驾驶控制阶段；后 6 个字段兼容大纲中的正交路口相位日志。其中 `phase` 为 `IDLE / ENTRY / MID / EXIT / DONE`，`event` 包括 `FIRST_ENTRY / ENTER_MID / ENTER_EXIT / ENTER_DONE`。
+
+## Replay 使用方法
+
+1. 确保当前没有正在进行的人工驾驶。
+2. 在 Replay 区点击“加载 CSV”，选择 M2 导出的 `human_scenario_YYYYMMDD_HHMMSS.csv`。
+3. 加载成功后核对文件名、行数和起止时间。
+4. 点击“播放”，可使用暂停、停止/回到开头、进度条和倍速选择。
+5. HUD、车辆、挂车、A/B/H/T、B 点轨迹会显示当前回放帧。
+6. 缺少关键字段、数值无效或时间倒序时，页面显示错误且不会崩溃。
+
+Replay 只读本地文件，不上传数据，不修改已存在的 M2 记录。加载 Replay 后如需重新人工驾驶，请点击“重置”。
+
 ## WASD 控制
 
 推荐使用英文输入法（EN）进行驾驶测试。中文输入法/IME 可能拦截 W/A/S/D，导致按键不响应；中文输入法下方向键也不保证稳定。如果按键无效，请先切换到英文输入法，然后点击画布再测试。
@@ -83,9 +129,8 @@ xA_m,yA_m,xB_m,yB_m,xH_m,yH_m,xT_m,yT_m,accel_mps2
 
 ## 当前未实现
 
-- Replay 回放：属于 M3；
-- `phase_log.csv` 和正交路口状态机日志：属于 M3；
 - 目标点导入与在线判警：属于 M4/可选扩展；
+- TTC 与盲区风险算法：属于后续功能；
 - Electron、npm、`package.json` 和桌面启动器：暂未实现。
 
 ## M1 测试清单
@@ -122,6 +167,21 @@ xA_m,yA_m,xB_m,yB_m,xH_m,yH_m,xT_m,yT_m,accel_mps2
 - [ ] CSV 第一行与本文列出的 29 列字段顺序完全一致；
 - [ ] CSV 包含初始帧和多行驾驶数据；
 - [ ] `theta_ref` 等于同一行 `theta`，两个误差字段均为 0；
+
+## M3 测试清单
+
+- [ ] 开始驾驶后 phase_log 当前阶段和持续时间实时更新；
+- [ ] 分别使用 W、S、A、D 及松键滑行，阶段按预期切换；
+- [ ] 结束驾驶后最后阶段被关闭，导出文件含表头和多行阶段；
+- [ ] scenario CSV 与 phase_log 文件名使用相同时间戳；
+- [ ] 重置后主记录、phase_log 和 Replay 状态均被清空；
+- [ ] Replay 能加载刚导出的 M2 CSV，显示文件名、行数、时间范围和当前帧；
+- [ ] 播放、暂停、停止回到开头、进度拖动和 0.5x/1x/2x 正常；
+- [ ] Replay 画面使用 CSV 中的 A/B/H/T，并随帧更新 HUD 和轨迹；
+- [ ] Replay 期间 M2 记录行数不增加；
+- [ ] 缺少任一关键字段的 CSV 会显示错误，页面仍可继续操作；
+- [ ] 英文输入法下 M1 的 WASD、回正、运动学、HUD 和画布仍正常；
+- [ ] M2 主 CSV 的 29 列字段及顺序保持不变。
 
 ## 运动学一致性
 
