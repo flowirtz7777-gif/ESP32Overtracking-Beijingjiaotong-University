@@ -126,6 +126,11 @@ tools/update_codex_ppt_deck_spec_slides_6_8.py
 tools/update_codex_ppt_deck_spec_slides_9_20.py
 文本资料/26 小挑.pptx
 
+# ------------- Defense speech renders (答辩演讲稿渲染产物) -------------
+tmp/docs/答辩演讲稿_render/
+tmp/docs/答辩演讲稿_含问答_render/
+tmp/pdfs/
+
 # ------------- Opening report drafts / extracted text -------------
 generated_text/
 文本资料/*开题报告*.docx
