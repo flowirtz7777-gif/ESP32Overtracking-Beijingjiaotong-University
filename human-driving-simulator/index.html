@@ -201,7 +201,7 @@
 
     .actions {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
 
@@ -216,6 +216,7 @@
     .actions button:disabled { opacity: 0.42; cursor: not-allowed; }
     .primary { background: var(--accent); color: #fff; }
     .primary:hover:not(:disabled) { background: var(--accent-dark); }
+    .secondary { background: #fff; border-color: var(--accent) !important; color: var(--accent); }
     .danger { background: #fff; border-color: var(--red) !important; color: var(--red); }
     .ghost { background: var(--panel-soft); border-color: var(--line) !important; color: var(--ink); }
 
@@ -309,6 +310,48 @@
 
     .debug-actions button:disabled { opacity: 0.42; cursor: not-allowed; }
 
+    .csv-summary {
+      display: grid;
+      grid-template-columns: 0.7fr 1.5fr 2fr;
+      gap: 10px;
+    }
+
+    .csv-summary .debug-item code { white-space: normal; word-break: break-all; }
+
+    .csv-status {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-left: 3px solid var(--accent);
+      background: #f4f8fc;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .csv-table-wrap {
+      margin-top: 14px;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+    }
+
+    .csv-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: "Times New Roman", serif;
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .csv-table th,
+    .csv-table td {
+      padding: 7px 9px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .csv-table th { background: var(--panel-soft); color: var(--muted); }
+    .csv-table tbody tr:last-child td { border-bottom: 0; }
+
     .canvas-wrap {
       position: relative;
       min-height: 590px;
@@ -370,6 +413,7 @@
       .sidebar .panel:first-child { grid-row: auto; }
       .hud { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .keyboard-debug { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .csv-summary { grid-template-columns: 1fr; }
       .canvas-wrap { min-height: 470px; }
       canvas { height: 470px; }
     }
@@ -432,6 +476,7 @@
             <button class="primary" id="start-btn" type="button">开始驾驶</button>
             <button class="danger" id="stop-btn" type="button" disabled>结束驾驶</button>
             <button class="ghost" id="reset-btn" type="button">重置</button>
+            <button class="secondary" id="export-btn" type="button">导出 CSV</button>
           </div>
         </section>
       </aside>
@@ -478,6 +523,22 @@
         </section>
 
         <section class="panel">
+          <h2 class="panel-title">CSV 数据状态 <small>PID-compatible · M2</small></h2>
+          <div class="csv-summary">
+            <div class="debug-item"><span>当前已记录行数</span><code id="csv-row-count">0</code></div>
+            <div class="debug-item"><span>预计导出文件名</span><code id="csv-filename">human_scenario_—.csv</code></div>
+            <div class="debug-item"><span>最近一行</span><code id="csv-latest">暂无数据</code></div>
+          </div>
+          <div class="csv-status" id="csv-status" role="status" aria-live="polite">暂无数据可导出。开始驾驶后将按固定时间步记录。</div>
+          <div class="csv-table-wrap">
+            <table class="csv-table">
+              <thead><tr><th>time_s</th><th>v_input_mps</th><th>alpha_deg</th><th>phi_deg</th><th>accel_mps2</th></tr></thead>
+              <tbody id="csv-preview-body"><tr><td colspan="5" style="text-align:center">暂无记录</td></tr></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel">
           <h2 class="panel-title">车辆与轨迹 <small>x → right · y → up</small></h2>
           <div class="canvas-wrap">
             <canvas id="sim-canvas" tabindex="0" aria-label="半挂车实时仿真画布，点击后可使用 WASD 驾驶"></canvas>
@@ -494,6 +555,19 @@
     "use strict";
 
     const DEG = Math.PI / 180;
+    const CSV_HEADERS = Object.freeze([
+      "time_s", "dt_s", "v_input_mps",
+      "l_m", "l_h_m", "L_m", "width_m", "phi_max_rad",
+      "theta_ref_rad", "theta_ref_deg",
+      "theta_rad", "theta_deg",
+      "theta_t_rad", "theta_t_deg",
+      "alpha_rad", "alpha_deg",
+      "phi_rad", "phi_deg",
+      "e_theta_rad", "e_phi_rad",
+      "xA_m", "yA_m", "xB_m", "yB_m",
+      "xH_m", "yH_m", "xT_m", "yT_m",
+      "accel_mps2"
+    ]);
     const DEFAULT_PARAMS = Object.freeze({
       l: 4.0,
       l_h: 1.8,
@@ -518,6 +592,7 @@
     const startButton = document.getElementById("start-btn");
     const stopButton = document.getElementById("stop-btn");
     const resetButton = document.getElementById("reset-btn");
+    const exportButton = document.getElementById("export-btn");
     const debugWButton = document.getElementById("debug-w-btn");
     const debugDButton = document.getElementById("debug-d-btn");
     const statusBox = document.getElementById("status-box");
@@ -542,6 +617,9 @@
     let points = null;
     let telemetry = null;
     let trail = [];
+    let scenarioRecords = [];
+    let exportFilename = "";
+    let csvExportStatus = "暂无数据可导出。开始驾驶后将按固定时间步记录。";
     let simulationTimer = null;
     let runStatus = "idle";
 
@@ -603,6 +681,9 @@
       telemetry = { time: 0, v: 0, accel: 0, alpha: 0 };
       points = derivePoints(state, params);
       trail = [{ x: state.xB, y: state.yB }];
+      scenarioRecords = [];
+      exportFilename = buildCsvFilename();
+      csvExportStatus = "暂无数据可导出。开始驾驶后将按固定时间步记录。";
       setInputsDisabled(false);
       startButton.disabled = false;
       stopButton.disabled = true;
@@ -611,6 +692,7 @@
       keyboardDebug.ignoredReason = "not running";
       setStatus("参数就绪。点击“开始驾驶”，然后使用 WASD 控制车辆。");
       updateHud();
+      updateCsvPanel();
       drawScene();
     }
 
@@ -629,6 +711,9 @@
       stopButton.disabled = false;
       debugWButton.disabled = false;
       debugDButton.disabled = false;
+      exportFilename = buildCsvFilename();
+      csvExportStatus = "正在记录人工驾驶数据。";
+      recordCurrentFrame();
       setStatus("驾驶中：W 油门、S 刹车、A 左转、D 右转。参数在结束或重置前锁定。");
       updateHud();
       if (document.activeElement && typeof document.activeElement.blur === "function") {
@@ -653,8 +738,12 @@
       debugWButton.disabled = true;
       debugDButton.disabled = true;
       setInputsDisabled(false);
+      csvExportStatus = scenarioRecords.length > 0
+        ? `记录已停止，共 ${scenarioRecords.length} 行，可以导出 CSV。`
+        : "暂无数据可导出。";
       setStatus(`驾驶已停止：仿真时长 ${telemetry.time.toFixed(2)} s。点击“重置”开始新工况。`);
       updateHud();
+      updateCsvPanel();
       drawScene();
     }
 
@@ -690,8 +779,10 @@
       points = derivePoints(state, params);
       trail.push({ x: state.xB, y: state.yB });
       if (trail.length > 20000) trail.shift();
+      recordCurrentFrame();
 
       updateHud();
+      updateCsvPanel();
       drawScene();
     }
 
@@ -744,6 +835,108 @@
         y: H.y - vehicleParams.L * Math.sin(theta_t)
       };
       return { A, B, H, T, theta_t };
+    }
+
+    function recordCurrentFrame() {
+      const thetaDeg = radToDeg(state.theta);
+      scenarioRecords.push({
+        time_s: telemetry.time,
+        dt_s: params.dt,
+        v_input_mps: telemetry.v,
+        l_m: params.l,
+        l_h_m: params.l_h,
+        L_m: params.L,
+        width_m: params.width,
+        phi_max_rad: params.phiLimit,
+        // 人工驾驶没有参考航向：用当前真实航向占位，并将误差字段置零。
+        theta_ref_rad: state.theta,
+        theta_ref_deg: thetaDeg,
+        theta_rad: state.theta,
+        theta_deg: thetaDeg,
+        theta_t_rad: points.theta_t,
+        theta_t_deg: radToDeg(points.theta_t),
+        alpha_rad: telemetry.alpha,
+        alpha_deg: radToDeg(telemetry.alpha),
+        phi_rad: state.phi,
+        phi_deg: radToDeg(state.phi),
+        e_theta_rad: 0,
+        e_phi_rad: 0,
+        xA_m: points.A.x,
+        yA_m: points.A.y,
+        xB_m: points.B.x,
+        yB_m: points.B.y,
+        xH_m: points.H.x,
+        yH_m: points.H.y,
+        xT_m: points.T.x,
+        yT_m: points.T.y,
+        accel_mps2: telemetry.accel
+      });
+    }
+
+    function buildCsvFilename() {
+      const now = new Date();
+      const pad = (value) => String(value).padStart(2, "0");
+      return `human_scenario_${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}_${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}.csv`;
+    }
+
+    function formatCsvNumber(value) {
+      return Number.isFinite(value) ? value.toFixed(6) : "";
+    }
+
+    function buildCsv() {
+      const lines = [CSV_HEADERS.join(",")];
+      for (const row of scenarioRecords) {
+        lines.push(CSV_HEADERS.map((field) => formatCsvNumber(row[field])).join(","));
+      }
+      return lines.join("\n");
+    }
+
+    function exportCsv() {
+      if (scenarioRecords.length === 0) {
+        csvExportStatus = "暂无数据可导出。请先开始驾驶并产生记录。";
+        updateCsvPanel();
+        return;
+      }
+
+      const blob = new Blob([buildCsv()], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = exportFilename;
+      anchor.style.display = "none";
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 0);
+      csvExportStatus = `已导出 ${exportFilename}，共 ${scenarioRecords.length} 行。`;
+      updateCsvPanel();
+    }
+
+    function updateCsvPanel() {
+      document.getElementById("csv-row-count").textContent = String(scenarioRecords.length);
+      document.getElementById("csv-filename").textContent = exportFilename || "human_scenario_—.csv";
+      document.getElementById("csv-status").textContent = csvExportStatus;
+
+      const latest = scenarioRecords[scenarioRecords.length - 1];
+      document.getElementById("csv-latest").textContent = latest
+        ? `t=${latest.time_s.toFixed(2)} s · v=${latest.v_input_mps.toFixed(3)} m/s · α=${latest.alpha_deg.toFixed(2)}° · φ=${latest.phi_deg.toFixed(2)}°`
+        : "暂无数据";
+
+      const previewBody = document.getElementById("csv-preview-body");
+      if (scenarioRecords.length === 0) {
+        previewBody.innerHTML = '<tr><td colspan="5" style="text-align:center">暂无记录</td></tr>';
+        return;
+      }
+
+      previewBody.innerHTML = scenarioRecords.slice(-8).map((row) => `
+        <tr>
+          <td>${row.time_s.toFixed(2)}</td>
+          <td>${row.v_input_mps.toFixed(3)}</td>
+          <td>${row.alpha_deg.toFixed(2)}</td>
+          <td>${row.phi_deg.toFixed(2)}</td>
+          <td>${row.accel_mps2.toFixed(3)}</td>
+        </tr>
+      `).join("");
     }
 
     function updateHud() {
@@ -1178,6 +1371,7 @@
 
     startButton.addEventListener("click", startSimulation);
     stopButton.addEventListener("click", stopSimulation);
+    exportButton.addEventListener("click", exportCsv);
     debugWButton.addEventListener("click", () => simulateKeyHold("w"));
     debugDButton.addEventListener("click", () => simulateKeyHold("d"));
     resetButton.addEventListener("click", () => {

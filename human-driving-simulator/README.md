@@ -1,8 +1,8 @@
 # 人工驾驶半挂车工况仿真器
 
-当前版本：**M1 — 浏览器人工驾驶与实时运动学仿真**。
+当前版本：**M1 + M2 — 浏览器人工驾驶、实时运动学仿真与 PID 兼容 CSV 导出**。
 
-本工具使用纯 HTML、CSS 和 JavaScript 实现，不依赖框架、npm 或 Electron。它用于通过 WASD 人工驾驶半挂车，为后续 M2 CSV 导出、MATLAB 验证与 M3 回放功能准备数据生成基础。
+本工具使用纯 HTML、CSS 和 JavaScript 实现，不依赖框架、npm 或 Electron。它用于通过 WASD 人工驾驶半挂车，并将每个固定时间步的真实车辆状态导出为 PID 工况兼容 CSV，为 MATLAB 验证与后续 M3 回放准备数据。
 
 ## M1 已实现
 
@@ -19,11 +19,47 @@
 - 画面以 B 点为中心跟随，并根据车辆总长自动选择显示比例；
 - 开始驾驶、结束驾驶和重置操作。
 
+## M2 已实现
+
+- 从点击“开始驾驶”起，按固定仿真步长逐帧记录真实状态；
+- 记录 `t = 0` 初始帧，以及之后每个运动学积分帧；
+- 导出 PID 工况兼容的 29 列 CSV；
+- 文件名格式：`human_scenario_YYYYMMDD_HHMMSS.csv`；
+- 页面显示记录行数、预计文件名、最近一行摘要和最近 8 行预览；
+- 结束驾驶后仍可导出；
+- 没有数据时点击导出会提示“暂无数据可导出”；
+- 重置会清空全部 CSV 记录并生成新的预计文件名。
+
 ## 如何运行
 
 直接双击 `human-driving-simulator/index.html`，使用 Chrome、Edge 或其他现代浏览器打开即可。无需启动服务器，也无需安装依赖。
 
 建议先保留默认参数，点击“开始驾驶”，再把焦点留在当前页面中进行操作。
+
+## CSV 记录与导出
+
+1. 切换到英文输入法（EN）。
+2. 点击“开始驾驶”；程序立即记录初始帧，并在每个固定时间步追加一行。
+3. 使用 WASD 完成人工驾驶。
+4. 点击“结束驾驶”。
+5. 检查“CSV 数据状态”中的行数、最近一行和预览。
+6. 点击“导出 CSV”，浏览器会下载 `human_scenario_YYYYMMDD_HHMMSS.csv`。
+
+CSV 字段顺序：
+
+```text
+time_s,dt_s,v_input_mps,l_m,l_h_m,L_m,width_m,phi_max_rad,
+theta_ref_rad,theta_ref_deg,theta_rad,theta_deg,theta_t_rad,theta_t_deg,
+alpha_rad,alpha_deg,phi_rad,phi_deg,e_theta_rad,e_phi_rad,
+xA_m,yA_m,xB_m,yB_m,xH_m,yH_m,xT_m,yT_m,accel_mps2
+```
+
+- `rad` 字段单位为弧度，`deg` 字段单位为角度；
+- 坐标单位为 m，速度单位为 m/s，加速度单位为 m/s²；
+- `v_input_mps` 是当前帧真实车速，`accel_mps2` 是当前帧实际加速度；
+- 人工驾驶没有参考航向，因此 `theta_ref_rad = theta_rad`、`theta_ref_deg = theta_deg`；
+- `e_theta_rad = 0`、`e_phi_rad = 0`；
+- 额外的 `accel_mps2` 位于原 PID 兼容字段之后，现有按字段名读取的工具可以忽略该列。
 
 ## WASD 控制
 
@@ -47,7 +83,6 @@
 
 ## 当前未实现
 
-- CSV 导出：属于 M2；
 - Replay 回放：属于 M3；
 - `phase_log.csv` 和正交路口状态机日志：属于 M3；
 - 目标点导入与在线判警：属于 M4/可选扩展；
@@ -74,6 +109,19 @@
 - [ ] 离开浏览器窗口后 WASD 状态被释放；
 - [ ] 点击“结束驾驶”后时间和车辆状态停止更新；
 - [ ] 点击“重置”后参数和车辆状态恢复默认值。
+
+## M2 测试清单
+
+- [ ] 点击“开始驾驶”后记录行数从 1 开始增长；
+- [ ] 英文输入法下 W/S/A/D 控制仍然正常；
+- [ ] 最近一行的时间、速度、α、φ 与 HUD 对应；
+- [ ] 点击“结束驾驶”后行数停止增长，但仍可导出；
+- [ ] 点击“重置”后记录行数归零；
+- [ ] 无数据时点击“导出 CSV”会显示明确提示；
+- [ ] 导出文件名符合 `human_scenario_YYYYMMDD_HHMMSS.csv`；
+- [ ] CSV 第一行与本文列出的 29 列字段顺序完全一致；
+- [ ] CSV 包含初始帧和多行驾驶数据；
+- [ ] `theta_ref` 等于同一行 `theta`，两个误差字段均为 0；
 
 ## 运动学一致性
 
