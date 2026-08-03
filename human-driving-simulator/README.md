@@ -108,6 +108,105 @@ xA_m,yA_m,xB_m,yB_m,xH_m,yH_m,xT_m,yT_m,accel_mps2
 - `e_theta_rad = 0`、`e_phi_rad = 0`；
 - 额外的 `accel_mps2` 位于原 PID 兼容字段之后，现有按字段名读取的工具可以忽略该列。
 
+## MATLAB / CSV 读取验证
+
+### 直接使用 readtable
+
+下面的示例读取人工驾驶 CSV 的时间、车速、转向角、铰接角和 A/B/H/T 坐标，并绘制 B 点轨迹：
+
+```matlab
+csv_path = fullfile('alpha一阶保持仿真', 'scenarios', ...
+    'human_scenario_YYYYMMDD_HHMMSS.csv');
+data = readtable(csv_path);
+
+t = data.time_s;
+v = data.v_input_mps;
+alpha_deg = data.alpha_deg;
+phi_deg = data.phi_deg;
+
+A = [data.xA_m, data.yA_m];
+B = [data.xB_m, data.yB_m];
+H = [data.xH_m, data.yH_m];
+T = [data.xT_m, data.yT_m];
+
+fprintf('读取 %d 行，时间 %.2f–%.2f s，最大车速 %.3f m/s。\n', ...
+    height(data), t(1), t(end), max(v));
+
+figure('Name', '人工驾驶 B 点轨迹');
+plot(B(:, 1), B(:, 2), 'LineWidth', 1.8);
+grid on;
+axis equal;
+xlabel('x_B / m');
+ylabel('y_B / m');
+title('human\_scenario：牵引车后轴 B 点轨迹');
+```
+
+人工驾驶没有独立参考航向，因此每行满足：
+
+```text
+theta_ref_rad = theta_rad
+theta_ref_deg = theta_deg
+e_theta_rad = 0
+e_phi_rad = 0
+```
+
+### 使用 load_pid_scenario
+
+当前仓库的函数签名为：
+
+```matlab
+scenario = load_pid_scenario(csv_path)
+```
+
+`csv_path` 可以是完整路径，也可以是加载器同级 `scenarios/` 目录中的文件名；省略参数时会打开文件选择框。推荐流程：
+
+1. 将 `human_scenario_*.csv` 复制到加载器所在方案目录的 `scenarios/`。
+2. 进入该方案目录并按文件名读取。
+3. 从返回结构的 `inputs / states / points` 分组访问数据。
+
+当前仓库已将原来的 `Matlab/` 方案目录重组为多个 alpha 预测方案。因此基线加载器的实际推荐目录是：
+
+```text
+alpha一阶保持仿真/scenarios/
+```
+
+旧版目录布局或仍使用 `Matlab/load_pid_scenario.m` 的副本时，对应目录就是 `Matlab/scenarios/`。加载器始终根据自身文件位置查找同级 `scenarios/`，不依赖当前工作目录。
+
+示例：
+
+```matlab
+cd('alpha一阶保持仿真');
+scenario = load_pid_scenario('human_scenario_YYYYMMDD_HHMMSS.csv');
+
+t = scenario.time_s;
+v = scenario.inputs.v_mps;
+alpha_deg = scenario.inputs.alpha_deg;
+phi_deg = scenario.inputs.phi_deg;
+A = scenario.points.A;
+B = scenario.points.B;
+H = scenario.points.H;
+T = scenario.points.T;
+
+figure('Name', 'load\_pid\_scenario：B 点轨迹');
+plot(B(:, 1), B(:, 2), 'LineWidth', 1.8);
+grid on;
+axis equal;
+xlabel('x_B / m');
+ylabel('y_B / m');
+```
+
+### 兼容性结论
+
+`load_pid_scenario.m` 要求 25 个核心字段。人工驾驶导出的 29 列包含全部核心字段，并额外提供：
+
+- `phi_max_rad`：加载器识别并写入 `scenario.params.phi_max_rad`；
+- `e_theta_rad`、`e_phi_rad`：保留 PID 同格式语义；
+- `accel_mps2`：额外加速度列，`readtable` 会保留，加载器可安全忽略。
+
+因此 `human_scenario` 在字段和读取结构上兼容 `load_pid_scenario.m`，无需修改加载器或 CSV 表头。仓库中的 `run_phase1_demo.m` 也能通过该加载器读取人工驾驶 CSV。
+
+需要注意：`run_phase1_demo` 的严格 `< 1 mm` 重积分门控最初针对 PID 导出器的采样时序设计，假定第 `k` 行输入用于推进第 `k → k+1` 个区间。人工驾驶 CSV 记录的是每次固定步完成后的当前状态与当前输入；在油门或转向持续变化时，可能出现一个采样步的输入对齐差异。因此“成功读取”代表格式兼容，但人工驾驶数据不保证直接通过该 PID 专用的 1 mm 重积分门控。
+
 ## phase_log 记录与导出
 
 1. 点击“开始驾驶”，phase_log 与主工况 CSV 同时开始记录。
