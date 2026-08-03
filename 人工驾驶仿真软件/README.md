@@ -274,6 +274,50 @@ time_s,phase,event,alpha_deg,phi_deg,heading_delta_deg
 
 前 14 个字段描述人工驾驶控制阶段；后 6 个字段兼容大纲中的正交路口相位日志。其中 `phase` 为 `IDLE / ENTRY / MID / EXIT / DONE`，`event` 包括 `FIRST_ENTRY / ENTER_MID / ENTER_EXIT / ENTER_DONE`。
 
+### 驾驶阶段判定参数
+
+`phase_name` 是互斥的人工驾驶控制阶段，按以下优先级判定：
+
+```text
+brake > left_turn/right_turn > accelerate > straight > coast > idle
+```
+
+当前推荐阈值：
+
+| 参数 | 进入阈值 | 保持/退出阈值 | 作用 |
+|---|---:|---:|---|
+| 车辆明显移动 | `v ≥ 0.10 m/s` | 滚动保持到 `v < 0.05 m/s` | 防止原地打方向被记为转弯 |
+| 牵引车转向角 α | `|alpha| ≥ 2.0°` | 已转弯时保持到 `|alpha| < 1.0°` | 左正右负，双阈值减少抖动 |
+| 铰接角 φ | `|phi| ≥ 1.5°` | 已转弯时保持到 `|phi| < 0.75°` | α 回正后仍反映挂车内切/回正过程 |
+| 加速阶段 | `W` 且 `accel > 0.08 m/s²` | 已加速时保持到 `accel ≤ 0.02 m/s²` | 避免加速/直行在小加速度附近反复切换 |
+
+各阶段含义：
+
+- `brake`：S 被按下；制动优先于转弯和其他阶段；
+- `left_turn`：车辆已明显移动，α 达到左转进入阈值；或 α 接近零但正 φ 表明挂车仍处于左转铰接过程；
+- `right_turn`：与左转对称，α、φ 为负；
+- `accelerate`：W 被按下且实际加速度达到进入/保持阈值；
+- `straight`：W 被按下、车辆仍在滚动，但未满足转弯或明显加速条件；
+- `coast`：未制动、未满足转弯、没有有效油门阶段，但车辆仍以至少 `0.05 m/s` 滑行；
+- `idle`：不满足以上条件，通常为速度低于 `0.05 m/s` 的静止或近静止状态。
+
+`phase` 列中的正交五相状态与 `phase_name` 分开计算：`|alpha| ≥ 2°` 连续 2 帧进入 `ENTRY`，累计 `heading_delta_deg` 达到 25° 连续 2 帧进入 `MID`，达到 75° 连续 2 帧进入 `EXIT`，达到 88° 连续 10 帧进入 `DONE`。默认 `dt = 0.02 s` 时，2 帧约为 40 ms，10 帧约为 200 ms。`heading_delta_deg` 用于描述整段转弯进度，不用于单独判断左转或右转方向。
+
+### 转弯状态人工核对方法
+
+建议使用英文输入法（EN），按以下动作录制一段连续测试：
+
+1. 保持静止约 2 秒，确认阶段为 `idle`；
+2. 按 W 直线加速，先确认进入 `accelerate`；继续保持到加速度稳定在阈值以下，确认切换为 `straight`。如需缩短核对时间，可在开始前临时把 `v_max` 调为 1.0 m/s；
+3. 保持 W 并按 A，先缓慢越过 α=2°，再继续左转到航向变化超过 30°；
+4. 松开 A 但继续按 W，确认 α 回正期间 `left_turn` 不在 1°/2°附近频繁抖动，并观察 φ 回正后才切回 `straight`；
+5. 松开 W 滑行约 2 秒，确认进入 `coast`；
+6. 以相同方式按 D 完成一次右转，确认 α、φ 和 `right_turn` 符号一致；
+7. 按 S 制动到停车，确认先进入 `brake`，松开 S 后进入 `idle`；
+8. 导出配对的 `human_scenario_*.csv` 和 `human_phase_log_*.csv`，检查阶段边界附近是否出现大量短于 0.10 秒的反复切换。
+
+人工核对 phase_log 时重点查看：`phase_id`、`phase_name`、`start_time_s`、`end_time_s`、`duration_s`、`start_v_mps`、`end_v_mps`、`start_alpha_deg`、`end_alpha_deg`、`start_phi_deg`、`end_phi_deg`、`phase`、`event` 和 `heading_delta_deg`。如需进一步判断边界是否合理，建议同时提供配对的 human_scenario CSV，以检查阶段切换前后逐帧的 `v_input_mps`、`accel_mps2`、`alpha_deg`、`phi_deg` 和 `theta_deg`。
+
 ## Replay 使用方法
 
 1. 确保当前没有正在进行的人工驾驶。

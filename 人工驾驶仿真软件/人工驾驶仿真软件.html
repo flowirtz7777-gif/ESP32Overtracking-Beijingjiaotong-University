@@ -523,8 +523,9 @@
             <div class="hud-item"><span>accel_mps2</span><strong id="hud-accel">0.000</strong></div>
             <div class="hud-item"><span>alpha_deg</span><strong id="hud-alpha">0.00°</strong></div>
             <div class="hud-item"><span>phi_deg</span><strong id="hud-phi">0.00°</strong></div>
-            <div class="hud-item"><span>theta_deg</span><strong id="hud-theta">0.00°</strong></div>
-            <div class="hud-item"><span>theta_t_deg</span><strong id="hud-theta-t">0.00°</strong></div>
+            <div class="hud-item"><span>theta_deg</span><strong id="hud-theta">90.00°</strong></div>
+            <div class="hud-item"><span>theta_rad</span><strong id="hud-theta-rad">1.5708</strong></div>
+            <div class="hud-item"><span>theta_t_deg</span><strong id="hud-theta-t">90.00°</strong></div>
             <div class="hud-item"><span>xB, yB</span><strong id="hud-position">0.00, 0.00</strong></div>
             <div class="hud-item"><span>W / S / A / D</span><strong id="hud-keys">—</strong></div>
             <div class="hud-item" id="hud-status-card"><span>运行状态</span><strong id="hud-status">未开始</strong></div>
@@ -625,6 +626,17 @@
     "use strict";
 
     const DEG = Math.PI / 180;
+    const INITIAL_THETA_RAD = Math.PI / 2;
+    const PHASE_THRESHOLDS = Object.freeze({
+      movingEnterMps: 0.10,
+      movingHoldMps: 0.05,
+      turnAlphaEnterDeg: 2.0,
+      turnAlphaHoldDeg: 1.0,
+      turnPhiEnterDeg: 1.5,
+      turnPhiHoldDeg: 0.75,
+      accelerateEnterMps2: 0.08,
+      accelerateHoldMps2: 0.02
+    });
     const CSV_HEADERS = Object.freeze([
       "time_s", "dt_s", "v_input_mps",
       "l_m", "l_h_m", "L_m", "width_m", "phi_max_rad",
@@ -779,7 +791,7 @@
       clearPressedKeys("resetState");
       runStatus = "idle";
       params = parseParams();
-      state = { xB: 0, yB: 0, theta: 0, phi: 0 };
+      state = { xB: 0, yB: 0, theta: INITIAL_THETA_RAD, phi: 0 };
       telemetry = { time: 0, v: 0, accel: 0, alpha: 0 };
       points = derivePoints(state, params);
       trail = [{ x: state.xB, y: state.yB }];
@@ -1002,7 +1014,7 @@
     }
 
     function createOrthogonalFsm() {
-      return { phase: "IDLE", startHeading: state ? state.theta : 0, hold: 0 };
+      return { phase: "IDLE", startHeading: state ? state.theta : INITIAL_THETA_RAD, hold: 0 };
     }
 
     function updateOrthogonalFsm() {
@@ -1029,12 +1041,39 @@
 
     function classifyDrivingPhase() {
       const alphaDeg = radToDeg(telemetry.alpha);
+      const phiDeg = radToDeg(state.phi);
+      const activePhase = currentPhase ? currentPhase.phase_name : "";
+      const isMoving = telemetry.v >= PHASE_THRESHOLDS.movingEnterMps;
+      const isRolling = telemetry.v >= PHASE_THRESHOLDS.movingHoldMps;
+
+      // 控制阶段采用固定优先级：制动 > 转弯 > 加速 > 直行 > 滑行 > 静止。
       if (pressedKeys.s) return "brake";
-      if ((pressedKeys.a && !pressedKeys.d) || alphaDeg >= 1) return "left_turn";
-      if ((pressedKeys.d && !pressedKeys.a) || alphaDeg <= -1) return "right_turn";
-      if (pressedKeys.w && telemetry.accel > 0.02) return "accelerate";
-      if (pressedKeys.w && telemetry.v > 0.05) return "straight";
-      if (telemetry.v > 0.05) return "coast";
+
+      // α 是牵引车即时转向主判据；必须已经明显移动，避免原地打方向被记为转弯。
+      if (isMoving && alphaDeg >= PHASE_THRESHOLDS.turnAlphaEnterDeg) return "left_turn";
+      if (isMoving && alphaDeg <= -PHASE_THRESHOLDS.turnAlphaEnterDeg) return "right_turn";
+
+      // 已进入转弯后用更低的 α/φ 保持阈值形成迟滞，避免阈值附近反复切换。
+      // φ 保留挂车仍在内切/回正过程中的转弯阶段，α 强反向时由上面的主判据立即换向。
+      if (activePhase === "left_turn" && isRolling && (
+        alphaDeg >= PHASE_THRESHOLDS.turnAlphaHoldDeg
+        || phiDeg >= PHASE_THRESHOLDS.turnPhiHoldDeg
+      )) return "left_turn";
+      if (activePhase === "right_turn" && isRolling && (
+        alphaDeg <= -PHASE_THRESHOLDS.turnAlphaHoldDeg
+        || phiDeg <= -PHASE_THRESHOLDS.turnPhiHoldDeg
+      )) return "right_turn";
+
+      // α 接近零时，明显的挂车铰接角仍可触发转弯，反映挂车尚未完成回正。
+      if (isMoving && phiDeg >= PHASE_THRESHOLDS.turnPhiEnterDeg) return "left_turn";
+      if (isMoving && phiDeg <= -PHASE_THRESHOLDS.turnPhiEnterDeg) return "right_turn";
+
+      const accelThreshold = activePhase === "accelerate"
+        ? PHASE_THRESHOLDS.accelerateHoldMps2
+        : PHASE_THRESHOLDS.accelerateEnterMps2;
+      if (pressedKeys.w && telemetry.accel > accelThreshold) return "accelerate";
+      if (pressedKeys.w && isRolling) return "straight";
+      if (isRolling) return "coast";
       return "idle";
     }
 
@@ -1453,6 +1492,7 @@
       document.getElementById("hud-alpha").textContent = `${radToDeg(telemetry.alpha).toFixed(2)}°`;
       document.getElementById("hud-phi").textContent = `${radToDeg(state.phi).toFixed(2)}°`;
       document.getElementById("hud-theta").textContent = `${radToDeg(state.theta).toFixed(2)}°`;
+      document.getElementById("hud-theta-rad").textContent = state.theta.toFixed(4);
       document.getElementById("hud-theta-t").textContent = `${radToDeg(points.theta_t).toFixed(2)}°`;
       document.getElementById("hud-position").textContent = `${state.xB.toFixed(2)}, ${state.yB.toFixed(2)}`;
       document.getElementById("hud-keys").textContent = activeKeys;
