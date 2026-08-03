@@ -63,6 +63,14 @@
 npm.cmd install
 ```
 
+安装完成后，可以直接双击项目根目录中的：
+
+```text
+启动人工驾驶仿真软件.bat
+```
+
+BAT 会以自身所在目录作为项目根目录，检查 Node.js、`npm.cmd` 和 `node_modules`，然后执行 `npm.cmd run human:dev`。如果环境未安装完整或启动失败，窗口会保留并显示中文错误提示。
+
 启动人工驾驶桌面版：
 
 ```powershell
@@ -73,6 +81,12 @@ npm.cmd run human:dev
 
 ```powershell
 npm.cmd run desktop:dev
+```
+
+PID 桌面版原有的一键启动脚本仍是：
+
+```text
+启动PID工况导出器.bat
 ```
 
 可选打包命令已配置为：
@@ -349,6 +363,9 @@ Replay 只读本地文件，不上传数据，不修改已存在的 M2 记录。
 
 ## M4 Electron 开发模式测试清单
 
+- [ ] 首次使用前在项目根目录执行 `npm.cmd install`；
+- [ ] 双击 `启动人工驾驶仿真软件.bat` 后出现人工驾驶桌面窗口；
+- [ ] 临时缺少 `node_modules` 时，BAT 显示安装提示并等待确认，不直接关闭；
 - [ ] 在项目根目录运行 `npm.cmd run human:dev` 后出现独立桌面窗口；
 - [ ] 窗口标题为“人工驾驶仿真软件”，页面内容来自新的中文 HTML 入口；
 - [ ] 切换英文输入法（EN）后，W/S/A/D 驾驶与自动回正正常；
@@ -356,6 +373,7 @@ Replay 只读本地文件，不上传数据，不修改已存在的 M2 记录。
 - [ ] `human_phase_log_*.csv` 可以导出且与主 CSV 时间戳对应；
 - [ ] Replay 可以加载 CSV，并完成播放、暂停和停止；
 - [ ] 重置会清空驾驶记录、phase_log 和 Replay；
+- [ ] PID 一键启动仍使用原 `启动PID工况导出器.bat`；
 - [ ] `npm.cmd run desktop:dev` 仍能启动原 PID 桌面版。
 
 ## 运动学一致性
