@@ -43,7 +43,7 @@
 
 ## 如何运行
 
-直接双击 `human-driving-simulator/index.html`，使用 Chrome、Edge 或其他现代浏览器打开即可。无需启动服务器，也无需安装依赖。
+直接双击 `human-driving-simulator/人工驾驶仿真软件.html`，使用 Chrome、Edge 或其他现代浏览器打开即可。无需启动服务器，也无需安装依赖。
 
 建议先保留默认参数，点击“开始驾驶”，再把焦点留在当前页面中进行操作。
 
