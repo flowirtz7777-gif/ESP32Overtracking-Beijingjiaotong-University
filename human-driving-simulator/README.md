@@ -1,8 +1,8 @@
 # 人工驾驶半挂车工况仿真器
 
-当前版本：**M1 + M2 + M3 — 浏览器人工驾驶、PID 兼容 CSV、phase_log 与 Replay**。
+当前版本：**M1 + M2 + M3 + M4 — 浏览器人工驾驶、数据导出、Replay 与 Electron 开发入口**。
 
-本工具使用纯 HTML、CSS 和 JavaScript 实现，不依赖框架、npm 或 Electron。它用于通过 WASD 人工驾驶半挂车，并将每个固定时间步的真实车辆状态导出为 PID 工况兼容 CSV，为 MATLAB 验证与后续 M3 回放准备数据。
+仿真器核心使用纯 HTML、CSS 和 JavaScript 实现，不依赖前端框架；既可直接在浏览器中打开，也可通过项目已有的 Electron 开发依赖启动独立桌面窗口。它用于通过 WASD 人工驾驶半挂车，并将每个固定时间步的真实车辆状态导出为 PID 工况兼容 CSV。
 
 ## M1 已实现
 
@@ -41,11 +41,47 @@
 - 回放直接使用 CSV 中的 A/B/H/T、航向、车速、转向角和铰接角，不重新积分，也不会写入 M2 驾驶记录；
 - 人工驾驶与 Replay 相互隔离；重置会停止并清除 Replay、主 CSV 记录和 phase_log。
 
-## 如何运行
+## M4 Electron 开发入口
+
+- 新增独立主进程入口 `human-desktop-main.js`；
+- `npm.cmd run human:dev` 打开“人工驾驶仿真软件”桌面窗口；
+- 优先加载 `human-driving-simulator/人工驾驶仿真软件.html`，仅在该文件不存在时回退到旧的 `index.html`；
+- PID 桌面版仍由原来的 `desktop-main.js` 和 `desktop:dev` 启动；
+- 网页版和桌面版复用同一份 HTML，因此 M1/M2/M3 逻辑保持一致。
+
+## 网页版打开方法
 
 直接双击 `human-driving-simulator/人工驾驶仿真软件.html`，使用 Chrome、Edge 或其他现代浏览器打开即可。无需启动服务器，也无需安装依赖。
 
 建议先保留默认参数，点击“开始驾驶”，再把焦点留在当前页面中进行操作。
+
+## Electron 桌面版开发模式
+
+在项目根目录打开 PowerShell 或命令提示符，首次使用先安装依赖：
+
+```powershell
+npm.cmd install
+```
+
+启动人工驾驶桌面版：
+
+```powershell
+npm.cmd run human:dev
+```
+
+原 PID 工况仿真导出器桌面版仍使用：
+
+```powershell
+npm.cmd run desktop:dev
+```
+
+可选打包命令已配置为：
+
+```powershell
+npm.cmd run human:pack
+```
+
+`human:pack` 当前只作为后续打包入口，本阶段不要求打包成功，也不需要执行。驾驶测试仍建议先切换到英文输入法（EN）。
 
 ## CSV 记录与导出
 
@@ -131,7 +167,7 @@ Replay 只读本地文件，不上传数据，不修改已存在的 M2 记录。
 
 - 目标点导入与在线判警：属于 M4/可选扩展；
 - TTC 与盲区风险算法：属于后续功能；
-- Electron、npm、`package.json` 和桌面启动器：暂未实现。
+- 人工驾驶桌面版的正式安装包、签名和发布流程尚未实现。
 
 ## M1 测试清单
 
@@ -182,6 +218,17 @@ Replay 只读本地文件，不上传数据，不修改已存在的 M2 记录。
 - [ ] 缺少任一关键字段的 CSV 会显示错误，页面仍可继续操作；
 - [ ] 英文输入法下 M1 的 WASD、回正、运动学、HUD 和画布仍正常；
 - [ ] M2 主 CSV 的 29 列字段及顺序保持不变。
+
+## M4 Electron 开发模式测试清单
+
+- [ ] 在项目根目录运行 `npm.cmd run human:dev` 后出现独立桌面窗口；
+- [ ] 窗口标题为“人工驾驶仿真软件”，页面内容来自新的中文 HTML 入口；
+- [ ] 切换英文输入法（EN）后，W/S/A/D 驾驶与自动回正正常；
+- [ ] `human_scenario_*.csv` 可以导出并包含 M2 的 29 列表头；
+- [ ] `human_phase_log_*.csv` 可以导出且与主 CSV 时间戳对应；
+- [ ] Replay 可以加载 CSV，并完成播放、暂停和停止；
+- [ ] 重置会清空驾驶记录、phase_log 和 Replay；
+- [ ] `npm.cmd run desktop:dev` 仍能启动原 PID 桌面版。
 
 ## 运动学一致性
 
