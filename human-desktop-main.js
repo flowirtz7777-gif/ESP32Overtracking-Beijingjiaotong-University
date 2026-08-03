@@ -7,12 +7,12 @@ const fs = require("fs");
 const WINDOW_TITLE = "人工驾驶仿真软件";
 const PRIMARY_HTML = path.join(
   __dirname,
-  "human-driving-simulator",
+  "人工驾驶仿真软件",
   "人工驾驶仿真软件.html"
 );
 const FALLBACK_HTML = path.join(
   __dirname,
-  "human-driving-simulator",
+  "人工驾驶仿真软件",
   "index.html"
 );
 

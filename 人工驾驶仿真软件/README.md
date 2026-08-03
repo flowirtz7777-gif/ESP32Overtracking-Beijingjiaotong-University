@@ -45,13 +45,13 @@
 
 - 新增独立主进程入口 `human-desktop-main.js`；
 - `npm.cmd run human:dev` 打开“人工驾驶仿真软件”桌面窗口；
-- 优先加载 `human-driving-simulator/人工驾驶仿真软件.html`，仅在该文件不存在时回退到旧的 `index.html`；
+- 优先加载 `人工驾驶仿真软件/人工驾驶仿真软件.html`，仅在该文件不存在时回退到旧的 `index.html`；
 - PID 桌面版仍由原来的 `desktop-main.js` 和 `desktop:dev` 启动；
 - 网页版和桌面版复用同一份 HTML，因此 M1/M2/M3 逻辑保持一致。
 
 ## 网页版打开方法
 
-直接双击 `human-driving-simulator/人工驾驶仿真软件.html`，使用 Chrome、Edge 或其他现代浏览器打开即可。无需启动服务器，也无需安装依赖。
+直接双击 `人工驾驶仿真软件/人工驾驶仿真软件.html`，使用 Chrome、Edge 或其他现代浏览器打开即可。无需启动服务器，也无需安装依赖。
 
 建议先保留默认参数，点击“开始驾驶”，再把焦点留在当前页面中进行操作。
 
