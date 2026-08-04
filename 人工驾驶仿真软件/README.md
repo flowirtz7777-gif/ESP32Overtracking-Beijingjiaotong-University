@@ -1,0 +1,551 @@
+# 人工驾驶半挂车工况仿真器
+
+当前版本：**M1 + M2 + M3 + M4 — 浏览器人工驾驶、数据导出、Replay 与 Electron 开发入口**。
+
+仿真器核心使用纯 HTML、CSS 和 JavaScript 实现，不依赖前端框架；既可直接在浏览器中打开，也可通过项目已有的 Electron 开发依赖启动独立桌面窗口。它用于通过 WASD 人工驾驶半挂车，并将每个固定时间步的真实车辆状态导出为 PID 工况兼容 CSV。
+
+## M1 已实现
+
+- 可编辑的车辆几何参数与人工驾驶参数；
+- W/S 油门和制动控制；
+- A/D 左右转向、转向限幅与松键自动回正；
+- W 与 S 同时按下时刹车优先；
+- 固定时间步长主循环，默认 `dt = 0.02 s`（50 Hz）；
+- 含 `l_h` 鞍座偏置耦合项的半挂车运动学；
+- A/B/H/T 四个关键点实时推导；
+- 车速不小于 0，当前不支持倒车；
+- 实时 HUD：时间、速度、加速度、α、φ、牵引车/挂车航向、B 点位置、按键和运行状态；
+- Canvas 坐标网格、牵引车、挂车、关键点、朝向箭头和 B 点历史轨迹；
+- 画面以 B 点为中心跟随，并根据车辆总长自动选择显示比例；
+- 开始驾驶、结束驾驶和重置操作。
+
+## M2 已实现
+
+- 从点击“开始驾驶”起，按固定仿真步长逐帧记录真实状态；
+- 记录 `t = 0` 初始帧，以及之后每个运动学积分帧；
+- 导出 PID 工况兼容的 29 列 CSV；
+- 文件名格式：`human_scenario_YYYYMMDD_HHMMSS.csv`；
+- 页面显示记录行数、预计文件名、最近一行摘要和最近 8 行预览；
+- 结束驾驶后仍可导出；
+- 没有数据时点击导出会提示“暂无数据可导出”；
+- 重置会清空全部 CSV 记录并生成新的预计文件名。
+
+## M3 已实现
+
+- 自动识别 `idle`、`accelerate`、`brake`、`left_turn`、`right_turn`、`straight`、`coast` 驾驶阶段；
+- 阶段变化时自动关闭上一阶段并开启新阶段，记录起止时间、数据行、速度、转向角和铰接角；
+- 同时记录大纲中的正交转弯五相 `IDLE / ENTRY / MID / EXIT / DONE` 及切换事件；
+- 导出与当前工况共用时间戳的 `human_phase_log_YYYYMMDD_HHMMSS.csv`；
+- 加载 M2 导出的本地 `human_scenario_*.csv`，检查关键字段并显示明确错误；
+- Replay 支持播放、暂停、停止回到开头、进度拖动以及 `0.5x / 1x / 2x` 倍速；
+- 回放直接使用 CSV 中的 A/B/H/T、航向、车速、转向角和铰接角，不重新积分，也不会写入 M2 驾驶记录；
+- 人工驾驶与 Replay 相互隔离；重置会停止并清除 Replay、主 CSV 记录和 phase_log。
+
+## M4 Electron 开发入口
+
+- 新增独立主进程入口 `human-desktop-main.js`；
+- `npm.cmd run human:dev` 打开“人工驾驶仿真软件”桌面窗口；
+- 优先加载 `人工驾驶仿真软件/人工驾驶仿真软件.html`，仅在该文件不存在时回退到旧的 `index.html`；
+- PID 桌面版仍由原来的 `desktop-main.js` 和 `desktop:dev` 启动；
+- 网页版和桌面版复用同一份 HTML，因此 M1/M2/M3 逻辑保持一致。
+
+## 网页版打开方法
+
+直接双击 `人工驾驶仿真软件/人工驾驶仿真软件.html`，使用 Chrome、Edge 或其他现代浏览器打开即可。无需启动服务器，也无需安装依赖。
+
+建议先保留默认参数，点击“开始驾驶”，再把焦点留在当前页面中进行操作。
+
+## Electron 桌面版开发模式
+
+在项目根目录打开 PowerShell 或命令提示符，首次使用先安装依赖：
+
+```powershell
+npm.cmd install
+```
+
+安装完成后，可以直接双击项目根目录中的：
+
+```text
+启动人工驾驶仿真软件.bat
+```
+
+BAT 会以自身所在目录作为项目根目录，检查 Node.js、`npm.cmd` 和 `node_modules`，然后执行 `npm.cmd run human:dev`。如果环境未安装完整或启动失败，窗口会保留并显示中文错误提示。
+
+启动人工驾驶桌面版：
+
+```powershell
+npm.cmd run human:dev
+```
+
+原 PID 工况仿真导出器桌面版仍使用：
+
+```powershell
+npm.cmd run desktop:dev
+```
+
+PID 桌面版原有的一键启动脚本仍是：
+
+```text
+启动PID工况导出器.bat
+```
+
+可选打包命令已配置为：
+
+```powershell
+npm.cmd run human:pack
+```
+
+`human:pack` 当前只作为后续打包入口，本阶段不要求打包成功，也不需要执行。驾驶测试仍建议先切换到英文输入法（EN）。
+
+## CSV 记录与导出
+
+1. 切换到英文输入法（EN）。
+2. 点击“开始驾驶”；程序立即记录初始帧，并在每个固定时间步追加一行。
+3. 使用 WASD 完成人工驾驶。
+4. 点击“结束驾驶”。
+5. 检查“CSV 数据状态”中的行数、最近一行和预览。
+6. 点击“导出 CSV”，浏览器会下载 `human_scenario_YYYYMMDD_HHMMSS.csv`。
+
+CSV 字段顺序：
+
+```text
+time_s,dt_s,v_input_mps,l_m,l_h_m,L_m,width_m,phi_max_rad,
+theta_ref_rad,theta_ref_deg,theta_rad,theta_deg,theta_t_rad,theta_t_deg,
+alpha_rad,alpha_deg,phi_rad,phi_deg,e_theta_rad,e_phi_rad,
+xA_m,yA_m,xB_m,yB_m,xH_m,yH_m,xT_m,yT_m,accel_mps2
+```
+
+- `rad` 字段单位为弧度，`deg` 字段单位为角度；
+- 坐标单位为 m，速度单位为 m/s，加速度单位为 m/s²；
+- `v_input_mps` 是当前帧真实车速，`accel_mps2` 是当前帧实际加速度；
+- 人工驾驶没有参考航向，因此 `theta_ref_rad = theta_rad`、`theta_ref_deg = theta_deg`；
+- `e_theta_rad = 0`、`e_phi_rad = 0`；
+- 额外的 `accel_mps2` 位于原 PID 兼容字段之后，现有按字段名读取的工具可以忽略该列。
+
+## MATLAB / CSV 读取验证
+
+### 直接使用 readtable
+
+下面的示例读取人工驾驶 CSV 的时间、车速、转向角、铰接角和 A/B/H/T 坐标，并绘制 B 点轨迹：
+
+```matlab
+csv_path = fullfile('alpha一阶保持仿真', 'scenarios', ...
+    'human_scenario_YYYYMMDD_HHMMSS.csv');
+data = readtable(csv_path);
+
+t = data.time_s;
+v = data.v_input_mps;
+alpha_deg = data.alpha_deg;
+phi_deg = data.phi_deg;
+
+A = [data.xA_m, data.yA_m];
+B = [data.xB_m, data.yB_m];
+H = [data.xH_m, data.yH_m];
+T = [data.xT_m, data.yT_m];
+
+fprintf('读取 %d 行，时间 %.2f–%.2f s，最大车速 %.3f m/s。\n', ...
+    height(data), t(1), t(end), max(v));
+
+figure('Name', '人工驾驶 B 点轨迹');
+plot(B(:, 1), B(:, 2), 'LineWidth', 1.8);
+grid on;
+axis equal;
+xlabel('x_B / m');
+ylabel('y_B / m');
+title('human\_scenario：牵引车后轴 B 点轨迹');
+```
+
+人工驾驶没有独立参考航向，因此每行满足：
+
+```text
+theta_ref_rad = theta_rad
+theta_ref_deg = theta_deg
+e_theta_rad = 0
+e_phi_rad = 0
+```
+
+### 使用 load_pid_scenario
+
+当前仓库的函数签名为：
+
+```matlab
+scenario = load_pid_scenario(csv_path)
+```
+
+`csv_path` 可以是完整路径，也可以是加载器同级 `scenarios/` 目录中的文件名；省略参数时会打开文件选择框。推荐流程：
+
+1. 将 `human_scenario_*.csv` 复制到加载器所在方案目录的 `scenarios/`。
+2. 进入该方案目录并按文件名读取。
+3. 从返回结构的 `inputs / states / points` 分组访问数据。
+
+当前仓库已将原来的 `Matlab/` 方案目录重组为多个 alpha 预测方案。因此基线加载器的实际推荐目录是：
+
+```text
+alpha一阶保持仿真/scenarios/
+```
+
+旧版目录布局或仍使用 `Matlab/load_pid_scenario.m` 的副本时，对应目录就是 `Matlab/scenarios/`。加载器始终根据自身文件位置查找同级 `scenarios/`，不依赖当前工作目录。
+
+示例：
+
+```matlab
+cd('alpha一阶保持仿真');
+scenario = load_pid_scenario('human_scenario_YYYYMMDD_HHMMSS.csv');
+
+t = scenario.time_s;
+v = scenario.inputs.v_mps;
+alpha_deg = scenario.inputs.alpha_deg;
+phi_deg = scenario.inputs.phi_deg;
+A = scenario.points.A;
+B = scenario.points.B;
+H = scenario.points.H;
+T = scenario.points.T;
+
+figure('Name', 'load\_pid\_scenario：B 点轨迹');
+plot(B(:, 1), B(:, 2), 'LineWidth', 1.8);
+grid on;
+axis equal;
+xlabel('x_B / m');
+ylabel('y_B / m');
+```
+
+### 兼容性结论
+
+`load_pid_scenario.m` 要求 25 个核心字段。人工驾驶导出的 29 列包含全部核心字段，并额外提供：
+
+- `phi_max_rad`：加载器识别并写入 `scenario.params.phi_max_rad`；
+- `e_theta_rad`、`e_phi_rad`：保留 PID 同格式语义；
+- `accel_mps2`：额外加速度列，`readtable` 会保留，加载器可安全忽略。
+
+因此 `human_scenario` 在字段和读取结构上兼容 `load_pid_scenario.m`，无需修改加载器或 CSV 表头。仓库中的 `run_phase1_demo.m` 也能通过该加载器读取人工驾驶 CSV。
+
+需要注意：`run_phase1_demo` 的严格 `< 1 mm` 重积分门控最初针对 PID 导出器的采样时序设计，假定第 `k` 行输入用于推进第 `k → k+1` 个区间。人工驾驶 CSV 记录的是每次固定步完成后的当前状态与当前输入；在油门或转向持续变化时，可能出现一个采样步的输入对齐差异。因此“成功读取”代表格式兼容，但人工驾驶数据不保证直接通过该 PID 专用的 1 mm 重积分门控。
+
+### M4-3 下游兼容性实测
+
+已使用相对路径 `scenarios/human_scenario_20260803_091503.csv` 完成一次 MATLAB 下游链路实测，结果如下：
+
+- `readtable` 成功读取，共 1655 行、29 个字段，表头完整；
+- `load_pid_scenario` 成功加载并生成分组后的 `scenario` 结构；
+- `run_phase1_demo('scenarios/human_scenario_20260803_091503.csv')` 成功运行；
+- demo 完成轨迹回放、误差报告和三层扫掠预测，并生成三幅图和 `summary.txt`；
+- demo 最终完成，但未通过 PID 专用的 `< 1 mm` 重积分门控。
+
+实测最大误差：
+
+| 状态量 | 最大误差 |
+|---|---:|
+| `xB` | 0.071541 m |
+| `yB` | 0.106706 m |
+| `theta` | 0.012228 rad |
+| `phi` | 0.009619 rad |
+
+位置最大误差约为 106.7055 mm。该结果应分为三个层次理解：
+
+1. **可读取**：29 列 CSV 与 `readtable`、`load_pid_scenario` 的字段接口兼容；
+2. **可运行**：`run_phase1_demo` 可以完成现有 MATLAB 回放、报告、绘图和预测流程；
+3. **未通过 PID 1 mm 门控**：该门控验证的是 PID 导出采样时序下的严格重积分一致性，不等同于人工驾驶 CSV 的格式或下游接口是否有效。
+
+因此，人工驾驶 CSV 可以用于 MATLAB 下游链路联调、数据结构验证、轨迹可视化和预测流程测试，但不应把 `run_phase1_demo` 的 `< 1 mm` PID 专用门控作为人工驾驶 CSV 的严格通过标准。
+
+本次 `predict_swept` 运行期间出现了 `polyshape` 空多边形警告，表示部分预测帧可能生成退化或空的预测多边形。警告没有阻止 demo 完成；但在后续正式接入目标判内、风险分级或报警算法前，需要进一步定位对应帧并检查多边形顶点、车速、转向角和几何退化条件。
+
+## M4-4 负责人反馈后的下游软件实测结果
+
+本节记录初始朝向统一为 y 轴正方向后，人工驾驶 `human_scenario` CSV 在 MATLAB、TTC 预警复盘软件和转弯全过程盲区分析软件中的最新实测结果。测试文件名仅用于标识本次验证样本；测试 CSV、报警日志和边界点日志不纳入仓库。
+
+### 朝向修正验证
+
+新导出的 `human_scenario` CSV 首行实测值：
+
+| 字段/点 | 实测值 |
+|---|---:|
+| `theta_rad` | 1.5708 |
+| `theta_deg` | 90 |
+| A | (0, 4) |
+| B | (0, 0) |
+| T | (0, -11.7) |
+
+上述结果满足：
+
+- 车头初始朝向沿 y 轴正方向；
+- `yA_m > yB_m`，且 `yT_m < yB_m`；
+- `theta_ref_rad = theta_rad`；
+- `theta_ref_deg = theta_deg`；
+- `e_theta_rad = 0`，`e_phi_rad = 0`。
+
+新 CSV 可被 MATLAB `readtable` 正常读取，`load_pid_scenario` 也可正常加载。本次新朝向测试文件的 `row_count = 1299`，CSV 仍保持 29 列，未改变既有字段结构。
+
+### TTC 预警复盘软件实测
+
+测试目的：验证人工驾驶 `human_scenario` CSV 能否作为 TTC 预警复盘软件的场景 CSV，被正常读取并用于车辆路径显示、验收目标加载、TTC 分析和报警日志导出。
+
+测试输入：
+
+- 场景 CSV：`human_scenario_20260803_112656.csv`；
+- 目标 CSV 1：`验收目标集/出弯测试.csv`；
+- 目标 CSV 2：`验收目标集/R3内切探针.csv`。
+
+实测结果：
+
+1. `human_scenario` CSV 可正常导入 TTC 预警复盘软件；
+2. 车辆路径显示正常，初始方向沿 y 轴正方向；
+3. 验收目标点可正常导入；
+4. 模拟可启动和播放；
+5. Risk / TTC 状态可正常刷新；
+6. 报警日志 CSV 可正常导出；
+7. 使用“出弯测试.csv”时，报警日志中的 R1、R2、R3 均出现 Risk 1/2/3 风险升级和 Risk 0 退出记录；
+8. 使用“R3内切探针.csv”时，R1、R2、R3 也出现完整的 Risk 1 → Risk 2 → Risk 3 → Risk 0 风险变化链；
+9. TTC 数值随风险等级升高而降低，例如约从 1.96 s / 0.96 s 降至 0.28 s；
+10. 软件无致命报错。
+
+结论：人工驾驶 `human_scenario` CSV 可以被 TTC 预警复盘软件正常读取，并可用于 TTC 复盘链路联调。
+
+注意事项：
+
+- Risk 不一定每次都必须大于 0，是否报警取决于车辆路径是否靠近目标点；
+- 正式测试应尽量采用简单、标准的转弯轨迹，不建议复杂绕行，否则车辆可能远离固定目标点，导致 Risk 始终为 0；
+- TTC 复盘软件使用的目标点来自“验收目标集”，属于固定目标点。
+
+### 转弯全过程盲区分析软件实测
+
+测试目的：验证人工驾驶 `human_scenario` CSV 能否被转弯全过程盲区分析软件读取，并用于全过程边界点生成、盲区分析和边界点盲区日志导出。
+
+测试输入：
+
+- 场景 CSV：`human_scenario_20260803_140433.csv`；
+- 目标点：使用软件内“生成全过程边界点并分析”功能生成；
+- 该软件的固定目标点应来自 `转弯全过程盲区分析软件/目标点CSV/`，不使用“验收目标集”。
+
+实测结果：
+
+| 指标 | 结果 |
+|---|---:|
+| 全过程边界点 | 493 |
+| 盲区点 | 14 |
+| 反应充足 | 451 |
+| 未命中 | 0 |
+| 起始截断 | 28 |
+| 首个盲区点 | B37 @ 3.96 s |
+
+- `human_scenario` CSV 可正常导入，车辆路径显示正常，初始方向沿 y 轴正方向；
+- 点击“生成全过程边界点并分析”后，成功生成全过程边界点并完成分析；
+- 统计结果可闭合：`14 + 451 + 0 + 28 = 493`；
+- 边界点盲区日志 CSV 可正常导出，共 493 行；
+- 软件无致命报错。
+
+结论：人工驾驶 `human_scenario` CSV 可以被转弯全过程盲区分析软件正常读取，并可用于全过程边界点生成和盲区分析链路联调。
+
+注意事项：
+
+- 盲区点数量不代表软件错误，而表示在当前路径和预测参数下，部分边界点没有足够提前量被预测扫到；
+- 起始截断通常与目标点在起始阶段过近或 `warmup_ignore_s` 设置有关，不应直接视为 CSV 错误；
+- 后续如需优化盲区结果，应结合 CFG 策略、转弯状态判定参数和预测窗口继续调参。
+
+### 转弯状态判定说明
+
+- `phase_log` 已完成最小阈值优化，字段结构保持不变；
+- 原地打方向不再直接判定为 `left_turn` / `right_turn`；
+- 转弯判定结合 `v_input_mps`、`alpha_deg` 和 `phi_deg`，加速阶段同时参考 `accel_mps2`；
+- 转弯和移动状态分别使用进入阈值与保持/退出阈值形成滞回，减少临界值附近的频繁抖动；
+- 建议使用简单标准轨迹进行人工核对：直行 → 左转/右转 → 出弯 → 停车。详细阈值和逐步核对方法见后文“驾驶阶段判定参数”和“转弯状态人工核对方法”。
+
+### 当前链路验证结论
+
+目前人工驾驶仿真软件已经通过以下链路验证：
+
+1. MATLAB `readtable`；
+2. `load_pid_scenario`；
+3. TTC 预警复盘软件；
+4. 转弯全过程盲区分析软件；
+5. Electron 桌面版；
+6. BAT 一键启动。
+
+需要区分接口兼容性与 PID 专用严格重积分验收：
+
+- `run_phase1_demo` 的 `< 1 mm` 重积分门控是 PID 工况专用严格验收，不应作为人工驾驶 CSV 的唯一严格通过标准；
+- 人工驾驶 CSV 更适合用于下游软件链路联调和人工驾驶工况测试；
+- 正式测试建议采用简单、标准的转弯轨迹，不建议复杂绕行。
+
+## phase_log 记录与导出
+
+1. 点击“开始驾驶”，phase_log 与主工况 CSV 同时开始记录。
+2. 驾驶过程中可在“phase_log 状态”查看当前阶段、阶段数量、持续时间和最近阶段。
+3. 点击“结束驾驶”关闭最后一个阶段。
+4. 点击“导出 phase_log”下载日志。无阶段数据时页面会提示“暂无 phase_log 可导出”。
+
+主工况与阶段日志复用同一时间戳，例如：
+
+```text
+human_scenario_20260802_153000.csv
+human_phase_log_20260802_153000.csv
+```
+
+phase_log 字段：
+
+```text
+phase_id,phase_name,start_time_s,end_time_s,duration_s,start_row,end_row,
+start_v_mps,end_v_mps,start_alpha_deg,end_alpha_deg,start_phi_deg,end_phi_deg,note,
+time_s,phase,event,alpha_deg,phi_deg,heading_delta_deg
+```
+
+前 14 个字段描述人工驾驶控制阶段；后 6 个字段兼容大纲中的正交路口相位日志。其中 `phase` 为 `IDLE / ENTRY / MID / EXIT / DONE`，`event` 包括 `FIRST_ENTRY / ENTER_MID / ENTER_EXIT / ENTER_DONE`。
+
+### 驾驶阶段判定参数
+
+`phase_name` 是互斥的人工驾驶控制阶段，按以下优先级判定：
+
+```text
+brake > left_turn/right_turn > accelerate > straight > coast > idle
+```
+
+当前推荐阈值：
+
+| 参数 | 进入阈值 | 保持/退出阈值 | 作用 |
+|---|---:|---:|---|
+| 车辆明显移动 | `v ≥ 0.10 m/s` | 滚动保持到 `v < 0.05 m/s` | 防止原地打方向被记为转弯 |
+| 牵引车转向角 α | `|alpha| ≥ 2.0°` | 已转弯时保持到 `|alpha| < 1.0°` | 左正右负，双阈值减少抖动 |
+| 铰接角 φ | `|phi| ≥ 1.5°` | 已转弯时保持到 `|phi| < 0.75°` | α 回正后仍反映挂车内切/回正过程 |
+| 加速阶段 | `W` 且 `accel > 0.08 m/s²` | 已加速时保持到 `accel ≤ 0.02 m/s²` | 避免加速/直行在小加速度附近反复切换 |
+
+各阶段含义：
+
+- `brake`：S 被按下；制动优先于转弯和其他阶段；
+- `left_turn`：车辆已明显移动，α 达到左转进入阈值；或 α 接近零但正 φ 表明挂车仍处于左转铰接过程；
+- `right_turn`：与左转对称，α、φ 为负；
+- `accelerate`：W 被按下且实际加速度达到进入/保持阈值；
+- `straight`：W 被按下、车辆仍在滚动，但未满足转弯或明显加速条件；
+- `coast`：未制动、未满足转弯、没有有效油门阶段，但车辆仍以至少 `0.05 m/s` 滑行；
+- `idle`：不满足以上条件，通常为速度低于 `0.05 m/s` 的静止或近静止状态。
+
+`phase` 列中的正交五相状态与 `phase_name` 分开计算：`|alpha| ≥ 2°` 连续 2 帧进入 `ENTRY`，累计 `heading_delta_deg` 达到 25° 连续 2 帧进入 `MID`，达到 75° 连续 2 帧进入 `EXIT`，达到 88° 连续 10 帧进入 `DONE`。默认 `dt = 0.02 s` 时，2 帧约为 40 ms，10 帧约为 200 ms。`heading_delta_deg` 用于描述整段转弯进度，不用于单独判断左转或右转方向。
+
+### 转弯状态人工核对方法
+
+建议使用英文输入法（EN），按以下动作录制一段连续测试：
+
+1. 保持静止约 2 秒，确认阶段为 `idle`；
+2. 按 W 直线加速，先确认进入 `accelerate`；继续保持到加速度稳定在阈值以下，确认切换为 `straight`。如需缩短核对时间，可在开始前临时把 `v_max` 调为 1.0 m/s；
+3. 保持 W 并按 A，先缓慢越过 α=2°，再继续左转到航向变化超过 30°；
+4. 松开 A 但继续按 W，确认 α 回正期间 `left_turn` 不在 1°/2°附近频繁抖动，并观察 φ 回正后才切回 `straight`；
+5. 松开 W 滑行约 2 秒，确认进入 `coast`；
+6. 以相同方式按 D 完成一次右转，确认 α、φ 和 `right_turn` 符号一致；
+7. 按 S 制动到停车，确认先进入 `brake`，松开 S 后进入 `idle`；
+8. 导出配对的 `human_scenario_*.csv` 和 `human_phase_log_*.csv`，检查阶段边界附近是否出现大量短于 0.10 秒的反复切换。
+
+人工核对 phase_log 时重点查看：`phase_id`、`phase_name`、`start_time_s`、`end_time_s`、`duration_s`、`start_v_mps`、`end_v_mps`、`start_alpha_deg`、`end_alpha_deg`、`start_phi_deg`、`end_phi_deg`、`phase`、`event` 和 `heading_delta_deg`。如需进一步判断边界是否合理，建议同时提供配对的 human_scenario CSV，以检查阶段切换前后逐帧的 `v_input_mps`、`accel_mps2`、`alpha_deg`、`phi_deg` 和 `theta_deg`。
+
+## Replay 使用方法
+
+1. 确保当前没有正在进行的人工驾驶。
+2. 在 Replay 区点击“加载 CSV”，选择 M2 导出的 `human_scenario_YYYYMMDD_HHMMSS.csv`。
+3. 加载成功后核对文件名、行数和起止时间。
+4. 点击“播放”，可使用暂停、停止/回到开头、进度条和倍速选择。
+5. HUD、车辆、挂车、A/B/H/T、B 点轨迹会显示当前回放帧。
+6. 缺少关键字段、数值无效或时间倒序时，页面显示错误且不会崩溃。
+
+Replay 只读本地文件，不上传数据，不修改已存在的 M2 记录。加载 Replay 后如需重新人工驾驶，请点击“重置”。
+
+## WASD 控制
+
+推荐使用英文输入法（EN）进行驾驶测试。中文输入法/IME 可能拦截 W/A/S/D，导致按键不响应；中文输入法下方向键也不保证稳定。如果按键无效，请先切换到英文输入法，然后点击画布再测试。
+
+| 按键 | 功能 | 行为 |
+|---|---|---|
+| W | 油门 | 按住时油门为 1，车辆加速 |
+| S | 刹车 | 按住时制动为 1，只减速、不倒车 |
+| A | 左转 | α 按设定转向速率向正方向变化 |
+| D | 右转 | α 按设定转向速率向负方向变化 |
+
+方向键仍保留为备用尝试：`↑` 等同 W、`↓` 等同 S、`←` 等同 A、`→` 等同 D；但 M1 操作与演示推荐统一使用英文输入法下的 WASD。
+
+输入法限制不影响 M1 的车辆运动学、HUD、轨迹绘制，也不影响后续 CSV 的字段和数据结构。M1 验收以英文输入法下 WASD 能正常控制车辆为准；Caps Lock 开启或关闭均不影响验收。
+
+- 松开 A/D 后，α 按 `returnRateDeg` 自动回到 0。
+- A 与 D 同时按下时视为无转向输入并回正。
+- W 与 S 同时按下时采用刹车优先。
+- 浏览器窗口失去焦点时会释放所有按键，防止按键状态卡住。
+
+## 当前未实现
+
+- 目标点导入与在线判警：属于 M4/可选扩展；
+- TTC 与盲区风险算法：属于后续功能；
+- 人工驾驶桌面版的正式安装包、签名和发布流程尚未实现。
+
+## M1 测试清单
+
+- [ ] 直接双击 HTML 后页面正常显示，无外部资源加载错误；
+- [ ] 默认参数下点击“开始驾驶”，HUD 状态变为“驾驶中”；
+- [ ] 切换到英文输入法（EN）后，W/A/S/D 均可正常控制；
+- [ ] Caps Lock 开启和关闭时，英文输入法下 WASD 均可正常控制；
+- [ ] 若按键无效，先切换到英文输入法，再点击画布重试；
+- [ ] 中文输入法下方向键只作为备用尝试，不列入 M1 验收要求；
+- [ ] 输入法限制不影响车辆运动学、HUD、轨迹绘制和后续 CSV 数据结构；
+- [ ] 按住 W 后速度增加，松开后受阻力逐渐下降；
+- [ ] 按住 S 后车辆减速，速度不会低于 0；
+- [ ] 同时按 W 和 S 时制动优先；
+- [ ] 按 A 时 α 为正、车辆逆时针左转；
+- [ ] 按 D 时 α 为负、车辆顺时针右转；
+- [ ] 松开 A/D 后 α 自动回正；
+- [ ] α 与 φ 均不超过配置限幅；
+- [ ] Canvas 中 A/B/H/T 位置、牵引车与挂车姿态连续变化；
+- [ ] B 点轨迹不会在每帧刷新时被清除；
+- [ ] 离开浏览器窗口后 WASD 状态被释放；
+- [ ] 点击“结束驾驶”后时间和车辆状态停止更新；
+- [ ] 点击“重置”后参数和车辆状态恢复默认值。
+
+## M2 测试清单
+
+- [ ] 点击“开始驾驶”后记录行数从 1 开始增长；
+- [ ] 英文输入法下 W/S/A/D 控制仍然正常；
+- [ ] 最近一行的时间、速度、α、φ 与 HUD 对应；
+- [ ] 点击“结束驾驶”后行数停止增长，但仍可导出；
+- [ ] 点击“重置”后记录行数归零；
+- [ ] 无数据时点击“导出 CSV”会显示明确提示；
+- [ ] 导出文件名符合 `human_scenario_YYYYMMDD_HHMMSS.csv`；
+- [ ] CSV 第一行与本文列出的 29 列字段顺序完全一致；
+- [ ] CSV 包含初始帧和多行驾驶数据；
+- [ ] `theta_ref` 等于同一行 `theta`，两个误差字段均为 0；
+
+## M3 测试清单
+
+- [ ] 开始驾驶后 phase_log 当前阶段和持续时间实时更新；
+- [ ] 分别使用 W、S、A、D 及松键滑行，阶段按预期切换；
+- [ ] 结束驾驶后最后阶段被关闭，导出文件含表头和多行阶段；
+- [ ] scenario CSV 与 phase_log 文件名使用相同时间戳；
+- [ ] 重置后主记录、phase_log 和 Replay 状态均被清空；
+- [ ] Replay 能加载刚导出的 M2 CSV，显示文件名、行数、时间范围和当前帧；
+- [ ] 播放、暂停、停止回到开头、进度拖动和 0.5x/1x/2x 正常；
+- [ ] Replay 画面使用 CSV 中的 A/B/H/T，并随帧更新 HUD 和轨迹；
+- [ ] Replay 期间 M2 记录行数不增加；
+- [ ] 缺少任一关键字段的 CSV 会显示错误，页面仍可继续操作；
+- [ ] 英文输入法下 M1 的 WASD、回正、运动学、HUD 和画布仍正常；
+- [ ] M2 主 CSV 的 29 列字段及顺序保持不变。
+
+## M4 Electron 开发模式测试清单
+
+- [ ] 首次使用前在项目根目录执行 `npm.cmd install`；
+- [ ] 双击 `启动人工驾驶仿真软件.bat` 后出现人工驾驶桌面窗口；
+- [ ] 临时缺少 `node_modules` 时，BAT 显示安装提示并等待确认，不直接关闭；
+- [ ] 在项目根目录运行 `npm.cmd run human:dev` 后出现独立桌面窗口；
+- [ ] 窗口标题为“人工驾驶仿真软件”，页面内容来自新的中文 HTML 入口；
+- [ ] 切换英文输入法（EN）后，W/S/A/D 驾驶与自动回正正常；
+- [ ] `human_scenario_*.csv` 可以导出并包含 M2 的 29 列表头；
+- [ ] `human_phase_log_*.csv` 可以导出且与主 CSV 时间戳对应；
+- [ ] Replay 可以加载 CSV，并完成播放、暂停和停止；
+- [ ] 重置会清空驾驶记录、phase_log 和 Replay；
+- [ ] PID 一键启动仍使用原 `启动PID工况导出器.bat`；
+- [ ] `npm.cmd run desktop:dev` 仍能启动原 PID 桌面版。
+
+## 运动学一致性
+
+M1 使用的核心方程与项目 MATLAB `kinematics_step.m` 保持一致：
+
+```text
+omega1 = v * sin(alpha) / l
+vB     = v * cos(alpha)
+omega2 = (vB * sin(phi) + l_h * omega1 * cos(phi)) / L
+dphi   = omega1 - omega2
+```
+
+其中 `l_h * omega1 * cos(phi)` 为必须保留的鞍座偏置耦合项。所有内部角度使用弧度，HUD 再转换为角度显示。

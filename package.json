@@ -6,7 +6,9 @@
   "private": true,
   "scripts": {
     "desktop:dev": "electron .",
-    "desktop:pack": "electron-builder --win portable"
+    "desktop:pack": "electron-builder --win portable",
+    "human:dev": "electron human-desktop-main.js",
+    "human:pack": "electron-builder --win portable --config.extraMetadata.main=human-desktop-main.js --config.appId=com.xiaotiao.humandriving --config.productName=人工驾驶仿真软件 --config.directories.output=human-desktop-dist"
   },
   "build": {
     "appId": "com.xiaotiao.pidscenario",
@@ -17,7 +19,9 @@
     "icon": "交大校徽.png",
     "files": [
       "desktop-main.js",
+      "human-desktop-main.js",
       "pid工况仿真导出器.html",
+      "人工驾驶仿真软件/人工驾驶仿真软件.html",
       "package.json",
       "交大校徽.png"
     ],
