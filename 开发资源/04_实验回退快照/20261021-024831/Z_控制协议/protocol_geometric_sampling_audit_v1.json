@@ -1,0 +1,18 @@
+{
+  "version": "negative-geometric-sampling-audit-v1-20261015",
+  "scope": "negative_component_precision_diagnostic_not_full_density_acceptance_or_algorithm_selection",
+  "source_runs": ["resume_S4_negative_census_v1", "resume_S4_negative_census_v2"],
+  "population": "all_unique_near_noncontact_00125m_grid_points_in_each_frozen_census",
+  "coordinate_only_rule": "Morton_integer_cell_order_then_systematic_equal_rank_sampling",
+  "within_rank_offsets": [0.25, 0.5, 0.75],
+  "negative_sample_counts": [23333, 46666, 93333],
+  "all_prespecified_offsets_reported_not_selected_for_good_scores": true,
+  "all_methods_and_conditions_same_mask_per_case_count_offset": true,
+  "limits": {"absolute_population_error_pp": 0.2, "adjacent_density_change_pp": 0.2, "method_minus_hold_effect_error_pp": 0.2},
+  "primary_targets_and_old_rankings_unchanged": true,
+  "minimum_unique_diagnostic_points": 20000,
+  "does_not_override_original_failed_density_gate": true,
+  "prospective_rule_frozen_before_two_additional_case_predictions": true,
+  "prediction_jobs": 0,
+  "execution": {"workers": 1, "reserve_bytes": 3221225472, "research_budget_bytes": 12884901888, "run_budget_bytes": 8388608}
+}

@@ -1,0 +1,289 @@
+{
+  "version": "changed-point-contact-mechanism-v1",
+  "deadline": "2026-10-19T08:00:00+08:00",
+  "cases": [
+    {
+      "id": "geo_a050_symmetric",
+      "reference": {
+        "id": "geo_a050_symmetric",
+        "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a050_symmetric",
+        "result_sha256": "3d9e4b091ae04feeb0427959176fc7175116b4bf101bc5e01c07d166558be495",
+        "reference_sha256": "bac32572b1188c28b7d07bae40bc23d8a865fbcfebbc5554e7562fde5ac0f899",
+        "spec": {
+          "id": "geo_a050_symmetric",
+          "alpha_peak_abs_deg": 5.0,
+          "template": "symmetric",
+          "v_B_mps": 3.0,
+          "base_rate_deg_s": 4.0,
+          "entry_rate_abs_deg_s": 4.0,
+          "return_rate_abs_deg_s": 4.0,
+          "turn_heading_change_deg": 90.0
+        }
+      },
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_labels_v2\\cases\\geo_a050_symmetric",
+      "targets_sha256": "a5e74948a0d18d358df24710a4f817506ee43618ebc12120d99e650d257d219e",
+      "result_sha256": "394cf7416c7da0be093d7de837378440a7387c70cae9c711dec2ba17ef18eaa4"
+    },
+    {
+      "id": "geo_a050_fast_entry",
+      "reference": {
+        "id": "geo_a050_fast_entry",
+        "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a050_fast_entry",
+        "result_sha256": "59d6e04baad6e57e92d706a173cc93ec51cc1e31bec1d906e1c05d8c7491d514",
+        "reference_sha256": "b1d6f99e125730a140ce86e65f7ce606df6acfebcb9ab67cb1bfa1ac457df4d9",
+        "spec": {
+          "id": "geo_a050_fast_entry",
+          "alpha_peak_abs_deg": 5.0,
+          "template": "fast_entry",
+          "v_B_mps": 3.0,
+          "base_rate_deg_s": 4.0,
+          "entry_rate_abs_deg_s": 8.0,
+          "return_rate_abs_deg_s": 4.0,
+          "turn_heading_change_deg": 90.0
+        }
+      },
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_labels_v2\\cases\\geo_a050_fast_entry",
+      "targets_sha256": "09fa661e800701c765391e956e996235fa509202adc49c183a17243498e9cfed",
+      "result_sha256": "b570cd555e5855c72c70901b0f0f5f7977ed2b5b85b0bdbcef4cef70085da303"
+    },
+    {
+      "id": "geo_a050_fast_return",
+      "reference": {
+        "id": "geo_a050_fast_return",
+        "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a050_fast_return",
+        "result_sha256": "57b79f7c12a2f502a0fb419412068d5c5a8b89584008cb5d89464446292b4d31",
+        "reference_sha256": "5990ec0ed676892b9b557ae7abeba7bb6d4cf92c8a38fc1c59ca6d6addde9dae",
+        "spec": {
+          "id": "geo_a050_fast_return",
+          "alpha_peak_abs_deg": 5.0,
+          "template": "fast_return",
+          "v_B_mps": 3.0,
+          "base_rate_deg_s": 4.0,
+          "entry_rate_abs_deg_s": 4.0,
+          "return_rate_abs_deg_s": 8.0,
+          "turn_heading_change_deg": 90.0
+        }
+      },
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_labels_v2\\cases\\geo_a050_fast_return",
+      "targets_sha256": "7f3086d8e2c1f6a786381b420c546d11e9864858f8e3e2f22244a553b3d6570b",
+      "result_sha256": "a496988d96225f4ad3ccb3ab307df90b4e8401d0204dc884ff6eb0a4fde814ad"
+    },
+    {
+      "id": "geo_a125_symmetric",
+      "reference": {
+        "id": "geo_a125_symmetric",
+        "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a125_symmetric",
+        "result_sha256": "93e4836c27c874c01b214391d94cfc2bb7f80efea489b3ca1771e612c8a2d6c4",
+        "reference_sha256": "1cbde494992ea2a82d012a0d190535a68901974e457c1ca02c95b78c5f409611",
+        "spec": {
+          "id": "geo_a125_symmetric",
+          "alpha_peak_abs_deg": 12.5,
+          "template": "symmetric",
+          "v_B_mps": 3.0,
+          "base_rate_deg_s": 4.0,
+          "entry_rate_abs_deg_s": 4.0,
+          "return_rate_abs_deg_s": 4.0,
+          "turn_heading_change_deg": 90.0
+        }
+      },
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_labels_v2\\cases\\geo_a125_symmetric",
+      "targets_sha256": "a1c44fe323be3d03725a14329ca9e064d1cfd902a73de9c44628ee000420859a",
+      "result_sha256": "a6c10c7fdddcd06b6cfce469048877bb4cda6d6bf685c13969c1db98a11616e4"
+    },
+    {
+      "id": "geo_a125_fast_entry",
+      "reference": {
+        "id": "geo_a125_fast_entry",
+        "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a125_fast_entry",
+        "result_sha256": "a9977bbd5b9d448d30cb702f61d86c872aa2ab3c4d04a01bd0cf0521fe81a886",
+        "reference_sha256": "5c39bf2436c44db4db318e7c3ccbb7cb0f7101fb1ceb6f90e2cde09ddc448c19",
+        "spec": {
+          "id": "geo_a125_fast_entry",
+          "alpha_peak_abs_deg": 12.5,
+          "template": "fast_entry",
+          "v_B_mps": 3.0,
+          "base_rate_deg_s": 4.0,
+          "entry_rate_abs_deg_s": 8.0,
+          "return_rate_abs_deg_s": 4.0,
+          "turn_heading_change_deg": 90.0
+        }
+      },
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_labels_v2\\cases\\geo_a125_fast_entry",
+      "targets_sha256": "bde5c4435c1a496bf037bbd929bc282e2aa193a694be624e0b2323abc2a24726",
+      "result_sha256": "005f946e8fc3542e5c0af91dcf259cde6d5fab86df27fc87710c48e2e2297f1e"
+    },
+    {
+      "id": "geo_a125_fast_return",
+      "reference": {
+        "id": "geo_a125_fast_return",
+        "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a125_fast_return",
+        "result_sha256": "137b02c5cd27bdd379f5af5c75bb9216fd2efa0ccc5dbdbb83aa503962a839eb",
+        "reference_sha256": "949e4325519b301600a24a05865c2e4087fa3601c03fe1ecc22250e114555bff",
+        "spec": {
+          "id": "geo_a125_fast_return",
+          "alpha_peak_abs_deg": 12.5,
+          "template": "fast_return",
+          "v_B_mps": 3.0,
+          "base_rate_deg_s": 4.0,
+          "entry_rate_abs_deg_s": 4.0,
+          "return_rate_abs_deg_s": 8.0,
+          "turn_heading_change_deg": 90.0
+        }
+      },
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_labels_v2\\cases\\geo_a125_fast_return",
+      "targets_sha256": "621c8d21973312f4ff41bc10f8e35b5006e7cd55149de6b59d32a3239015f878",
+      "result_sha256": "af6bf69e34c1540add51aa6b0e139699b6cf711f4ccbdaefac5091c6aa17c543"
+    },
+    {
+      "id": "geo_a150_symmetric",
+      "reference": {
+        "id": "geo_a150_symmetric",
+        "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a150_symmetric",
+        "result_sha256": "f3186a0ba6759384422d6172b16284378a12abec591a05b7552ce34a4b91ac60",
+        "reference_sha256": "5d1c2e77cbe0046ecf1d82643fa50392b64f636ee004e0dbf5f9d57bd0d4f024",
+        "spec": {
+          "id": "geo_a150_symmetric",
+          "alpha_peak_abs_deg": 15.0,
+          "template": "symmetric",
+          "v_B_mps": 3.0,
+          "base_rate_deg_s": 4.0,
+          "entry_rate_abs_deg_s": 4.0,
+          "return_rate_abs_deg_s": 4.0,
+          "turn_heading_change_deg": 90.0
+        }
+      },
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_labels_v2\\cases\\geo_a150_symmetric",
+      "targets_sha256": "81f10cc4e1e20a19e567cc3c02dd81cd37cb810caccb65af7613b11dda7e5033",
+      "result_sha256": "1a7cc72de89a77ce38578a174bb292694a8a5e74be4310345c39e6fef87d3439"
+    },
+    {
+      "id": "geo_a150_fast_entry",
+      "reference": {
+        "id": "geo_a150_fast_entry",
+        "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a150_fast_entry",
+        "result_sha256": "0a3e9a6042f6686f62688d51860f898e2b4dffb954f7f46e2322ce62986fe00b",
+        "reference_sha256": "c1079eaba255790a6c7660dde4a359cc186659c43e738ec18f8358da72f89a2c",
+        "spec": {
+          "id": "geo_a150_fast_entry",
+          "alpha_peak_abs_deg": 15.0,
+          "template": "fast_entry",
+          "v_B_mps": 3.0,
+          "base_rate_deg_s": 4.0,
+          "entry_rate_abs_deg_s": 8.0,
+          "return_rate_abs_deg_s": 4.0,
+          "turn_heading_change_deg": 90.0
+        }
+      },
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_labels_v2\\cases\\geo_a150_fast_entry",
+      "targets_sha256": "7407104867171f6b1a19a0a94b59ef3434e6f8816f4dcdffe86841ad123c0662",
+      "result_sha256": "2f80b8b4409afef5eac2c36f28016facd95fc516334b3347d05470ff33068233"
+    },
+    {
+      "id": "geo_a150_fast_return",
+      "reference": {
+        "id": "geo_a150_fast_return",
+        "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a150_fast_return",
+        "result_sha256": "4b873570a6022f422088c02f7a6a87dc0a2db9af88115c60f8bc7159477a2264",
+        "reference_sha256": "990b3a80a745b70aab68fb9b5d36ca97fc87c29c32d8eb8137d4a17d79dd9a96",
+        "spec": {
+          "id": "geo_a150_fast_return",
+          "alpha_peak_abs_deg": 15.0,
+          "template": "fast_return",
+          "v_B_mps": 3.0,
+          "base_rate_deg_s": 4.0,
+          "entry_rate_abs_deg_s": 4.0,
+          "return_rate_abs_deg_s": 8.0,
+          "turn_heading_change_deg": 90.0
+        }
+      },
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_labels_v2\\cases\\geo_a150_fast_return",
+      "targets_sha256": "43a4d1921bc8e09ac8edd988403fead69431626fff61f05d3b34131ebaebc436",
+      "result_sha256": "002674062414100fc889a3dd9cce325eb324f79706503f396a4351161b0abad6"
+    },
+    {
+      "id": "geo_a200_symmetric",
+      "reference": {
+        "id": "geo_a200_symmetric",
+        "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a200_symmetric",
+        "result_sha256": "d004abb1a55c46d6897b594bd65e97b55d55901e58d104e153b8287246db600e",
+        "reference_sha256": "c915fe9ed7c6aa589ea8354eac0476bf2131e467fcc1673ec0bc7d5465cd38eb",
+        "spec": {
+          "id": "geo_a200_symmetric",
+          "alpha_peak_abs_deg": 20.0,
+          "template": "symmetric",
+          "v_B_mps": 3.0,
+          "base_rate_deg_s": 4.0,
+          "entry_rate_abs_deg_s": 4.0,
+          "return_rate_abs_deg_s": 4.0,
+          "turn_heading_change_deg": 90.0
+        }
+      },
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_labels_v2\\cases\\geo_a200_symmetric",
+      "targets_sha256": "2de718daa188a13610625ff1f696ffe58ff547e45fdb05de9adec741b4f9b436",
+      "result_sha256": "e328ffa8cd25ef76641404aab52fcac04d37e434bb0c57e9e78b048550d53667"
+    },
+    {
+      "id": "geo_a200_fast_entry",
+      "reference": {
+        "id": "geo_a200_fast_entry",
+        "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a200_fast_entry",
+        "result_sha256": "bf2137226b3c81b4078acde3730907c3c12bfec3c521d61cc2bef2993ff915e8",
+        "reference_sha256": "0d9e24b2c9fa428acd7257435190eebaa9867d13733a10e7ba6218a95789b47e",
+        "spec": {
+          "id": "geo_a200_fast_entry",
+          "alpha_peak_abs_deg": 20.0,
+          "template": "fast_entry",
+          "v_B_mps": 3.0,
+          "base_rate_deg_s": 4.0,
+          "entry_rate_abs_deg_s": 8.0,
+          "return_rate_abs_deg_s": 4.0,
+          "turn_heading_change_deg": 90.0
+        }
+      },
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_labels_v2\\cases\\geo_a200_fast_entry",
+      "targets_sha256": "ef9bf82ddedad4eaf570982426f433be99370f79d5215afb0f576e850fd366fd",
+      "result_sha256": "959322863bde928a73c77a0e24a30177b623e14d3e14235d1a3d3bb444ae8134"
+    },
+    {
+      "id": "geo_a200_fast_return",
+      "reference": {
+        "id": "geo_a200_fast_return",
+        "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a200_fast_return",
+        "result_sha256": "793037dc65b0defec327411a88694083b91f9db8c247b52a08923c4b9e4f3e7c",
+        "reference_sha256": "5ef3b838f995c3ef01230745dc19804424e66987936e6a282cf503ca03e31325",
+        "spec": {
+          "id": "geo_a200_fast_return",
+          "alpha_peak_abs_deg": 20.0,
+          "template": "fast_return",
+          "v_B_mps": 3.0,
+          "base_rate_deg_s": 4.0,
+          "entry_rate_abs_deg_s": 4.0,
+          "return_rate_abs_deg_s": 8.0,
+          "turn_heading_change_deg": 90.0
+        }
+      },
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_labels_v2\\cases\\geo_a200_fast_return",
+      "targets_sha256": "5375c286511d6e8283ab48ee1f16dae0f0385d12ef3e2510896029e0ec5ab508",
+      "result_sha256": "8d27fecaa42b25d28785a7e06df85c22a602999b9eac096a204de0ced738d070"
+    }
+  ],
+  "selection": "all edge/front/contact-existence changes; no prediction performance selection",
+  "full_changed_point_arrays_no_sampling": true,
+  "physical_contact_tolerance_m": 0.05,
+  "existing_geometry_epsilon_m": 1e-09,
+  "original_one_mm_corner_threshold_preserved": true,
+  "interval_time_resolution_s": 1e-07,
+  "maximum_interval_evaluations_per_point": 20000,
+  "conditional_model": "piecewise-linear supplied pose; no certified ODE or physical error bound",
+  "spatial_error_m": 0.0,
+  "global_interval_exclusion_bound": "translation+hitch rotation+trailer corner rotation",
+  "unresolved_or_budget_exhaustion_never_noncontact": true,
+  "not_a_corrected_truth_population_or_any_repaired_historical_job": true,
+  "no_algorithm_prediction_or_ranking": true,
+  "workers": 1,
+  "inflight": 1,
+  "run_cap_bytes": 134217728,
+  "reservation_bytes": 67108864,
+  "whole_E_Z_cap_bytes": 17179869184,
+  "Z_reserve_bytes": 3221225472
+}

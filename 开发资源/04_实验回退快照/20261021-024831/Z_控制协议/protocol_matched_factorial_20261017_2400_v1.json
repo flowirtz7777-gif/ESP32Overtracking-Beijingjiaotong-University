@@ -1,0 +1,86 @@
+{
+  "version": "20261017-2400-matched-factorial-readonly-v1",
+  "identity": "post_result_readonly_same_survivor_development_diagnostic_not_prediction",
+  "authorization_file": "runs\\resume_20261017_2400_authorization_v1\\authorization.json",
+  "authorization_sha256": "7622eaa91bd7ce0ca4de4f208016a0086544afa8f01153fbde9002acd91631ab",
+  "source_entry": "src_s4_matched_factorial_20261017_2400_v1/analyze_matched.py",
+  "output_run": "runs/resume_20261017_matched_factorial_2400_v1",
+  "reference_run": "runs/resume_20261017_fine_factorial_1900_v1",
+  "reference_checkpoint_sha256": "125062d1912b6b608aeb37f9e79229aca19ff90253b7383f62a0bf9c16484a4c",
+  "reference_source_sha256": "a2923dd3f36132d4627f62ba1de56bd3c4f1abbdec599da5c000a7ef3defba07",
+  "reference_protocol_sha256": "4afcb5432a9f229cf98103ad7d05c32bece73ca0fcf4b31d41fb0a0126c97ee8",
+  "reference_output_audit_sha256": "b44009c65bb7bc4999bcde14b90eea660428412c754e8f6613b4fb07cae1d950",
+  "cases": [
+    "v2_r2_symmetric",
+    "v3_r4_fast_return",
+    "v4_r8_fast_entry"
+  ],
+  "methods": [
+    "damped_g1250",
+    "linear_g0625",
+    "hold"
+  ],
+  "cells": [
+    "w2000_m20_c0",
+    "w2000_m20_c100",
+    "w2000_m50_c0",
+    "w2000_m50_c100"
+  ],
+  "pairs": [
+    [
+      "confirmation_at_m20",
+      0,
+      1
+    ],
+    [
+      "confirmation_at_m50",
+      2,
+      3
+    ],
+    [
+      "margin_at_c0",
+      0,
+      2
+    ],
+    [
+      "margin_at_c100",
+      1,
+      3
+    ]
+  ],
+  "cohorts": [
+    "original_70000",
+    "development_catalog"
+  ],
+  "eligible": "not_front_ignored_and_finite_contact_and_edge_2_and_contact_in_2_to_end_minus_3_with_1e-9_epsilon",
+  "same_survivor": "finite_valid_timestamp_in_both_pair_cells; all_four_finite_for_interaction",
+  "pair_delta": "(contact-valid_after)-(contact-valid_before)",
+  "interaction": "(lead_m50c100-lead_m50c0)-(lead_m20c100-lead_m20c0)_on_all_four_detected",
+  "quantiles": [
+    0.1,
+    0.5
+  ],
+  "quantile_method": "linear",
+  "zero_comparison_epsilon": 1e-09,
+  "false_alarm_budgets_only": {
+    "negative_point_percent": 5,
+    "frame_percent": 0.5,
+    "exact_integer_cross_multiplication": true,
+    "zero_denominator": "null_not_passed"
+  },
+  "all_36_main_rows_all_90_cohort_contrasts_required": true,
+  "point_indices_and_before_after_leads_and_deltas_lossless_npz_sha_readback": true,
+  "no_full_fine_cross_cell_claim_no_foundation_override_no_causal_or_unseen_claim": true,
+  "new_prediction_jobs": 0,
+  "execution": {
+    "deadline_local": "2026-10-18T00:00:00+08:00",
+    "workers": 1,
+    "inflight": 1,
+    "blas_threads": 1,
+    "run_cap_bytes": 268435456,
+    "batch_reservation_bytes": 167772160,
+    "experiment_budget_bytes": 17179869184,
+    "reserve_bytes": 3221225472,
+    "write_retry_seconds": 30
+  }
+}

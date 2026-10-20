@@ -1,0 +1,23 @@
+{
+  "version": "20261015-resume-v4",
+  "authorized_until_local": "2026-10-15T18:00:00+08:00",
+  "authorization": "Human requested resume after interruption and extension to today 18:00",
+  "previous_plan": "morning_plan_20261015_v3.json",
+  "completed_new_predictions_this_cycle": 144,
+  "completed_new_scoring_predictions_total": 2220,
+  "current_stage": "M1_sampling_failure_mechanism_diagnosis",
+  "current_entrypoint": "src_s4_sampling_diagnostic_v1/diagnose_sampling.py",
+  "current_protocol": "protocol_sampling_diagnostic_v1.json",
+  "current_run": "runs/resume_S4_sampling_diagnostic_v1",
+  "new_prediction_jobs_planned": 0,
+  "read_only_reference_prediction_jobs": 54,
+  "density_gate_passed": false,
+  "failed_density_pairs": 6,
+  "failure_scope": "v4_r8_fast_entry_noise100_s1_margin005_confirmation0_negative_point_FP",
+  "original_70000_main_targets_preserved": true,
+  "research_directory_budget_bytes": 12884901888,
+  "same_path_speed_replay": "not_implemented_wait_for_density_gate",
+  "S5": "not_ready_no_feasible_frozen_candidate",
+  "next_action": "diagnose_sampling_before_new_version_finite_geometric_control_if_justified_and_within_budget",
+  "stop_policy": "no_new_prediction_submission_at_or_after_18_00_drain_already_submitted_then_audit"
+}

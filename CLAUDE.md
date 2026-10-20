@@ -11,7 +11,7 @@
 
 **唯一需要事先确认的操作**：批量删除多个文件或目录（`rm -rf`、`Remove-Item -Recurse` 等)。
 
-**Release 后写复盘的强制约定**：每打一个 `vX.Y.Z` tag 后，必须在 `工作复盘/` 目录新增一份 `vX.Y.Z_<主题>.md`，按 `工作复盘/README.md` 的模板写。复盘文件一旦提交不再修改，作为该版本的工程档案快照。
+**Release 后写复盘的强制约定**：每打一个 `vX.Y.Z` tag 后，必须在 `项目文档/03_项目管理/工作复盘/` 目录新增一份 `vX.Y.Z_<主题>.md`，按 `项目文档/03_项目管理/工作复盘/README.md` 的模板写。复盘文件一旦提交不再修改，作为该版本的工程档案快照。
 
 ---
 
@@ -19,7 +19,7 @@
 
 本工程执行手册之上还有一份**顶层论证文档**，定义了项目的建模哲学、主模型与对照模型的论证体系、PID 模型的重新定位等核心思想：
 
-📘 **[`预测模型与对照模型构建思路.md`](预测模型与对照模型构建思路.md)** — 必读
+📘 **[`项目文档/01_核心设计/预测模型与对照模型构建思路.md`](项目文档/01_核心设计/预测模型与对照模型构建思路.md)** — 必读
 
 文档要点（执行任何修改前都应理解）：
 
@@ -79,34 +79,35 @@
 
 | 文件 | 角色 |
 |---|---|
-| `pid工况仿真导出器.html` | 独立网页：配置车辆参数 / 参考航向 / PID 增益，仿真后导出离散 CSV `(t, v, α, φ, ...)` |
-| `desktop-main.js` + `package.json` | 可选 Electron 桌面壳。`npm install && npm run desktop:dev` 即可启动。**非必需**——HTML 双击就能用 |
-| `启动PID工况导出器.bat` | Windows 一键启动器，双击直接打开 Electron 版导出器，免开 PowerShell / 免敲 npm。依赖 `trae/node_modules/electron/` 存在 |
-| `Matlab/load_pid_scenario.m` | MATLAB 加载脚本：返回 `params / inputs / states / points / summary` 分组 struct |
+| `工具/PID工况仿真导出器/pid工况仿真导出器.html` | 独立网页：配置车辆参数 / 参考航向 / PID 增益，仿真后导出离散 CSV `(t, v, α, φ, ...)` |
+| `工具/PID工况仿真导出器/desktop-main.js` + `package.json` | 可选 Electron 桌面壳。在该工具目录执行 `npm install && npm run desktop:dev`；HTML 也可直接打开 |
+| `工具/PID工况仿真导出器/启动PID工况导出器.bat` | Windows 一键启动器，使用该工具目录内安装的 Electron 依赖 |
+| `工具/alpha一阶保持仿真/load_pid_scenario.m` | MATLAB 加载脚本：返回 `params / inputs / states / points / summary` 分组 struct |
 
 **UI 设计**：工业 SCADA/HMI 控制台风格，支持深色/浅色主题切换（`localStorage` 持久化），右上角工业翘板开关控制。页面顶部展示三种启动入口徽章（Web / BAT / 桌面快捷方式）。纯单文件 HTML，无外部依赖。
 
 **Phase 1 工作流**：
 
 ```
-1. 打开 pid工况仿真导出器.html       → 调参，点击"导出 CSV"
-   ├─ Electron 启动器：保存对话框默认指向 Matlab/scenarios/
-   └─ 浏览器直开：下载到默认 Downloads，需手动移到 Matlab/scenarios/
+1. 打开 工具/PID工况仿真导出器/pid工况仿真导出器.html       → 调参，点击"导出 CSV"
+   ├─ Electron 启动器：保存对话框默认指向 工具/PID工况仿真导出器/Matlab/scenarios/
+   └─ 浏览器直开：下载到默认 Downloads/
+   再把选定工况复制到需要运行的仿真工具自己的 scenarios/ 目录。
 2. MATLAB: scenario = load_pid_scenario('pid_scenario_*.csv');
-   ├─ 仅传文件名 → 自动到 Matlab/scenarios/ 找
+   ├─ 仅传文件名 → 自动到 工具/alpha一阶保持仿真/scenarios/ 找
    ├─ 传完整路径 → 直接用
-   └─ 不传参数  → 弹文件框，默认打开 Matlab/scenarios/
+   └─ 不传参数  → 弹文件框，默认打开 工具/alpha一阶保持仿真/scenarios/
 3. 把 scenario.inputs.{v_mps, alpha_rad, phi_rad} 当作虚拟传感器数据
 4. 喂给新主预测器，与 scenario.points.{A,B,H,T} 真值轨迹对比扫掠区域
 ```
 
-**统一目录约定**：所有 PID 工况 CSV 集中在 `Matlab/scenarios/`，loader 默认查找该路径，Electron 导出默认存该路径。
+**目录约定**：PID导出器在自身 `Matlab/scenarios/` 保存原始导出；每个MATLAB仿真工具在自己的 `scenarios/` 保存本次运行使用的输入，结果留在各自 `runs/`。
 
 **约束**：
 
 - 该 CSV **不是**真车数据，是平滑可控的替身。论文里别仅凭它声称真实精度
 - `node_modules/`、`package-lock.json`、`desktop-dist/` 永远不进 git（已在 `.gitignore`）
-- `trae/` 目录是 trae IDE 沙箱，也已忽略；里面的产物升级到正式版时手动复制到仓库根
+- `trae/` 目录若存在，仅作为忽略的IDE沙箱，不是项目正式入口
 
 ---
 
@@ -140,7 +141,7 @@
 ### 3.1 ESP32 端（C++ / Arduino）
 
 ```
-ArduinoIDE/
+固件/ESP32/
 ├── ESP32TruckOverTrackingWarningSystem.ino   # 主入口，调度循环
 ├── config.h                                   # 引脚 / 车型参数 / 阈值
 ├── sensors_alpha.{h,cpp}                      # AS5600 → α (rad)
@@ -161,7 +162,7 @@ ArduinoIDE/
 ### 3.2 OpenMV 端（Python / MaixPy 风格 OpenMV API）
 
 ```
-OpenMV/
+固件/OpenMV/
 ├── main.py                # 启动加载模型 + 主循环
 ├── detector.py            # 模型加载与推理封装
 ├── tracker.py             # 简单跨帧 ID 跟踪
@@ -176,17 +177,17 @@ OpenMV/
 
 ### 3.3 MATLAB 仿真（地面真值 / 算法验证）
 
-> **目录结构（2026-05-30 重组）**：原 `Matlab/` 改名为 `alpha一阶保持仿真/`（方案 0 基线：α(τ)=α₀ 恒定保持）。
+> **目录结构（2026-05-30 重组）**：原主MATLAB目录已拆分为 `工具/alpha一阶保持仿真/` 等独立方案，其中一阶保持是方案0基线。
 > α 预测的其它方案各自独立成文件夹（每个含 `runs/` 出图子目录）：
 >
 > ```
-> alpha一阶保持仿真/      # 方案 0：α 恒定保持（基线，最完整）
-> alpha线性外推仿真/      # 方案 A：α(τ)=α₀+α̇·τ（LPF 后）
-> alpha多假设并集仿真/    # 方案 B：保持/继续打/回正 三假设取并集（保守并集对照）
-> alpha扇形包络仿真/      # 方案 C：最坏情况扇形包络（对照上界）
-> alpha二阶外推仿真/      # 方案 D：α(τ)=α₀+α̇·τ+½α̈·τ²
-> alpha方案对比/          # 五方案横向对比脚本 compare_alpha_schemes.m
-> matlab/                # 历史脚本归档（pid3.m / guacheweixianqu.m / 两个 txt）
+> 工具/alpha一阶保持仿真/      # 方案 0：α 恒定保持（基线，最完整）
+> 工具/alpha线性外推仿真/      # 方案 A：α(τ)=α₀+α̇·τ（LPF 后）
+> 工具/alpha多假设并集仿真/    # 方案 B：保持/继续打/回正 三假设取并集（保守并集对照）
+> 工具/alpha扇形包络仿真/      # 方案 C：最坏情况扇形包络（对照上界）
+> 工具/alpha二阶外推仿真/      # 方案 D：α(τ)=α₀+α̇·τ+½α̈·τ²
+> 工具/alpha方案对比/          # 五方案横向对比脚本 compare_alpha_schemes.m
+> 历史归档/01_MATLAB早期脚本/matlab/                # 历史脚本归档（pid3.m / guacheweixianqu.m / 两个 txt）
 > ```
 
 每个 alpha 方案文件夹内的核心文件（与基线一致的部分）：
@@ -199,7 +200,7 @@ OpenMV/
 ├── predict_swept.m        # ✅ 三层扫掠多边形（α 外推方式因方案而异）
 ├── point_in_poly.m        # ✅ 射线法判内
 ├── run_phase1_demo.m      # ✅ 顶层 demo：CSV → 回放 → 预测 → 误差报告
-├── load_pid_scenario.m    # ✅ 读取 pid工况仿真导出器.html 导出的 CSV
+├── load_pid_scenario.m    # ✅ 读取 工具/PID工况仿真导出器/pid工况仿真导出器.html 导出的 CSV
 ├── scenarios/             # PID 工况 CSV（共用）
 └── runs/                  # 自动归档出图（gitignore，仅留 README）
 ```
@@ -209,13 +210,13 @@ OpenMV/
 **Phase 1 一键跑**：
 
 ```matlab
-out = run_phase1_demo();         % 弹文件框选 CSV（默认目录 Matlab/scenarios/）
+out = run_phase1_demo();         % 弹文件框选 CSV（默认目录 工具/alpha一阶保持仿真/scenarios/）
 % 或
 out = run_phase1_demo('pid_scenario_*.csv');
 ```
 
 输出三幅图 + 误差报告；通过门控 = `out.pass_gate == true`（位置最大误差 < 1mm）。
-**自动归档**：每次执行会在 `Matlab/runs/<时间戳>__<csv名>/` 下保存三张 PNG + summary.txt。
+**自动归档**：每次执行会在 `工具/alpha一阶保持仿真/runs/<时间戳>__<csv名>/` 下保存三张 PNG + summary.txt。
 
 **五方案横向对比**（论文/答辩用的"基线 vs 改进"图）：
 
@@ -228,7 +229,7 @@ out = compare_alpha_schemes('pid_scenario_20260530_020148.csv'); % 指定工况
 同一条 CSV 下跑 0/A/B/C/D 五方案，输出 PolyW 几何叠加 + 平均扫掠面积柱状 +
 PolyA 报警提前量（`lead = 物理接触时刻 − 首次预测命中时刻`）三张对比图。
 靠 MATLAB「当前目录函数优先于路径」规则：先 `addpath` 基线拿公共函数，
-再 `cd` 进各方案目录调用其专属 `predict_swept`，互不污染。详见 `alpha方案对比/README.md`。
+再 `cd` 进各方案目录调用其专属 `predict_swept`，互不污染。详见 `工具/alpha方案对比/README.md`。
 
 **时间尺度速查表**（与代码常量一致）：
 
@@ -315,7 +316,7 @@ BodyNow = [
 ]
 ```
 
-此兜底用于修复“目标已经被右外缘扫过、当前位于挂车车身内部，但未来外缘扫掠多边形不再覆盖它”的漏判。`Matlab/run_phase1_demo.m` 已实现此逻辑；后续 `ArduinoIDE/risk_eval.{h,cpp}` 必须同步实现。
+此兜底用于修复“目标已经被右外缘扫过、当前位于挂车车身内部，但未来外缘扫掠多边形不再覆盖它”的漏判。`工具/alpha一阶保持仿真/run_phase1_demo.m` 已实现此逻辑；后续 `固件/ESP32/risk_eval.{h,cpp}` 必须同步实现。
 
 每个雷达 / 视觉目标 i：
 ```
@@ -337,7 +338,7 @@ Risk_total = max_i(Risk_i)
 
 #### 复盘口径（不要搬到在线端）
 
-`Matlab/truck_slider_sim.py` 是 TTC 复盘/可视化程序：它读取已导出的完整 CSV 真值轨迹，用未来真实车身占用来计算 true TTC、检查 Poly 判警是否过晚。它可以揭示 R3 这类“真实还有 2 秒但当前恒定 alpha 预测尚未覆盖”的提前量问题，但它不是实车在线算法。
+`工具/alpha一阶保持仿真/truck_slider_sim.py` 是 TTC 复盘/可视化程序：它读取已导出的完整 CSV 真值轨迹，用未来真实车身占用来计算 true TTC、检查 Poly 判警是否过晚。它可以揭示 R3 这类“真实还有 2 秒但当前恒定 alpha 预测尚未覆盖”的提前量问题，但它不是实车在线算法。
 
 #### R3 报警偏晚问题（必须记住）
 
@@ -363,7 +364,7 @@ t = 16.00 s: true TTC ≈ 0.24 s
 
 #### 转弯全过程盲区分析（2026-06-01 新增）
 
-`转弯全过程盲区分析软件/` 是从“出弯时间测试”扩展出来的桌面/HTML 工具，当前用于研究右转全过程中哪些扫掠边界点在在线 PolyW 首次报警时已经没有足够反应时间。这里的“盲区”不是静态视觉不可见区，而是时间安全概念：
+`工具/转弯全过程盲区分析软件/` 是从“出弯时间测试”扩展出来的桌面/HTML 工具，当前用于研究右转全过程中哪些扫掠边界点在在线 PolyW 首次报警时已经没有足够反应时间。这里的“盲区”不是静态视觉不可见区，而是时间安全概念：
 
 ```text
 lead_W = true_contact_time_s - first_PolyW_s
@@ -380,15 +381,15 @@ lead_W = true_contact_time_s - first_PolyW_s
 软件输出目录固定为：
 
 ```text
-转弯全过程盲区分析软件/目标点CSV/
-转弯全过程盲区分析软件/边界点盲区日志/
-转弯全过程盲区分析软件/logs/
+工具/转弯全过程盲区分析软件/目标点CSV/
+工具/转弯全过程盲区分析软件/边界点盲区日志/
+工具/转弯全过程盲区分析软件/logs/
 ```
 
 MATLAB 批量扫描脚本：
 
 ```matlab
-cd('C:/Users/Admin/Desktop/小挑资料/转弯全过程盲区分析软件')
+cd('E:/大创内轮差项目/工具/转弯全过程盲区分析软件')
 out = scan_ttc_threshold_blindspots();
 ```
 
@@ -415,7 +416,7 @@ out = plot_threshold_filtered_blindspots(scan_dir, [2.0 1.5 1.0]);
 2026-06-01 追加：软件支持导入/导出策略 CFG（JSON）。CFG 定义在线状态机阈值以及不同状态下的 `T_h_W / T_h_A / T_h_I / dt_pred`，导入后刷新分析会按状态选择预测窗口。当前示例文件为：
 
 ```text
-转弯全过程盲区分析软件/CFG配置/default_exit_window_cfg.json
+工具/转弯全过程盲区分析软件/CFG配置/default_exit_window_cfg.json
 ```
 
 当前已实现 `default` 与 `EXIT` 两套策略，`EXIT` 可扩大预测时间窗；`alpha_mode` 字段暂只按 `hold` 执行，`safety_expand_m / safety_expand_enabled` 已保存在 CFG 和日志中但暂不启用几何膨胀，作为后续算法实验预留口。
@@ -424,11 +425,11 @@ out = plot_threshold_filtered_blindspots(scan_dir, [2.0 1.5 1.0]);
 
 场景 CSV 与目标点 CSV 必须解耦：场景 CSV 只放车辆运动/车辆参数，目标点 CSV 独立导入。软件切换场景或使用内置工况时不得清空目标点；应保留目标点，并基于新场景重新估计 `trueContactIdx` 与报警日志。
 
-`CFG配置生成器/` 是独立的白底黑字配置小工具，用于生成盲区分析软件可导入的策略 CFG。桌面入口为 `CFG配置生成器.lnk` 或 `CFG配置生成器/启动CFG配置生成器.bat`。桌面模式下点击“保存 CFG”会写入 `转弯全过程盲区分析软件/CFG配置/`。
+`工具/CFG配置生成器/` 是独立的白底黑字配置小工具，用于生成盲区分析软件可导入的策略 CFG。桌面入口为 `CFG配置生成器.lnk` 或 `工具/CFG配置生成器/启动CFG配置生成器.bat`。桌面模式下点击“保存 CFG”会写入 `工具/转弯全过程盲区分析软件/CFG配置/`。
 
 盲区分析软件的日志命中方法为 `segment_swept`：分析计算不再用整段预测窗口拼成一个总多边形后判内，而是按相邻预测步的右边缘形成小扫掠四边形逐段判内。原因是 EXIT 扩窗后总多边形可能自交/退化，导致 3s 窗口反而漏掉 2s 窗口已覆盖的点，破坏扩窗单调性。在线预测区提供显示模式开关：默认 `segment_swept 判定区`，逐段画出真正参与判定的小扫掠四边形；`Poly 大多边形参考` 只作为旧版轮廓可视化。实时命中点跟随显示模式切换，日志与盲区数量始终以 `segment_swept` 为准。
 
-CFG 扩窗一致性清单见 `docs/CFG扩窗算法一致性说明.md`。当前必须统一的裁判链是：`转弯全过程盲区分析软件/index.html`、`validate_turn_exit_targets.m`、`scan_ttc_threshold_blindspots.m`、`CFG配置生成器/index.html`；`正交路口出弯状态机仿真/run_phase1_demo.m` 作为 MATLAB 可视化/对照 demo，也必须读取同一份 CFG。MATLAB 校验第 6 参数 `strategy_cfg_json` 可传入 CFG；阈值扫描 `opts.strategy_cfg_json` 可传入 CFG；正交路口 demo 第 3 参数 `strategy_cfg_json` 可传入 CFG。正交路口 demo 的统计命中、日志、风险等级已使用 `segment_swept`，但 MATLAB 图暂不加入网页端的 `segment_swept / Poly` 显示开关，仍画 PolyW/A/I 大多边形作为形状参考。`TTC预警复盘软件` 和 `alpha一阶保持仿真/truck_slider_sim.py` 当前定位为 true-TTC/可视化复盘，不作为 CFG 扩窗统计裁判。
+CFG 扩窗一致性清单见 `项目文档/02_算法说明/CFG扩窗算法一致性说明.md`。当前必须统一的裁判链是：`工具/转弯全过程盲区分析软件/index.html`、`validate_turn_exit_targets.m`、`scan_ttc_threshold_blindspots.m`、`工具/CFG配置生成器/index.html`；`工具/正交路口出弯状态机仿真/run_phase1_demo.m` 作为 MATLAB 可视化/对照 demo，也必须读取同一份 CFG。MATLAB 校验第 6 参数 `strategy_cfg_json` 可传入 CFG；阈值扫描 `opts.strategy_cfg_json` 可传入 CFG；正交路口 demo 第 3 参数 `strategy_cfg_json` 可传入 CFG。正交路口 demo 的统计命中、日志、风险等级已使用 `segment_swept`，但 MATLAB 图暂不加入网页端的 `segment_swept / Poly` 显示开关，仍画 PolyW/A/I 大多边形作为形状参考。`TTC预警复盘软件` 和 `工具/alpha一阶保持仿真/truck_slider_sim.py` 当前定位为 true-TTC/可视化复盘，不作为 CFG 扩窗统计裁判。
 
 ### 4.4 报警状态机（滞回防抖）
 
@@ -493,10 +494,10 @@ S = 当前等级 ∈ {0,1,2,3}
 
 ### Phase 1 (v0.1) — MATLAB → C++ 等价移植
 
-1. 写 `Matlab/vehicle_params.m`、`Matlab/kinematics_step.m`
+1. 写 `工具/alpha一阶保持仿真/vehicle_params.m`、`工具/alpha一阶保持仿真/kinematics_step.m`
 2. 重构 `guacheweixianqu.m`，使用新运动学函数（含 `l_h` 耦合）
-3. 写 `Matlab/predict_swept.m`，输出三层多边形
-4. 写 `ArduinoIDE/predictor.{h,cpp}`，与 MATLAB 字字对照
+3. 写 `工具/alpha一阶保持仿真/predict_swept.m`，输出三层多边形
+4. 写 `固件/ESP32/predictor.{h,cpp}`，与 MATLAB 字字对照
 5. **验收门控**：相同输入下，C++ 输出顶点与 MATLAB 误差 < 1 mm
 
 ### Phase 2 (v0.2) — 硬件接口闭环
@@ -532,7 +533,7 @@ S = 当前等级 ∈ {0,1,2,3}
 - ❌ 在中断里调用浮点函数 / `Serial.print`
 - ❌ 直接从 OpenMV 摄像头到雷达坐标系做大量浮点变换（应在 ESP32 上做）
 - ❌ 修改既有运动学公式时不同步更新 MATLAB 与 C++ 两端（必须配对修改）
-- ❌ **BAT 启动器写中文路径不要直接用 cmd if exist**：cmd.exe 默认 GBK 解码，UTF-8 BAT 会乱码，GBK BAT 又不能跨 IDE 编辑。**正确做法**：BAT 只做一行 `powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0launch.ps1"`，所有路径逻辑放进 launch.ps1（PowerShell 原生 Unicode 安全）。当前实现见 `TTC预警复盘软件/launch.ps1` + `启动TTC预警复盘软件.bat`，以及 `转弯全过程盲区分析软件/launch.ps1` + `启动转弯全过程盲区分析软件.bat`。
+- ❌ **BAT 启动器写中文路径不要直接用 cmd if exist**：cmd.exe 默认 GBK 解码，UTF-8 BAT 会乱码，GBK BAT 又不能跨 IDE 编辑。**正确做法**：BAT 只做一行 `powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0launch.ps1"`，所有路径逻辑放进 launch.ps1（PowerShell 原生 Unicode 安全）。当前实现见 `工具/TTC预警复盘软件/launch.ps1` + `启动TTC预警复盘软件.bat`，以及 `工具/转弯全过程盲区分析软件/launch.ps1` + `启动转弯全过程盲区分析软件.bat`。
 
 ---
 

@@ -1,0 +1,33 @@
+{
+  "version": "complete-current-scope-local-motion-edge-candidates-v1",
+  "deadline": "2026-10-22T00:00:00+08:00",
+  "parent": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_upper_merge_v1",
+  "parent_hashes": {
+    "checkpoint.json": "033ad57e679af3f93643e5997b358c814f776cc686c9fce3ac31b7b58cc439f8",
+    "acceptance.json": "df0af4b7d53d0ac3a14d04b34d667e3d0efac19f0e7f44f44d04e044fc380740",
+    "close_receipt.json": "6e2aa908f386530cfd6d8b684cc4d2f6e243c8675a59a0f9d803cc82d5605228",
+    "source_manifest.json": "2d442c8e9872dfaf0695f795d1db713d02011090e1ba386aeb057ac6ae74a6a1"
+  },
+  "scope": "all22985 group-unique current unknown points both paths, all27025 original point-file records",
+  "all_57_inputs_and_39_groups": true,
+  "full_original_bracket_all_intersected_intervals": true,
+  "spatial_error_tol_time_corner_and_guard_unchanged": true,
+  "motion_bound": "outward-rounded per-interval corner total variation, integrated from original midpoint to both endpoints",
+  "independent_check": "all intervals high-precision Decimal70, separate scalar full sums, every new finite-face GEOS confidence",
+  "all_unwitnessed_initial_leaf_errorband_diagnostics_exact_accepted_reuse": true,
+  "unchanged_contact_existence_lower_upper_and_complete_prefix_proofs": true,
+  "no_query_on_known_noncontact_or_before_proven_lower": true,
+  "not_global_nonidentifiability_proof": true,
+  "no_promoted_truth_or_scores": true,
+  "no_subset_by_performance_or_midpoint_hypothetical_diagnostic": true,
+  "separate_full_merge_and_updated_census_required_after_close": true,
+  "workers": 1,
+  "inflight": 1,
+  "run_cap_bytes": 536870912,
+  "reservation_bytes": 469762048,
+  "total_E_Z_cap_bytes": 34359738368,
+  "Z_reserve_bytes": 3221225472,
+  "submitted_block": "one path on a complete current group scope and every original-order projection; drain after cutoff",
+  "development_first_fixture_failure_preserved": true,
+  "corrected_truth_revalidated_prediction_jobs": 0
+}

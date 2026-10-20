@@ -1,0 +1,37 @@
+{
+  "name": "truck-pid-scenario-desktop",
+  "version": "0.1.0",
+  "description": "Desktop wrapper for the PID scenario simulator exporter",
+  "main": "desktop-main.js",
+  "private": true,
+  "scripts": {
+    "desktop:dev": "electron .",
+    "desktop:pack": "electron-builder --win portable"
+  },
+  "build": {
+    "appId": "com.xiaotiao.pidscenario",
+    "productName": "PID工况仿真导出器",
+    "directories": {
+      "output": "desktop-dist"
+    },
+    "files": [
+      "desktop-main.js",
+      "pid工况仿真导出器.html",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "electron": "^37.2.0",
+    "electron-builder": "^26.0.12"
+  }
+}

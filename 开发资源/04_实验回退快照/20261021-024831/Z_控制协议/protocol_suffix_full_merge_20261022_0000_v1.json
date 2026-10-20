@@ -1,0 +1,37 @@
+{
+  "version": "whole-full-scope-accepted-bounded-suffix-merge-v1",
+  "deadline": "2026-10-22T00:00:00+08:00",
+  "parent_merged_assets": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_unwitnessed_probe_merge_v1",
+  "accepted_probes": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_suffix_witness_search_v3",
+  "candidate_hashes": {
+    "checkpoint.json": "09b90a0a6f428a72cd369f5aa87176b906fa62bb3a13bac7cbfdf60403962c54",
+    "acceptance.json": "621886966468a89ffd65e8abcb7cafc511612bdacd2606f6bb7e8f7a059a92d0",
+    "close_receipt.json": "1a7fba4bf9d7f2917c7efb51d67e339bb4f01fb142aa1b70c04dd90e2ace1f3d",
+    "source_manifest.json": "282a6a187d6a1c75b314972ac9f66e7c701994ae760f0ef41515556f33d1d6c2"
+  },
+  "selection": "all22857 current scope points, both45714 path rows, not only changed or successful rows",
+  "only_mutable_fields_for_independently_accepted_new_witnesses": [
+    "contact_status",
+    "contact_upper_s",
+    "edge_certain",
+    "nominal_instantaneous_edge",
+    "possible_edge_codes"
+  ],
+  "all_scientific_lowers_original_prefix_proofs_and_other_provenance_byte_exact": true,
+  "every_no_witness_existing_witness_and_noncontact_row_byte_exact": true,
+  "full_population": "all39groups/57original-order projections/3360000point-file records",
+  "all114_original_order_full_2D_probe_traces_and_unknown_diagnostics_retained_byte_exact": true,
+  "independent_close": "scalar full replacement/combine/conflicts/classify/discrepancies/projection/all fields/padding",
+  "full_census_recomputed_no_readding_old_valid_or_unknown_counts": true,
+  "no_new_geometry_ODE_prediction_or_score_computation": true,
+  "truth_asset_promotion_allowed": false,
+  "corrected_truth_revalidated_prediction_jobs": 0,
+  "not_global_earliest_identifiability_formal_ODE_or_real_vehicle_certificate": true,
+  "workers": 1,
+  "inflight": 1,
+  "run_cap_bytes": 4294967296,
+  "reservation_bytes": 3758096384,
+  "total_E_Z_cap_bytes": 34359738368,
+  "Z_reserve_bytes": 3221225472,
+  "submitted_block": "one complete group and all original-order projections/census; drain at cutoff"
+}

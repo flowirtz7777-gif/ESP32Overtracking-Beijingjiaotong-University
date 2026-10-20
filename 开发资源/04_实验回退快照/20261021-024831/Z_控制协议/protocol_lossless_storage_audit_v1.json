@@ -1,0 +1,17 @@
+{
+  "version": "lossless-storage-feasibility-audit-v1-20261015",
+  "scope": "read_only_storage_measurement_no_new_prediction_no_old_file_rewrite",
+  "reference_groups": 18,
+  "contact_tolerance_m": 0.05,
+  "cohorts": ["all_old_280000", "old_eligible_RIGHT"],
+  "roundtrip_requirement": "original_dtype_shape_and_array_SHA256_identical_including_NaN_bytes",
+  "timestamp_rule": "exact_frozen_observation_indices_not_float_rounding",
+  "count_rule": "lossless_unsigned_integer_with_checked_range",
+  "all_reference_methods_conditions_reported_without_selecting_favorable_compression": true,
+  "new_prediction_jobs": 0,
+  "original_files_deleted_or_rewritten": false,
+  "future_output_compression_not_guaranteed_by_reference_measurements": true,
+  "run_budget_bytes": 8388608,
+  "research_budget_bytes": 12884901888,
+  "disk_reserve_bytes": 3221225472
+}

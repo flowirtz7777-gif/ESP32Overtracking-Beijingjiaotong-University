@@ -1,0 +1,18 @@
+{
+  "version": "fine-inventory-full-chunk-rebuild-acceptance-v1-20261016",
+  "identity": "readonly_full_chunk_regeneration_and_resource_admission_verification_not_prediction_or_independent_truth_method",
+  "authorized_until_local": "2026-10-16T12:00:00+08:00",
+  "cases": ["v2_r2_symmetric", "v3_r4_fast_return", "v4_r8_fast_entry"],
+  "inventory_checkpoint_sha256": "ba25547c3904ca25a4dea36a5a7e30cd8f5d756c5390dfc16da4ab16d08bc9ea",
+  "inventory_manifest_sha256": "d65d38534cb5bc183e7b468ddfba0fa76143ecff358521057b299865a5b6eb43",
+  "inventory_summary_sha256": "ab177dd60afa3e89509451ce30f3efa4fcafa1834d8ebe5a329fb8fcb5d44275",
+  "verification_scope": "rebuild_every_fine_chunk_coordinate_group_and_all_four_label_arrays_and_match_saved_dtype_shape_SHA256; recompute_stratum_counts_and_RIGHT_eligibility_and_nested_coarse_population_hashes",
+  "label_helper_reused": "frozen_temporal_tree_labeler_already_checked_against_original_labeler; not_an_independent_geometry_or_vehicle_model",
+  "no_new_or_modified_prediction_inputs": true,
+  "no_old_reports_overwritten": true,
+  "new_prediction_jobs": 0,
+  "new_target_or_full_density_gate_acceptance": false,
+  "budget_increase_requires_explicit_user_reply": true,
+  "budget_question_pending": "16GiB_requested_not_approved; use_existing_12GiB_until_explicit_reply",
+  "execution": {"workers": 1, "blas_threads": 1, "reserve_bytes": 3221225472, "experiment_budget_bytes": 12884901888, "new_run_budget_bytes": 4194304}
+}

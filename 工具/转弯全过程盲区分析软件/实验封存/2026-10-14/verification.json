@@ -1,0 +1,15 @@
+{
+  "status": "verified",
+  "legacy_file_count": 8575,
+  "legacy_bytes": 1686942037,
+  "zip_entry_hashes_verified": 8575,
+  "original_hashes_rechecked": 8575,
+  "readonly_file_count": 8575,
+  "external_dependencies_verified": 5,
+  "archive_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\实验封存\\2026-10-14\\旧实验完整快照.zip",
+  "archive_bytes": 816148217,
+  "archive_sha256": "a7607409b67df7e0c5d8a6fed84ccf69349e5dc381e843e345b62df159bb9d9e",
+  "manifest_sha256": "c567d1e2c84e95b96ed26b51517ec1789f5a4d415ba08efeea0e06928942279a",
+  "completed_at_utc": "2026-10-13T18:57:26.4882115Z",
+  "experiments_started": false
+}

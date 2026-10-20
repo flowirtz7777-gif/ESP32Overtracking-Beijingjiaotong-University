@@ -1,0 +1,14 @@
+{
+  "version": "observability-existing-scientific-acceptance-pure-file-administrative-finalize-v1",
+  "original_scientific_close_exit_code": 1,
+  "original_scientific_close_not_repeated": true,
+  "original_close_receipt_must_remain_absent": true,
+  "no_parent_files_modified": true,
+  "new_array_decodes": 0,
+  "new_geometry_queries": 0,
+  "new_labels_or_predictions": 0,
+  "old_execution_guard_unchanged_and_required_to_pass_now": true,
+  "known_incident": "unrecognized concurrent read-only log/CIM shell conservatively rejected by unchanged guard",
+  "not_a_scientific_counterexample": true,
+  "administrative_receipt_location": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_label_observability_admin_finalize_v1\\receipt.json"
+}

@@ -1,0 +1,38 @@
+{
+  "time": "2026-10-20T18:42:26+00:00",
+  "tests_run": 33,
+  "successful": true,
+  "failures": 0,
+  "errors": 0,
+  "test_transcript": "test_closed_eps_support_and_late_boundary (test_paired_interval_metric_core_v1.Tests.test_closed_eps_support_and_late_boundary) ... ok\ntest_complete_boundary_partition_matches_dense_independent_samples (test_paired_interval_metric_core_v1.Tests.test_complete_boundary_partition_matches_dense_independent_samples) ... ok\ntest_contact_repair_must_reconstruct_valid (test_paired_interval_metric_core_v1.Tests.test_contact_repair_must_reconstruct_valid) ... ok\ntest_edge_and_front_superset_preserves_exclusion (test_paired_interval_metric_core_v1.Tests.test_edge_and_front_superset_preserves_exclusion) ... ok\ntest_first_raw_or_saved_valid_alone_rejected (test_paired_interval_metric_core_v1.Tests.test_first_raw_or_saved_valid_alone_rejected) ... ok\ntest_invalid_domains_and_nonfinite_times_rejected (test_paired_interval_metric_core_v1.Tests.test_invalid_domains_and_nonfinite_times_rejected) ... ok\ntest_negative_numerator_variable_denominator (test_paired_interval_metric_core_v1.Tests.test_negative_numerator_variable_denominator) ... ok\ntest_positive_sign_favors_B (test_paired_interval_metric_core_v1.Tests.test_positive_sign_favors_B) ... ok\ntest_ratio_matches_full_cartesian_exhaustion_300_small_populations (test_paired_interval_metric_core_v1.Tests.test_ratio_matches_full_cartesian_exhaustion_300_small_populations) ... ok\ntest_same_time_distinct_horizons (test_paired_interval_metric_core_v1.Tests.test_same_time_distinct_horizons) ... ok\ntest_shared_time_identical_methods_never_independently_plus_minus_one (test_paired_interval_metric_core_v1.Tests.test_shared_time_identical_methods_never_independently_plus_minus_one) ... ok\ntest_undefined_denominator_preserved_and_ranking_withheld (test_paired_interval_metric_core_v1.Tests.test_undefined_denominator_preserved_and_ranking_withheld) ... ok\ntest_weighted_correlated_duplicate_point (test_paired_interval_metric_core_v1.Tests.test_weighted_correlated_duplicate_point) ... ok\ntest_cannot_skip_p1_for_real_scoring (test_client_execution_repairs_v2.ContractTests.test_cannot_skip_p1_for_real_scoring) ... ok\ntest_edge_255_is_mask_not_atomic_face (test_client_execution_repairs_v2.ContractTests.test_edge_255_is_mask_not_atomic_face) ... ok\ntest_missing_argv_or_mutex_cannot_be_substituted (test_client_execution_repairs_v2.ContractTests.test_missing_argv_or_mutex_cannot_be_substituted) ... ok\ntest_path_and_metadata_linkage_does_not_close_p1 (test_client_execution_repairs_v2.ContractTests.test_path_and_metadata_linkage_does_not_close_p1) ... ok\ntest_permissions_stop_on_first_denial (test_client_execution_repairs_v2.ContractTests.test_permissions_stop_on_first_denial) ... ok\ntest_time_limit_not_wave_count_and_no_forced_scientific_kill (test_client_execution_repairs_v2.ContractTests.test_time_limit_not_wave_count_and_no_forced_scientific_kill) ... ok\ntest_adapter_matches_independent_scalar_oracle_100_populations (test_client_execution_repairs_v2.TraceTests.test_adapter_matches_independent_scalar_oracle_100_populations) ... ok\ntest_new_contact_reconstructs_valid_from_later_event (test_client_execution_repairs_v2.TraceTests.test_new_contact_reconstructs_valid_from_later_event) ... ok\ntest_original_trace_counts_ineligible_front_contacts (test_client_execution_repairs_v2.TraceTests.test_original_trace_counts_ineligible_front_contacts) ... ok\ntest_original_trace_drops_negative_false_alarm (test_client_execution_repairs_v2.TraceTests.test_original_trace_drops_negative_false_alarm) ... ok\ntest_short_horizon_outside_contract_rejected (test_client_execution_repairs_v2.TraceTests.test_short_horizon_outside_contract_rejected) ... ok\ntest_variable_horizon_and_reference_false_alarm_differ (test_client_execution_repairs_v2.TraceTests.test_variable_horizon_and_reference_false_alarm_differ) ... ok\ntest_warmup_confirmation_preserved_but_scored_first_starts_at_two (test_client_execution_repairs_v2.TraceTests.test_warmup_confirmation_preserved_but_scored_first_starts_at_two) ... ok\ntest_alarm_iterators_not_exhausted_by_boundary_partition (test_paired_interval_metric_core_v2.Tests.test_alarm_iterators_not_exhausted_by_boundary_partition) ... ok\ntest_invalid_base_and_boolean_certificate_rejected (test_paired_interval_metric_core_v2.Tests.test_invalid_base_and_boolean_certificate_rejected) ... ok\ntest_later_supported_alarm_selected_after_contact_change (test_paired_interval_metric_core_v2.Tests.test_later_supported_alarm_selected_after_contact_change) ... ok\ntest_missing_valid_gate_rejected_before_any_result (test_paired_interval_metric_core_v2.Tests.test_missing_valid_gate_rejected_before_any_result) ... ok\ntest_raw_mask255_cannot_be_used_as_single_atomic_edge (test_paired_interval_metric_core_v2.Tests.test_raw_mask255_cannot_be_used_as_single_atomic_edge) ... ok\ntest_scored_and_legacy_valid_start_are_explicitly_different (test_paired_interval_metric_core_v2.Tests.test_scored_and_legacy_valid_start_are_explicitly_different) ... ok\ntest_v2_keeps_negative_numerator_joint_ratio_and_sign (test_paired_interval_metric_core_v2.Tests.test_v2_keeps_negative_numerator_joint_ratio_and_sign) ... ok\n\n----------------------------------------------------------------------\nRan 33 tests in 0.110s\n\nOK\n",
+  "candidate_source_sha256": {
+    "paired_interval_metric_core_v1.py": "dfb0236ffa6d0c276934321975c3e783b0e864cea9be65d53625126ae7276ebd",
+    "paired_interval_metric_core_v2.py": "cef758f9a52809d986467998e2930e6967a12d324fcf18a491b7c867953a42b5",
+    "scored_trace_adapter_core_v1.py": "b5a1b823ba71f0e86a70482da045317c5b16b2768ad967481a84417321f6407f",
+    "client_execution_contract_v2.py": "65ed95371ccfa59e9ec17d70788a65fa0e50b1b58361a26abbf1696f693f564c",
+    "client_readonly_admission_check_v2.py": "f9b68d2a1130d63ffbfefb18c79e8b05afc3c6c403bf82494f671ed5069527c9",
+    "client_readonly_admission_check_v3.py": "58a7c70d1e4727e4fdb3c42598e9563897e13f30f952839aad63313577f0bbfa",
+    "test_paired_interval_metric_core_v1.py": "da44afc136a8c437f435d73ce64c692c580373298057c25e61875d5768e2b16b",
+    "test_client_execution_repairs_v2.py": "790996235d7b8a1fda9a078215ce09604c550d91b75d8a59da85896e9c7b99cd",
+    "test_paired_interval_metric_core_v2.py": "a7309062174361e66fc6f5724471abc6bb8bc93bd4b32d8abefc23f44720e043"
+  },
+  "original_frozen_source_sha256": {
+    "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_temporal_trace_v2\\run_trace.py": "bf3e15fd0f05ea68f933fa908aad493580633c8867b2f5722886d7901bdb4405",
+    "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_v1\\evaluation_scored.py": "cd33553eb165562f61f1ea3a681892d62522327e4e0bb396729932a4312baa87",
+    "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_interval_cover_20261022_v2\\edge_cover_core.py": "e16d0d48c24d58a68673d2daf8e8cedc94ba4598af4632459542f350b7534b18"
+  },
+  "original_frozen_files_modified": false,
+  "pure_synthetic_inputs_only": true,
+  "real_coordinate_arrays_reconstructed": false,
+  "real_scoring_or_independent_scientific_acceptance": false,
+  "scientific_workers_started": 0,
+  "native_client_permission_gate_not_yet_passed": true,
+  "codex_precheck_did_not_claim_native_client_admission": true,
+  "original_trace_negative_false_alarm_actual": 0,
+  "corrected_synthetic_negative_false_alarm": 1,
+  "original_trace_ineligible_front_TP_actual": 1,
+  "corrected_synthetic_ineligible_front_TP": 0,
+  "codex_automation_status": "PAUSED",
+  "old_cli_controller_retired": true,
+  "no_client_hour_started_by_codex": true
+}

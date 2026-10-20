@@ -1,0 +1,30 @@
+{
+  "version": "20261019-v1-reflection-and-two-bounded-foundation-diagnostics",
+  "previous_plan": "resume_plan_20261018_v4.json",
+  "authorization_status": "active",
+  "deadline": "2026-10-19T08:00:00+08:00",
+  "formal_baseline": 2238,
+  "accepted_diagnostic_baseline": 57,
+  "accepted_numeric_baseline": 2295,
+  "new_formal_predictions": 0,
+  "new_diagnostics_accepted_this_authorization": 0,
+  "accepted_diagnostic_total": 57,
+  "accepted_numeric_total": 2295,
+  "source_implemented": true,
+  "input_worker_admission_pending": true,
+  "new_geometry_cases_planned": 12,
+  "new_diagnostic_predictions_maximum": 9,
+  "full_foundation_passed": false,
+  "S4_overall_complete": false,
+  "M2_allowed": false,
+  "S5_allowed": false,
+  "remaining_after_this_batch": [
+    "new-geometry contact-label/density validation and shared-input core comparisons",
+    "qualified candidate and numerical stability gates",
+    "M2 only after explicit gate clearance",
+    "S5 with at least 18 frozen unseen trajectories"
+  ],
+  "run_directory": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_v1",
+  "protocol": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_geometry_delay_20261019_v1.json",
+  "next_action": "actual Windows worker input preflight before new science submission"
+}

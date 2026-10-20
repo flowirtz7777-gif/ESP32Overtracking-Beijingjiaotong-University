@@ -1,0 +1,894 @@
+{
+  "version": "all-baseline-prefix-v1",
+  "deadline": "2026-10-22T00:00:00+08:00",
+  "matrix": [
+    {
+      "id": "development/v2_r2_symmetric",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v2_r2_symmetric",
+      "files": {
+        "manifest.json": "0e0d6479efacc816934d2fa0dcb352cdf5f62f63e7ee8bbc39b5b9978e724a1c",
+        "trajectory.npz": "363563304c5eefabc7e598827455b8ad3b20527500d5228a898d7e5e3817e63b",
+        "targets.npz": "e696f42075c44f265043ebe2b864d840bde8b6f1fd546926bc9a685de40d3775",
+        "profile.json": "45e349d9cd1d91e5a25ca81213b6d87eb2df9d2a28433fa14b27f8f8385809fa"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v2_r2_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development\\v2_r2_symmetric"
+      ]
+    },
+    {
+      "id": "development/v2_r4_fast_entry",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v2_r4_fast_entry",
+      "files": {
+        "manifest.json": "3d2cdfbdff3996e84bdc4182c6b734f53a0a5477a3170d4433d187292ed5a97d",
+        "trajectory.npz": "608d9445e1f619f93b37082058c0ef6543ad73f951c6e2478df8c5f25074e471",
+        "targets.npz": "cef4c0879f1720352d108f709fe0aabd99c102f81dc97623419632188cf91a36",
+        "profile.json": "10ee827633cfa2cd8f3dccbf8f6857b1da85e6107e4e9dab2371e825f17383c9"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v2_r4_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development\\v2_r4_fast_entry"
+      ]
+    },
+    {
+      "id": "development/v2_r8_fast_return",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v2_r8_fast_return",
+      "files": {
+        "manifest.json": "ed6ce8dc060247e9f2d71a7adf451e63c17df612a96365ed279a1065b9fc1412",
+        "trajectory.npz": "71390e004d7068cebe8ec29c6d4757937bc59f92d7b8b26982dfb6a0a8f7e3ba",
+        "targets.npz": "9e92f75b74ea0d56f8ebf6d713e94898abbd1c01ce3ab5f6d3ff3932a8841d22",
+        "profile.json": "a778d0abd4024f1b3898579cea25178d6db6e6d8867be9084e1b895c734157de"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v2_r8_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development\\v2_r8_fast_return"
+      ]
+    },
+    {
+      "id": "development/v3_r2_fast_entry",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v3_r2_fast_entry",
+      "files": {
+        "manifest.json": "cb9dc59d41c2ad84a0937c3dac3b1879957b01e6a7fca19ce9fa978ce307f0bc",
+        "trajectory.npz": "ab1a4075e5779cf80ed31b317aaf52d1601f33f01bd9cdbdee5788ffa900540f",
+        "targets.npz": "60981adc68f5db290baf70953ed38948dd1ddd7d3977f30b6c70f4b7f89360e1",
+        "profile.json": "d1c343bd0cb5cd9811f15593709846b020691ade777a696d123ac4230618945f"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v3_r2_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development\\v3_r2_fast_entry"
+      ]
+    },
+    {
+      "id": "development/v3_r4_fast_return",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v3_r4_fast_return",
+      "files": {
+        "manifest.json": "5d76d83fae3b3164a4d3ba7b95f9fe5bc2e6b93170b59ad1fc68c97aa603e037",
+        "trajectory.npz": "87518681272faf6b89849055eca85211ab5d523465410dd4ec183a849ded4e51",
+        "targets.npz": "a6289401f940fb410905b4c1131ea919397411d7f23fcfe4e2fde789497c3a6f",
+        "profile.json": "fd1f51901e77b275308d986fbbff573191d48d1608acec16fb6c8f5de0fe6647"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v3_r4_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development\\v3_r4_fast_return"
+      ]
+    },
+    {
+      "id": "development/v3_r8_symmetric",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v3_r8_symmetric",
+      "files": {
+        "manifest.json": "958837f225d5beb58bd06d5f77c1c82a7e01a734b66b6379757971105819117f",
+        "trajectory.npz": "a792dd5338d9fee58c79febb034fd230febe4bd859b169e54ad7e9269e38c8d2",
+        "targets.npz": "96478aa50bdca9bcddd03fa36ef386ffe8bdd47df03761012a194a10db0f75bc",
+        "profile.json": "a24aac51731491444aee488d7213c65884fe02bf860f76883676dbacb3124250"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v3_r8_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development\\v3_r8_symmetric"
+      ]
+    },
+    {
+      "id": "development/v4_r2_fast_return",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v4_r2_fast_return",
+      "files": {
+        "manifest.json": "256a656c6fc79a8f0f1ad1ea0fe1ae8a6364a6a52f39202264197570f70d90c2",
+        "trajectory.npz": "d0ff0fbad695081af2296ddfaa92de472b6fef2f3b0e23e0111061315c591e1d",
+        "targets.npz": "6b2b41db1bd3c677512b69eca1540a063cd4bf29e472f1d82503260e6ef00157",
+        "profile.json": "481c6ec274afbcc3a45220cfbb301d3ec5db6af380a257847cbe981fc35587a6"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v4_r2_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development\\v4_r2_fast_return"
+      ]
+    },
+    {
+      "id": "development/v4_r4_symmetric",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v4_r4_symmetric",
+      "files": {
+        "manifest.json": "b9b30e002de7bdd172eab8b9d3223f90b7ebfd2f183146033ec61100f7bc4f11",
+        "trajectory.npz": "d6a10b404857cd98b5b48b3483be5b24189c4ad2bb440c06ea9831a89bf3c4c2",
+        "targets.npz": "7c8c2a03dc2014b7a4bfb1165ff5de994f528c4e466d8389f57e0e35a1eaaf21",
+        "profile.json": "24b16b657d0e2086dd4e32b00bffba3f2712ceacdcbe883ee68646e2719b7186"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v4_r4_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development\\v4_r4_symmetric"
+      ]
+    },
+    {
+      "id": "development/v4_r8_fast_entry",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v4_r8_fast_entry",
+      "files": {
+        "manifest.json": "13022c9fa020afe2911ca7b7c24de9d8d698e080bba8b8e9015b044726c76942",
+        "trajectory.npz": "5fdd8efb30d5369ff8b8422f86bc523e3543ddda6e22f9e9daab9976be6449e9",
+        "targets.npz": "e61b75f138ed74eeab631421663aa4853fa017f8df6ebdadbc146262f14ebe5c",
+        "profile.json": "6a1b646a047a99235ab54d2814749801008336765a775f2335254fa9522de400"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development\\v4_r8_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development\\v4_r8_fast_entry"
+      ]
+    },
+    {
+      "id": "development_v2/v2_r2_symmetric",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v2_r2_symmetric",
+      "files": {
+        "manifest.json": "f6e57eba0872c0be96036d37dfb9074923529b93ae383af9dc4c093a51080af7",
+        "trajectory.npz": "363563304c5eefabc7e598827455b8ad3b20527500d5228a898d7e5e3817e63b",
+        "targets.npz": "a2025c2f3c1d66fd68597d71acd73693e326e4adef8ab5dc81074440e26f5192",
+        "profile.json": "a0a16dd98b860b6bf61b7466d791bda468a85270b855ba682f0253a7484a7b7a"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v2_r2_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2\\v2_r2_symmetric"
+      ]
+    },
+    {
+      "id": "development_v2/v2_r4_fast_entry",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v2_r4_fast_entry",
+      "files": {
+        "manifest.json": "c420cf127e0cc35855f800819fa50670ee34528c4a59bcd1c95b34922d5203af",
+        "trajectory.npz": "608d9445e1f619f93b37082058c0ef6543ad73f951c6e2478df8c5f25074e471",
+        "targets.npz": "dbbfff60920e3d2ca9f0f28d21893fa2942680dc9c77a89c7e4284685c7c9860",
+        "profile.json": "92d75950d31f6dffdf8676eddc2d82f3c99230b7fcc7ad9a43a5be670ebbedf5"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v2_r4_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2\\v2_r4_fast_entry"
+      ]
+    },
+    {
+      "id": "development_v2/v2_r8_fast_return",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v2_r8_fast_return",
+      "files": {
+        "manifest.json": "01b00de9f06bdbee8f75e56284b314376423069e5c2542d4dcc4a34546015331",
+        "trajectory.npz": "71390e004d7068cebe8ec29c6d4757937bc59f92d7b8b26982dfb6a0a8f7e3ba",
+        "targets.npz": "52f3f21c1862830e1d4222d3a939bf6916062e2ad0699be9c7d84787fe659ca4",
+        "profile.json": "ab33629a263859330b449a3e91b1e8107273e8bd4cb0fbebd15223c24d7f63e5"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v2_r8_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2\\v2_r8_fast_return"
+      ]
+    },
+    {
+      "id": "development_v2/v3_r2_fast_entry",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v3_r2_fast_entry",
+      "files": {
+        "manifest.json": "0386f4ea1d1d8b6bbb5d8e5229b534f92baff526c883a0d11306188f0902f305",
+        "trajectory.npz": "ab1a4075e5779cf80ed31b317aaf52d1601f33f01bd9cdbdee5788ffa900540f",
+        "targets.npz": "89e149668219a9afd6fb33063a4957b0695745cb8eac8585fa429e568da507df",
+        "profile.json": "298fdc8af99e36392e7318f0d15900b6352fa18d3ffe3d463f42f766200398b6"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v3_r2_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2\\v3_r2_fast_entry"
+      ]
+    },
+    {
+      "id": "development_v2/v3_r4_fast_return",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v3_r4_fast_return",
+      "files": {
+        "manifest.json": "ec5590fcc80f41b98c798f00ad0d0de02091d79cbd2504c4e1ea81a3e11bb3c2",
+        "trajectory.npz": "87518681272faf6b89849055eca85211ab5d523465410dd4ec183a849ded4e51",
+        "targets.npz": "c44bf5ffd09ab42a2fc14fa91bf7b9477edeff5cf14611a362467aea36afa63a",
+        "profile.json": "edc7858c004b69159b0487ca2349c6e179158c8acaca5c8913f85ed34a1d0b95"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v3_r4_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2\\v3_r4_fast_return"
+      ]
+    },
+    {
+      "id": "development_v2/v3_r8_symmetric",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v3_r8_symmetric",
+      "files": {
+        "manifest.json": "d488823882f63945c7cadb9ea64c6785cadbdc89d5dc493c91169a4e6543afd7",
+        "trajectory.npz": "a792dd5338d9fee58c79febb034fd230febe4bd859b169e54ad7e9269e38c8d2",
+        "targets.npz": "cb678d88b9f716746e3189ce752792d4b498fce4bc488e06e37256628dff1b10",
+        "profile.json": "eb3377e4b25f6d0023b64339ad95d03ea27cb75adaf09347097756aa77371381"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v3_r8_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2\\v3_r8_symmetric"
+      ]
+    },
+    {
+      "id": "development_v2/v4_r2_fast_return",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v4_r2_fast_return",
+      "files": {
+        "manifest.json": "05aeda331d15ad7b69942a9152b73d12d41cf18d84a13aaf4c02764b1c6c77b1",
+        "trajectory.npz": "d0ff0fbad695081af2296ddfaa92de472b6fef2f3b0e23e0111061315c591e1d",
+        "targets.npz": "662b78783f0e5a4538f11297d2159e4c0725431b938787c7021fd12eda7ef1b5",
+        "profile.json": "346adf31d7e43a11971bdf9621cb76b84704d93f606684d0316f1bd2a60c462c"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v4_r2_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2\\v4_r2_fast_return"
+      ]
+    },
+    {
+      "id": "development_v2/v4_r4_symmetric",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v4_r4_symmetric",
+      "files": {
+        "manifest.json": "7e1dd6b2440f11b05b89e9b222706caefc534b8c747d30b6055f54af10f78511",
+        "trajectory.npz": "d6a10b404857cd98b5b48b3483be5b24189c4ad2bb440c06ea9831a89bf3c4c2",
+        "targets.npz": "841f15917c28d477f2a482c8825ab1fc2b874973aac34cd911ed492cc7bbf2bb",
+        "profile.json": "79152ced11d8f8a2187ddd016914948257041f9028d499fcfcdf8e5bc5ac9c3d"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v4_r4_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2\\v4_r4_symmetric"
+      ]
+    },
+    {
+      "id": "development_v2/v4_r8_fast_entry",
+      "count": 35000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v4_r8_fast_entry",
+      "files": {
+        "manifest.json": "4675105133e0ec8245343c4783db8e34bef45dc6bf2c92b3e50a5fb418ff72fb",
+        "trajectory.npz": "5fdd8efb30d5369ff8b8422f86bc523e3543ddda6e22f9e9daab9976be6449e9",
+        "targets.npz": "3a09496acb761f6bc27697e2b7713bfacca499f9c3e191783dea2e84a1799985",
+        "profile.json": "f51f58c66dfc8195b8fb2db0d32cf8e38449eee53be9faab278f17ecb6d019fc"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2\\v4_r8_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2\\v4_r8_fast_entry"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v2_r2_fast_entry",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r2_fast_entry",
+      "files": {
+        "manifest.json": "f1ac76aa7a148e61e1e54b064761344acc37aab5664ce282519ec58f9ad75919",
+        "trajectory.npz": "38f0e9e84a2edb7f65db2ec0d9c889afc3f18fee2d17117c196e06f6c7b03948",
+        "targets.npz": "be12f76c07315bd04a3e5b16469d7a6114963fff7aa8ab2b6be61196e672aaf6",
+        "profile.json": "b1b5c3d5ef42492f3801fbb5f744f9f88268b96607a8fe9d79e3a5e64b4525a1"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r2_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r2_fast_entry"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v2_r2_fast_return",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r2_fast_return",
+      "files": {
+        "manifest.json": "ba68d1169cb380d07a89fe373f8ae864f09ee41d51927bb585c3ea41612b44e6",
+        "trajectory.npz": "d113eb5c1f11019bfc75fa44ad9dc1829b8cd8b537d7e506909732f9dee0462c",
+        "targets.npz": "9ff1e2b97c043c60a13657477acf32a48899438c90be569e9c1d3adcd94b86f7",
+        "profile.json": "f7f3e5da33ce3bc41f2afcd8426ec7ec5a86e24f8346c4a0f26106d252753325"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r2_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r2_fast_return"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v2_r2_symmetric",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r2_symmetric",
+      "files": {
+        "manifest.json": "2ad4e7325e78ea45f4ae0897ff5c138e7c7cb76a934626d0997fd4f2620b8483",
+        "trajectory.npz": "363563304c5eefabc7e598827455b8ad3b20527500d5228a898d7e5e3817e63b",
+        "targets.npz": "c633f7898aae1328aecc9d4ccc6a3ecc3079c806194135d7e6fad26832df606e",
+        "profile.json": "906e858cba79e4663cc56fa5faafddf618017eda756e1fd77c2bb89a0bc7d7fd"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r2_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r2_symmetric"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v2_r4_fast_entry",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r4_fast_entry",
+      "files": {
+        "manifest.json": "1cf8bbd21ec1f597abcefdd74f9006fb208158807dee691c9168bb168beb4ff1",
+        "trajectory.npz": "608d9445e1f619f93b37082058c0ef6543ad73f951c6e2478df8c5f25074e471",
+        "targets.npz": "827659292f27619b4e9ac55a2c69e3a26eccb16a9b1ffdc685554923fe645eb6",
+        "profile.json": "30f26f7dff2a1ea3d128296a91f1b634118bb0c10c1c39c919ca27ab6526bee9"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r4_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r4_fast_entry"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v2_r4_fast_return",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r4_fast_return",
+      "files": {
+        "manifest.json": "a309ea59b3cefc7f5707bb00588410126fdaa5e0455741f0a86a2bb1f2a72ac1",
+        "trajectory.npz": "24b5490940d045e2e5e641e16d62f61538b0180bebbbff8bccf262bc453e9029",
+        "targets.npz": "4b1beaac7e4c9d5cbf2fb9c7ba8e087527ec37058c89d2e17ab3764009126ba6",
+        "profile.json": "95020141ec8a6e5a368142fe11202620bb7a62c5b101adb04eb4e562f100f039"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r4_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r4_fast_return"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v2_r4_symmetric",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r4_symmetric",
+      "files": {
+        "manifest.json": "ce53149d2e44949022778e6e190c854f64a1c17b19d8bbfb9506d12cf5bf3a28",
+        "trajectory.npz": "e71aa4b0566a69798e4f847248d0e851670c831fce1348b8227db63f2f32570b",
+        "targets.npz": "70bae910fab2387253e52eb86abde77a7497389ae868cbe431b98701001e3136",
+        "profile.json": "bf64f3008cd04114f8338f14664a8ed56dee3f2f3460ce7cd310dc75a9958b84"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r4_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r4_symmetric"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v2_r8_fast_entry",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r8_fast_entry",
+      "files": {
+        "manifest.json": "40b406d2fbdacb75670bc4aad5a5330d9f093e5a0d4565442018901dbf4f977c",
+        "trajectory.npz": "b9817f4062ab96406e22e3d892aab2f75954c5e0ae411604c90247a3ab707a02",
+        "targets.npz": "9afefab7eb8b2c220acd43508ca794217b716597b46499fcafa0f18cdc25489a",
+        "profile.json": "f4ab3fd7584c692fead44c025f7543dcb2e3a3d9740bfff8068532ae83a42202"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r8_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r8_fast_entry"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v2_r8_fast_return",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r8_fast_return",
+      "files": {
+        "manifest.json": "5d836f64e84cf77eae6bd56762c01d9f8be1edf6887acc49d509326de6c1c145",
+        "trajectory.npz": "71390e004d7068cebe8ec29c6d4757937bc59f92d7b8b26982dfb6a0a8f7e3ba",
+        "targets.npz": "25fe058cb9b66abd6cf3b057428c79b52015379b5ceeaaca6a09f28e954714d3",
+        "profile.json": "ec1ecbdbdb243cc94d9d68cca940fdbfaf77c5cf8f108f83da9f8d00cabaa3ee"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r8_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r8_fast_return"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v2_r8_symmetric",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r8_symmetric",
+      "files": {
+        "manifest.json": "fe62c2962000d728ab75d4058a3a22487f4f17c883f69e53d060e27e5edc68c9",
+        "trajectory.npz": "d6f4439ce3c3f988a345c5c7274a02977fec1b68144c0e0416ad666642a3b4a2",
+        "targets.npz": "df45ae6de5f7412d19b174d9defcb597ce505c9648ddaaf43bca7f74d2828f6b",
+        "profile.json": "f4f7738bd351abebcfff9a73374305a08deace5010bd3f86276f0395698d910a"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r8_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v2_r8_symmetric"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v3_r2_fast_entry",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r2_fast_entry",
+      "files": {
+        "manifest.json": "a95b9667bb2919678278abd6c29eb298ba6805e39c127caa995ac04b55dc972c",
+        "trajectory.npz": "ab1a4075e5779cf80ed31b317aaf52d1601f33f01bd9cdbdee5788ffa900540f",
+        "targets.npz": "60129536439609c9fe7720c5e7dba5ed07f346e16e534eff3088bee8fbfdd3fe",
+        "profile.json": "9c29e580ba80d7be8c2b4a5d1f1da757728c0b2e97c8aba6534ff5a10fa8cc32"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r2_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r2_fast_entry"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v3_r2_fast_return",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r2_fast_return",
+      "files": {
+        "manifest.json": "b67a1ed585e0fc7f6da271643ee8a41a752f3ebd6bb3b8c0391cab35a30cfb96",
+        "trajectory.npz": "1b023ed71df476af0e40dfcec036d5fb5e642ef10d64621cdb35e2595fe25e62",
+        "targets.npz": "f39898d76e5185ccc0f038a6ea3024cc503d9fc44d5edc51fd496c07285299c6",
+        "profile.json": "d2f4bb26b9a0cd3c9c1ec73d5a3cda857b9a4450933a935dcd8dadbf3de20db5"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r2_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r2_fast_return"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v3_r2_symmetric",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r2_symmetric",
+      "files": {
+        "manifest.json": "55e092b65fdd5414021d5192f6b065f68a07c99e7423958cf57670201e23ecdc",
+        "trajectory.npz": "f94cc2ac1104caaf6eb13d0df8544cd8c042e6636e0ec8123ea220e85ae0ab46",
+        "targets.npz": "2692e31d978b9860162b370c2f0dc623f287bd163f20c230be25fb365f0407e1",
+        "profile.json": "993219a7f6394709d6aad0f0c755764ae6ed19b8bd42bf335252d4dd4f13f329"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r2_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r2_symmetric"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v3_r4_fast_entry",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r4_fast_entry",
+      "files": {
+        "manifest.json": "8f5f03925439709da859b311ad815061b4984de7a58aa3b74b9711fcd70524fe",
+        "trajectory.npz": "2b7c1daca7780cf14bf8e86b16b782d985f81954b44e184332c8c74328357302",
+        "targets.npz": "297c8d2e359b5e83ef3ae13a7a3afb2e09ed1a11e60c293f5e7d10d237440181",
+        "profile.json": "0b38115c2d92071723b2c2dd5d4f6ad9587e0e835eb01b1cf113b502f987932c"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r4_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r4_fast_entry"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v3_r4_fast_return",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r4_fast_return",
+      "files": {
+        "manifest.json": "c8feb112f2ac6aa151d8b581273fbaaf511fa5cb893699627f76ddf7b12f589c",
+        "trajectory.npz": "87518681272faf6b89849055eca85211ab5d523465410dd4ec183a849ded4e51",
+        "targets.npz": "ddbfd8bc5da5786f5068274df5323828797efe90dac60019076ab6e53a10eb74",
+        "profile.json": "a6e6d8eeb257c8a70f3b0dce5ff3e49329b7dde46fd2288e6fcba22b6953c1e0"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r4_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r4_fast_return"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v3_r4_symmetric",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r4_symmetric",
+      "files": {
+        "manifest.json": "49002d6aeee27f82dba25f71fd677cd1149e5193c7f641c3338b57f426ffb519",
+        "trajectory.npz": "3bf8b829d43e18ecf63371426ba6db13c8f7945055f93b8deb6fa333e3671297",
+        "targets.npz": "6b1f970159f3b22b4629ff359de7bbb5ab484b3e63f6bb36c87fd3614418f692",
+        "profile.json": "e00dee35d2e5eb74c6ca33e114a91fa993343a4d64164e8036008f92513755f1"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r4_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r4_symmetric"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v3_r8_fast_entry",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r8_fast_entry",
+      "files": {
+        "manifest.json": "45d2a56efc76a2341b081a38448b801aca6ce33fe6396d13db978326b8a85fd0",
+        "trajectory.npz": "613dbb292b84c9d5bce94fd17e6d39fed7fc31abf36ec9cabb71ed2877955f44",
+        "targets.npz": "e86f14bb8beaa7f5eba7d62ded2a508ebfdede35c069f34300d0f2156e712e76",
+        "profile.json": "1f7b9a7053f6e874861f60c0d27f816eed318f8adae0cf71c96fc811f303200c"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r8_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r8_fast_entry"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v3_r8_fast_return",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r8_fast_return",
+      "files": {
+        "manifest.json": "24bc4973c64173ea824794c7893ed08db653edf76f18da3769143f6fcebaccb3",
+        "trajectory.npz": "e0ac6bc1660f857efd6e68c6b65500cae60bc5337bdf825311558a2fa84b0cdf",
+        "targets.npz": "d85dd0c7e2f614807b988dcef961ef15354496d4b9ed3d67bc7c71281a72845e",
+        "profile.json": "5127232c50bb363ef5dd1e6b30678169da9397db70f9324d280f33a85ce82524"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r8_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r8_fast_return"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v3_r8_symmetric",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r8_symmetric",
+      "files": {
+        "manifest.json": "53cddc05a7e35d7271a46d498a275bbdaea0564fe33f1ba1045afe3e48c887f6",
+        "trajectory.npz": "a792dd5338d9fee58c79febb034fd230febe4bd859b169e54ad7e9269e38c8d2",
+        "targets.npz": "33ec49c31a17f6bda4dc4e029f5c1df83e6f7ad3c2d874973e6d1eb8115ad58c",
+        "profile.json": "35ff88dad06bc71ba243e9533fc4023088e68b612d4a9a817e3ae2609701803b"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r8_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v3_r8_symmetric"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v4_r2_fast_entry",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r2_fast_entry",
+      "files": {
+        "manifest.json": "8fd4e74f561aab18ad7002345ce26622afe73a198fdea4a7abd2117ff02f00b2",
+        "trajectory.npz": "5dc7d9e62f37f1b40d7a4dc28a69d3f4c2833ba62a070bdd2b90a346621aeef8",
+        "targets.npz": "1fdd328cb6d636f25f829593d621b0c55bfe524e09e68d9a76442b36fcd17c1d",
+        "profile.json": "e5d454e398d701e071161227001a96a88797668ae8491b31a31710263dbff04e"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r2_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r2_fast_entry"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v4_r2_fast_return",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r2_fast_return",
+      "files": {
+        "manifest.json": "70622dbfa238cbf36966674a948e125d163ee84a580cb1d560934fb1d5f1bf3a",
+        "trajectory.npz": "d0ff0fbad695081af2296ddfaa92de472b6fef2f3b0e23e0111061315c591e1d",
+        "targets.npz": "da34b09094c034d8671f084db276f866f722b823ecdbf954b7acb89d5dc82575",
+        "profile.json": "35eaec359463a7c44312e870abfcd53164e2daac8325b72339d59795b5b8e295"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r2_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r2_fast_return"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v4_r2_symmetric",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r2_symmetric",
+      "files": {
+        "manifest.json": "b32c123b9204f4fda5ddcb4a04d8e2ea51ea1ed6b8ca0bd2e524fd20fd646691",
+        "trajectory.npz": "b815cbd9f3dbeeae2821821e701ce9e3ce0e3d71b580dc7e2fe88c8e3649c19e",
+        "targets.npz": "b6f3b59ad3d57d5c51b02f3f1dcb5247ac9b0aa64de20fe9f445809b05f13ed1",
+        "profile.json": "af832ee96b504d705d115d54ea284065569d41b549b327452e029171246595de"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r2_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r2_symmetric"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v4_r4_fast_entry",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r4_fast_entry",
+      "files": {
+        "manifest.json": "3dc2593246083cc3c99a75717e15c22ffb90e139658a83479ffdf26800b49e49",
+        "trajectory.npz": "2285867f0eb6690a296d5b957b2b25d8fbacafd4f8481ee361a880ad531c23bc",
+        "targets.npz": "9cf95314e033fa4939a538402ab98e44e46e834795caf9c2c8f160bc6630bc76",
+        "profile.json": "4beabee74ac8b3a79d89c20de4419ea340d4042046b47ce44ac6e825f6ffef45"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r4_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r4_fast_entry"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v4_r4_fast_return",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r4_fast_return",
+      "files": {
+        "manifest.json": "a894edbfa4eefadfa717a85712b6e6cd7f6edd60e0181bcced9a4e8a88997805",
+        "trajectory.npz": "4d24bdec1453d0a5729ec0777d43ea26aa7a4d861c1f092ce7d571585986a77c",
+        "targets.npz": "6ce3e411231a5405fe2c87be8b2d8807acc2ba539887b14ce5da97675cd70a5f",
+        "profile.json": "c7dc83bbd642992fbf3b6134140ab6dfe1d44825c980cf77e5815be1f2cd9a69"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r4_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r4_fast_return"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v4_r4_symmetric",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r4_symmetric",
+      "files": {
+        "manifest.json": "bae963212224d216d6606efc7359a03ceb0a75649b67cf9e6e8d0b48ca49621b",
+        "trajectory.npz": "d6a10b404857cd98b5b48b3483be5b24189c4ad2bb440c06ea9831a89bf3c4c2",
+        "targets.npz": "becbace1406a9e60e5f17c16e40f1763db38397cd8b9430e1b654196aca7f45c",
+        "profile.json": "9476a537a134f7a038be79f79f7df4b1a92005c5fc665f746253bb61057732ce"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r4_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r4_symmetric"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v4_r8_fast_entry",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r8_fast_entry",
+      "files": {
+        "manifest.json": "d57f494baa0a71632cb152860209bba5096920afa7b9b8c9d805a8275e9c6276",
+        "trajectory.npz": "5fdd8efb30d5369ff8b8422f86bc523e3543ddda6e22f9e9daab9976be6449e9",
+        "targets.npz": "ee5090d74fc4362cd66fcd7c8e445a3816bb254e34c3bc4707581087545226c8",
+        "profile.json": "5fbed00860998894c0e83a5445da8a8afc5bc14182942ce7f60ef705b73d4075"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r8_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r8_fast_entry"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v4_r8_fast_return",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r8_fast_return",
+      "files": {
+        "manifest.json": "0f8cd788019752331ae5d0d143dc5146c1f2e842a65aca777dc9887871cf4aa7",
+        "trajectory.npz": "fb20bf05a43fb03e99eecab11e4d85548bfa591615bdcf731b56c6e6021961c0",
+        "targets.npz": "f9f2d7d96bc420781ac57b0366e3d353b7c0428085941a00f9264b7e39ac1633",
+        "profile.json": "fb0fe40d8f1def06274e28d84739332a4a34e8ebdfbc5d4a9e788b9f283685f8"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r8_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r8_fast_return"
+      ]
+    },
+    {
+      "id": "development_v2_n70000/v4_r8_symmetric",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r8_symmetric",
+      "files": {
+        "manifest.json": "7ff13322ddbc2e514d88afdeea94fee0ec14ccd464f1d2c2478df49890bd95d4",
+        "trajectory.npz": "6fcf76b73400afefdd5a7b981c2099136cd32041837d8c53e0929022c3f1be8c",
+        "targets.npz": "cf9fb630e7249d8248e70c8bbb77ad0eaa0e7b39d847a06d27fcc662988855f8",
+        "profile.json": "611de040a295f39984fbb2751b70f6088bf9928cc62caefa9c92a879ced2483a"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r8_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\development_v2_n70000\\v4_r8_symmetric"
+      ]
+    },
+    {
+      "id": "selection_v2/sel_v2.5_r3_fast_entry",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r3_fast_entry",
+      "files": {
+        "manifest.json": "a090064400cec26a07b0a556f8ef0d6254c78accfe49b841c2004169472283cd",
+        "trajectory.npz": "deec9670ed7510a5fe67ae6fcdb2b5673c1b41928ddb91d5de50cb5d0c412769",
+        "targets.npz": "5e01ed11dd710b4d262789f5c713bec50c55a726c40547342980c2cda878cbc7",
+        "profile.json": "28d223be76c49ab3766d3eab5d152e3522b7e8993f61452b914b83a9d29a8e11"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r3_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r3_fast_entry"
+      ]
+    },
+    {
+      "id": "selection_v2/sel_v2.5_r3_fast_return",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r3_fast_return",
+      "files": {
+        "manifest.json": "8d2b75284c9fe564a4f4c2333bcfa8e4f3be06f2a2db37fccb35f500bb7c7904",
+        "trajectory.npz": "cb0b0c49d43c3a09c5cb20e9534e1fc8de330abd9bdcd8b58aa67efdb43fa8a3",
+        "targets.npz": "06cd74140dd73fc008eaaaa105a623089f5708a5542b7e0ecabc0ef506920966",
+        "profile.json": "44312fb0653b65026a041ad75a8ef09e6d4ff79a3b6aeae0f556cf94a17af106"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r3_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r3_fast_return"
+      ]
+    },
+    {
+      "id": "selection_v2/sel_v2.5_r3_symmetric",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r3_symmetric",
+      "files": {
+        "manifest.json": "d290619002e5d8f9a5350aa8d2779c4e5be12a2062908a5e4cf196d01d1ac6ba",
+        "trajectory.npz": "5d655fef83208f16aeb26d275f4bfa090872fb814d2a39bdd643fd843e418922",
+        "targets.npz": "6b6768e300615bf50c1b63cd8039b7fab270e609dda1a9815bcdb1b58f4d58db",
+        "profile.json": "03bd435f3ce005bc6c5439602fe87ae6f5a83cba76f359fcaf68787b956ff00d"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r3_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r3_symmetric"
+      ]
+    },
+    {
+      "id": "selection_v2/sel_v2.5_r6_fast_entry",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r6_fast_entry",
+      "files": {
+        "manifest.json": "0db6099281d1122f4af33e43066c7d86b8b6781d39e687323cb24264fb2dc480",
+        "trajectory.npz": "b468eb8b58101d3fbbc80e6440013b67406a4e0f9b37cef4ca6bd015993bae25",
+        "targets.npz": "392df650a4b0e76317288539e797ba8a55a28cc8408bcecc8a75fd8d8c6b15e0",
+        "profile.json": "057517c4e26d0bd6ba19652c08eeb1d1ef1c3bbefa09c54062e8cf1e1099dba7"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r6_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r6_fast_entry"
+      ]
+    },
+    {
+      "id": "selection_v2/sel_v2.5_r6_fast_return",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r6_fast_return",
+      "files": {
+        "manifest.json": "50c6a647310a7ec223ca0a7f608b39eddf2ec11b1c7c044145a479c64edfca7f",
+        "trajectory.npz": "c06dda8d41eec696a052f72061d046e9f599a9f566a60aa9f81c0d136753d2b9",
+        "targets.npz": "bdc4f48f8b3767d32ee89db60992b979ecc9673c85fc1f8b4e4f45fc22b46cca",
+        "profile.json": "cc4d55ddc0e9fb560a19681cd1e2047ba7905660dfb5f6cea5cc4afefc4f7ecc"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r6_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r6_fast_return"
+      ]
+    },
+    {
+      "id": "selection_v2/sel_v2.5_r6_symmetric",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r6_symmetric",
+      "files": {
+        "manifest.json": "1238e1a132b3084394bf367c2ed33e35d2a8af18cc2274dcbb08a59fb443dfd2",
+        "trajectory.npz": "8cde90aca27b18d39a84f183264fa468404e548f0c3e46c702ca619d99539d5f",
+        "targets.npz": "6fa9db0c956de0cb4f9436e91d7f8d503accd177706a390b32449276d25dcc8e",
+        "profile.json": "0d335621aee21d76532541f8d7377ce72cf50b79b9e4293c1f30761754d99952"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r6_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v2.5_r6_symmetric"
+      ]
+    },
+    {
+      "id": "selection_v2/sel_v3.5_r3_fast_entry",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r3_fast_entry",
+      "files": {
+        "manifest.json": "64d245cd1993a7f1d6c801497ada79ac6340d99a370930bd3416a45e40bf5c95",
+        "trajectory.npz": "4da98cf305d1707529eef0c67eb91c7f4a45fe6b2f29a05a3b54e9cc08ad1722",
+        "targets.npz": "acf6701af10854dd86f5fd7a770a71b9f4a9892b6399b205b2da8425dba45ee8",
+        "profile.json": "f869b65e4d9f3cd28ce71a2186eb4e1ea02334836389aacb6505aaa42de95bfb"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r3_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r3_fast_entry"
+      ]
+    },
+    {
+      "id": "selection_v2/sel_v3.5_r3_fast_return",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r3_fast_return",
+      "files": {
+        "manifest.json": "edd7c9a2914d9ed31b48c58ba748d94a205c1d3dfbbcc1fe47d4b034b71d9421",
+        "trajectory.npz": "89834389c68bcff4b0642485fb6d324f16c6c4e62497fe1f5775a947b296b071",
+        "targets.npz": "f05f83ed7c07a9c18c16bc014296b8731d63873f17e4e4c82f3e143516f0a83a",
+        "profile.json": "7421630b1d74e8fbf7f975142cded11f9fc3db47390b6aae972f2a5b07b1761d"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r3_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r3_fast_return"
+      ]
+    },
+    {
+      "id": "selection_v2/sel_v3.5_r3_symmetric",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r3_symmetric",
+      "files": {
+        "manifest.json": "875f982ccddde595a25c03f544e60484e740e3cfd3564c6f0aa932d74bf139a6",
+        "trajectory.npz": "5e4d211f5d24878509ee0d03e464a67b5bcfb7bbc969c83f29588e0a25f2ff76",
+        "targets.npz": "9ca1a4964de5848bc77842abd1a579da691eda00844c0f311d3cac8b89829420",
+        "profile.json": "2c3fb7106a69170664cc1fabfaa92f3867324792723738b94a26dd0dc83b2266"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r3_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r3_symmetric"
+      ]
+    },
+    {
+      "id": "selection_v2/sel_v3.5_r6_fast_entry",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r6_fast_entry",
+      "files": {
+        "manifest.json": "b89e115b376f5d33e26271c2bf2835fc8eee49e4e18e1531aeed7ff7f1d90dc8",
+        "trajectory.npz": "627b6fc11ece6967cfbe9ec3594bff4394a460ca09ea356294603e75c7a399e8",
+        "targets.npz": "e443bfb2aa75c45d614d38e6e801f0d61f808307f9019912217f130b288a3acf",
+        "profile.json": "5a38566b6434424a8ade93f26be6eacd07a3efc42f7509c420cb48f737fdfa04"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r6_fast_entry",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r6_fast_entry"
+      ]
+    },
+    {
+      "id": "selection_v2/sel_v3.5_r6_fast_return",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r6_fast_return",
+      "files": {
+        "manifest.json": "b0eb1fbc87629ee3902f8f70612f23e53af5e74c4f24d9e7541a59ede54ce4e8",
+        "trajectory.npz": "e4c6a49d47e78228003973e44349fb64601daea897b241116e3c7baaa3f36718",
+        "targets.npz": "4452dbfb05a9a6e1f3ab61e3a53a305007346617f0d2ff954f6154f8f357b3ca",
+        "profile.json": "1b6411b21966752edf74f72499f1eec9182c5e6db159965295d8559500346781"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r6_fast_return",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r6_fast_return"
+      ]
+    },
+    {
+      "id": "selection_v2/sel_v3.5_r6_symmetric",
+      "count": 70000,
+      "folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r6_symmetric",
+      "files": {
+        "manifest.json": "b59a19bea396e1043bd0920462825fa7c4fb78704406a1dd45270eabac096072",
+        "trajectory.npz": "db36bb9214b4abe4ab38dcc573c52346152dff1698150275e00651baff5d8e44",
+        "targets.npz": "b3e3e142f56f2259ffb54965c931435fd51e9c8a90886877cf46f23ceb87d806",
+        "profile.json": "b4b26aa7c14d421577889028cc5e95cb3b933c2ecc20784a632b055df668f524"
+      },
+      "mirrors": [
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r6_symmetric",
+        "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\datasets\\selection_v2\\sel_v3.5_r6_symmetric"
+      ]
+    }
+  ],
+  "population": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_population_extension_v1",
+  "accepted_prefix": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_2400_prefix_completion_v2",
+  "exact_reuse_groups": [
+    "55f8c67578953765f2fcff0e7019fb12596ee4a55881001702623b078a8a1f3f",
+    "3a7929842bbc1d37536cd07f769e1f04e53a261bc2a6e7380ad3f06f295a88d5",
+    "24f2feee0a9d7c75a2515fc90ecc75d6e0c1f0c12df32dae8974d12799b2a7c9",
+    "740ce144349dcc9e11824b9c8d044b85252db3f0172fbe23ed089c5b3d3120c3",
+    "d51f2be6466c3b2ee8e6f241d943c804c334a8ca8b6c8a70c13aac66a25b0e26",
+    "cafebfd74440b6d2cd387aaeeb3d5b8f83a08cba53c13f76c35e8f887eff88c2",
+    "dae45fa792daaccc52fa5fb9ebde318342cbd2e9da43431c2bb6df58f828d739",
+    "b72e8505c8d33e6c218857d6330ca7c8d22270a3ed308a6802483f7fa02fc0c2",
+    "fe2e699c326e2904171486efde4443c3cb400c170bc9018b61353e84ae060ba4",
+    "bdf74d1ea1e6638d05c30d101b31cccb899cb00a3194a17252d58558671c4bfa",
+    "bfb86692aad0278c0e0e95c4d63cac32b085a650349433c24195f0e6d8e2b9c1",
+    "0ea65a921aebf3c89636eaf5376f5cb51574087c1921e916c26f32b16df4232c"
+  ],
+  "new_groups": 27,
+  "all_groups": 39,
+  "all_files": 57,
+  "seed_budget": 8192,
+  "all_unknown_refinement_budget": 131072,
+  "time_resolution_s": 1e-08,
+  "tolerance_m": 0.050000001,
+  "empirical_pose_bounds_unchanged": true,
+  "all_unknowns_preserved": true,
+  "workers": 1,
+  "inflight": 1,
+  "run_cap_bytes": 536870912,
+  "reservation_bytes": 503316480,
+  "total_E_Z_cap_bytes": 34359738368,
+  "Z_reserve_bytes": 3221225472,
+  "no_prediction_or_score_recertification": true,
+  "not_formal_ODE_or_real_vehicle_certificate": true
+}

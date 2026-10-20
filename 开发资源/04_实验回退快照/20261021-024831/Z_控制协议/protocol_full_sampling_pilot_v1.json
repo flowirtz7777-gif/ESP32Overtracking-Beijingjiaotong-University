@@ -1,0 +1,22 @@
+{
+  "version": "full-metric-geometry-sampling-pilot-v1-20261015",
+  "scope": "sampling_rule_development_reusing_frozen_predictions_not_algorithm_optimization_or_independent_validation",
+  "prior_negative_audit_sha256": "52a7207180cb10fbea60ffec89a23055dd6fc2e506da550e68e12e11ad397235",
+  "coordinate_rule_unchanged": "Morton_integer_cell_order_then_systematic_equal_rank_sampling_within_each_original_stratum",
+  "density_counts": [140000, 280000],
+  "offsets": [0.25, 0.5, 0.75],
+  "count_choice_reason": "prior_registered_negative_audit_high_density_passed_but_small_density_failed_do_not_relabel_this_as_unseen_validation",
+  "shared_masks": "same_case_density_offset_for_all_methods_and_conditions",
+  "source_runs": ["resume_S4_negative_census_v1", "resume_S4_negative_census_v2"],
+  "score_rows_expected": 216,
+  "density_pairs_expected": 108,
+  "point_miss_pairs_expected": 108,
+  "limits": {"absolute_metric_change_pp": 0.2, "method_minus_hold_effect_change_pp": 0.2, "lead_p10_change_s": 0.05},
+  "zero_miss_claim_lost_blocks_pass": true,
+  "new_and_disappeared_misses_reported_separately": true,
+  "original_70000_main_set_and_historical_rankings_unchanged": true,
+  "does_not_override_original_density_failure": true,
+  "subset_pass_not_full_foundation_or_S4_acceptance": true,
+  "prediction_jobs": 0,
+  "execution": {"workers": 1, "reserve_bytes": 3221225472, "research_budget_bytes": 12884901888, "run_budget_bytes": 12582912}
+}

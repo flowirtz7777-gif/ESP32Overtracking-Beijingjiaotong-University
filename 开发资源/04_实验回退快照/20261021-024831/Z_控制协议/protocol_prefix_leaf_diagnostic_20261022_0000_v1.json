@@ -1,0 +1,29 @@
+{
+  "version": "prefix-leaf-diagnostic-v1",
+  "deadline": "2026-10-22T00:00:00+08:00",
+  "parent": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_population_prefix_v1",
+  "parent_hashes": {
+    "checkpoint.json": "13b8e8b7b8cc76dd7381c595cd7799130f199152e8d274692c0927083e8f5857",
+    "acceptance.json": "9694aa33d907e292e5ab24a66cc705feb6061ec68e9fcdac3462de87c763b0ae",
+    "close_receipt.json": "8947cf0551db908829cee074d1e350240cb24d982a4dd353cd24990c8c3d7d5f"
+  },
+  "selection": "all and only final prefix_undetermined",
+  "expected_points": 1,
+  "input_files": 57,
+  "geometry_groups": 39,
+  "prefix_paths": 78,
+  "evaluation_budget": 131072,
+  "time_resolution_s": 1e-08,
+  "tolerance_m": 0.050000001,
+  "all_empirical_envelopes_unchanged": true,
+  "original_kernel_code_object_unchanged": true,
+  "all_original_final_arrays_exact": true,
+  "does_not_repair_or_clear_unknown": true,
+  "run_cap_bytes": 134217728,
+  "reservation_bytes": 100663296,
+  "E_Z_cap_bytes": 34359738368,
+  "Z_reserve_bytes": 3221225472,
+  "workers": 1,
+  "inflight": 1,
+  "corrected_truth_revalidated_prediction_jobs": 0
+}

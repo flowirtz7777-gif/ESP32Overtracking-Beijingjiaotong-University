@@ -1,0 +1,26 @@
+{
+  "version": "bounded-noisy-full-RIGHT-census-v1-20261015",
+  "scope": "fixed_configuration_development_foundation_diagnostic_not_search_or_independent_validation",
+  "partition": "development_v2_n70000",
+  "cases": [
+    {"id": "v2_r2_symmetric", "full_target_count": 1007343, "RIGHT_count": 817371, "extra_count": 727343, "single_job_quota_bytes": 27494768},
+    {"id": "v3_r4_fast_return", "full_target_count": 1016455, "RIGHT_count": 832407, "extra_count": 736455, "single_job_quota_bytes": 27826080},
+    {"id": "v4_r8_fast_entry", "full_target_count": 1058721, "RIGHT_count": 860913, "extra_count": 778721, "single_job_quota_bytes": 29362872}
+  ],
+  "core_ids": ["damped_g1250", "linear_g0625", "hold"],
+  "conditions": ["noise100_s1"],
+  "variants": [{"exit_W": 2, "margin": 0.05, "confirmation": 0}, {"exit_W": 2, "margin": 0.02, "confirmation": 0.1}],
+  "prediction_dt_s": 0.02,
+  "contact_tolerance_m": 0.05,
+  "diagnostic_predictions_max": 9,
+  "formal_ranked_jobs_added": 0,
+  "geometry_report_sha256": "6afe08b3b46aec9c30c2cfc2d903f51e897de11ab316568ae0e7bb2656822f6f",
+  "storage_audit_sha256": "9f9f785534f574578b61728101615c95bc80f12a7ccbbd87878a862c6387c909",
+  "packing_source_sha256": "49583db81d130c2a4fd6351f853be679ed6cd43405f3b8ec27edd25c95b198de",
+  "all_original_280000_point_outputs_must_be_exact": true,
+  "full_array_dtype_shape_and_SHA256_reconstruction_required": true,
+  "cohorts_separate": ["original_70000", "full_eligible_RIGHT_finite_population", "original_280000_near_negative_controls"],
+  "changed_population_frame_weights_not_mixed_with_old_rankings": true,
+  "failed_complete_density_gate_not_overridden": true,
+  "execution": {"deadline_local": "2026-10-15T18:00:00+08:00", "workers": 3, "max_inflight": 3, "case_blocks_do_not_overlap": true, "reserve_bytes": 3221225472, "experiment_budget_bytes": 12884901888, "new_run_budget_bytes": 134217728, "fixed_report_headroom_bytes": 2097152, "minimum_seconds_before_case_block": 5}
+}

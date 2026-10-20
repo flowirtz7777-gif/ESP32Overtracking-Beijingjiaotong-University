@@ -1,0 +1,16 @@
+{
+  "version": "closed-temporal-trace-analysis-v1-20261015",
+  "scope": "read_only_diagnostic_mechanisms_not_prediction_or_parameter_selection",
+  "dependency_run": "runs/resume_S4_temporal_trace_v2",
+  "required_complete_diagnostic_jobs": 12,
+  "expected_witness_outcomes": 828,
+  "focus_case": "v2_r2_symmetric",
+  "focus_reference_ids": [41842, 46662],
+  "report_all_methods_conditions_and_variants_for_focus_points": true,
+  "new_prediction_jobs": 0,
+  "failed_complete_foundation_gate_not_overridden": true,
+  "interval_rule": "consecutive_observation_frames_inclusive_endpoints_not_continuous_time_between_samples",
+  "research_budget_bytes": 12884901888,
+  "new_analysis_budget_bytes": 8388608,
+  "disk_reserve_bytes": 3221225472
+}

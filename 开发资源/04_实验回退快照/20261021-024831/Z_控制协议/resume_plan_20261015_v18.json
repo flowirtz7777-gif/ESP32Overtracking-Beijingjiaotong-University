@@ -1,0 +1,21 @@
+{
+  "version": "20261015-v18-authorization-ended-at-1800",
+  "previous_plan": "resume_plan_20261015_v17.json",
+  "previous_plan_sha256": "b4f7924f9740ffc8c64d1e53f7227d1602052ff338fefdb7a5d2225e961f0e23",
+  "authorization_status": "ended_no_automatic_resume",
+  "authorized_until_local": "2026-10-15T18:00:00+08:00",
+  "closed_at_utc": "2026-10-15T10:06:46Z",
+  "running_predictions": false,
+  "automations_status": "PAUSED",
+  "formal_cycle_predictions": 162,
+  "formal_total_corrected_scoring_predictions": 2238,
+  "accepted_temporal_diagnostic_replays": 12,
+  "accepted_full_RIGHT_foundation_diagnostics": 9,
+  "accepted_numeric_jobs_cycle": 183,
+  "accepted_numeric_jobs_total": 2259,
+  "final_summary": "runs/authorization_close_20261015_1800_v3/reports/final_summary.json",
+  "full_foundation_accepted": false,
+  "S4_complete": false,
+  "S5_complete": false,
+  "next_action": "await_explicit_new_user_authorization_and_foundation_resource_admission"
+}

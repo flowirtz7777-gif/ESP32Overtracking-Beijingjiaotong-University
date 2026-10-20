@@ -1,0 +1,35 @@
+{
+  "version": "S4-step-stability-20261014-v1",
+  "scope": "exploratory_prediction_step_diagnostic_not_full_S4_acceptance",
+  "dependency_checkpoint_sha256": "8bcf241fe81f57ef314872385c21aa52e917ec4992cc8478f562be2ce5fa7a4c",
+  "partition": "development_v2_n70000",
+  "cases": ["v2_r2_symmetric", "v3_r4_fast_return", "v4_r8_fast_entry"],
+  "case_selection": "preexisting_S0_representative_list_not_new_performance_based_selection",
+  "core_configs": [
+    {"id": "damped_g1250", "mode": "damped_linear", "gain": 1.25, "decay_s": 1},
+    {"id": "linear_g0625", "mode": "linear", "gain": 0.625, "decay_s": 0.5},
+    {"id": "hold", "mode": "hold", "gain": 1, "decay_s": 0.5}
+  ],
+  "candidate_status": "two_S4_family_rank_first_candidates_both_infeasible_under_research_budget_plus_hold",
+  "predictor_dt_s": [0.02, 0.01],
+  "observation_and_score_dt_s": 0.02,
+  "conditions": ["clean", "noise100_s1"],
+  "processor": "raw",
+  "variants": [
+    {"exit_W": 2, "margin": 0.05, "confirmation": 0},
+    {"exit_W": 2, "margin": 0.02, "confirmation": 0.1}
+  ],
+  "target_count": 70000,
+  "new_target_sampling": false,
+  "contact_tolerance_m": 0.05,
+  "contact_labels_changed": false,
+  "score_start_s": 2,
+  "score_end_rule": "trajectory_end_minus_3_seconds",
+  "prediction_jobs": 36,
+  "comparison_limits": {"right_absolute_delta_pp": 0.2, "point_fp_absolute_delta_pp": 0.2, "lead_p10_absolute_delta_s": 0.05},
+  "physical_validation": false,
+  "full_S4_stability_acceptance": false,
+  "same_path_speed_replay_implemented": false,
+  "S5_implemented": false,
+  "execution": {"deadline_local": "2026-10-14T21:00:00+08:00", "workers": 6, "reserve_bytes": 3221225472, "experiment_budget_bytes": 12884901888}
+}

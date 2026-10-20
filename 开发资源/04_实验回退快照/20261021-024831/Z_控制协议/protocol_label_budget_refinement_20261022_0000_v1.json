@@ -1,0 +1,38 @@
+{
+  "version": "all-exhausted-path-label-budget-candidates-v1",
+  "deadline": "2026-10-22T00:00:00+08:00",
+  "parent": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_label_unknown_census_v1",
+  "parent_hashes": {
+    "checkpoint.json": "22865a60b87dff56edb9516e861e65d08fc6817595f163204a97a2eaea7628c8",
+    "acceptance.json": "6dde6e54acaa0769d0ba18e6373851974ed5557d4e7d1f159edea6321fd4ca35",
+    "close_receipt.json": "84dc0d0f9c8e2e8479f49e5053b7db3ba07f8dffedce583445cdbad2806a0fb1"
+  },
+  "selection": "every and only raw per-path budget_exhausted bound to full census flags",
+  "original_budget_point_file_records": {
+    "oldpath": 2295,
+    "independent": 1669
+  },
+  "original_seed_budget": 2048,
+  "fixed_candidate_budget": 131072,
+  "time_resolution_s": 1e-07,
+  "tolerance_m": 0.050000001,
+  "conditional_label_time_resolution_unchanged_s": 1e-07,
+  "existing_prefix_time_resolution_unchanged_s": 1e-08,
+  "no_new_prefix_computation_in_this_stage": true,
+  "submitted_block": "one path original seed plus fixed refinement; cutoff checked before seed; drain submitted block",
+  "original_corner_rule_m": 0.001,
+  "original_spatial_errors_and_full_paths_unchanged": true,
+  "same_original_label_population_code_object": true,
+  "exact_original_seed_required_before_refinement": true,
+  "new_candidate_prefix_proof_required": true,
+  "truth_asset_promotion_allowed": false,
+  "no_original_labels_predictions_or_scores_overwritten": true,
+  "run_cap_bytes": 536870912,
+  "reservation_bytes": 503316480,
+  "total_E_Z_cap_bytes": 34359738368,
+  "Z_reserve_bytes": 3221225472,
+  "workers": 1,
+  "inflight": 1,
+  "corrected_truth_revalidated_prediction_jobs": 0,
+  "not_formal_ODE_or_real_vehicle_certificate": true
+}

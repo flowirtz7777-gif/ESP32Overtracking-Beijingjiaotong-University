@@ -1,0 +1,23 @@
+{
+  "version": "RIGHT-composition-explanation-v1-20261015",
+  "registration_identity": "post_outcome_inspection_explanatory_analysis_not_prespecified_validation",
+  "dependency_run": "runs/resume_S4_RIGHT_sampling_audit_v1",
+  "dependency_manifest_sha256": "97e55f55d1869c0ee0bd28f7419c37ef887ba80ae968f7a2510fb0e1454532c3",
+  "dependency_report_sha256": "2b12d962424f6201680a8e1e0a280e0ce1d9b12921803ab74dbb2721540c26a8",
+  "fixed_groups": [0, 1],
+  "fixed_standardization_weights": [0.5, 0.5],
+  "metric": "RIGHT_window_miss_or_less_than_one_second_lead_pct",
+  "decomposition": "raw_subset_minus_reference = sum(subset_weight * (subset_layer_rate-reference_layer_rate)) + sum((subset_weight-reference_weight)*reference_layer_rate)",
+  "missing_positive_weight_stratum": "reject_do_not_renormalize",
+  "composition_metadata_correction": "v1 marked every phase as same composition; corrected by exact integer stratum-count cross-products, without changing any stored counts, rates, quantiles or indices",
+  "all_144_summaries_and_126_pairs_and_84_effects_retained": true,
+  "weighted_quantiles_implemented": false,
+  "new_prediction_jobs": 0,
+  "new_acceptance_or_algorithm_selection_gate": false,
+  "old_full_density_failure_not_overridden": true,
+  "analysis_run_budget_bytes": 4194304,
+  "whole_research_budget_bytes": 12884901888,
+  "disk_reserve_bytes": 3221225472,
+  "S4_complete": false,
+  "S5_complete": false
+}

@@ -1,0 +1,52 @@
+{
+  "version": "20261017-v1-authorized-fine-RIGHT-foundation-repair",
+  "previous_plan": "night_plan_20261016_v6.json",
+  "authorized_until_local": "2026-10-17T14:00:00+08:00",
+  "authorization_status": "active",
+  "execution_authorization": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261017_authorization_v1\\authorization.json",
+  "execution_authorization_sha256": "644c7280dfa7390a6b727f549e4bbaea1389cee4edfd4a9043ac1d8a1e447bda",
+  "whole_research_budget_bytes": 17179869184,
+  "disk_reserve_bytes": 3221225472,
+  "formal_baseline": 2238,
+  "accepted_diagnostic_baseline": 21,
+  "accepted_numeric_baseline": 2259,
+  "new_formal_predictions": 0,
+  "new_prediction_diagnostics_completed": 0,
+  "next_stage": "fine_RIGHT_nested_finite_population_development_diagnostic",
+  "next_source": "src_s4_fine_RIGHT_census_20261017_v1/run_fine_RIGHT.py",
+  "next_protocol": "protocol_fine_RIGHT_census_20261017_v1.json",
+  "next_run": "runs/resume_20261017_fine_RIGHT_census_v1",
+  "next_stage_implemented": false,
+  "running_predictions": false,
+  "running_analysis": false,
+  "cases": [
+    "v2_r2_symmetric",
+    "v3_r4_fast_return",
+    "v4_r8_fast_entry"
+  ],
+  "expected_new_diagnostic_predictions_max": 9,
+  "fixed_methods": [
+    "damped_g1250",
+    "linear_g0625",
+    "hold"
+  ],
+  "fixed_condition": "noise100_s1",
+  "full_old_coarse_prefix_preserved": true,
+  "job_scope": "fixed_configuration_spatial_foundation_diagnostic_not_formal_ranking_or_unseen_trajectories",
+  "admission_requires": [
+    "new_frozen_protocol_source",
+    "truth_geometry_label_uniqueness_input_hashes",
+    "exact_old_prefix_labels_and_all_outputs",
+    "causal_prefix_tests",
+    "actual_Windows_worker",
+    "complete_case_block_worst_quota_plus_inputs_and_2MiB_headroom",
+    "lossless_full_array_reconstruction"
+  ],
+  "full_foundation_passed": false,
+  "old_density_failure_overridden": false,
+  "algorithm_search_allowed": false,
+  "same_path_speed_replay_allowed": false,
+  "S5_allowed": false,
+  "stop_policy": "no_new_jobs_after_20261017_1400_drain_submitted_then_close_and_pause_automation_2",
+  "no_old_completed_work_rerun": true
+}

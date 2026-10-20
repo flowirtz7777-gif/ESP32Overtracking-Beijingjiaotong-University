@@ -1,0 +1,2551 @@
+{
+  "created_beijing": "2026-10-21T02:48:31+08:00",
+  "branch": "codex/safety-before-deepseek-20261021-024831",
+  "base_commit": "8fdfe15466b0d16d6ad6a63f92cc15c92858f3ba",
+  "original_working_branch": "main",
+  "repository_files_existing": 309,
+  "repository_file_bytes": 53213328,
+  "external_source_files": 506,
+  "external_source_bytes": 4135061,
+  "excluded_untracked_research_records": 8861,
+  "original_index_sha256": "97560bb247ee6270754b88e5edbaa87e69cbb64ae15f1dc4e4ad4f6c50873900",
+  "excluded_bulk_directories": [
+    "工具/转弯全过程盲区分析软件/科研实验_2026-10-14/",
+    "工具/转弯全过程盲区分析软件/自动化批量实验/"
+  ],
+  "active_checkpoints_not_read_or_hashed": true,
+  "large_research_results_not_backed_up_in_git": true,
+  "no_project_worktree_or_real_index_or_frozen_research_file_modified": true,
+  "source_snapshots": {
+    "C_交接与修复/CLIENT_EXECUTION_HANDOFF_20261021_v2.md": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\CLIENT_EXECUTION_HANDOFF_20261021_v2.md",
+      "bytes": 9385,
+      "sha256": "2514c13172f573610075fc03241b5468dfca4bc60d8c6373351be34fc874ec71"
+    },
+    "C_交接与修复/DEEPSEEK_ORIGINAL_PLAN_TRIAL_20261021_v1.md": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\DEEPSEEK_ORIGINAL_PLAN_TRIAL_20261021_v1.md",
+      "bytes": 7994,
+      "sha256": "37bec26534c494937d2c8e17c8c4af7a91834dbb90374c245bf225f38c6fb0a1"
+    },
+    "C_交接与修复/HANDOFF.md": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\HANDOFF.md",
+      "bytes": 7610,
+      "sha256": "97c4a4d8bded968b70fd7792ae58e00128f39813137b012fdd51a6d907cf5731"
+    },
+    "C_交接与修复/RESULT_REPAIR_AND_DEEPSEEK_HANDOFF_20261021_v1.md": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\RESULT_REPAIR_AND_DEEPSEEK_HANDOFF_20261021_v1.md",
+      "bytes": 8406,
+      "sha256": "fc652ef709aaf687cef168308b8e48415952661fd933ebf07d58abf2488ec243"
+    },
+    "C_交接与修复/STATUS.md": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\STATUS.md",
+      "bytes": 12082,
+      "sha256": "8791e2115b725407b1fbe43bf965a0d51e997db3ff4594ae1fca602684313407"
+    },
+    "C_交接与修复/build_probe_merge_tests_v2.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\build_probe_merge_tests_v2.py",
+      "bytes": 2865,
+      "sha256": "67a54b51c892c8751f9144ffc4398ec42c0a895c06690e85c7c2c5a52597028b"
+    },
+    "C_交接与修复/build_probe_merge_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\build_probe_merge_v1.py",
+      "bytes": 16880,
+      "sha256": "5d99481fdb81786e936bb2d1d24cd6febb04475645abcae87a770ba679f2fc14"
+    },
+    "C_交接与修复/build_suffix_search_adapter_v2.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\build_suffix_search_adapter_v2.py",
+      "bytes": 8957,
+      "sha256": "9bc15a03977dfb252d390013cf511a56ae027e2b22f9b5bde8dd91c6e4c3477a"
+    },
+    "C_交接与修复/build_suffix_search_development_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\build_suffix_search_development_v1.py",
+      "bytes": 3799,
+      "sha256": "641edc24ccc9274f79ae8069595dd2604dddf9e0aead1dcf362b492d3e8d8ede"
+    },
+    "C_交接与修复/build_suffix_search_driver_v3.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\build_suffix_search_driver_v3.py",
+      "bytes": 11580,
+      "sha256": "444a3923b381eeaf9c2c0123171af1c75569f5fb1cde56d114f65ebf65f55abf"
+    },
+    "C_交接与修复/client-handoff-repairs-evidence-20261021-v2.json": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\client-handoff-repairs-evidence-20261021-v2.json",
+      "bytes": 7644,
+      "sha256": "2b4e3a9c26497f018d43e6749a02ee0ef2d603123bc75aec4654dcb4cb9882e0"
+    },
+    "C_交接与修复/client_execution_contract_v2.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\client_execution_contract_v2.py",
+      "bytes": 2671,
+      "sha256": "65ed95371ccfa59e9ec17d70788a65fa0e50b1b58361a26abbf1696f693f564c"
+    },
+    "C_交接与修复/client_readonly_admission_check_v2.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\client_readonly_admission_check_v2.py",
+      "bytes": 6169,
+      "sha256": "f9b68d2a1130d63ffbfefb18c79e8b05afc3c6c403bf82494f671ed5069527c9"
+    },
+    "C_交接与修复/client_readonly_admission_check_v3.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\client_readonly_admission_check_v3.py",
+      "bytes": 6367,
+      "sha256": "58a7c70d1e4727e4fdb3c42598e9563897e13f30f952839aad63313577f0bbfa"
+    },
+    "C_交接与修复/continue_remediation_20261021_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\continue_remediation_20261021_v1.py",
+      "bytes": 16271,
+      "sha256": "4e840dcd1ae26ab5d7538d72e2280a4192e1b91d15737adea63a47d560c1e4e1"
+    },
+    "C_交接与修复/continue_remediation_admin_20261021_v2.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\continue_remediation_admin_20261021_v2.py",
+      "bytes": 2009,
+      "sha256": "875cf51125f1f366fc31e64e500162eeb9b06d90ea50e8c42dc1ad4cc53832d1"
+    },
+    "C_交接与修复/create_client_admission_v3.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\create_client_admission_v3.py",
+      "bytes": 1161,
+      "sha256": "0fe202a8b2e18b051b593c879ab4646ec860deb737f22c6aaac9195dde9236e6"
+    },
+    "C_交接与修复/create_deepseek_trial_health_v2.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\create_deepseek_trial_health_v2.py",
+      "bytes": 1021,
+      "sha256": "07e7fa76300ce347e464e1dbec95f572ba89861e4e2f423cd0b614d7069ce170"
+    },
+    "C_交接与修复/create_deepseek_trial_health_v3.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\create_deepseek_trial_health_v3.py",
+      "bytes": 618,
+      "sha256": "b3255e73bf4c58c9f49b0a10507f128c5fbfae2ef3ff451ff8d015fc402cabc9"
+    },
+    "C_交接与修复/create_deepseek_trial_health_v4.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\create_deepseek_trial_health_v4.py",
+      "bytes": 1020,
+      "sha256": "f599119d57db67548b6dba398631cefff37804f65c1f08b618b5db57df61a15e"
+    },
+    "C_交接与修复/create_paired_metric_core_v2.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\create_paired_metric_core_v2.py",
+      "bytes": 2664,
+      "sha256": "e51a35cbef9d0e3695e4dd26e38ee7b77f2203c697173638ec6c49f655fc73b6"
+    },
+    "C_交接与修复/create_suffix_lifecycle_manager_v3.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\create_suffix_lifecycle_manager_v3.py",
+      "bytes": 1976,
+      "sha256": "6ce0d9333ac52571b3a14a382e0c463b9fd3540521cdf281ff2dde4e486e35ab"
+    },
+    "C_交接与修复/deepseek_original_plan_trial_manager_20261021_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\deepseek_original_plan_trial_manager_20261021_v1.py",
+      "bytes": 19060,
+      "sha256": "227784a2fb0c7779dd45717efc96e02c5f7ffb7e7b60249bc2fa2ad16206cd82"
+    },
+    "C_交接与修复/deepseek_trial_health_20261021_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\deepseek_trial_health_20261021_v1.py",
+      "bytes": 5249,
+      "sha256": "a6b41c232adb6cc8fa02a09fd4928e2224ef5c877cde69eebd0a06b99c6daaa1"
+    },
+    "C_交接与修复/deepseek_trial_health_20261021_v2.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\deepseek_trial_health_20261021_v2.py",
+      "bytes": 5479,
+      "sha256": "b5a80a46aed1b3792cee9f82df457fbed892c36c96468347b49de07bf6ec5205"
+    },
+    "C_交接与修复/deepseek_trial_health_20261021_v3.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\deepseek_trial_health_20261021_v3.py",
+      "bytes": 5471,
+      "sha256": "12372c52a783cccd75caf6c4c1e698acdb8d9c65ccca1a0bcfb08e06a01c4e5f"
+    },
+    "C_交接与修复/deepseek_trial_health_20261021_v4.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\deepseek_trial_health_20261021_v4.py",
+      "bytes": 5563,
+      "sha256": "60a2080c276bb4d5b777f4ae5340e67e11b38130ccd6a198d16f585451c02c93"
+    },
+    "C_交接与修复/deepseek_trial_io_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\deepseek_trial_io_v1.py",
+      "bytes": 1581,
+      "sha256": "bc7df55a905518eee562187a3ea20c005ce90a6aadbe1c56e5967942bbe5b41f"
+    },
+    "C_交接与修复/edge_cover_merge_lifecycle_manager_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\edge_cover_merge_lifecycle_manager_v1.py",
+      "bytes": 7118,
+      "sha256": "85678c08f6a85d6f7c604d58508841adda41591485991b19843f36040bc9c4e6"
+    },
+    "C_交接与修复/edge_interval_cover_core_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\edge_interval_cover_core_v1.py",
+      "bytes": 11397,
+      "sha256": "e16d0d48c24d58a68673d2daf8e8cedc94ba4598af4632459542f350b7534b18"
+    },
+    "C_交接与修复/edge_interval_cover_lifecycle_manager_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\edge_interval_cover_lifecycle_manager_v1.py",
+      "bytes": 6974,
+      "sha256": "3a189ec5204519ebff5d29e4bb29467c037d1db1459c2a6d507d81fa7771fce7"
+    },
+    "C_交接与修复/edge_interval_cover_lifecycle_manager_v2.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\edge_interval_cover_lifecycle_manager_v2.py",
+      "bytes": 6974,
+      "sha256": "1f15d55d04327a23608fe1ab1934c19b6f75022adab27595a5df8a1d13e0d1ef"
+    },
+    "C_交接与修复/freeze_edge_cover_merge_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\freeze_edge_cover_merge_v1.py",
+      "bytes": 8041,
+      "sha256": "c54b148e19bab0fc07f8e805ed218f25af408cefc97bff4ba26546459b29e7e9"
+    },
+    "C_交接与修复/freeze_edge_interval_cover_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\freeze_edge_interval_cover_v1.py",
+      "bytes": 3793,
+      "sha256": "a32b273bfe4eaf670e80dba87e4b931d42789226d6512f9902ec7e91e71769d8"
+    },
+    "C_交接与修复/freeze_edge_interval_cover_v2.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\freeze_edge_interval_cover_v2.py",
+      "bytes": 5448,
+      "sha256": "001daf136f1f46bc81bc89d001701efa0034d9177725d1a83721a7df234dcb94"
+    },
+    "C_交接与修复/freeze_suffix_full_merge_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\freeze_suffix_full_merge_v1.py",
+      "bytes": 4630,
+      "sha256": "d330d3779dff89045ab55911f463ad6395be07253fdf6a1c747c5a0705b23d7c"
+    },
+    "C_交接与修复/git_safety_snapshot_20261021_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\git_safety_snapshot_20261021_v1.py",
+      "bytes": 10137,
+      "sha256": "29efe5c37bf8f932b42229d488a9e8225b19ef4e8503fd7d9f9dd36e3493e0ae"
+    },
+    "C_交接与修复/package_client_handoff_repairs_v2.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\package_client_handoff_repairs_v2.py",
+      "bytes": 17171,
+      "sha256": "247782b6694e8b8069f1da6280b78b112f48a4700e3299218a2504fa04ebd7f5"
+    },
+    "C_交接与修复/paired-metric-candidate-synthetic-checks-20261021-v1.json": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\paired-metric-candidate-synthetic-checks-20261021-v1.json",
+      "bytes": 2810,
+      "sha256": "ec0f789e685902fef5f85a2e0e6fa580876ef03a2218a6c1ea7699e436b15a1d"
+    },
+    "C_交接与修复/paired_interval_metric_core_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\paired_interval_metric_core_v1.py",
+      "bytes": 6639,
+      "sha256": "dfb0236ffa6d0c276934321975c3e783b0e864cea9be65d53625126ae7276ebd"
+    },
+    "C_交接与修复/paired_interval_metric_core_v2.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\paired_interval_metric_core_v2.py",
+      "bytes": 7349,
+      "sha256": "cef758f9a52809d986467998e2930e6967a12d324fcf18a491b7c867953a42b5"
+    },
+    "C_交接与修复/probe_merge_core_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\probe_merge_core_v1.py",
+      "bytes": 6429,
+      "sha256": "d8f32ebc63b31cafd9ae7b64d78392f8bed07d1604c4a2e244f051d0afbef284"
+    },
+    "C_交接与修复/probe_merge_driver_synthetic_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\probe_merge_driver_synthetic_v1.py",
+      "bytes": 4409,
+      "sha256": "c598cb11dda98a027254194d54ceba3ff5cf149837df424dc2bf407ffca43859"
+    },
+    "C_交接与修复/probe_merge_lifecycle_manager_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\probe_merge_lifecycle_manager_v1.py",
+      "bytes": 6904,
+      "sha256": "c054f68806d5c875e0741447ad8dab2aa5c5c2f76a3fc5e30129f60ddefa4473"
+    },
+    "C_交接与修复/read_original_human_research_requests_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\read_original_human_research_requests_v1.py",
+      "bytes": 1747,
+      "sha256": "2d8c65805ce6adbce46ad48836c95635bf341313dcac3866e252314fca72c22e"
+    },
+    "C_交接与修复/read_original_planning_answers_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\read_original_planning_answers_v1.py",
+      "bytes": 1486,
+      "sha256": "892822b1ebb8f08ad0425a2a152f01b1194af412c31c7cef9d5aeca3ac1b2b8f"
+    },
+    "C_交接与修复/record_remediation_transition_20261021_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\record_remediation_transition_20261021_v1.py",
+      "bytes": 6568,
+      "sha256": "61538fdb83a6d809f883c98cb05a1d67e1a6306bbe2057e5ac782b9d63e6dc76"
+    },
+    "C_交接与修复/record_scope_live_and_metric_candidate_20261021_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\record_scope_live_and_metric_candidate_20261021_v1.py",
+      "bytes": 3523,
+      "sha256": "baebf89f88217f36adc1daf6b91d7aa732ab427d0ed0a7684f77f0efba0a839d"
+    },
+    "C_交接与修复/register_edge_cover_merge_close_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\register_edge_cover_merge_close_v1.py",
+      "bytes": 4019,
+      "sha256": "01752ef30e77a76a055bef9532e5aa5f7d18a5ab2dff6ca171c62364c4416b57"
+    },
+    "C_交接与修复/register_probe_merge_close_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\register_probe_merge_close_v1.py",
+      "bytes": 4043,
+      "sha256": "bc8b84ecf6d0f597785854a4c19868e209e7c68a263f068362d6e59c4cda07d8"
+    },
+    "C_交接与修复/register_remediation_scope_closed_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\register_remediation_scope_closed_v1.py",
+      "bytes": 6404,
+      "sha256": "1cc306a1622a198467d7bd494f4a92c41b208f52cfd20303c0545ce60c521a6a"
+    },
+    "C_交接与修复/register_suffix_full_merge_close_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\register_suffix_full_merge_close_v1.py",
+      "bytes": 4005,
+      "sha256": "70a9364bbd69474a7f22325e6e4a029fba9e30f2dbce1d31344ba5d1be3e4837"
+    },
+    "C_交接与修复/remediation_scope_core_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\remediation_scope_core_v1.py",
+      "bytes": 6654,
+      "sha256": "198999ea564d90d3584959e205d6b5548a4ba518c5541e4418c9605ed776c04e"
+    },
+    "C_交接与修复/remediation_scope_driver_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\remediation_scope_driver_v1.py",
+      "bytes": 16085,
+      "sha256": "9493a1bc0b18d7467566b3e6d394b937c60bc11e2ab9e9ecb8104d89c088786d"
+    },
+    "C_交接与修复/remediation_scope_lifecycle_manager_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\remediation_scope_lifecycle_manager_v1.py",
+      "bytes": 6460,
+      "sha256": "82729d767ec54e3e93d5315bc59b9a192da942beeadb27549bee9b0bf660a6d1"
+    },
+    "C_交接与修复/resume_probe_close_manager_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\resume_probe_close_manager_v1.py",
+      "bytes": 6322,
+      "sha256": "fd4b9a38422744e8c97a2fa77e1385f3f5f3d4660109fe3d090c1a32d2860206"
+    },
+    "C_交接与修复/scored_trace_adapter_core_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\scored_trace_adapter_core_v1.py",
+      "bytes": 3706,
+      "sha256": "b5a1b823ba71f0e86a70482da045317c5b16b2768ad967481a84417321f6407f"
+    },
+    "C_交接与修复/search_control_v2.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\search_control_v2.py",
+      "bytes": 3502,
+      "sha256": "155917c97a71f86e4210ed39ef33607c72a2eec5dc653a961a92928f45360f7a"
+    },
+    "C_交接与修复/stage_edge_cover_driver_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\stage_edge_cover_driver_v1.py",
+      "bytes": 10220,
+      "sha256": "198e1e76d4108bdf3ff6d499c317d27ced5387b96ecb8a7c94df533ccbece621"
+    },
+    "C_交接与修复/stage_edge_cover_merge_driver_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\stage_edge_cover_merge_driver_v1.py",
+      "bytes": 4671,
+      "sha256": "c45296f9b5bacd06c49c5f0e1ca1363b62222294f79eed4b34454fb6c96725bd"
+    },
+    "C_交接与修复/stage_edge_cover_merge_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\stage_edge_cover_merge_v1.py",
+      "bytes": 3332,
+      "sha256": "11f4d57346bfaa54280e27c41c552e1d8748e86f213b682809fd3a46e7b9eff8"
+    },
+    "C_交接与修复/stage_suffix_full_merge_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\stage_suffix_full_merge_v1.py",
+      "bytes": 8325,
+      "sha256": "a2ffce7d5d071873863ba38beac51c453e43daba6e74fc9f8600b22cb49cd689"
+    },
+    "C_交接与修复/suffix_full_merge_lifecycle_manager_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\suffix_full_merge_lifecycle_manager_v1.py",
+      "bytes": 7126,
+      "sha256": "05bedec55747cb419db9c200a10262d4f89270bcf5724ebd8687268a01cbb9c0"
+    },
+    "C_交接与修复/suffix_search_core_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\suffix_search_core_v1.py",
+      "bytes": 9726,
+      "sha256": "35d0d5937495115535593946d9012d41cd25ffd88f957eff321923506a8da714"
+    },
+    "C_交接与修复/suffix_search_lifecycle_manager_v3.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\suffix_search_lifecycle_manager_v3.py",
+      "bytes": 6972,
+      "sha256": "eb9a235ac5f2e066a820f21c73bc78cedc0524bdd7d9d23f2207d2ae9703e369"
+    },
+    "C_交接与修复/test_client_execution_repairs_v2.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\test_client_execution_repairs_v2.py",
+      "bytes": 8281,
+      "sha256": "790996235d7b8a1fda9a078215ce09604c550d91b75d8a59da85896e9c7b99cd"
+    },
+    "C_交接与修复/test_edge_cover_merge_core_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\test_edge_cover_merge_core_v1.py",
+      "bytes": 5583,
+      "sha256": "3c0dca28e437f5693c1a205a28cd217e425778d2539ef6f75ae113458525b836"
+    },
+    "C_交接与修复/test_paired_interval_metric_core_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\test_paired_interval_metric_core_v1.py",
+      "bytes": 4632,
+      "sha256": "da44afc136a8c437f435d73ce64c692c580373298057c25e61875d5768e2b16b"
+    },
+    "C_交接与修复/test_paired_interval_metric_core_v2.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\test_paired_interval_metric_core_v2.py",
+      "bytes": 2154,
+      "sha256": "a7309062174361e66fc6f5724471abc6bb8bc93bd4b32d8abefc23f44720e043"
+    },
+    "C_交接与修复/test_probe_merge_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\test_probe_merge_v1.py",
+      "bytes": 8096,
+      "sha256": "78921295e971af395ebb89430bcdf9aac82285b1b1f54d646173278372ac863d"
+    },
+    "C_交接与修复/test_remediation_scope_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\test_remediation_scope_v1.py",
+      "bytes": 4886,
+      "sha256": "d11932e58504817a710c9e0615e282163c0dd31ead3b0132bf2f301bc691320e"
+    },
+    "C_交接与修复/test_search_adapter_v2.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\test_search_adapter_v2.py",
+      "bytes": 3321,
+      "sha256": "9ed42c02a1e02ab1c698eb26e21a9c28a4b20607e6e30b0d5f10a1c1404ef058"
+    },
+    "C_交接与修复/test_suffix_search_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\test_suffix_search_v1.py",
+      "bytes": 6364,
+      "sha256": "9e87795319d4b92d2e4e5f8f52f0f2e4b63235958e777669081d1eb884bd23b4"
+    },
+    "C_交接与修复/test_training_admission_draft_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\test_training_admission_draft_v1.py",
+      "bytes": 3337,
+      "sha256": "d23e567eb2905036e17628b6e40060963fff0c58c5fe01dc5c7475c4ec47dd82"
+    },
+    "C_交接与修复/training_admission_draft_v1.py": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\training_admission_draft_v1.py",
+      "bytes": 3795,
+      "sha256": "87b871ee75f6972e27e81e07b470c33f2a7f5587dd97e06b140dbc90fb810767"
+    },
+    "C_交接与修复/今晚加速与训练准入草案_20261020.md": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\今晚加速与训练准入草案_20261020.md",
+      "bytes": 5966,
+      "sha256": "e850c0487cba346c4246d4803ea01fe9ad8cc1a93efcda8c5a9b9949e1a818f5"
+    },
+    "C_交接与修复/原自动化实验规划核对_20261020.md": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\原自动化实验规划核对_20261020.md",
+      "bytes": 8989,
+      "sha256": "c7ab4a363d7f43d31ca7639293f83b5f69b35344fe03c550f8afcf03a18725f6"
+    },
+    "C_交接与修复/粘贴给DeepSeek_客户端执行_v2.txt": {
+      "original_path": "C:\\Users\\Admin\\.codex\\thread-recovery\\20261020-context-recovery-v1\\粘贴给DeepSeek_客户端执行_v2.txt",
+      "bytes": 2086,
+      "sha256": "730114ccdf9cfeb3efa780d16b9426ab82a6b3407984c72088cb28bc1f6a15db"
+    },
+    "E_旧批量源码/ARCHIVED.json": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\自动化批量实验\\ARCHIVED.json",
+      "bytes": 600,
+      "sha256": "952b54f31a0b6f306e4022817582c99729d93e064848e1195784c646f4193ac6"
+    },
+    "E_旧批量源码/README.md": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\自动化批量实验\\README.md",
+      "bytes": 4515,
+      "sha256": "6720130088b1832f53f5ba57ab7550319e799e08f443b7322c562771da7ae4aa"
+    },
+    "E_旧批量源码/active_experiment_plan.json": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\自动化批量实验\\active_experiment_plan.json",
+      "bytes": 2881,
+      "sha256": "bb9a673866386f78ca3027f262989d1b28fd99e8b2070629bffa7e42c7a76c3d"
+    },
+    "E_旧批量源码/batch_plan.json": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\自动化批量实验\\batch_plan.json",
+      "bytes": 497,
+      "sha256": "a5d9e6f033f90da39589ce4858074d6d3bba21d4e0d92c7840eb4db9291b8421"
+    },
+    "E_旧批量源码/integration_plan.json": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\自动化批量实验\\integration_plan.json",
+      "bytes": 392,
+      "sha256": "e1cf8d65ee27ecd161935d949750d40de936fb822207e5eb18d159912072ff62"
+    },
+    "E_旧批量源码/未来十轮实验规划_2026-10-13.md": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\自动化批量实验\\未来十轮实验规划_2026-10-13.md",
+      "bytes": 17926,
+      "sha256": "2917006205565985825e4b7ef47b45e059de96e4fdd3dd545ff084e7778e843e"
+    },
+    "E_旧批量源码/验证记录.md": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\自动化批量实验\\验证记录.md",
+      "bytes": 1916,
+      "sha256": "ab4de21ebc98be4fc5954a827d35457f3e27a165d137875e9274238405822e66"
+    },
+    "E_旧科研源码/README.md": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\README.md",
+      "bytes": 4077,
+      "sha256": "1d771519aaead5def4c461c6d7e65e0482f7566556fc9cbf7e03d8710a2825cc"
+    },
+    "E_旧科研源码/interval_bounds_b0.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\interval_bounds_b0.py",
+      "bytes": 8640,
+      "sha256": "c8a821509f1fc743bb28d24ef24eadc4c13d98879c76d5f69e90e598bbeb7587"
+    },
+    "E_旧科研源码/interval_bounds_b0_v2.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\interval_bounds_b0_v2.py",
+      "bytes": 10229,
+      "sha256": "3a1aca2a09ef0b0ebe330e1ed51d119ac759ab156223b32b8514febaa730ec8b"
+    },
+    "E_旧科研源码/joint_matrix.json": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\joint_matrix.json",
+      "bytes": 5035,
+      "sha256": "b4759e44c71b4451b4ba9281701aaafaa0da7c1e3e7185a5fb895d745850daca"
+    },
+    "E_旧科研源码/plan.json": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\plan.json",
+      "bytes": 6960,
+      "sha256": "4b7ea4376a4a1a818e7a3f7392acdaaf2eef9f3c8104139a87d79653af11a399"
+    },
+    "E_旧科研源码/planning_validation.json": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\planning_validation.json",
+      "bytes": 4091,
+      "sha256": "9beae747f9cf3c1bc34400365287a115c744237c65a04e0e834467b13d171e94"
+    },
+    "E_旧科研源码/scenario_matrix.json": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\scenario_matrix.json",
+      "bytes": 8838,
+      "sha256": "22ed73db0a07c2f506ce88311bf10b4ee239abca62796e22a4640af4ad77c194"
+    },
+    "E_旧科研源码/src/audit.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src\\audit.py",
+      "bytes": 3414,
+      "sha256": "1691739ba8fde23f371c46d7fdb877a816ddf8798bfa8b1f444f0d1c1158c0fb"
+    },
+    "E_旧科研源码/src/common.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src\\common.py",
+      "bytes": 3284,
+      "sha256": "84feb27e702b16aa6a67a1c32425e397bf731b2d1c1e7f21a2ff2dd44dfa51dd"
+    },
+    "E_旧科研源码/src/evaluation.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src\\evaluation.py",
+      "bytes": 13057,
+      "sha256": "6dc2eaf32e792d13a68f587e636224d4f9e492a1bd6af0bb6a08b5aab072c61b"
+    },
+    "E_旧科研源码/src/foundation.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src\\foundation.py",
+      "bytes": 9122,
+      "sha256": "883de006edcb70c5c51d547b62847aa3e2645bb695c036421388c5dcb62af686"
+    },
+    "E_旧科研源码/src/geometry.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src\\geometry.py",
+      "bytes": 8382,
+      "sha256": "4b5eb49d29220195d2643536e76e2a41d353895450e81ca3e5e1bbfec19cca2e"
+    },
+    "E_旧科研源码/src/observations.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src\\observations.py",
+      "bytes": 2480,
+      "sha256": "64abe7a64cdcd22cdbe3f261cca21f3d9463dd9846305cc5c85b6108d9336755"
+    },
+    "E_旧科研源码/src/prediction.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src\\prediction.py",
+      "bytes": 3052,
+      "sha256": "c2dafd309ebad2f800b92209217435e79ebeef0e60936c6ebcd11a4cc6b1b025"
+    },
+    "E_旧科研源码/src/reporting.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src\\reporting.py",
+      "bytes": 3690,
+      "sha256": "885ba9459c690dee4d7a97230892ed750f45447494085c653900ea689b7c85a6"
+    },
+    "E_旧科研源码/src/run_night.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src\\run_night.py",
+      "bytes": 19001,
+      "sha256": "bf433c731107606049ef729896b5240d3f6e7742a67d00323acb96f7f9de7c4f"
+    },
+    "E_旧科研源码/src/scenarios.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src\\scenarios.py",
+      "bytes": 5255,
+      "sha256": "8f8f90b65e0d479ceebf28216331b83eaef181faa0aeadfd3c50b57b00362b77"
+    },
+    "E_旧科研源码/src_v3/audit.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src_v3\\audit.py",
+      "bytes": 4385,
+      "sha256": "1684523b0111e9fcac48a30be518337c88eb2471fb18d751d8b04bcdf400a4d4"
+    },
+    "E_旧科研源码/src_v3/common.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src_v3\\common.py",
+      "bytes": 3284,
+      "sha256": "84feb27e702b16aa6a67a1c32425e397bf731b2d1c1e7f21a2ff2dd44dfa51dd"
+    },
+    "E_旧科研源码/src_v3/evaluation.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src_v3\\evaluation.py",
+      "bytes": 13057,
+      "sha256": "6dc2eaf32e792d13a68f587e636224d4f9e492a1bd6af0bb6a08b5aab072c61b"
+    },
+    "E_旧科研源码/src_v3/foundation.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src_v3\\foundation.py",
+      "bytes": 9122,
+      "sha256": "883de006edcb70c5c51d547b62847aa3e2645bb695c036421388c5dcb62af686"
+    },
+    "E_旧科研源码/src_v3/geometry.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src_v3\\geometry.py",
+      "bytes": 8382,
+      "sha256": "4b5eb49d29220195d2643536e76e2a41d353895450e81ca3e5e1bbfec19cca2e"
+    },
+    "E_旧科研源码/src_v3/observations.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src_v3\\observations.py",
+      "bytes": 2480,
+      "sha256": "64abe7a64cdcd22cdbe3f261cca21f3d9463dd9846305cc5c85b6108d9336755"
+    },
+    "E_旧科研源码/src_v3/prediction.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src_v3\\prediction.py",
+      "bytes": 3518,
+      "sha256": "6943cfa855e42c25e9c0064edfa7da3c364076608e2772fa7a3a39c04b5b334a"
+    },
+    "E_旧科研源码/src_v3/reporting.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src_v3\\reporting.py",
+      "bytes": 3690,
+      "sha256": "885ba9459c690dee4d7a97230892ed750f45447494085c653900ea689b7c85a6"
+    },
+    "E_旧科研源码/src_v3/run_night.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src_v3\\run_night.py",
+      "bytes": 19023,
+      "sha256": "c0b66354a82fd05c519c1c8836c2090721b440396f9360f8ad95bf43dc82246b"
+    },
+    "E_旧科研源码/src_v3/scenarios.py": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\src_v3\\scenarios.py",
+      "bytes": 5255,
+      "sha256": "8f8f90b65e0d479ceebf28216331b83eaef181faa0aeadfd3c50b57b00362b77"
+    },
+    "E_旧科研源码/任务清单.md": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\任务清单.md",
+      "bytes": 2805,
+      "sha256": "5db2fe949be146a44a17d8603348e2680405d5547798ccc50db7eb63eafabce3"
+    },
+    "E_旧科研源码/后续实验方案_区间界_2026-10-21.md": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\后续实验方案_区间界_2026-10-21.md",
+      "bytes": 17130,
+      "sha256": "2bdb8b8c6bf017c9c70eb18005edade8c4c7046ca79977f6f0fd0cbee2298072"
+    },
+    "E_旧科研源码/实验总计划.md": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\实验总计划.md",
+      "bytes": 16420,
+      "sha256": "6247d4c1a7861dae39b7aaddc26a286fa3f695d1070b89e4b7f86a6d37bc743d"
+    },
+    "E_旧科研源码/实验改进设想_2026-10-21.md": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\实验改进设想_2026-10-21.md",
+      "bytes": 20697,
+      "sha256": "0d83e18c3ff9fb9dfcc1693eb449699133aa1bbcffdfed7c60e09cb2e696f681"
+    },
+    "E_旧科研源码/实验方案评审建议_2026-10-18.md": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\实验方案评审建议_2026-10-18.md",
+      "bytes": 19808,
+      "sha256": "37215543ad452a7808e4bf5476c677e221bdcc187da65d65aa7ea7ce1964b9b9"
+    },
+    "E_旧科研源码/执行协议_夜间首批.md": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\执行协议_夜间首批.md",
+      "bytes": 4738,
+      "sha256": "e4d4b51f462508793ed46edfa3756ee1d52ca8354f905bd12f18b5de538a6643"
+    },
+    "E_旧科研源码/论文素材清单_2026-10-21.md": {
+      "original_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\论文素材清单_2026-10-21.md",
+      "bytes": 23017,
+      "sha256": "5d90719466a98e17223548d63184f01d007ca161df8589da165a638b433609c3"
+    },
+    "Z_控制协议/active_research_run.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\active_research_run.json",
+      "bytes": 10339,
+      "sha256": "57c4f9a69446e5d2921a63ceb3c1d172f9261a86267ca75ca616c3d21c2a98d5"
+    },
+    "Z_控制协议/protocol_RIGHT_census_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_RIGHT_census_v1.json",
+      "bytes": 1972,
+      "sha256": "af5f2700b9b1f0112e96858f963cbfdb37e8071b505bca5b8da9ac50d072d7ad"
+    },
+    "Z_控制协议/protocol_RIGHT_composition_explanation_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_RIGHT_composition_explanation_v1.json",
+      "bytes": 1421,
+      "sha256": "65553f3ed4c2a81390c8257824ac22a4f23c3cea0200132bfb129f736d8fcae4"
+    },
+    "Z_控制协议/protocol_RIGHT_lead_coverage_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_RIGHT_lead_coverage_v1.json",
+      "bytes": 2969,
+      "sha256": "b79ff6b596184dde459666d1dd6550e73c55bc4d8d0bfd25d3565eaa824f7307"
+    },
+    "Z_控制协议/protocol_RIGHT_sampling_audit_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_RIGHT_sampling_audit_v1.json",
+      "bytes": 2608,
+      "sha256": "e9415f9a0fa0f944de44dea31e1b5a6d3aa728ac97238172d8782bc06bbe8e13"
+    },
+    "Z_控制协议/protocol_RIGHT_scoring_ceiling_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_RIGHT_scoring_ceiling_v1.json",
+      "bytes": 3067,
+      "sha256": "5ce3dc6173b70e656e719fbb69072b1bc4460f8e8ae1a59e145251addb0abbc9"
+    },
+    "Z_控制协议/protocol_candidate_prefix_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_candidate_prefix_20261022_0000_v1.json",
+      "bytes": 3057,
+      "sha256": "0a5f818bea9daeb1066afcfc75020a579783dda391bc563057d96f6fcc98d7dd"
+    },
+    "Z_控制协议/protocol_candidate_prefix_20261022_0000_v2.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_candidate_prefix_20261022_0000_v2.json",
+      "bytes": 2476,
+      "sha256": "4fc80677e397438538ce326e11a6a7cc50ac050383adbf4dd8eb66d053404889"
+    },
+    "Z_控制协议/protocol_contact_mechanism_20261019_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_contact_mechanism_20261019_v1.json",
+      "bytes": 14688,
+      "sha256": "8529902c1f39cdd4fb2964f9fbd72a92acf128aab635959b2aaa9dabd8a68b5d"
+    },
+    "Z_控制协议/protocol_density_repair_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_density_repair_v1.json",
+      "bytes": 2028,
+      "sha256": "ed5e44b1bf801571df21b1effcdf48f68d4f2c2bc13906cc51874a43ac4a6f42"
+    },
+    "Z_控制协议/protocol_density_repair_v2.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_density_repair_v2.json",
+      "bytes": 2160,
+      "sha256": "f4819d7827da4fc9d8cd2f30eb2af6c047141b8b6280ebd1ab2045d61f10a2c9"
+    },
+    "Z_控制协议/protocol_edge_cover_merge_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_edge_cover_merge_20261022_0000_v1.json",
+      "bytes": 2179,
+      "sha256": "83ad901a25c42f81657ce6cafb77799e883a72cf5905ea0bb6b3069b765f8c67"
+    },
+    "Z_控制协议/protocol_edge_interval_cover_20261022_0000_v2.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_edge_interval_cover_20261022_0000_v2.json",
+      "bytes": 2290,
+      "sha256": "d7eb18d6e6172a93c90be7871dcf1895d6891a6f75a27c37ddf2a9a6fb57c62a"
+    },
+    "Z_控制协议/protocol_existing_prefix_audit_20261019_1200_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_existing_prefix_audit_20261019_1200_v1.json",
+      "bytes": 2172,
+      "sha256": "12a300568809ab39832d9215cf6224d0bc01fc670314449c6268cd27b7542742"
+    },
+    "Z_控制协议/protocol_fine_RIGHT_acceptance_20261017_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_fine_RIGHT_acceptance_20261017_v1.json",
+      "bytes": 3249,
+      "sha256": "93f18b3759922bbff2d9c4a45baf86688ebccc18ee43bb65b67a0a7f9e23b29d"
+    },
+    "Z_控制协议/protocol_fine_RIGHT_census_20261017_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_fine_RIGHT_census_20261017_v1.json",
+      "bytes": 2969,
+      "sha256": "a6d5f2e6b1491529920ef0281178a4a2f0a93d3ca664c8ddc6ca5ea55b412b50"
+    },
+    "Z_控制协议/protocol_fine_counterexamples_20261017_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_fine_counterexamples_20261017_v1.json",
+      "bytes": 3070,
+      "sha256": "8fd81a1558ecc3a6217d207d1f3cc43de3ca6e6c1a84e1fec4ad7836fff0cdc3"
+    },
+    "Z_控制协议/protocol_fine_factorial_20261017_1900_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_fine_factorial_20261017_1900_v1.json",
+      "bytes": 10170,
+      "sha256": "4afcb5432a9f229cf98103ad7d05c32bece73ca0fcf4b31d41fb0a0126c97ee8"
+    },
+    "Z_控制协议/protocol_fine_inventory_20261016_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_fine_inventory_20261016_v1.json",
+      "bytes": 2153,
+      "sha256": "271a2ce220bfe9467fb0b1aee1b75c3f50941a4823735a21937bc816f0530ada"
+    },
+    "Z_控制协议/protocol_fine_inventory_acceptance_20261016_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_fine_inventory_acceptance_20261016_v1.json",
+      "bytes": 1470,
+      "sha256": "7f498ffa1891ff0fe0cf374a4645d8cca86c71168c8df9ab0e2f5340af1277bf"
+    },
+    "Z_控制协议/protocol_fine_temporal_trace_20261017_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_fine_temporal_trace_20261017_v1.json",
+      "bytes": 7877,
+      "sha256": "78a570b3a3b6799e240006fbfed823acd8e67ace1279663961729af437a2b46a"
+    },
+    "Z_控制协议/protocol_foundation_evidence_review_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_foundation_evidence_review_v1.json",
+      "bytes": 4700,
+      "sha256": "d77c17d12aeacdcffcbec7e627bad0188df4d91471013c1b9c8a0a6fc6ece0c6"
+    },
+    "Z_控制协议/protocol_full_fine_cross_20261018_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_full_fine_cross_20261018_v1.json",
+      "bytes": 4643,
+      "sha256": "86d561fd5d5f8bbc348f494cc079faf8bbe7e3aaa52632b54c54edddd8e54cfc"
+    },
+    "Z_控制协议/protocol_full_sampling_pilot_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_full_sampling_pilot_v1.json",
+      "bytes": 1443,
+      "sha256": "ddfbfe07ca4ab1b8f8e0859fc5aead593df3bed4be4b67f84073d313b7210cd1"
+    },
+    "Z_控制协议/protocol_geometric_sampling_audit_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_geometric_sampling_audit_v1.json",
+      "bytes": 1180,
+      "sha256": "7839640a40da38fbb2e8078948a6934ffe36a9764d6a667f34304161b586943e"
+    },
+    "Z_控制协议/protocol_geometry_delay_20261019_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_geometry_delay_20261019_v1.json",
+      "bytes": 12600,
+      "sha256": "e55516bee5651f4ef78bea83dd1d37a9e03e43bffd826afe6224bfab8d79969a"
+    },
+    "Z_控制协议/protocol_geometry_labels_20261019_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_geometry_labels_20261019_v1.json",
+      "bytes": 9784,
+      "sha256": "b7dec3c2123612578ac2f9f284b753394c6f8939384255ce4c501193e5baaed5"
+    },
+    "Z_控制协议/protocol_geometry_labels_20261019_v2.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_geometry_labels_20261019_v2.json",
+      "bytes": 10076,
+      "sha256": "c16fc28880820e1e680a529b1efa3aedd0ea5d102dd358cbf90351acccce9595"
+    },
+    "Z_控制协议/protocol_interval_population_20261019_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_interval_population_20261019_v1.json",
+      "bytes": 53232,
+      "sha256": "014675c09c9cb9a5482f3f0fa6c8a898d7376de9173b86db93311f71610d070c"
+    },
+    "Z_控制协议/protocol_label_budget_refinement_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_label_budget_refinement_20261022_0000_v1.json",
+      "bytes": 1769,
+      "sha256": "156b18e40c56a122b75dff2dd578c0486f14fee3881e7d3800f447f3522f6ff5"
+    },
+    "Z_控制协议/protocol_label_merge_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_label_merge_20261022_0000_v1.json",
+      "bytes": 2218,
+      "sha256": "08537cb58e9be9b56e4817cc42b17c1c3455ce0c7137d430d9199a5988b06fba"
+    },
+    "Z_控制协议/protocol_label_observability_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_label_observability_20261022_0000_v1.json",
+      "bytes": 2240,
+      "sha256": "4483d65f45b61eca2cef3502328ffe3808de27bfc26e74298488345d9e42a112"
+    },
+    "Z_控制协议/protocol_label_observability_admin_finalize_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_label_observability_admin_finalize_20261022_0000_v1.json",
+      "bytes": 780,
+      "sha256": "26730bfcd10178de0cf6396f0e7563712518022f08026915473ae4ed8768c9eb"
+    },
+    "Z_控制协议/protocol_label_unknown_census_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_label_unknown_census_20261022_0000_v1.json",
+      "bytes": 2003,
+      "sha256": "2ab4aa1a5abf6af9b52b6e146d1f0439d917492d932a2a2c3dcfd15395aea6d6"
+    },
+    "Z_控制协议/protocol_local_motion_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_local_motion_20261022_0000_v1.json",
+      "bytes": 2011,
+      "sha256": "d3dd2908eaab873b59d31ad9f74a90a5c92f16d08eceee9790dd4c6230602cb8"
+    },
+    "Z_控制协议/protocol_local_motion_20261022_0000_v2.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_local_motion_20261022_0000_v2.json",
+      "bytes": 2720,
+      "sha256": "4ad16136294f170e9251bebdc4bff0423f04475edb2f971f50162bbf95eec870"
+    },
+    "Z_控制协议/protocol_local_motion_merge_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_local_motion_merge_20261022_0000_v1.json",
+      "bytes": 2252,
+      "sha256": "72d321d8fa83596da07a0a9fe11bb68b609c4cfb41b31aa0eb4217bbc8191845"
+    },
+    "Z_控制协议/protocol_lossless_storage_audit_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_lossless_storage_audit_v1.json",
+      "bytes": 851,
+      "sha256": "de9ae22f9d36175256e0803b126a9eeec19efccb6101c92c2d40fcc2ae026300"
+    },
+    "Z_控制协议/protocol_matched_factorial_20261017_2400_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_matched_factorial_20261017_2400_v1.json",
+      "bytes": 2761,
+      "sha256": "de8a67496357a960688348a1c8f7f1ef775a294256f7f97ec1ec37f999788140"
+    },
+    "Z_控制协议/protocol_negative_census_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_negative_census_v1.json",
+      "bytes": 1444,
+      "sha256": "dac50bd99b191c1cc3c81e4c7555416cae16738f3cf46d08c25b21333bab31f7"
+    },
+    "Z_控制协议/protocol_negative_census_v2.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_negative_census_v2.json",
+      "bytes": 1714,
+      "sha256": "39c0041f5ce4fac3485d23a4acb3d77f477d1349f6b605371a803d9310940b2a"
+    },
+    "Z_控制协议/protocol_population_extension_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_population_extension_20261022_0000_v1.json",
+      "bytes": 55810,
+      "sha256": "61bf914ded21a85494a73d1910b3b6c8d9edc572e43bdd6cc9e2e15e5a30d250"
+    },
+    "Z_控制协议/protocol_population_prefix_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_population_prefix_20261022_0000_v1.json",
+      "bytes": 53829,
+      "sha256": "97f518bbf203cf629b7b9e8c5d206c5414e09d766758f293be76b421e58f8542"
+    },
+    "Z_控制协议/protocol_population_recovery_20261019_2400_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_population_recovery_20261019_2400_v1.json",
+      "bytes": 54830,
+      "sha256": "df2531ec55e6a95bc902045ec928d8ad4b2afe31ebec1a7a53be8635919698ae"
+    },
+    "Z_控制协议/protocol_positive_population_feasibility_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_positive_population_feasibility_v1.json",
+      "bytes": 1576,
+      "sha256": "e026e6964d8ee01a1ee3d69d7ac1c0ca5506ae89b75fa2a916adde3acab3d05f"
+    },
+    "Z_控制协议/protocol_prefix_completion_20261019_2400_v2.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_prefix_completion_20261019_2400_v2.json",
+      "bytes": 2668,
+      "sha256": "945046e5d68f48ac8826c91cd23737119eafefc609aa8681ee21496ebe285fc7"
+    },
+    "Z_控制协议/protocol_prefix_hull_completion_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_prefix_hull_completion_20261022_0000_v1.json",
+      "bytes": 1508,
+      "sha256": "c4afbef843ab2d0e4d3a1e5048e3f4d4dd8733abcd3713a42467c94398068c3b"
+    },
+    "Z_控制协议/protocol_prefix_leaf_diagnostic_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_prefix_leaf_diagnostic_20261022_0000_v1.json",
+      "bytes": 1152,
+      "sha256": "97a7dbbee457b0f8ee379fdfc0a296a5be835039892904b453e5d4b6f035ee20"
+    },
+    "Z_控制协议/protocol_remediation_scope_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_remediation_scope_20261022_0000_v1.json",
+      "bytes": 2194,
+      "sha256": "b4aebf941c39387744ab9172fbe4538b175d6a445e14d5aabdd6789a60f20ae3"
+    },
+    "Z_控制协议/protocol_s4_sensitivity_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_s4_sensitivity_v1.json",
+      "bytes": 2049,
+      "sha256": "39bca8f9b8b183784c3e5d9d159a3c7d606e0dd92ea521239b23903bb81bc56a"
+    },
+    "Z_控制协议/protocol_s4_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_s4_v1.json",
+      "bytes": 3739,
+      "sha256": "7d13d12423c242a4fd12a729c10283b1140dc592659f294520c386baff94cf25"
+    },
+    "Z_控制协议/protocol_sampling_counterexamples_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_sampling_counterexamples_v1.json",
+      "bytes": 972,
+      "sha256": "27127ff8b66c0e4370be1c5075d00f4c9df53cb2b95185d706e4e957a92d165b"
+    },
+    "Z_控制协议/protocol_sampling_diagnostic_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_sampling_diagnostic_v1.json",
+      "bytes": 1014,
+      "sha256": "281f32c34408efcfb4622005b78a143ccc9a29dfd20d72a1227d602752850865"
+    },
+    "Z_控制协议/protocol_step_stability_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_step_stability_v1.json",
+      "bytes": 1699,
+      "sha256": "ac8e4ce60a41922168c6b7815b51de56dd4fc7d606ff27fad6f105ae9f94f369"
+    },
+    "Z_控制协议/protocol_suffix_full_merge_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_suffix_full_merge_20261022_0000_v1.json",
+      "bytes": 2167,
+      "sha256": "7e4c0ca6adba7842079214d92e8e6f76d62a68766a3fa36b8e3fd21be8536f31"
+    },
+    "Z_控制协议/protocol_suffix_witness_search_20261022_0000_v3.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_suffix_witness_search_20261022_0000_v3.json",
+      "bytes": 2338,
+      "sha256": "cb648506399368dd214e1ac70700524d4a58df0317d7b2f2935dce4aefb62b78"
+    },
+    "Z_控制协议/protocol_temporal_analysis_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_temporal_analysis_v1.json",
+      "bytes": 739,
+      "sha256": "db18c6f925c4f2b64ff778037e2b8599fc86e6631ab33343b372b689a8c965e0"
+    },
+    "Z_控制协议/protocol_temporal_trace_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_temporal_trace_v1.json",
+      "bytes": 1790,
+      "sha256": "f67a8b758e9c5c7d797657548584de030a07493137fde0dd878aa6eb3261ce8d"
+    },
+    "Z_控制协议/protocol_temporal_trace_v2.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_temporal_trace_v2.json",
+      "bytes": 1995,
+      "sha256": "2c16f4e8f1fc5e0a0009193281e73d6b7d7ea237b46ffe1d085501ea744b60dc"
+    },
+    "Z_控制协议/protocol_unwitnessed_probe_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_unwitnessed_probe_20261022_0000_v1.json",
+      "bytes": 2234,
+      "sha256": "8de5482dc502ff99697e18baa5e9fd030badbee2add5298aa3673f4b3c529f4d"
+    },
+    "Z_控制协议/protocol_unwitnessed_probe_merge_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_unwitnessed_probe_merge_20261022_0000_v1.json",
+      "bytes": 2148,
+      "sha256": "5216df065d02ea547972834cc64c45f4ccd95fa85a842e2e2e29bc9855f30d14"
+    },
+    "Z_控制协议/protocol_upper_merge_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_upper_merge_20261022_0000_v1.json",
+      "bytes": 2190,
+      "sha256": "4c33b9a9debb7b9dbf848de8df0e6f8cddd80a02839d28b73979736a4c371ad9"
+    },
+    "Z_控制协议/protocol_witness_upper_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_witness_upper_20261022_0000_v1.json",
+      "bytes": 1765,
+      "sha256": "114764ac5549497b261b232e2fd4fbdd22ce89911e75175018db436d447bb6c4"
+    },
+    "Z_控制协议/research_validity_overlay_20261019_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\research_validity_overlay_20261019_v1.json",
+      "bytes": 2474,
+      "sha256": "3fcf1844bc5f9989611b34f4eb0b0da9a1504f896295e77f6f126167c35d6d7d"
+    },
+    "Z_控制协议/research_validity_overlay_20261019_v2.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\research_validity_overlay_20261019_v2.json",
+      "bytes": 2963,
+      "sha256": "e221ed001e13a226b7fbc89bb2f4ba3b21acc15dd5fbac193ab1b3329b0d6c34"
+    },
+    "Z_控制协议/research_validity_overlay_20261019_v3.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\research_validity_overlay_20261019_v3.json",
+      "bytes": 3251,
+      "sha256": "091243a90a08aa90dd2d37e161c3da9f2cc54f8ab08fad25e390576306dae167"
+    },
+    "Z_控制协议/research_validity_overlay_20261019_v4.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\research_validity_overlay_20261019_v4.json",
+      "bytes": 3632,
+      "sha256": "338edc2bfff8d4300011f064583a86764788a11c034db139e0e7971c20721166"
+    },
+    "Z_控制协议/research_validity_overlay_20261019_v5.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\research_validity_overlay_20261019_v5.json",
+      "bytes": 3798,
+      "sha256": "a1e7147f165a82537a795ed7aac26132a7910b593194e9ef27e34e9e65e1d5c5"
+    },
+    "Z_控制协议/research_validity_overlay_20261019_v6.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\research_validity_overlay_20261019_v6.json",
+      "bytes": 3866,
+      "sha256": "2efdc3d4e3f6c4acb8a937980db288d423ae54e03395c35e9acfd07e256e9fb4"
+    },
+    "Z_控制协议/research_validity_overlay_20261019_v7.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\research_validity_overlay_20261019_v7.json",
+      "bytes": 3761,
+      "sha256": "9efd04b942318fedc7b700340fbe59e772dd53cdea9f8afcf4931e0903364e97"
+    },
+    "Z_控制协议/research_validity_overlay_20261020_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\research_validity_overlay_20261020_v1.json",
+      "bytes": 4107,
+      "sha256": "440ab1c896273a068e848879d8b15fea6b6e391e4103320d054388ecc463dc86"
+    },
+    "Z_控制协议/resume_plan_20261015_v10.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261015_v10.json",
+      "bytes": 3068,
+      "sha256": "b24e5ecbf71d52d067d74dcda7d2eafc9753081f2f1d809f909b51c2224b2fbb"
+    },
+    "Z_控制协议/resume_plan_20261015_v11.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261015_v11.json",
+      "bytes": 2239,
+      "sha256": "3d370d86164c78e5fdbcee71b762f65ebe5057287d411c7ab11de1021549e601"
+    },
+    "Z_控制协议/resume_plan_20261015_v12.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261015_v12.json",
+      "bytes": 3989,
+      "sha256": "cff95e08b901a6c3c97d78a01bb56333bff72bdcf02ab33cfd31a7599259bd50"
+    },
+    "Z_控制协议/resume_plan_20261015_v13.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261015_v13.json",
+      "bytes": 2740,
+      "sha256": "f22518b2ff960e16ce8b96e26bc23647dc8a70f783f4bee59265d6778f45310a"
+    },
+    "Z_控制协议/resume_plan_20261015_v14.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261015_v14.json",
+      "bytes": 3786,
+      "sha256": "fe2f2ab3a5fd9529ed033313cf13a566005bb1e9d9ca5ecc219dde0c2a586145"
+    },
+    "Z_控制协议/resume_plan_20261015_v15.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261015_v15.json",
+      "bytes": 4613,
+      "sha256": "37f93d4d8637402986a92f629688b3b94e7541923b34132050d498453918b8df"
+    },
+    "Z_控制协议/resume_plan_20261015_v16.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261015_v16.json",
+      "bytes": 4787,
+      "sha256": "150b3cbf312c2f7ed572edc4fa5d59ed7e1c7211a41e50a82803d0ea285307c4"
+    },
+    "Z_控制协议/resume_plan_20261015_v17.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261015_v17.json",
+      "bytes": 4669,
+      "sha256": "b4f7924f9740ffc8c64d1e53f7227d1602052ff338fefdb7a5d2225e961f0e23"
+    },
+    "Z_控制协议/resume_plan_20261015_v18.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261015_v18.json",
+      "bytes": 958,
+      "sha256": "bc6a9f497fdb3d053268e591182af54d5b307318dcd1ad38745f5e9d9cc6c96c"
+    },
+    "Z_控制协议/resume_plan_20261015_v4.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261015_v4.json",
+      "bytes": 1266,
+      "sha256": "b90b9195f7be179d68011ddf57d70b33acc7acabad0c24451e62729e86b87c21"
+    },
+    "Z_控制协议/resume_plan_20261015_v5.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261015_v5.json",
+      "bytes": 1237,
+      "sha256": "baedfb8f2d1333b8b49eb19114ba4e4d8ea76acf5f23b8888b12c0d3fe542524"
+    },
+    "Z_控制协议/resume_plan_20261015_v6.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261015_v6.json",
+      "bytes": 1457,
+      "sha256": "5655bbe9096a66d45e530fb6b41f638f27c63a0b39df1c79fd04483bb99d37f3"
+    },
+    "Z_控制协议/resume_plan_20261015_v7.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261015_v7.json",
+      "bytes": 2802,
+      "sha256": "48d865aa6cc79733cb8898b57774243c19d4008d86bc91749d2d6d0b112f1785"
+    },
+    "Z_控制协议/resume_plan_20261015_v8.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261015_v8.json",
+      "bytes": 2401,
+      "sha256": "4bc6506b441e5badcb9bda53f5dbf4e6bca2c928248c3f2c98c7ff181fd8e8bf"
+    },
+    "Z_控制协议/resume_plan_20261015_v9.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261015_v9.json",
+      "bytes": 2822,
+      "sha256": "f12899f30b075a56a5e85ba74ad5e020bd10715652d028897c3dbdc43d9dc11f"
+    },
+    "Z_控制协议/resume_plan_20261017_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v1.json",
+      "bytes": 2164,
+      "sha256": "a1feac31a278058d230ad7ca29cee71d637fff4f8f86bb51fbc5827dde47a1a8"
+    },
+    "Z_控制协议/resume_plan_20261017_v10.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v10.json",
+      "bytes": 7904,
+      "sha256": "f68bd417e9d450cae920923fe64f40b429055c7da227d7c01537c560da98d847"
+    },
+    "Z_控制协议/resume_plan_20261017_v11.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v11.json",
+      "bytes": 8671,
+      "sha256": "c05627282a926839c9236291f87a812707525ee6034082140fba31343b27cb71"
+    },
+    "Z_控制协议/resume_plan_20261017_v12.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v12.json",
+      "bytes": 9442,
+      "sha256": "ad8c55160c45db38880925985479ba139017aafb074565af45a171f1d314c4ff"
+    },
+    "Z_控制协议/resume_plan_20261017_v13.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v13.json",
+      "bytes": 10306,
+      "sha256": "6ac01ff6c16604eef4eb0c86731aa3e1b70b728eb4c9912dae30a85db346a94a"
+    },
+    "Z_控制协议/resume_plan_20261017_v14.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v14.json",
+      "bytes": 1661,
+      "sha256": "dadd2d8ae1e25f90fcfeb076e0bd5ca1c6a3039e4c835a7f118865b5cd669d2c"
+    },
+    "Z_控制协议/resume_plan_20261017_v15.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v15.json",
+      "bytes": 2060,
+      "sha256": "f9d5c51bb3e6e7e5db4a121e0da48e6cad206567d9e1ab27d7b7d1d76bca8bf2"
+    },
+    "Z_控制协议/resume_plan_20261017_v16.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v16.json",
+      "bytes": 2592,
+      "sha256": "887144c9de316e22167ca9f34bc815226504b23b80914f3553512ec9a3491808"
+    },
+    "Z_控制协议/resume_plan_20261017_v17.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v17.json",
+      "bytes": 3403,
+      "sha256": "36661b5b363b0eea67f730781e790afbc20522274c611ae7d821390d66c88bf7"
+    },
+    "Z_控制协议/resume_plan_20261017_v18.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v18.json",
+      "bytes": 1722,
+      "sha256": "5088d6cfaeae6994344b5900cf40329598eefff7aeb6b3879bd2bba9a49fd403"
+    },
+    "Z_控制协议/resume_plan_20261017_v19.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v19.json",
+      "bytes": 10128,
+      "sha256": "1c3f9037b72216009fe6c801fe6460e3ca64e14ead9fe3b620076f68e20c5786"
+    },
+    "Z_控制协议/resume_plan_20261017_v2.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v2.json",
+      "bytes": 2757,
+      "sha256": "fdaf928a77389281156eb703213ddc3e32fce14a6cd39b9ac4676b1f11eb39f9"
+    },
+    "Z_控制协议/resume_plan_20261017_v20.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v20.json",
+      "bytes": 11054,
+      "sha256": "70d9ae1ecfcb24ea7b5b2ca720035e49b38012b000521917ce8c6940406bd23e"
+    },
+    "Z_控制协议/resume_plan_20261017_v3.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v3.json",
+      "bytes": 3394,
+      "sha256": "e4a613d6cb0e7fa5b21cf08dc7f1a50f87e7178eba0d05c32f7030a79977bc1f"
+    },
+    "Z_控制协议/resume_plan_20261017_v4.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v4.json",
+      "bytes": 3982,
+      "sha256": "7040e6e63d73dc90a85d1ffdb019dae6f651a1e658b5120404d853c801d47422"
+    },
+    "Z_控制协议/resume_plan_20261017_v5.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v5.json",
+      "bytes": 4608,
+      "sha256": "1c89b5df1e5e1f2e602813b8a8a8470c83b8f94bcedbda8b087cecdae2952377"
+    },
+    "Z_控制协议/resume_plan_20261017_v6.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v6.json",
+      "bytes": 5693,
+      "sha256": "d8745dc6ad537f40ded8562901390d69607b4834b4ebcf4844934f83d6d0713c"
+    },
+    "Z_控制协议/resume_plan_20261017_v7.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v7.json",
+      "bytes": 6239,
+      "sha256": "2e8120cc8a1a9f8b3fcb2e747ee3638f8a9b8f910110cdd31400033b16749b98"
+    },
+    "Z_控制协议/resume_plan_20261017_v8.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v8.json",
+      "bytes": 6591,
+      "sha256": "160dbcd9874a67b599df48202a9946b437d38a479ba66865a1f25562ed5effb0"
+    },
+    "Z_控制协议/resume_plan_20261017_v9.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261017_v9.json",
+      "bytes": 7576,
+      "sha256": "d09c6b7034cea542e1dac3df9ef30c00561a2f93c3b5b5b1eeb7ca9d848fccc6"
+    },
+    "Z_控制协议/resume_plan_20261018_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261018_v1.json",
+      "bytes": 1701,
+      "sha256": "8241a66016a01e2febb220ac333c397705027b33629f307bc7832d66deba8e95"
+    },
+    "Z_控制协议/resume_plan_20261018_v2.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261018_v2.json",
+      "bytes": 11009,
+      "sha256": "4d86ec40bf9196d72286e69f1fbe06738d6ca18f995ea2b27eb2796fd3829ea7"
+    },
+    "Z_控制协议/resume_plan_20261018_v3.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261018_v3.json",
+      "bytes": 11760,
+      "sha256": "a4f3b39e66139bcfbd45b25a18228cfd8777c76b1328ff3b9cd209032df2616c"
+    },
+    "Z_控制协议/resume_plan_20261018_v4.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261018_v4.json",
+      "bytes": 12376,
+      "sha256": "e8a6782824c79bc9f3f0ca12d35efb702598ae88b2122829b7279fda8675b263"
+    },
+    "Z_控制协议/resume_plan_20261019_1200_deadline_close_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261019_1200_deadline_close_v1.json",
+      "bytes": 2493,
+      "sha256": "38a04acd42e366ed19ab42842d71377c1f613fa546cf28bb2e4944cfe5f56d1a"
+    },
+    "Z_控制协议/resume_plan_20261019_1200_v2.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261019_1200_v2.json",
+      "bytes": 1426,
+      "sha256": "616f114b9b10cf94172bbdcb538e4271a42dc2b3f0b4b852795f29cc5bac10e6"
+    },
+    "Z_控制协议/resume_plan_20261019_1200_v3.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261019_1200_v3.json",
+      "bytes": 1900,
+      "sha256": "64ff1375c893e5125d8a7fea0e22dad087a162f66ce008a4e956c9d9eea3589f"
+    },
+    "Z_控制协议/resume_plan_20261019_2400_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261019_2400_v1.json",
+      "bytes": 1344,
+      "sha256": "19f8306b6521f28cf78d8ead40c62db9c2ddd1df89061cf46a2f474e1b619a02"
+    },
+    "Z_控制协议/resume_plan_20261019_2400_v2.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261019_2400_v2.json",
+      "bytes": 1502,
+      "sha256": "f771274b3668771f1c773a60fe615a31187fcebe879e4cb41ac3f6acac527174"
+    },
+    "Z_控制协议/resume_plan_20261019_2400_v3.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261019_2400_v3.json",
+      "bytes": 1537,
+      "sha256": "f9f1775c7e88c2ab6af6cbc5ad56b473b1b358bef2075b339e14563d9361cbd8"
+    },
+    "Z_控制协议/resume_plan_20261019_deadline_close_v2.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261019_deadline_close_v2.json",
+      "bytes": 2098,
+      "sha256": "cdb36df4d50bfddae0886a12d9624c3d88b6147fba7f314871527b3ee8067955"
+    },
+    "Z_控制协议/resume_plan_20261019_recovery_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261019_recovery_v1.json",
+      "bytes": 1822,
+      "sha256": "9833fdb39d1cbfb1b1cfb4917885330ae1c63b55192e081af7347b1bb5e52cc8"
+    },
+    "Z_控制协议/resume_plan_20261019_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261019_v1.json",
+      "bytes": 1348,
+      "sha256": "6611f440b7d5ab680baa750b4ece8370f3011b60e285a9f3b37f17a1b6a42a72"
+    },
+    "Z_控制协议/resume_plan_20261019_v2.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261019_v2.json",
+      "bytes": 1859,
+      "sha256": "c56124cb836d306d6700d051172525cc6854b9b33bd5d916536de88b66b79daa"
+    },
+    "Z_控制协议/resume_plan_20261019_v3.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261019_v3.json",
+      "bytes": 1908,
+      "sha256": "6fd3e7f4b9c60b68827629d6e5bb47bfb2f940340ab36f4f78cbc81d35ee0920"
+    },
+    "Z_控制协议/resume_plan_20261019_v4.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261019_v4.json",
+      "bytes": 1901,
+      "sha256": "53dfd877318b6ca8c06f3aa1f6444e937f2e2b32185d9758453a50e19fc94abd"
+    },
+    "Z_控制协议/resume_plan_20261019_v5.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261019_v5.json",
+      "bytes": 1965,
+      "sha256": "2c12d9b3ea6918b48b4954432b36f2c22ae5f61a8cfb78720b6e1627cdf24551"
+    },
+    "Z_控制协议/resume_plan_20261019_v6.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261019_v6.json",
+      "bytes": 2009,
+      "sha256": "1bb7a7a68c236d2d29407525df5219620cbbf277bb8379a45efffa39f93235f4"
+    },
+    "Z_控制协议/resume_plan_20261019_v7.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261019_v7.json",
+      "bytes": 2014,
+      "sha256": "1a54996f88d7a4ddf731259b62fee104444c4d765e6be7db4a9bfa37b6888f41"
+    },
+    "Z_控制协议/resume_plan_20261019_v8.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261019_v8.json",
+      "bytes": 2034,
+      "sha256": "7809f3e3794433185ee12ce8c2e39c17ce4cab19f92093a124859ed728b5d061"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v1.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v1.json",
+      "bytes": 1669,
+      "sha256": "945c9a0336612d6883f05dd2c3fb9824d351b5a9bcfac6972696b29814b00363"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v10.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v10.json",
+      "bytes": 1881,
+      "sha256": "1bc5f82006fe9fb050f60828f6c1f203267a180e2334fb7ce32c09a9ffe246f7"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v11.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v11.json",
+      "bytes": 1855,
+      "sha256": "0b38439bc7062f25108037b10f0781c27662d14541ca9112707f1a7931fe3ce5"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v12.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v12.json",
+      "bytes": 1950,
+      "sha256": "15cace58ec00f9a016fa59f189ed56a619d8737afd991951eedce1095a1f619c"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v13.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v13.json",
+      "bytes": 1884,
+      "sha256": "e6f96d715b356dbab9cc68d3524e910d35e2e98ae2fb541cf16beb1545c84ef4"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v14.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v14.json",
+      "bytes": 2575,
+      "sha256": "5ca365d7ddde4c518080d4feb32b8e995c17d62c41f93813df0cce66f7a783a7"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v15.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v15.json",
+      "bytes": 2514,
+      "sha256": "d74d8323f8157b1ceb4b147f010e43ff4a85e33a9987a52b8b55ddd57bd27f94"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v16.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v16.json",
+      "bytes": 2652,
+      "sha256": "9b5149c628513906c49615e4634afae9943f910c8dcab55a5d49ae20e412c8a6"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v17.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v17.json",
+      "bytes": 2468,
+      "sha256": "5e56408bc8bc0e1a4b0938351db0da0a680ef70a5a3c4e962e4bb4a0279fc930"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v18.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v18.json",
+      "bytes": 3431,
+      "sha256": "1138ecdf5900470f5cc61a1943003e5cda9c5c1156018c09804150e8fd6cef8e"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v19.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v19.json",
+      "bytes": 3306,
+      "sha256": "6f028e5bcb7c93266c4e1399bf994754637fb49684e9a7c3fc5f4e595f05bb15"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v2.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v2.json",
+      "bytes": 1847,
+      "sha256": "77fd85d504b25b2079a771fa1b386f2f41540b8e6a916f2a1205bd8755c695b2"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v20.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v20.json",
+      "bytes": 4907,
+      "sha256": "1f1aff39874b3a3e4d2c696eeac575e460dc62fcbdb62396d4cc4c499c405bfa"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v21.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v21.json",
+      "bytes": 4799,
+      "sha256": "63809647ae127b274174eb5b46b2a89c335858c74cc25f6f5feecb45fba411bb"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v22.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v22.json",
+      "bytes": 5277,
+      "sha256": "6850add7c0211c7589028b3f46a828d9eb6f4d3a52afade99c41ef8f63a1e248"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v23.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v23.json",
+      "bytes": 2697,
+      "sha256": "e47cd4f53b6d8f4bbe650309c1528acf46e6d52dd41aff39d0a2004894dc8516"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v24.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v24.json",
+      "bytes": 3782,
+      "sha256": "ee5f900c7537b9675cc1842024349cd141f99ec6df934aa1f010abb160736d15"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v25.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v25.json",
+      "bytes": 3606,
+      "sha256": "37c0e052c6a262c29536f47529c4a1189fc58e1beb8821317055ccccddbb8e92"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v26.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v26.json",
+      "bytes": 3606,
+      "sha256": "ca817736722ec5a00e3c0d33f89a8d6240c0fc752fd61abb035b1e4ab57be3d1"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v27.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v27.json",
+      "bytes": 5588,
+      "sha256": "35d957ae0fe84f1fcb301bc4c9c7544c273005e1733b3212aa9bc04044832ef9"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v28.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v28.json",
+      "bytes": 2698,
+      "sha256": "4482c4da47cb9ef5326594d595860799d6b4306093a431d4cf8231ca2f03b7ce"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v29.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v29.json",
+      "bytes": 3657,
+      "sha256": "82c0e3b0060e50d6d7e97bedd073b1d798890cd2de00ece0d4a4b48425c84c9c"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v3.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v3.json",
+      "bytes": 1744,
+      "sha256": "66ef655deaf529c26e3672137846a137bd20713779cb06bd81fc9de04157df64"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v30.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v30.json",
+      "bytes": 2354,
+      "sha256": "85fe2fcf9d64746111eeb541f9d4859220a13f30638f7bdc03086889706ad7e7"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v31.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v31.json",
+      "bytes": 4747,
+      "sha256": "903a3ec7a870f3cccfa72a8cb88ba0a1ae9e7fc773e8c017982d3ac818071788"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v32.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v32.json",
+      "bytes": 2467,
+      "sha256": "8f7a43693a81a9f4d27b39d8d73ae383d31b1da3dfa242d9c321dfa92a10a3c5"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v33.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v33.json",
+      "bytes": 3490,
+      "sha256": "f718b4f5a71bc6f94989de3153d7b9bf42066ad3fb0c9675d44c9884d1028a46"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v34.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v34.json",
+      "bytes": 2371,
+      "sha256": "78cd5a186626e8d4e1fe6d682fa79121f8efdd466197bc5321171f3df41d3676"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v35.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v35.json",
+      "bytes": 4776,
+      "sha256": "038511af79c90677bc80795ace43f821aeb864e843f7b5dc6e8044c0dc1490fc"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v36.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v36.json",
+      "bytes": 2461,
+      "sha256": "3befc195bbb8cb8d49e931cfd29a1ebcdeca95077857c8458f84e80cedd63c77"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v37.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v37.json",
+      "bytes": 3483,
+      "sha256": "14504c3e398d7dc7f787753c0368ca7692d8f538abe0acbfe57597a19988836a"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v38.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v38.json",
+      "bytes": 2373,
+      "sha256": "18e508fe6b7a649d75ea60c7d8e01bf73ba639009506d206412127ead8428514"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v39.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v39.json",
+      "bytes": 4848,
+      "sha256": "87d2aa641c12be919c90270bc6f12394cd59aa73310dc8d4f941fd0ca708df6e"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v4.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v4.json",
+      "bytes": 1874,
+      "sha256": "e306fc9f17c18bdd7d6a1bb35c08d02fa81a9175ab38045170685117cb8d62b7"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v40.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v40.json",
+      "bytes": 2463,
+      "sha256": "ce6f794975e45e53798429d84ebfdca8034a1e857ffe87a335064a30b4c33330"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v41.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v41.json",
+      "bytes": 3469,
+      "sha256": "e4a165f577957acb95dd2e43c224fade83fa04e0a510320d292fb4cad979ba3e"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v42.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v42.json",
+      "bytes": 923,
+      "sha256": "62111a8f0f6a28f650fcd2d5ee35835d669f950a30b065e7912bccfc6613b708"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v43.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v43.json",
+      "bytes": 1318,
+      "sha256": "25ccc0172adb4a9ab7b1bf858288ddfebc2a80cd6b99980339e13792db453c8b"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v5.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v5.json",
+      "bytes": 1816,
+      "sha256": "51be64032dd77a07e4043e3416fa26f99619964ab5f3fb7e1ad6be7d63c090f5"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v6.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v6.json",
+      "bytes": 1902,
+      "sha256": "e0928aa3f9d276ff5e4e6b230b8f26caa501350ab7308bb340e94d61a9a9f083"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v7.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v7.json",
+      "bytes": 1839,
+      "sha256": "661b9bc0ccb01caba31487a287aa783d5acabb645b5b01790a8f549e6fc5ec27"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v8.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v8.json",
+      "bytes": 1889,
+      "sha256": "e548ae2c1380ff6682c59bb78c4057ebe21b615d1f87694145371c55f2255ba4"
+    },
+    "Z_控制协议/resume_plan_20261022_0000_v9.json": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261022_0000_v9.json",
+      "bytes": 1824,
+      "sha256": "bc9037fec3e36371827873f31c4d947f50e12fb940207ef3c6a1d05a1ca6cb62"
+    },
+    "Z_研究源码/src/audit.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src\\audit.py",
+      "bytes": 3414,
+      "sha256": "1691739ba8fde23f371c46d7fdb877a816ddf8798bfa8b1f444f0d1c1158c0fb"
+    },
+    "Z_研究源码/src/common.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src\\common.py",
+      "bytes": 3284,
+      "sha256": "84feb27e702b16aa6a67a1c32425e397bf731b2d1c1e7f21a2ff2dd44dfa51dd"
+    },
+    "Z_研究源码/src/evaluation.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src\\evaluation.py",
+      "bytes": 13057,
+      "sha256": "6dc2eaf32e792d13a68f587e636224d4f9e492a1bd6af0bb6a08b5aab072c61b"
+    },
+    "Z_研究源码/src/foundation.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src\\foundation.py",
+      "bytes": 9122,
+      "sha256": "883de006edcb70c5c51d547b62847aa3e2645bb695c036421388c5dcb62af686"
+    },
+    "Z_研究源码/src/geometry.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src\\geometry.py",
+      "bytes": 8382,
+      "sha256": "4b5eb49d29220195d2643536e76e2a41d353895450e81ca3e5e1bbfec19cca2e"
+    },
+    "Z_研究源码/src/observations.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src\\observations.py",
+      "bytes": 2480,
+      "sha256": "64abe7a64cdcd22cdbe3f261cca21f3d9463dd9846305cc5c85b6108d9336755"
+    },
+    "Z_研究源码/src/prediction.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src\\prediction.py",
+      "bytes": 3052,
+      "sha256": "c2dafd309ebad2f800b92209217435e79ebeef0e60936c6ebcd11a4cc6b1b025"
+    },
+    "Z_研究源码/src/reporting.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src\\reporting.py",
+      "bytes": 3690,
+      "sha256": "885ba9459c690dee4d7a97230892ed750f45447494085c653900ea689b7c85a6"
+    },
+    "Z_研究源码/src/run_night.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src\\run_night.py",
+      "bytes": 19001,
+      "sha256": "bf433c731107606049ef729896b5240d3f6e7742a67d00323acb96f7f9de7c4f"
+    },
+    "Z_研究源码/src/scenarios.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src\\scenarios.py",
+      "bytes": 5255,
+      "sha256": "8f8f90b65e0d479ceebf28216331b83eaef181faa0aeadfd3c50b57b00362b77"
+    },
+    "Z_研究源码/src_s4_RIGHT_census_v1/run_RIGHT_census.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_RIGHT_census_v1\\run_RIGHT_census.py",
+      "bytes": 23591,
+      "sha256": "5431dfa564c5b81ea3977d98574e02a5ef0c2f0fea980963d3f04aeb02eeaea9"
+    },
+    "Z_研究源码/src_s4_RIGHT_census_v1/test_RIGHT_census.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_RIGHT_census_v1\\test_RIGHT_census.py",
+      "bytes": 4852,
+      "sha256": "8e69bc2890a99d90d15be9f3aa746b84413a670a608975fea23db8691417434c"
+    },
+    "Z_研究源码/src_s4_RIGHT_composition_explanation_v1/explain_composition.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_RIGHT_composition_explanation_v1\\explain_composition.py",
+      "bytes": 9349,
+      "sha256": "2b4268ef9d4617a71f0662a70d00e6a2e904d99325dcc348e935fe72fbb07413"
+    },
+    "Z_研究源码/src_s4_RIGHT_composition_explanation_v1/test_explanation.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_RIGHT_composition_explanation_v1\\test_explanation.py",
+      "bytes": 1736,
+      "sha256": "d7f61036e790e5cf795dcf5fcecf4ca5038f477d85b4d736e4b6998ab2e4065f"
+    },
+    "Z_研究源码/src_s4_RIGHT_lead_coverage_v1/analyze_coverage.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_RIGHT_lead_coverage_v1\\analyze_coverage.py",
+      "bytes": 17698,
+      "sha256": "fcacb756a78968d4acf0884fac46536ace69f288f344624979ff72789ed13ee5"
+    },
+    "Z_研究源码/src_s4_RIGHT_lead_coverage_v1/test_coverage.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_RIGHT_lead_coverage_v1\\test_coverage.py",
+      "bytes": 3925,
+      "sha256": "67f845c1803e44dd798ff780a8c995809d04fb48bc786e3ffc5a08180023ed15"
+    },
+    "Z_研究源码/src_s4_RIGHT_sampling_audit_v1/audit_sampling.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_RIGHT_sampling_audit_v1\\audit_sampling.py",
+      "bytes": 20776,
+      "sha256": "487559ea7b94b8bec950323ab541d98d12e765d6507ab46decaf65a096278b6f"
+    },
+    "Z_研究源码/src_s4_RIGHT_sampling_audit_v1/test_audit.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_RIGHT_sampling_audit_v1\\test_audit.py",
+      "bytes": 2868,
+      "sha256": "5b1ec9ffc7e7314d2ca23c3bcd982c7ca6f480d4793ee795d656d695f406aacd"
+    },
+    "Z_研究源码/src_s4_RIGHT_scoring_ceiling_v1/analyze_ceiling.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_RIGHT_scoring_ceiling_v1\\analyze_ceiling.py",
+      "bytes": 19350,
+      "sha256": "50c045ea85c9ea539f2aff438630a0a92713adc9da27e3eb43d584c3b5f90026"
+    },
+    "Z_研究源码/src_s4_RIGHT_scoring_ceiling_v1/test_ceiling.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_RIGHT_scoring_ceiling_v1\\test_ceiling.py",
+      "bytes": 4015,
+      "sha256": "ee62aafbfb092cc9be4ef43a314685e59cd648dac9673257c01feb5b0a5582d9"
+    },
+    "Z_研究源码/src_s4_candidate_prefix_20261022_v1/candidate_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_candidate_prefix_20261022_v1\\candidate_core.py",
+      "bytes": 7378,
+      "sha256": "5182a74c7877beb05613bb8a83a3c8147ca084e336ca52a8e5f1f63689141b05"
+    },
+    "Z_研究源码/src_s4_candidate_prefix_20261022_v1/candidate_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_candidate_prefix_20261022_v1\\candidate_driver.py",
+      "bytes": 20139,
+      "sha256": "f6fb052ecabe481d36807ea4d02d47d2daea6dbb9d0b51412b4467c0fbddb663"
+    },
+    "Z_研究源码/src_s4_candidate_prefix_20261022_v1/test_candidate.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_candidate_prefix_20261022_v1\\test_candidate.py",
+      "bytes": 8040,
+      "sha256": "def9a37109bdb712defe837d40b8ae57ffc71ffe7cbf2c6a6df2426dd2d8b4cf"
+    },
+    "Z_研究源码/src_s4_candidate_prefix_20261022_v2/compact_io.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_candidate_prefix_20261022_v2\\compact_io.py",
+      "bytes": 3201,
+      "sha256": "38eb1e5299f030ec6979094b9c15941df31db19625080936dc89beb339810d52"
+    },
+    "Z_研究源码/src_s4_candidate_prefix_20261022_v2/resume_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_candidate_prefix_20261022_v2\\resume_driver.py",
+      "bytes": 19018,
+      "sha256": "2bf13d322785e4900d0e24b2ea03ca9002e30ae611f2c0dbd93f2760a6e51068"
+    },
+    "Z_研究源码/src_s4_candidate_prefix_20261022_v2/test_resume.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_candidate_prefix_20261022_v2\\test_resume.py",
+      "bytes": 6457,
+      "sha256": "c7fb8af8e59abf78d3639ce007e7613a12fb9a82f596d72a8c1f4acfc18ebe95"
+    },
+    "Z_研究源码/src_s4_contact_mechanism_20261019_v1/run_mechanism.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_contact_mechanism_20261019_v1\\run_mechanism.py",
+      "bytes": 19994,
+      "sha256": "33256232ea4379eb3255221c355def2561310a3e528f79231b1a5cac551a773e"
+    },
+    "Z_研究源码/src_s4_contact_mechanism_20261019_v1/test_mechanism.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_contact_mechanism_20261019_v1\\test_mechanism.py",
+      "bytes": 2254,
+      "sha256": "611b3ac8f0190207d23f1d0e444df4edbb0a2df8a8ebd576a9e21c5a82f72e9d"
+    },
+    "Z_研究源码/src_s4_density_acceptance_v3/analyze_density.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_density_acceptance_v3\\analyze_density.py",
+      "bytes": 6514,
+      "sha256": "e513bf0762a473e71cd7bbe04d28d213c74aacda1d13866847c9221724635ed7"
+    },
+    "Z_研究源码/src_s4_density_acceptance_v3/test_acceptance.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_density_acceptance_v3\\test_acceptance.py",
+      "bytes": 1001,
+      "sha256": "908a69cef1fb869d2f4a41be004bbfa4205248426a2c5305b1b7323c86261a58"
+    },
+    "Z_研究源码/src_s4_density_repair_v1/run_density_repair.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_density_repair_v1\\run_density_repair.py",
+      "bytes": 24352,
+      "sha256": "07f14f0e8c880367ece5a33d21042bbfa4bd06d46073e026cd6733f6552db51e"
+    },
+    "Z_研究源码/src_s4_density_repair_v1/test_density_repair.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_density_repair_v1\\test_density_repair.py",
+      "bytes": 3699,
+      "sha256": "8855f58008aa62f01355edbb9996be0a9199a9b8381a63fd39ef1678a74d3efd"
+    },
+    "Z_研究源码/src_s4_density_repair_v2/run_density_repair_v2.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_density_repair_v2\\run_density_repair_v2.py",
+      "bytes": 27849,
+      "sha256": "409ea245fcb3581af86334160aa0b8b832efaa7d60027201dd98811e5bff75d2"
+    },
+    "Z_研究源码/src_s4_density_repair_v2/test_density_repair_v2.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_density_repair_v2\\test_density_repair_v2.py",
+      "bytes": 4233,
+      "sha256": "16883d23d24fa1e86af806b66db9023048c3a8967751f5e91ae1c76fe11528a1"
+    },
+    "Z_研究源码/src_s4_edge_cover_merge_20261022_v1/edge_cover_merge_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_cover_merge_20261022_v1\\edge_cover_merge_driver.py",
+      "bytes": 32401,
+      "sha256": "e8a8289b04a7a648f8bb1afb59e77f430088aa02655e862eff7d16efe0089141"
+    },
+    "Z_研究源码/src_s4_edge_cover_merge_20261022_v1/edge_merge_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_cover_merge_20261022_v1\\edge_merge_core.py",
+      "bytes": 5629,
+      "sha256": "a60ef347bf082fb8281da795554124016a3c7af4e6f55616f1f5ae893a610e89"
+    },
+    "Z_研究源码/src_s4_edge_cover_merge_20261022_v1/test_edge_cover_merge_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_cover_merge_20261022_v1\\test_edge_cover_merge_driver.py",
+      "bytes": 8549,
+      "sha256": "7150d962b230730cb21d5ad3808a5936c843fd22e3e94eda864d0913e97efdd6"
+    },
+    "Z_研究源码/src_s4_edge_cover_merge_20261022_v1/test_edge_merge.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_cover_merge_20261022_v1\\test_edge_merge.py",
+      "bytes": 5583,
+      "sha256": "3c0dca28e437f5693c1a205a28cd217e425778d2539ef6f75ae113458525b836"
+    },
+    "Z_研究源码/src_s4_edge_interval_cover_20261022_v1/contact_primitives.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_interval_cover_20261022_v1\\contact_primitives.py",
+      "bytes": 4965,
+      "sha256": "d06ffc62335afa3f70863821691b51bb226b553e7b5de92e35373f0b723a2e3b"
+    },
+    "Z_研究源码/src_s4_edge_interval_cover_20261022_v1/edge_cover_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_interval_cover_20261022_v1\\edge_cover_core.py",
+      "bytes": 11397,
+      "sha256": "e16d0d48c24d58a68673d2daf8e8cedc94ba4598af4632459542f350b7534b18"
+    },
+    "Z_研究源码/src_s4_edge_interval_cover_20261022_v1/edge_cover_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_interval_cover_20261022_v1\\edge_cover_driver.py",
+      "bytes": 32353,
+      "sha256": "affc42ac2a713f3e7225f36a69cae0a07f0990ce60fd737cbb2ebe71c69ea578"
+    },
+    "Z_研究源码/src_s4_edge_interval_cover_20261022_v1/local_motion_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_interval_cover_20261022_v1\\local_motion_core.py",
+      "bytes": 17479,
+      "sha256": "852dc2ed760248522274d00ffd4572f44845f9bac282a3ee2ccf65950089ffad"
+    },
+    "Z_研究源码/src_s4_edge_interval_cover_20261022_v1/local_scope.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_interval_cover_20261022_v1\\local_scope.py",
+      "bytes": 5192,
+      "sha256": "f20e5bb77ced45b4427fe8dd69c97c781fca37e6bfd966764d01b2768aed34a1"
+    },
+    "Z_研究源码/src_s4_edge_interval_cover_20261022_v1/test_edge_cover.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_interval_cover_20261022_v1\\test_edge_cover.py",
+      "bytes": 9540,
+      "sha256": "650a2c2be82149ff0578d56025dfa19ba1972c1f8829ea2077a588b250e4831c"
+    },
+    "Z_研究源码/src_s4_edge_interval_cover_20261022_v1/test_edge_cover_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_interval_cover_20261022_v1\\test_edge_cover_driver.py",
+      "bytes": 6361,
+      "sha256": "0637c9e52b9863af577c773c07ec668e98e647d7bdcda595d9a3157faefe8243"
+    },
+    "Z_研究源码/src_s4_edge_interval_cover_20261022_v2/contact_primitives.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_interval_cover_20261022_v2\\contact_primitives.py",
+      "bytes": 4965,
+      "sha256": "d06ffc62335afa3f70863821691b51bb226b553e7b5de92e35373f0b723a2e3b"
+    },
+    "Z_研究源码/src_s4_edge_interval_cover_20261022_v2/edge_cover_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_interval_cover_20261022_v2\\edge_cover_core.py",
+      "bytes": 11397,
+      "sha256": "e16d0d48c24d58a68673d2daf8e8cedc94ba4598af4632459542f350b7534b18"
+    },
+    "Z_研究源码/src_s4_edge_interval_cover_20261022_v2/edge_cover_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_interval_cover_20261022_v2\\edge_cover_driver.py",
+      "bytes": 32456,
+      "sha256": "3471a1fb21d622da387f6d3fadac4c24e67f8247bfb72fe9dbadd4d6f65fa093"
+    },
+    "Z_研究源码/src_s4_edge_interval_cover_20261022_v2/local_motion_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_interval_cover_20261022_v2\\local_motion_core.py",
+      "bytes": 17479,
+      "sha256": "852dc2ed760248522274d00ffd4572f44845f9bac282a3ee2ccf65950089ffad"
+    },
+    "Z_研究源码/src_s4_edge_interval_cover_20261022_v2/local_scope.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_interval_cover_20261022_v2\\local_scope.py",
+      "bytes": 5192,
+      "sha256": "f20e5bb77ced45b4427fe8dd69c97c781fca37e6bfd966764d01b2768aed34a1"
+    },
+    "Z_研究源码/src_s4_edge_interval_cover_20261022_v2/test_edge_cover.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_interval_cover_20261022_v2\\test_edge_cover.py",
+      "bytes": 9540,
+      "sha256": "650a2c2be82149ff0578d56025dfa19ba1972c1f8829ea2077a588b250e4831c"
+    },
+    "Z_研究源码/src_s4_edge_interval_cover_20261022_v2/test_edge_cover_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_edge_interval_cover_20261022_v2\\test_edge_cover_driver.py",
+      "bytes": 6854,
+      "sha256": "2fb18ef524b8c50a3f6cf58f8beeabbe7025b122bbda6b07beba1513733c35d8"
+    },
+    "Z_研究源码/src_s4_fine_RIGHT_acceptance_20261017_v1/analyze_fine_RIGHT.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_fine_RIGHT_acceptance_20261017_v1\\analyze_fine_RIGHT.py",
+      "bytes": 27054,
+      "sha256": "6ac862a352142611d1ee1650f168cef475f2672026c6931e80f22ebe66e97743"
+    },
+    "Z_研究源码/src_s4_fine_RIGHT_acceptance_20261017_v1/test_acceptance.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_fine_RIGHT_acceptance_20261017_v1\\test_acceptance.py",
+      "bytes": 7570,
+      "sha256": "2d070b37b07acf22361e43db2ce53e69e92655f8a2a541d9dbe6a14f65ee1d65"
+    },
+    "Z_研究源码/src_s4_fine_RIGHT_census_20261017_v1/run_fine_RIGHT.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_fine_RIGHT_census_20261017_v1\\run_fine_RIGHT.py",
+      "bytes": 31405,
+      "sha256": "09e75fb29d5f0094d85ec665b6cc836eb0e3628eb67f93df7f667058e8216240"
+    },
+    "Z_研究源码/src_s4_fine_RIGHT_census_20261017_v1/test_fine_RIGHT.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_fine_RIGHT_census_20261017_v1\\test_fine_RIGHT.py",
+      "bytes": 7260,
+      "sha256": "41a9d7cfe7c24d92f849594b9d1794dfd1f4e201b0264e44d691ef99b7bc7292"
+    },
+    "Z_研究源码/src_s4_fine_counterexamples_20261017_v1/collect_counterexamples.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_fine_counterexamples_20261017_v1\\collect_counterexamples.py",
+      "bytes": 21141,
+      "sha256": "4be1600092b7a1686933caa6801efa4d10e99b8a92b528b00cf69c8f62c5d5f5"
+    },
+    "Z_研究源码/src_s4_fine_counterexamples_20261017_v1/test_counterexamples.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_fine_counterexamples_20261017_v1\\test_counterexamples.py",
+      "bytes": 5728,
+      "sha256": "4c406653d75449dad9bc7672460e2fba351b814c42fba209f8c8fea0cfc82e88"
+    },
+    "Z_研究源码/src_s4_fine_factorial_20261017_1900_v1/factorial_analysis.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_fine_factorial_20261017_1900_v1\\factorial_analysis.py",
+      "bytes": 3660,
+      "sha256": "4435dc4703cc7f52a5bb37d044925e8e9d98a0b40633eb028376a994610bc004"
+    },
+    "Z_研究源码/src_s4_fine_factorial_20261017_1900_v1/run_factorial.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_fine_factorial_20261017_1900_v1\\run_factorial.py",
+      "bytes": 36354,
+      "sha256": "a2923dd3f36132d4627f62ba1de56bd3c4f1abbdec599da5c000a7ef3defba07"
+    },
+    "Z_研究源码/src_s4_fine_factorial_20261017_1900_v1/test_factorial.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_fine_factorial_20261017_1900_v1\\test_factorial.py",
+      "bytes": 14464,
+      "sha256": "57f0e5de40eaca44cf7a3e9bc06c1e0a193654fb42b28b2295d9f1436d69e235"
+    },
+    "Z_研究源码/src_s4_fine_inventory_acceptance_v1/test_acceptance.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_fine_inventory_acceptance_v1\\test_acceptance.py",
+      "bytes": 1798,
+      "sha256": "28bad986995a3a6fabec295cf85df26adca6edc79dd43903f9ee5e063d31b2c9"
+    },
+    "Z_研究源码/src_s4_fine_inventory_acceptance_v1/verify_inventory.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_fine_inventory_acceptance_v1\\verify_inventory.py",
+      "bytes": 15285,
+      "sha256": "199782a7d0e227caede5a9d50acb48dd0385f7c63d32380becaf86a615947d4b"
+    },
+    "Z_研究源码/src_s4_fine_inventory_v1/run_inventory.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_fine_inventory_v1\\run_inventory.py",
+      "bytes": 17280,
+      "sha256": "0f83b7768ad8a23ac07d1cf47a80bcbe043d3b25fff5b34087f73b95920c0e49"
+    },
+    "Z_研究源码/src_s4_fine_inventory_v1/test_inventory.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_fine_inventory_v1\\test_inventory.py",
+      "bytes": 2673,
+      "sha256": "7e13908f7832b73a634e3bc767f9669789a247b7a2b0a9cb37eb1d262703025f"
+    },
+    "Z_研究源码/src_s4_fine_temporal_trace_20261017_v1/run_trace.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_fine_temporal_trace_20261017_v1\\run_trace.py",
+      "bytes": 31530,
+      "sha256": "f642da8b02168f931f494651fb69db79c3cd326bfeb92c9d57e647538e888e36"
+    },
+    "Z_研究源码/src_s4_fine_temporal_trace_20261017_v1/test_trace.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_fine_temporal_trace_20261017_v1\\test_trace.py",
+      "bytes": 9081,
+      "sha256": "227d63083319550ea30255ca17c646ff191efd08fd8c0d9b6f281456633c5be4"
+    },
+    "Z_研究源码/src_s4_foundation_evidence_review_v1/review_foundation.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_foundation_evidence_review_v1\\review_foundation.py",
+      "bytes": 22341,
+      "sha256": "133443210efb08462f24c79dc08c96b6e0e9fcb496c374d3661e4b11baa5b3f4"
+    },
+    "Z_研究源码/src_s4_foundation_evidence_review_v1/test_review.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_foundation_evidence_review_v1\\test_review.py",
+      "bytes": 2676,
+      "sha256": "47f7a8a5f9d5834ced891b5cd4f8e07989b1e4f097a58d7bc3f63ac4640b2505"
+    },
+    "Z_研究源码/src_s4_full_fine_cross_20261018_v1/run_cross.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_full_fine_cross_20261018_v1\\run_cross.py",
+      "bytes": 30556,
+      "sha256": "afbc9d20f577ae4f78cc51f99ac3900c73e51fb7b6d91831053f403c3439446c"
+    },
+    "Z_研究源码/src_s4_full_fine_cross_20261018_v1/test_cross.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_full_fine_cross_20261018_v1\\test_cross.py",
+      "bytes": 5762,
+      "sha256": "af74d538453f612256788660fc94c2d6b8f690bbec075a46e25f4d9e9786c293"
+    },
+    "Z_研究源码/src_s4_full_sampling_pilot_v1/analyze_full_sampling.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_full_sampling_pilot_v1\\analyze_full_sampling.py",
+      "bytes": 11587,
+      "sha256": "4adaa61645357e6a3784d5299b653c30d1ab26967cec42e146a100d03e4bd39b"
+    },
+    "Z_研究源码/src_s4_full_sampling_pilot_v1/test_projection.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_full_sampling_pilot_v1\\test_projection.py",
+      "bytes": 2306,
+      "sha256": "ff41fe390c2761330e7d398885ba29aa2f5b86bf40dea10934df84b170188fa3"
+    },
+    "Z_研究源码/src_s4_geometric_sampling_audit_v1/audit_sampling.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_geometric_sampling_audit_v1\\audit_sampling.py",
+      "bytes": 9687,
+      "sha256": "86def603b847f625de7b8f683a225913db754625edf40210be9fa8f67bd705c2"
+    },
+    "Z_研究源码/src_s4_geometric_sampling_audit_v1/test_sampling.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_geometric_sampling_audit_v1\\test_sampling.py",
+      "bytes": 1504,
+      "sha256": "97955e491c0b2d1a11059e955db90ab8d6e98c89cb8638bed8a6b28ed02627a6"
+    },
+    "Z_研究源码/src_s4_geometry_labels_20261019_v1/run_labels.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_geometry_labels_20261019_v1\\run_labels.py",
+      "bytes": 23924,
+      "sha256": "e9925fee3b430e712f714331a45ffab9065646018fdac03d01b06389b89f6134"
+    },
+    "Z_研究源码/src_s4_geometry_labels_20261019_v1/test_labels.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_geometry_labels_20261019_v1\\test_labels.py",
+      "bytes": 2903,
+      "sha256": "35d54ca1859acd1979337c00f4b1ecfeef3b01cdf5d2167ae37dee6bf2b11103"
+    },
+    "Z_研究源码/src_s4_geometry_labels_20261019_v2/run_labels.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_geometry_labels_20261019_v2\\run_labels.py",
+      "bytes": 26314,
+      "sha256": "d8cf5664a480aed50a1ceb2a41877309bec895c489f7f0e51d38c1b81eaf7498"
+    },
+    "Z_研究源码/src_s4_geometry_labels_20261019_v2/test_labels.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_geometry_labels_20261019_v2\\test_labels.py",
+      "bytes": 4189,
+      "sha256": "af9d073f0f38d5a543882a79ecb9c036afed4489bbd03ded59b5de6c0ee7c733"
+    },
+    "Z_研究源码/src_s4_interval_population_20261019_v1/population.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_interval_population_20261019_v1\\population.py",
+      "bytes": 7501,
+      "sha256": "7745d186f9c39b344eb50a88bf8349040595436ce598da735e189ad717a77048"
+    },
+    "Z_研究源码/src_s4_interval_population_20261019_v1/reference.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_interval_population_20261019_v1\\reference.py",
+      "bytes": 4922,
+      "sha256": "273994a2281a33ef2529db66886206be0a621215a31a9f84fa0c00637f8a653b"
+    },
+    "Z_研究源码/src_s4_interval_population_20261019_v1/run_population.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_interval_population_20261019_v1\\run_population.py",
+      "bytes": 29769,
+      "sha256": "df1ce56362e3952de6af327ad4ae6c928f02a464f0433bb7ae560aa9776e8ede"
+    },
+    "Z_研究源码/src_s4_interval_population_20261019_v1/test_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_interval_population_20261019_v1\\test_driver.py",
+      "bytes": 1935,
+      "sha256": "a7e7fd5825b088d3c65e70348987d089bc29945045e9d471a117f147ecd72f4c"
+    },
+    "Z_研究源码/src_s4_interval_population_20261019_v1/test_population.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_interval_population_20261019_v1\\test_population.py",
+      "bytes": 5201,
+      "sha256": "38d79c0423c5effde998cd7d337628e98eaeb9b6dbeef5b272a7f8c5700c441e"
+    },
+    "Z_研究源码/src_s4_interval_population_20261019_v1/test_reference.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_interval_population_20261019_v1\\test_reference.py",
+      "bytes": 2777,
+      "sha256": "6d564bad4042ef984eaef49dbd7ee7526c456a22753fdeb93cbd3ce8e83619d8"
+    },
+    "Z_研究源码/src_s4_interval_prefix_audit_20261019_v1/prefix_audit.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_interval_prefix_audit_20261019_v1\\prefix_audit.py",
+      "bytes": 4570,
+      "sha256": "ce20321a2103fed1eb58523ccaaa7221435254d10423bebc08446ee032906684"
+    },
+    "Z_研究源码/src_s4_interval_prefix_audit_20261019_v1/run_audit.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_interval_prefix_audit_20261019_v1\\run_audit.py",
+      "bytes": 21821,
+      "sha256": "2dc8146875e456dc5d7c0de2c30b31c959a0825f38c2b6b032db5ebba50f2f3e"
+    },
+    "Z_研究源码/src_s4_interval_prefix_audit_20261019_v1/test_audit.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_interval_prefix_audit_20261019_v1\\test_audit.py",
+      "bytes": 1415,
+      "sha256": "7f437e31b7271297f8ddb539fe779b498a5aa2e4ab479142a8315e42713406cf"
+    },
+    "Z_研究源码/src_s4_interval_prefix_audit_20261019_v1/test_prefix_audit.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_interval_prefix_audit_20261019_v1\\test_prefix_audit.py",
+      "bytes": 3114,
+      "sha256": "4b6b640405299b3d5614dc9aaa899966726be6136edff8bb3dd0a5998360a131"
+    },
+    "Z_研究源码/src_s4_label_budget_refinement_20261022_v1/budget.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_label_budget_refinement_20261022_v1\\budget.py",
+      "bytes": 21292,
+      "sha256": "59836831e92e1ccbb717b9f22b0bb8a40e8fbe1a56461e1d8553922536b0a9ea"
+    },
+    "Z_研究源码/src_s4_label_budget_refinement_20261022_v1/budget_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_label_budget_refinement_20261022_v1\\budget_core.py",
+      "bytes": 2495,
+      "sha256": "a7b90df2b2f0705479f3c7ced1953e1cd51dd0d8b303ab9e8aa90209fb69405f"
+    },
+    "Z_研究源码/src_s4_label_budget_refinement_20261022_v1/test_budget.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_label_budget_refinement_20261022_v1\\test_budget.py",
+      "bytes": 4637,
+      "sha256": "6a5539d9587db66138ee668ee98e3f25e83a81c2de320663bc1ef3114bf5c1c4"
+    },
+    "Z_研究源码/src_s4_label_merge_20261022_v1/merge_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_label_merge_20261022_v1\\merge_core.py",
+      "bytes": 6166,
+      "sha256": "1fe97c146f0110ce85066781de42c84e6120fb45e4b58b9c735c6cd12bd9c39d"
+    },
+    "Z_研究源码/src_s4_label_merge_20261022_v1/merge_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_label_merge_20261022_v1\\merge_driver.py",
+      "bytes": 24827,
+      "sha256": "39c9519a8a4052ed4bfc705bd345c3e5ddb5daeb4d12372c3402f1ecd71161bf"
+    },
+    "Z_研究源码/src_s4_label_merge_20261022_v1/test_merge.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_label_merge_20261022_v1\\test_merge.py",
+      "bytes": 11968,
+      "sha256": "ac5614a3c48801869695c6c77a33a9932315d1d92060d0a4f777b238adba3759"
+    },
+    "Z_研究源码/src_s4_label_observability_20261022_v1/observability.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_label_observability_20261022_v1\\observability.py",
+      "bytes": 24592,
+      "sha256": "4ea7de6d321101093e9bdaa3e0b7d386ebc25dc8a1d5dc3fd7930c3c8eb1087b"
+    },
+    "Z_研究源码/src_s4_label_observability_20261022_v1/observability_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_label_observability_20261022_v1\\observability_core.py",
+      "bytes": 14043,
+      "sha256": "82d8c3d4cb5159c31fb502303dacecf68e2d7e962bafb12db670e0da9c8c1d8d"
+    },
+    "Z_研究源码/src_s4_label_observability_20261022_v1/test_observability.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_label_observability_20261022_v1\\test_observability.py",
+      "bytes": 7886,
+      "sha256": "a89641377b314c845a06ad124964c01343ec991ba85258afcf22234e806d9196"
+    },
+    "Z_研究源码/src_s4_label_observability_finalize_20261022_v1/finalize.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_label_observability_finalize_20261022_v1\\finalize.py",
+      "bytes": 11704,
+      "sha256": "03052cfee61da23dd6e58d8e1fbd0ab5bebe31a3bbe1243a3b85fe7da1ead129"
+    },
+    "Z_研究源码/src_s4_label_observability_finalize_20261022_v1/test_finalize.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_label_observability_finalize_20261022_v1\\test_finalize.py",
+      "bytes": 4065,
+      "sha256": "1b76780d0456637d2eb5716def6db4e0ded73fbb00ff2378c554cb076c6e832c"
+    },
+    "Z_研究源码/src_s4_label_unknown_census_20261022_v1/census.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_label_unknown_census_20261022_v1\\census.py",
+      "bytes": 18646,
+      "sha256": "9afed81ec4bdc81571c7a2d1423b020b1ee15f868c6b1325a9dfe17c171d9d37"
+    },
+    "Z_研究源码/src_s4_label_unknown_census_20261022_v1/census_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_label_unknown_census_20261022_v1\\census_core.py",
+      "bytes": 5705,
+      "sha256": "069beb608a50f1b63e38ab88085ea3243906dfb4f1a848ca3ddb916485f7d918"
+    },
+    "Z_研究源码/src_s4_label_unknown_census_20261022_v1/test_census.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_label_unknown_census_20261022_v1\\test_census.py",
+      "bytes": 5727,
+      "sha256": "7f0c7cc136a4c03afcaecff8280d2af01c766eec3b67abafad481ba6037046fd"
+    },
+    "Z_研究源码/src_s4_local_motion_20261022_v1/local_motion_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_local_motion_20261022_v1\\local_motion_core.py",
+      "bytes": 17479,
+      "sha256": "852dc2ed760248522274d00ffd4572f44845f9bac282a3ee2ccf65950089ffad"
+    },
+    "Z_研究源码/src_s4_local_motion_20261022_v1/local_motion_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_local_motion_20261022_v1\\local_motion_driver.py",
+      "bytes": 28690,
+      "sha256": "794df5d40d6f1a8bcc940ed4d1b79c33db83b6f9fe64469f74635cd064cf5520"
+    },
+    "Z_研究源码/src_s4_local_motion_20261022_v1/local_scope.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_local_motion_20261022_v1\\local_scope.py",
+      "bytes": 4896,
+      "sha256": "5fd98f9fc545842a984f710eb421814f0ce2b4d74c34e0fc61d09088ceadd6cb"
+    },
+    "Z_研究源码/src_s4_local_motion_20261022_v1/test_local_motion.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_local_motion_20261022_v1\\test_local_motion.py",
+      "bytes": 12864,
+      "sha256": "13f13733502e09c3e645a94c3c2dd60079d056ab2628d5e25088bcb7effc0c8d"
+    },
+    "Z_研究源码/src_s4_local_motion_20261022_v1/test_local_scope.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_local_motion_20261022_v1\\test_local_scope.py",
+      "bytes": 9837,
+      "sha256": "b60b5dbda53d6776b830151d427b28dbab20c61dda46004faa8cb11a8f2eed22"
+    },
+    "Z_研究源码/src_s4_local_motion_20261022_v2/local_motion_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_local_motion_20261022_v2\\local_motion_core.py",
+      "bytes": 17479,
+      "sha256": "852dc2ed760248522274d00ffd4572f44845f9bac282a3ee2ccf65950089ffad"
+    },
+    "Z_研究源码/src_s4_local_motion_20261022_v2/local_motion_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_local_motion_20261022_v2\\local_motion_driver.py",
+      "bytes": 32828,
+      "sha256": "b027c217550b34752f533031cc6eb1b5abce6074db4bb123b10756c39e43b7c2"
+    },
+    "Z_研究源码/src_s4_local_motion_20261022_v2/local_scope.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_local_motion_20261022_v2\\local_scope.py",
+      "bytes": 5192,
+      "sha256": "f20e5bb77ced45b4427fe8dd69c97c781fca37e6bfd966764d01b2768aed34a1"
+    },
+    "Z_研究源码/src_s4_local_motion_20261022_v2/test_local_motion.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_local_motion_20261022_v2\\test_local_motion.py",
+      "bytes": 12864,
+      "sha256": "13f13733502e09c3e645a94c3c2dd60079d056ab2628d5e25088bcb7effc0c8d"
+    },
+    "Z_研究源码/src_s4_local_motion_20261022_v2/test_local_scope.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_local_motion_20261022_v2\\test_local_scope.py",
+      "bytes": 13254,
+      "sha256": "e3b9232d5b20ca701d6ecf02875a6b4f05dc06b96c376373eeaed102a66e4c0c"
+    },
+    "Z_研究源码/src_s4_local_motion_merge_20261022_v1/motion_merge_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_local_motion_merge_20261022_v1\\motion_merge_core.py",
+      "bytes": 5835,
+      "sha256": "63e35994e1ba698cf58e76120380b4ac5defd0db9b587cc4c5eb6e261de25e79"
+    },
+    "Z_研究源码/src_s4_local_motion_merge_20261022_v1/motion_merge_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_local_motion_merge_20261022_v1\\motion_merge_driver.py",
+      "bytes": 32069,
+      "sha256": "028ed5841966d68752a83467ccf146dc8c8db0f6b5e726fe58c840a5a032bcfc"
+    },
+    "Z_研究源码/src_s4_local_motion_merge_20261022_v1/test_motion_merge.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_local_motion_merge_20261022_v1\\test_motion_merge.py",
+      "bytes": 16644,
+      "sha256": "5a640779a389416e0426a38e5493f97f9151041bb1088d43496508e47977b88a"
+    },
+    "Z_研究源码/src_s4_lossless_storage_audit_v1/audit_storage.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_lossless_storage_audit_v1\\audit_storage.py",
+      "bytes": 8091,
+      "sha256": "f1cf3de122f3c04ddf3fd1d8a8c6f39d1f048cb391265a3343b3ac7b9dff878e"
+    },
+    "Z_研究源码/src_s4_lossless_storage_audit_v1/packing.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_lossless_storage_audit_v1\\packing.py",
+      "bytes": 3838,
+      "sha256": "49583db81d130c2a4fd6351f853be679ed6cd43405f3b8ec27edd25c95b198de"
+    },
+    "Z_研究源码/src_s4_lossless_storage_audit_v1/test_packing.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_lossless_storage_audit_v1\\test_packing.py",
+      "bytes": 2341,
+      "sha256": "52443dc077cbd3595b934eade66cc440cc33610ed4f9b7130a7949c18fa58609"
+    },
+    "Z_研究源码/src_s4_matched_factorial_20261017_2400_v1/analyze_matched.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_matched_factorial_20261017_2400_v1\\analyze_matched.py",
+      "bytes": 28186,
+      "sha256": "ee6e439ab0f955fe242e6074e24000b7ae82f4972b0d726c43dccbdf9a5c22f1"
+    },
+    "Z_研究源码/src_s4_matched_factorial_20261017_2400_v1/test_matched.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_matched_factorial_20261017_2400_v1\\test_matched.py",
+      "bytes": 5485,
+      "sha256": "b184eed9312bf4a262213a0fbe42af36303adec2a40b07417ad5d2856b1414fe"
+    },
+    "Z_研究源码/src_s4_negative_census_v1/run_census.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_negative_census_v1\\run_census.py",
+      "bytes": 23286,
+      "sha256": "6ea851534acd7b414432987aaa8995c724f8b3fb0386973a85ca6e000ccf973e"
+    },
+    "Z_研究源码/src_s4_negative_census_v1/test_census.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_negative_census_v1\\test_census.py",
+      "bytes": 2684,
+      "sha256": "7931327e987636a1e4126a75292f32096bbb15eb3120ba00c8fcc1aa1c504592"
+    },
+    "Z_研究源码/src_s4_negative_census_v2/run_census.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_negative_census_v2\\run_census.py",
+      "bytes": 24372,
+      "sha256": "6f12137bf8827507357b9008e03a63b6ddcb74746a303c8948d107f3d5ef86a9"
+    },
+    "Z_研究源码/src_s4_negative_census_v2/test_census.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_negative_census_v2\\test_census.py",
+      "bytes": 2684,
+      "sha256": "7931327e987636a1e4126a75292f32096bbb15eb3120ba00c8fcc1aa1c504592"
+    },
+    "Z_研究源码/src_s4_population_extension_20261022_v1/extension.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_population_extension_20261022_v1\\extension.py",
+      "bytes": 28062,
+      "sha256": "b2d087f44253bb7bd4c5bb049b3b2776b6ca44412e1689f2411a8c97a66bf8f8"
+    },
+    "Z_研究源码/src_s4_population_extension_20261022_v1/test_extension.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_population_extension_20261022_v1\\test_extension.py",
+      "bytes": 6613,
+      "sha256": "5d36b3bc9e4263aa797063e37fa30c1defb16411fd9a7a609f285374f094df96"
+    },
+    "Z_研究源码/src_s4_population_prefix_20261022_v1/prefix.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_population_prefix_20261022_v1\\prefix.py",
+      "bytes": 20153,
+      "sha256": "3fe9ceb2fd83d2456050d41667e672b973a3184a06bb84fa47349faa4b04d65a"
+    },
+    "Z_研究源码/src_s4_population_prefix_20261022_v1/test_prefix.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_population_prefix_20261022_v1\\test_prefix.py",
+      "bytes": 5864,
+      "sha256": "62600428c35bc6533e59df4d9cec679ef3214db625565096c3c98e178db716da"
+    },
+    "Z_研究源码/src_s4_population_recovery_20261019_v1/recovery.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_population_recovery_20261019_v1\\recovery.py",
+      "bytes": 18621,
+      "sha256": "72c8da3930b436cb73cb26466b510ed125860b1e71e63ef3f1a4f98dc9af6e62"
+    },
+    "Z_研究源码/src_s4_population_recovery_20261019_v1/test_recovery.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_population_recovery_20261019_v1\\test_recovery.py",
+      "bytes": 1647,
+      "sha256": "0ffa6d84e125d50d5c51906fe396a816f499b7390f805f09a9a4e78dc4d6482a"
+    },
+    "Z_研究源码/src_s4_positive_population_feasibility_v1/run_feasibility.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_positive_population_feasibility_v1\\run_feasibility.py",
+      "bytes": 20742,
+      "sha256": "c87f2497023a56c3056184d112b670013721fe3e93e958132b0237ad5c8a5c57"
+    },
+    "Z_研究源码/src_s4_positive_population_feasibility_v1/test_feasibility.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_positive_population_feasibility_v1\\test_feasibility.py",
+      "bytes": 2214,
+      "sha256": "8be30058a8ea81772aeda23ef0ef9e5d8b0bd7182541e88ad0b32e92d260735f"
+    },
+    "Z_研究源码/src_s4_prefix_completion_20261019_v1/completion.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_prefix_completion_20261019_v1\\completion.py",
+      "bytes": 27125,
+      "sha256": "a2cb62e3285b496696f883e5839b3ab7f00b0e573b4e0607c5c15c6be97a0ba3"
+    },
+    "Z_研究源码/src_s4_prefix_completion_20261019_v1/test_completion.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_prefix_completion_20261019_v1\\test_completion.py",
+      "bytes": 2695,
+      "sha256": "a4ce74e357beda70b92fb15434ba295beae75dd8e1c24cf6e9a2190e56aef158"
+    },
+    "Z_研究源码/src_s4_prefix_completion_20261019_v2/completion.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_prefix_completion_20261019_v2\\completion.py",
+      "bytes": 27998,
+      "sha256": "db2f0ac2048650eadf851f39358f55d690a66f12cf8aa0ea4b1049934b10c4c9"
+    },
+    "Z_研究源码/src_s4_prefix_completion_20261019_v2/test_completion.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_prefix_completion_20261019_v2\\test_completion.py",
+      "bytes": 3534,
+      "sha256": "c04119ba0ee0f688911cdab1fac943869026ed8b2eff1215ffb40d4c8cd06393"
+    },
+    "Z_研究源码/src_s4_prefix_hull_completion_20261022_v1/hull.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_prefix_hull_completion_20261022_v1\\hull.py",
+      "bytes": 6328,
+      "sha256": "bb18af0e84e2b6012a5875cf9b9f2dc88db3943084de2fd923d06161f9f856d8"
+    },
+    "Z_研究源码/src_s4_prefix_hull_completion_20261022_v1/hull_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_prefix_hull_completion_20261022_v1\\hull_driver.py",
+      "bytes": 21481,
+      "sha256": "8ba903481705ed154a94e4819cd033b13803a78a0d65b9ec80d14cac8c389be6"
+    },
+    "Z_研究源码/src_s4_prefix_hull_completion_20261022_v1/test_hull.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_prefix_hull_completion_20261022_v1\\test_hull.py",
+      "bytes": 4488,
+      "sha256": "82f81634618db4707510e6176b6a9ea23d7183e156c9cea35187e1a0fcf2c44d"
+    },
+    "Z_研究源码/src_s4_prefix_hull_completion_20261022_v1/test_hull_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_prefix_hull_completion_20261022_v1\\test_hull_driver.py",
+      "bytes": 3259,
+      "sha256": "e749b594035f83ea3286cd5d4aeeb41e8633d29e0581a79f1874adda04aefdfa"
+    },
+    "Z_研究源码/src_s4_prefix_leaf_diagnostic_20261022_v1/driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_prefix_leaf_diagnostic_20261022_v1\\driver.py",
+      "bytes": 23342,
+      "sha256": "beadf336149e7b6404523399bfc0474eefc5c96341cbdce1ef51219b762261fb"
+    },
+    "Z_研究源码/src_s4_prefix_leaf_diagnostic_20261022_v1/leaf.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_prefix_leaf_diagnostic_20261022_v1\\leaf.py",
+      "bytes": 4198,
+      "sha256": "affe50853c3c3e379662326dbe33732816edc14e349475423264e20d14dc5935"
+    },
+    "Z_研究源码/src_s4_prefix_leaf_diagnostic_20261022_v1/test_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_prefix_leaf_diagnostic_20261022_v1\\test_driver.py",
+      "bytes": 3942,
+      "sha256": "f4144f5a20158a519e5bfc71807f8b0189e41495a30cece210f00350b49ba875"
+    },
+    "Z_研究源码/src_s4_prefix_leaf_diagnostic_20261022_v1/test_leaf.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_prefix_leaf_diagnostic_20261022_v1\\test_leaf.py",
+      "bytes": 4084,
+      "sha256": "212584b851db49e8876bc64cc02dc50baa1ca25d9a967b3bced5362891590b0e"
+    },
+    "Z_研究源码/src_s4_remediation_scope_20261022_v1/remediation_scope_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_remediation_scope_20261022_v1\\remediation_scope_core.py",
+      "bytes": 6654,
+      "sha256": "198999ea564d90d3584959e205d6b5548a4ba518c5541e4418c9605ed776c04e"
+    },
+    "Z_研究源码/src_s4_remediation_scope_20261022_v1/scope_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_remediation_scope_20261022_v1\\scope_driver.py",
+      "bytes": 16085,
+      "sha256": "9493a1bc0b18d7467566b3e6d394b937c60bc11e2ab9e9ecb8104d89c088786d"
+    },
+    "Z_研究源码/src_s4_remediation_scope_20261022_v1/test_scope.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_remediation_scope_20261022_v1\\test_scope.py",
+      "bytes": 4886,
+      "sha256": "d11932e58504817a710c9e0615e282163c0dd31ead3b0132bf2f301bc691320e"
+    },
+    "Z_研究源码/src_s4_remediation_scope_20261022_v1/test_scope_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_remediation_scope_20261022_v1\\test_scope_driver.py",
+      "bytes": 2762,
+      "sha256": "77acead22421573e9638771050e4b14914ed3832f94aced7619e6dca5656775c"
+    },
+    "Z_研究源码/src_s4_repair_recovery_20261019_v1/run_recovery.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_repair_recovery_20261019_v1\\run_recovery.py",
+      "bytes": 12034,
+      "sha256": "a59c0d9900eae14faadbd0ad72d405969b16a37ece44ff56fa42f94dedb6e955"
+    },
+    "Z_研究源码/src_s4_repair_recovery_20261019_v1/test_recovery.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_repair_recovery_20261019_v1\\test_recovery.py",
+      "bytes": 1592,
+      "sha256": "e7ed570983ef11b4be1f6ad2d8bf398a642bfba9185d85d3a4007c02c1757618"
+    },
+    "Z_研究源码/src_s4_repair_review_20261019_v1/review.md": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_repair_review_20261019_v1\\review.md",
+      "bytes": 7488,
+      "sha256": "f07c9029e6a4e0b0c5a00f0df528a3a8a9e96139ffcce0db405a228a5a89542e"
+    },
+    "Z_研究源码/src_s4_repair_review_20261019_v1/run_repair.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_repair_review_20261019_v1\\run_repair.py",
+      "bytes": 38604,
+      "sha256": "24b4c52c17b88fe02bfa92c33d9261ffb9ef29c88bc44d27e783b907988466af"
+    },
+    "Z_研究源码/src_s4_repair_review_20261019_v1/runtime.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_repair_review_20261019_v1\\runtime.py",
+      "bytes": 6845,
+      "sha256": "ede8bb3040b1b6ad62095604d32a0a75bc6a942a16c836b16e766832aac4c1fe"
+    },
+    "Z_研究源码/src_s4_repair_review_20261019_v1/test_repair.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_repair_review_20261019_v1\\test_repair.py",
+      "bytes": 4468,
+      "sha256": "4d9de3384f8c93147cd6f8e08d5a9fde65fb7e4ae10c1de3ddcf2f474260efa0"
+    },
+    "Z_研究源码/src_s4_sampling_counterexamples_v1/collect_counterexamples.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_sampling_counterexamples_v1\\collect_counterexamples.py",
+      "bytes": 11292,
+      "sha256": "2b57489d8e156647796e5c39ecd077894b5dc5af6b8a5d5f06ebbf4cc420f45c"
+    },
+    "Z_研究源码/src_s4_sampling_counterexamples_v1/test_counterexamples.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_sampling_counterexamples_v1\\test_counterexamples.py",
+      "bytes": 1001,
+      "sha256": "c8fc2d04d8573d0117e0bc021122430deb843a7010628da3d01e84a2fa355c42"
+    },
+    "Z_研究源码/src_s4_sampling_diagnostic_v1/diagnose_sampling.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_sampling_diagnostic_v1\\diagnose_sampling.py",
+      "bytes": 15116,
+      "sha256": "880da94c1cdc05919f2aeb5ddaa7812048ec7122a8d4a643f06db1de3908352f"
+    },
+    "Z_研究源码/src_s4_sampling_diagnostic_v1/test_sampling.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_sampling_diagnostic_v1\\test_sampling.py",
+      "bytes": 2112,
+      "sha256": "42436b56cf0f247e662f49e662f1924015ffb3f85bc21f1e7c40ac73429e477f"
+    },
+    "Z_研究源码/src_s4_sensitivity_analysis_v2/analyze_sensitivity.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_sensitivity_analysis_v2\\analyze_sensitivity.py",
+      "bytes": 9325,
+      "sha256": "fa17e1c49e1a9f5c2acb25abacb60bd6b4c39564bd53186853bf0aa585c84bcc"
+    },
+    "Z_研究源码/src_s4_sensitivity_analysis_v2/test_analysis.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_sensitivity_analysis_v2\\test_analysis.py",
+      "bytes": 1743,
+      "sha256": "54281b79023d7672c2de30d389a1ead6231e6a3273e80988fb74941ecdc9aa90"
+    },
+    "Z_研究源码/src_s4_sensitivity_v1/run_sensitivity.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_sensitivity_v1\\run_sensitivity.py",
+      "bytes": 27505,
+      "sha256": "4161585d9f9c91644ce20538b97977af0428b41e003efb4af52b34f98ec8bc33"
+    },
+    "Z_研究源码/src_s4_sensitivity_v1/test_sensitivity.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_sensitivity_v1\\test_sensitivity.py",
+      "bytes": 4593,
+      "sha256": "752af96d56206b2e1e9d28778f085a7f33e3ac9a816739838dd5f1dfd0979763"
+    },
+    "Z_研究源码/src_s4_step_v1/run_step.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_step_v1\\run_step.py",
+      "bytes": 17224,
+      "sha256": "e77cd8fcebd7b66d9162de477c0465f26a9c8e7eba544fe2a1537d03fcb807bc"
+    },
+    "Z_研究源码/src_s4_suffix_full_merge_20261022_v1/suffix_full_merge_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_suffix_full_merge_20261022_v1\\suffix_full_merge_driver.py",
+      "bytes": 32064,
+      "sha256": "e77241e48e920d94e308e1806c2ca47801df10ba8c0a87657cd5b0c6d4e81f3f"
+    },
+    "Z_研究源码/src_s4_suffix_full_merge_20261022_v1/suffix_merge_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_suffix_full_merge_20261022_v1\\suffix_merge_core.py",
+      "bytes": 6447,
+      "sha256": "70b1f2a0974a4f551275ddcdf72be780459abb10829159fcc37a672ea94690c6"
+    },
+    "Z_研究源码/src_s4_suffix_full_merge_20261022_v1/test_suffix_full_merge_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_suffix_full_merge_20261022_v1\\test_suffix_full_merge_driver.py",
+      "bytes": 8212,
+      "sha256": "91be54f114d1cbca8e627a5fa950adc672610d8928d27a1530b43163aa17220c"
+    },
+    "Z_研究源码/src_s4_suffix_full_merge_20261022_v1/test_suffix_merge.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_suffix_full_merge_20261022_v1\\test_suffix_merge.py",
+      "bytes": 8393,
+      "sha256": "74e68763b8725114ca2d87c5deebe64b2a9a10005e1d9c34fa2921da36e967cf"
+    },
+    "Z_研究源码/src_s4_suffix_witness_search_20261022_v1/suffix_search_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_suffix_witness_search_20261022_v1\\suffix_search_core.py",
+      "bytes": 9726,
+      "sha256": "35d0d5937495115535593946d9012d41cd25ffd88f957eff321923506a8da714"
+    },
+    "Z_研究源码/src_s4_suffix_witness_search_20261022_v1/test_suffix_search.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_suffix_witness_search_20261022_v1\\test_suffix_search.py",
+      "bytes": 6364,
+      "sha256": "9e87795319d4b92d2e4e5f8f52f0f2e4b63235958e777669081d1eb884bd23b4"
+    },
+    "Z_研究源码/src_s4_suffix_witness_search_20261022_v2/search_control.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_suffix_witness_search_20261022_v2\\search_control.py",
+      "bytes": 3502,
+      "sha256": "155917c97a71f86e4210ed39ef33607c72a2eec5dc653a961a92928f45360f7a"
+    },
+    "Z_研究源码/src_s4_suffix_witness_search_20261022_v2/search_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_suffix_witness_search_20261022_v2\\search_core.py",
+      "bytes": 17305,
+      "sha256": "a45e1996f6e6bd39ae547e16477012360daf3eef46339fc3a9d514d94dab9c91"
+    },
+    "Z_研究源码/src_s4_suffix_witness_search_20261022_v2/test_search_adapter.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_suffix_witness_search_20261022_v2\\test_search_adapter.py",
+      "bytes": 3321,
+      "sha256": "9ed42c02a1e02ab1c698eb26e21a9c28a4b20607e6e30b0d5f10a1c1404ef058"
+    },
+    "Z_研究源码/src_s4_suffix_witness_search_20261022_v2/test_search_control.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_suffix_witness_search_20261022_v2\\test_search_control.py",
+      "bytes": 6432,
+      "sha256": "3dc58b240ebd2e82f4d64a8412fa68ca89edfb27f8e5c1eb25f0328a7492a84e"
+    },
+    "Z_研究源码/src_s4_suffix_witness_search_20261022_v3/search_control.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_suffix_witness_search_20261022_v3\\search_control.py",
+      "bytes": 3502,
+      "sha256": "155917c97a71f86e4210ed39ef33607c72a2eec5dc653a961a92928f45360f7a"
+    },
+    "Z_研究源码/src_s4_suffix_witness_search_20261022_v3/search_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_suffix_witness_search_20261022_v3\\search_core.py",
+      "bytes": 17305,
+      "sha256": "a45e1996f6e6bd39ae547e16477012360daf3eef46339fc3a9d514d94dab9c91"
+    },
+    "Z_研究源码/src_s4_suffix_witness_search_20261022_v3/suffix_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_suffix_witness_search_20261022_v3\\suffix_driver.py",
+      "bytes": 32681,
+      "sha256": "275de7e48b142ad0bae9ad379be063f7c4777ade81b6cab8a913f02048f917be"
+    },
+    "Z_研究源码/src_s4_suffix_witness_search_20261022_v3/test_search_adapter.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_suffix_witness_search_20261022_v3\\test_search_adapter.py",
+      "bytes": 3321,
+      "sha256": "9ed42c02a1e02ab1c698eb26e21a9c28a4b20607e6e30b0d5f10a1c1404ef058"
+    },
+    "Z_研究源码/src_s4_suffix_witness_search_20261022_v3/test_search_control.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_suffix_witness_search_20261022_v3\\test_search_control.py",
+      "bytes": 6432,
+      "sha256": "3dc58b240ebd2e82f4d64a8412fa68ca89edfb27f8e5c1eb25f0328a7492a84e"
+    },
+    "Z_研究源码/src_s4_suffix_witness_search_20261022_v3/test_suffix_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_suffix_witness_search_20261022_v3\\test_suffix_driver.py",
+      "bytes": 13014,
+      "sha256": "bf45835d34e5a08c6a95088fc2244d30760f851276d7fb9636b137af1b93454e"
+    },
+    "Z_研究源码/src_s4_temporal_analysis_v1/analyze_trace.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_temporal_analysis_v1\\analyze_trace.py",
+      "bytes": 9803,
+      "sha256": "e5fcaea2de6c21884fba3e561911234eb6cf96c8cfd582beb1028a8c2d70ce40"
+    },
+    "Z_研究源码/src_s4_temporal_analysis_v1/test_analysis.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_temporal_analysis_v1\\test_analysis.py",
+      "bytes": 1297,
+      "sha256": "ea5b9c3f3d45e4277a978c7bb71f1a5ea48e7336b9cef97d0b2c3b369d252618"
+    },
+    "Z_研究源码/src_s4_temporal_trace_v1/run_trace.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_temporal_trace_v1\\run_trace.py",
+      "bytes": 27769,
+      "sha256": "e8da0e763ad5a0a7b4b0c3083fb4c66593323e1592bc09cedc97c0df047475b3"
+    },
+    "Z_研究源码/src_s4_temporal_trace_v1/test_trace.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_temporal_trace_v1\\test_trace.py",
+      "bytes": 2842,
+      "sha256": "9bc114f62818f28c1a2cbd4ef21de8a7be2d8f5631212a1b7b6b719a549046ad"
+    },
+    "Z_研究源码/src_s4_temporal_trace_v2/run_trace.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_temporal_trace_v2\\run_trace.py",
+      "bytes": 28042,
+      "sha256": "bf3e15fd0f05ea68f933fa908aad493580633c8867b2f5722886d7901bdb4405"
+    },
+    "Z_研究源码/src_s4_temporal_trace_v2/test_trace.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_temporal_trace_v2\\test_trace.py",
+      "bytes": 4306,
+      "sha256": "df14d0d1e1f313c56a0fe7edf56c17fd1a8547fe657e47da9c14842f9f213b8b"
+    },
+    "Z_研究源码/src_s4_truth_remediation_20261019_v1/contact_primitives.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_truth_remediation_20261019_v1\\contact_primitives.py",
+      "bytes": 4965,
+      "sha256": "d06ffc62335afa3f70863821691b51bb226b553e7b5de92e35373f0b723a2e3b"
+    },
+    "Z_研究源码/src_s4_truth_remediation_20261019_v1/impact_registry.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_truth_remediation_20261019_v1\\impact_registry.py",
+      "bytes": 11122,
+      "sha256": "9c0c9ff3aae418d6021788cc0824509353c5a9e45702c2128eebcb9c174d5972"
+    },
+    "Z_研究源码/src_s4_truth_remediation_20261019_v1/interval_contact.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_truth_remediation_20261019_v1\\interval_contact.py",
+      "bytes": 5247,
+      "sha256": "8ea6205439cc31aa80a7f5a6fe2c12902eb2ef6fe1776024a7e4d166755e75d9"
+    },
+    "Z_研究源码/src_s4_truth_remediation_20261019_v1/resolve_impact.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_truth_remediation_20261019_v1\\resolve_impact.py",
+      "bytes": 6729,
+      "sha256": "a34886412c5b19b08792e0b40b88c8ce6da6143ab26498f382bda87501e9b8f5"
+    },
+    "Z_研究源码/src_s4_truth_remediation_20261019_v1/test_contact_primitives.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_truth_remediation_20261019_v1\\test_contact_primitives.py",
+      "bytes": 2986,
+      "sha256": "504197fe9c7dc8fb3a75862edbcfef3b040f6467f41a4771c11ded4015fa26dc"
+    },
+    "Z_研究源码/src_s4_truth_remediation_20261019_v1/test_interval_contact.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_truth_remediation_20261019_v1\\test_interval_contact.py",
+      "bytes": 3065,
+      "sha256": "6534e5595f0d009923dc0e1ded22c8192570a047581ff3a1010e68d157419775"
+    },
+    "Z_研究源码/src_s4_unwitnessed_probe_20261022_v1/probe_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_unwitnessed_probe_20261022_v1\\probe_core.py",
+      "bytes": 16001,
+      "sha256": "4e541ddc29b65e1930bc270b852d3006826181c46570e9b46127188f4e851399"
+    },
+    "Z_研究源码/src_s4_unwitnessed_probe_20261022_v1/probe_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_unwitnessed_probe_20261022_v1\\probe_driver.py",
+      "bytes": 32038,
+      "sha256": "73cbc27ec830958e44fd4b9d681aa148119c318dfc4678af6bda4aa6639b62ef"
+    },
+    "Z_研究源码/src_s4_unwitnessed_probe_20261022_v1/test_probe.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_unwitnessed_probe_20261022_v1\\test_probe.py",
+      "bytes": 14744,
+      "sha256": "ed0cf9a3210fb631a73191f9cb1627c159eb8f49474b4ae11bd288bfa998fb4b"
+    },
+    "Z_研究源码/src_s4_unwitnessed_probe_20261022_v1/test_probe_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_unwitnessed_probe_20261022_v1\\test_probe_driver.py",
+      "bytes": 15739,
+      "sha256": "da8def60cfecc71674e6c6bcc014dd40e6f3086930fedbf796286f4778be3dd3"
+    },
+    "Z_研究源码/src_s4_unwitnessed_probe_merge_20261022_v1/probe_merge_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_unwitnessed_probe_merge_20261022_v1\\probe_merge_core.py",
+      "bytes": 6429,
+      "sha256": "d8f32ebc63b31cafd9ae7b64d78392f8bed07d1604c4a2e244f051d0afbef284"
+    },
+    "Z_研究源码/src_s4_unwitnessed_probe_merge_20261022_v1/probe_merge_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_unwitnessed_probe_merge_20261022_v1\\probe_merge_driver.py",
+      "bytes": 31833,
+      "sha256": "aad1524c5c6e0b8b330412ff3af8526b7a6bcf4d5fe6c28b45ab79c1a88804f4"
+    },
+    "Z_研究源码/src_s4_unwitnessed_probe_merge_20261022_v1/test_probe_merge.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_unwitnessed_probe_merge_20261022_v1\\test_probe_merge.py",
+      "bytes": 8181,
+      "sha256": "beac5efd3f721831f3da2e8c05ddda22dd9c27bc8b232af61c2a48d050710188"
+    },
+    "Z_研究源码/src_s4_upper_merge_20261022_v1/merge_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_upper_merge_20261022_v1\\merge_core.py",
+      "bytes": 4294,
+      "sha256": "da7c381c3ff02acda2110f5add44052bfd6a4b84038f26afb2f2abcf4cdd2ea5"
+    },
+    "Z_研究源码/src_s4_upper_merge_20261022_v1/test_upper_merge.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_upper_merge_20261022_v1\\test_upper_merge.py",
+      "bytes": 12154,
+      "sha256": "4470cedca10f06eb20d386dc27768d7da2acd4826f6c1f8668c7d2c22655d999"
+    },
+    "Z_研究源码/src_s4_upper_merge_20261022_v1/upper_merge_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_upper_merge_20261022_v1\\upper_merge_driver.py",
+      "bytes": 28293,
+      "sha256": "9559cfb45d2648ddd14c6e1a61645609e758af384c29c4f9c68119a022303b9a"
+    },
+    "Z_研究源码/src_s4_v1/evaluation_scored.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_v1\\evaluation_scored.py",
+      "bytes": 13373,
+      "sha256": "cd33553eb165562f61f1ea3a681892d62522327e4e0bb396729932a4312baa87"
+    },
+    "Z_研究源码/src_s4_v1/pipeline.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_v1\\pipeline.py",
+      "bytes": 34290,
+      "sha256": "164a95af179072231e28f75150ab621770fa2fc75c55b33c3bdf80d3610cbfa2"
+    },
+    "Z_研究源码/src_s4_v1/state_estimation.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_v1\\state_estimation.py",
+      "bytes": 3261,
+      "sha256": "8095d68667a49f1c475a1630f367b1a3a9d55b555c9c33274112cb98f118c552"
+    },
+    "Z_研究源码/src_s4_witness_upper_20261022_v1/test_upper.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_witness_upper_20261022_v1\\test_upper.py",
+      "bytes": 10202,
+      "sha256": "2b6f8614f3e1327d312103db26d2feedad51b120bc2a5c9c00f4e94906a9d8cf"
+    },
+    "Z_研究源码/src_s4_witness_upper_20261022_v1/upper_core.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_witness_upper_20261022_v1\\upper_core.py",
+      "bytes": 9336,
+      "sha256": "dc82e14b5b4957975ad7010744ff0eac92628a551de40f89ecc8960c28526ca6"
+    },
+    "Z_研究源码/src_s4_witness_upper_20261022_v1/upper_driver.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_witness_upper_20261022_v1\\upper_driver.py",
+      "bytes": 23482,
+      "sha256": "dd564314600501411e082283ff42748057c65f1117b883897171af46620a9923"
+    },
+    "Z_研究源码/src_v3/audit.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_v3\\audit.py",
+      "bytes": 4385,
+      "sha256": "1684523b0111e9fcac48a30be518337c88eb2471fb18d751d8b04bcdf400a4d4"
+    },
+    "Z_研究源码/src_v3/common.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_v3\\common.py",
+      "bytes": 3284,
+      "sha256": "84feb27e702b16aa6a67a1c32425e397bf731b2d1c1e7f21a2ff2dd44dfa51dd"
+    },
+    "Z_研究源码/src_v3/evaluation.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_v3\\evaluation.py",
+      "bytes": 13057,
+      "sha256": "6dc2eaf32e792d13a68f587e636224d4f9e492a1bd6af0bb6a08b5aab072c61b"
+    },
+    "Z_研究源码/src_v3/foundation.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_v3\\foundation.py",
+      "bytes": 9122,
+      "sha256": "883de006edcb70c5c51d547b62847aa3e2645bb695c036421388c5dcb62af686"
+    },
+    "Z_研究源码/src_v3/geometry.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_v3\\geometry.py",
+      "bytes": 8382,
+      "sha256": "4b5eb49d29220195d2643536e76e2a41d353895450e81ca3e5e1bbfec19cca2e"
+    },
+    "Z_研究源码/src_v3/observations.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_v3\\observations.py",
+      "bytes": 2480,
+      "sha256": "64abe7a64cdcd22cdbe3f261cca21f3d9463dd9846305cc5c85b6108d9336755"
+    },
+    "Z_研究源码/src_v3/prediction.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_v3\\prediction.py",
+      "bytes": 3518,
+      "sha256": "6943cfa855e42c25e9c0064edfa7da3c364076608e2772fa7a3a39c04b5b334a"
+    },
+    "Z_研究源码/src_v3/reporting.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_v3\\reporting.py",
+      "bytes": 3690,
+      "sha256": "885ba9459c690dee4d7a97230892ed750f45447494085c653900ea689b7c85a6"
+    },
+    "Z_研究源码/src_v3/run_night.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_v3\\run_night.py",
+      "bytes": 19023,
+      "sha256": "c0b66354a82fd05c519c1c8836c2090721b440396f9360f8ad95bf43dc82246b"
+    },
+    "Z_研究源码/src_v3/scenarios.py": {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_v3\\scenarios.py",
+      "bytes": 5255,
+      "sha256": "8f8f90b65e0d479ceebf28216331b83eaef181faa0aeadfd3c50b57b00362b77"
+    }
+  }
+}

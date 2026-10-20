@@ -1,0 +1,32 @@
+{
+  "version": "20261022-0000-v7-prefix-hull-completion",
+  "deadline": "2026-10-22T00:00:00+08:00",
+  "authorization": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_truth_authorization_v1\\authorization.json",
+  "run_directory": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_prefix_hull_completion_v1",
+  "protocol": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_prefix_hull_completion_20261022_0000_v1.json",
+  "entrypoint": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_prefix_hull_completion_20261022_v1\\hull_driver.py",
+  "stage_status": "prepared_not_admitted",
+  "research_cap_bytes": 34359738368,
+  "historical_ledger": {
+    "formal": 2238,
+    "accepted_diagnostics": 66,
+    "numeric_records": 2304
+  },
+  "corrected_truth_revalidated_prediction_jobs": 0,
+  "prior_generated_baseline_files": 41,
+  "planned_baseline_files": 57,
+  "ordered_remaining": [
+    "exact reuse all 23 groups / 41 original-order projections; generate missing 16 only",
+    "independently close all 39 groups / 57 baseline conditional assets",
+    "new-version independent first-time full-point prefix audit all 27 new groups; prove reuse of 12 accepted groups",
+    "full coarse/fine populations, negative controls, counterexamples and every unknown point",
+    "all affected prediction scores/reports, or exact unaffected proof; original-simulation verification"
+  ],
+  "all_label_dependent_claims_withheld": true,
+  "S4_overall_complete": false,
+  "M2_allowed": false,
+  "S5_allowed": false,
+  "no_completion_claim_from_plan": true,
+  "next_action": "full required prefix hull/chord proof all and only remaining prefix unknowns; no forced clearance",
+  "strict_all_point_prefix_gate_passed": false
+}

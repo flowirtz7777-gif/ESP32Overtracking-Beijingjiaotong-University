@@ -1,0 +1,24 @@
+{
+  "version": "20261022-0000-v43-full-remediation-scope-lineage-closed",
+  "deadline": "2026-10-22T00:00:00+08:00",
+  "run_directory": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_remediation_scope_v1",
+  "protocol": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_remediation_scope_20261022_0000_v1.json",
+  "entrypoint": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_remediation_scope_20261022_v1\\scope_driver.py",
+  "stage_status": "lineage_closed_not_truth_or_score_repair",
+  "scientific_acceptance_exists": true,
+  "truth_asset_promotion_allowed": false,
+  "corrected_truth_revalidated_prediction_jobs": 0,
+  "S4_overall_complete": false,
+  "M2_allowed": false,
+  "S5_allowed": false,
+  "next_action": "complete every expanded/coarse/fine/negative/control coordinate input reconstruction; conditional truth and every affected score/report repair",
+  "accounting": {
+    "output_file_records_not_experiments": 6609,
+    "packed_expanded_population_records": 27,
+    "packed_full_coordinate_descriptor_links_resolved": 9,
+    "packed_full_coordinate_descriptor_links_unresolved": 18,
+    "corrected_labels_accepted": 0,
+    "corrected_prediction_scores_accepted": 0,
+    "raw_prediction_reuse_proven": 0
+  }
+}

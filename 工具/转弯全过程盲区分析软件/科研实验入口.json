@@ -1,0 +1,13 @@
+{
+  "status": "storage_guard_saved_v3_S3_partial",
+  "date": "2026-10-14",
+  "active_directory": "科研实验_2026-10-14",
+  "active_plan": "科研实验_2026-10-14/plan.json",
+  "active_document": "科研实验_2026-10-14/实验总计划.md",
+  "legacy_directory": "自动化批量实验",
+  "archive_verification": "实验封存/2026-10-14/verification.json",
+  "resume_legacy_experiments": false,
+  "new_experiments_started": true,
+  "active_runner": "科研实验_2026-10-14/src_v3/run_night.py",
+  "active_checkpoint": "科研实验_2026-10-14/runs/overnight_20261014_v3/checkpoint.json"
+}

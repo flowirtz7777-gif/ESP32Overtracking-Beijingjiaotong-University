@@ -1,0 +1,17 @@
+{
+  "time": "2026-10-20T17:25:40+00:00",
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "test_closed_eps_support_and_late_boundary (test_paired_interval_metric_core_v1.Tests.test_closed_eps_support_and_late_boundary) ... ok\ntest_complete_boundary_partition_matches_dense_independent_samples (test_paired_interval_metric_core_v1.Tests.test_complete_boundary_partition_matches_dense_independent_samples) ... ok\ntest_contact_repair_must_reconstruct_valid (test_paired_interval_metric_core_v1.Tests.test_contact_repair_must_reconstruct_valid) ... ok\ntest_edge_and_front_superset_preserves_exclusion (test_paired_interval_metric_core_v1.Tests.test_edge_and_front_superset_preserves_exclusion) ... ok\ntest_first_raw_or_saved_valid_alone_rejected (test_paired_interval_metric_core_v1.Tests.test_first_raw_or_saved_valid_alone_rejected) ... ok\ntest_invalid_domains_and_nonfinite_times_rejected (test_paired_interval_metric_core_v1.Tests.test_invalid_domains_and_nonfinite_times_rejected) ... ok\ntest_negative_numerator_variable_denominator (test_paired_interval_metric_core_v1.Tests.test_negative_numerator_variable_denominator) ... ok\ntest_positive_sign_favors_B (test_paired_interval_metric_core_v1.Tests.test_positive_sign_favors_B) ... ok\ntest_ratio_matches_full_cartesian_exhaustion_300_small_populations (test_paired_interval_metric_core_v1.Tests.test_ratio_matches_full_cartesian_exhaustion_300_small_populations) ... ok\ntest_same_time_distinct_horizons (test_paired_interval_metric_core_v1.Tests.test_same_time_distinct_horizons) ... ok\ntest_shared_time_identical_methods_never_independently_plus_minus_one (test_paired_interval_metric_core_v1.Tests.test_shared_time_identical_methods_never_independently_plus_minus_one) ... ok\ntest_undefined_denominator_preserved_and_ranking_withheld (test_paired_interval_metric_core_v1.Tests.test_undefined_denominator_preserved_and_ranking_withheld) ... ok\ntest_weighted_correlated_duplicate_point (test_paired_interval_metric_core_v1.Tests.test_weighted_correlated_duplicate_point) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 0.039s\n\nOK\n",
+  "source_sha256": {
+    "paired_interval_metric_core_v1.py": "dfb0236ffa6d0c276934321975c3e783b0e864cea9be65d53625126ae7276ebd",
+    "test_paired_interval_metric_core_v1.py": "da44afc136a8c437f435d73ce64c692c580373298057c25e61875d5768e2b16b"
+  },
+  "data_scope": "pure synthetic only; 13 tests including300 full Cartesian small-population comparisons",
+  "metric_scope": "paired RIGHT insufficient percentage only; not all confusion/FP/quantile metrics",
+  "frozen_scientific_source": false,
+  "real_data_adapter_implemented": false,
+  "real_prediction_reuse_accepted": false,
+  "real_scores_accepted": false,
+  "scientific_worker_inflight_not_touched": true
+}

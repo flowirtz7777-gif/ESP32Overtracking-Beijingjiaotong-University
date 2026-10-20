@@ -1,0 +1,61 @@
+{
+  "version": "2026-10-13-ten-rounds-v2",
+  "status": "planned_not_started",
+  "document": "未来十轮实验规划_2026-10-13.md",
+  "completed_rounds": [1, 2, 3],
+  "future_rounds": [
+    { "round": 4, "topic": "EXIT W horizon", "primary_values_s": [2, 2.5, 3, 3.5, 4, 5] },
+    { "round": 5, "topic": "steering trend strength", "primary_gains": [0, 0.25, 0.5, 0.75, 1, 1.25, 1.5] },
+    { "round": 6, "topic": "minimum safety margin", "primary_distances_m": [0, 0.02, 0.05, 0.1, 0.15, 0.2, 0.3] },
+    { "round": 7, "topic": "causal filtering and derivative estimation" },
+    { "round": 8, "topic": "timestamp alignment and delay compensation", "fixed_delay_s": [0, 0.05, 0.1, 0.2] },
+    { "round": 9, "topic": "confirmation release and graded alarms" },
+    { "round": 10, "topic": "damped finite-time and bounded second-order prediction" },
+    { "round": 11, "topic": "phase-adaptive strategy" },
+    { "round": 12, "topic": "joint algorithm optimization", "maximum_configurations_per_batch": 144 },
+    { "round": 13, "topic": "frozen independent final validation", "minimum_fresh_scenarios": 8 }
+  ],
+  "target_sampling": {
+    "count_is_not_hard_objective": true,
+    "development_count_guidance": [20000, 35000],
+    "candidate_validation_count_guidance": [35000, 70000],
+    "count_selected_by": ["valid_pool_capacity", "density_convergence", "measured_compute_and_storage_budget"],
+    "same_targets_across_algorithms_per_case": true,
+    "duplicate_points_allowed": false,
+    "far_negative_filler_allowed": false,
+    "history_is_preserved": true
+  },
+  "selection": {
+    "primary_contact_edge": "RIGHT",
+    "ignored_contact_edge": "FRONT",
+    "keep_interior_points": true,
+    "tolerance_m": 0.05,
+    "reaction_threshold_s": 1,
+    "warmup_ignore_s": 2,
+    "research_final_window_miss_right_max": 0,
+    "research_final_no_confirmation_before_contact_right_max": 0,
+    "exploratory_worst_point_fp_pct_max": 5,
+    "exploratory_worst_frame_fpr_pct_max": 0.5,
+    "budgets_are_not_engineering_certification": true,
+    "infeasible_results_must_be_reported": true,
+    "historical_data_is_not_fresh_final_test": true,
+    "final_test_retuning_allowed": false
+  },
+  "progression": {
+    "automatic_when_representative": true,
+    "negative_or_saturated_result_can_advance": true,
+    "foundation_failure_stops_search_for_repair": true,
+    "consecutive_local_batches_without_material_gain": 2,
+    "material_right_improvement_reference_pp": 0.2,
+    "resolved_reproducible_miss_mechanism_is_material": true
+  },
+  "supersedes": {
+    "path": "steering_experiment_round4/plan_spec.json",
+    "fields": ["execution_priority", "fixed_formal_target_count"],
+    "previous_plan_kept_unmodified": true
+  },
+  "execution_implemented": false,
+  "new_formal_experiments_started": false,
+  "default_algorithm_changed": false,
+  "physical_validation_completed": false
+}

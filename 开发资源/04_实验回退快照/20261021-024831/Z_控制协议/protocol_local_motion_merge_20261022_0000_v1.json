@@ -1,0 +1,36 @@
+{
+  "version": "whole-combined-scope-local-motion-edge-only-merge-v1",
+  "deadline": "2026-10-22T00:00:00+08:00",
+  "parent_merged_assets": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_upper_merge_v1",
+  "local_candidates": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_local_motion_v2",
+  "candidate_hashes": {
+    "checkpoint.json": "1ea29e8694295d702d67c59183c6c116f8c4b5606b88de19f2967a41cfd65f35",
+    "acceptance.json": "501320f640e803e912d308e958c719e3effb42c4177a6c789660c9e60d56d13b",
+    "close_receipt.json": "a009ace210d161014bde477822babcb18a7119d8b2483a6d95e8e7748a127265",
+    "source_manifest.json": "c9e76e6ed9086bf8200769066aa9e78e051a393513c2f1bb1e1ddc170a02c795"
+  },
+  "selection": "all22985 current combined-scope group points on both paths; all45970 rows, not only147 certified",
+  "only_mutable_fields": [
+    "edge_certain",
+    "possible_edge_codes"
+  ],
+  "both_scientific_endpoints_and_all_other_fields_byte_exact": true,
+  "all78path_blocks_and114parent_diagnostic_projections_exactly_bound_and_retained": true,
+  "full_population": "all39 groups/all57 full original-order double-path projections/all3360000 point-file records",
+  "new_masks": "local_motion_selected/certified/changed; old budget and upper provenance exact",
+  "independent_close": "every scalar replacement/combination/conflict/classification/discrepancy/projection/packbits padding",
+  "all_unwitnessed_contact_initial_leaf_diagnostics_exact_no_contact_repair": true,
+  "full_census_recomputed_no_old_unknown_mask_or_valid_counts": true,
+  "no_geometry_label_kernel_ODE_prediction_or_score_recomputed": true,
+  "complete_accepted_prefix_proofs_exactly_reused_no_proven_exclusions_recomputed": true,
+  "truth_asset_promotion_allowed": false,
+  "corrected_truth_revalidated_prediction_jobs": 0,
+  "not_global_identifiability_formal_ODE_or_real_vehicle_certificate": true,
+  "workers": 1,
+  "inflight": 1,
+  "run_cap_bytes": 1073741824,
+  "reservation_bytes": 939524096,
+  "total_E_Z_cap_bytes": 34359738368,
+  "Z_reserve_bytes": 3221225472,
+  "submitted_block": "one complete merged group including all original-order projections and census; drain at cutoff"
+}

@@ -1,0 +1,32 @@
+{
+  "version": "full-output-and-expanded-population-metadata-lineage-v1",
+  "deadline": "2026-10-22T00:00:00+08:00",
+  "original_registry": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\truth_label_dependency_resolution_20261019_v1\\dependency_resolution.json",
+  "original_inventory": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\truth_label_impact_registry_20261019_v1\\impact_inventory.json",
+  "output_records_not_experiments": 6609,
+  "packed_population_records": 27,
+  "current_complete_truth_parent": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_edge_cover_merge_v1",
+  "parent_hashes": {
+    "checkpoint.json": "b718044369b2636110b17e8bbc0d5fa79d9211d808432a9e67335dff0793297b",
+    "acceptance.json": "364e3c486ab665649c710cb68400f99e9de79aaa7f359ddea39713d15e66e45e",
+    "close_receipt.json": "0d1f7a462179926a8df1ec42d61c4e408f265af0aa4f8bdb20b4838ef8193d51",
+    "source_manifest.json": "23b7be8b8d855ff9bb56728603a4c5786836e82415cbd028348369361515cb87"
+  },
+  "scope": "every6609 original E/Z frozen output report, signed point-output file, configuration, inherited input and every registered target/derived JSON descriptor",
+  "no_real_array_contents_read": true,
+  "no_relabeling_no_prediction_no_training_no_score_recomputation": true,
+  "descriptor_link_is_not_complete_coordinate_reconstruction_or_corrected_truth": true,
+  "all_unknowns_and_unresolved_links_preserved": true,
+  "no_unsupported_input_or_prediction_reuse_claim": true,
+  "independent_close": "independently reread/hash every complete registry report/output and descriptor, exact full-row recomputation/conservation",
+  "snapshot": "RAM deterministic ZIP of every individually signed source; complete byte-exact readback before freeze and during verify",
+  "resources": "every research write RAM-encoded/count and fresh full E/Z scandir through unchanged runtime",
+  "workers": 1,
+  "inflight": 1,
+  "block_records": 128,
+  "run_cap_bytes": 536870912,
+  "reservation_bytes": 469762048,
+  "total_E_Z_cap_bytes": 34359738368,
+  "Z_physical_reserve_bytes": 3221225472,
+  "truth_asset_promotion_allowed": false
+}

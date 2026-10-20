@@ -1,0 +1,29 @@
+{
+  "version": "geometry-defined-positive-RIGHT-population-feasibility-v1-20261015",
+  "scope": "geometry_label_and_resource_feasibility_only_no_prediction_or_parameter_search",
+  "partition": "development_v2_n70000",
+  "cases": [
+    {"id": "v2_r2_symmetric", "expected_stratum_capacity": [132735, 1848457, 507648]},
+    {"id": "v3_r4_fast_return", "expected_stratum_capacity": [118689, 2013817, 563510]},
+    {"id": "v4_r8_fast_entry", "expected_stratum_capacity": [167923, 2150090, 633822]}
+  ],
+  "grid_spacing_m": 0.0125,
+  "grid_phase": [0, 0],
+  "contact_tolerance_m": 0.05,
+  "near_outer_distance_m": 0.5,
+  "boundary_band_m": 0.2,
+  "buffer_quad_segs": 32,
+  "time_start_s": 2,
+  "time_end_offset_s": 3,
+  "temporal_union_leaf_size": 16,
+  "target_selection_uses_truth_geometry_and_labels_only": true,
+  "prediction_outputs_must_not_be_read_for_selecting_population": true,
+  "preserve_original_280000_as_prefix_then_append_new_eligible_RIGHT_cells": true,
+  "new_input_storage": "lossless_delta_xy_group_contact_time_contact_index_edge_front_ignored_plus_frozen_original_target_reference",
+  "population_is_finite_raster_not_real_traffic_or_continuous_geometry_guarantee": true,
+  "old_density_failure_not_overridden": true,
+  "raw_storage_upper_bound_point_bytes_per_prediction": 96,
+  "hypothetical_predictions_per_case": 6,
+  "new_predictions_in_this_stage": 0,
+  "execution": {"deadline_local": "2026-10-15T18:00:00+08:00", "workers": 1, "blas_threads": 1, "reserve_bytes": 3221225472, "experiment_budget_bytes": 12884901888, "new_run_budget_bytes": 33554432}
+}

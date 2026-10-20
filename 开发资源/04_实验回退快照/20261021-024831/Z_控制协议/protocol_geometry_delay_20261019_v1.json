@@ -1,0 +1,370 @@
+{
+  "version": "geometry-delay-repair-review-20261019-v1",
+  "scope": "new geometry admissibility plus corrected-score deterministic-delay diagnosis; not algorithm optimization",
+  "deadline_local": "2026-10-19T08:00:00+08:00",
+  "geometry_specs": [
+    {
+      "id": "geo_a050_symmetric",
+      "alpha_peak_abs_deg": 5.0,
+      "template": "symmetric",
+      "v_B_mps": 3.0,
+      "base_rate_deg_s": 4.0,
+      "entry_rate_abs_deg_s": 4.0,
+      "return_rate_abs_deg_s": 4.0,
+      "turn_heading_change_deg": 90.0
+    },
+    {
+      "id": "geo_a050_fast_entry",
+      "alpha_peak_abs_deg": 5.0,
+      "template": "fast_entry",
+      "v_B_mps": 3.0,
+      "base_rate_deg_s": 4.0,
+      "entry_rate_abs_deg_s": 8.0,
+      "return_rate_abs_deg_s": 4.0,
+      "turn_heading_change_deg": 90.0
+    },
+    {
+      "id": "geo_a050_fast_return",
+      "alpha_peak_abs_deg": 5.0,
+      "template": "fast_return",
+      "v_B_mps": 3.0,
+      "base_rate_deg_s": 4.0,
+      "entry_rate_abs_deg_s": 4.0,
+      "return_rate_abs_deg_s": 8.0,
+      "turn_heading_change_deg": 90.0
+    },
+    {
+      "id": "geo_a125_symmetric",
+      "alpha_peak_abs_deg": 12.5,
+      "template": "symmetric",
+      "v_B_mps": 3.0,
+      "base_rate_deg_s": 4.0,
+      "entry_rate_abs_deg_s": 4.0,
+      "return_rate_abs_deg_s": 4.0,
+      "turn_heading_change_deg": 90.0
+    },
+    {
+      "id": "geo_a125_fast_entry",
+      "alpha_peak_abs_deg": 12.5,
+      "template": "fast_entry",
+      "v_B_mps": 3.0,
+      "base_rate_deg_s": 4.0,
+      "entry_rate_abs_deg_s": 8.0,
+      "return_rate_abs_deg_s": 4.0,
+      "turn_heading_change_deg": 90.0
+    },
+    {
+      "id": "geo_a125_fast_return",
+      "alpha_peak_abs_deg": 12.5,
+      "template": "fast_return",
+      "v_B_mps": 3.0,
+      "base_rate_deg_s": 4.0,
+      "entry_rate_abs_deg_s": 4.0,
+      "return_rate_abs_deg_s": 8.0,
+      "turn_heading_change_deg": 90.0
+    },
+    {
+      "id": "geo_a150_symmetric",
+      "alpha_peak_abs_deg": 15.0,
+      "template": "symmetric",
+      "v_B_mps": 3.0,
+      "base_rate_deg_s": 4.0,
+      "entry_rate_abs_deg_s": 4.0,
+      "return_rate_abs_deg_s": 4.0,
+      "turn_heading_change_deg": 90.0
+    },
+    {
+      "id": "geo_a150_fast_entry",
+      "alpha_peak_abs_deg": 15.0,
+      "template": "fast_entry",
+      "v_B_mps": 3.0,
+      "base_rate_deg_s": 4.0,
+      "entry_rate_abs_deg_s": 8.0,
+      "return_rate_abs_deg_s": 4.0,
+      "turn_heading_change_deg": 90.0
+    },
+    {
+      "id": "geo_a150_fast_return",
+      "alpha_peak_abs_deg": 15.0,
+      "template": "fast_return",
+      "v_B_mps": 3.0,
+      "base_rate_deg_s": 4.0,
+      "entry_rate_abs_deg_s": 4.0,
+      "return_rate_abs_deg_s": 8.0,
+      "turn_heading_change_deg": 90.0
+    },
+    {
+      "id": "geo_a200_symmetric",
+      "alpha_peak_abs_deg": 20.0,
+      "template": "symmetric",
+      "v_B_mps": 3.0,
+      "base_rate_deg_s": 4.0,
+      "entry_rate_abs_deg_s": 4.0,
+      "return_rate_abs_deg_s": 4.0,
+      "turn_heading_change_deg": 90.0
+    },
+    {
+      "id": "geo_a200_fast_entry",
+      "alpha_peak_abs_deg": 20.0,
+      "template": "fast_entry",
+      "v_B_mps": 3.0,
+      "base_rate_deg_s": 4.0,
+      "entry_rate_abs_deg_s": 8.0,
+      "return_rate_abs_deg_s": 4.0,
+      "turn_heading_change_deg": 90.0
+    },
+    {
+      "id": "geo_a200_fast_return",
+      "alpha_peak_abs_deg": 20.0,
+      "template": "fast_return",
+      "v_B_mps": 3.0,
+      "base_rate_deg_s": 4.0,
+      "entry_rate_abs_deg_s": 4.0,
+      "return_rate_abs_deg_s": 8.0,
+      "turn_heading_change_deg": 90.0
+    }
+  ],
+  "old_10_degree_reference_controls": "reuse frozen profiles only; no reintegration or rerun",
+  "new_geometry_phi_limit_deg": 45,
+  "phi_limit_origin": "existing simulation design boundary, not calibrated mechanical limit",
+  "truth_phi_clamping": false,
+  "geometry_steps_s": [
+    0.005,
+    0.0025
+  ],
+  "independent_solver": {
+    "method": "DOP853",
+    "rtol": 1e-10,
+    "atol": 1e-12,
+    "max_step_s": 0.02
+  },
+  "geometry_edge_error_limit_m": 0.005,
+  "geometry_is_not_new_contact_label_or_density_acceptance": true,
+  "delay_jobs": [
+    {
+      "id": "S2__v3_r4_fast_entry__damped_d1000__delay200__age_hold",
+      "method": {
+        "mode": "damped_linear",
+        "gain": 1.0,
+        "decay_s": 1,
+        "acceleration_duration_s": 0.25,
+        "history_s": 0.2,
+        "alpha_limit_deg": 30.0,
+        "rate_limit_deg_s": 32.0,
+        "acceleration_limit_deg_s2": 160.0,
+        "dt": 0.02
+      },
+      "processor": "age_hold",
+      "condition": {
+        "id": "delay200",
+        "delay_s": 0.2,
+        "noise_level": 0
+      },
+      "old_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\overnight_20261014_v3\\jobs\\S2__v3_r4_fast_entry__damped_d1000__delay200__age_hold",
+      "old_configuration_sha256": "ad45e668466af47a9c051b1bc625b27998b27eb34745ae32ea0bc079f4925a6d",
+      "old_report_sha256": "f3a56c05eb79f1bf83fe5701c7461ddc4742ea6d55a20e59ce12d4fb8c87219e"
+    },
+    {
+      "id": "S2__v3_r4_fast_entry__damped_d1000__delay200__alpha_lp",
+      "method": {
+        "mode": "damped_linear",
+        "gain": 1.0,
+        "decay_s": 1,
+        "acceleration_duration_s": 0.25,
+        "history_s": 0.2,
+        "alpha_limit_deg": 30.0,
+        "rate_limit_deg_s": 32.0,
+        "acceleration_limit_deg_s2": 160.0,
+        "dt": 0.02
+      },
+      "processor": "alpha_lp",
+      "condition": {
+        "id": "delay200",
+        "delay_s": 0.2,
+        "noise_level": 0
+      },
+      "old_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\overnight_20261014_v3\\jobs\\S2__v3_r4_fast_entry__damped_d1000__delay200__alpha_lp",
+      "old_configuration_sha256": "014f794dd44715cb88c2133a89795a11ff139bc763456b112e2333ff5e3c0b96",
+      "old_report_sha256": "1996285e79f9d992d54164b2307fc88653f445d7ed03ae5d558ef5a2989c501d"
+    },
+    {
+      "id": "S2__v3_r4_fast_entry__damped_d1000__delay200__raw",
+      "method": {
+        "mode": "damped_linear",
+        "gain": 1.0,
+        "decay_s": 1,
+        "acceleration_duration_s": 0.25,
+        "history_s": 0.2,
+        "alpha_limit_deg": 30.0,
+        "rate_limit_deg_s": 32.0,
+        "acceleration_limit_deg_s2": 160.0,
+        "dt": 0.02
+      },
+      "processor": "raw",
+      "condition": {
+        "id": "delay200",
+        "delay_s": 0.2,
+        "noise_level": 0
+      },
+      "old_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\overnight_20261014_v3\\jobs\\S2__v3_r4_fast_entry__damped_d1000__delay200__raw",
+      "old_configuration_sha256": "320498c6e71797d4cede7008dc912915aec192fb2523b23904ef944cbd68cb4a",
+      "old_report_sha256": "6e1ea38ccaf6a29a6c13e6816edd402cbad11e9052b9b6c4f17269ed515ceced"
+    },
+    {
+      "id": "S2__v3_r4_fast_entry__hold__delay200__age_hold",
+      "method": {
+        "mode": "hold",
+        "gain": 1.0,
+        "decay_s": 0.5,
+        "acceleration_duration_s": 0.25,
+        "history_s": 0.2,
+        "alpha_limit_deg": 30.0,
+        "rate_limit_deg_s": 32.0,
+        "acceleration_limit_deg_s2": 160.0,
+        "dt": 0.02
+      },
+      "processor": "age_hold",
+      "condition": {
+        "id": "delay200",
+        "delay_s": 0.2,
+        "noise_level": 0
+      },
+      "old_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\overnight_20261014_v3\\jobs\\S2__v3_r4_fast_entry__hold__delay200__age_hold",
+      "old_configuration_sha256": "76c502bebe1d14e328234f18a11b0a28d7b9fe5e3ce8f4643ea74e3cc26e0b65",
+      "old_report_sha256": "92a07af8a55ffdc5bc03de49920e2c4e0fbb927a820bb732a61e9a938e782ce7"
+    },
+    {
+      "id": "S2__v3_r4_fast_entry__hold__delay200__alpha_lp",
+      "method": {
+        "mode": "hold",
+        "gain": 1.0,
+        "decay_s": 0.5,
+        "acceleration_duration_s": 0.25,
+        "history_s": 0.2,
+        "alpha_limit_deg": 30.0,
+        "rate_limit_deg_s": 32.0,
+        "acceleration_limit_deg_s2": 160.0,
+        "dt": 0.02
+      },
+      "processor": "alpha_lp",
+      "condition": {
+        "id": "delay200",
+        "delay_s": 0.2,
+        "noise_level": 0
+      },
+      "old_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\overnight_20261014_v3\\jobs\\S2__v3_r4_fast_entry__hold__delay200__alpha_lp",
+      "old_configuration_sha256": "3966d357bdc215534e3cfb05ea01885df447b3aba6e07adf13b2464a868ecd25",
+      "old_report_sha256": "b0ff884776cb04add46c2c1e0c720f4add27339bef72e48ccfe49008e2ae588f"
+    },
+    {
+      "id": "S2__v3_r4_fast_entry__hold__delay200__raw",
+      "method": {
+        "mode": "hold",
+        "gain": 1.0,
+        "decay_s": 0.5,
+        "acceleration_duration_s": 0.25,
+        "history_s": 0.2,
+        "alpha_limit_deg": 30.0,
+        "rate_limit_deg_s": 32.0,
+        "acceleration_limit_deg_s2": 160.0,
+        "dt": 0.02
+      },
+      "processor": "raw",
+      "condition": {
+        "id": "delay200",
+        "delay_s": 0.2,
+        "noise_level": 0
+      },
+      "old_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\overnight_20261014_v3\\jobs\\S2__v3_r4_fast_entry__hold__delay200__raw",
+      "old_configuration_sha256": "e230c094b93871c8666816a2735a354aefc8908b784d6a4f6bc8653eecb5b495",
+      "old_report_sha256": "49d3a0b3da0d513d868aa593ebac79b4f3a48fa1fc3ac4bb1b6811064acf3b45"
+    },
+    {
+      "id": "S2__v3_r4_fast_entry__linear_g050__delay200__age_hold",
+      "method": {
+        "mode": "linear",
+        "gain": 0.5,
+        "decay_s": 0.5,
+        "acceleration_duration_s": 0.25,
+        "history_s": 0.2,
+        "alpha_limit_deg": 30.0,
+        "rate_limit_deg_s": 32.0,
+        "acceleration_limit_deg_s2": 160.0,
+        "dt": 0.02
+      },
+      "processor": "age_hold",
+      "condition": {
+        "id": "delay200",
+        "delay_s": 0.2,
+        "noise_level": 0
+      },
+      "old_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\overnight_20261014_v3\\jobs\\S2__v3_r4_fast_entry__linear_g050__delay200__age_hold",
+      "old_configuration_sha256": "0963ff4bce1020904d1600717efda6cb06fcc3be89454a40ea845ebb2e5171ef",
+      "old_report_sha256": "2430d00c8ccc02cead2aa3da834f8d2c59afcfbad8c99fb0cdafe39cb59e6fe4"
+    },
+    {
+      "id": "S2__v3_r4_fast_entry__linear_g050__delay200__alpha_lp",
+      "method": {
+        "mode": "linear",
+        "gain": 0.5,
+        "decay_s": 0.5,
+        "acceleration_duration_s": 0.25,
+        "history_s": 0.2,
+        "alpha_limit_deg": 30.0,
+        "rate_limit_deg_s": 32.0,
+        "acceleration_limit_deg_s2": 160.0,
+        "dt": 0.02
+      },
+      "processor": "alpha_lp",
+      "condition": {
+        "id": "delay200",
+        "delay_s": 0.2,
+        "noise_level": 0
+      },
+      "old_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\overnight_20261014_v3\\jobs\\S2__v3_r4_fast_entry__linear_g050__delay200__alpha_lp",
+      "old_configuration_sha256": "2dd405ba65e7bb715f682f6fe98f0f765ea389de37c38c4bac4dd74f6ef1f211",
+      "old_report_sha256": "f85dc3aff2e905e291ac4528e0aaec4c4193b40d2b3268bc028393bca8d71dff"
+    },
+    {
+      "id": "S2__v3_r4_fast_entry__linear_g050__delay200__raw",
+      "method": {
+        "mode": "linear",
+        "gain": 0.5,
+        "decay_s": 0.5,
+        "acceleration_duration_s": 0.25,
+        "history_s": 0.2,
+        "alpha_limit_deg": 30.0,
+        "rate_limit_deg_s": 32.0,
+        "acceleration_limit_deg_s2": 160.0,
+        "dt": 0.02
+      },
+      "processor": "raw",
+      "condition": {
+        "id": "delay200",
+        "delay_s": 0.2,
+        "noise_level": 0
+      },
+      "old_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\overnight_20261014_v3\\jobs\\S2__v3_r4_fast_entry__linear_g050__delay200__raw",
+      "old_configuration_sha256": "fd2a0e13cee3415cb2aaecf0f7dac76911b5c2e88de64371b69ff819bd6c5bae",
+      "old_report_sha256": "6a94b614931621821a92482d97d35f798d46a3508477f70fe74a38485e7a6c01"
+    }
+  ],
+  "score_start_s": 2.0,
+  "score_end": "last recorded time minus 3s",
+  "variant": {
+    "exit_W": 2.0,
+    "margin": 0.0,
+    "confirmation": 0.0
+  },
+  "witness_rule": "all new RIGHT window-miss/no-before points plus all original S2 RIGHT window-miss points",
+  "all_late_and_miss_indices": "lossless full-length packbits with index hashes",
+  "no_parameter_search": true,
+  "M2_allowed": false,
+  "S5_allowed": false,
+  "global_or_vehicle_safety_claim": false,
+  "whole_batch_reservation_bytes": 167772160,
+  "run_cap_bytes": 268435456,
+  "workers": 1,
+  "inflight": 1,
+  "BLAS_threads": 1
+}

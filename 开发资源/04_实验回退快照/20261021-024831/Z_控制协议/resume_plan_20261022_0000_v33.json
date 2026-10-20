@@ -1,0 +1,69 @@
+{
+  "version": "20261022-0000-v33-local-motion-full-merge-census-closed",
+  "deadline": "2026-10-22T00:00:00+08:00",
+  "authorization": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_truth_authorization_v1\\authorization.json",
+  "run_directory": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_unwitnessed_probe_merge_v1",
+  "entrypoint": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_unwitnessed_probe_merge_20261022_v1\\probe_merge_driver.py",
+  "protocol": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_unwitnessed_probe_merge_20261022_0000_v1.json",
+  "parent_merged_assets": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_local_motion_merge_v1",
+  "accepted_probes": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_unwitnessed_probe_v1",
+  "parent_complete_census": {
+    "dataset_files": 57,
+    "geometry_groups": 39,
+    "point_file_records": 3360000,
+    "combined_status_unknown_point_file_records": 13956,
+    "complete_census_point_file_records": 26878,
+    "complete_census_group_unique_points": 22857,
+    "reason_point_file_records_nonexclusive": {
+      "combined_status_unknown": 13956,
+      "both_witnessed_combined_edge_not_singleton": 12922,
+      "contact_existence_not_decided_by_both_paths": 13956,
+      "oldpath_possible_without_witness": 13956,
+      "independent_possible_without_witness": 13710,
+      "oldpath_budget": 0,
+      "independent_budget": 0,
+      "model_conflict": 0,
+      "time_interval_conflict": 0,
+      "edge_set_conflict": 0,
+      "oldpath_witnessed_edge_uncertain": 12922,
+      "independent_witnessed_edge_uncertain": 12645
+    }
+  },
+  "stage_status": "full_scope_unwitnessed_probe_merge_merge_all57projections_and_census_closed_not_global_truth",
+  "scientific_acceptance_exists": true,
+  "truth_asset_promotion_allowed": false,
+  "corrected_truth_revalidated_prediction_jobs": 0,
+  "all_label_dependent_claims_withheld": true,
+  "S4_overall_complete": false,
+  "M2_allowed": false,
+  "S5_allowed": false,
+  "ordered_remaining": [
+    "full merge all57projections fresh census independent close",
+    "all remaining contact/time/edge identifiability and full coarse/fine populations/controls",
+    "every affected score/report repair or exact unaffected proof"
+  ],
+  "next_action": "all remaining contact/time/edge identifiability, full coarse/fine populations and controls, every affected score/report",
+  "accounting": {
+    "dataset_files": 57,
+    "geometry_groups": 39,
+    "point_file_records": 3360000,
+    "combined_status_unknown_point_file_records": 13955,
+    "complete_census_point_file_records": 26878,
+    "complete_census_group_unique_points": 22857,
+    "reason_point_file_records_nonexclusive": {
+      "combined_status_unknown": 13955,
+      "both_witnessed_combined_edge_not_singleton": 12923,
+      "contact_existence_not_decided_by_both_paths": 13955,
+      "oldpath_possible_without_witness": 13955,
+      "independent_possible_without_witness": 13707,
+      "oldpath_budget": 0,
+      "independent_budget": 0,
+      "model_conflict": 0,
+      "time_interval_conflict": 0,
+      "edge_set_conflict": 0,
+      "oldpath_witnessed_edge_uncertain": 12923,
+      "independent_witnessed_edge_uncertain": 12645
+    }
+  },
+  "strict_merged_all_point_prefix_coverage_passed": true
+}

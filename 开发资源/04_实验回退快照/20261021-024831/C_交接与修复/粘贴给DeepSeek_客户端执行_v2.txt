@@ -1,0 +1,10 @@
+请在这个既有ZCode会话中，作为执行者继续Codex已经确定的计划，严格按下面文件推进，不重新设计研究路线：
+C:\Users\Admin\.codex\thread-recovery\20261020-context-recovery-v1\CLIENT_EXECUTION_HANDOFF_20261021_v2.md
+
+这是我从原客户端发起的新一次一小时试运行授权：先完成文件规定的真实P0核验；P0通过并取得工具真实exit0后，以新窗口文件记录的时刻开始一小时，不超过原总截止北京时间2026-10-22 00:00。旧CLI控制器和窗口不要重启、重置或延长；已有本次新窗口则不得重复开始。Codex科研定时任务保持PAUSED，不与它并行提交任务。
+
+先读取上述文件、最新STATUS.md，以及client-handoff-repairs-evidence-20261021-v2.json。通过客户端正常权限通道运行client_readonly_admission_check_v3.py --origin zcode-client --start-client-hour；所有shell workdir=C:\Users\Admin，Python必须精确原路径-X utf8 -B。若权限拒绝或缺进程/mutex证据，第一次就停并报告，不能换成零写入、旧PID或MSYS /proc后宣布通过，也不要改yolo或绕过审批。
+
+P0→P1完整坐标/来源链的全数组新冻结与独立闭合→P2接入修正评分核心和完整报警序列→P3首批真实评分独立验收→P4交付；禁止把P1推迟到推广阶段。复用新候选paired_interval_metric_core_v2.py、scored_trace_adapter_core_v1.py及client_execution_contract_v2.py，先核来源和33项合成证据，再走完整真实准入。旧trace“完全等价”的判断已被负例误报和资格筛选两个反例推翻，不能沿用。
+
+E只读、32GiB/3GiB、单worker/一在途、逐写RAM计量+fresh全量scandir、冻结资产和失败全保留、旧入口禁重跑、活动CP不读/hash、科学阈值和训练门全部保持。不要只写建议或重复宣告准备完成；必须交付实际代码、测试、源/输入输出签名、真实退出码与独立验收，或清楚的单项阻塞。到点停止新任务和close，已提交块自然退出后交接，不自动恢复Codex。

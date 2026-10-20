@@ -1,0 +1,228 @@
+{
+  "version": "new-geometry-contact-label-step-20261019-v1",
+  "deadline_local": "2026-10-19T08:00:00+08:00",
+  "specs": [
+    {
+      "id": "geo_a050_symmetric",
+      "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a050_symmetric",
+      "result_sha256": "3d9e4b091ae04feeb0427959176fc7175116b4bf101bc5e01c07d166558be495",
+      "reference_sha256": "bac32572b1188c28b7d07bae40bc23d8a865fbcfebbc5554e7562fde5ac0f899",
+      "spec": {
+        "id": "geo_a050_symmetric",
+        "alpha_peak_abs_deg": 5.0,
+        "template": "symmetric",
+        "v_B_mps": 3.0,
+        "base_rate_deg_s": 4.0,
+        "entry_rate_abs_deg_s": 4.0,
+        "return_rate_abs_deg_s": 4.0,
+        "turn_heading_change_deg": 90.0
+      }
+    },
+    {
+      "id": "geo_a050_fast_entry",
+      "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a050_fast_entry",
+      "result_sha256": "59d6e04baad6e57e92d706a173cc93ec51cc1e31bec1d906e1c05d8c7491d514",
+      "reference_sha256": "b1d6f99e125730a140ce86e65f7ce606df6acfebcb9ab67cb1bfa1ac457df4d9",
+      "spec": {
+        "id": "geo_a050_fast_entry",
+        "alpha_peak_abs_deg": 5.0,
+        "template": "fast_entry",
+        "v_B_mps": 3.0,
+        "base_rate_deg_s": 4.0,
+        "entry_rate_abs_deg_s": 8.0,
+        "return_rate_abs_deg_s": 4.0,
+        "turn_heading_change_deg": 90.0
+      }
+    },
+    {
+      "id": "geo_a050_fast_return",
+      "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a050_fast_return",
+      "result_sha256": "57b79f7c12a2f502a0fb419412068d5c5a8b89584008cb5d89464446292b4d31",
+      "reference_sha256": "5990ec0ed676892b9b557ae7abeba7bb6d4cf92c8a38fc1c59ca6d6addde9dae",
+      "spec": {
+        "id": "geo_a050_fast_return",
+        "alpha_peak_abs_deg": 5.0,
+        "template": "fast_return",
+        "v_B_mps": 3.0,
+        "base_rate_deg_s": 4.0,
+        "entry_rate_abs_deg_s": 4.0,
+        "return_rate_abs_deg_s": 8.0,
+        "turn_heading_change_deg": 90.0
+      }
+    },
+    {
+      "id": "geo_a125_symmetric",
+      "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a125_symmetric",
+      "result_sha256": "93e4836c27c874c01b214391d94cfc2bb7f80efea489b3ca1771e612c8a2d6c4",
+      "reference_sha256": "1cbde494992ea2a82d012a0d190535a68901974e457c1ca02c95b78c5f409611",
+      "spec": {
+        "id": "geo_a125_symmetric",
+        "alpha_peak_abs_deg": 12.5,
+        "template": "symmetric",
+        "v_B_mps": 3.0,
+        "base_rate_deg_s": 4.0,
+        "entry_rate_abs_deg_s": 4.0,
+        "return_rate_abs_deg_s": 4.0,
+        "turn_heading_change_deg": 90.0
+      }
+    },
+    {
+      "id": "geo_a125_fast_entry",
+      "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a125_fast_entry",
+      "result_sha256": "a9977bbd5b9d448d30cb702f61d86c872aa2ab3c4d04a01bd0cf0521fe81a886",
+      "reference_sha256": "5c39bf2436c44db4db318e7c3ccbb7cb0f7101fb1ceb6f90e2cde09ddc448c19",
+      "spec": {
+        "id": "geo_a125_fast_entry",
+        "alpha_peak_abs_deg": 12.5,
+        "template": "fast_entry",
+        "v_B_mps": 3.0,
+        "base_rate_deg_s": 4.0,
+        "entry_rate_abs_deg_s": 8.0,
+        "return_rate_abs_deg_s": 4.0,
+        "turn_heading_change_deg": 90.0
+      }
+    },
+    {
+      "id": "geo_a125_fast_return",
+      "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a125_fast_return",
+      "result_sha256": "137b02c5cd27bdd379f5af5c75bb9216fd2efa0ccc5dbdbb83aa503962a839eb",
+      "reference_sha256": "949e4325519b301600a24a05865c2e4087fa3601c03fe1ecc22250e114555bff",
+      "spec": {
+        "id": "geo_a125_fast_return",
+        "alpha_peak_abs_deg": 12.5,
+        "template": "fast_return",
+        "v_B_mps": 3.0,
+        "base_rate_deg_s": 4.0,
+        "entry_rate_abs_deg_s": 4.0,
+        "return_rate_abs_deg_s": 8.0,
+        "turn_heading_change_deg": 90.0
+      }
+    },
+    {
+      "id": "geo_a150_symmetric",
+      "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a150_symmetric",
+      "result_sha256": "f3186a0ba6759384422d6172b16284378a12abec591a05b7552ce34a4b91ac60",
+      "reference_sha256": "5d1c2e77cbe0046ecf1d82643fa50392b64f636ee004e0dbf5f9d57bd0d4f024",
+      "spec": {
+        "id": "geo_a150_symmetric",
+        "alpha_peak_abs_deg": 15.0,
+        "template": "symmetric",
+        "v_B_mps": 3.0,
+        "base_rate_deg_s": 4.0,
+        "entry_rate_abs_deg_s": 4.0,
+        "return_rate_abs_deg_s": 4.0,
+        "turn_heading_change_deg": 90.0
+      }
+    },
+    {
+      "id": "geo_a150_fast_entry",
+      "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a150_fast_entry",
+      "result_sha256": "0a3e9a6042f6686f62688d51860f898e2b4dffb954f7f46e2322ce62986fe00b",
+      "reference_sha256": "c1079eaba255790a6c7660dde4a359cc186659c43e738ec18f8358da72f89a2c",
+      "spec": {
+        "id": "geo_a150_fast_entry",
+        "alpha_peak_abs_deg": 15.0,
+        "template": "fast_entry",
+        "v_B_mps": 3.0,
+        "base_rate_deg_s": 4.0,
+        "entry_rate_abs_deg_s": 8.0,
+        "return_rate_abs_deg_s": 4.0,
+        "turn_heading_change_deg": 90.0
+      }
+    },
+    {
+      "id": "geo_a150_fast_return",
+      "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a150_fast_return",
+      "result_sha256": "4b873570a6022f422088c02f7a6a87dc0a2db9af88115c60f8bc7159477a2264",
+      "reference_sha256": "990b3a80a745b70aab68fb9b5d36ca97fc87c29c32d8eb8137d4a17d79dd9a96",
+      "spec": {
+        "id": "geo_a150_fast_return",
+        "alpha_peak_abs_deg": 15.0,
+        "template": "fast_return",
+        "v_B_mps": 3.0,
+        "base_rate_deg_s": 4.0,
+        "entry_rate_abs_deg_s": 4.0,
+        "return_rate_abs_deg_s": 8.0,
+        "turn_heading_change_deg": 90.0
+      }
+    },
+    {
+      "id": "geo_a200_symmetric",
+      "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a200_symmetric",
+      "result_sha256": "d004abb1a55c46d6897b594bd65e97b55d55901e58d104e153b8287246db600e",
+      "reference_sha256": "c915fe9ed7c6aa589ea8354eac0476bf2131e467fcc1673ec0bc7d5465cd38eb",
+      "spec": {
+        "id": "geo_a200_symmetric",
+        "alpha_peak_abs_deg": 20.0,
+        "template": "symmetric",
+        "v_B_mps": 3.0,
+        "base_rate_deg_s": 4.0,
+        "entry_rate_abs_deg_s": 4.0,
+        "return_rate_abs_deg_s": 4.0,
+        "turn_heading_change_deg": 90.0
+      }
+    },
+    {
+      "id": "geo_a200_fast_entry",
+      "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a200_fast_entry",
+      "result_sha256": "bf2137226b3c81b4078acde3730907c3c12bfec3c521d61cc2bef2993ff915e8",
+      "reference_sha256": "0d9e24b2c9fa428acd7257435190eebaa9867d13733a10e7ba6218a95789b47e",
+      "spec": {
+        "id": "geo_a200_fast_entry",
+        "alpha_peak_abs_deg": 20.0,
+        "template": "fast_entry",
+        "v_B_mps": 3.0,
+        "base_rate_deg_s": 4.0,
+        "entry_rate_abs_deg_s": 8.0,
+        "return_rate_abs_deg_s": 4.0,
+        "turn_heading_change_deg": 90.0
+      }
+    },
+    {
+      "id": "geo_a200_fast_return",
+      "reference_folder": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_geometry_delay_recovery_v1\\geometry\\geo_a200_fast_return",
+      "result_sha256": "793037dc65b0defec327411a88694083b91f9db8c247b52a08923c4b9e4f3e7c",
+      "reference_sha256": "5ef3b838f995c3ef01230745dc19804424e66987936e6a282cf503ca03e31325",
+      "spec": {
+        "id": "geo_a200_fast_return",
+        "alpha_peak_abs_deg": 20.0,
+        "template": "fast_return",
+        "v_B_mps": 3.0,
+        "base_rate_deg_s": 4.0,
+        "entry_rate_abs_deg_s": 4.0,
+        "return_rate_abs_deg_s": 8.0,
+        "turn_heading_change_deg": 90.0
+      }
+    }
+  ],
+  "dependency_acceptance_sha256": "48a79b3c8061c66931ad2eb7758e50605295f4c05f175232597a7189ee28119a",
+  "target_pool_spacing_m": 0.025,
+  "new_maximum_unique_target_count": 140000,
+  "nested_counts": [
+    70000,
+    140000
+  ],
+  "minimum_unique_targets": 20000,
+  "contact_tolerance_m": 0.05,
+  "reference_steps_s": [
+    0.005,
+    0.0025
+  ],
+  "all_target_contact_and_RIGHT_and_front_membership_step_check": true,
+  "contact_time_change_max_s": 0.005,
+  "truth_phi_limit_deg": 45,
+  "phi_clamping": false,
+  "rejected_geometry_cases_preserved_in_dependency": true,
+  "all_admitted_geometries_included_no_performance_selection": true,
+  "no_predictions_no_new_algorithm_ranking": true,
+  "new_accepted_prediction_jobs": 0,
+  "density_prediction_effect_gate_not_yet_executed": true,
+  "source_signature_uses_actual_files_not_old_foundation_src_path": true,
+  "source_policy_override": "new process local RUN/RUN_CAP and fresh scandir tree enumeration only",
+  "workers": 1,
+  "inflight": 1,
+  "run_cap_bytes": 536870912,
+  "whole_batch_reservation_bytes": 268435456,
+  "whole_E_Z_cap_bytes": 17179869184,
+  "Z_physical_reserve_bytes": 3221225472
+}

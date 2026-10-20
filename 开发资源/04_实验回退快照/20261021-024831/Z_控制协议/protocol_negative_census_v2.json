@@ -1,0 +1,26 @@
+{
+  "version": "S4-near-negative-finite-census-v2-20261015",
+  "scope": "extend_registered_density_diagnostics_not_algorithm_optimization_or_gate_override",
+  "cases": [
+    {"id": "v2_r2_symmetric", "negative_census_count": 507648, "full_target_count": 694315},
+    {"id": "v3_r4_fast_return", "negative_census_count": 563510, "full_target_count": 750177}
+  ],
+  "partition": "development_v2_n70000",
+  "conditions": ["clean", "noise100_s1"],
+  "core_ids": ["damped_g1250", "linear_g0625", "hold"],
+  "contact_tolerance_m": 0.05,
+  "grid_spacing_m": 0.0125,
+  "negative_outer_buffer_m": 0.5,
+  "buffer_quad_segs": 32,
+  "original_280000_points_and_all_outputs_must_match": true,
+  "target_balance_scope": "negative_population_diagnostic_only_no_aggregate_ranking_across_changed_stratum_weights",
+  "sampling_diagnostic_sha256": "1b37e07c1ba45b8ed79ccc14ed0896813d8b75ac48a343c69aa2d75ca2a4983c",
+  "dependency_checkpoint_sha256": "c4293fe59af4a1b0f952bd5f98a6abd9daa119ad4c79ec4972ce9a9288029189",
+  "dependency_acceptance_sha256": "67e704422087382751aa68f9435224d4163447a6ff7f735b2eaf27227d96802b",
+  "prior_single_case_census_checkpoint_sha256": "ccaf5bcd4888197967abe7fc8d2e25c8342227e02728216f42f416d66e7151ac",
+  "prediction_jobs": 12,
+  "previous_completed_new_scoring_jobs": 2226,
+  "new_predictions_completed_this_cycle_before_run": 150,
+  "storage_schema": "lossless_delta_for_new_negative_points_plus_frozen_280000_reference",
+  "execution": {"deadline_local": "2026-10-15T18:00:00+08:00", "workers": 6, "submission_window_jobs": 6, "reserve_bytes": 3221225472, "experiment_budget_bytes": 12884901888, "new_run_budget_bytes": 134217728, "minimum_free_research_headroom_before_submit_bytes": 67108864}
+}

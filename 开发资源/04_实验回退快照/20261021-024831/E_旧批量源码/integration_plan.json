@@ -1,0 +1,13 @@
+{
+  "cfg_files": ["../CFG配置/default_cfg.json", "../CFG配置/exit_window_test_cfg.json"],
+  "scenarios": [
+    {
+      "id": "pid_020804",
+      "csv": "../../alpha一阶保持仿真/scenarios/pid_scenario_20260530_020804.csv",
+      "targets_csv": "../目标点CSV/mixed_targets_20261013_011540_873.csv"
+    }
+  ],
+  "output_dir": "results",
+  "headless": true,
+  "timeout_ms": 180000
+}

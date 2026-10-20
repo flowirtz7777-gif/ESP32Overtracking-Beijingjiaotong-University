@@ -1,0 +1,10 @@
+{
+  "status": "archived",
+  "user_date": "2026-10-14",
+  "archive_directory": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\实验封存\\2026-10-14",
+  "verification_path": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\实验封存\\2026-10-14\\verification.json",
+  "archive_sha256": "a7607409b67df7e0c5d8a6fed84ccf69349e5dc381e843e345b62df159bb9d9e",
+  "original_files_readonly": true,
+  "no_legacy_resume": true,
+  "new_plan": "E:\\大创内轮差项目\\工具\\转弯全过程盲区分析软件\\科研实验_2026-10-14\\plan.json"
+}

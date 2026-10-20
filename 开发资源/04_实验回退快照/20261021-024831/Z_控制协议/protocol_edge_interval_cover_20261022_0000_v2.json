@@ -1,0 +1,37 @@
+{
+  "version": "full-current-scope-complete-bracket-edge-cover-v1",
+  "deadline": "2026-10-22T00:00:00+08:00",
+  "parent_merged_assets": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_suffix_full_merge_v1",
+  "parent_hashes": {
+    "checkpoint.json": "47a120b10059e406fdd9e29a7d6fb9ef6a46b4c38d61129ce93f78262e0c253d",
+    "acceptance.json": "f1f494e65e974e1bad8faf5cbeab44a497f0d8a05e241e67b3e4965891202067",
+    "close_receipt.json": "7888837f4b558f1a51c302840d6c151a1ac755aaa1e10edfbd7ec5542f70926d",
+    "source_manifest.json": "d80b03d11eca7738a5484c307f4a24d8bfc718c2872706a3f2ec25f70fc29887"
+  },
+  "scope": "all22857 current group-scope points, both45714 path records, all57/114 original-order projections",
+  "selection": "all finite witnessed upper, edge uncertain; retain all unwitnessed/initial/leaf diagnostics",
+  "tree": "original full lower/upper; deterministic chronological midpoint subdivision, at most64 node queries per point",
+  "leaf_proof": "same original nominal code on every covering leaf, full local motion plus original empirical error and1e-12, original1mm corner rule",
+  "resolution_s": 1e-07,
+  "maximum_queries": 64,
+  "scientific_lower_and_upper_and_all_contact_evidence_byte_exact": true,
+  "budget_resolution_different_code_open_frontier": "keep original uncertainty and every field; never a negative or impossibility proof",
+  "mutable_fields": [
+    "edge_certain",
+    "possible_edge_codes"
+  ],
+  "new_budgets_separate_original_budget_masks_exact": true,
+  "independent_close": "all scalar GEOS probes; independent exact tree/frontier/budget/padding replay, full original-segment Decimal70 and all114 projections",
+  "no_global_physical_identifiability_or_noncontact_or_real_vehicle_certificate": true,
+  "no_proven_excluded_points_recomputed": true,
+  "truth_asset_promotion_allowed": false,
+  "corrected_truth_revalidated_prediction_jobs": 0,
+  "all_remaining_unknowns_expanded_populations_controls_scores_still_required": true,
+  "workers": 1,
+  "inflight": 1,
+  "run_cap_bytes": 4294967296,
+  "reservation_bytes": 3758096384,
+  "total_E_Z_cap_bytes": 34359738368,
+  "Z_reserve_bytes": 3221225472,
+  "submitted_block": "one complete scope path and every original-order projection, drain at cutoff"
+}

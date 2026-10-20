@@ -1,0 +1,25 @@
+{
+  "version": "20261019-1200-truth-continuation-v2",
+  "authorization": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_1200_truth_authorization_v2\\authorization.json",
+  "deadline": "2026-10-19T12:00:00+08:00",
+  "previous_plan": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261019_deadline_close_v2.json",
+  "priority": "independently audit every generated baseline asset and first-contact prefix before further propagation",
+  "ordered_remaining": [
+    "new-version independent audit of all 12 generated groups / 30 baseline assets",
+    "new-run exact reuse of proven unchanged complete outputs and remaining 27 baseline files",
+    "complete coarse/fine populations and negative controls/counterexamples",
+    "every affected score/report correction or proof of exact unaffected reuse"
+  ],
+  "stage_status": "authorization_registered_no_new_worker_or_protocol_admitted_yet",
+  "historical_baseline": {
+    "formal": 2238,
+    "accepted_diagnostics": 66,
+    "numeric_records": 2304
+  },
+  "new_formal": 0,
+  "new_accepted_diagnostics": 0,
+  "corrected_truth_revalidated_prediction_jobs": 0,
+  "scientific_remediation_complete": false,
+  "deadline_policy": "No new scientific/input-build/independent-analysis submissions after noon; submitted block drains, then files and execution evidence only",
+  "no_claim_of_completion_from_plan": true
+}

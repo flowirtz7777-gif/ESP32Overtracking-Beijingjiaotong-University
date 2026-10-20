@@ -1,0 +1,8 @@
+{
+  "name": "human-driving-simulator",
+  "version": "0.1.0",
+  "private": true,
+  "main": "human-desktop-main.js",
+  "scripts": { "human:dev": "electron ." },
+  "devDependencies": { "electron": "^37.2.0" }
+}

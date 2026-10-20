@@ -1,0 +1,26 @@
+{
+  "version": "20261019-2400-v3-population-recovery",
+  "deadline": "2026-10-20T00:00:00+08:00",
+  "authorization": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_2400_truth_authorization_v2\\authorization.json",
+  "previous_plan": "resume_plan_20261019_2400_v2.json",
+  "protocol": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_population_recovery_20261019_2400_v1.json",
+  "run_directory": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261019_2400_population_recovery_v1",
+  "entrypoint": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_population_recovery_20261019_v1\\recovery.py",
+  "stage_status": "prepared_not_admitted",
+  "scientific_remediation_complete": false,
+  "new_formal": 0,
+  "new_accepted_diagnostics": 0,
+  "corrected_truth_revalidated_prediction_jobs": 0,
+  "ordered_remaining": [
+    "complete last prefix group and refine every unresolved prefix; independent close",
+    "remaining 27 baseline assets in a separately admitted version, with proved exact reuse",
+    "full coarse/fine populations, controls and counterexamples",
+    "all affected scores/reports or exact unaffected proofs"
+  ],
+  "M2_allowed": false,
+  "S5_allowed": false,
+  "no_completion_claim_from_plan": true,
+  "strict_all_point_prefix_gate_passed": true,
+  "next_action": "actual full input admission, exact reuse 12 groups, generate missing groups only",
+  "new_group_prefix_independent_audit_pending": true
+}

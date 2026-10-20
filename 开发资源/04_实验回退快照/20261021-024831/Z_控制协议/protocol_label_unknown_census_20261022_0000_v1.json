@@ -1,0 +1,43 @@
+{
+  "version": "all-conditional-unknown-label-census-v1",
+  "deadline": "2026-10-22T00:00:00+08:00",
+  "parent": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_prefix_hull_completion_v1",
+  "parent_hashes": {
+    "checkpoint.json": "2ac921c29da864a404fe9c3e7ffd92aac7ea9aa33c7882af45a2586861a56525",
+    "acceptance.json": "0b034b3d6b8e7b30471620df88a6c82bab11049fa158c4c131dec307f9ee2763",
+    "close_receipt.json": "830ddd32951d5f88aff3d55ba636d08a3acc5d827b37f10e5d8a0df4054625ea"
+  },
+  "conditional_population": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261022_0000_population_extension_v1",
+  "input_files": 57,
+  "geometry_groups": 39,
+  "point_file_records": 3360000,
+  "previous_combined_status_unknown_point_file_records": 16464,
+  "selection": "all combined status >=2 OR both witnessed but combined edge not singleton OR any model conflict",
+  "reason_flags": {
+    "1": "combined_status_unknown",
+    "2": "both_witnessed_combined_edge_not_singleton",
+    "4": "contact_existence_not_decided_by_both_paths",
+    "8": "oldpath_possible_without_witness",
+    "16": "independent_possible_without_witness",
+    "32": "oldpath_budget",
+    "64": "independent_budget",
+    "128": "model_conflict",
+    "256": "time_interval_conflict",
+    "512": "edge_set_conflict",
+    "1024": "oldpath_witnessed_edge_uncertain",
+    "2048": "independent_witnessed_edge_uncertain"
+  },
+  "nonexclusive_reasons_not_summed_as_unique_counts": true,
+  "all_original_indices_and_full_mask_padding_bound": true,
+  "no_label_time_or_prediction_changes": true,
+  "independent_close_scalar_classification": true,
+  "run_cap_bytes": 268435456,
+  "reservation_bytes": 234881024,
+  "total_E_Z_cap_bytes": 34359738368,
+  "Z_reserve_bytes": 3221225472,
+  "workers": 1,
+  "inflight": 1,
+  "corrected_truth_revalidated_prediction_jobs": 0,
+  "all_label_dependent_claims_withheld": true,
+  "not_formal_ODE_or_real_vehicle_certificate": true
+}

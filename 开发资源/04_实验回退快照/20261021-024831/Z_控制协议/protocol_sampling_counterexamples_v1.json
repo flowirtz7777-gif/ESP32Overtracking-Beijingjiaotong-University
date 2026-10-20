@@ -1,0 +1,15 @@
+{
+  "version": "sampling-counterexamples-v1-20261015",
+  "scope": "read_only_failure_localization_and_lossless_index_export_not_new_prediction_or_acceptance_override",
+  "full_sampling_pilot_sha256": "524e0e01065d0a13089bd2a79ae26892070d763073e6e91077847f6ebdb30f4b",
+  "expected_prediction_references": 18,
+  "expected_density_pairs": 108,
+  "expected_zero_miss_claim_lost_rows": 2,
+  "index_storage": "JSON_lists_of_exact_frozen_target_indices_never_scalar_only_CSV",
+  "witness_selection": "union_of_all_eligible_RIGHT_window_misses_in_existing_census_predictions_all_methods_conditions_variants",
+  "witness_scope": "development_counterexamples_not_unbiased_population_or_independent_final_validation",
+  "witnesses_do_not_replace_primary_or_density_target_sets": true,
+  "original_reports_and_failed_gates_unchanged": true,
+  "new_prediction_jobs": 0,
+  "execution": {"reserve_bytes": 3221225472, "research_budget_bytes": 12884901888, "run_budget_bytes": 16777216}
+}

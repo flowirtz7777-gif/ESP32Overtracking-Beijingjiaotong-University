@@ -1,0 +1,23 @@
+{
+  "version": "20261015-resume-v5-finite-negative-census",
+  "authorized_until_local": "2026-10-15T18:00:00+08:00",
+  "previous_plan": "resume_plan_20261015_v4.json",
+  "completed_new_predictions_this_cycle_before_current_run": 144,
+  "completed_new_scoring_predictions_before_current_run": 2220,
+  "sampling_diagnostic": "completed_54_reused_jobs_6912_resample_rows_0_new_predictions",
+  "current_stage": "M1_finite_negative_census_failure_diagnostic",
+  "current_entrypoint": "src_s4_negative_census_v1/run_census.py",
+  "current_protocol": "protocol_negative_census_v1.json",
+  "current_run": "runs/resume_S4_negative_census_v1",
+  "new_prediction_jobs_planned": 6,
+  "expected_full_target_count": 820489,
+  "expected_negative_census_count": 633822,
+  "original_70000_main_and_280000_reference_preserved": true,
+  "density_gate_still_failed": true,
+  "census_does_not_override_density_gate": true,
+  "no_aggregate_ranking_across_changed_stratum_weights": true,
+  "research_budget_bytes_unchanged": 12884901888,
+  "same_path_speed_replay": "not_implemented_wait_for_density_gate",
+  "S5": "not_ready_no_feasible_frozen_candidate",
+  "stop_policy": "no_new_prediction_submission_at_or_after_18_00_drain_already_submitted_then_audit"
+}

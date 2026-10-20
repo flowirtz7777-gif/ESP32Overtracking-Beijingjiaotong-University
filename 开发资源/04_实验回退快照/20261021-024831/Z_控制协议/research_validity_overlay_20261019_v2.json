@@ -1,0 +1,62 @@
+{
+  "time": "2026-10-18T19:00:16+00:00",
+  "priority": "research_truth_and_reliability_before_completion_counts",
+  "user_request": "Correct every experiment affected by the label issue; scientific truth and reliability first.",
+  "evidence_status": "step_sensitive_edge_and_front_labels_observed_on_new_geometries_not_yet_independently_closed",
+  "confirmed_old_dataset_metric_changes": "not_yet_established_do_not_invent_impact_counts",
+  "historical_execution_ledger": {
+    "formal": 2238,
+    "accepted_diagnostics": 66,
+    "numeric_records": 2304
+  },
+  "historical_acceptance_means": "frozen_file_and_computational_consistency_not_current_recertified_truth",
+  "currently_revalidated_prediction_jobs_under_corrected_truth": 0,
+  "claims_withheld": [
+    "RIGHT_recall_and_misses",
+    "FRONT_exclusion",
+    "contact_timing_and_lateness",
+    "label_conditioned_frame_confusions",
+    "zero_miss_claims",
+    "algorithm_rankings",
+    "84_configuration_feasibility_conclusions",
+    "deployment_or_safety_recommendations"
+  ],
+  "not_automatically_invalidated": [
+    "file_integrity_and_execution_history",
+    "label_independent_kinematic_reference_convergence",
+    "label_independent_observation_array_identity"
+  ],
+  "raw_predictions_reuse_requires": [
+    "same_online_inputs_and_method",
+    "same_target_coordinates",
+    "no_truth_used_online",
+    "independent_reconstruction_of_changed_label_dependent_scores"
+  ],
+  "forbidden_shortcuts": [
+    "exclude_changed_points",
+    "force_labels_to_agree",
+    "relax_gates",
+    "select_fix_by_method_performance",
+    "silently_overwrite_old_results",
+    "equate_reproducibility_with_truth"
+  ],
+  "remediation_order": [
+    "finish_current_label_diagnostic_and_independent_close",
+    "freeze_and_validate_label_definition_and_uncertainty_policy",
+    "all_affected_datasets_same_coordinates_full_point_audit",
+    "propagate_changes_through_every_job_and_report_or_prove_exact_reuse",
+    "independent_end_to_end_acceptance_and_traceable_supersession"
+  ],
+  "inventory": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\truth_label_impact_registry_20261019_v1\\impact_inventory.json",
+  "inventory_sha256": "e414953306f23bec8c17721e5da6bbe80d4ca61d68db4604b40bd9c398b66e70",
+  "any_unrepaired_or_unresolved_result_remains_withheld": true,
+  "M2_allowed": false,
+  "S5_allowed": false,
+  "deadline": "2026-10-19T08:00:00+08:00",
+  "authorization_not_automatically_extended": true,
+  "previous_overlay": "research_validity_overlay_20261019_v1.json",
+  "dependency_resolution": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\truth_label_dependency_resolution_20261019_v1\\dependency_resolution.json",
+  "dependency_resolution_sha256": "63d56366ab8054cb8f67f039df4aa57c1d4db897dc01e6366340f7c958229fc3",
+  "all_packed_expanded_populations_explicitly_in_scope": true,
+  "any_reused_original_labels_or_projection_only_validation_insufficient": true
+}

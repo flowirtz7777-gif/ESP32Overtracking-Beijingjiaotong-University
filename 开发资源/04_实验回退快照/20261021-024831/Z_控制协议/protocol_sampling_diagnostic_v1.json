@@ -1,0 +1,17 @@
+{
+  "version": "S4-sampling-diagnostic-v1-20261015",
+  "scope": "read_only_frozen_point_results_not_new_predictions_or_algorithm_selection",
+  "authorization_deadline_local": "2026-10-15T18:00:00+08:00",
+  "dependency_checkpoint_sha256": "c4293fe59af4a1b0f952bd5f98a6abd9daa119ad4c79ec4972ce9a9288029189",
+  "sampling_seed_start": 2026101501,
+  "replicates": 64,
+  "resample_count": 140000,
+  "reference_count": 280000,
+  "sampling": "independent_PCG64_permutation_within_original_three_strata_nested_prefix_without_replacement",
+  "shared_masks": "same_case_and_seed_identical_coordinates_for_all_methods_conditions_and_label_tolerances",
+  "mask_storage": "frozen_generator_seed_and_input_with_reconstructed_index_SHA256",
+  "primary_70000_unchanged": true,
+  "density_limits_unchanged": {"metric_pp": 0.2, "lead_s": 0.05},
+  "does_not_override_failed_density_acceptance": true,
+  "execution": {"workers": 1, "reserve_bytes": 3221225472, "research_budget_bytes": 12884901888, "new_run_budget_bytes": 16777216}
+}
