@@ -1,0 +1,163 @@
+{
+  "header": "中期答辩临时训练：基于接触标签纠错前评分，非冻结科研资产。",
+  "sources": {
+    "D1_S1": {
+      "path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\overnight_20261014_v3\\reports\\S1_all_scores.csv",
+      "sha256": "105a85d615d437734675ad78c2aedb39f2005d956c8f42ca4c7411845cc697a1",
+      "rows": 513
+    },
+    "D2_S2": {
+      "path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\overnight_20261014_v3\\reports\\S2_all_scores.csv",
+      "sha256": "3dda9fb281c0966c6ecbe99ee93d3be04a8fb38bbe4c6b388db12688085ee3f5",
+      "rows": 864
+    },
+    "D3_S3": {
+      "path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\afternoon_S4_v1\\reports\\S3_consistent_scoring_scores.csv",
+      "sha256": "2a70a2bd8cd11e699632a0cb49c2762358fa2cf6365da9ed0d5c55d3d1bfc23a",
+      "rows": 7488
+    },
+    "D4_S4proc": {
+      "path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\afternoon_S4_v1\\reports\\S4_processor_scores.csv",
+      "sha256": "74a6c5f0cb4a17ed3ce87b830b5dda282099b23364e5ef3cbed1cc00d6d54486",
+      "rows": 576
+    },
+    "D5_S4joint": {
+      "path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\afternoon_S4_v1\\reports\\S4_joint_scores.csv",
+      "sha256": "206973982ecbc255946e18a15d4b28440f9dbd2a000a7d6af5f07a6ff60a3fab",
+      "rows": 8064
+    },
+    "D3h_S3hold": {
+      "path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\afternoon_S4_v1\\jobs\\S3_hold_scoring_repair__*\\summary.json",
+      "rows": 312,
+      "jobs": 312
+    }
+  },
+  "outputs": {
+    "D1": {
+      "paired_hold_rows": 513,
+      "rows": 513,
+      "trajectories": 27,
+      "jobs": 513,
+      "partitions": {
+        "development_v2_n70000": 513
+      },
+      "score_version": [
+        "v3"
+      ],
+      "geometry_missing_rows": 0,
+      "alpha_peak_deg": [
+        10.0
+      ],
+      "any_window_miss_share": 0.0,
+      "fp_budget_pass_share": 0.885
+    },
+    "D2": {
+      "paired_hold_rows": 864,
+      "rows": 864,
+      "trajectories": 6,
+      "jobs": 864,
+      "partitions": {
+        "development_v2_n70000": 864
+      },
+      "score_version": [
+        "v3"
+      ],
+      "geometry_missing_rows": 0,
+      "alpha_peak_deg": [
+        10.0
+      ],
+      "any_window_miss_share": 0.0069,
+      "fp_budget_pass_share": 0.2639
+    },
+    "D3": {
+      "paired_hold_rows": 7800,
+      "paired_post_rows": 7488,
+      "rows": 7800,
+      "trajectories": 39,
+      "jobs": 936,
+      "partitions": {
+        "development_v2_n70000": 5400,
+        "selection_v2": 2400
+      },
+      "score_version": [
+        "repaired"
+      ],
+      "geometry_missing_rows": 0,
+      "alpha_peak_deg": [
+        10.0
+      ],
+      "any_window_miss_share": 0.1864,
+      "fp_budget_pass_share": 0.3956
+    },
+    "D4": {
+      "paired_hold_rows": 576,
+      "paired_raw_rows": 576,
+      "rows": 576,
+      "trajectories": 6,
+      "jobs": 576,
+      "partitions": {
+        "development_v2_n70000": 576
+      },
+      "score_version": [
+        "repaired"
+      ],
+      "geometry_missing_rows": 0,
+      "alpha_peak_deg": [
+        10.0
+      ],
+      "any_window_miss_share": 0.1562,
+      "fp_budget_pass_share": 0.5955
+    },
+    "D5": {
+      "paired_hold_rows": 8064,
+      "paired_post_rows": 8064,
+      "rows_identical_to_D3_selection": 2400,
+      "rows": 8064,
+      "trajectories": 12,
+      "jobs": 672,
+      "partitions": {
+        "selection_v2": 8064
+      },
+      "score_version": [
+        "repaired"
+      ],
+      "geometry_missing_rows": 0,
+      "alpha_peak_deg": [
+        10.0
+      ],
+      "any_window_miss_share": 0.1958,
+      "fp_budget_pass_share": 0.3845
+    }
+  },
+  "notes": [
+    "D5 中与 D3 选择集重复的行只在 M4 内使用；M3 外部检验用 D3 选择集，两者不在同一模型中合并，因此无需删除。",
+    "同一作业的 12 个后处理变体共用一次预测，端点误差相同；几何目标建模时按作业去重。"
+  ],
+  "row_conservation": {
+    "D1": {
+      "read": 513,
+      "written": 513,
+      "ok": true
+    },
+    "D2": {
+      "read": 864,
+      "written": 864,
+      "ok": true
+    },
+    "D3": {
+      "read": 7800,
+      "written": 7800,
+      "ok": true
+    },
+    "D4": {
+      "read": 576,
+      "written": 576,
+      "ok": true
+    },
+    "D5": {
+      "read": 8064,
+      "written": 8064,
+      "ok": true
+    }
+  }
+}

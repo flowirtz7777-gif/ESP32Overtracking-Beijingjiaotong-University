@@ -1,0 +1,244 @@
+﻿family,task,segment,value,n,MAE,mean_resid
+M2a,geom_2.0_mean,condition,clean,54.0,0.021621474651205445,-0.006588971236490026
+M2a,geom_2.0_mean,condition,combined100_s1,54.0,0.045729008413881896,-0.01478056051002643
+M2a,geom_2.0_mean,condition,combined100_s2,54.0,0.04517126176525843,-0.01657604551869884
+M2a,geom_2.0_mean,condition,combined100_s3,54.0,0.04541915354677823,-0.013058873075428454
+M2a,geom_2.0_mean,condition,delay100,54.0,0.03725813616511742,-0.01416673828541236
+M2a,geom_2.0_mean,condition,delay200,54.0,0.06639816459737313,-0.016353558968908596
+M2a,geom_2.0_mean,condition,delay50,54.0,0.0340884933048082,-0.008072934276068557
+M2a,geom_2.0_mean,condition,noise050_s1,54.0,0.024304240237785577,-0.00610368235663822
+M2a,geom_2.0_mean,condition,noise050_s2,54.0,0.024923277754515274,-0.006996121362503621
+M2a,geom_2.0_mean,condition,noise050_s3,54.0,0.024435999304261106,-0.0049230466907834
+M2a,geom_2.0_mean,condition,noise100_s1,54.0,0.029441498501888947,-0.004171819583186186
+M2a,geom_2.0_mean,condition,noise100_s2,54.0,0.028557156399297155,-0.005935444957692658
+M2a,geom_2.0_mean,condition,noise100_s3,54.0,0.029486820847655918,-0.0017355797560285476
+M2a,geom_2.0_mean,condition,noise200_s1,54.0,0.03900340826145344,-0.011837440371913564
+M2a,geom_2.0_mean,condition,noise200_s2,54.0,0.03717249060622178,-0.014875239277301121
+M2a,geom_2.0_mean,condition,noise200_s3,54.0,0.03734307990306823,-0.006858997911932092
+M2a,geom_2.0_mean,template,fast_entry,288.0,0.03297812362423589,0.012224391732527476
+M2a,geom_2.0_mean,template,fast_return,288.0,0.0450724133063353,-0.014484272095594799
+M2a,geom_2.0_mean,template,symmetric,288.0,0.02889077511828572,-0.02643419228799755
+M2a,geom_2.0_mean,v_B_mps,2.0,288.0,0.054873590434325194,-0.054873590434325194
+M2a,geom_2.0_mean,v_B_mps,3.0,288.0,0.012930623127088406,-0.010176925315691332
+M2a,geom_2.0_mean,v_B_mps,4.0,288.0,0.03913709848744331,0.036356443098951655
+M2a,geom_2.0_mean,config_id,damped_d1000,288.0,0.042223710093157625,-0.011223963641314751
+M2a,geom_2.0_mean,config_id,hold,288.0,0.02962425084041099,-0.0078155230768814
+M2a,geom_2.0_mean,config_id,linear_g050,288.0,0.0350933511152883,-0.009654585932868723
+M2a,geom_2.0_mean,最难预测前10（轨迹×条件）,v2_r8_fast_return | delay200,,0.11842732155008504,
+M2a,geom_2.0_mean,最难预测前10（轨迹×条件）,v2_r2_symmetric | delay200,,0.1129577528652254,
+M2a,geom_2.0_mean,最难预测前10（轨迹×条件）,v4_r2_fast_return | delay200,,0.10495728984098086,
+M2a,geom_2.0_mean,最难预测前10（轨迹×条件）,v2_r8_fast_return | combined100_s1,,0.07959957781315455,
+M2a,geom_2.0_mean,最难预测前10（轨迹×条件）,v2_r8_fast_return | combined100_s2,,0.07893473153029137,
+M2a,geom_2.0_mean,最难预测前10（轨迹×条件）,v2_r8_fast_return | combined100_s3,,0.07658545052778805,
+M2a,geom_2.0_mean,最难预测前10（轨迹×条件）,v2_r2_symmetric | combined100_s2,,0.07537063075105133,
+M2a,geom_2.0_mean,最难预测前10（轨迹×条件）,v2_r2_symmetric | combined100_s1,,0.07424903030641847,
+M2a,geom_2.0_mean,最难预测前10（轨迹×条件）,v2_r2_symmetric | combined100_s3,,0.07386423250378908,
+M2a,geom_2.0_mean,最难预测前10（轨迹×条件）,v2_r8_fast_return | noise200_s1,,0.0660739136439633,
+M2a,geom_2.0_p95,condition,clean,54.0,0.18957509171098105,-0.008342323878034762
+M2a,geom_2.0_p95,condition,combined100_s1,54.0,0.1763806790245677,-0.03645977856826338
+M2a,geom_2.0_p95,condition,combined100_s2,54.0,0.17140176044860878,-0.04368270489890715
+M2a,geom_2.0_p95,condition,combined100_s3,54.0,0.17161363496333698,-0.03843694654030029
+M2a,geom_2.0_p95,condition,delay100,54.0,0.1996241992912566,-0.028798851736124915
+M2a,geom_2.0_p95,condition,delay200,54.0,0.22905866910200234,-0.06542165787162688
+M2a,geom_2.0_p95,condition,delay50,54.0,0.19541960528219987,-0.014487445507712483
+M2a,geom_2.0_p95,condition,noise050_s1,54.0,0.18445246039753224,-0.013158621579573461
+M2a,geom_2.0_p95,condition,noise050_s2,54.0,0.18394753594646643,-0.0158489078846554
+M2a,geom_2.0_p95,condition,noise050_s3,54.0,0.18354377194275762,-0.015350913432085635
+M2a,geom_2.0_p95,condition,noise100_s1,54.0,0.16779867151460437,-0.026657961582970062
+M2a,geom_2.0_p95,condition,noise100_s2,54.0,0.16652501655857363,-0.03541451554786807
+M2a,geom_2.0_p95,condition,noise100_s3,54.0,0.1663007352202292,-0.028886502669679123
+M2a,geom_2.0_p95,condition,noise200_s1,54.0,0.17993021156433034,-0.04020433499475065
+M2a,geom_2.0_p95,condition,noise200_s2,54.0,0.17398971502058844,-0.06078111561455713
+M2a,geom_2.0_p95,condition,noise200_s3,54.0,0.17070156253716087,-0.04842092244934582
+M2a,geom_2.0_p95,template,fast_entry,288.0,0.2883200535785988,0.11883324067318773
+M2a,geom_2.0_p95,template,fast_return,288.0,0.14434705058562464,-0.11847433664262416
+M2a,geom_2.0_p95,template,symmetric,288.0,0.11300726843425093,-0.09792518617239894
+M2a,geom_2.0_p95,v_B_mps,2.0,288.0,0.2070849946694309,-0.2070849946694309
+M2a,geom_2.0_p95,v_B_mps,3.0,288.0,0.09706765587841099,-0.08198557361655898
+M2a,geom_2.0_p95,v_B_mps,4.0,288.0,0.24152172205063246,0.19150428614415452
+M2a,geom_2.0_p95,config_id,damped_d1000,288.0,0.1792500311323296,-0.02994665858647766
+M2a,geom_2.0_p95,config_id,hold,288.0,0.20225979518750475,-0.03880022027559796
+M2a,geom_2.0_p95,config_id,linear_g050,288.0,0.16416454627864002,-0.02881940327975973
+M2a,geom_2.0_p95,最难预测前10（轨迹×条件）,v4_r8_fast_entry | delay50,,0.5072624649249592,
+M2a,geom_2.0_p95,最难预测前10（轨迹×条件）,v4_r8_fast_entry | clean,,0.4993731812503832,
+M2a,geom_2.0_p95,最难预测前10（轨迹×条件）,v4_r8_fast_entry | delay100,,0.48734576436071436,
+M2a,geom_2.0_p95,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise050_s1,,0.48070694116180945,
+M2a,geom_2.0_p95,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise050_s2,,0.4726359001115202,
+M2a,geom_2.0_p95,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise050_s3,,0.46889230584942776,
+M2a,geom_2.0_p95,最难预测前10（轨迹×条件）,v4_r8_fast_entry | delay200,,0.43957229221128363,
+M2a,geom_2.0_p95,最难预测前10（轨迹×条件）,v4_r8_fast_entry | combined100_s1,,0.40029775309641646,
+M2a,geom_2.0_p95,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise100_s1,,0.3944833453576464,
+M2a,geom_2.0_p95,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise100_s3,,0.3919082356950521,
+M2a,right_pct,condition,clean,54.0,0.8007767247692797,-0.26589506962155124
+M2a,right_pct,condition,combined100_s1,54.0,0.6073830144381055,-0.14294211045333022
+M2a,right_pct,condition,combined100_s2,54.0,0.6118879206076252,-0.1592652874858207
+M2a,right_pct,condition,combined100_s3,54.0,0.5802268314400971,-0.0869664227450014
+M2a,right_pct,condition,delay100,54.0,0.8499806611207865,-0.24167152983166146
+M2a,right_pct,condition,delay200,54.0,0.9534169676354044,-0.2806121313203078
+M2a,right_pct,condition,delay50,54.0,0.8220027399658347,-0.25321916198188554
+M2a,right_pct,condition,noise050_s1,54.0,0.6979482437369642,-0.20466082611976621
+M2a,right_pct,condition,noise050_s2,54.0,0.7107861157234299,-0.17497277952971593
+M2a,right_pct,condition,noise050_s3,54.0,0.7314476351066495,-0.098380069640558
+M2a,right_pct,condition,noise100_s1,54.0,0.44206933802278175,-0.11846035569770723
+M2a,right_pct,condition,noise100_s2,54.0,0.4610003979602852,-0.12356754208565209
+M2a,right_pct,condition,noise100_s3,54.0,0.43128446425232925,-0.07466814667082866
+M2a,right_pct,condition,noise200_s1,54.0,0.1900664357884955,-0.05074997930930229
+M2a,right_pct,condition,noise200_s2,54.0,0.2034660414002848,-0.04609437286173522
+M2a,right_pct,condition,noise200_s3,54.0,0.1861401360474169,-0.033085872836395885
+M2a,right_pct,template,fast_entry,288.0,0.7856375163094156,0.44913988018842577
+M2a,right_pct,template,fast_return,288.0,0.7329003245589346,-0.7231819219987676
+M2a,right_pct,template,symmetric,288.0,0.22144034688460673,-0.16756014410051193
+M2a,right_pct,v_B_mps,2.0,288.0,0.6124251490057,-0.6124251490057
+M2a,right_pct,v_B_mps,3.0,288.0,0.20642261529737543,-0.1513107843279396
+M2a,right_pct,v_B_mps,4.0,288.0,0.9211304234498816,0.32213374742278583
+M2a,right_pct,config_id,damped_d1000,288.0,0.3561820775072169,-0.09983399272629258
+M2a,right_pct,config_id,hold,288.0,0.984136229808849,-0.2560592880152193
+M2a,right_pct,config_id,linear_g050,288.0,0.399659880436891,-0.08570890516934183
+M2a,right_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | delay200,,1.8193963672831654,
+M2a,right_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise050_s3,,1.8156278428397121,
+M2a,right_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | delay100,,1.7845942798743575,
+M2a,right_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | delay50,,1.683828291933572,
+M2a,right_pct,最难预测前10（轨迹×条件）,v2_r2_symmetric | delay200,,1.5934976241765093,
+M2a,right_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | clean,,1.5916210360188046,
+M2a,right_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | combined100_s3,,1.4433565773746808,
+M2a,right_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise050_s2,,1.4403298682486942,
+M2a,right_pct,最难预测前10（轨迹×条件）,v2_r8_fast_return | delay200,,1.3744864378152695,
+M2a,right_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise050_s1,,1.3246857249154156,
+M2a,negative_fp_pct,condition,clean,54.0,0.8590713663825226,-0.09801360087647897
+M2a,negative_fp_pct,condition,combined100_s1,54.0,0.9980627454343944,0.20232566992181375
+M2a,negative_fp_pct,condition,combined100_s2,54.0,1.0291161240732152,-0.17228285623173425
+M2a,negative_fp_pct,condition,combined100_s3,54.0,1.3489509760547966,0.6037599761261885
+M2a,negative_fp_pct,condition,delay100,54.0,0.8900036673775703,-0.07774779560648329
+M2a,negative_fp_pct,condition,delay200,54.0,0.9307481774503527,-0.04692538949278349
+M2a,negative_fp_pct,condition,delay50,54.0,0.870867845687228,-0.07613273630647287
+M2a,negative_fp_pct,condition,noise050_s1,54.0,0.6436029396652653,0.06651886985145788
+M2a,negative_fp_pct,condition,noise050_s2,54.0,0.7664266824636571,-0.11245194084266316
+M2a,negative_fp_pct,condition,noise050_s3,54.0,0.8467825377194708,0.24525158190607452
+M2a,negative_fp_pct,condition,noise100_s1,54.0,1.0032052001815086,0.30251968425434267
+M2a,negative_fp_pct,condition,noise100_s2,54.0,1.0315408592388364,-0.1842333011057652
+M2a,negative_fp_pct,condition,noise100_s3,54.0,1.3223158950447125,0.5653012160540039
+M2a,negative_fp_pct,condition,noise200_s1,54.0,1.8407834296433325,0.562767128878017
+M2a,negative_fp_pct,condition,noise200_s2,54.0,2.0271829217265935,-0.38010348355930323
+M2a,negative_fp_pct,condition,noise200_s3,54.0,2.0914362984033636,0.19990480227335092
+M2a,negative_fp_pct,template,fast_entry,288.0,1.1787187845614677,0.46347619736914925
+M2a,negative_fp_pct,template,fast_return,288.0,1.4790354678367972,-0.1601257929033665
+M2a,negative_fp_pct,template,symmetric,288.0,0.8110140600792639,-0.003264562232614354
+M2a,negative_fp_pct,v_B_mps,2.0,288.0,1.0975830020997346,-0.8576346280670119
+M2a,negative_fp_pct,v_B_mps,3.0,288.0,0.7314434969961184,0.035015603821777645
+M2a,negative_fp_pct,v_B_mps,4.0,288.0,1.639741813381676,1.1227048664784025
+M2a,negative_fp_pct,config_id,damped_d1000,288.0,1.5997677854515593,0.14631149883691785
+M2a,negative_fp_pct,config_id,hold,288.0,0.6022561301916629,0.038356092944542924
+M2a,negative_fp_pct,config_id,linear_g050,288.0,1.2667443968343066,0.11541825045170759
+M2a,negative_fp_pct,最难预测前10（轨迹×条件）,v4_r2_fast_return | noise200_s3,,3.4108321569668734,
+M2a,negative_fp_pct,最难预测前10（轨迹×条件）,v4_r2_fast_return | noise200_s2,,2.981778408579991,
+M2a,negative_fp_pct,最难预测前10（轨迹×条件）,v4_r2_fast_return | noise200_s1,,2.8348336654700663,
+M2a,negative_fp_pct,最难预测前10（轨迹×条件）,v2_r8_fast_return | noise200_s3,,2.807861803807823,
+M2a,negative_fp_pct,最难预测前10（轨迹×条件）,v2_r8_fast_return | noise200_s1,,2.584272132311027,
+M2a,negative_fp_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | delay200,,2.575298970749858,
+M2a,negative_fp_pct,最难预测前10（轨迹×条件）,v2_r2_symmetric | noise200_s2,,2.438131573276121,
+M2a,negative_fp_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | delay100,,2.3863763789355588,
+M2a,negative_fp_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | delay50,,2.3372064474830236,
+M2a,negative_fp_pct,最难预测前10（轨迹×条件）,v2_r8_fast_return | noise200_s2,,2.2816638105031544,
+M2a,frame_fpr_pct,condition,clean,54.0,0.07157530314968309,-0.014772323685137131
+M2a,frame_fpr_pct,condition,combined100_s1,54.0,0.09386250027989665,-0.02210281374169462
+M2a,frame_fpr_pct,condition,combined100_s2,54.0,0.09431479236921206,-0.022019069913492947
+M2a,frame_fpr_pct,condition,combined100_s3,54.0,0.08923376767739982,-0.01404173810396739
+M2a,frame_fpr_pct,condition,delay100,54.0,0.07079179574641155,-0.01303493105820236
+M2a,frame_fpr_pct,condition,delay200,54.0,0.074259137431298,-0.006807840086654726
+M2a,frame_fpr_pct,condition,delay50,54.0,0.07071811595929865,-0.014615337327238347
+M2a,frame_fpr_pct,condition,noise050_s1,54.0,0.07716093942606346,-0.01391267047062362
+M2a,frame_fpr_pct,condition,noise050_s2,54.0,0.07680675475235962,-0.012748999105257397
+M2a,frame_fpr_pct,condition,noise050_s3,54.0,0.07514072536554221,-0.009848141247694545
+M2a,frame_fpr_pct,condition,noise100_s1,54.0,0.09382578972482733,-0.024232885915139567
+M2a,frame_fpr_pct,condition,noise100_s2,54.0,0.09242873323575289,-0.020667530914417493
+M2a,frame_fpr_pct,condition,noise100_s3,54.0,0.08898935491808155,-0.014053337866739256
+M2a,frame_fpr_pct,condition,noise200_s1,54.0,0.10829560006060639,-0.025466204968935917
+M2a,frame_fpr_pct,condition,noise200_s2,54.0,0.09944064537996204,-0.01383453816249275
+M2a,frame_fpr_pct,condition,noise200_s3,54.0,0.09597396672494957,-0.004504059870407821
+M2a,frame_fpr_pct,template,fast_entry,288.0,0.1116335021186615,0.08656175490906894
+M2a,frame_fpr_pct,template,fast_return,288.0,0.08664399703326836,-0.08123678155806886
+M2a,frame_fpr_pct,template,symmetric,288.0,0.05912586126082231,-0.05157417755814305
+M2a,frame_fpr_pct,v_B_mps,2.0,288.0,0.12185103505324875,-0.12185103505324875
+M2a,frame_fpr_pct,v_B_mps,3.0,288.0,0.01787691738347323,-0.01007291510191524
+M2a,frame_fpr_pct,v_B_mps,4.0,288.0,0.1176754079760302,0.085674745948021
+M2a,frame_fpr_pct,config_id,damped_d1000,288.0,0.09404927439183368,-0.015610276245519158
+M2a,frame_fpr_pct,config_id,hold,288.0,0.08023820932145338,-0.015113779808226892
+M2a,frame_fpr_pct,config_id,linear_g050,288.0,0.08311587669946512,-0.015525148153396926
+M2a,frame_fpr_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise200_s3,,0.24116342669185498,
+M2a,frame_fpr_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise200_s2,,0.2397963855421285,
+M2a,frame_fpr_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise200_s1,,0.21756948833563367,
+M2a,frame_fpr_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | combined100_s3,,0.21649595550248582,
+M2a,frame_fpr_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise100_s3,,0.21205422739505747,
+M2a,frame_fpr_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | combined100_s2,,0.21141893589286895,
+M2a,frame_fpr_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise100_s2,,0.20933648061719903,
+M2a,frame_fpr_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | combined100_s1,,0.20626175122357565,
+M2a,frame_fpr_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise100_s1,,0.19847547632451737,
+M2a,frame_fpr_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise050_s3,,0.18602337219837384,
+M2a,d_hold_right_pct,condition,clean,36.0,0.3588109213092861,0.1438961545126332
+M2a,d_hold_right_pct,condition,combined100_s1,36.0,0.8233080770194443,0.2630056747672594
+M2a,d_hold_right_pct,condition,combined100_s2,36.0,0.9262192330580947,0.24043849979293347
+M2a,d_hold_right_pct,condition,combined100_s3,36.0,0.8466613389906485,0.07798609495622529
+M2a,d_hold_right_pct,condition,delay100,36.0,0.46363618910675897,0.14537146163562287
+M2a,d_hold_right_pct,condition,delay200,36.0,0.6969313946330608,0.2614353356703185
+M2a,d_hold_right_pct,condition,delay50,36.0,0.44730912876567025,0.16009644575842275
+M2a,d_hold_right_pct,condition,noise050_s1,36.0,0.6229882221909624,0.16845953100924593
+M2a,d_hold_right_pct,condition,noise050_s2,36.0,0.655172560417021,0.15696594742584608
+M2a,d_hold_right_pct,condition,noise050_s3,36.0,0.5370563356578976,0.18067945873748695
+M2a,d_hold_right_pct,condition,noise100_s1,36.0,0.7361751140618354,0.2150975111078087
+M2a,d_hold_right_pct,condition,noise100_s2,36.0,0.8269931668910342,0.1891661518732729
+M2a,d_hold_right_pct,condition,noise100_s3,36.0,0.7417676591882437,0.06425266525146606
+M2a,d_hold_right_pct,condition,noise200_s1,36.0,0.5373913332823272,0.13905457494235454
+M2a,d_hold_right_pct,condition,noise200_s2,36.0,0.5901257691763748,0.1091321367671137
+M2a,d_hold_right_pct,condition,noise200_s3,36.0,0.5430566506636629,0.06847016296468136
+M2a,d_hold_right_pct,template,fast_entry,192.0,0.85586228547354,-0.36977301451962735
+M2a,d_hold_right_pct,template,fast_return,192.0,0.8157846454947227,0.6493399692901847
+M2a,d_hold_right_pct,template,symmetric,192.0,0.2696536492340479,0.20484075907432234
+M2a,d_hold_right_pct,v_B_mps,2.0,192.0,0.6512275588429357,0.6512275588429357
+M2a,d_hold_right_pct,v_B_mps,3.0,192.0,0.27393057342288923,0.1535370381757302
+M2a,d_hold_right_pct,v_B_mps,4.0,192.0,1.0161424479364858,-0.3203568831737862
+M2a,d_hold_right_pct,config_id,damped_d1000,288.0,0.6859005965900609,0.16712316554481316
+M2a,d_hold_right_pct,config_id,linear_g050,288.0,0.6082997902114795,0.15581531035177332
+M2a,d_hold_right_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | combined100_s3,,2.3060257321032696,
+M2a,d_hold_right_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise100_s3,,2.0325449818103327,
+M2a,d_hold_right_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | combined100_s2,,1.991004539768512,
+M2a,d_hold_right_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise100_s2,,1.881989398980215,
+M2a,d_hold_right_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | combined100_s1,,1.5057900798866661,
+M2a,d_hold_right_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise100_s1,,1.479416862282292,
+M2a,d_hold_right_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise200_s2,,1.4198696006626974,
+M2a,d_hold_right_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise200_s3,,1.388776599860825,
+M2a,d_hold_right_pct,最难预测前10（轨迹×条件）,v2_r2_symmetric | delay200,,1.2942316691822582,
+M2a,d_hold_right_pct,最难预测前10（轨迹×条件）,v4_r8_fast_entry | noise050_s2,,1.290872820690373,
+M2a,d_hold_negative_fp_pct,condition,clean,36.0,0.7766378049567878,0.29660426843331233
+M2a,d_hold_negative_fp_pct,condition,combined100_s1,36.0,1.5417073800610526,-0.6825775443898693
+M2a,d_hold_negative_fp_pct,condition,combined100_s2,36.0,1.3374246419889688,-0.271262144646063
+M2a,d_hold_negative_fp_pct,condition,combined100_s3,36.0,1.580851507990953,0.374937562968807
+M2a,d_hold_negative_fp_pct,condition,delay100,36.0,0.7556630028182442,0.28926311960668455
+M2a,d_hold_negative_fp_pct,condition,delay200,36.0,0.7418327671262571,0.2860500873005394
+M2a,d_hold_negative_fp_pct,condition,delay50,36.0,0.7697452555439203,0.2843428865374402
+M2a,d_hold_negative_fp_pct,condition,noise050_s1,36.0,0.7227760599779474,-0.18394619648565283
+M2a,d_hold_negative_fp_pct,condition,noise050_s2,36.0,0.6922169036601106,0.05689057737302186
+M2a,d_hold_negative_fp_pct,condition,noise050_s3,36.0,0.7839459109305121,0.387728636964349
+M2a,d_hold_negative_fp_pct,condition,noise100_s1,36.0,1.5133357504255518,-0.6692225735023377
+M2a,d_hold_negative_fp_pct,condition,noise100_s2,36.0,1.2911324097114998,-0.2511213625326568
+M2a,d_hold_negative_fp_pct,condition,noise100_s3,36.0,1.546337671720159,0.3746018620848377
+M2a,d_hold_negative_fp_pct,condition,noise200_s1,36.0,2.215224221623394,-0.9557843438598925
+M2a,d_hold_negative_fp_pct,condition,noise200_s2,36.0,2.2549798952225424,-0.3597043998606934
+M2a,d_hold_negative_fp_pct,condition,noise200_s3,36.0,2.6654602481786007,-0.25648863963554924
+M2a,d_hold_negative_fp_pct,template,fast_entry,192.0,0.953833094298207,0.17388939831840963
+M2a,d_hold_negative_fp_pct,template,fast_return,192.0,1.978493700356551,0.12270470703323477
+M2a,d_hold_negative_fp_pct,template,symmetric,192.0,1.0406615988333363,-0.5365356435348424
+M2a,d_hold_negative_fp_pct,v_B_mps,2.0,192.0,1.695675266876161,-1.2680952640888903
+M2a,d_hold_negative_fp_pct,v_B_mps,3.0,192.0,0.5764807890639512,0.14491366539249043
+M2a,d_hold_negative_fp_pct,v_B_mps,4.0,192.0,1.700832337547982,0.8832400605132018
+M2a,d_hold_negative_fp_pct,config_id,damped_d1000,288.0,1.4744242331985342,-0.13071918465103882
+M2a,d_hold_negative_fp_pct,config_id,linear_g050,288.0,1.1742346957935286,-0.029241840804426506
+M2a,d_hold_negative_fp_pct,最难预测前10（轨迹×条件）,v4_r2_fast_return | noise200_s3,,4.456043783121401,
+M2a,d_hold_negative_fp_pct,最难预测前10（轨迹×条件）,v4_r2_fast_return | noise200_s2,,4.036037783035681,
+M2a,d_hold_negative_fp_pct,最难预测前10（轨迹×条件）,v2_r2_symmetric | noise200_s2,,4.0236423451388,
+M2a,d_hold_negative_fp_pct,最难预测前10（轨迹×条件）,v2_r8_fast_return | noise200_s1,,3.971167395872447,
+M2a,d_hold_negative_fp_pct,最难预测前10（轨迹×条件）,v2_r2_symmetric | noise200_s3,,3.846496957347551,
+M2a,d_hold_negative_fp_pct,最难预测前10（轨迹×条件）,v2_r8_fast_return | noise200_s3,,3.6661630386673494,
+M2a,d_hold_negative_fp_pct,最难预测前10（轨迹×条件）,v2_r2_symmetric | noise200_s1,,3.469348712372621,
+M2a,d_hold_negative_fp_pct,最难预测前10（轨迹×条件）,v4_r2_fast_return | noise200_s1,,3.077452660391075,
+M2a,d_hold_negative_fp_pct,最难预测前10（轨迹×条件）,v2_r8_fast_return | noise200_s2,,2.906866477287895,
+M2a,d_hold_negative_fp_pct,最难预测前10（轨迹×条件）,v4_r2_fast_return | combined100_s2,,2.826324600322574,

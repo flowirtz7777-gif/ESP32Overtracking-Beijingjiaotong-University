@@ -1,0 +1,582 @@
+{
+  "checked": 64,
+  "all_ok": true,
+  "rows": [
+    {
+      "family": "M1",
+      "task": "d_hold_negative_fp_pct",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 4.440892098500626e-16,
+      "ok": true
+    },
+    {
+      "family": "M1",
+      "task": "d_hold_right_lead_p10_s",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 9.540979117872439e-17,
+      "ok": true
+    },
+    {
+      "family": "M1",
+      "task": "d_hold_right_pct",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 2.220446049250313e-16,
+      "ok": true
+    },
+    {
+      "family": "M1",
+      "task": "geom_0.3_mean",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 9.706319949176478e-17,
+      "ok": true
+    },
+    {
+      "family": "M1",
+      "task": "geom_1.0_mean",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 9.71445146547012e-17,
+      "ok": true
+    },
+    {
+      "family": "M1",
+      "task": "geom_2.0_mean",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 9.71445146547012e-17,
+      "ok": true
+    },
+    {
+      "family": "M1",
+      "task": "geom_2.0_p95",
+      "tier": "A",
+      "model": "Ridge",
+      "rows_checked": 50,
+      "max_abs_diff": 9.020562075079397e-17,
+      "ok": true
+    },
+    {
+      "family": "M1",
+      "task": "negative_fp_pct",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 4.440892098500626e-16,
+      "ok": true
+    },
+    {
+      "family": "M1",
+      "task": "right_pct",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 2.220446049250313e-16,
+      "ok": true
+    },
+    {
+      "family": "M2a",
+      "task": "d_hold_negative_fp_pct",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 2.220446049250313e-16,
+      "ok": true
+    },
+    {
+      "family": "M2a",
+      "task": "d_hold_right_pct",
+      "tier": "B",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 2.220446049250313e-16,
+      "ok": true
+    },
+    {
+      "family": "M2a",
+      "task": "frame_fpr_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 9.562663161322149e-17,
+      "ok": true
+    },
+    {
+      "family": "M2a",
+      "task": "geom_2.0_mean",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 9.540979117872439e-17,
+      "ok": true
+    },
+    {
+      "family": "M2a",
+      "task": "geom_2.0_p95",
+      "tier": "B",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 9.71445146547012e-17,
+      "ok": true
+    },
+    {
+      "family": "M2a",
+      "task": "negative_fp_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 8.881784197001252e-16,
+      "ok": true
+    },
+    {
+      "family": "M2a",
+      "task": "right_pct",
+      "tier": "B",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 9.020562075079397e-17,
+      "ok": true
+    },
+    {
+      "family": "M2b",
+      "task": "d_hold_right_pct",
+      "tier": "B",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 2.220446049250313e-16,
+      "ok": true
+    },
+    {
+      "family": "M2b",
+      "task": "d_raw_negative_fp_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 8.881784197001252e-16,
+      "ok": true
+    },
+    {
+      "family": "M2b",
+      "task": "d_raw_right_miss_rate",
+      "tier": "B",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 9.12356128146552e-17,
+      "ok": true
+    },
+    {
+      "family": "M2b",
+      "task": "d_raw_right_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 7.632783294297951e-17,
+      "ok": true
+    },
+    {
+      "family": "M2b",
+      "task": "frame_fpr_pct",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 8.326672684688674e-17,
+      "ok": true
+    },
+    {
+      "family": "M2b",
+      "task": "geom_2.0_mean",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 8.326672684688674e-17,
+      "ok": true
+    },
+    {
+      "family": "M2b",
+      "task": "geom_2.0_p95",
+      "tier": "B",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 9.020562075079397e-17,
+      "ok": true
+    },
+    {
+      "family": "M2b",
+      "task": "negative_fp_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 1.7763568394002505e-15,
+      "ok": true
+    },
+    {
+      "family": "M2b",
+      "task": "right_miss_rate",
+      "tier": "B",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 1.6940658945086007e-21,
+      "ok": true
+    },
+    {
+      "family": "M2b",
+      "task": "right_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 2.220446049250313e-16,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "any_no_before",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 1.1102230246251565e-16,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "any_window_miss",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 9.05850915111639e-17,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "common_2s_fpr_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 2.220446049250313e-16,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "d_hold_common_2s_fpr_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 8.326672684688674e-17,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "d_hold_negative_fp_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 4.440892098500626e-16,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "d_hold_right_lead_p10_s",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 9.71445146547012e-17,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "d_hold_right_pct",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 1.1102230246251565e-16,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "d_post_common_2s_fpr_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 8.326672684688674e-17,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "d_post_negative_fp_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 2.220446049250313e-16,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "d_post_right_miss_rate",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 9.71445146547012e-17,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "d_post_right_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 8.326672684688674e-17,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "fp_budget_pass",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 1.1102230246251565e-16,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "frame_fpr_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 8.326672684688674e-17,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "geom_2.0_mean",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 8.847089727481716e-17,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "geom_2.0_p95",
+      "tier": "A",
+      "model": "Ridge",
+      "rows_checked": 50,
+      "max_abs_diff": 8.326672684688674e-17,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "negative_fp_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 1.7763568394002505e-15,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "right_lead_p10_s",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 4.440892098500626e-16,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "right_miss_rate",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 1.1102230246251565e-16,
+      "ok": true
+    },
+    {
+      "family": "M3",
+      "task": "right_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 9.71445146547012e-17,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "any_no_before",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 1.1102230246251565e-16,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "any_window_miss",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 1.1102230246251565e-16,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "common_2s_fpr_pct",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 8.326672684688674e-17,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "d_hold_common_2s_fpr_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 9.71445146547012e-17,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "d_hold_negative_fp_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 6.938893903907228e-17,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "d_hold_right_lead_p10_s",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 9.020562075079397e-17,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "d_hold_right_pct",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 2.220446049250313e-16,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "d_post_common_2s_fpr_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 2.220446049250313e-16,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "d_post_negative_fp_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 1.7763568394002505e-15,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "d_post_right_miss_rate",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 2.220446049250313e-16,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "d_post_right_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 6.938893903907228e-17,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "fp_budget_pass",
+      "tier": "A",
+      "model": "梯度提升",
+      "rows_checked": 50,
+      "max_abs_diff": 1.1102230246251565e-16,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "frame_fpr_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 9.107298248878237e-17,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "geom_2.0_mean",
+      "tier": "A",
+      "model": "Ridge",
+      "rows_checked": 50,
+      "max_abs_diff": 8.326672684688674e-17,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "geom_2.0_p95",
+      "tier": "A",
+      "model": "Ridge",
+      "rows_checked": 50,
+      "max_abs_diff": 8.326672684688674e-17,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "negative_fp_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 1.7763568394002505e-15,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "right_lead_p10_s",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 4.440892098500626e-16,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "right_miss_rate",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 6.938893903907228e-17,
+      "ok": true
+    },
+    {
+      "family": "M4",
+      "task": "right_pct",
+      "tier": "A",
+      "model": "随机森林",
+      "rows_checked": 50,
+      "max_abs_diff": 1.1102230246251565e-16,
+      "ok": true
+    }
+  ]
+}

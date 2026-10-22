@@ -1,0 +1,78 @@
+{
+  "header": "中期答辩临时训练：基于接触标签纠错前评分，非冻结科研资产。",
+  "family": "M2a",
+  "task": "d_hold_negative_fp_pct",
+  "target_label": "近场点误报率 − 保持 (pp)",
+  "kind": "reg",
+  "model": "梯度提升",
+  "tier": "A",
+  "params": null,
+  "numeric_features": [
+    "v_B_mps",
+    "entry_rate_deg_s",
+    "return_rate_deg_s",
+    "gain_eff",
+    "decay_eff_s",
+    "accel_eff_s",
+    "noise_level",
+    "delay_ms"
+  ],
+  "categorical_features": [
+    "template",
+    "method",
+    "processor"
+  ],
+  "categories": {
+    "template": [
+      "fast_entry",
+      "fast_return",
+      "symmetric"
+    ],
+    "method": [
+      "damped_linear",
+      "hold",
+      "linear"
+    ],
+    "processor": [
+      "age_hold",
+      "alpha_lp",
+      "raw"
+    ]
+  },
+  "numeric_ranges": {
+    "v_B_mps": [
+      2.0,
+      4.0
+    ],
+    "entry_rate_deg_s": [
+      2.0,
+      16.0
+    ],
+    "return_rate_deg_s": [
+      2.0,
+      16.0
+    ],
+    "gain_eff": [
+      0.0,
+      1.0
+    ],
+    "decay_eff_s": [
+      0.0,
+      1.0
+    ],
+    "accel_eff_s": [
+      0.0,
+      0.0
+    ],
+    "noise_level": [
+      0.0,
+      2.0
+    ],
+    "delay_ms": [
+      0.0,
+      200.0
+    ]
+  },
+  "training_rows": 576,
+  "output": "近场点误报率 − 保持 (pp)"
+}

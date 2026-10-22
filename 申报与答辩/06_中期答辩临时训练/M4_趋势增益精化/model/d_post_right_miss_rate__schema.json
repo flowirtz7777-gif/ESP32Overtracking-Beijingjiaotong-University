@@ -1,0 +1,87 @@
+{
+  "header": "中期答辩临时训练：基于接触标签纠错前评分，非冻结科研资产。",
+  "family": "M4",
+  "task": "d_post_right_miss_rate",
+  "target_label": "窗口漏报率 − 无后处理 (pp)",
+  "kind": "reg",
+  "model": "随机森林",
+  "tier": "A",
+  "params": null,
+  "numeric_features": [
+    "v_B_mps",
+    "entry_rate_deg_s",
+    "return_rate_deg_s",
+    "gain_eff",
+    "decay_eff_s",
+    "accel_eff_s",
+    "noise_level",
+    "delay_ms",
+    "EXIT_W_s",
+    "margin_m",
+    "confirmation_s"
+  ],
+  "categorical_features": [
+    "template",
+    "method"
+  ],
+  "categories": {
+    "template": [
+      "fast_entry",
+      "fast_return",
+      "symmetric"
+    ],
+    "method": [
+      "damped_linear",
+      "hold",
+      "linear"
+    ]
+  },
+  "numeric_ranges": {
+    "v_B_mps": [
+      2.5,
+      3.5
+    ],
+    "entry_rate_deg_s": [
+      3.0,
+      12.0
+    ],
+    "return_rate_deg_s": [
+      3.0,
+      12.0
+    ],
+    "gain_eff": [
+      0.0,
+      1.25
+    ],
+    "decay_eff_s": [
+      0.0,
+      1.0
+    ],
+    "accel_eff_s": [
+      0.0,
+      0.0
+    ],
+    "noise_level": [
+      0.0,
+      1.0
+    ],
+    "delay_ms": [
+      0.0,
+      100.0
+    ],
+    "EXIT_W_s": [
+      2.0,
+      3.0
+    ],
+    "margin_m": [
+      0.0,
+      0.05
+    ],
+    "confirmation_s": [
+      0.0,
+      0.1
+    ]
+  },
+  "training_rows": 7392,
+  "output": "窗口漏报率 − 无后处理 (pp)"
+}
