@@ -45,10 +45,11 @@ def family_figures(fam, scores, tiers, imp, oof, ext, cls, lc_rows, pdp_store, s
         lbl.set_color(TIER_COLOR[tier_of[t]])
     ax.set_ylabel("相对基线的改善 skill")
     ax.set_ylim(min(-0.3, np.nanmin(main.skill) - 0.05), 1.0)
-    ax.set_title(f"{fam.name} {fam.title}：各任务的模型对比（[ ] 内为准入档）")
+    ax.set_title(f"{fam.name} {fam.title}：各任务的模型对比（[ ] 内为临时模型表现分档）")
     ax.legend(fontsize=7, ncol=2, loc="lower left")
     ax.grid(axis="y", alpha=0.3)
-    footnote(fig, foot + " 虚线为 A 档 skill 阈值 0.3；回归 skill=1−MAE/MAE基线，分类 skill=1−Brier/Brier基线。", y=-0.12)
+    footnote(fig, foot + " 虚线为 A 档 skill 阈值 0.3；回归 skill=1−MAE/MAE基线，分类 skill=1−Brier/Brier基线。"
+                         "柱为开发集交叉验证成绩，最优模型类别按同一成绩选出，略偏乐观；分档只衡量对纠错前评分的预测能力，不是科研准入。", y=-0.12)
     save(fig, fig_dir / "fig01_模型对比与分档.png")
 
     # 2 预测 vs 实际（主方案折外）
@@ -122,7 +123,8 @@ def family_figures(fam, scores, tiers, imp, oof, ext, cls, lc_rows, pdp_store, s
     # 6 分类：混淆矩阵与 ROC/PR
     if cls:
         names = list(cls)
-        fig, axes = plt.subplots(len(names), 2, figsize=(8, 3.4 * len(names)), squeeze=False)
+        fig, axes = plt.subplots(len(names), 2, figsize=(8, 3.6 * len(names)), squeeze=False)
+        fig.subplots_adjust(hspace=0.6)
         for i, t in enumerate(names):
             for j, (tname, v) in enumerate(cls[t]["confusion"].items()):
                 cm = np.array(v["matrix"])
@@ -133,8 +135,11 @@ def family_figures(fam, scores, tiers, imp, oof, ext, cls, lc_rows, pdp_store, s
                                         color="white" if cm[a, b] > cm.max() / 2 else "black")
                 axes[i, j].set_xticks([0, 1], ["预测否", "预测是"])
                 axes[i, j].set_yticks([0, 1], ["实际否", "实际是"])
-                axes[i, j].set_title(f"{target_label(t)} · {tname}\n阈值 {v['threshold']:.3f}  召回 {v['recall']:.2f}  精确率 {v['precision']:.2f}", fontsize=8)
-        footnote(fig, foot + f" 数据来源：{cls[names[0]]['source']}；安全优先阈值只用开发集折外预测确定（召回≥{SAFETY_RECALL:.0%}）。", y=-0.01)
+                lo, hi = v.get("threshold_range", [v["threshold"], v["threshold"]])
+                thr_txt = f"{v['threshold']:.3f}" if abs(hi - lo) < 1e-9 else f"{lo:.3f}–{hi:.3f}"
+                axes[i, j].set_title(f"{target_label(t)} · {tname}\n阈值 {thr_txt}  召回 {v['recall']:.2f}  精确率 {v['precision']:.2f}", fontsize=8)
+        footnote(fig, foot + f" 数据来源：{cls[names[0]]['source']}。安全优先阈值的目标召回为 {SAFETY_RECALL:.0%}，"
+                             "阈值从不在被评估的同一批预测上选择，因此实际召回可能低于目标。", y=-0.01)
         save(fig, fig_dir / "fig06_混淆矩阵.png")
 
         from sklearn.metrics import auc, precision_recall_curve, roc_curve
@@ -194,11 +199,12 @@ def family_figures(fam, scores, tiers, imp, oof, ext, cls, lc_rows, pdp_store, s
             gb = d.groupby("n_traj")[bcol].mean()
             ax.plot(gb.index, gb.values, ls="--", color="#999", label="基线")
             ax.set_title(target_label(t), fontsize=9)
-            ax.set_xlabel("训练用开发轨迹数")
-            ax.set_ylabel(f"外部检验 {'每轨迹等权 MAE' if col == 'MAE_group_equal' else 'Brier'}")
+            ax.set_xlabel("每折训练用轨迹数")
+            ax.set_ylabel(f"开发集留出折 {'每轨迹等权 MAE' if col == 'MAE_group_equal' else 'Brier'}")
             ax.legend(fontsize=7)
             ax.grid(alpha=0.3)
-        footnote(fig, foot + " 每个规模随机抽 5 次（27 条时 1 次），阴影为最小–最大；学习曲线使用固定默认参数。曲线变平表示再加同类轨迹收益有限。", y=-0.05)
+        footnote(fig, foot + f" 学习曲线只在开发集内部完成（{fam.main_scheme}，每折从训练轨迹中抽样），外部集不参与；"
+                             "模型类别与超参数与最终模型一致。每个规模抽 2 次，阴影为最小–最大。曲线变平表示再加同类轨迹收益有限。", y=-0.05)
         save(fig, fig_dir / "fig09_学习曲线.png")
 
     # 9 PDP

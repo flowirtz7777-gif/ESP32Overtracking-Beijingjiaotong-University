@@ -202,16 +202,27 @@ def estimate_units(fam: Family) -> int:
         total += len(fam.schemes[fam.main_scheme](df))  # 置换重要性
         total += 2                                       # 全量重拟合 + 外部检验
     for t in fam.learning_curve:
-        total += 21
+        total += len(fam.schemes[fam.main_scheme](fam.train)) * (len(LC_SIZES) * LC_REPS + 1)
     total += 10
     return total
 
 
+LC_SIZES = (5, 10, 15, 20)  # 另加“训练折全部轨迹”
+LC_REPS = 2
+
+
+def _fresh_dir(path: Path):
+    """每次运行前清空输出目录，避免重跑失败时混入上一次的模型和结果。"""
+    import shutil
+    if path.exists():
+        shutil.rmtree(path)
+    path.mkdir(parents=True)
+
+
 def run_family(fam: Family, mon) -> dict:
     out = fam.out
-    (out / "results").mkdir(parents=True, exist_ok=True)
-    (out / "model").mkdir(parents=True, exist_ok=True)
-    (out / "figures").mkdir(parents=True, exist_ok=True)
+    for sub in ("results", "model", "figures"):
+        _fresh_dir(out / sub)
     score_rows, tier_rows, imp_rows, seg_rows = [], [], [], []
     oof_store, ext_store, cls_store, final_models, pdp_store = {}, {}, {}, {}, {}
     feats = fam.num + fam.cat
@@ -347,18 +358,29 @@ def run_family(fam: Family, mon) -> dict:
                          + (f" R²={me['R2']:.3f}" if task.kind == "reg" else f" AUC={me['AUC']:.3f}"))
         mon.tick(1)
 
-        # 分类：混淆矩阵与阈值
+        # 分类：混淆矩阵与阈值。阈值从不在被评估的同一批预测上选择：
+        # - 有外部集：阈值只用开发集折外预测确定，再在外部集上评估；
+        # - 无外部集：交叉拟合，第 k 折的阈值只用其余折的折外预测确定。
         if task.kind == "cls":
             o = oof_store[task.target][fam.main_scheme]
-            thr_safe = safety_threshold(o.y_true.to_numpy().astype(int), o.y_pred.to_numpy())
-            evald = ext_store.get(task.target, o)
-            src = "外部检验" if task.target in ext_store else f"{fam.main_scheme} 折外"
-            yt, pp = evald.y_true.to_numpy().astype(int), evald.y_pred.to_numpy()
+            y_oof, p_oof = o.y_true.to_numpy().astype(int), o.y_pred.to_numpy()
+            if task.target in ext_store:
+                evald = ext_store[task.target]
+                yt, pp = evald.y_true.to_numpy().astype(int), evald.y_pred.to_numpy()
+                thr_vec = np.full(len(yt), safety_threshold(y_oof, p_oof))
+                src = "外部检验（阈值只用开发集折外预测确定）"
+            else:
+                yt, pp = y_oof, p_oof
+                thr_vec = np.empty(len(yt))
+                for tr, te in fold_models[bname][1]:
+                    thr_vec[te] = safety_threshold(y_oof[tr], p_oof[tr])
+                src = f"{fam.main_scheme} 折外预测（阈值交叉拟合：每折阈值只用其余折确定）"
             cms = {}
-            for tname, thr in (("默认阈值 0.5", 0.5), (f"安全优先（开发集召回≥{SAFETY_RECALL:.0%}）", thr_safe)):
+            for tname, thr in (("默认阈值 0.5", np.full(len(yt), 0.5)), (f"安全优先（目标召回≥{SAFETY_RECALL:.0%}）", thr_vec)):
                 cm = confusion_matrix(yt, (pp >= thr).astype(int), labels=[0, 1])
-                cms[tname] = {"threshold": float(thr), "matrix": cm.tolist(),
-                              "recall": float(cm[1, 1] / max(1, cm[1].sum())), "precision": float(cm[1, 1] / max(1, cm[:, 1].sum()))}
+                cms[tname] = {"threshold": float(np.mean(thr)), "threshold_range": [float(thr.min()), float(thr.max())],
+                              "matrix": cm.tolist(), "recall": float(cm[1, 1] / max(1, cm[1].sum())),
+                              "precision": float(cm[1, 1] / max(1, cm[:, 1].sum()))}
             cls_store[task.target] = {"source": src, "confusion": cms, "y": yt, "p": pp}
 
         # 分档
@@ -373,13 +395,28 @@ def run_family(fam: Family, mon) -> dict:
             except Exception as exc:  # noqa: BLE001
                 mon.line(f"    PDP 失败（不影响训练结果）：{exc!r}")
 
-    # 学习曲线
+    # 学习曲线：只在开发集内部（主方案留出折）完成，外部集不参与
     lc_rows = []
-    if fam.learning_curve and fam.external is not None:
+    if fam.learning_curve:
         lc_rows = learning_curve(fam, mon, final_models)
 
     # 保存结果
     res = out / "results"
+    from .config import DATA
+    from .provenance import run_record, sha256
+    data_files = {p.name: sha256(p) for p in sorted(DATA.glob("*.csv")) + [DATA / "data_manifest.json"]}
+    with open(res / "run_manifest.json", "w", encoding="utf-8") as fh:
+        json.dump(run_record({
+            "header": HEADER, "family": fam.name, "title": fam.title, "main_scheme": fam.main_scheme,
+            "schemes": list(fam.schemes), "tuned": fam.tune, "tune_grids": GRIDS if fam.tune else None,
+            "train_rows": int(len(fam.train)), "train_trajectories": int(fam.train.case_id.nunique()),
+            "external_rows": int(len(fam.external)) if fam.external is not None else 0,
+            "external_trajectories": int(fam.external.case_id.nunique()) if fam.external is not None else 0,
+            "external_use": "每个任务的最终模型在外部集上只评一次；学习曲线、调参、阈值选择均不使用外部集"
+                            if fam.external is not None else None,
+            "data_sha256": data_files,
+            "final_models": {t: {"model": v[1], "params": v[2]} for t, v in final_models.items()},
+        }), fh, ensure_ascii=False, indent=2, default=str)
     scores = pd.DataFrame(score_rows)
     scores.to_csv(res / "scores.csv", index=False, encoding="utf-8-sig")
     tiers = pd.DataFrame(tier_rows)
@@ -429,7 +466,7 @@ def run_family(fam: Family, mon) -> dict:
     mon.tick(5)
 
     mon.line("")
-    mon.line(f"[{fam.name}] 准入总表")
+    mon.line(f"[{fam.name}] 临时模型表现分档（只衡量对纠错前评分的预测能力，非科研准入）")
     for _, t in tiers.iterrows():
         mon.line(f"  {t.tier}  {target_label(t.task):28s} {t.model:6s} 主方案 skill={t.main_skill:+.3f} "
                  + (f"R²={t.main_R2:.3f}" if t.kind == "reg" else f"AUC={t.main_AUC:.3f}")
@@ -446,6 +483,8 @@ def tier_for(fam, task, score_rows, bname, ext_skill):
         strong = main["skill"] >= TIER_A["skill"] and main["R2"] >= TIER_A["r2"]
     else:
         strong = main["AUC"] == main["AUC"] and main["AUC"] >= TIER_A["auc"] and main["skill"] > 0
+    # 临时模型表现分档：只衡量模型对“当前（纠错前）评分”的预测能力，
+    # 不代表评分正确、实验完成或安全性通过，与正式科研准入分开。
     if strong and all_pos:
         tier, reason = "A", "达到 A 档阈值，且所有验证方案都优于基线"
     elif main["skill"] > 0:
@@ -457,6 +496,9 @@ def tier_for(fam, task, score_rows, bname, ext_skill):
         tier, reason = "C", "主方案不优于基线"
     return {"family": fam.name, "task": task.target, "target_label": target_label(task.target), "kind": task.kind,
             "label_dep": task.label_dep, "model": bname, "tier": tier, "reason": reason,
+            "tier_meaning": "临时模型表现分档（非科研准入）",
+            "main_scheme_note": "开发集交叉验证成绩；最优模型类别按同一外层成绩选出，略偏乐观"
+                                + ("；外部检验成绩无此偏差" if fam.external is not None else ""),
             "main_skill": main["skill"], "main_R2": main.get("R2", np.nan), "main_AUC": main.get("AUC", np.nan),
             "external_skill": ext_skill if ext_skill is not None else np.nan,
             **{f"skill[{s}]": v for s, v in skills.items()}}
@@ -489,36 +531,58 @@ def pdp(model, X, features, kind):
 
 
 def learning_curve(fam, mon, final_models):
+    """开发集内部学习曲线。
+
+    - 只用开发集：沿用主验证方案的按轨迹留出折，每折从训练折轨迹中抽 n 条训练，在该折留出轨迹上评估；
+      外部集完全不参与，因此外部检验仍是“定型后只评一次”。
+    - 与最终模型同一套训练流程：模型类别与超参数固定为全量重拟合时选定的取值（M3 为内层调参结果），不再重新调参。
+    """
     rows = []
     rng = np.random.default_rng(SEED)
     feats = fam.num + fam.cat
-    cases = np.array(sorted(fam.train.case_id.unique()))
     for tname in fam.learning_curve:
         task = next(t for t in fam.tasks if t.target == tname)
         if tname not in final_models:
             continue
-        _, bname, _ = final_models[tname]
-        base = make_models(task.kind, fam.num, fam.cat)[bname]
-        df, de = task_frame(fam, task), task_frame(fam, task, fam.external)
-        Xe, ye, ge = de[feats], de[tname].to_numpy(float), de.case_id.to_numpy()
-        for n in (5, 10, 15, 20, len(cases)):
-            reps = 1 if n >= len(cases) else 5
+        final, bname, params = final_models[tname]
+        if isinstance(final, ConstProba):
+            continue
+        base = clone(make_models(task.kind, fam.num, fam.cat)[bname])
+        if params:
+            base.set_params(**params)
+        df = task_frame(fam, task)
+        X, y, g = df[feats], df[tname].to_numpy(float), df.case_id.to_numpy()
+        folds = fam.schemes[fam.main_scheme](df)
+        max_train = min(len(np.unique(g[tr])) for tr, _ in folds)
+        plan = [(n, LC_REPS) for n in LC_SIZES if n < max_train] + [("全部", 1)]
+        for n, reps in plan:
             for r in range(reps):
-                pick = cases if n >= len(cases) else rng.choice(cases, n, replace=False)
-                sub = df[df.case_id.isin(pick)]
-                mon.set_stage(f"学习曲线 {tname[:14]} n={n} r={r+1}")
-                m, _ = fit_model(bname, base, sub[feats], sub[tname].to_numpy(float), sub.case_id.to_numpy(), task.kind, False)
-                pe = predict(m, Xe, task.kind)
-                pb = np.full(len(de), sub[tname].mean())
+                pred, pbase = np.full(len(df), np.nan), np.full(len(df), np.nan)
+                n_used = []
+                for k, (tr, te) in enumerate(folds):
+                    tr_cases = np.unique(g[tr])
+                    pick = tr_cases if n == "全部" else rng.choice(tr_cases, n, replace=False)
+                    sub = tr[np.isin(g[tr], pick)]
+                    n_used.append(len(pick))
+                    mon.set_stage(f"学习曲线 {tname[:14]} n={n} r={r+1} 折{k+1}")
+                    if task.kind == "cls" and len(np.unique(y[sub])) < 2:
+                        m = ConstProba(y[sub].mean())
+                    else:
+                        m = clone(base)
+                        m.fit(X.iloc[sub], y[sub])
+                    pred[te] = predict(m, X.iloc[te], task.kind)
+                    pbase[te] = y[sub].mean()
+                    mon.tick(1)
+                rec = {"task": tname, "model": bname, "params": json.dumps(params, ensure_ascii=False) if params else "",
+                       "n_traj": int(np.mean(n_used)), "n_label": str(n), "rep": r, "evaluated_on": f"开发集 {fam.main_scheme} 留出折"}
                 if task.kind == "reg":
-                    a, b = reg_metrics(ye, pe, ge), reg_metrics(ye, pb, ge)
-                    rows.append({"task": tname, "model": bname, "n_traj": n, "rep": r, "MAE_group_equal": a["MAE_group_equal"],
-                                 "baseline_MAE_group_equal": b["MAE_group_equal"], "R2": a["R2"],
-                                 "skill": 1 - a["MAE_group_equal"] / b["MAE_group_equal"]})
+                    a, b = reg_metrics(y, pred, g), reg_metrics(y, pbase, g)
+                    rec.update({"MAE_group_equal": a["MAE_group_equal"], "baseline_MAE_group_equal": b["MAE_group_equal"],
+                                "R2": a["R2"], "skill": 1 - a["MAE_group_equal"] / b["MAE_group_equal"]})
                 else:
-                    a, b = cls_metrics(ye.astype(int), pe), cls_metrics(ye.astype(int), pb)
-                    rows.append({"task": tname, "model": bname, "n_traj": n, "rep": r, "AUC": a["AUC"], "Brier": a["Brier"],
-                                 "baseline_Brier": b["Brier"], "skill": 1 - a["Brier"] / b["Brier"]})
-                mon.tick(1)
-        mon.line(f"    学习曲线 {target_label(tname)} 完成")
+                    a, b = cls_metrics(y.astype(int), pred), cls_metrics(y.astype(int), pbase)
+                    rec.update({"AUC": a["AUC"], "Brier": a["Brier"], "baseline_Brier": b["Brier"],
+                                "skill": 1 - a["Brier"] / b["Brier"]})
+                rows.append(rec)
+        mon.line(f"    学习曲线 {target_label(tname)} 完成（开发集内部，{bname}，参数与最终模型一致）")
     return rows

@@ -40,12 +40,21 @@ def sha256(path: Path) -> str:
 
 
 _profiles: dict = {}
+_read_files: dict = {}  # 实际读取的每个源文件 -> sha256，用于可复现绑定
+
+
+def _record(path: Path):
+    key = str(path)
+    if key not in _read_files:
+        _read_files[key] = sha256(path)
 
 
 def profile(partition: str, case: str) -> dict:
     key = (partition, case)
     if key not in _profiles:
-        with open(DATASETS / partition / case / "profile.json", encoding="utf-8") as fh:
+        p = DATASETS / partition / case / "profile.json"
+        _record(p)
+        with open(p, encoding="utf-8") as fh:
             d = json.load(fh)["design"]
         entry, ret = float(d["entry_rate_abs_deg_s"]), float(d["return_rate_abs_deg_s"])
         # 选择集 profile 没有 template / base_rate 字段：按入弯与回正速率的关系推出（与开发集定义一致）
@@ -74,6 +83,7 @@ def geometry(job_id: str) -> dict:
         out = {c: np.nan for c in GEOM}
         p = find_job(job_id)
         if p is not None:
+            _record(p / "summary.json")
             with open(p / "summary.json", encoding="utf-8") as fh:
                 s = json.load(fh)
             s = s[0] if isinstance(s, list) else s
@@ -148,6 +158,7 @@ def add_paired(df: pd.DataFrame, prefix: str, ref_mask: pd.Series, key: list[str
 def hold_rows_from_jobs(stage: str) -> pd.DataFrame:
     recs = []
     for d in sorted((AFT / "jobs").glob(f"{stage}__*")):
+        _record(d / "summary.json")
         with open(d / "summary.json", encoding="utf-8") as fh:
             s = json.load(fh)
         for r in (s if isinstance(s, list) else [s]):
@@ -157,6 +168,10 @@ def hold_rows_from_jobs(stage: str) -> pd.DataFrame:
 
 
 def build(mon) -> dict:
+    import shutil
+    for d in (DATA, FIG):  # 清空旧输出，避免混入上一次的数据表和图
+        if d.exists():
+            shutil.rmtree(d)
     DATA.mkdir(parents=True, exist_ok=True)
     manifest = {"header": HEADER, "sources": {}, "outputs": {}, "notes": []}
     raw = {}
@@ -228,9 +243,28 @@ def build(mon) -> dict:
     manifest["row_conservation"] = {k: {"read": int(a), "written": int(b), "ok": a == b} for k, (a, b) in cons.items()}
     if not all(v["ok"] for v in manifest["row_conservation"].values()):
         raise RuntimeError(f"行数不守恒：{manifest['row_conservation']}")
+    # 可复现绑定：所有实际读取的源文件（评分 CSV、保持基线与几何误差 summary、工况 profile）逐文件 SHA256
+    from common.provenance import aggregate, run_record
+    for k in manifest["sources"]:
+        if "sha256" in manifest["sources"][k]:
+            _read_files[manifest["sources"][k]["path"]] = manifest["sources"][k]["sha256"]
+    pd.DataFrame(sorted(_read_files.items()), columns=["path", "sha256"]).to_csv(
+        DATA / "source_files_sha256.csv", index=False, encoding="utf-8-sig")
+    kinds = {"summary.json": 0, "profile.json": 0, ".csv": 0}
+    for pth in _read_files:
+        for k in kinds:
+            if pth.endswith(k):
+                kinds[k] += 1
+    manifest["source_files"] = {"count": len(_read_files), "by_kind": kinds, "aggregate_sha256": aggregate(_read_files),
+                                "list": "source_files_sha256.csv"}
+    manifest["run"] = run_record()
+    for name in ("D1", "D2", "D3", "D4", "D5"):
+        manifest["outputs"][name]["sha256"] = sha256(DATA / f"{name}.csv")
     with open(DATA / "data_manifest.json", "w", encoding="utf-8") as fh:
         json.dump(manifest, fh, ensure_ascii=False, indent=2)
     mon.line("行数守恒：" + "；".join(f"{k} 读入 {v['read']} → 写出 {v['written']}" for k, v in manifest["row_conservation"].items()))
+    mon.line(f"源文件绑定：{manifest['source_files']['count']} 个文件 {manifest['source_files']['by_kind']}，"
+             f"整组指纹 {manifest['source_files']['aggregate_sha256'][:16]}…")
     for k, v in manifest["outputs"].items():
         mon.line(f"  {k}: {v['rows']} 行 / {v['trajectories']} 条轨迹 / {v['jobs']} 个作业，口径 {v['score_version']}，"
                  f"窗口漏报行占比 {v['any_window_miss_share']:.3f}，几何缺失 {v['geometry_missing_rows']}")

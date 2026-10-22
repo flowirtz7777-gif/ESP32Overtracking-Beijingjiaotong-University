@@ -1,0 +1,89 @@
+{
+  "time": "2026-10-22 15:40:39",
+  "environment": {
+    "python": "3.14.4",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "matplotlib": "3.10.9",
+    "joblib": "1.6.0",
+    "seed": 20261022
+  },
+  "code_sha256": {
+    "common/__init__.py": "e0196d9d3678fac868ba77486b7be4a2f45ebdad8b60fac542da3c0807611430",
+    "common/config.py": "82428e9c97523e667f4f7bd9c099c8f5f3431b69ea873cfa583871be76779e2f",
+    "common/figures.py": "fe8ed33ff1e6df16ca4f12d06589e8487e446dc1ca90fb908ec1af2885ac5451",
+    "common/modeling.py": "696aecad14b1deeb692d501fd214c5989802493145de42fb61f4d417d192c96d",
+    "common/monitor.py": "d3471f2e8f032dae08082090320119ee32e44afdfdf39c22991310e45b3c6298",
+    "common/plotting.py": "110e40226c6fe3a9b3fcfd5321ad77fd272bf340f0c59182040881ddd1f4fc6f",
+    "common/provenance.py": "062c4d0ed5fd29845c29d4c0ff68878285a1e1239030bec0e2098f501fd65387",
+    "M1_核心预测方法/train.py": "f02950d25bfcaa8e1a23ece5ec5165be7969d8451fbb2a6079de9b045dbafc87",
+    "M2a_观测扰动与预处理/train.py": "bfc1bf343d7f80f710ac98360d237436e5868f70ad89186b9a3091967f895614",
+    "M2b_状态估计筛选/train.py": "ff6b156bea9c1c0219eabed0d15baf31021f57152d9738d3013eae9f3b110c4b",
+    "M3_二级处理联合/train.py": "4024fc9e301de67ed9ad9f9875841af361386cc28f9b4b037ca1af597d608810",
+    "M4_趋势增益精化/train.py": "c4d7eca2e21ebb84babbf901277c5214341be2d342faa2695c10372a2ef5fd6b",
+    "P0_数据整理/build_all.py": "442e8ae17fd828981b91f79e6213999f4ef28774c730a81cf42b94ff313ab236",
+    "run_step.py": "a34f31e3886fd31c9bf5c4c658fcb9fff5d306d481601b3db1aa27c776906779",
+    "描述性图表/make_figures.py": "046c808368835f8131a987a9a86ce407effe79fcbea31dd0503596bfe42379f6",
+    "汇总/collect_figures.py": "a5e583ab689fcec053247d3d20196b5136aacc36fbe7af924b01e5c8efb3104e",
+    "汇总/summarize.py": "9ab018c69624dd480c2703e5e05f8ab1a3e2945906fe066b31088afbeb2b9eac",
+    "汇总/verify_models.py": "3aaa40feea31b5ef1026eaa9bd62b03b2193220cd6a473c82391b644dc6a172b",
+    "run_all.ps1": "53d085764751a0f250cb41df58465585043aaa746057ad1d95d0649ea59788a7"
+  },
+  "code_aggregate_sha256": "852887c02d64f566fb0c6cc789beb6ff9d7340fbb75c6c059ba27d7461b55207",
+  "header": "中期答辩临时训练：基于接触标签纠错前评分，非冻结科研资产。",
+  "family": "M2a",
+  "title": "观测扰动与预处理",
+  "main_scheme": "留一轨迹",
+  "schemes": [
+    "留一轨迹"
+  ],
+  "tuned": false,
+  "tune_grids": null,
+  "train_rows": 864,
+  "train_trajectories": 6,
+  "external_rows": 0,
+  "external_trajectories": 0,
+  "external_use": null,
+  "data_sha256": {
+    "D1.csv": "3010e9476bf6430bd8d6a35979687c79716036762a5f429e3f882cf781698f01",
+    "D2.csv": "0d225e9367239981f93ae5a0423926e126b385c8f8f94d75949297474865ca96",
+    "D3.csv": "0b4b05c6aa77bc9c2e02a763cca4503183a77559d55a3e6e3d3930af9b07ee71",
+    "D4.csv": "155d9d0e251fc0d432b3d31bce5cc5e164bc3f1d7d4f51ae373a2d20c26de4a4",
+    "D5.csv": "4a4b1e663ccd614adccec78a43b9bf4ed5cd2e8f4f8684e7c8d1145981cb7992",
+    "source_files_sha256.csv": "d5f946561f6805fb746bc490866164de16514e1526425fd4848d8eb2d86f6622",
+    "data_manifest.json": "7bd1f57ff32c64bf67aa4af65a929c6c4e19e9efb4de013e81ac3d37b4b55f92"
+  },
+  "final_models": {
+    "geom_2.0_mean": {
+      "model": "梯度提升",
+      "params": null
+    },
+    "geom_2.0_p95": {
+      "model": "梯度提升",
+      "params": null
+    },
+    "right_pct": {
+      "model": "随机森林",
+      "params": null
+    },
+    "negative_fp_pct": {
+      "model": "随机森林",
+      "params": null
+    },
+    "frame_fpr_pct": {
+      "model": "随机森林",
+      "params": null
+    },
+    "d_hold_right_pct": {
+      "model": "梯度提升",
+      "params": null
+    },
+    "d_hold_negative_fp_pct": {
+      "model": "梯度提升",
+      "params": null
+    }
+  }
+}

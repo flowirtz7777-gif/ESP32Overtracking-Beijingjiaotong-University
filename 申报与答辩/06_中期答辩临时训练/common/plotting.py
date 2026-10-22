@@ -19,7 +19,9 @@ METHOD_LABEL = {"hold": "保持", "linear": "线性", "damped_linear": "衰减�
 
 
 def footnote(fig, text, y=-0.02):
-    fig.text(0.01, y, text, fontsize=8, color="#555555", ha="left", va="top")
+    import textwrap
+    width = max(60, int(fig.get_figwidth() * 13))  # 按图宽折行，避免长脚注把图撑宽
+    fig.text(0.01, y, "\n".join(textwrap.wrap(text, width)), fontsize=8, color="#555555", ha="left", va="top")
 
 
 def save(fig, path):
