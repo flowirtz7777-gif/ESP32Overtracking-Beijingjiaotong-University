@@ -1,0 +1,431 @@
+{
+  "started_utc": "2026-10-22T16:20:07.007725+00:00",
+  "renderer": "Exact Tavotto bundled Python + installed engine/worker.py (desktop safe mode)",
+  "bundled_python": "C:\\Users\\Admin\\AppData\\Local\\Tavotto\\sidecar\\Tavotto\\_internal\\runtime\\python.exe",
+  "controller_python": "C:\\Users\\Admin\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+  "registry_scripts": 60,
+  "unique_stems": 60,
+  "results": [
+    {
+      "script": "01_数据探索\\01_目标分布_D1.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 464,
+      "seconds": 2.157
+    },
+    {
+      "script": "01_数据探索\\01_目标分布_D2.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 471,
+      "seconds": 2.264
+    },
+    {
+      "script": "01_数据探索\\01_目标分布_D3.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 475,
+      "seconds": 2.386
+    },
+    {
+      "script": "01_数据探索\\01_目标分布_D4.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 470,
+      "seconds": 2.455
+    },
+    {
+      "script": "01_数据探索\\01_目标分布_D5.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 463,
+      "seconds": 2.559
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D1.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 140,
+      "seconds": 2.145
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D2.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 215,
+      "seconds": 2.31
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D3.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 215,
+      "seconds": 2.373
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D4.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 244,
+      "seconds": 2.499
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D5.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 215,
+      "seconds": 2.512
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D1.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 83,
+      "seconds": 2.06
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D2.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 100,
+      "seconds": 2.147
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D3.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 100,
+      "seconds": 2.237
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D4.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 100,
+      "seconds": 2.352
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D5.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 100,
+      "seconds": 2.387
+    },
+    {
+      "script": "01_数据探索\\04_轨迹相似度_D3.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 188,
+      "seconds": 3.344
+    },
+    {
+      "script": "01_数据探索\\05_特征与目标关系_D3.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 323,
+      "seconds": 3.138
+    },
+    {
+      "script": "02_描述性图表\\fig01_端点误差_各配置.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 152,
+      "seconds": 1.429
+    },
+    {
+      "script": "02_描述性图表\\fig02_配对迟报差_相对保持.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 72,
+      "seconds": 1.37
+    },
+    {
+      "script": "02_描述性图表\\fig03_迟报误报权衡.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 59,
+      "seconds": 1.401
+    },
+    {
+      "script": "02_描述性图表\\fig04_驾驶因素_配对收益热图.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 68,
+      "seconds": 1.392
+    },
+    {
+      "script": "02_描述性图表\\fig05_噪声延迟与状态估计.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 108,
+      "seconds": 1.628
+    },
+    {
+      "script": "02_描述性图表\\fig06_后处理三因素交互.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 169,
+      "seconds": 1.792
+    },
+    {
+      "script": "02_描述性图表\\fig07_趋势增益曲线.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 89,
+      "seconds": 1.547
+    },
+    {
+      "script": "02_描述性图表\\fig12_标签区间旁证.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 65,
+      "seconds": 1.389
+    },
+    {
+      "script": "02_描述性图表\\fig13_案例_预测区叠加.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 230,
+      "seconds": 1.682
+    },
+    {
+      "script": "02_描述性图表\\fig14_案例_报警接触时间轴.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 257,
+      "seconds": 1.651
+    },
+    {
+      "script": "03_M1_核心预测方法\\M1__fig01_模型对比与分档.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 61,
+      "seconds": 1.414
+    },
+    {
+      "script": "03_M1_核心预测方法\\M1__fig02_预测vs实际_折外.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 83,
+      "seconds": 1.583
+    },
+    {
+      "script": "03_M1_核心预测方法\\M1__fig03_残差诊断.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 353,
+      "seconds": 1.973
+    },
+    {
+      "script": "03_M1_核心预测方法\\M1__fig04_分段误差.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 276,
+      "seconds": 2.123
+    },
+    {
+      "script": "03_M1_核心预测方法\\M1__fig05_置换重要性.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 132,
+      "seconds": 1.786
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\M2a__fig01_模型对比与分档.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 52,
+      "seconds": 1.347
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\M2a__fig02_预测vs实际_折外.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 93,
+      "seconds": 1.582
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\M2a__fig03_残差诊断.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 349,
+      "seconds": 1.941
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\M2a__fig04_分段误差.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 315,
+      "seconds": 2.326
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\M2a__fig05_置换重要性.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 113,
+      "seconds": 1.77
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\M2b__fig01_模型对比与分档.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 61,
+      "seconds": 1.382
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\M2b__fig02_预测vs实际_折外.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 91,
+      "seconds": 1.616
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\M2b__fig03_残差诊断.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 360,
+      "seconds": 2.03
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\M2b__fig04_分段误差.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 262,
+      "seconds": 2.118
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\M2b__fig05_置换重要性.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 119,
+      "seconds": 1.751
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig01_模型对比与分档.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 107,
+      "seconds": 1.942
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig02_预测vs实际_折外.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 87,
+      "seconds": 2.175
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig03_残差诊断.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 362,
+      "seconds": 2.558
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig04_分段误差.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 382,
+      "seconds": 2.879
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig05_置换重要性.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 182,
+      "seconds": 2.512
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig06_混淆矩阵.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 80,
+      "seconds": 2.224
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig07_ROC_PR.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 52,
+      "seconds": 2.242
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig08_外部检验_预测vs实际.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 138,
+      "seconds": 2.725
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig09_学习曲线.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 104,
+      "seconds": 2.568
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig10_部分依赖_后处理.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 602,
+      "seconds": 4.391
+    },
+    {
+      "script": "07_M4_趋势增益精化\\M4__fig01_模型对比与分档.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 103,
+      "seconds": 1.959
+    },
+    {
+      "script": "07_M4_趋势增益精化\\M4__fig02_预测vs实际_折外.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 85,
+      "seconds": 2.343
+    },
+    {
+      "script": "07_M4_趋势增益精化\\M4__fig03_残差诊断.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 360,
+      "seconds": 2.764
+    },
+    {
+      "script": "07_M4_趋势增益精化\\M4__fig04_分段误差.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 409,
+      "seconds": 3.087
+    },
+    {
+      "script": "07_M4_趋势增益精化\\M4__fig05_置换重要性.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 180,
+      "seconds": 2.423
+    },
+    {
+      "script": "07_M4_趋势增益精化\\M4__fig06_混淆矩阵.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 80,
+      "seconds": 2.162
+    },
+    {
+      "script": "07_M4_趋势增益精化\\M4__fig07_ROC_PR.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 52,
+      "seconds": 2.117
+    },
+    {
+      "script": "08_汇总\\fig11_全部模型临时表现分档总图.py",
+      "ok": true,
+      "exit_code": 0,
+      "editable_elements": 147,
+      "seconds": 1.745
+    }
+  ],
+  "integrity_failures": []
+}

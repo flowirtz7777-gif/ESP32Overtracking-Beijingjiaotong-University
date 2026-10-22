@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "scripts": {
+    "M3__fig01_模型对比与分档.py": {
+      "entry": "__main__",
+      "stems": [
+        "M3__fig01_模型对比与分档"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "M3__fig02_预测vs实际_折外.py": {
+      "entry": "__main__",
+      "stems": [
+        "M3__fig02_预测vs实际_折外"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "M3__fig03_残差诊断.py": {
+      "entry": "__main__",
+      "stems": [
+        "M3__fig03_残差诊断"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "M3__fig04_分段误差.py": {
+      "entry": "__main__",
+      "stems": [
+        "M3__fig04_分段误差"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "M3__fig05_置换重要性.py": {
+      "entry": "__main__",
+      "stems": [
+        "M3__fig05_置换重要性"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "M3__fig06_混淆矩阵.py": {
+      "entry": "__main__",
+      "stems": [
+        "M3__fig06_混淆矩阵"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "M3__fig07_ROC_PR.py": {
+      "entry": "__main__",
+      "stems": [
+        "M3__fig07_ROC_PR"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "M3__fig08_外部检验_预测vs实际.py": {
+      "entry": "__main__",
+      "stems": [
+        "M3__fig08_外部检验_预测vs实际"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "M3__fig09_学习曲线.py": {
+      "entry": "__main__",
+      "stems": [
+        "M3__fig09_学习曲线"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "M3__fig10_部分依赖_后处理.py": {
+      "entry": "__main__",
+      "stems": [
+        "M3__fig10_部分依赖_后处理"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    }
+  }
+}

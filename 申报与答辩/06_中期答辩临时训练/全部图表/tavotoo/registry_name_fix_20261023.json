@@ -1,0 +1,202 @@
+{
+  "at_utc": "2026-10-22T16:06:50.879584+00:00",
+  "cause": "Root Registry.load rejects duplicate stems, although isolated worker rendering succeeds.",
+  "backup": "C:\\Users\\Admin\\tavotto_registry_fix_20261023_v1",
+  "model_figures_renamed": 32,
+  "all_figures": 60,
+  "unique_stems": 60,
+  "mapping": [
+    {
+      "old_script": "03_M1_核心预测方法\\fig01_模型对比与分档.py",
+      "new_script": "03_M1_核心预测方法\\M1__fig01_模型对比与分档.py",
+      "old_stem": "fig01_模型对比与分档",
+      "new_stem": "M1__fig01_模型对比与分档"
+    },
+    {
+      "old_script": "03_M1_核心预测方法\\fig02_预测vs实际_折外.py",
+      "new_script": "03_M1_核心预测方法\\M1__fig02_预测vs实际_折外.py",
+      "old_stem": "fig02_预测vs实际_折外",
+      "new_stem": "M1__fig02_预测vs实际_折外"
+    },
+    {
+      "old_script": "03_M1_核心预测方法\\fig03_残差诊断.py",
+      "new_script": "03_M1_核心预测方法\\M1__fig03_残差诊断.py",
+      "old_stem": "fig03_残差诊断",
+      "new_stem": "M1__fig03_残差诊断"
+    },
+    {
+      "old_script": "03_M1_核心预测方法\\fig04_分段误差.py",
+      "new_script": "03_M1_核心预测方法\\M1__fig04_分段误差.py",
+      "old_stem": "fig04_分段误差",
+      "new_stem": "M1__fig04_分段误差"
+    },
+    {
+      "old_script": "03_M1_核心预测方法\\fig05_置换重要性.py",
+      "new_script": "03_M1_核心预测方法\\M1__fig05_置换重要性.py",
+      "old_stem": "fig05_置换重要性",
+      "new_stem": "M1__fig05_置换重要性"
+    },
+    {
+      "old_script": "04_M2a_观测扰动与预处理\\fig01_模型对比与分档.py",
+      "new_script": "04_M2a_观测扰动与预处理\\M2a__fig01_模型对比与分档.py",
+      "old_stem": "fig01_模型对比与分档",
+      "new_stem": "M2a__fig01_模型对比与分档"
+    },
+    {
+      "old_script": "04_M2a_观测扰动与预处理\\fig02_预测vs实际_折外.py",
+      "new_script": "04_M2a_观测扰动与预处理\\M2a__fig02_预测vs实际_折外.py",
+      "old_stem": "fig02_预测vs实际_折外",
+      "new_stem": "M2a__fig02_预测vs实际_折外"
+    },
+    {
+      "old_script": "04_M2a_观测扰动与预处理\\fig03_残差诊断.py",
+      "new_script": "04_M2a_观测扰动与预处理\\M2a__fig03_残差诊断.py",
+      "old_stem": "fig03_残差诊断",
+      "new_stem": "M2a__fig03_残差诊断"
+    },
+    {
+      "old_script": "04_M2a_观测扰动与预处理\\fig04_分段误差.py",
+      "new_script": "04_M2a_观测扰动与预处理\\M2a__fig04_分段误差.py",
+      "old_stem": "fig04_分段误差",
+      "new_stem": "M2a__fig04_分段误差"
+    },
+    {
+      "old_script": "04_M2a_观测扰动与预处理\\fig05_置换重要性.py",
+      "new_script": "04_M2a_观测扰动与预处理\\M2a__fig05_置换重要性.py",
+      "old_stem": "fig05_置换重要性",
+      "new_stem": "M2a__fig05_置换重要性"
+    },
+    {
+      "old_script": "05_M2b_状态估计筛选\\fig01_模型对比与分档.py",
+      "new_script": "05_M2b_状态估计筛选\\M2b__fig01_模型对比与分档.py",
+      "old_stem": "fig01_模型对比与分档",
+      "new_stem": "M2b__fig01_模型对比与分档"
+    },
+    {
+      "old_script": "05_M2b_状态估计筛选\\fig02_预测vs实际_折外.py",
+      "new_script": "05_M2b_状态估计筛选\\M2b__fig02_预测vs实际_折外.py",
+      "old_stem": "fig02_预测vs实际_折外",
+      "new_stem": "M2b__fig02_预测vs实际_折外"
+    },
+    {
+      "old_script": "05_M2b_状态估计筛选\\fig03_残差诊断.py",
+      "new_script": "05_M2b_状态估计筛选\\M2b__fig03_残差诊断.py",
+      "old_stem": "fig03_残差诊断",
+      "new_stem": "M2b__fig03_残差诊断"
+    },
+    {
+      "old_script": "05_M2b_状态估计筛选\\fig04_分段误差.py",
+      "new_script": "05_M2b_状态估计筛选\\M2b__fig04_分段误差.py",
+      "old_stem": "fig04_分段误差",
+      "new_stem": "M2b__fig04_分段误差"
+    },
+    {
+      "old_script": "05_M2b_状态估计筛选\\fig05_置换重要性.py",
+      "new_script": "05_M2b_状态估计筛选\\M2b__fig05_置换重要性.py",
+      "old_stem": "fig05_置换重要性",
+      "new_stem": "M2b__fig05_置换重要性"
+    },
+    {
+      "old_script": "06_M3_二级处理联合\\fig01_模型对比与分档.py",
+      "new_script": "06_M3_二级处理联合\\M3__fig01_模型对比与分档.py",
+      "old_stem": "fig01_模型对比与分档",
+      "new_stem": "M3__fig01_模型对比与分档"
+    },
+    {
+      "old_script": "06_M3_二级处理联合\\fig02_预测vs实际_折外.py",
+      "new_script": "06_M3_二级处理联合\\M3__fig02_预测vs实际_折外.py",
+      "old_stem": "fig02_预测vs实际_折外",
+      "new_stem": "M3__fig02_预测vs实际_折外"
+    },
+    {
+      "old_script": "06_M3_二级处理联合\\fig03_残差诊断.py",
+      "new_script": "06_M3_二级处理联合\\M3__fig03_残差诊断.py",
+      "old_stem": "fig03_残差诊断",
+      "new_stem": "M3__fig03_残差诊断"
+    },
+    {
+      "old_script": "06_M3_二级处理联合\\fig04_分段误差.py",
+      "new_script": "06_M3_二级处理联合\\M3__fig04_分段误差.py",
+      "old_stem": "fig04_分段误差",
+      "new_stem": "M3__fig04_分段误差"
+    },
+    {
+      "old_script": "06_M3_二级处理联合\\fig05_置换重要性.py",
+      "new_script": "06_M3_二级处理联合\\M3__fig05_置换重要性.py",
+      "old_stem": "fig05_置换重要性",
+      "new_stem": "M3__fig05_置换重要性"
+    },
+    {
+      "old_script": "06_M3_二级处理联合\\fig06_混淆矩阵.py",
+      "new_script": "06_M3_二级处理联合\\M3__fig06_混淆矩阵.py",
+      "old_stem": "fig06_混淆矩阵",
+      "new_stem": "M3__fig06_混淆矩阵"
+    },
+    {
+      "old_script": "06_M3_二级处理联合\\fig07_ROC_PR.py",
+      "new_script": "06_M3_二级处理联合\\M3__fig07_ROC_PR.py",
+      "old_stem": "fig07_ROC_PR",
+      "new_stem": "M3__fig07_ROC_PR"
+    },
+    {
+      "old_script": "06_M3_二级处理联合\\fig08_外部检验_预测vs实际.py",
+      "new_script": "06_M3_二级处理联合\\M3__fig08_外部检验_预测vs实际.py",
+      "old_stem": "fig08_外部检验_预测vs实际",
+      "new_stem": "M3__fig08_外部检验_预测vs实际"
+    },
+    {
+      "old_script": "06_M3_二级处理联合\\fig09_学习曲线.py",
+      "new_script": "06_M3_二级处理联合\\M3__fig09_学习曲线.py",
+      "old_stem": "fig09_学习曲线",
+      "new_stem": "M3__fig09_学习曲线"
+    },
+    {
+      "old_script": "06_M3_二级处理联合\\fig10_部分依赖_后处理.py",
+      "new_script": "06_M3_二级处理联合\\M3__fig10_部分依赖_后处理.py",
+      "old_stem": "fig10_部分依赖_后处理",
+      "new_stem": "M3__fig10_部分依赖_后处理"
+    },
+    {
+      "old_script": "07_M4_趋势增益精化\\fig01_模型对比与分档.py",
+      "new_script": "07_M4_趋势增益精化\\M4__fig01_模型对比与分档.py",
+      "old_stem": "fig01_模型对比与分档",
+      "new_stem": "M4__fig01_模型对比与分档"
+    },
+    {
+      "old_script": "07_M4_趋势增益精化\\fig02_预测vs实际_折外.py",
+      "new_script": "07_M4_趋势增益精化\\M4__fig02_预测vs实际_折外.py",
+      "old_stem": "fig02_预测vs实际_折外",
+      "new_stem": "M4__fig02_预测vs实际_折外"
+    },
+    {
+      "old_script": "07_M4_趋势增益精化\\fig03_残差诊断.py",
+      "new_script": "07_M4_趋势增益精化\\M4__fig03_残差诊断.py",
+      "old_stem": "fig03_残差诊断",
+      "new_stem": "M4__fig03_残差诊断"
+    },
+    {
+      "old_script": "07_M4_趋势增益精化\\fig04_分段误差.py",
+      "new_script": "07_M4_趋势增益精化\\M4__fig04_分段误差.py",
+      "old_stem": "fig04_分段误差",
+      "new_stem": "M4__fig04_分段误差"
+    },
+    {
+      "old_script": "07_M4_趋势增益精化\\fig05_置换重要性.py",
+      "new_script": "07_M4_趋势增益精化\\M4__fig05_置换重要性.py",
+      "old_stem": "fig05_置换重要性",
+      "new_stem": "M4__fig05_置换重要性"
+    },
+    {
+      "old_script": "07_M4_趋势增益精化\\fig06_混淆矩阵.py",
+      "new_script": "07_M4_趋势增益精化\\M4__fig06_混淆矩阵.py",
+      "old_stem": "fig06_混淆矩阵",
+      "new_stem": "M4__fig06_混淆矩阵"
+    },
+    {
+      "old_script": "07_M4_趋势增益精化\\fig07_ROC_PR.py",
+      "new_script": "07_M4_趋势增益精化\\M4__fig07_ROC_PR.py",
+      "old_stem": "fig07_ROC_PR",
+      "new_stem": "M4__fig07_ROC_PR"
+    }
+  ]
+}

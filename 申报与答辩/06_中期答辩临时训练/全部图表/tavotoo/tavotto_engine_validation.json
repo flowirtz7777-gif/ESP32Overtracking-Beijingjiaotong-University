@@ -1,0 +1,1301 @@
+{
+  "total": 60,
+  "engine": "C:\\Users\\Admin\\AppData\\Local\\Tavotto\\sidecar\\Tavotto\\_internal\\tavotto\\engine\\worker.py",
+  "interpreter": "C:\\Users\\Admin\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+  "started_utc": "2026-10-22T15:53:30.896422+00:00",
+  "scope": "Installed Tavotto safe-worker build and editable-Artist manifest, one script per subprocess; no GUI interaction, model fit, simulation or result relabeling",
+  "results": [
+    {
+      "script": "01_数据探索\\01_目标分布_D1.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "01_目标分布_D1": {
+            "size_mm": [
+              381.0,
+              152.4
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.032,
+      "editable_elements": 464,
+      "artist_elements": 464
+    },
+    {
+      "script": "01_数据探索\\01_目标分布_D2.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "01_目标分布_D2": {
+            "size_mm": [
+              381.0,
+              152.4
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.135,
+      "editable_elements": 471,
+      "artist_elements": 471
+    },
+    {
+      "script": "01_数据探索\\01_目标分布_D3.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "01_目标分布_D3": {
+            "size_mm": [
+              381.0,
+              152.4
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.253,
+      "editable_elements": 475,
+      "artist_elements": 475
+    },
+    {
+      "script": "01_数据探索\\01_目标分布_D4.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "01_目标分布_D4": {
+            "size_mm": [
+              381.0,
+              152.4
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.398,
+      "editable_elements": 470,
+      "artist_elements": 470
+    },
+    {
+      "script": "01_数据探索\\01_目标分布_D5.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "01_目标分布_D5": {
+            "size_mm": [
+              381.0,
+              152.4
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.589,
+      "editable_elements": 463,
+      "artist_elements": 463
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D1.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "02_输入相关矩阵_D1": {
+            "size_mm": [
+              215.9,
+              177.8
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.042,
+      "editable_elements": 140,
+      "artist_elements": 140
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D2.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "02_输入相关矩阵_D2": {
+            "size_mm": [
+              257.81,
+              215.9
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.183,
+      "editable_elements": 215,
+      "artist_elements": 215
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D3.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "02_输入相关矩阵_D3": {
+            "size_mm": [
+              257.81,
+              215.9
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.238,
+      "editable_elements": 215,
+      "artist_elements": 215
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D4.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "02_输入相关矩阵_D4": {
+            "size_mm": [
+              271.78,
+              228.6
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.317,
+      "editable_elements": 244,
+      "artist_elements": 244
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D5.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "02_输入相关矩阵_D5": {
+            "size_mm": [
+              257.81,
+              215.9
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.395,
+      "editable_elements": 215,
+      "artist_elements": 215
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D1.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "03_输出相关矩阵_D1": {
+            "size_mm": [
+              203.2,
+              165.1
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.014,
+      "editable_elements": 83,
+      "artist_elements": 83
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D2.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "03_输出相关矩阵_D2": {
+            "size_mm": [
+              203.2,
+              165.1
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.125,
+      "editable_elements": 100,
+      "artist_elements": 100
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D3.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "03_输出相关矩阵_D3": {
+            "size_mm": [
+              203.2,
+              165.1
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.163,
+      "editable_elements": 100,
+      "artist_elements": 100
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D4.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "03_输出相关矩阵_D4": {
+            "size_mm": [
+              203.2,
+              165.1
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.233,
+      "editable_elements": 100,
+      "artist_elements": 100
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D5.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "03_输出相关矩阵_D5": {
+            "size_mm": [
+              203.2,
+              165.1
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.313,
+      "editable_elements": 100,
+      "artist_elements": 100
+    },
+    {
+      "script": "01_数据探索\\04_轨迹相似度_D3.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "04_轨迹相似度_D3": {
+            "size_mm": [
+              431.8,
+              203.2
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 3.073,
+      "editable_elements": 188,
+      "artist_elements": 188
+    },
+    {
+      "script": "01_数据探索\\05_特征与目标关系_D3.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "05_特征与目标关系_D3": {
+            "size_mm": [
+              467.36,
+              165.1
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 3.26,
+      "editable_elements": 323,
+      "artist_elements": 323
+    },
+    {
+      "script": "02_描述性图表\\fig01_端点误差_各配置.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig01_端点误差_各配置": {
+            "size_mm": [
+              279.4,
+              106.68
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.317,
+      "editable_elements": 152,
+      "artist_elements": 152
+    },
+    {
+      "script": "02_描述性图表\\fig02_配对迟报差_相对保持.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig02_配对迟报差_相对保持": {
+            "size_mm": [
+              279.4,
+              106.68
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.289,
+      "editable_elements": 72,
+      "artist_elements": 72
+    },
+    {
+      "script": "02_描述性图表\\fig03_迟报误报权衡.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig03_迟报误报权衡": {
+            "size_mm": [
+              190.5,
+              127.0
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.387,
+      "editable_elements": 59,
+      "artist_elements": 59
+    },
+    {
+      "script": "02_描述性图表\\fig04_驾驶因素_配对收益热图.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig04_驾驶因素_配对收益热图": {
+            "size_mm": [
+              279.4,
+              91.44
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.349,
+      "editable_elements": 68,
+      "artist_elements": 68
+    },
+    {
+      "script": "02_描述性图表\\fig05_噪声延迟与状态估计.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig05_噪声延迟与状态估计": {
+            "size_mm": [
+              406.4,
+              106.68
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.514,
+      "editable_elements": 108,
+      "artist_elements": 108
+    },
+    {
+      "script": "02_描述性图表\\fig06_后处理三因素交互.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig06_后处理三因素交互": {
+            "size_mm": [
+              426.72,
+              165.1
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.656,
+      "editable_elements": 169,
+      "artist_elements": 169
+    },
+    {
+      "script": "02_描述性图表\\fig07_趋势增益曲线.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig07_趋势增益曲线": {
+            "size_mm": [
+              381.0,
+              106.68
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.436,
+      "editable_elements": 89,
+      "artist_elements": 89
+    },
+    {
+      "script": "02_描述性图表\\fig12_标签区间旁证.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig12_标签区间旁证": {
+            "size_mm": [
+              203.2,
+              152.4
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.263,
+      "editable_elements": 65,
+      "artist_elements": 65
+    },
+    {
+      "script": "02_描述性图表\\fig13_案例_预测区叠加.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig13_案例_预测区叠加": {
+            "size_mm": [
+              179.43,
+              148.13
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.573,
+      "editable_elements": 230,
+      "artist_elements": 230
+    },
+    {
+      "script": "02_描述性图表\\fig14_案例_报警接触时间轴.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig14_案例_报警接触时间轴": {
+            "size_mm": [
+              172.78,
+              178.91
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.56,
+      "editable_elements": 257,
+      "artist_elements": 257
+    },
+    {
+      "script": "03_M1_核心预测方法\\fig01_模型对比与分档.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig01_模型对比与分档": {
+            "size_mm": [
+              262.89,
+              121.92
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.337,
+      "editable_elements": 61,
+      "artist_elements": 61
+    },
+    {
+      "script": "03_M1_核心预测方法\\fig02_预测vs实际_折外.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig02_预测vs实际_折外": {
+            "size_mm": [
+              426.72,
+              101.6
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.517,
+      "editable_elements": 83,
+      "artist_elements": 83
+    },
+    {
+      "script": "03_M1_核心预测方法\\fig03_残差诊断.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig03_残差诊断": {
+            "size_mm": [
+              426.72,
+              177.8
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.897,
+      "editable_elements": 353,
+      "artist_elements": 353
+    },
+    {
+      "script": "03_M1_核心预测方法\\fig04_分段误差.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig04_分段误差": {
+            "size_mm": [
+              254.0,
+              304.8
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.853,
+      "editable_elements": 276,
+      "artist_elements": 276
+    },
+    {
+      "script": "03_M1_核心预测方法\\fig05_置换重要性.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig05_置换重要性": {
+            "size_mm": [
+              487.68,
+              121.92
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.664,
+      "editable_elements": 132,
+      "artist_elements": 132
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\fig01_模型对比与分档.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig01_模型对比与分档": {
+            "size_mm": [
+              228.6,
+              121.92
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.272,
+      "editable_elements": 52,
+      "artist_elements": 52
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\fig02_预测vs实际_折外.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig02_预测vs实际_折外": {
+            "size_mm": [
+              426.72,
+              101.6
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.533,
+      "editable_elements": 93,
+      "artist_elements": 93
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\fig03_残差诊断.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig03_残差诊断": {
+            "size_mm": [
+              426.72,
+              177.8
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.968,
+      "editable_elements": 349,
+      "artist_elements": 349
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\fig04_分段误差.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig04_分段误差": {
+            "size_mm": [
+              381.0,
+              304.8
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.016,
+      "editable_elements": 315,
+      "artist_elements": 315
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\fig05_置换重要性.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig05_置换重要性": {
+            "size_mm": [
+              487.68,
+              121.92
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.649,
+      "editable_elements": 113,
+      "artist_elements": 113
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\fig01_模型对比与分档.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig01_模型对比与分档": {
+            "size_mm": [
+              292.1,
+              121.92
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.28,
+      "editable_elements": 61,
+      "artist_elements": 61
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\fig02_预测vs实际_折外.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig02_预测vs实际_折外": {
+            "size_mm": [
+              426.72,
+              101.6
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.526,
+      "editable_elements": 91,
+      "artist_elements": 91
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\fig03_残差诊断.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig03_残差诊断": {
+            "size_mm": [
+              426.72,
+              177.8
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.931,
+      "editable_elements": 360,
+      "artist_elements": 360
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\fig04_分段误差.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig04_分段误差": {
+            "size_mm": [
+              381.0,
+              304.8
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.908,
+      "editable_elements": 262,
+      "artist_elements": 262
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\fig05_置换重要性.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig05_置换重要性": {
+            "size_mm": [
+              487.68,
+              121.92
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.636,
+      "editable_elements": 119,
+      "artist_elements": 119
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig01_模型对比与分档.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig01_模型对比与分档": {
+            "size_mm": [
+              554.99,
+              121.92
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.781,
+      "editable_elements": 107,
+      "artist_elements": 107
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig02_预测vs实际_折外.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig02_预测vs实际_折外": {
+            "size_mm": [
+              426.72,
+              101.6
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.034,
+      "editable_elements": 87,
+      "artist_elements": 87
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig03_残差诊断.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig03_残差诊断": {
+            "size_mm": [
+              426.72,
+              177.8
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.461,
+      "editable_elements": 362,
+      "artist_elements": 362
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig04_分段误差.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig04_分段误差": {
+            "size_mm": [
+              508.0,
+              304.8
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.593,
+      "editable_elements": 382,
+      "artist_elements": 382
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig05_置换重要性.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig05_置换重要性": {
+            "size_mm": [
+              487.68,
+              121.92
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.188,
+      "editable_elements": 182,
+      "artist_elements": 182
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig06_混淆矩阵.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig06_混淆矩阵": {
+            "size_mm": [
+              203.2,
+              274.32
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.05,
+      "editable_elements": 80,
+      "artist_elements": 80
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig07_ROC_PR.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig07_ROC_PR": {
+            "size_mm": [
+              254.0,
+              109.22
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 3.442,
+      "editable_elements": 52,
+      "artist_elements": 52
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig08_外部检验_预测vs实际.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig08_外部检验_预测vs实际": {
+            "size_mm": [
+              436.88,
+              106.68
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 3.987,
+      "editable_elements": 138,
+      "artist_elements": 138
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig09_学习曲线.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig09_学习曲线": {
+            "size_mm": [
+              406.4,
+              96.52
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 3.699,
+      "editable_elements": 104,
+      "artist_elements": 104
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig10_部分依赖_后处理.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig10_部分依赖_后处理": {
+            "size_mm": [
+              431.8,
+              515.62
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 5.205,
+      "editable_elements": 602,
+      "artist_elements": 602
+    },
+    {
+      "script": "07_M4_趋势增益精化\\fig01_模型对比与分档.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig01_模型对比与分档": {
+            "size_mm": [
+              554.99,
+              121.92
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.718,
+      "editable_elements": 103,
+      "artist_elements": 103
+    },
+    {
+      "script": "07_M4_趋势增益精化\\fig02_预测vs实际_折外.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig02_预测vs实际_折外": {
+            "size_mm": [
+              426.72,
+              101.6
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.04,
+      "editable_elements": 85,
+      "artist_elements": 85
+    },
+    {
+      "script": "07_M4_趋势增益精化\\fig03_残差诊断.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig03_残差诊断": {
+            "size_mm": [
+              426.72,
+              177.8
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.462,
+      "editable_elements": 360,
+      "artist_elements": 360
+    },
+    {
+      "script": "07_M4_趋势增益精化\\fig04_分段误差.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig04_分段误差": {
+            "size_mm": [
+              508.0,
+              304.8
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.586,
+      "editable_elements": 409,
+      "artist_elements": 409
+    },
+    {
+      "script": "07_M4_趋势增益精化\\fig05_置换重要性.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig05_置换重要性": {
+            "size_mm": [
+              487.68,
+              121.92
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.136,
+      "editable_elements": 180,
+      "artist_elements": 180
+    },
+    {
+      "script": "07_M4_趋势增益精化\\fig06_混淆矩阵.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig06_混淆矩阵": {
+            "size_mm": [
+              203.2,
+              274.32
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.041,
+      "editable_elements": 80,
+      "artist_elements": 80
+    },
+    {
+      "script": "07_M4_趋势增益精化\\fig07_ROC_PR.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig07_ROC_PR": {
+            "size_mm": [
+              254.0,
+              109.22
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 3.365,
+      "editable_elements": 52,
+      "artist_elements": 52
+    },
+    {
+      "script": "08_汇总\\fig11_全部模型临时表现分档总图.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "fig11_全部模型临时表现分档总图": {
+            "size_mm": [
+              682.75,
+              132.08
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 1.471,
+      "editable_elements": 147,
+      "artist_elements": 147
+    }
+  ],
+  "passed": 60,
+  "all_ok": true,
+  "finished_utc": "2026-10-22T15:55:37.290762+00:00",
+  "category_library_edit_export_checks": [
+    {
+      "script": "02_描述性图表\\fig14_案例_报警接触时间轴.py",
+      "category_library": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\tavotoo\\02_描述性图表",
+      "ok": true,
+      "edit": {
+        "gid": "axes_0.texts_0",
+        "prop": "color",
+        "value": "#0f4d92"
+      },
+      "confirmed_color": "#0f4d92",
+      "pdf_bytes": 114736,
+      "seconds": 2.346
+    },
+    {
+      "script": "03_M1_核心预测方法\\fig01_模型对比与分档.py",
+      "category_library": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\tavotoo\\03_M1_核心预测方法",
+      "ok": true,
+      "edit": {
+        "gid": "fig.texts_0",
+        "prop": "color",
+        "value": "#0f4d92"
+      },
+      "confirmed_color": "#0f4d92",
+      "pdf_bytes": 74340,
+      "seconds": 1.807
+    }
+  ],
+  "category_library_edit_export_all_ok": true
+}

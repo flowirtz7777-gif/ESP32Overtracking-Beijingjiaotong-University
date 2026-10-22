@@ -1,0 +1,31 @@
+{
+  "total": 1,
+  "engine": "C:\\Users\\Admin\\AppData\\Local\\Tavotto\\sidecar\\Tavotto\\_internal\\tavotto\\engine\\worker.py",
+  "interpreter": "C:\\Users\\Admin\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+  "started_utc": "2026-10-22T15:53:07.723485+00:00",
+  "scope": "Installed Tavotto safe-worker build and editable-Artist manifest, one script per subprocess; no GUI interaction, model fit, simulation or result relabeling",
+  "results": [
+    {
+      "script": "01_数据探索\\01_目标分布_D1.py",
+      "exit_code": 0,
+      "ok": true,
+      "response": {
+        "ok": true,
+        "stems": {
+          "01_目标分布_D1": {
+            "size_mm": [
+              381.0,
+              152.4
+            ],
+            "source": "savefig"
+          }
+        }
+      },
+      "preview_svg_count": 1,
+      "seconds": 2.044
+    }
+  ],
+  "passed": 1,
+  "all_ok": true,
+  "finished_utc": "2026-10-22T15:53:09.768024+00:00"
+}

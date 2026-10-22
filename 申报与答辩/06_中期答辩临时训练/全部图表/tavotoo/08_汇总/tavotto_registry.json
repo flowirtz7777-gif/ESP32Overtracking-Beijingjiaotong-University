@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "scripts": {
+    "fig11_全部模型临时表现分档总图.py": {
+      "entry": "__main__",
+      "stems": [
+        "fig11_全部模型临时表现分档总图"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "scripts": {
+    "M2a__fig01_模型对比与分档.py": {
+      "entry": "__main__",
+      "stems": [
+        "M2a__fig01_模型对比与分档"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "M2a__fig02_预测vs实际_折外.py": {
+      "entry": "__main__",
+      "stems": [
+        "M2a__fig02_预测vs实际_折外"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "M2a__fig03_残差诊断.py": {
+      "entry": "__main__",
+      "stems": [
+        "M2a__fig03_残差诊断"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "M2a__fig04_分段误差.py": {
+      "entry": "__main__",
+      "stems": [
+        "M2a__fig04_分段误差"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "M2a__fig05_置换重要性.py": {
+      "entry": "__main__",
+      "stems": [
+        "M2a__fig05_置换重要性"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    }
+  }
+}

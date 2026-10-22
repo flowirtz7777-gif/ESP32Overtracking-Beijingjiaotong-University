@@ -1,0 +1,36 @@
+{
+  "at_utc": "2026-10-22T16:19:14.739227+00:00",
+  "backup": "C:\\Users\\Admin\\tavotto_bundled_fix_20261023_v3",
+  "derived_plot_data": [
+    {
+      "path": "_data\\M3_二级处理联合\\roc_pr_plot_arrays.json",
+      "sha256": "907cf6ac574f29ac41a8a105083724a71e5906e563d2191e6cefcdc652d6bb63",
+      "curve_count": 3,
+      "source_figure": "fig07_ROC_PR",
+      "array_roundtrip_exact": true
+    },
+    {
+      "path": "_data\\M4_趋势增益精化\\roc_pr_plot_arrays.json",
+      "sha256": "fca850d582011e8d177312dd0717b98e11c374072743a1d1fd4d339996ceb958",
+      "curve_count": 3,
+      "source_figure": "fig07_ROC_PR",
+      "array_roundtrip_exact": true
+    }
+  ],
+  "helpers_moved": [
+    "_plot_config.py",
+    "_plot_descriptive.py",
+    "_plot_models.py",
+    "_plot_p0.py",
+    "_plot_style.py",
+    "_support.py",
+    "_svg_replay.py"
+  ],
+  "removed_false_figure_registrations": [
+    "_plot_descriptive.py",
+    "_support.py"
+  ],
+  "original_tables_modified": false,
+  "model_refit": false,
+  "simulation_run": false
+}

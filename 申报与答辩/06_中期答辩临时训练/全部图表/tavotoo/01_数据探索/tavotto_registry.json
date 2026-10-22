@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "scripts": {
+    "01_目标分布_D1.py": {
+      "entry": "__main__",
+      "stems": [
+        "01_目标分布_D1"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "01_目标分布_D2.py": {
+      "entry": "__main__",
+      "stems": [
+        "01_目标分布_D2"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "01_目标分布_D3.py": {
+      "entry": "__main__",
+      "stems": [
+        "01_目标分布_D3"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "01_目标分布_D4.py": {
+      "entry": "__main__",
+      "stems": [
+        "01_目标分布_D4"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "01_目标分布_D5.py": {
+      "entry": "__main__",
+      "stems": [
+        "01_目标分布_D5"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "02_输入相关矩阵_D1.py": {
+      "entry": "__main__",
+      "stems": [
+        "02_输入相关矩阵_D1"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "02_输入相关矩阵_D2.py": {
+      "entry": "__main__",
+      "stems": [
+        "02_输入相关矩阵_D2"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "02_输入相关矩阵_D3.py": {
+      "entry": "__main__",
+      "stems": [
+        "02_输入相关矩阵_D3"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "02_输入相关矩阵_D4.py": {
+      "entry": "__main__",
+      "stems": [
+        "02_输入相关矩阵_D4"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "02_输入相关矩阵_D5.py": {
+      "entry": "__main__",
+      "stems": [
+        "02_输入相关矩阵_D5"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "03_输出相关矩阵_D1.py": {
+      "entry": "__main__",
+      "stems": [
+        "03_输出相关矩阵_D1"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "03_输出相关矩阵_D2.py": {
+      "entry": "__main__",
+      "stems": [
+        "03_输出相关矩阵_D2"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "03_输出相关矩阵_D3.py": {
+      "entry": "__main__",
+      "stems": [
+        "03_输出相关矩阵_D3"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "03_输出相关矩阵_D4.py": {
+      "entry": "__main__",
+      "stems": [
+        "03_输出相关矩阵_D4"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "03_输出相关矩阵_D5.py": {
+      "entry": "__main__",
+      "stems": [
+        "03_输出相关矩阵_D5"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "04_轨迹相似度_D3.py": {
+      "entry": "__main__",
+      "stems": [
+        "04_轨迹相似度_D3"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "05_特征与目标关系_D3.py": {
+      "entry": "__main__",
+      "stems": [
+        "05_特征与目标关系_D3"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    }
+  }
+}

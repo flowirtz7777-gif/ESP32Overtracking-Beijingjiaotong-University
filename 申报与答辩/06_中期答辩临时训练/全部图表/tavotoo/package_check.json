@@ -1,0 +1,80 @@
+{
+  "checked_utc": "2026-10-22T16:22:44.173525+00:00",
+  "figures": 60,
+  "entry_points": 60,
+  "pdfs": 60,
+  "pngs": 60,
+  "groups": {
+    "01_数据探索": {
+      ".py": 17,
+      ".pdf": 17,
+      ".png": 17
+    },
+    "02_描述性图表": {
+      ".py": 10,
+      ".pdf": 10,
+      ".png": 10
+    },
+    "03_M1_核心预测方法": {
+      ".py": 5,
+      ".pdf": 5,
+      ".png": 5
+    },
+    "04_M2a_观测扰动与预处理": {
+      ".py": 5,
+      ".pdf": 5,
+      ".png": 5
+    },
+    "05_M2b_状态估计筛选": {
+      ".py": 5,
+      ".pdf": 5,
+      ".png": 5
+    },
+    "06_M3_二级处理联合": {
+      ".py": 10,
+      ".pdf": 10,
+      ".png": 10
+    },
+    "07_M4_趋势增益精化": {
+      ".py": 7,
+      ".pdf": 7,
+      ".png": 7
+    },
+    "08_汇总": {
+      ".py": 1,
+      ".pdf": 1,
+      ".png": 1
+    }
+  },
+  "mode_counts": {
+    "original_plot_code": 57,
+    "existing_svg_vector_replay": 2,
+    "existing_summary_table": 1
+  },
+  "copied_source_and_package_hash_pairs_checked": 112,
+  "data_files": 46,
+  "root_registry_entries": 60,
+  "category_registry_entries": {
+    "01_数据探索": 17,
+    "02_描述性图表": 10,
+    "03_M1_核心预测方法": 5,
+    "04_M2a_观测扰动与预处理": 5,
+    "05_M2b_状态估计筛选": 5,
+    "06_M3_二级处理联合": 10,
+    "07_M4_趋势增益精化": 7,
+    "08_汇总": 1
+  },
+  "matplotlib_passed": 60,
+  "installed_tavotto_worker_passed": 60,
+  "training_or_simulation_executed": false,
+  "failures": [],
+  "all_ok": true,
+  "package_bytes": 48809248,
+  "figure_stems_unique": true,
+  "latest_validation": "bundled_runtime_validation_v3.json",
+  "real_tavotto_cli_passed": 60,
+  "renamed_model_render_passed": 32,
+  "bundled_runtime_passed": 60,
+  "plotting_requires_sklearn": false,
+  "common_module_directory": "site-packages"
+}

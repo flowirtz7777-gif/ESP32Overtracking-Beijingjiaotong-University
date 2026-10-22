@@ -1,0 +1,485 @@
+{
+ "version": 1,
+ "scripts": {
+  "01_数据探索/01_目标分布_D1.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "01_目标分布_D1"
+   ]
+  },
+  "01_数据探索/01_目标分布_D2.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "01_目标分布_D2"
+   ]
+  },
+  "01_数据探索/01_目标分布_D3.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "01_目标分布_D3"
+   ]
+  },
+  "01_数据探索/01_目标分布_D4.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "01_目标分布_D4"
+   ]
+  },
+  "01_数据探索/01_目标分布_D5.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "01_目标分布_D5"
+   ]
+  },
+  "01_数据探索/02_输入相关矩阵_D1.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "02_输入相关矩阵_D1"
+   ]
+  },
+  "01_数据探索/02_输入相关矩阵_D2.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "02_输入相关矩阵_D2"
+   ]
+  },
+  "01_数据探索/02_输入相关矩阵_D3.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "02_输入相关矩阵_D3"
+   ]
+  },
+  "01_数据探索/02_输入相关矩阵_D4.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "02_输入相关矩阵_D4"
+   ]
+  },
+  "01_数据探索/02_输入相关矩阵_D5.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "02_输入相关矩阵_D5"
+   ]
+  },
+  "01_数据探索/03_输出相关矩阵_D1.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "03_输出相关矩阵_D1"
+   ]
+  },
+  "01_数据探索/03_输出相关矩阵_D2.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "03_输出相关矩阵_D2"
+   ]
+  },
+  "01_数据探索/03_输出相关矩阵_D3.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "03_输出相关矩阵_D3"
+   ]
+  },
+  "01_数据探索/03_输出相关矩阵_D4.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "03_输出相关矩阵_D4"
+   ]
+  },
+  "01_数据探索/03_输出相关矩阵_D5.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "03_输出相关矩阵_D5"
+   ]
+  },
+  "01_数据探索/04_轨迹相似度_D3.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "04_轨迹相似度_D3"
+   ]
+  },
+  "01_数据探索/05_特征与目标关系_D3.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "05_特征与目标关系_D3"
+   ]
+  },
+  "02_描述性图表/fig01_端点误差_各配置.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "fig01_端点误差_各配置"
+   ]
+  },
+  "02_描述性图表/fig02_配对迟报差_相对保持.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "fig02_配对迟报差_相对保持"
+   ]
+  },
+  "02_描述性图表/fig03_迟报误报权衡.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "fig03_迟报误报权衡"
+   ]
+  },
+  "02_描述性图表/fig04_驾驶因素_配对收益热图.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "fig04_驾驶因素_配对收益热图"
+   ]
+  },
+  "02_描述性图表/fig05_噪声延迟与状态估计.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "fig05_噪声延迟与状态估计"
+   ]
+  },
+  "02_描述性图表/fig06_后处理三因素交互.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "fig06_后处理三因素交互"
+   ]
+  },
+  "02_描述性图表/fig07_趋势增益曲线.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "fig07_趋势增益曲线"
+   ]
+  },
+  "02_描述性图表/fig12_标签区间旁证.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "fig12_标签区间旁证"
+   ]
+  },
+  "02_描述性图表/fig13_案例_预测区叠加.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "fig13_案例_预测区叠加"
+   ]
+  },
+  "02_描述性图表/fig14_案例_报警接触时间轴.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "fig14_案例_报警接触时间轴"
+   ]
+  },
+  "08_汇总/fig11_全部模型临时表现分档总图.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "fig11_全部模型临时表现分档总图"
+   ]
+  },
+  "03_M1_核心预测方法/M1__fig01_模型对比与分档.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M1__fig01_模型对比与分档"
+   ]
+  },
+  "03_M1_核心预测方法/M1__fig02_预测vs实际_折外.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M1__fig02_预测vs实际_折外"
+   ]
+  },
+  "03_M1_核心预测方法/M1__fig03_残差诊断.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M1__fig03_残差诊断"
+   ]
+  },
+  "03_M1_核心预测方法/M1__fig04_分段误差.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M1__fig04_分段误差"
+   ]
+  },
+  "03_M1_核心预测方法/M1__fig05_置换重要性.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M1__fig05_置换重要性"
+   ]
+  },
+  "04_M2a_观测扰动与预处理/M2a__fig01_模型对比与分档.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M2a__fig01_模型对比与分档"
+   ]
+  },
+  "04_M2a_观测扰动与预处理/M2a__fig02_预测vs实际_折外.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M2a__fig02_预测vs实际_折外"
+   ]
+  },
+  "04_M2a_观测扰动与预处理/M2a__fig03_残差诊断.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M2a__fig03_残差诊断"
+   ]
+  },
+  "04_M2a_观测扰动与预处理/M2a__fig04_分段误差.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M2a__fig04_分段误差"
+   ]
+  },
+  "04_M2a_观测扰动与预处理/M2a__fig05_置换重要性.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M2a__fig05_置换重要性"
+   ]
+  },
+  "05_M2b_状态估计筛选/M2b__fig01_模型对比与分档.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M2b__fig01_模型对比与分档"
+   ]
+  },
+  "05_M2b_状态估计筛选/M2b__fig02_预测vs实际_折外.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M2b__fig02_预测vs实际_折外"
+   ]
+  },
+  "05_M2b_状态估计筛选/M2b__fig03_残差诊断.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M2b__fig03_残差诊断"
+   ]
+  },
+  "05_M2b_状态估计筛选/M2b__fig04_分段误差.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M2b__fig04_分段误差"
+   ]
+  },
+  "05_M2b_状态估计筛选/M2b__fig05_置换重要性.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M2b__fig05_置换重要性"
+   ]
+  },
+  "06_M3_二级处理联合/M3__fig01_模型对比与分档.py": {
+   "entry": "__main__",
+   "stems": [
+    "M3__fig01_模型对比与分档"
+   ],
+   "cost": "light",
+   "notes": "Existing plot results only; no training or simulation."
+  },
+  "06_M3_二级处理联合/M3__fig02_预测vs实际_折外.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M3__fig02_预测vs实际_折外"
+   ]
+  },
+  "06_M3_二级处理联合/M3__fig03_残差诊断.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M3__fig03_残差诊断"
+   ]
+  },
+  "06_M3_二级处理联合/M3__fig04_分段误差.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M3__fig04_分段误差"
+   ]
+  },
+  "06_M3_二级处理联合/M3__fig05_置换重要性.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M3__fig05_置换重要性"
+   ]
+  },
+  "06_M3_二级处理联合/M3__fig06_混淆矩阵.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M3__fig06_混淆矩阵"
+   ]
+  },
+  "06_M3_二级处理联合/M3__fig07_ROC_PR.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M3__fig07_ROC_PR"
+   ]
+  },
+  "06_M3_二级处理联合/M3__fig08_外部检验_预测vs实际.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "M3__fig08_外部检验_预测vs实际"
+   ]
+  },
+  "06_M3_二级处理联合/M3__fig09_学习曲线.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "M3__fig09_学习曲线"
+   ]
+  },
+  "06_M3_二级处理联合/M3__fig10_部分依赖_后处理.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "",
+   "stems": [
+    "M3__fig10_部分依赖_后处理"
+   ]
+  },
+  "07_M4_趋势增益精化/M4__fig01_模型对比与分档.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M4__fig01_模型对比与分档"
+   ]
+  },
+  "07_M4_趋势增益精化/M4__fig02_预测vs实际_折外.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M4__fig02_预测vs实际_折外"
+   ]
+  },
+  "07_M4_趋势增益精化/M4__fig03_残差诊断.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M4__fig03_残差诊断"
+   ]
+  },
+  "07_M4_趋势增益精化/M4__fig04_分段误差.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M4__fig04_分段误差"
+   ]
+  },
+  "07_M4_趋势增益精化/M4__fig05_置换重要性.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M4__fig05_置换重要性"
+   ]
+  },
+  "07_M4_趋势增益精化/M4__fig06_混淆矩阵.py": {
+   "entry": "__main__",
+   "cost": "medium",
+   "notes": "Existing plot results only; no training or simulation.",
+   "stems": [
+    "M4__fig06_混淆矩阵"
+   ]
+  },
+  "07_M4_趋势增益精化/M4__fig07_ROC_PR.py": {
+   "entry": "__main__",
+   "stems": [
+    "M4__fig07_ROC_PR"
+   ],
+   "cost": "light",
+   "notes": "Existing plot results only; no training or simulation."
+  }
+ }
+}

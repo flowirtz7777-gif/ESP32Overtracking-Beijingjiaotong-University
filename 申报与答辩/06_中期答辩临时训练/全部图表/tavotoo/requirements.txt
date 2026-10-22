@@ -1,0 +1,8 @@
+# Versions already installed in the verified Python 3.14.4 environment.
+# Reference for migration; do not upgrade/reinstall the working environment.
+matplotlib==3.10.9
+numpy==2.4.4
+pandas==3.0.2
+scipy==1.18.1
+fonttools==4.62.1
+Pillow==12.2.0

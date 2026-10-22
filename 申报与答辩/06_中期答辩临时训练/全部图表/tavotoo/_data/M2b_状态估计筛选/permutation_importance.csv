@@ -1,0 +1,141 @@
+﻿family,task,model,feature,label,is_group,importance_mean,importance_fold_std,positive_folds,folds
+M2b,geom_2.0_mean,随机森林,v_B_mps,车速 v_B,False,0.0,0.0,0,6
+M2b,geom_2.0_mean,随机森林,entry_rate_deg_s,入弯转角速率,False,0.0,0.0,0,6
+M2b,geom_2.0_mean,随机森林,return_rate_deg_s,回正转角速率,False,0.0,0.0,0,6
+M2b,geom_2.0_mean,随机森林,gain_eff,趋势增益 g,False,0.0013199493426851755,0.0019653268547991133,4,6
+M2b,geom_2.0_mean,随机森林,decay_eff_s,衰减时间 τ,False,0.0001094824063939562,0.0001380074684865879,4,6
+M2b,geom_2.0_mean,随机森林,accel_eff_s,二阶生效时长,False,0.0,0.0,0,6
+M2b,geom_2.0_mean,随机森林,noise_level,噪声倍率,False,0.01328491786177493,0.004907541238009691,6,6
+M2b,geom_2.0_mean,随机森林,delay_ms,纯延迟,False,0.07433690183823081,0.02542328572541429,6,6
+M2b,geom_2.0_mean,随机森林,template,动作模板,False,0.0,0.0,0,6
+M2b,geom_2.0_mean,随机森林,method,预测方法,False,0.0011221431914063649,0.001588008331000504,4,6
+M2b,geom_2.0_mean,随机森林,processor,输入处理,False,0.002366861525988871,0.0026216643441164394,5,6
+M2b,geom_2.0_mean,随机森林,[组] 转向动作,[组] 转向动作,True,0.0,0.0,0,6
+M2b,geom_2.0_mean,随机森林,[组] 方法及参数,[组] 方法及参数,True,0.003950202621764238,0.004259911342936183,5,6
+M2b,geom_2.0_mean,随机森林,[组] 观测扰动,[组] 观测扰动,True,0.08484055070318397,0.029060860719403125,6,6
+M2b,geom_2.0_p95,梯度提升,v_B_mps,车速 v_B,False,0.0,0.0,0,6
+M2b,geom_2.0_p95,梯度提升,entry_rate_deg_s,入弯转角速率,False,0.0,0.0,0,6
+M2b,geom_2.0_p95,梯度提升,return_rate_deg_s,回正转角速率,False,0.0,0.0,0,6
+M2b,geom_2.0_p95,梯度提升,gain_eff,趋势增益 g,False,0.0031189892077579406,0.003854289808008236,4,6
+M2b,geom_2.0_p95,梯度提升,decay_eff_s,衰减时间 τ,False,0.00016047619586402224,0.00024174863374309212,4,6
+M2b,geom_2.0_p95,梯度提升,accel_eff_s,二阶生效时长,False,0.0,0.0,0,6
+M2b,geom_2.0_p95,梯度提升,noise_level,噪声倍率,False,0.008018340709690472,0.011885551730245237,5,6
+M2b,geom_2.0_p95,梯度提升,delay_ms,纯延迟,False,0.01799167802442695,0.024693700859937093,5,6
+M2b,geom_2.0_p95,梯度提升,template,动作模板,False,0.0,0.0,0,6
+M2b,geom_2.0_p95,梯度提升,method,预测方法,False,0.004904408619090678,0.006945290876079886,6,6
+M2b,geom_2.0_p95,梯度提升,processor,输入处理,False,0.0017509381671125931,0.002946639753323301,3,6
+M2b,geom_2.0_p95,梯度提升,[组] 转向动作,[组] 转向动作,True,0.0,0.0,0,6
+M2b,geom_2.0_p95,梯度提升,[组] 方法及参数,[组] 方法及参数,True,0.007917769830304244,0.01087211526404741,4,6
+M2b,geom_2.0_p95,梯度提升,[组] 观测扰动,[组] 观测扰动,True,0.027387965759811853,0.0339307834244919,4,6
+M2b,right_pct,随机森林,v_B_mps,车速 v_B,False,0.0,0.0,0,6
+M2b,right_pct,随机森林,entry_rate_deg_s,入弯转角速率,False,0.0,0.0,0,6
+M2b,right_pct,随机森林,return_rate_deg_s,回正转角速率,False,0.0,0.0,0,6
+M2b,right_pct,随机森林,gain_eff,趋势增益 g,False,0.12131683943620737,0.11241635579658485,6,6
+M2b,right_pct,随机森林,decay_eff_s,衰减时间 τ,False,0.00209460326767155,0.002962585667199121,4,6
+M2b,right_pct,随机森林,accel_eff_s,二阶生效时长,False,0.0,0.0,0,6
+M2b,right_pct,随机森林,noise_level,噪声倍率,False,0.15255155229288106,0.07855652459121903,6,6
+M2b,right_pct,随机森林,delay_ms,纯延迟,False,0.013063902889407043,0.020159384660000102,5,6
+M2b,right_pct,随机森林,template,动作模板,False,0.0,0.0,0,6
+M2b,right_pct,随机森林,method,预测方法,False,0.21047374690824464,0.12485214653117122,5,6
+M2b,right_pct,随机森林,processor,输入处理,False,0.10730718206704093,0.07296978331293255,6,6
+M2b,right_pct,随机森林,[组] 转向动作,[组] 转向动作,True,0.0,0.0,0,6
+M2b,right_pct,随机森林,[组] 方法及参数,[组] 方法及参数,True,0.43807506003568575,0.20738300545110236,6,6
+M2b,right_pct,随机森林,[组] 观测扰动,[组] 观测扰动,True,0.16613328674220454,0.09304280446181025,6,6
+M2b,right_miss_rate,随机森林,v_B_mps,车速 v_B,False,0.0,0.0,0,6
+M2b,right_miss_rate,随机森林,entry_rate_deg_s,入弯转角速率,False,0.0,0.0,0,6
+M2b,right_miss_rate,随机森林,return_rate_deg_s,回正转角速率,False,0.0,0.0,0,6
+M2b,right_miss_rate,随机森林,gain_eff,趋势增益 g,False,0.0009526222805229769,0.0003347346859563329,6,6
+M2b,right_miss_rate,随机森林,decay_eff_s,衰减时间 τ,False,1.700279941923138e-05,3.5515537351947757e-05,5,6
+M2b,right_miss_rate,随机森林,accel_eff_s,二阶生效时长,False,0.0,0.0,0,6
+M2b,right_miss_rate,随机森林,noise_level,噪声倍率,False,0.0013543701440649576,0.00023801077294760317,6,6
+M2b,right_miss_rate,随机森林,delay_ms,纯延迟,False,1.0350839262665543e-05,1.65208393132619e-05,4,6
+M2b,right_miss_rate,随机森林,template,动作模板,False,0.0,0.0,0,6
+M2b,right_miss_rate,随机森林,method,预测方法,False,0.0009972173258120975,0.00022327564509858893,6,6
+M2b,right_miss_rate,随机森林,processor,输入处理,False,0.0023386242627307634,0.0007589103194574368,6,6
+M2b,right_miss_rate,随机森林,[组] 转向动作,[组] 转向动作,True,0.0,0.0,0,6
+M2b,right_miss_rate,随机森林,[组] 方法及参数,[组] 方法及参数,True,0.002547694967184815,0.0003670807027227561,6,6
+M2b,right_miss_rate,随机森林,[组] 观测扰动,[组] 观测扰动,True,0.0011367771760807679,0.000268545331421151,6,6
+M2b,negative_fp_pct,随机森林,v_B_mps,车速 v_B,False,0.0,0.0,0,6
+M2b,negative_fp_pct,随机森林,entry_rate_deg_s,入弯转角速率,False,0.0,0.0,0,6
+M2b,negative_fp_pct,随机森林,return_rate_deg_s,回正转角速率,False,0.0,0.0,0,6
+M2b,negative_fp_pct,随机森林,gain_eff,趋势增益 g,False,0.6229400299851894,0.6507787651189761,5,6
+M2b,negative_fp_pct,随机森林,decay_eff_s,衰减时间 τ,False,0.033074811153850886,0.046160616042997114,4,6
+M2b,negative_fp_pct,随机森林,accel_eff_s,二阶生效时长,False,0.0,0.0,0,6
+M2b,negative_fp_pct,随机森林,noise_level,噪声倍率,False,1.8944111247512077,0.7847891554017615,6,6
+M2b,negative_fp_pct,随机森林,delay_ms,纯延迟,False,0.0007862383837382376,0.003605263029172988,3,6
+M2b,negative_fp_pct,随机森林,template,动作模板,False,0.0,0.0,0,6
+M2b,negative_fp_pct,随机森林,method,预测方法,False,0.5934344078515984,0.6043752117137028,4,6
+M2b,negative_fp_pct,随机森林,processor,输入处理,False,2.1151026214161073,0.2824507222105239,6,6
+M2b,negative_fp_pct,随机森林,[组] 转向动作,[组] 转向动作,True,0.0,0.0,0,6
+M2b,negative_fp_pct,随机森林,[组] 方法及参数,[组] 方法及参数,True,1.3725162652773635,1.0232125942795633,6,6
+M2b,negative_fp_pct,随机森林,[组] 观测扰动,[组] 观测扰动,True,1.839334760200801,0.6308529449171774,6,6
+M2b,frame_fpr_pct,梯度提升,v_B_mps,车速 v_B,False,0.0,0.0,0,6
+M2b,frame_fpr_pct,梯度提升,entry_rate_deg_s,入弯转角速率,False,0.0,0.0,0,6
+M2b,frame_fpr_pct,梯度提升,return_rate_deg_s,回正转角速率,False,0.0,0.0,0,6
+M2b,frame_fpr_pct,梯度提升,gain_eff,趋势增益 g,False,0.009432082446804576,0.009191353451702265,5,6
+M2b,frame_fpr_pct,梯度提升,decay_eff_s,衰减时间 τ,False,0.0005611367471364134,0.00040923779692837405,6,6
+M2b,frame_fpr_pct,梯度提升,accel_eff_s,二阶生效时长,False,0.0,0.0,0,6
+M2b,frame_fpr_pct,梯度提升,noise_level,噪声倍率,False,0.04546741746131889,0.018145679437344072,6,6
+M2b,frame_fpr_pct,梯度提升,delay_ms,纯延迟,False,0.018517917522316737,0.01836816431736306,4,6
+M2b,frame_fpr_pct,梯度提升,template,动作模板,False,0.0,0.0,0,6
+M2b,frame_fpr_pct,梯度提升,method,预测方法,False,0.008412475599115708,0.01064288188619145,6,6
+M2b,frame_fpr_pct,梯度提升,processor,输入处理,False,0.02740760618064837,0.01972605282388928,6,6
+M2b,frame_fpr_pct,梯度提升,[组] 转向动作,[组] 转向动作,True,0.0,0.0,0,6
+M2b,frame_fpr_pct,梯度提升,[组] 方法及参数,[组] 方法及参数,True,0.022559877000963693,0.020634866818521974,5,6
+M2b,frame_fpr_pct,梯度提升,[组] 观测扰动,[组] 观测扰动,True,0.059567689844935906,0.03193472176407314,6,6
+M2b,d_hold_right_pct,随机森林,v_B_mps,车速 v_B,False,0.0,0.0,0,6
+M2b,d_hold_right_pct,随机森林,entry_rate_deg_s,入弯转角速率,False,0.0,0.0,0,6
+M2b,d_hold_right_pct,随机森林,return_rate_deg_s,回正转角速率,False,0.0,0.0,0,6
+M2b,d_hold_right_pct,随机森林,gain_eff,趋势增益 g,False,0.0006271679569614699,0.0013135364542350605,3,6
+M2b,d_hold_right_pct,随机森林,decay_eff_s,衰减时间 τ,False,0.001391823078238896,0.0017428844678272928,5,6
+M2b,d_hold_right_pct,随机森林,accel_eff_s,二阶生效时长,False,0.0,0.0,0,6
+M2b,d_hold_right_pct,随机森林,noise_level,噪声倍率,False,0.11695786231676351,0.09031258977590191,6,6
+M2b,d_hold_right_pct,随机森林,delay_ms,纯延迟,False,0.04136164496935192,0.03202048433369949,5,6
+M2b,d_hold_right_pct,随机森林,template,动作模板,False,0.0,0.0,0,6
+M2b,d_hold_right_pct,随机森林,method,预测方法,False,0.0032383399630271166,0.005242513417182566,4,6
+M2b,d_hold_right_pct,随机森林,processor,输入处理,False,0.19421502319881503,0.12068632364134653,6,6
+M2b,d_hold_right_pct,随机森林,[组] 转向动作,[组] 转向动作,True,0.0,0.0,0,6
+M2b,d_hold_right_pct,随机森林,[组] 方法及参数,[组] 方法及参数,True,0.007270443108211445,0.012194637930216936,3,6
+M2b,d_hold_right_pct,随机森林,[组] 观测扰动,[组] 观测扰动,True,0.16689264601922296,0.09576913861978363,6,6
+M2b,d_raw_right_pct,随机森林,v_B_mps,车速 v_B,False,0.0,0.0,0,6
+M2b,d_raw_right_pct,随机森林,entry_rate_deg_s,入弯转角速率,False,0.0,0.0,0,6
+M2b,d_raw_right_pct,随机森林,return_rate_deg_s,回正转角速率,False,0.0,0.0,0,6
+M2b,d_raw_right_pct,随机森林,gain_eff,趋势增益 g,False,0.09212638412726026,0.10806336881892083,5,6
+M2b,d_raw_right_pct,随机森林,decay_eff_s,衰减时间 τ,False,0.0015152094912907641,0.0017034836281413321,4,6
+M2b,d_raw_right_pct,随机森林,accel_eff_s,二阶生效时长,False,0.0,0.0,0,6
+M2b,d_raw_right_pct,随机森林,noise_level,噪声倍率,False,0.13034410137802718,0.060687396288694136,6,6
+M2b,d_raw_right_pct,随机森林,delay_ms,纯延迟,False,0.0030729614881622263,0.005456149585766739,5,6
+M2b,d_raw_right_pct,随机森林,template,动作模板,False,0.0,0.0,0,6
+M2b,d_raw_right_pct,随机森林,method,预测方法,False,0.09986021304421423,0.09359363556621704,5,6
+M2b,d_raw_right_pct,随机森林,processor,输入处理,False,0.07610758357269592,0.05026285728303946,6,6
+M2b,d_raw_right_pct,随机森林,[组] 转向动作,[组] 转向动作,True,0.0,0.0,0,6
+M2b,d_raw_right_pct,随机森林,[组] 方法及参数,[组] 方法及参数,True,0.29842687180935007,0.12028723173740297,6,6
+M2b,d_raw_right_pct,随机森林,[组] 观测扰动,[组] 观测扰动,True,0.1386245350763988,0.05716333613926227,6,6
+M2b,d_raw_right_miss_rate,随机森林,v_B_mps,车速 v_B,False,0.0,0.0,0,6
+M2b,d_raw_right_miss_rate,随机森林,entry_rate_deg_s,入弯转角速率,False,0.0,0.0,0,6
+M2b,d_raw_right_miss_rate,随机森林,return_rate_deg_s,回正转角速率,False,0.0,0.0,0,6
+M2b,d_raw_right_miss_rate,随机森林,gain_eff,趋势增益 g,False,0.0012235033449377783,0.0002246452215128555,6,6
+M2b,d_raw_right_miss_rate,随机森林,decay_eff_s,衰减时间 τ,False,1.9815072915427567e-05,3.7408627838332455e-05,5,6
+M2b,d_raw_right_miss_rate,随机森林,accel_eff_s,二阶生效时长,False,0.0,0.0,0,6
+M2b,d_raw_right_miss_rate,随机森林,noise_level,噪声倍率,False,0.0016394759727458845,0.0004914860407019611,6,6
+M2b,d_raw_right_miss_rate,随机森林,delay_ms,纯延迟,False,8.112963629293857e-06,4.3948484545892965e-05,4,6
+M2b,d_raw_right_miss_rate,随机森林,template,动作模板,False,0.0,0.0,0,6
+M2b,d_raw_right_miss_rate,随机森林,method,预测方法,False,0.0013165629474592851,0.0003661515124261599,6,6
+M2b,d_raw_right_miss_rate,随机森林,processor,输入处理,False,0.0019431899111179134,0.0009107102745953017,6,6
+M2b,d_raw_right_miss_rate,随机森林,[组] 转向动作,[组] 转向动作,True,0.0,0.0,0,6
+M2b,d_raw_right_miss_rate,随机森林,[组] 方法及参数,[组] 方法及参数,True,0.0035364187376304783,0.0007852322665204156,6,6
+M2b,d_raw_right_miss_rate,随机森林,[组] 观测扰动,[组] 观测扰动,True,0.0016260633054723604,0.00042729965426947054,6,6
+M2b,d_raw_negative_fp_pct,随机森林,v_B_mps,车速 v_B,False,0.0,0.0,0,6
+M2b,d_raw_negative_fp_pct,随机森林,entry_rate_deg_s,入弯转角速率,False,0.0,0.0,0,6
+M2b,d_raw_negative_fp_pct,随机森林,return_rate_deg_s,回正转角速率,False,0.0,0.0,0,6
+M2b,d_raw_negative_fp_pct,随机森林,gain_eff,趋势增益 g,False,0.38756163736783383,0.29903082758199817,4,6
+M2b,d_raw_negative_fp_pct,随机森林,decay_eff_s,衰减时间 τ,False,0.002796400389723114,0.016533220338899614,3,6
+M2b,d_raw_negative_fp_pct,随机森林,accel_eff_s,二阶生效时长,False,0.0,0.0,0,6
+M2b,d_raw_negative_fp_pct,随机森林,noise_level,噪声倍率,False,2.5448479747853923,0.3808667457278104,6,6
+M2b,d_raw_negative_fp_pct,随机森林,delay_ms,纯延迟,False,-0.000679413847680867,0.001092274781857774,2,6
+M2b,d_raw_negative_fp_pct,随机森林,template,动作模板,False,0.0,0.0,0,6
+M2b,d_raw_negative_fp_pct,随机森林,method,预测方法,False,0.12994763997461065,0.13330664542665757,4,6
+M2b,d_raw_negative_fp_pct,随机森林,processor,输入处理,False,1.0176723363958355,0.5546348612810273,6,6
+M2b,d_raw_negative_fp_pct,随机森林,[组] 转向动作,[组] 转向动作,True,0.0,0.0,0,6
+M2b,d_raw_negative_fp_pct,随机森林,[组] 方法及参数,[组] 方法及参数,True,0.7398478282222426,0.4262368716480573,6,6
+M2b,d_raw_negative_fp_pct,随机森林,[组] 观测扰动,[组] 观测扰动,True,2.3842349264864304,0.383623081777393,6,6

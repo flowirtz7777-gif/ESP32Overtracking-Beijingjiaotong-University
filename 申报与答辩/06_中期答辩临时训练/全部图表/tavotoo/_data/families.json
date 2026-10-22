@@ -1,0 +1,362 @@
+{
+  "M1_核心预测方法": {
+    "name": "M1",
+    "title": "核心预测方法",
+    "main_scheme": "按轨迹5折",
+    "score_note": "数据 S1（v3 评分口径，误报类数值略高于修正口径），27 条轨迹，转角峰值均为 10°。",
+    "tasks": [
+      {
+        "target": "geom_0.3_mean",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "geom_1.0_mean",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "geom_2.0_mean",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "geom_2.0_p95",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_hold_right_pct",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "d_hold_right_lead_p10_s",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_hold_negative_fp_pct",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "right_pct",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "negative_fp_pct",
+        "kind": "reg",
+        "key": false
+      }
+    ]
+  },
+  "M2a_观测扰动与预处理": {
+    "name": "M2a",
+    "title": "观测扰动与预处理",
+    "main_scheme": "留一轨迹",
+    "score_note": "数据 S2（v3 评分口径），只有 6 条轨迹，结论稳健性有限。",
+    "tasks": [
+      {
+        "target": "geom_2.0_mean",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "geom_2.0_p95",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "right_pct",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "negative_fp_pct",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "frame_fpr_pct",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_hold_right_pct",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "d_hold_negative_fp_pct",
+        "kind": "reg",
+        "key": true
+      }
+    ]
+  },
+  "M2b_状态估计筛选": {
+    "name": "M2b",
+    "title": "状态估计筛选",
+    "main_scheme": "留一轨迹",
+    "score_note": "数据 S4 状态估计筛选（修正评分口径），只有 6 条轨迹，结论稳健性有限。",
+    "tasks": [
+      {
+        "target": "geom_2.0_mean",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "geom_2.0_p95",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "right_pct",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "right_miss_rate",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "negative_fp_pct",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "frame_fpr_pct",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_hold_right_pct",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_raw_right_pct",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "d_raw_right_miss_rate",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_raw_negative_fp_pct",
+        "kind": "reg",
+        "key": true
+      }
+    ]
+  },
+  "M3_二级处理联合": {
+    "name": "M3",
+    "title": "二级处理联合（主模型）",
+    "main_scheme": "按轨迹5折",
+    "score_note": "数据 S3（修正评分口径），训练 27 条开发轨迹，外部检验 12 条选择轨迹，转角峰值均为 10°。",
+    "tasks": [
+      {
+        "target": "right_pct",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "right_miss_rate",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "right_lead_p10_s",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "negative_fp_pct",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "frame_fpr_pct",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "common_2s_fpr_pct",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_hold_right_pct",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_hold_right_lead_p10_s",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_hold_negative_fp_pct",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_hold_common_2s_fpr_pct",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_post_right_pct",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "d_post_right_miss_rate",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_post_negative_fp_pct",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "d_post_common_2s_fpr_pct",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "geom_2.0_mean",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "geom_2.0_p95",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "any_window_miss",
+        "kind": "cls",
+        "key": true
+      },
+      {
+        "target": "any_no_before",
+        "kind": "cls",
+        "key": true
+      },
+      {
+        "target": "fp_budget_pass",
+        "kind": "cls",
+        "key": true
+      }
+    ]
+  },
+  "M4_趋势增益精化": {
+    "name": "M4",
+    "title": "趋势增益精化",
+    "main_scheme": "按轨迹4折",
+    "score_note": "数据 S4 联合精化（修正评分口径），12 条选择轨迹（属于调参数据），增益细档效应只来自这 12 条轨迹。",
+    "tasks": [
+      {
+        "target": "right_pct",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "right_miss_rate",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "right_lead_p10_s",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "negative_fp_pct",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "frame_fpr_pct",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "common_2s_fpr_pct",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_hold_right_pct",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "d_hold_right_lead_p10_s",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_hold_negative_fp_pct",
+        "kind": "reg",
+        "key": true
+      },
+      {
+        "target": "d_hold_common_2s_fpr_pct",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_post_right_pct",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_post_right_miss_rate",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_post_negative_fp_pct",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "d_post_common_2s_fpr_pct",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "geom_2.0_mean",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "geom_2.0_p95",
+        "kind": "reg",
+        "key": false
+      },
+      {
+        "target": "any_window_miss",
+        "kind": "cls",
+        "key": false
+      },
+      {
+        "target": "any_no_before",
+        "kind": "cls",
+        "key": false
+      },
+      {
+        "target": "fp_budget_pass",
+        "kind": "cls",
+        "key": false
+      }
+    ]
+  }
+}

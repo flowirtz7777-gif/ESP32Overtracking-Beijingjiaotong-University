@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "scripts": {
+    "fig01_端点误差_各配置.py": {
+      "entry": "__main__",
+      "stems": [
+        "fig01_端点误差_各配置"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "fig02_配对迟报差_相对保持.py": {
+      "entry": "__main__",
+      "stems": [
+        "fig02_配对迟报差_相对保持"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "fig03_迟报误报权衡.py": {
+      "entry": "__main__",
+      "stems": [
+        "fig03_迟报误报权衡"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "fig04_驾驶因素_配对收益热图.py": {
+      "entry": "__main__",
+      "stems": [
+        "fig04_驾驶因素_配对收益热图"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "fig05_噪声延迟与状态估计.py": {
+      "entry": "__main__",
+      "stems": [
+        "fig05_噪声延迟与状态估计"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "fig06_后处理三因素交互.py": {
+      "entry": "__main__",
+      "stems": [
+        "fig06_后处理三因素交互"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "fig07_趋势增益曲线.py": {
+      "entry": "__main__",
+      "stems": [
+        "fig07_趋势增益曲线"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "fig12_标签区间旁证.py": {
+      "entry": "__main__",
+      "stems": [
+        "fig12_标签区间旁证"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "fig13_案例_预测区叠加.py": {
+      "entry": "__main__",
+      "stems": [
+        "fig13_案例_预测区叠加"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    },
+    "fig14_案例_报警接触时间轴.py": {
+      "entry": "__main__",
+      "stems": [
+        "fig14_案例_报警接触时间轴"
+      ],
+      "cost": "light",
+      "notes": "Existing plot results only; no training or simulation."
+    }
+  }
+}

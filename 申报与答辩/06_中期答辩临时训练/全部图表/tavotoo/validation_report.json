@@ -1,0 +1,565 @@
+{
+  "total": 60,
+  "passed": 60,
+  "all_ok": true,
+  "validation": "Python syntax, real Matplotlib Artist reconstruction and PDF render; not a claim of Tavotto GUI acceptance",
+  "environment": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "fonttools": "4.62.1",
+    "Pillow": "12.2.0"
+  },
+  "results": [
+    {
+      "script": "01_数据探索\\01_目标分布_D1.py",
+      "ok": true,
+      "axes": 8,
+      "text_count": 127,
+      "seconds": 1.064,
+      "pdf_bytes": 49113,
+      "svg_replay": null
+    },
+    {
+      "script": "01_数据探索\\01_目标分布_D2.py",
+      "ok": true,
+      "axes": 8,
+      "text_count": 134,
+      "seconds": 0.888,
+      "pdf_bytes": 49434,
+      "svg_replay": null
+    },
+    {
+      "script": "01_数据探索\\01_目标分布_D3.py",
+      "ok": true,
+      "axes": 8,
+      "text_count": 138,
+      "seconds": 1.047,
+      "pdf_bytes": 50299,
+      "svg_replay": null
+    },
+    {
+      "script": "01_数据探索\\01_目标分布_D4.py",
+      "ok": true,
+      "axes": 8,
+      "text_count": 133,
+      "seconds": 1.141,
+      "pdf_bytes": 49340,
+      "svg_replay": null
+    },
+    {
+      "script": "01_数据探索\\01_目标分布_D5.py",
+      "ok": true,
+      "axes": 8,
+      "text_count": 126,
+      "seconds": 1.255,
+      "pdf_bytes": 49689,
+      "svg_replay": null
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D1.py",
+      "ok": true,
+      "axes": 2,
+      "text_count": 130,
+      "seconds": 1.254,
+      "pdf_bytes": 58678,
+      "svg_replay": null
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D2.py",
+      "ok": true,
+      "axes": 2,
+      "text_count": 205,
+      "seconds": 1.481,
+      "pdf_bytes": 61917,
+      "svg_replay": null
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D3.py",
+      "ok": true,
+      "axes": 2,
+      "text_count": 205,
+      "seconds": 1.587,
+      "pdf_bytes": 66205,
+      "svg_replay": null
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D4.py",
+      "ok": true,
+      "axes": 2,
+      "text_count": 234,
+      "seconds": 1.653,
+      "pdf_bytes": 62911,
+      "svg_replay": null
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D5.py",
+      "ok": true,
+      "axes": 2,
+      "text_count": 205,
+      "seconds": 1.669,
+      "pdf_bytes": 65998,
+      "svg_replay": null
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D1.py",
+      "ok": true,
+      "axes": 2,
+      "text_count": 73,
+      "seconds": 1.194,
+      "pdf_bytes": 47416,
+      "svg_replay": null
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D2.py",
+      "ok": true,
+      "axes": 2,
+      "text_count": 90,
+      "seconds": 1.239,
+      "pdf_bytes": 59105,
+      "svg_replay": null
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D3.py",
+      "ok": true,
+      "axes": 2,
+      "text_count": 90,
+      "seconds": 1.318,
+      "pdf_bytes": 62069,
+      "svg_replay": null
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D4.py",
+      "ok": true,
+      "axes": 2,
+      "text_count": 90,
+      "seconds": 1.416,
+      "pdf_bytes": 59928,
+      "svg_replay": null
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D5.py",
+      "ok": true,
+      "axes": 2,
+      "text_count": 90,
+      "seconds": 1.564,
+      "pdf_bytes": 61745,
+      "svg_replay": null
+    },
+    {
+      "script": "01_数据探索\\04_轨迹相似度_D3.py",
+      "ok": true,
+      "axes": 4,
+      "text_count": 173,
+      "seconds": 2.762,
+      "pdf_bytes": 99190,
+      "svg_replay": null
+    },
+    {
+      "script": "01_数据探索\\05_特征与目标关系_D3.py",
+      "ok": true,
+      "axes": 16,
+      "text_count": 59,
+      "seconds": 1.678,
+      "pdf_bytes": 54084,
+      "svg_replay": null
+    },
+    {
+      "script": "02_描述性图表\\fig01_端点误差_各配置.py",
+      "ok": true,
+      "axes": 1,
+      "text_count": 29,
+      "seconds": 0.314,
+      "pdf_bytes": 55309,
+      "svg_replay": null
+    },
+    {
+      "script": "02_描述性图表\\fig02_配对迟报差_相对保持.py",
+      "ok": true,
+      "axes": 1,
+      "text_count": 47,
+      "seconds": 0.28,
+      "pdf_bytes": 50566,
+      "svg_replay": null
+    },
+    {
+      "script": "02_描述性图表\\fig03_迟报误报权衡.py",
+      "ok": true,
+      "axes": 1,
+      "text_count": 29,
+      "seconds": 0.334,
+      "pdf_bytes": 56891,
+      "svg_replay": null
+    },
+    {
+      "script": "02_描述性图表\\fig04_驾驶因素_配对收益热图.py",
+      "ok": true,
+      "axes": 4,
+      "text_count": 47,
+      "seconds": 0.402,
+      "pdf_bytes": 60583,
+      "svg_replay": null
+    },
+    {
+      "script": "02_描述性图表\\fig05_噪声延迟与状态估计.py",
+      "ok": true,
+      "axes": 4,
+      "text_count": 70,
+      "seconds": 0.493,
+      "pdf_bytes": 69997,
+      "svg_replay": null
+    },
+    {
+      "script": "02_描述性图表\\fig06_后处理三因素交互.py",
+      "ok": true,
+      "axes": 12,
+      "text_count": 122,
+      "seconds": 1.039,
+      "pdf_bytes": 80501,
+      "svg_replay": null
+    },
+    {
+      "script": "02_描述性图表\\fig07_趋势增益曲线.py",
+      "ok": true,
+      "axes": 3,
+      "text_count": 48,
+      "seconds": 0.44,
+      "pdf_bytes": 62402,
+      "svg_replay": null
+    },
+    {
+      "script": "02_描述性图表\\fig12_标签区间旁证.py",
+      "ok": true,
+      "axes": 1,
+      "text_count": 28,
+      "seconds": 0.359,
+      "pdf_bytes": 42468,
+      "svg_replay": null
+    },
+    {
+      "script": "02_描述性图表\\fig13_案例_预测区叠加.py",
+      "ok": true,
+      "first_failure": "ValueError(\"'square' is not a valid CapStyle\")",
+      "axes": 1,
+      "text_count": 90,
+      "svg_replay": {
+        "path": 119,
+        "text": 90,
+        "image": 2
+      },
+      "pdf_bytes": 152035
+    },
+    {
+      "script": "02_描述性图表\\fig14_案例_报警接触时间轴.py",
+      "ok": true,
+      "first_failure": "ValueError(\"'square' is not a valid CapStyle\")",
+      "axes": 1,
+      "text_count": 97,
+      "svg_replay": {
+        "path": 145,
+        "text": 97,
+        "image": 0
+      },
+      "pdf_bytes": 114818
+    },
+    {
+      "script": "03_M1_核心预测方法\\fig01_模型对比与分档.py",
+      "ok": true,
+      "axes": 1,
+      "text_count": 18,
+      "seconds": 0.33,
+      "pdf_bytes": 74341,
+      "svg_replay": null
+    },
+    {
+      "script": "03_M1_核心预测方法\\fig02_预测vs实际_折外.py",
+      "ok": true,
+      "axes": 4,
+      "text_count": 69,
+      "seconds": 0.449,
+      "pdf_bytes": 79701,
+      "svg_replay": null
+    },
+    {
+      "script": "03_M1_核心预测方法\\fig03_残差诊断.py",
+      "ok": true,
+      "axes": 8,
+      "text_count": 130,
+      "seconds": 0.692,
+      "pdf_bytes": 83903,
+      "svg_replay": null
+    },
+    {
+      "script": "03_M1_核心预测方法\\fig04_分段误差.py",
+      "ok": true,
+      "axes": 8,
+      "text_count": 151,
+      "seconds": 0.809,
+      "pdf_bytes": 56678,
+      "svg_replay": null
+    },
+    {
+      "script": "03_M1_核心预测方法\\fig05_置换重要性.py",
+      "ok": true,
+      "axes": 4,
+      "text_count": 71,
+      "seconds": 0.594,
+      "pdf_bytes": 74217,
+      "svg_replay": null
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\fig01_模型对比与分档.py",
+      "ok": true,
+      "axes": 1,
+      "text_count": 17,
+      "seconds": 0.278,
+      "pdf_bytes": 73391,
+      "svg_replay": null
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\fig02_预测vs实际_折外.py",
+      "ok": true,
+      "axes": 4,
+      "text_count": 79,
+      "seconds": 0.488,
+      "pdf_bytes": 83989,
+      "svg_replay": null
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\fig03_残差诊断.py",
+      "ok": true,
+      "axes": 8,
+      "text_count": 126,
+      "seconds": 0.697,
+      "pdf_bytes": 90371,
+      "svg_replay": null
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\fig04_分段误差.py",
+      "ok": true,
+      "axes": 12,
+      "text_count": 173,
+      "seconds": 0.851,
+      "pdf_bytes": 55233,
+      "svg_replay": null
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\fig05_置换重要性.py",
+      "ok": true,
+      "axes": 4,
+      "text_count": 60,
+      "seconds": 0.609,
+      "pdf_bytes": 74110,
+      "svg_replay": null
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\fig01_模型对比与分档.py",
+      "ok": true,
+      "axes": 1,
+      "text_count": 17,
+      "seconds": 0.317,
+      "pdf_bytes": 76264,
+      "svg_replay": null
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\fig02_预测vs实际_折外.py",
+      "ok": true,
+      "axes": 4,
+      "text_count": 77,
+      "seconds": 0.458,
+      "pdf_bytes": 68226,
+      "svg_replay": null
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\fig03_残差诊断.py",
+      "ok": true,
+      "axes": 8,
+      "text_count": 137,
+      "seconds": 0.741,
+      "pdf_bytes": 74348,
+      "svg_replay": null
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\fig04_分段误差.py",
+      "ok": true,
+      "axes": 12,
+      "text_count": 150,
+      "seconds": 0.828,
+      "pdf_bytes": 56957,
+      "svg_replay": null
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\fig05_置换重要性.py",
+      "ok": true,
+      "axes": 4,
+      "text_count": 66,
+      "seconds": 0.627,
+      "pdf_bytes": 75132,
+      "svg_replay": null
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig01_模型对比与分档.py",
+      "ok": true,
+      "axes": 1,
+      "text_count": 28,
+      "seconds": 0.777,
+      "pdf_bytes": 87089,
+      "svg_replay": null
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig02_预测vs实际_折外.py",
+      "ok": true,
+      "axes": 4,
+      "text_count": 73,
+      "seconds": 1.021,
+      "pdf_bytes": 265078,
+      "svg_replay": null
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig03_残差诊断.py",
+      "ok": true,
+      "axes": 8,
+      "text_count": 139,
+      "seconds": 1.306,
+      "pdf_bytes": 301360,
+      "svg_replay": null
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig04_分段误差.py",
+      "ok": true,
+      "axes": 16,
+      "text_count": 209,
+      "seconds": 1.449,
+      "pdf_bytes": 60459,
+      "svg_replay": null
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig05_置换重要性.py",
+      "ok": true,
+      "axes": 4,
+      "text_count": 97,
+      "seconds": 1.187,
+      "pdf_bytes": 83369,
+      "svg_replay": null
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig06_混淆矩阵.py",
+      "ok": true,
+      "axes": 6,
+      "text_count": 49,
+      "seconds": 1.178,
+      "pdf_bytes": 66939,
+      "svg_replay": null
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig07_ROC_PR.py",
+      "ok": true,
+      "axes": 2,
+      "text_count": 32,
+      "seconds": 2.138,
+      "pdf_bytes": 56878,
+      "svg_replay": null
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig08_外部检验_预测vs实际.py",
+      "ok": true,
+      "axes": 4,
+      "text_count": 67,
+      "seconds": 1.558,
+      "pdf_bytes": 171043,
+      "svg_replay": null
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig09_学习曲线.py",
+      "ok": true,
+      "axes": 4,
+      "text_count": 71,
+      "seconds": 1.227,
+      "pdf_bytes": 73889,
+      "svg_replay": null
+    },
+    {
+      "script": "06_M3_二级处理联合\\fig10_部分依赖_后处理.py",
+      "ok": true,
+      "axes": 35,
+      "text_count": 561,
+      "seconds": 2.612,
+      "pdf_bytes": 99133,
+      "svg_replay": null
+    },
+    {
+      "script": "07_M4_趋势增益精化\\fig01_模型对比与分档.py",
+      "ok": true,
+      "axes": 1,
+      "text_count": 28,
+      "seconds": 0.72,
+      "pdf_bytes": 89342,
+      "svg_replay": null
+    },
+    {
+      "script": "07_M4_趋势增益精化\\fig02_预测vs实际_折外.py",
+      "ok": true,
+      "axes": 4,
+      "text_count": 71,
+      "seconds": 1.065,
+      "pdf_bytes": 365494,
+      "svg_replay": null
+    },
+    {
+      "script": "07_M4_趋势增益精化\\fig03_残差诊断.py",
+      "ok": true,
+      "axes": 8,
+      "text_count": 137,
+      "seconds": 1.31,
+      "pdf_bytes": 426495,
+      "svg_replay": null
+    },
+    {
+      "script": "07_M4_趋势增益精化\\fig04_分段误差.py",
+      "ok": true,
+      "axes": 16,
+      "text_count": 218,
+      "seconds": 1.398,
+      "pdf_bytes": 63787,
+      "svg_replay": null
+    },
+    {
+      "script": "07_M4_趋势增益精化\\fig05_置换重要性.py",
+      "ok": true,
+      "axes": 4,
+      "text_count": 95,
+      "seconds": 1.147,
+      "pdf_bytes": 87685,
+      "svg_replay": null
+    },
+    {
+      "script": "07_M4_趋势增益精化\\fig06_混淆矩阵.py",
+      "ok": true,
+      "axes": 6,
+      "text_count": 49,
+      "seconds": 1.094,
+      "pdf_bytes": 72259,
+      "svg_replay": null
+    },
+    {
+      "script": "07_M4_趋势增益精化\\fig07_ROC_PR.py",
+      "ok": true,
+      "axes": 2,
+      "text_count": 32,
+      "seconds": 1.005,
+      "pdf_bytes": 68084,
+      "svg_replay": null
+    },
+    {
+      "script": "08_汇总\\fig11_全部模型临时表现分档总图.py",
+      "ok": true,
+      "axes": 1,
+      "text_count": 72,
+      "seconds": 0.534,
+      "pdf_bytes": 71830,
+      "svg_replay": null
+    }
+  ]
+}

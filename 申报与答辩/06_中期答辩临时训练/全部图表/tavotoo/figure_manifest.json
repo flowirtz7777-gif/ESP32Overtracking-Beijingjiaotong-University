@@ -1,0 +1,1131 @@
+{
+  "figure_count": 60,
+  "entries": [
+    {
+      "script": "01_数据探索\\01_目标分布_D1.py",
+      "pdf": "01_数据探索\\01_目标分布_D1.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\01_目标分布_D1.png",
+      "group": "p0",
+      "stem": "01_目标分布_D1",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "01_数据探索\\01_目标分布_D2.py",
+      "pdf": "01_数据探索\\01_目标分布_D2.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\01_目标分布_D2.png",
+      "group": "p0",
+      "stem": "01_目标分布_D2",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "01_数据探索\\01_目标分布_D3.py",
+      "pdf": "01_数据探索\\01_目标分布_D3.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\01_目标分布_D3.png",
+      "group": "p0",
+      "stem": "01_目标分布_D3",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "01_数据探索\\01_目标分布_D4.py",
+      "pdf": "01_数据探索\\01_目标分布_D4.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\01_目标分布_D4.png",
+      "group": "p0",
+      "stem": "01_目标分布_D4",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "01_数据探索\\01_目标分布_D5.py",
+      "pdf": "01_数据探索\\01_目标分布_D5.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\01_目标分布_D5.png",
+      "group": "p0",
+      "stem": "01_目标分布_D5",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D1.py",
+      "pdf": "01_数据探索\\02_输入相关矩阵_D1.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\02_输入相关矩阵_D1.png",
+      "group": "p0",
+      "stem": "02_输入相关矩阵_D1",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D2.py",
+      "pdf": "01_数据探索\\02_输入相关矩阵_D2.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\02_输入相关矩阵_D2.png",
+      "group": "p0",
+      "stem": "02_输入相关矩阵_D2",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D3.py",
+      "pdf": "01_数据探索\\02_输入相关矩阵_D3.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\02_输入相关矩阵_D3.png",
+      "group": "p0",
+      "stem": "02_输入相关矩阵_D3",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D4.py",
+      "pdf": "01_数据探索\\02_输入相关矩阵_D4.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\02_输入相关矩阵_D4.png",
+      "group": "p0",
+      "stem": "02_输入相关矩阵_D4",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "01_数据探索\\02_输入相关矩阵_D5.py",
+      "pdf": "01_数据探索\\02_输入相关矩阵_D5.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\02_输入相关矩阵_D5.png",
+      "group": "p0",
+      "stem": "02_输入相关矩阵_D5",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D1.py",
+      "pdf": "01_数据探索\\03_输出相关矩阵_D1.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\03_输出相关矩阵_D1.png",
+      "group": "p0",
+      "stem": "03_输出相关矩阵_D1",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D2.py",
+      "pdf": "01_数据探索\\03_输出相关矩阵_D2.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\03_输出相关矩阵_D2.png",
+      "group": "p0",
+      "stem": "03_输出相关矩阵_D2",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D3.py",
+      "pdf": "01_数据探索\\03_输出相关矩阵_D3.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\03_输出相关矩阵_D3.png",
+      "group": "p0",
+      "stem": "03_输出相关矩阵_D3",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D4.py",
+      "pdf": "01_数据探索\\03_输出相关矩阵_D4.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\03_输出相关矩阵_D4.png",
+      "group": "p0",
+      "stem": "03_输出相关矩阵_D4",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "01_数据探索\\03_输出相关矩阵_D5.py",
+      "pdf": "01_数据探索\\03_输出相关矩阵_D5.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\03_输出相关矩阵_D5.png",
+      "group": "p0",
+      "stem": "03_输出相关矩阵_D5",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "01_数据探索\\04_轨迹相似度_D3.py",
+      "pdf": "01_数据探索\\04_轨迹相似度_D3.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\04_轨迹相似度_D3.png",
+      "group": "p0",
+      "stem": "04_轨迹相似度_D3",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "01_数据探索\\05_特征与目标关系_D3.py",
+      "pdf": "01_数据探索\\05_特征与目标关系_D3.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\05_特征与目标关系_D3.png",
+      "group": "p0",
+      "stem": "05_特征与目标关系_D3",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "02_描述性图表\\fig01_端点误差_各配置.py",
+      "pdf": "02_描述性图表\\fig01_端点误差_各配置.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig01_端点误差_各配置.png",
+      "group": "descriptive",
+      "stem": "fig01_端点误差_各配置",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "02_描述性图表\\fig02_配对迟报差_相对保持.py",
+      "pdf": "02_描述性图表\\fig02_配对迟报差_相对保持.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig02_配对迟报差_相对保持.png",
+      "group": "descriptive",
+      "stem": "fig02_配对迟报差_相对保持",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "02_描述性图表\\fig03_迟报误报权衡.py",
+      "pdf": "02_描述性图表\\fig03_迟报误报权衡.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig03_迟报误报权衡.png",
+      "group": "descriptive",
+      "stem": "fig03_迟报误报权衡",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "02_描述性图表\\fig04_驾驶因素_配对收益热图.py",
+      "pdf": "02_描述性图表\\fig04_驾驶因素_配对收益热图.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig04_驾驶因素_配对收益热图.png",
+      "group": "descriptive",
+      "stem": "fig04_驾驶因素_配对收益热图",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "02_描述性图表\\fig05_噪声延迟与状态估计.py",
+      "pdf": "02_描述性图表\\fig05_噪声延迟与状态估计.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig05_噪声延迟与状态估计.png",
+      "group": "descriptive",
+      "stem": "fig05_噪声延迟与状态估计",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "02_描述性图表\\fig06_后处理三因素交互.py",
+      "pdf": "02_描述性图表\\fig06_后处理三因素交互.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig06_后处理三因素交互.png",
+      "group": "descriptive",
+      "stem": "fig06_后处理三因素交互",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "02_描述性图表\\fig07_趋势增益曲线.py",
+      "pdf": "02_描述性图表\\fig07_趋势增益曲线.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig07_趋势增益曲线.png",
+      "group": "descriptive",
+      "stem": "fig07_趋势增益曲线",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "02_描述性图表\\fig12_标签区间旁证.py",
+      "pdf": "02_描述性图表\\fig12_标签区间旁证.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig12_标签区间旁证.png",
+      "group": "descriptive",
+      "stem": "fig12_标签区间旁证",
+      "mode": "original_plot_code"
+    },
+    {
+      "script": "02_描述性图表\\fig13_案例_预测区叠加.py",
+      "pdf": "02_描述性图表\\fig13_案例_预测区叠加.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig13_案例_预测区叠加.png",
+      "group": "case_svg",
+      "stem": "fig13_案例_预测区叠加",
+      "mode": "existing_svg_vector_replay"
+    },
+    {
+      "script": "02_描述性图表\\fig14_案例_报警接触时间轴.py",
+      "pdf": "02_描述性图表\\fig14_案例_报警接触时间轴.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig14_案例_报警接触时间轴.png",
+      "group": "case_svg",
+      "stem": "fig14_案例_报警接触时间轴",
+      "mode": "existing_svg_vector_replay"
+    },
+    {
+      "script": "03_M1_核心预测方法\\M1__fig01_模型对比与分档.py",
+      "pdf": "03_M1_核心预测方法\\M1__fig01_模型对比与分档.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\03_M1_核心预测方法\\fig01_模型对比与分档.png",
+      "group": "M1_核心预测方法",
+      "stem": "M1__fig01_模型对比与分档",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig01_模型对比与分档",
+      "script_before_name_fix": "03_M1_核心预测方法\\fig01_模型对比与分档.py"
+    },
+    {
+      "script": "03_M1_核心预测方法\\M1__fig02_预测vs实际_折外.py",
+      "pdf": "03_M1_核心预测方法\\M1__fig02_预测vs实际_折外.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\03_M1_核心预测方法\\fig02_预测vs实际_折外.png",
+      "group": "M1_核心预测方法",
+      "stem": "M1__fig02_预测vs实际_折外",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig02_预测vs实际_折外",
+      "script_before_name_fix": "03_M1_核心预测方法\\fig02_预测vs实际_折外.py"
+    },
+    {
+      "script": "03_M1_核心预测方法\\M1__fig03_残差诊断.py",
+      "pdf": "03_M1_核心预测方法\\M1__fig03_残差诊断.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\03_M1_核心预测方法\\fig03_残差诊断.png",
+      "group": "M1_核心预测方法",
+      "stem": "M1__fig03_残差诊断",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig03_残差诊断",
+      "script_before_name_fix": "03_M1_核心预测方法\\fig03_残差诊断.py"
+    },
+    {
+      "script": "03_M1_核心预测方法\\M1__fig04_分段误差.py",
+      "pdf": "03_M1_核心预测方法\\M1__fig04_分段误差.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\03_M1_核心预测方法\\fig04_分段误差.png",
+      "group": "M1_核心预测方法",
+      "stem": "M1__fig04_分段误差",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig04_分段误差",
+      "script_before_name_fix": "03_M1_核心预测方法\\fig04_分段误差.py"
+    },
+    {
+      "script": "03_M1_核心预测方法\\M1__fig05_置换重要性.py",
+      "pdf": "03_M1_核心预测方法\\M1__fig05_置换重要性.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\03_M1_核心预测方法\\fig05_置换重要性.png",
+      "group": "M1_核心预测方法",
+      "stem": "M1__fig05_置换重要性",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig05_置换重要性",
+      "script_before_name_fix": "03_M1_核心预测方法\\fig05_置换重要性.py"
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\M2a__fig01_模型对比与分档.py",
+      "pdf": "04_M2a_观测扰动与预处理\\M2a__fig01_模型对比与分档.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\04_M2a_观测扰动与预处理\\fig01_模型对比与分档.png",
+      "group": "M2a_观测扰动与预处理",
+      "stem": "M2a__fig01_模型对比与分档",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig01_模型对比与分档",
+      "script_before_name_fix": "04_M2a_观测扰动与预处理\\fig01_模型对比与分档.py"
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\M2a__fig02_预测vs实际_折外.py",
+      "pdf": "04_M2a_观测扰动与预处理\\M2a__fig02_预测vs实际_折外.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\04_M2a_观测扰动与预处理\\fig02_预测vs实际_折外.png",
+      "group": "M2a_观测扰动与预处理",
+      "stem": "M2a__fig02_预测vs实际_折外",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig02_预测vs实际_折外",
+      "script_before_name_fix": "04_M2a_观测扰动与预处理\\fig02_预测vs实际_折外.py"
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\M2a__fig03_残差诊断.py",
+      "pdf": "04_M2a_观测扰动与预处理\\M2a__fig03_残差诊断.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\04_M2a_观测扰动与预处理\\fig03_残差诊断.png",
+      "group": "M2a_观测扰动与预处理",
+      "stem": "M2a__fig03_残差诊断",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig03_残差诊断",
+      "script_before_name_fix": "04_M2a_观测扰动与预处理\\fig03_残差诊断.py"
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\M2a__fig04_分段误差.py",
+      "pdf": "04_M2a_观测扰动与预处理\\M2a__fig04_分段误差.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\04_M2a_观测扰动与预处理\\fig04_分段误差.png",
+      "group": "M2a_观测扰动与预处理",
+      "stem": "M2a__fig04_分段误差",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig04_分段误差",
+      "script_before_name_fix": "04_M2a_观测扰动与预处理\\fig04_分段误差.py"
+    },
+    {
+      "script": "04_M2a_观测扰动与预处理\\M2a__fig05_置换重要性.py",
+      "pdf": "04_M2a_观测扰动与预处理\\M2a__fig05_置换重要性.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\04_M2a_观测扰动与预处理\\fig05_置换重要性.png",
+      "group": "M2a_观测扰动与预处理",
+      "stem": "M2a__fig05_置换重要性",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig05_置换重要性",
+      "script_before_name_fix": "04_M2a_观测扰动与预处理\\fig05_置换重要性.py"
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\M2b__fig01_模型对比与分档.py",
+      "pdf": "05_M2b_状态估计筛选\\M2b__fig01_模型对比与分档.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\05_M2b_状态估计筛选\\fig01_模型对比与分档.png",
+      "group": "M2b_状态估计筛选",
+      "stem": "M2b__fig01_模型对比与分档",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig01_模型对比与分档",
+      "script_before_name_fix": "05_M2b_状态估计筛选\\fig01_模型对比与分档.py"
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\M2b__fig02_预测vs实际_折外.py",
+      "pdf": "05_M2b_状态估计筛选\\M2b__fig02_预测vs实际_折外.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\05_M2b_状态估计筛选\\fig02_预测vs实际_折外.png",
+      "group": "M2b_状态估计筛选",
+      "stem": "M2b__fig02_预测vs实际_折外",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig02_预测vs实际_折外",
+      "script_before_name_fix": "05_M2b_状态估计筛选\\fig02_预测vs实际_折外.py"
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\M2b__fig03_残差诊断.py",
+      "pdf": "05_M2b_状态估计筛选\\M2b__fig03_残差诊断.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\05_M2b_状态估计筛选\\fig03_残差诊断.png",
+      "group": "M2b_状态估计筛选",
+      "stem": "M2b__fig03_残差诊断",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig03_残差诊断",
+      "script_before_name_fix": "05_M2b_状态估计筛选\\fig03_残差诊断.py"
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\M2b__fig04_分段误差.py",
+      "pdf": "05_M2b_状态估计筛选\\M2b__fig04_分段误差.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\05_M2b_状态估计筛选\\fig04_分段误差.png",
+      "group": "M2b_状态估计筛选",
+      "stem": "M2b__fig04_分段误差",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig04_分段误差",
+      "script_before_name_fix": "05_M2b_状态估计筛选\\fig04_分段误差.py"
+    },
+    {
+      "script": "05_M2b_状态估计筛选\\M2b__fig05_置换重要性.py",
+      "pdf": "05_M2b_状态估计筛选\\M2b__fig05_置换重要性.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\05_M2b_状态估计筛选\\fig05_置换重要性.png",
+      "group": "M2b_状态估计筛选",
+      "stem": "M2b__fig05_置换重要性",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig05_置换重要性",
+      "script_before_name_fix": "05_M2b_状态估计筛选\\fig05_置换重要性.py"
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig01_模型对比与分档.py",
+      "pdf": "06_M3_二级处理联合\\M3__fig01_模型对比与分档.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig01_模型对比与分档.png",
+      "group": "M3_二级处理联合",
+      "stem": "M3__fig01_模型对比与分档",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig01_模型对比与分档",
+      "script_before_name_fix": "06_M3_二级处理联合\\fig01_模型对比与分档.py"
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig02_预测vs实际_折外.py",
+      "pdf": "06_M3_二级处理联合\\M3__fig02_预测vs实际_折外.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig02_预测vs实际_折外.png",
+      "group": "M3_二级处理联合",
+      "stem": "M3__fig02_预测vs实际_折外",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig02_预测vs实际_折外",
+      "script_before_name_fix": "06_M3_二级处理联合\\fig02_预测vs实际_折外.py"
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig03_残差诊断.py",
+      "pdf": "06_M3_二级处理联合\\M3__fig03_残差诊断.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig03_残差诊断.png",
+      "group": "M3_二级处理联合",
+      "stem": "M3__fig03_残差诊断",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig03_残差诊断",
+      "script_before_name_fix": "06_M3_二级处理联合\\fig03_残差诊断.py"
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig04_分段误差.py",
+      "pdf": "06_M3_二级处理联合\\M3__fig04_分段误差.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig04_分段误差.png",
+      "group": "M3_二级处理联合",
+      "stem": "M3__fig04_分段误差",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig04_分段误差",
+      "script_before_name_fix": "06_M3_二级处理联合\\fig04_分段误差.py"
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig05_置换重要性.py",
+      "pdf": "06_M3_二级处理联合\\M3__fig05_置换重要性.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig05_置换重要性.png",
+      "group": "M3_二级处理联合",
+      "stem": "M3__fig05_置换重要性",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig05_置换重要性",
+      "script_before_name_fix": "06_M3_二级处理联合\\fig05_置换重要性.py"
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig06_混淆矩阵.py",
+      "pdf": "06_M3_二级处理联合\\M3__fig06_混淆矩阵.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig06_混淆矩阵.png",
+      "group": "M3_二级处理联合",
+      "stem": "M3__fig06_混淆矩阵",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig06_混淆矩阵",
+      "script_before_name_fix": "06_M3_二级处理联合\\fig06_混淆矩阵.py"
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig07_ROC_PR.py",
+      "pdf": "06_M3_二级处理联合\\M3__fig07_ROC_PR.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig07_ROC_PR.png",
+      "group": "M3_二级处理联合",
+      "stem": "M3__fig07_ROC_PR",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig07_ROC_PR",
+      "script_before_name_fix": "06_M3_二级处理联合\\fig07_ROC_PR.py"
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig08_外部检验_预测vs实际.py",
+      "pdf": "06_M3_二级处理联合\\M3__fig08_外部检验_预测vs实际.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig08_外部检验_预测vs实际.png",
+      "group": "M3_二级处理联合",
+      "stem": "M3__fig08_外部检验_预测vs实际",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig08_外部检验_预测vs实际",
+      "script_before_name_fix": "06_M3_二级处理联合\\fig08_外部检验_预测vs实际.py"
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig09_学习曲线.py",
+      "pdf": "06_M3_二级处理联合\\M3__fig09_学习曲线.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig09_学习曲线.png",
+      "group": "M3_二级处理联合",
+      "stem": "M3__fig09_学习曲线",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig09_学习曲线",
+      "script_before_name_fix": "06_M3_二级处理联合\\fig09_学习曲线.py"
+    },
+    {
+      "script": "06_M3_二级处理联合\\M3__fig10_部分依赖_后处理.py",
+      "pdf": "06_M3_二级处理联合\\M3__fig10_部分依赖_后处理.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig10_部分依赖_后处理.png",
+      "group": "M3_二级处理联合",
+      "stem": "M3__fig10_部分依赖_后处理",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig10_部分依赖_后处理",
+      "script_before_name_fix": "06_M3_二级处理联合\\fig10_部分依赖_后处理.py"
+    },
+    {
+      "script": "07_M4_趋势增益精化\\M4__fig01_模型对比与分档.py",
+      "pdf": "07_M4_趋势增益精化\\M4__fig01_模型对比与分档.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\07_M4_趋势增益精化\\fig01_模型对比与分档.png",
+      "group": "M4_趋势增益精化",
+      "stem": "M4__fig01_模型对比与分档",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig01_模型对比与分档",
+      "script_before_name_fix": "07_M4_趋势增益精化\\fig01_模型对比与分档.py"
+    },
+    {
+      "script": "07_M4_趋势增益精化\\M4__fig02_预测vs实际_折外.py",
+      "pdf": "07_M4_趋势增益精化\\M4__fig02_预测vs实际_折外.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\07_M4_趋势增益精化\\fig02_预测vs实际_折外.png",
+      "group": "M4_趋势增益精化",
+      "stem": "M4__fig02_预测vs实际_折外",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig02_预测vs实际_折外",
+      "script_before_name_fix": "07_M4_趋势增益精化\\fig02_预测vs实际_折外.py"
+    },
+    {
+      "script": "07_M4_趋势增益精化\\M4__fig03_残差诊断.py",
+      "pdf": "07_M4_趋势增益精化\\M4__fig03_残差诊断.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\07_M4_趋势增益精化\\fig03_残差诊断.png",
+      "group": "M4_趋势增益精化",
+      "stem": "M4__fig03_残差诊断",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig03_残差诊断",
+      "script_before_name_fix": "07_M4_趋势增益精化\\fig03_残差诊断.py"
+    },
+    {
+      "script": "07_M4_趋势增益精化\\M4__fig04_分段误差.py",
+      "pdf": "07_M4_趋势增益精化\\M4__fig04_分段误差.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\07_M4_趋势增益精化\\fig04_分段误差.png",
+      "group": "M4_趋势增益精化",
+      "stem": "M4__fig04_分段误差",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig04_分段误差",
+      "script_before_name_fix": "07_M4_趋势增益精化\\fig04_分段误差.py"
+    },
+    {
+      "script": "07_M4_趋势增益精化\\M4__fig05_置换重要性.py",
+      "pdf": "07_M4_趋势增益精化\\M4__fig05_置换重要性.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\07_M4_趋势增益精化\\fig05_置换重要性.png",
+      "group": "M4_趋势增益精化",
+      "stem": "M4__fig05_置换重要性",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig05_置换重要性",
+      "script_before_name_fix": "07_M4_趋势增益精化\\fig05_置换重要性.py"
+    },
+    {
+      "script": "07_M4_趋势增益精化\\M4__fig06_混淆矩阵.py",
+      "pdf": "07_M4_趋势增益精化\\M4__fig06_混淆矩阵.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\07_M4_趋势增益精化\\fig06_混淆矩阵.png",
+      "group": "M4_趋势增益精化",
+      "stem": "M4__fig06_混淆矩阵",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig06_混淆矩阵",
+      "script_before_name_fix": "07_M4_趋势增益精化\\fig06_混淆矩阵.py"
+    },
+    {
+      "script": "07_M4_趋势增益精化\\M4__fig07_ROC_PR.py",
+      "pdf": "07_M4_趋势增益精化\\M4__fig07_ROC_PR.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\07_M4_趋势增益精化\\fig07_ROC_PR.png",
+      "group": "M4_趋势增益精化",
+      "stem": "M4__fig07_ROC_PR",
+      "mode": "original_plot_code",
+      "original_plot_stem": "fig07_ROC_PR",
+      "script_before_name_fix": "07_M4_趋势增益精化\\fig07_ROC_PR.py"
+    },
+    {
+      "script": "08_汇总\\fig11_全部模型临时表现分档总图.py",
+      "pdf": "08_汇总\\fig11_全部模型临时表现分档总图.pdf",
+      "source_png": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\08_汇总\\fig11_全部模型临时表现分档总图.png",
+      "group": "summary",
+      "stem": "fig11_全部模型临时表现分档总图",
+      "mode": "existing_summary_table"
+    }
+  ],
+  "copied_inputs": [
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\P0_数据整理\\data\\D1.csv",
+      "path": "_data\\D1.csv",
+      "sha256": "3010e9476bf6430bd8d6a35979687c79716036762a5f429e3f882cf781698f01"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\P0_数据整理\\data\\D2.csv",
+      "path": "_data\\D2.csv",
+      "sha256": "0d225e9367239981f93ae5a0423926e126b385c8f8f94d75949297474865ca96"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\P0_数据整理\\data\\D3.csv",
+      "path": "_data\\D3.csv",
+      "sha256": "0b4b05c6aa77bc9c2e02a763cca4503183a77559d55a3e6e3d3930af9b07ee71"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\P0_数据整理\\data\\D4.csv",
+      "path": "_data\\D4.csv",
+      "sha256": "155d9d0e251fc0d432b3d31bce5cc5e164bc3f1d7d4f51ae373a2d20c26de4a4"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\P0_数据整理\\data\\D5.csv",
+      "path": "_data\\D5.csv",
+      "sha256": "4a4b1e663ccd614adccec78a43b9bf4ed5cd2e8f4f8684e7c8d1145981cb7992"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\04_中期答辩_DeepSeek\\midterm_paired_bounds.csv",
+      "path": "_data\\deepseek_paired_bounds.csv",
+      "sha256": "d326de1142f6e3044aa89e81aa9d801c9cfcff224fa3f43dc3c4fc29adbad3ea"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M1_核心预测方法\\results\\oof_best_and_baseline.csv.gz",
+      "path": "_data\\M1_核心预测方法\\oof_best_and_baseline.csv.gz",
+      "sha256": "400e5b666bb721efc8080fd00b1364863729bf715b6754de8885f0e37db428ac"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M1_核心预测方法\\results\\permutation_importance.csv",
+      "path": "_data\\M1_核心预测方法\\permutation_importance.csv",
+      "sha256": "eab3c0e1b1286bf9e6d90fae96dbbd88aff3bf2df51f80490e28256d34dc73dc"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M1_核心预测方法\\results\\run_manifest.json",
+      "path": "_data\\M1_核心预测方法\\run_manifest.json",
+      "sha256": "b081a9a5fcc1b47d3af29251b5e72226c8cee61d93523fa4a53b1e1712484a9a"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M1_核心预测方法\\results\\scores.csv",
+      "path": "_data\\M1_核心预测方法\\scores.csv",
+      "sha256": "6a4853ac049ea5797b3cff1fde42aba298cf792367c349be61ca4bde17456ec4"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M1_核心预测方法\\results\\segment_errors.csv",
+      "path": "_data\\M1_核心预测方法\\segment_errors.csv",
+      "sha256": "3c885c0dde2108302628700012d178e1855cef1bbf0feacd6ccb2037fc1cb452"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M1_核心预测方法\\results\\tiers.csv",
+      "path": "_data\\M1_核心预测方法\\tiers.csv",
+      "sha256": "1436114dd60b526018ebdc6d17840a306089d3dbfb072682d4263112bbbcc8b9"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M2a_观测扰动与预处理\\results\\oof_best_and_baseline.csv.gz",
+      "path": "_data\\M2a_观测扰动与预处理\\oof_best_and_baseline.csv.gz",
+      "sha256": "f592f8c82817b2777a85af9e2868b0610714c6526b392619b70522983f6923b0"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M2a_观测扰动与预处理\\results\\permutation_importance.csv",
+      "path": "_data\\M2a_观测扰动与预处理\\permutation_importance.csv",
+      "sha256": "c3979559a7ef280334fb9295f2ea446d46163869d45c2eaed9a514bcbf7cd977"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M2a_观测扰动与预处理\\results\\run_manifest.json",
+      "path": "_data\\M2a_观测扰动与预处理\\run_manifest.json",
+      "sha256": "bd2b988f2baf7689946b001dd60aa342cb4bc50c3d01dd58dfa586d9ecdea1a8"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M2a_观测扰动与预处理\\results\\scores.csv",
+      "path": "_data\\M2a_观测扰动与预处理\\scores.csv",
+      "sha256": "9d070f04c2181b87a0df82f5f8b923019546ac3c267279ba728b182259b082bd"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M2a_观测扰动与预处理\\results\\segment_errors.csv",
+      "path": "_data\\M2a_观测扰动与预处理\\segment_errors.csv",
+      "sha256": "6e3adfb59178fc85adb49cee3df13cf18afd2ea6bb82a5f083f38d4141224e42"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M2a_观测扰动与预处理\\results\\tiers.csv",
+      "path": "_data\\M2a_观测扰动与预处理\\tiers.csv",
+      "sha256": "751a09325aab2d138c8fa58c893c7f029058308476f505bffc0971e04882783e"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M2b_状态估计筛选\\results\\oof_best_and_baseline.csv.gz",
+      "path": "_data\\M2b_状态估计筛选\\oof_best_and_baseline.csv.gz",
+      "sha256": "b480b70cec1723247eeede0052a937e9fb8cab1ddf869f3d77c8de9ce81d1ebb"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M2b_状态估计筛选\\results\\permutation_importance.csv",
+      "path": "_data\\M2b_状态估计筛选\\permutation_importance.csv",
+      "sha256": "68eda5491f02b4292c25d619abc946e14fc1215e6fd3f5992b7c1389a50105a7"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M2b_状态估计筛选\\results\\run_manifest.json",
+      "path": "_data\\M2b_状态估计筛选\\run_manifest.json",
+      "sha256": "1f7b6e026c29f604cab3bf0805c153d7ddc17c9dd8b37c14ead75462c5f21b56"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M2b_状态估计筛选\\results\\scores.csv",
+      "path": "_data\\M2b_状态估计筛选\\scores.csv",
+      "sha256": "ed2102fd45597af195ac855fd7bc5ad69bbc2060e7c1922e3003e17c418a61fa"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M2b_状态估计筛选\\results\\segment_errors.csv",
+      "path": "_data\\M2b_状态估计筛选\\segment_errors.csv",
+      "sha256": "cb60f8c52e77f2b98718a46b080ea473b111fc1c296a6588c3b27cf421a4413d"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M2b_状态估计筛选\\results\\tiers.csv",
+      "path": "_data\\M2b_状态估计筛选\\tiers.csv",
+      "sha256": "c619eb2b017a0987f7368e197702be628c7347e4940a95c8fc1ba915b3d20e2f"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M3_二级处理联合\\results\\confusion_matrices.json",
+      "path": "_data\\M3_二级处理联合\\confusion_matrices.json",
+      "sha256": "43de3531f71465d6bef142bb54fd0061c99579e49d4c9592ee175c9290f16fca"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M3_二级处理联合\\results\\external_predictions.csv",
+      "path": "_data\\M3_二级处理联合\\external_predictions.csv",
+      "sha256": "1b6767b20bade1ed6bf0786c7ea73bae22dc98a429c480e087d4a4379a16eec9"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M3_二级处理联合\\results\\learning_curve.csv",
+      "path": "_data\\M3_二级处理联合\\learning_curve.csv",
+      "sha256": "3f7ba14de6f22ac73d4baa9eeb0478586d1b23087b7dd7f003803036d8b2a13a"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M3_二级处理联合\\results\\oof_best_and_baseline.csv.gz",
+      "path": "_data\\M3_二级处理联合\\oof_best_and_baseline.csv.gz",
+      "sha256": "37f1417805100efd053d23f325b8db5551aa6a1302a7c4b0dc72df90343f9a4b"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M3_二级处理联合\\results\\pdp.json",
+      "path": "_data\\M3_二级处理联合\\pdp.json",
+      "sha256": "28981cda9c50226985160cdd01914dcb18b1b6bd74aa1bb2fa20a3c6c9ccdaa3"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M3_二级处理联合\\results\\permutation_importance.csv",
+      "path": "_data\\M3_二级处理联合\\permutation_importance.csv",
+      "sha256": "eebc4838fd9016fdca4a5a5bba6213c4bbb9a4c84f5a5738e1836638214e299a"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M3_二级处理联合\\results\\run_manifest.json",
+      "path": "_data\\M3_二级处理联合\\run_manifest.json",
+      "sha256": "d94d3a3d92d4ebbcabcfc0ee5ba0d2bba1fd53dfe596043650aff885f3429dd2"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M3_二级处理联合\\results\\scores.csv",
+      "path": "_data\\M3_二级处理联合\\scores.csv",
+      "sha256": "4976c43d6f95df542d8657a39c01687409e5c861ac4296dee63e27f8757a2401"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M3_二级处理联合\\results\\segment_errors.csv",
+      "path": "_data\\M3_二级处理联合\\segment_errors.csv",
+      "sha256": "2a16c7c999446d8932d17c598185764328a407a9424024ab2a6df8ad7b7b8c0f"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M3_二级处理联合\\results\\tiers.csv",
+      "path": "_data\\M3_二级处理联合\\tiers.csv",
+      "sha256": "2c593a547be26e42a6b94491a5801e32e7a9a2330e3bc3233ca956388398f666"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M4_趋势增益精化\\results\\confusion_matrices.json",
+      "path": "_data\\M4_趋势增益精化\\confusion_matrices.json",
+      "sha256": "8fd868fedf33fcf8758d4981ea03c286e5fd896b95bd48c55c2ebc4ccad1b75a"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M4_趋势增益精化\\results\\oof_best_and_baseline.csv.gz",
+      "path": "_data\\M4_趋势增益精化\\oof_best_and_baseline.csv.gz",
+      "sha256": "65856e3fbcee820ef5a13fb3095e8a959064ca9b47ec16d5a67ff8c991b692a8"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M4_趋势增益精化\\results\\permutation_importance.csv",
+      "path": "_data\\M4_趋势增益精化\\permutation_importance.csv",
+      "sha256": "d02c81b77f93dcdb67a502e725306ebd64fe0d505affb786cc75ef7dc9a63a6f"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M4_趋势增益精化\\results\\run_manifest.json",
+      "path": "_data\\M4_趋势增益精化\\run_manifest.json",
+      "sha256": "8276b8e4d46a60c9c6bd5166d4eee31f8aad474685a0b5e36e00922cf115db7c"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M4_趋势增益精化\\results\\scores.csv",
+      "path": "_data\\M4_趋势增益精化\\scores.csv",
+      "sha256": "f545f43fbce51ba01f7cb3b00284f1e636536e7aabb890dd6f17d9576ab0a2ac"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M4_趋势增益精化\\results\\segment_errors.csv",
+      "path": "_data\\M4_趋势增益精化\\segment_errors.csv",
+      "sha256": "0b1389483f733464f33f81f96220cb2370aeb170f636b256ff2d55c30ca19daf"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\M4_趋势增益精化\\results\\tiers.csv",
+      "path": "_data\\M4_趋势增益精化\\tiers.csv",
+      "sha256": "a152bd292e9aaa05642f8bb0fa3aa5fe34dfad241e1c1d9beaaca5949d29b806"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\common\\config.py",
+      "path": "_source_reference\\common__config.py.txt",
+      "sha256": "82428e9c97523e667f4f7bd9c099c8f5f3431b69ea873cfa583871be76779e2f"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\common\\plotting.py",
+      "path": "_source_reference\\common__plotting.py.txt",
+      "sha256": "7a6008ef59600a14231a70b0e2615f77cde6e0a21d346c91c6ce65f4c15e8ae1"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\common\\figures.py",
+      "path": "_source_reference\\common__figures.py.txt",
+      "sha256": "fe8ed33ff1e6df16ca4f12d06589e8487e446dc1ca90fb908ec1af2885ac5451"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\P0_数据整理\\build_all.py",
+      "path": "_source_reference\\P0_数据整理__build_all.py.txt",
+      "sha256": "442e8ae17fd828981b91f79e6213999f4ef28774c730a81cf42b94ff313ab236"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\描述性图表\\make_figures.py",
+      "path": "_source_reference\\描述性图表__make_figures.py.txt",
+      "sha256": "046c808368835f8131a987a9a86ce407effe79fcbea31dd0503596bfe42379f6"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\描述性图表\\make_case_figures.py",
+      "path": "_source_reference\\描述性图表__make_case_figures.py.txt",
+      "sha256": "74c1fa6c8184ed5d2871df9e8b063f4b78f278373619db91c389efaeddd23abe"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\汇总\\summarize.py",
+      "path": "_source_reference\\汇总__summarize.py.txt",
+      "sha256": "ec81f38a5d1fa56a5e09f4f827da5fac418570c739441708b20161d569412d43"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\01_目标分布_D1.png",
+      "path": "01_数据探索\\01_目标分布_D1.png",
+      "sha256": "4013e8207ada50bb88d94602c184974c245c5e3fb22991c1a4b6715ec0999da1"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\01_目标分布_D2.png",
+      "path": "01_数据探索\\01_目标分布_D2.png",
+      "sha256": "2d9b8ad49634015a6fa1ac8710d9d17a7354758f69b95a55ee21b0af62bffef1"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\01_目标分布_D3.png",
+      "path": "01_数据探索\\01_目标分布_D3.png",
+      "sha256": "abb1b9d55d39b7d780de4cb87f2b184a49d97b72d6ddb781953c208f7e0a9611"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\01_目标分布_D4.png",
+      "path": "01_数据探索\\01_目标分布_D4.png",
+      "sha256": "90ffe2a9ca471a430455d0293fdb12f705668fab8596f30ea499de50047970a1"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\01_目标分布_D5.png",
+      "path": "01_数据探索\\01_目标分布_D5.png",
+      "sha256": "b0667f26cc21977b520c2c4c39602185f7f67cda5086772fcc75b038bbfab294"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\02_输入相关矩阵_D1.png",
+      "path": "01_数据探索\\02_输入相关矩阵_D1.png",
+      "sha256": "ec033901547d989f04691f2e95d708ceedc05256ce8f52c9c57c3a0067da34df"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\02_输入相关矩阵_D2.png",
+      "path": "01_数据探索\\02_输入相关矩阵_D2.png",
+      "sha256": "2e8250d9e77d528b3460013475da3c46f573269ab1c3cec8962ad0fe7bb663bc"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\02_输入相关矩阵_D3.png",
+      "path": "01_数据探索\\02_输入相关矩阵_D3.png",
+      "sha256": "45d8c3e7aebb17d8d65fee191b04dfca463910da6ad646a38849ee6260889bbf"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\02_输入相关矩阵_D4.png",
+      "path": "01_数据探索\\02_输入相关矩阵_D4.png",
+      "sha256": "7565135441e18175fcad9bc7a860ea235b52431c70c07d431741de30a3f6c318"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\02_输入相关矩阵_D5.png",
+      "path": "01_数据探索\\02_输入相关矩阵_D5.png",
+      "sha256": "da56c0489c6612e49154707252d5bb11730c2e8541db09df9b32bf94826d0d97"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\03_输出相关矩阵_D1.png",
+      "path": "01_数据探索\\03_输出相关矩阵_D1.png",
+      "sha256": "0b3a046adc826eb5d77e6b7b91c4ebba245790d956ed88b54f0dd0429397ab7f"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\03_输出相关矩阵_D2.png",
+      "path": "01_数据探索\\03_输出相关矩阵_D2.png",
+      "sha256": "8fc27bde94dd79424ddc09fab7e5bc41777678db8a7b55604b9fbf0a175bc3d3"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\03_输出相关矩阵_D3.png",
+      "path": "01_数据探索\\03_输出相关矩阵_D3.png",
+      "sha256": "a9e8f4ff79e4bd27b7aff24b14062396a5ace74691b4fad2dfe42e05a68227d3"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\03_输出相关矩阵_D4.png",
+      "path": "01_数据探索\\03_输出相关矩阵_D4.png",
+      "sha256": "5483b3453a1687faa7ee96dc4d1c01aad46d56c88c669340961ccbf8384d5d2a"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\03_输出相关矩阵_D5.png",
+      "path": "01_数据探索\\03_输出相关矩阵_D5.png",
+      "sha256": "1cb1eafe647ae665b00b8fe2dca8cf362aff80bbfb8b7ebf169940f689b136d0"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\04_轨迹相似度_D3.png",
+      "path": "01_数据探索\\04_轨迹相似度_D3.png",
+      "sha256": "419694a218b97ec1ad1d4746c869b222b4ac07eed73d7ec39fda656f7368c912"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\01_数据探索\\05_特征与目标关系_D3.png",
+      "path": "01_数据探索\\05_特征与目标关系_D3.png",
+      "sha256": "9b8654853f891baf4652bf58e0a4969596983c1e5c71dca0952971ce561c3809"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig01_端点误差_各配置.png",
+      "path": "02_描述性图表\\fig01_端点误差_各配置.png",
+      "sha256": "8bcf4fdce2018c8a46a5d16109a28725c060ba12ded46f4767cdd954bafcd6e9"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig02_配对迟报差_相对保持.png",
+      "path": "02_描述性图表\\fig02_配对迟报差_相对保持.png",
+      "sha256": "1d121f415eff714eca9b074ef0f392bbc6f867281d45eb3394fffbaf3d469910"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig03_迟报误报权衡.png",
+      "path": "02_描述性图表\\fig03_迟报误报权衡.png",
+      "sha256": "1e3d1b3a116b53621550e4c229963010c76b3bc0ec32fcaf055869c2137d2bbe"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig04_驾驶因素_配对收益热图.png",
+      "path": "02_描述性图表\\fig04_驾驶因素_配对收益热图.png",
+      "sha256": "7baf88ab20d08c7fdefd3a66ac209171178355b530def186f52cdbd115611acd"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig05_噪声延迟与状态估计.png",
+      "path": "02_描述性图表\\fig05_噪声延迟与状态估计.png",
+      "sha256": "f057706aa83fd5d8838ecb7866d9ad58a4def406e3ab98631300a3e0d88acf91"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig06_后处理三因素交互.png",
+      "path": "02_描述性图表\\fig06_后处理三因素交互.png",
+      "sha256": "4d70f2eb5a5e11c0156b34c0cd41aa83e4f3a85ea8f303e9c9a93deba4d471b2"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig07_趋势增益曲线.png",
+      "path": "02_描述性图表\\fig07_趋势增益曲线.png",
+      "sha256": "69c7063c3c43f98dc5f9321e85344c16bf022881a3532d37ca8a1bad8c3dcb14"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig12_标签区间旁证.png",
+      "path": "02_描述性图表\\fig12_标签区间旁证.png",
+      "sha256": "a285e34658c6c0f1ce74cbd2f912c0ac89a1591ee05f6d41417fc396d72315ed"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\描述性图表\\fig13_案例_预测区叠加.svg",
+      "path": "_data\\case_svg\\fig13_案例_预测区叠加.svg",
+      "sha256": "73905f655dce1c9f86acdabc033af0ceb6aa4550fd3933ca3dc2c8a4a90db43f"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\描述性图表\\fig13_案例_预测区叠加.pdf",
+      "path": "02_描述性图表\\fig13_案例_预测区叠加.pdf",
+      "sha256": "a52b1b2982716f0edf87c6203790fea20ce4f98a522621ed45a844a4797c873d"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig13_案例_预测区叠加.png",
+      "path": "02_描述性图表\\fig13_案例_预测区叠加.png",
+      "sha256": "ed5aa4ad97d17b5dbae5e6a3cc3ce025de159ed86d5fbceb996bace51513234b"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\描述性图表\\fig14_案例_报警接触时间轴.svg",
+      "path": "_data\\case_svg\\fig14_案例_报警接触时间轴.svg",
+      "sha256": "e328e8e40fd88eb870aaa93f13314cc494e9c5fabc7fef225c136552a67211a7"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\描述性图表\\fig14_案例_报警接触时间轴.pdf",
+      "path": "02_描述性图表\\fig14_案例_报警接触时间轴.pdf",
+      "sha256": "be720da6ec6d5a7182e8c65232798cde959f73ff97b5b19fa380b184e696c712"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\02_描述性图表\\fig14_案例_报警接触时间轴.png",
+      "path": "02_描述性图表\\fig14_案例_报警接触时间轴.png",
+      "sha256": "3740c0738a8edddad4a6a88fd39b9dd8687e0769378e5d05529e78df9de7aefc"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\03_M1_核心预测方法\\fig01_模型对比与分档.png",
+      "path": "03_M1_核心预测方法\\M1__fig01_模型对比与分档.png",
+      "sha256": "b95f9ca7dea7ebb3a278f945371d9630b63cfefef5e5fdb6eb3ff91670dbb988"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\03_M1_核心预测方法\\fig02_预测vs实际_折外.png",
+      "path": "03_M1_核心预测方法\\M1__fig02_预测vs实际_折外.png",
+      "sha256": "25feb0f07d8ffa0097a1a99ad2754c8c8bcd559d33cf44391c0035b169e19c62"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\03_M1_核心预测方法\\fig03_残差诊断.png",
+      "path": "03_M1_核心预测方法\\M1__fig03_残差诊断.png",
+      "sha256": "ffc4b0bf7a54ad59ea9dfb850b83571d07becc94e95a44521aada32c9c97c8bf"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\03_M1_核心预测方法\\fig04_分段误差.png",
+      "path": "03_M1_核心预测方法\\M1__fig04_分段误差.png",
+      "sha256": "a1412cd6bd250c4198dd56cb62585aec05abf645f1ced7cdab38bb7ed0e1dd5e"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\03_M1_核心预测方法\\fig05_置换重要性.png",
+      "path": "03_M1_核心预测方法\\M1__fig05_置换重要性.png",
+      "sha256": "fbe52d9422de3aa5c4ff9481dd9bb644f10862ae50b8a74371e4c44310230e5c"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\04_M2a_观测扰动与预处理\\fig01_模型对比与分档.png",
+      "path": "04_M2a_观测扰动与预处理\\M2a__fig01_模型对比与分档.png",
+      "sha256": "23f26a6a9bee15bebae58f11f9d1f005412c585cd64655d55cc1b9c6f90f43ac"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\04_M2a_观测扰动与预处理\\fig02_预测vs实际_折外.png",
+      "path": "04_M2a_观测扰动与预处理\\M2a__fig02_预测vs实际_折外.png",
+      "sha256": "b2386ded1f96d695d4d885897bc24e33d942889dff8eb5863a503e2d1ed531a4"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\04_M2a_观测扰动与预处理\\fig03_残差诊断.png",
+      "path": "04_M2a_观测扰动与预处理\\M2a__fig03_残差诊断.png",
+      "sha256": "6d76e7fda35699d00b9f91160a283c4bd0377f6ac8ffe9d7f3789f30e6c1fc41"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\04_M2a_观测扰动与预处理\\fig04_分段误差.png",
+      "path": "04_M2a_观测扰动与预处理\\M2a__fig04_分段误差.png",
+      "sha256": "d72827108df3d575c12a59d1f4f9d60329dffae850746d53dacd0c793df60f70"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\04_M2a_观测扰动与预处理\\fig05_置换重要性.png",
+      "path": "04_M2a_观测扰动与预处理\\M2a__fig05_置换重要性.png",
+      "sha256": "79a21c2ec818d2cba10159ca10dd87458d44fc1a84523a23884e32592de57bff"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\05_M2b_状态估计筛选\\fig01_模型对比与分档.png",
+      "path": "05_M2b_状态估计筛选\\M2b__fig01_模型对比与分档.png",
+      "sha256": "2697fc3a4b7011b196e7b6d14a93d7145fd5b2c1c908be9514f8dde86794cc66"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\05_M2b_状态估计筛选\\fig02_预测vs实际_折外.png",
+      "path": "05_M2b_状态估计筛选\\M2b__fig02_预测vs实际_折外.png",
+      "sha256": "425a07904877f621a0d5b65b2bbe2598ca0e45b99a3ae4efc9de747f0e093ac4"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\05_M2b_状态估计筛选\\fig03_残差诊断.png",
+      "path": "05_M2b_状态估计筛选\\M2b__fig03_残差诊断.png",
+      "sha256": "bf12e8a71f01f11bc07a1d4bf02a8c5ec114d3b4a32b1bab9c25a4b7df68e607"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\05_M2b_状态估计筛选\\fig04_分段误差.png",
+      "path": "05_M2b_状态估计筛选\\M2b__fig04_分段误差.png",
+      "sha256": "6006c86980373ddc18010d41e856987d40c77febb33c2510d3b11216c5679c94"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\05_M2b_状态估计筛选\\fig05_置换重要性.png",
+      "path": "05_M2b_状态估计筛选\\M2b__fig05_置换重要性.png",
+      "sha256": "3bd9bbb6c958bddfeb5e0cbcec53084e3f3c7202cb47c9a31b3209e3728cc99d"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig01_模型对比与分档.png",
+      "path": "06_M3_二级处理联合\\M3__fig01_模型对比与分档.png",
+      "sha256": "24a10c2df9231eda248f3acd03b70a149f118125f76f704d12523ad5041b8134"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig02_预测vs实际_折外.png",
+      "path": "06_M3_二级处理联合\\M3__fig02_预测vs实际_折外.png",
+      "sha256": "6bcb04259cf1084949777eec56efc8ee70842e1817afa2cfc3eb1e64523095b5"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig03_残差诊断.png",
+      "path": "06_M3_二级处理联合\\M3__fig03_残差诊断.png",
+      "sha256": "6c9ad5df992942305bfaacba0b5768c4b31f61d769ccd66f6885d30f987bb7b4"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig04_分段误差.png",
+      "path": "06_M3_二级处理联合\\M3__fig04_分段误差.png",
+      "sha256": "b51da39560f67a355c9f58ace54ad6f3dfa3a0bba1319d8702a6bac503daebcf"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig05_置换重要性.png",
+      "path": "06_M3_二级处理联合\\M3__fig05_置换重要性.png",
+      "sha256": "8313dfa9fd5ca27aa1c25b3d7c77e6d154f519dcf2226b17a021b3850265a544"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig06_混淆矩阵.png",
+      "path": "06_M3_二级处理联合\\M3__fig06_混淆矩阵.png",
+      "sha256": "1d22234e1c69d601fe73b04f4f7b7e33169e8f8348effc668881808b283ff9fe"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig07_ROC_PR.png",
+      "path": "06_M3_二级处理联合\\M3__fig07_ROC_PR.png",
+      "sha256": "2e34bd1d662327b0628dd859cac2b431f5ca62316e84f47377adb026d700c145"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig08_外部检验_预测vs实际.png",
+      "path": "06_M3_二级处理联合\\M3__fig08_外部检验_预测vs实际.png",
+      "sha256": "2fdd358bcb841b7c79bd7bac5014bc2d47f95581a5f72fe2023f3a7978f1e58a"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig09_学习曲线.png",
+      "path": "06_M3_二级处理联合\\M3__fig09_学习曲线.png",
+      "sha256": "753d280e81002509b08ed03ba0d4dbc68345aaccafb9f88cf4f753562a4b709d"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\06_M3_二级处理联合\\fig10_部分依赖_后处理.png",
+      "path": "06_M3_二级处理联合\\M3__fig10_部分依赖_后处理.png",
+      "sha256": "55d0a7a0805fe2a31c922d22bd21f249627e0b666b1f57da9b627190f3998894"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\07_M4_趋势增益精化\\fig01_模型对比与分档.png",
+      "path": "07_M4_趋势增益精化\\M4__fig01_模型对比与分档.png",
+      "sha256": "eb4e095451ed6f5ab0d0336822107e2b9921ec6dc1206a482d39c53817d990cf"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\07_M4_趋势增益精化\\fig02_预测vs实际_折外.png",
+      "path": "07_M4_趋势增益精化\\M4__fig02_预测vs实际_折外.png",
+      "sha256": "f213c49057a32fa19d4a20fab1b3e4e8bb02805c04f9f7b4b2248685384903dd"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\07_M4_趋势增益精化\\fig03_残差诊断.png",
+      "path": "07_M4_趋势增益精化\\M4__fig03_残差诊断.png",
+      "sha256": "3df77676497ad925c44ee85a6ec68951cd0449928ff1b8df807d0a7772e82ce1"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\07_M4_趋势增益精化\\fig04_分段误差.png",
+      "path": "07_M4_趋势增益精化\\M4__fig04_分段误差.png",
+      "sha256": "74bf13f073614780fc4b53108e3d2fd24a705d84b49cc21dcf3653a0bdccd30d"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\07_M4_趋势增益精化\\fig05_置换重要性.png",
+      "path": "07_M4_趋势增益精化\\M4__fig05_置换重要性.png",
+      "sha256": "3d18502a4632adcac00cab893437c6c517a2682102eeaeb773eba1feab294b3e"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\07_M4_趋势增益精化\\fig06_混淆矩阵.png",
+      "path": "07_M4_趋势增益精化\\M4__fig06_混淆矩阵.png",
+      "sha256": "39f9bb8761e8e60e41d2f74b6d69553823256cd2bf2fada95991b8446c06bbe2"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\07_M4_趋势增益精化\\fig07_ROC_PR.png",
+      "path": "07_M4_趋势增益精化\\M4__fig07_ROC_PR.png",
+      "sha256": "44e64092c991c4c4dcb703d007cb2a5930f766163626ba3f7daeb663ba44f824"
+    },
+    {
+      "source": "E:\\大创内轮差项目\\申报与答辩\\06_中期答辩临时训练\\全部图表\\08_汇总\\fig11_全部模型临时表现分档总图.png",
+      "path": "08_汇总\\fig11_全部模型临时表现分档总图.png",
+      "sha256": "bbef3beeba3adde04db7f766a747713c89fa78f01e5ccbe0d6152eeff9a6e1b7"
+    }
+  ],
+  "purpose": "Editable plotting package only; no training or scientific acceptance",
+  "global_stem_naming": "Model outputs prefixed M1__/M2a__/M2b__/M3__/M4__; all 60 stems unique at root.",
+  "derived_plot_data": [
+    {
+      "path": "_data\\M3_二级处理联合\\roc_pr_plot_arrays.json",
+      "sha256": "907cf6ac574f29ac41a8a105083724a71e5906e563d2191e6cefcdc652d6bb63",
+      "curve_count": 3,
+      "source_figure": "fig07_ROC_PR",
+      "array_roundtrip_exact": true
+    },
+    {
+      "path": "_data\\M4_趋势增益精化\\roc_pr_plot_arrays.json",
+      "sha256": "fca850d582011e8d177312dd0717b98e11c374072743a1d1fd4d339996ceb958",
+      "curve_count": 3,
+      "source_figure": "fig07_ROC_PR",
+      "array_roundtrip_exact": true
+    }
+  ],
+  "support_modules": "site-packages (excluded from Tavotto standalone script inventory)",
+  "plotting_runtime_requires_sklearn": false
+}
