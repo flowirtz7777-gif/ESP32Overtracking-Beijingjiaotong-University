@@ -72,6 +72,11 @@ def work(mon):
     if r.returncode != 0:
         raise RuntimeError("描述性图表失败：" + r.stderr[-1500:])
     mon.tick(1)
+    mon.set_stage("汇集全部图表")
+    r = subprocess.run([sys.executable, "-X", "utf8", "-B", str(OUT / "collect_figures.py")], capture_output=True, text=True, encoding="utf-8")
+    if r.returncode != 0:
+        raise RuntimeError("汇集图表失败：" + r.stderr[-1500:])
+    mon.line(r.stdout.strip())
     mon.line("")
     for line in lines[8:]:
         mon.line(line)
