@@ -1,0 +1,231 @@
+{
+  "scope": "Immutable source snapshot and closed-readable report; no raw arrays or exact proof decoding",
+  "copied_files": [
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\freeze_admission.json",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/freeze_admission.json",
+      "bytes": 7793,
+      "sha256": "992c140ea74d11960c5d4c877fcf540d238acdd12f208d9d2dd329fd6cd4a4cd"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_driver.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_driver.py",
+      "bytes": 33317,
+      "sha256": "d3fccc31206ae31be390b97d0e75b112dbe193773c5828b96d45046e9ab9cca7"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_lifecycle_manager.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_lifecycle_manager.py",
+      "bytes": 7181,
+      "sha256": "f9e8c9ff44b1984af7b44bae3538c9c7ac3e9c701bc628709ed3f0211ba8e541"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\__init__.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\audit_core.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/audit_core.py",
+      "bytes": 5144,
+      "sha256": "a16d9710ef1865a5f3104d1c02a28f10883f802f71867faf09b5371344b0f419"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\checker.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/checker.py",
+      "bytes": 17496,
+      "sha256": "27b9069240312a7f462ccc41f1e9425fc868729a01ab8fb5f0ac5bfc3bd5ce61"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\core.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/core.py",
+      "bytes": 4422,
+      "sha256": "9a06fe35768d1753e96a4a0501bb1788011dc02c074eb54fb299dbdaaac6b9ca"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\frontier.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/frontier.py",
+      "bytes": 3921,
+      "sha256": "0c195342462155e60da66aef7ee683ac70ec686bf193bb883993b33bee4c00f5"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\independent_geometry.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/independent_geometry.py",
+      "bytes": 7713,
+      "sha256": "73ec6a6baf457482b42593a071918a66060ac2255f242f86a6d2742aa3115fdc"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\independent_math\\__init__.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/independent_math/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\independent_math\\entry_interval_geometry.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/independent_math/entry_interval_geometry.py",
+      "bytes": 3967,
+      "sha256": "371ee560803a2cabab765ebfad11939f1fe045c3cfe00b9e80a34f9c53c9e092"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\independent_math\\general_step_residual.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/independent_math/general_step_residual.py",
+      "bytes": 4200,
+      "sha256": "a01324d435fd447f6cab8dcce8e346ba7ed05e1ea3ed6e9957cddf27d81321f1"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\independent_math\\independent_step_verifier.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/independent_math/independent_step_verifier.py",
+      "bytes": 6366,
+      "sha256": "da4e64de6dc5f857a080f6052fe9f9e129ae82137565fe0ae51ebaae992d6f84"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\independent_math\\proof_codec.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/independent_math/proof_codec.py",
+      "bytes": 5889,
+      "sha256": "cd6c2fd8f945d3d68431251317d054aff1ea85081a9e3620151ff81f6c3eb0aa"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\independent_math\\source_control_enclosure.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/independent_math/source_control_enclosure.py",
+      "bytes": 5633,
+      "sha256": "50763bca3d9602aaa20bc2e88f304f14230b6092b59eee440d909049a69e7af3"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\independent_math\\source_reference_consistency.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/independent_math/source_reference_consistency.py",
+      "bytes": 3128,
+      "sha256": "1a33dea71dc87630ad0c3158a0dc030b692962d8a1b66e1be0247ef17534d8d1"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\independent_math\\validated_entry_core.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/independent_math/validated_entry_core.py",
+      "bytes": 4913,
+      "sha256": "e1534749b09fae9ca8fcce16bd7226be3c692be09c18e08b0a7eb9c570ac8e07"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\primary\\__init__.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/primary/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\primary\\correlated_projection.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/primary/correlated_projection.py",
+      "bytes": 3282,
+      "sha256": "5de04781c5bdbe7edef0dc34abde7f014956cfb4d23e4b63eb2fa0a18331b723"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\primary\\entry_interval_geometry.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/primary/entry_interval_geometry.py",
+      "bytes": 3967,
+      "sha256": "371ee560803a2cabab765ebfad11939f1fe045c3cfe00b9e80a34f9c53c9e092"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\primary\\general_step_residual.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/primary/general_step_residual.py",
+      "bytes": 4200,
+      "sha256": "a01324d435fd447f6cab8dcce8e346ba7ed05e1ea3ed6e9957cddf27d81321f1"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\primary\\source_control_enclosure.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/primary/source_control_enclosure.py",
+      "bytes": 5633,
+      "sha256": "50763bca3d9602aaa20bc2e88f304f14230b6092b59eee440d909049a69e7af3"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\primary\\source_projection.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/primary/source_projection.py",
+      "bytes": 3738,
+      "sha256": "2cbaf93cd1786855a498f4798a47a8b73b5128cab3dc6eab920e96fbb6e9f996"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\primary\\validated_entry_core.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/primary/validated_entry_core.py",
+      "bytes": 4913,
+      "sha256": "e1534749b09fae9ca8fcce16bd7226be3c692be09c18e08b0a7eb9c570ac8e07"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\test_checker.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/test_checker.py",
+      "bytes": 6856,
+      "sha256": "a25261674ae839d6edb2452bd8ac6770ab3453f6c63e2318f26bba81da2836ef"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\test_frontier.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/test_frontier.py",
+      "bytes": 2760,
+      "sha256": "712c0e2c391ecdeec030c4f927322a8c8bfbb440b5adb5d0b5f749415d77f0f6"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\test_full_source_integration.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/test_full_source_integration.py",
+      "bytes": 4596,
+      "sha256": "4fc8b9ea68e2b53f46e53eb9e7cceb6b6d38023b2ebd985072fed08b4f74ae0a"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\test_independent_geometry.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/test_independent_geometry.py",
+      "bytes": 4769,
+      "sha256": "b9f34011700ce9eeb30cb805bbf8ba323ce2a2f6e58bb9db413b6c08bff6704a"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\test_projection.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/test_projection.py",
+      "bytes": 2288,
+      "sha256": "de8fca24675890aa82da38f4ba26531667b0366690e0127614bf11cabaafb7ee"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\test_worker.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/test_worker.py",
+      "bytes": 3191,
+      "sha256": "acacd8fb57024b279d4008f0beeb658f693429155f768e22ee4bd4847dc7e982"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_v1\\worker.py",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source/source_truth_v1/worker.py",
+      "bytes": 6766,
+      "sha256": "0ceeb215ccd792ed41ebf8ba280edd37adbf2f322d76f651d51221d546ef83ba"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_source_model_truth_20261024_0000_v1.json",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/protocol.json",
+      "bytes": 3921,
+      "sha256": "f1c3a19009d5c81b5222a3975b7e39bf7c498b0ffcc316b4adaa5238fe79efbd"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\resume_plan_20261024_0000_v115.json",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/closed_plan_v115.json",
+      "bytes": 1125,
+      "sha256": "32c7e16f17dc956237cf4c11c47f57c9859acedda6302a1efb04790ac5b8ffe8"
+    },
+    {
+      "original_path": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261024_0000_source_model_truth_v1\\source_model_truth_diagnostic.json",
+      "repository_path": "项目文档/03_项目管理/科研冻结快照_20261022/source_model_truth_diagnostic.json",
+      "bytes": 1376,
+      "sha256": "29f1b3f7d631e2bb7a479ceadac94d10147e164db12cd80b8bed6df2df7c0b08"
+    }
+  ],
+  "closed_run_directory": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261024_0000_source_model_truth_v1",
+  "all17_closed_run_file_sha256": {
+    "acceptance.json": "c454f2ae1abc37b8ad97d39bffe48a65cf321f5a11a633af6cda069605a12357",
+    "analysis_runner_lock.json": "1a503dbc6444af969b0904b8a5dce8ac72c72a9395c71829ef9b62da9bff7c9a",
+    "checkpoint.json": "c37bb3585aceddd147b1253548c2319a43ed9da21a7306932e8bd832ab6a95f0",
+    "close_receipt.json": "c30a8245e48c5a575e3e57da7fc6905bea511b8e48762f09ad59bb4a8018fe55",
+    "environment.json": "7ba74b53efb21195cd14825650e90eea7290af576291d5b2da1361f1098784e0",
+    "full70000_mother.npz": "2753cc78398827a78f135b04af6aa21679f862f10c892d784182ee00b6d6dada",
+    "prelaunch.json": "beb2f15352314f636b7cab3a07067bdc2848197502213110745a76d021c8983f",
+    "runner_lock.json": "3d2afb396246682d9ffa6534f8b466b5977bb1652db36a926c0e93bcc19b909b",
+    "selection.json": "e8857507178165b33dbf3a652f6d3d05814aefd757e1a8f2db2661e8a81df40b",
+    "source_bundle.zip": "036c967ce1e0e9ec921a4c5f607a691b417302596b11194c4ae9c9a3b2415504",
+    "source_manifest.json": "890dbd735e3e2f53b4b599ae24341a41bcf345f44f105fbbd57db7b5bfb5b9e8",
+    "source_model_truth_authorization.json": "81de5db646b93293506fa07d6c9c70987acc5d8d809e490fa02950a958544356",
+    "source_model_truth_diagnostic.json": "29f1b3f7d631e2bb7a479ceadac94d10147e164db12cd80b8bed6df2df7c0b08",
+    "source_model_truth_independent_proof.json.gz": "861895a0fb7700d0e1743d5168c46df0ba1a3556d89918c6f94fad047a8c0239",
+    "source_model_truth_source_artifact.json.gz": "3bb107fbfb8546dc9d4e86bab4e66a5292ad88827e0a73e163201a0160f03b40",
+    "source_model_truth_worker_proof.json.gz": "3495ceb87ab2b3bdc0f7fa42d282029e02afe2998c70d0d22cf0972269c37f47",
+    "source_model_truth_worker_summary.json": "1662ee043f15f4ecda8a08e25cd7ce624c68a306e006b43e08069aff6e9bb8e9"
+  },
+  "original_assets_unchanged": true,
+  "formal_truth_score_training_certificates": 0
+}

@@ -1,0 +1,41 @@
+{
+  "time": "2026-10-22T01:38:41+00:00",
+  "target": "source-model-continuous-simulated-truth-v1",
+  "points": [
+    {
+      "original_index": 63731,
+      "candidate_status": "candidate_noncontact_mutual",
+      "first_contact_interval_s_outward": null,
+      "earliest_unexcluded_s_outward": null,
+      "candidate_contact_upper_s_outward": null,
+      "source_steps": 192,
+      "independent_geometry_calls": 212,
+      "unknown_frontier_cells": 0,
+      "face_candidate_mask": 255,
+      "face_certification_complete": false,
+      "corrected_truth_certificates": 0,
+      "scientific_admission_allowed": false
+    },
+    {
+      "original_index": 69993,
+      "candidate_status": "candidate_noncontact_mutual",
+      "first_contact_interval_s_outward": null,
+      "earliest_unexcluded_s_outward": null,
+      "candidate_contact_upper_s_outward": null,
+      "source_steps": 192,
+      "independent_geometry_calls": 204,
+      "unknown_frontier_cells": 0,
+      "face_candidate_mask": 255,
+      "face_certification_complete": false,
+      "corrected_truth_certificates": 0,
+      "scientific_admission_allowed": false
+    }
+  ],
+  "existence_candidates": 2,
+  "unknown_retained": true,
+  "no_full57_truth_or_score": true,
+  "corrected_truth_certificates": 0,
+  "corrected_score_certificates": 0,
+  "training_allowed": false,
+  "physical_accuracy_claim_allowed": false
+}

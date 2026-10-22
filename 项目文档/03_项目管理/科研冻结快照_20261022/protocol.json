@@ -1,0 +1,98 @@
+{
+  "time": "2026-10-22T01:32:23+00:00",
+  "deadline": "2026-10-23T16:00:00+00:00",
+  "target": "source-model-continuous-simulated-truth-v1",
+  "human_choice_sha256": "81de5db646b93293506fa07d6c9c70987acc5d8d809e490fa02950a958544356",
+  "human_choice_exact_bytes": true,
+  "authorization_extension_sha256": "7c0e63060749f041441ef90ab486c04d1746a9e404e1e1f449ee7d83594cc700",
+  "authorization_extension": {
+    "version": "human-deadline-extension-20261021-v1",
+    "recorded_at": "2026-10-21T11:57:19+00:00",
+    "human_instruction": "授权延长至后天24:00、",
+    "interpretation_timezone": "Asia/Shanghai",
+    "human_local_date": "2026-10-21",
+    "previous_deadline_utc": "2026-10-21T16:00:00+00:00",
+    "new_deadline_beijing": "2026-10-24T00:00:00+08:00",
+    "new_deadline_utc": "2026-10-23T16:00:00+00:00",
+    "scope": "Deadline only; all scientific/resource/E-readonly/single-worker/immutable-history/first-independent-close/training-admission constraints unchanged",
+    "original_authorization_sha256": "0c686fa41c6186c66fd330ebb755fef768671c58a3e3a2e4196355adabd9ce28",
+    "old_frozen_source_protocol_runs_not_modified": true,
+    "inflight_run_keeps_its_original_frozen_cutoff": true,
+    "new_versions_must_explicitly_bind_this_extension": true,
+    "no_automatic_further_renewal": true
+  },
+  "parent_lineage": {
+    "worker_exit": {
+      "time": "2026-10-22T00:49:52+00:00",
+      "actual_wait_exit_code": 0,
+      "pid": 38040,
+      "ancestor_manager_pid": 43596,
+      "argv": [
+        "C:\\Users\\Admin\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-u",
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_conditional_method_limit_20261024_v2\\conditional_method_driver.py",
+        "run"
+      ]
+    },
+    "close_exit": {
+      "time": "2026-10-22T00:53:34+00:00",
+      "actual_wait_exit_code": 0,
+      "pid": 54696,
+      "ancestor_manager_pid": 43596,
+      "argv": [
+        "C:\\Users\\Admin\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-u",
+        "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_conditional_method_limit_20261024_v2\\conditional_method_driver.py",
+        "close"
+      ]
+    },
+    "inventory_count": 16,
+    "receipt_sha256": "2c73ae743e4b4c2d3c28efe3f1b83dafae6ec369e0e7a0dc89631b039354dc59",
+    "acceptance_sha256": "6ab41e4c508af3ce4bad838a69924b9bbbee89ba4f24e0a67f7a0a5a01b5b29c"
+  },
+  "scope": "First bounded source-model simulated-truth existence trial for original indices 63731 and 69993; both complete original references/E retained as provenance only; source model is a separate target.",
+  "first_use_only": true,
+  "failed_prepare_run_close_terminal": true,
+  "worker_seconds": 1800,
+  "close_seconds": 1800,
+  "workers": 1,
+  "inflight": 1,
+  "blas_threads": 1,
+  "run_cap_bytes": 536870912,
+  "maximum_source_steps": 512,
+  "source_degree": 6,
+  "maximum_source_step_s": "0.2",
+  "geometry_calls_per_point": 4096,
+  "checker_calls_per_point": 4096,
+  "maximum_geometry_depth": 24,
+  "full_original_horizon": true,
+  "full_original_mother": 70000,
+  "original_indices": [
+    63731,
+    69993
+  ],
+  "old_reference_and_empirical_E": "identity/provenance only; excluded from source distance bounds",
+  "tolerance": "exact inherited source tolerance, bound at worker/close",
+  "no_step_order_budget_increase": true,
+  "no_uniform_1nm_gate": true,
+  "face_candidate_mask": 255,
+  "face_certification_complete": false,
+  "unknown_frontier_retained": true,
+  "original_time_lower_bound_retained": true,
+  "empirical_E_in_source判界": false,
+  "label_gain_expected": [
+    0,
+    2
+  ],
+  "scientific_admission_allowed": false,
+  "corrected_labels_accepted": false,
+  "corrected_scores_accepted": false,
+  "training_allowed": false,
+  "deployment_allowed": false
+}

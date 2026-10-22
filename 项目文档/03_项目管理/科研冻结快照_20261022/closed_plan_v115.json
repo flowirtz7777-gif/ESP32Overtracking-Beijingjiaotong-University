@@ -1,0 +1,27 @@
+{
+  "version": "20261024-v115-source-model-truth-closed",
+  "run_directory": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\runs\\resume_20261024_0000_source_model_truth_v1",
+  "protocol": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\protocol_source_model_truth_20261024_0000_v1.json",
+  "entrypoint": "Z:\\大创内轮差项目_实验结果\\科研实验_2026-10-14\\src_s4_source_model_truth_20261024_v1\\source_truth_driver.py",
+  "deadline": "2026-10-23T16:00:00+00:00",
+  "stage_status": "complete_two_point_source_model_truth_existence_diagnostic_not_admission",
+  "target": "source-model-continuous-simulated-truth-v1",
+  "original_indices": [
+    63731,
+    69993
+  ],
+  "full_mother": 70000,
+  "scientific_admission_allowed": false,
+  "corrected_labels_accepted": false,
+  "corrected_scores_accepted": false,
+  "training_allowed": false,
+  "accounting": {
+    "points": 2,
+    "full_mother": 70000,
+    "full_source_steps": 192,
+    "existence_candidates": 2,
+    "geometry_evaluations": 416,
+    "corrected_truth_certificates": 0,
+    "corrected_score_certificates": 0
+  }
+}

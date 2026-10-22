@@ -1,0 +1,1 @@
+档案仅为已冻结源和可读闭合报告的逐字副本，不是可从Git重跑的科研入口。完整父依赖、输入、精确rational证明在原盘按SHA256_INDEX保留；禁止重跑旧prepare/run/close。
