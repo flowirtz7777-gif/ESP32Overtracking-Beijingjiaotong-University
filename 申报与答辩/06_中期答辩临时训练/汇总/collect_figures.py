@@ -27,6 +27,9 @@ FAMILIES = [
     ("M4", "M4_趋势增益精化", "S4 联合精化：12 条选择轨迹 × 7 配置（g 0.375–1.25，含保持）× 8 条件 × 12 变体，修正评分口径"),
 ]
 
+# 本脚本只管理这些子目录；全部图表/ 下的其他内容（如 tavotoo/ Tavotto 编辑包、导读 notebook）一律不动
+MANAGED = ["01_数据探索", "02_描述性图表"] + [f"{i:02d}_{folder}" for i, (_, folder, _) in enumerate(FAMILIES, start=3)] + ["08_汇总"]
+
 # 标“★”的是建议直接放进答辩材料的图
 STAR = {
     ("02_描述性图表", n) for n in ("fig01", "fig02", "fig03", "fig04", "fig05", "fig06", "fig07", "fig12", "fig13", "fig14")
@@ -106,8 +109,9 @@ def star(sub, name):
 
 
 def main():
-    if DEST.exists():
-        for p in DEST.rglob("*.png"):
+    # 只清理本脚本管理的子目录，不能递归删除 全部图表/ 下的所有 PNG（会删掉 tavotoo/ 编辑包里的预览图）
+    for sub in MANAGED:
+        for p in (DEST / sub).glob("*.png"):
             p.unlink()
     DEST.mkdir(exist_ok=True)
     lines = [
@@ -115,6 +119,9 @@ def main():
         "本目录是各步骤生成图片的副本，按来源分子目录存放，原图仍保留在各步骤的 `figures/` 中。"
         "重跑训练后运行 `汇总/collect_figures.py`（汇总步骤会自动运行）即可同步。", "",
         "标 ★ 的是建议直接放进答辩材料的图。每张图的脚注都写了数据口径，引用时请保留。", "",
+        "同目录另有：",
+        "- `中期答辩图表导读.ipynb`：按论文顺序逐张说明这些图的来源、读法和结论，并用可执行代码重画（读取 `tavotoo/` 包内数据，不训练、不仿真，不覆盖任何图文件）。",
+        "- `tavotoo/`：Tavotto 改图编辑包（每张图一个独立入口、同名 PDF/PNG 和打包数据），说明见其中的 README.md。本脚本不会改动该目录。", "",
         "通用口径：",
         "- 全部轨迹转角峰值均为 10°，结论只适用于这一种转弯几何、2–4 m/s 低速、静态目标的运动学仿真。",
         "- S1、S2 为 v3 评分口径（误报类数值略高于修正口径），S3、S4 为修正评分口径。",
@@ -197,7 +204,7 @@ def main():
         lines.append(f"| {star(sub, f.stem)}`{f.name}` | 全部任务主验证方案下的 skill，颜色为临时模型表现分档，黑色菱形为 M3 外部检验 skill；逐项数值见 `汇总/临时模型表现分档总表.md`。 |")
     lines.append("")
 
-    n = len(list(DEST.rglob("*.png")))
+    n = sum(len(list((DEST / sub).glob("*.png"))) for sub in MANAGED)
     lines += ["## 统计", "", f"共 {n} 张图。"]
     (DEST / "README.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"copied {n} figures -> {DEST}")
