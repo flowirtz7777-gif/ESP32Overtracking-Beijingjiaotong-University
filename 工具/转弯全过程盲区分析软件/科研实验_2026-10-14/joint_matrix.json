@@ -1,0 +1,242 @@
+[
+  {
+    "id": "f1_w2_m0_c0",
+    "method_slot": 1,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 2,
+    "margin_m": 0,
+    "confirmation_s": 0
+  },
+  {
+    "id": "f1_w2_m0_c100",
+    "method_slot": 1,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 2,
+    "margin_m": 0,
+    "confirmation_s": 0.1
+  },
+  {
+    "id": "f1_w2_m20_c0",
+    "method_slot": 1,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 2,
+    "margin_m": 0.02,
+    "confirmation_s": 0
+  },
+  {
+    "id": "f1_w2_m20_c100",
+    "method_slot": 1,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 2,
+    "margin_m": 0.02,
+    "confirmation_s": 0.1
+  },
+  {
+    "id": "f1_w2_m50_c0",
+    "method_slot": 1,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 2,
+    "margin_m": 0.05,
+    "confirmation_s": 0
+  },
+  {
+    "id": "f1_w2_m50_c100",
+    "method_slot": 1,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 2,
+    "margin_m": 0.05,
+    "confirmation_s": 0.1
+  },
+  {
+    "id": "f1_w3_m0_c0",
+    "method_slot": 1,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 3,
+    "margin_m": 0,
+    "confirmation_s": 0
+  },
+  {
+    "id": "f1_w3_m0_c100",
+    "method_slot": 1,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 3,
+    "margin_m": 0,
+    "confirmation_s": 0.1
+  },
+  {
+    "id": "f1_w3_m20_c0",
+    "method_slot": 1,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 3,
+    "margin_m": 0.02,
+    "confirmation_s": 0
+  },
+  {
+    "id": "f1_w3_m20_c100",
+    "method_slot": 1,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 3,
+    "margin_m": 0.02,
+    "confirmation_s": 0.1
+  },
+  {
+    "id": "f1_w3_m50_c0",
+    "method_slot": 1,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 3,
+    "margin_m": 0.05,
+    "confirmation_s": 0
+  },
+  {
+    "id": "f1_w3_m50_c100",
+    "method_slot": 1,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 3,
+    "margin_m": 0.05,
+    "confirmation_s": 0.1
+  },
+  {
+    "id": "f2_w2_m0_c0",
+    "method_slot": 2,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 2,
+    "margin_m": 0,
+    "confirmation_s": 0
+  },
+  {
+    "id": "f2_w2_m0_c100",
+    "method_slot": 2,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 2,
+    "margin_m": 0,
+    "confirmation_s": 0.1
+  },
+  {
+    "id": "f2_w2_m20_c0",
+    "method_slot": 2,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 2,
+    "margin_m": 0.02,
+    "confirmation_s": 0
+  },
+  {
+    "id": "f2_w2_m20_c100",
+    "method_slot": 2,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 2,
+    "margin_m": 0.02,
+    "confirmation_s": 0.1
+  },
+  {
+    "id": "f2_w2_m50_c0",
+    "method_slot": 2,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 2,
+    "margin_m": 0.05,
+    "confirmation_s": 0
+  },
+  {
+    "id": "f2_w2_m50_c100",
+    "method_slot": 2,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 2,
+    "margin_m": 0.05,
+    "confirmation_s": 0.1
+  },
+  {
+    "id": "f2_w3_m0_c0",
+    "method_slot": 2,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 3,
+    "margin_m": 0,
+    "confirmation_s": 0
+  },
+  {
+    "id": "f2_w3_m0_c100",
+    "method_slot": 2,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 3,
+    "margin_m": 0,
+    "confirmation_s": 0.1
+  },
+  {
+    "id": "f2_w3_m20_c0",
+    "method_slot": 2,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 3,
+    "margin_m": 0.02,
+    "confirmation_s": 0
+  },
+  {
+    "id": "f2_w3_m20_c100",
+    "method_slot": 2,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 3,
+    "margin_m": 0.02,
+    "confirmation_s": 0.1
+  },
+  {
+    "id": "f2_w3_m50_c0",
+    "method_slot": 2,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 3,
+    "margin_m": 0.05,
+    "confirmation_s": 0
+  },
+  {
+    "id": "f2_w3_m50_c100",
+    "method_slot": 2,
+    "method_id": null,
+    "status": "design_only_not_executed",
+    "default_W_s": 2,
+    "EXIT_W_s": 3,
+    "margin_m": 0.05,
+    "confirmation_s": 0.1
+  }
+]

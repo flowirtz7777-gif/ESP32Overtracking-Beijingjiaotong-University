@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "past_only_and_prefix_checks": 8,
+  "straight_analytic_check": true,
+  "historical_linear_derivative_check": true,
+  "source_signature": {
+    "common.py": "84feb27e702b16aa6a67a1c32425e397bf731b2d1c1e7f21a2ff2dd44dfa51dd",
+    "scenarios.py": "8f8f90b65e0d479ceebf28216331b83eaef181faa0aeadfd3c50b57b00362b77",
+    "geometry.py": "4b5eb49d29220195d2643536e76e2a41d353895450e81ca3e5e1bbfec19cca2e",
+    "prediction.py": "c2dafd309ebad2f800b92209217435e79ebeef0e60936c6ebcd11a4cc6b1b025",
+    "foundation.py": "883de006edcb70c5c51d547b62847aa3e2645bb695c036421388c5dcb62af686"
+  },
+  "created_at": "2026-10-14T03:02:33Z"
+}

@@ -1,0 +1,114 @@
+{
+  "status": "passed",
+  "target_count": 70000,
+  "reference_sampling_and_frame_point_counts_checked": true,
+  "density": {
+    "target_count": 70000,
+    "lower_count": 35000,
+    "case_count": 3,
+    "max_right_absolute_delta_pp": 0.13662266164631998,
+    "max_point_fp_delta_pp": 0.11631034860342382,
+    "max_lead_p10_delta_s": 0.010000000000000675,
+    "max_paired_method_delta_pp": 0.15196182163226446,
+    "rows": [
+      {
+        "case": "v2_r2_symmetric",
+        "method": "damped_d0500",
+        "right_delta_pp": 0.008770787430664267,
+        "fp_delta_pp": 0.021432183914008404,
+        "lead_p10_delta_s": 0.0
+      },
+      {
+        "case": "v2_r2_symmetric",
+        "method": "hold",
+        "right_delta_pp": 0.025568174267572824,
+        "fp_delta_pp": 0.042865102574375646,
+        "lead_p10_delta_s": 0.004999999999999005
+      },
+      {
+        "case": "v2_r2_symmetric",
+        "method": "linear_g100",
+        "right_delta_pp": 0.004447409384033801,
+        "fp_delta_pp": 0.012856959160056775,
+        "lead_p10_delta_s": 0.0
+      },
+      {
+        "case": "v2_r2_symmetric",
+        "method": "second_a0250",
+        "right_delta_pp": 0.004447409384033801,
+        "fp_delta_pp": 0.029996020099398085,
+        "lead_p10_delta_s": 0.0
+      },
+      {
+        "case": "v3_r4_fast_return",
+        "method": "damped_d0500",
+        "right_delta_pp": 0.06174184573678365,
+        "fp_delta_pp": 0.11146469636691214,
+        "lead_p10_delta_s": 3.552713678800501e-15
+      },
+      {
+        "case": "v3_r4_fast_return",
+        "method": "hold",
+        "right_delta_pp": 0.11451367402305279,
+        "fp_delta_pp": 0.06861134973427785,
+        "lead_p10_delta_s": 0.009999999999999787
+      },
+      {
+        "case": "v3_r4_fast_return",
+        "method": "linear_g100",
+        "right_delta_pp": 0.049377889870716785,
+        "fp_delta_pp": 0.06432594159637861,
+        "lead_p10_delta_s": 0.010000000000000675
+      },
+      {
+        "case": "v3_r4_fast_return",
+        "method": "second_a0250",
+        "right_delta_pp": 0.05363883951451681,
+        "fp_delta_pp": 0.09868966142586544,
+        "lead_p10_delta_s": 0.0050000000000001155
+      },
+      {
+        "case": "v4_r8_fast_entry",
+        "method": "damped_d0500",
+        "right_delta_pp": 0.08779544497615044,
+        "fp_delta_pp": 0.021311685511159695,
+        "lead_p10_delta_s": 0.0050000000000001155
+      },
+      {
+        "case": "v4_r8_fast_entry",
+        "method": "hold",
+        "right_delta_pp": 0.015339159985944484,
+        "fp_delta_pp": 0.004180706781765409,
+        "lead_p10_delta_s": 0.004999999999999893
+      },
+      {
+        "case": "v4_r8_fast_entry",
+        "method": "linear_g100",
+        "right_delta_pp": 0.11751896717386856,
+        "fp_delta_pp": 0.10256948957368817,
+        "lead_p10_delta_s": 0.0
+      },
+      {
+        "case": "v4_r8_fast_entry",
+        "method": "second_a0250",
+        "right_delta_pp": 0.13662266164631998,
+        "fp_delta_pp": 0.11631034860342382,
+        "lead_p10_delta_s": 1.7763568394002505e-15
+      }
+    ],
+    "passed": true
+  },
+  "source_signature": {
+    "audit.py": "1684523b0111e9fcac48a30be518337c88eb2471fb18d751d8b04bcdf400a4d4",
+    "common.py": "84feb27e702b16aa6a67a1c32425e397bf731b2d1c1e7f21a2ff2dd44dfa51dd",
+    "evaluation.py": "6dc2eaf32e792d13a68f587e636224d4f9e492a1bd6af0bb6a08b5aab072c61b",
+    "foundation.py": "883de006edcb70c5c51d547b62847aa3e2645bb695c036421388c5dcb62af686",
+    "geometry.py": "4b5eb49d29220195d2643536e76e2a41d353895450e81ca3e5e1bbfec19cca2e",
+    "observations.py": "64abe7a64cdcd22cdbe3f261cca21f3d9463dd9846305cc5c85b6108d9336755",
+    "prediction.py": "6943cfa855e42c25e9c0064edfa7da3c364076608e2772fa7a3a39c04b5b334a",
+    "reporting.py": "885ba9459c690dee4d7a97230892ed750f45447494085c653900ea689b7c85a6",
+    "run_night.py": "c0b66354a82fd05c519c1c8836c2090721b440396f9360f8ad95bf43dc82246b",
+    "scenarios.py": "8f8f90b65e0d479ceebf28216331b83eaef181faa0aeadfd3c50b57b00362b77"
+  },
+  "physical_validation": false
+}

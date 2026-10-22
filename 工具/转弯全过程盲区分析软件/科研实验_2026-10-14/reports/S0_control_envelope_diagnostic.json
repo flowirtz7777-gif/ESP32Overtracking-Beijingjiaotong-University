@@ -1,0 +1,150 @@
+{
+  "status": "diagnostic",
+  "rows": [
+    {
+      "case": "v2_r2_symmetric",
+      "mode": "hold",
+      "gain": 1.0,
+      "acceleration_duration_s": 0.25,
+      "future_max_rate_deg_s": 0.0,
+      "estimator_rate_limit_deg_s": 32.0
+    },
+    {
+      "case": "v2_r2_symmetric",
+      "mode": "linear",
+      "gain": 1.0,
+      "acceleration_duration_s": 0.25,
+      "future_max_rate_deg_s": 2.3576689976693403,
+      "estimator_rate_limit_deg_s": 32.0
+    },
+    {
+      "case": "v2_r2_symmetric",
+      "mode": "damped_linear",
+      "gain": 1.0,
+      "acceleration_duration_s": 0.25,
+      "future_max_rate_deg_s": 2.3459198491238724,
+      "estimator_rate_limit_deg_s": 32.0
+    },
+    {
+      "case": "v2_r2_symmetric",
+      "mode": "bounded_second_order",
+      "gain": 1.0,
+      "acceleration_duration_s": 0.25,
+      "future_max_rate_deg_s": 4.634265734266059,
+      "estimator_rate_limit_deg_s": 32.0
+    },
+    {
+      "case": "v2_r2_symmetric",
+      "mode": "linear",
+      "gain": 2,
+      "acceleration_duration_s": 0.25,
+      "future_max_rate_deg_s": 4.715337995338363,
+      "estimator_rate_limit_deg_s": 32.0
+    },
+    {
+      "case": "v2_r2_symmetric",
+      "mode": "bounded_second_order",
+      "gain": 1.0,
+      "acceleration_duration_s": 1,
+      "future_max_rate_deg_s": 12.02368934452997,
+      "estimator_rate_limit_deg_s": 32.0
+    },
+    {
+      "case": "v3_r4_fast_return",
+      "mode": "hold",
+      "gain": 1.0,
+      "acceleration_duration_s": 0.25,
+      "future_max_rate_deg_s": 0.0,
+      "estimator_rate_limit_deg_s": 32.0
+    },
+    {
+      "case": "v3_r4_fast_return",
+      "mode": "linear",
+      "gain": 1.0,
+      "acceleration_duration_s": 0.25,
+      "future_max_rate_deg_s": 9.447621308432286,
+      "estimator_rate_limit_deg_s": 32.0
+    },
+    {
+      "case": "v3_r4_fast_return",
+      "mode": "damped_linear",
+      "gain": 1.0,
+      "acceleration_duration_s": 0.25,
+      "future_max_rate_deg_s": 9.400540269379457,
+      "estimator_rate_limit_deg_s": 32.0
+    },
+    {
+      "case": "v3_r4_fast_return",
+      "mode": "bounded_second_order",
+      "gain": 1.0,
+      "acceleration_duration_s": 0.25,
+      "future_max_rate_deg_s": 18.587085710236373,
+      "estimator_rate_limit_deg_s": 32.0
+    },
+    {
+      "case": "v3_r4_fast_return",
+      "mode": "linear",
+      "gain": 2,
+      "acceleration_duration_s": 0.25,
+      "future_max_rate_deg_s": 18.89524261686457,
+      "estimator_rate_limit_deg_s": 32.0
+    },
+    {
+      "case": "v3_r4_fast_return",
+      "mode": "bounded_second_order",
+      "gain": 1.0,
+      "acceleration_duration_s": 1,
+      "future_max_rate_deg_s": 48.18882239269452,
+      "estimator_rate_limit_deg_s": 32.0
+    },
+    {
+      "case": "v4_r8_fast_entry",
+      "mode": "hold",
+      "gain": 1.0,
+      "acceleration_duration_s": 0.25,
+      "future_max_rate_deg_s": 0.0,
+      "estimator_rate_limit_deg_s": 32.0
+    },
+    {
+      "case": "v4_r8_fast_entry",
+      "mode": "linear",
+      "gain": 1.0,
+      "acceleration_duration_s": 0.25,
+      "future_max_rate_deg_s": 18.86135198135345,
+      "estimator_rate_limit_deg_s": 32.0
+    },
+    {
+      "case": "v4_r8_fast_entry",
+      "mode": "damped_linear",
+      "gain": 1.0,
+      "acceleration_duration_s": 0.25,
+      "future_max_rate_deg_s": 18.76735879299098,
+      "estimator_rate_limit_deg_s": 32.0
+    },
+    {
+      "case": "v4_r8_fast_entry",
+      "mode": "bounded_second_order",
+      "gain": 1.0,
+      "acceleration_duration_s": 0.25,
+      "future_max_rate_deg_s": 37.074125874125926,
+      "estimator_rate_limit_deg_s": 32.0
+    },
+    {
+      "case": "v4_r8_fast_entry",
+      "mode": "linear",
+      "gain": 2,
+      "acceleration_duration_s": 0.25,
+      "future_max_rate_deg_s": 37.72270396270436,
+      "estimator_rate_limit_deg_s": 32.0
+    },
+    {
+      "case": "v4_r8_fast_entry",
+      "mode": "bounded_second_order",
+      "gain": 1.0,
+      "acceleration_duration_s": 1,
+      "future_max_rate_deg_s": 79.50611888111996,
+      "estimator_rate_limit_deg_s": 32.0
+    }
+  ],
+  "input_derivative_limit_is_not_automatically_output_control_rate_limit": true
+}

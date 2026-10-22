@@ -1,0 +1,47 @@
+{
+  "status": "completed",
+  "ranked": [
+    {
+      "preprocessing": "raw",
+      "folds": 288,
+      "right_miss_sum": 1,
+      "right_no_before_sum": 1,
+      "worst_right_pct": 5.665472040846384,
+      "worst_stratified_right_pct": 5.4415950860832805,
+      "mean_right_pct": 0.6176444811329839,
+      "worst_point_fp_pct": 40.44914927356105,
+      "worst_frame_fpr_pct": 1.3258208810601688,
+      "worst_2s_reference_fpr_pct": 1.3258208810601688,
+      "passes_research_budget": false
+    },
+    {
+      "preprocessing": "alpha_lp",
+      "folds": 288,
+      "right_miss_sum": 2,
+      "right_no_before_sum": 2,
+      "worst_right_pct": 5.950218469242476,
+      "worst_stratified_right_pct": 5.71939842118808,
+      "mean_right_pct": 0.8198094800275824,
+      "worst_point_fp_pct": 30.279003985771226,
+      "worst_frame_fpr_pct": 0.8930166815896194,
+      "worst_2s_reference_fpr_pct": 0.8930166815896194,
+      "passes_research_budget": false
+    },
+    {
+      "preprocessing": "age_hold",
+      "folds": 288,
+      "right_miss_sum": 3,
+      "right_no_before_sum": 3,
+      "worst_right_pct": 5.606558986695469,
+      "worst_stratified_right_pct": 5.378999205059328,
+      "mean_right_pct": 0.6274928687399484,
+      "worst_point_fp_pct": 40.44914927356105,
+      "worst_frame_fpr_pct": 1.3258208810601688,
+      "worst_2s_reference_fpr_pct": 1.3258208810601688,
+      "passes_research_budget": false
+    }
+  ],
+  "chosen_preprocessing": "raw",
+  "shared_across_finalists": true,
+  "physical_validation": false
+}

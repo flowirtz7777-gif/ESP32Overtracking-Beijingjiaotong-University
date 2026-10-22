@@ -50,6 +50,9 @@ venv/
 
 # ------------- Logs / data captures -------------
 logs/
+!工具/*/logs/
+工具/*/logs/*
+!工具/*/logs/README.md
 *.log
 *.csv.bak
 *.local.csv
@@ -57,14 +60,14 @@ data/raw/
 *.bag
 
 # TTC 复盘软件每次"导出 CSV"会落到这里，属于运行时日志，不入仓库
-TTC预警复盘软件/报警日志/*.csv
+工具/TTC预警复盘软件/报警日志/*.csv
 
 # 转弯全过程盲区分析软件：带时间戳的运行时导出（目标点/盲区日志），不入仓库。
 # 但保留固定测试输入（如"标准测试用.csv"）。
-转弯全过程盲区分析软件/目标点CSV/turn_exit_boundary_targets_*.csv
-转弯全过程盲区分析软件/目标点CSV/turn_blindspot_boundary_targets_*.csv
-转弯全过程盲区分析软件/目标点CSV/*_旧版备份.csv
-转弯全过程盲区分析软件/边界点盲区日志/*.csv
+工具/转弯全过程盲区分析软件/目标点CSV/turn_exit_boundary_targets_*.csv
+工具/转弯全过程盲区分析软件/目标点CSV/turn_blindspot_boundary_targets_*.csv
+工具/转弯全过程盲区分析软件/目标点CSV/*_旧版备份.csv
+工具/转弯全过程盲区分析软件/边界点盲区日志/*.csv
 
 # ------------- MATLAB demo run outputs -------------
 # Each alpha-prediction sim folder has a runs/ subdir with timestamped outputs.
@@ -97,9 +100,11 @@ package-lock.json
 # should never be committed.
 trae/
 
-# 同一沙箱被改名后的目录（用户/Trae IDE 把 trae/ 改成 PID工况仿真导出器/）。
-# 仍然是沙箱副本 + node_modules，不进仓库。
-PID工况仿真导出器/
+# PID工具保留本地Electron依赖，代码和说明文件正常跟踪。
+工具/PID工况仿真导出器/node_modules/
+工具/PID工况仿真导出器/Matlab/scenarios/*.csv
+!工具/PID工况仿真导出器/Matlab/scenarios/README.md
+工具/CFG配置生成器/生成结果/*.json
 
 # Windows shortcuts: hardcoded absolute paths, never portable, must not be tracked.
 *.lnk
@@ -111,28 +116,46 @@ PID工况仿真导出器/
 .cursor/
 
 # ------------- PPT generation tools & outputs (do not track) -------------
-generated_render/
-ppt_outline.md
-tools/audit_replica_v2_media.py
-tools/build_editable_ppt_inventory.py
-tools/build_editable_replica_v2.py
-tools/build_ppt_image2_editable_rebuild.py
-tools/make_ppt_geometry_reference.m
-tools/make_remaining_ppt_academic_figures.py
-tools/package_exact_origin_images_pptx.py
-tools/render_opening_report_images.py
-tools/sync_editable_asset_anchors.py
-tools/update_codex_ppt_deck_spec_slides_6_8.py
-tools/update_codex_ppt_deck_spec_slides_9_20.py
-文本资料/26 小挑.pptx
+开发资源/03_生成产物/PPT渲染/
+开发资源/02_PPT制作/ppt_outline.md
+开发资源/01_生成脚本/tools/audit_replica_v2_media.py
+开发资源/01_生成脚本/tools/build_editable_ppt_inventory.py
+开发资源/01_生成脚本/tools/build_editable_replica_v2.py
+开发资源/01_生成脚本/tools/build_ppt_image2_editable_rebuild.py
+开发资源/01_生成脚本/tools/make_ppt_geometry_reference.m
+开发资源/01_生成脚本/tools/make_remaining_ppt_academic_figures.py
+开发资源/01_生成脚本/tools/package_exact_origin_images_pptx.py
+开发资源/01_生成脚本/tools/render_opening_report_images.py
+开发资源/01_生成脚本/tools/sync_editable_asset_anchors.py
+开发资源/01_生成脚本/tools/update_codex_ppt_deck_spec_slides_6_8.py
+开发资源/01_生成脚本/tools/update_codex_ppt_deck_spec_slides_9_20.py
+申报与答辩/01_答辩材料/26 小挑.pptx
 
 # ------------- Defense speech renders (答辩演讲稿渲染产物) -------------
-tmp/docs/答辩演讲稿_render/
-tmp/docs/答辩演讲稿_含问答_render/
-tmp/pdfs/
+开发资源/03_生成产物/临时文件/docs/答辩演讲稿_render/
+开发资源/03_生成产物/临时文件/docs/答辩演讲稿_含问答_render/
+开发资源/03_生成产物/临时文件/pdfs/
 
 # ------------- Opening report drafts / extracted text -------------
-generated_text/
-文本资料/*开题报告*.docx
-文本资料/*开题报告*.pdf
-文本资料/主要研究内容_复制版.txt
+开发资源/03_生成产物/文本提取/
+申报与答辩/02_开题材料/*开题报告*.docx
+申报与答辩/02_开题材料/*开题报告*.pdf
+申报与答辩/02_开题材料/主要研究内容_复制版.txt
+
+# ------------- [DeepSeek] 实验运行时数据不入库（2026-10-22）-------------
+# 旧批量实验（steering_experiment_round1..8）已完整封存到
+#   Z:\大创内轮差项目_实验结果\科研实验_2026-10-14\实验封存\2026-10-14
+# 仓库只保留其规划/验证文档，不跟踪逐轮结果 JSON/CSV/NPZ。
+# [DeepSeek] 依据：8566 个文件 / 1.6 GiB，且与封存快照重复。
+工具/转弯全过程盲区分析软件/自动化批量实验/steering_experiment*/
+工具/转弯全过程盲区分析软件/自动化批量实验/results/
+工具/转弯全过程盲区分析软件/自动化批量实验/probes/
+工具/转弯全过程盲区分析软件/自动化批量实验/*checkpoint*.json
+工具/转弯全过程盲区分析软件/自动化批量实验/*.log
+
+# [DeepSeek] 新科研实验的冻结数据集（npz 二进制，见 Z 盘权威副本）
+工具/转弯全过程盲区分析软件/科研实验_2026-10-14/datasets/
+# [DeepSeek] 运行产物与封存快照（runs/ 已由 **/runs/* 覆盖，此处补充封存与入口）
+工具/转弯全过程盲区分析软件/科研实验_2026-10-14/实验封存/
+工具/转弯全过程盲区分析软件/科研实验_2026-10-14/边界点盲区日志/
+工具/转弯全过程盲区分析软件/科研实验_2026-10-14/目标点CSV/*.csv

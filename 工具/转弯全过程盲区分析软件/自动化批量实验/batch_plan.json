@@ -1,0 +1,22 @@
+{
+  "base_cfg": "../CFG配置/exit_window_test_cfg.json",
+  "grid": {
+    "strategies.EXIT.T_h_W": [2, 3, 4]
+  },
+  "scenarios": [
+    {"id": "builtin", "csv": null, "targets_csv": null}
+  ],
+  "evaluation": {
+    "spacing_m": 0.35,
+    "tolerance_m": 0.05,
+    "reaction_threshold_s": 1,
+    "warmup_ignore_s": 2,
+    "max_targets": 700,
+    "boundary_band_m": 0.2,
+    "negative_margin_m": 0.5
+  },
+  "output_dir": "results",
+  "headless": true,
+  "timeout_ms": 180000,
+  "max_configs": 10000
+}

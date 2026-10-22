@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "target_count": 70000,
+  "point_arrays": 9,
+  "frame_confusion_arrays_identical": true,
+  "new_timing": {
+    "batched_prediction_s": 0.020316800000728108,
+    "geometry_query_decision_frame_p50_ms": 16.888200007088017,
+    "geometry_query_decision_frame_p95_ms": 20.14612499406212,
+    "geometry_query_decision_frame_max_ms": 25.363300010212697,
+    "wall_s": 19.516759200007073,
+    "desktop_not_MCU": true
+  }
+}

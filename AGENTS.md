@@ -10,7 +10,7 @@
 
 **The only operation requiring prior confirmation**: bulk deletion of multiple files or directories (`rm -rf`, `Remove-Item -Recurse`, etc.).
 
-**Mandatory release retrospective**: after every `vX.Y.Z` tag, write a new `工作复盘/vX.Y.Z_<topic>.md` following the template in `工作复盘/README.md`. The retrospective file is a frozen snapshot — once committed, it should not be edited later.
+**Mandatory release retrospective**: after every `vX.Y.Z` tag, write a new `项目文档/03_项目管理/工作复盘/vX.Y.Z_<topic>.md` following the template in `项目文档/03_项目管理/工作复盘/README.md`. The retrospective file is a frozen snapshot — once committed, it should not be edited later.
 
 ---
 
@@ -18,7 +18,7 @@
 
 Above this engineering handbook there is a **top-level design document** defining the project's modeling philosophy, the main-model-vs-baseline argumentation, and the redefined role of the legacy PID model:
 
-📘 **[`预测模型与对照模型构建思路.md`](预测模型与对照模型构建思路.md)** — read first
+📘 **[`项目文档/01_核心设计/预测模型与对照模型构建思路.md`](项目文档/01_核心设计/预测模型与对照模型构建思路.md)** — read first
 
 Key points (must be internalized before making any modeling-related changes):
 
@@ -79,7 +79,7 @@ Trigger this pipeline as soon as Phase 1's `kinematics_step.m` + `predict_swept.
 
 ```
 .
-├── ArduinoIDE/                 # ESP32 firmware (Arduino C++)
+├── 固件/ESP32/                 # ESP32 firmware (Arduino C++)
 │   ├── ESP32TruckOverTrackingWarningSystem.ino
 │   ├── config.h
 │   ├── sensors_alpha.{h,cpp}   # AS5600 -> alpha (rad)
@@ -92,25 +92,22 @@ Trigger this pipeline as soon as Phase 1's `kinematics_step.m` + `predict_swept.
 │   ├── alarm_fsm.{h,cpp}       # TODO: 3-level state machine
 │   ├── alarm_out.{h,cpp}       # buzzer + LED
 │   └── vision_uart.{h,cpp}     # TODO: OpenMV link
-├── Matlab/                     # Simulation & algo verification
-│   ├── vehicle_params.m        # ✅ vehicle parameter struct
-│   ├── kinematics_step.m       # ✅ one-step rigorous kinematics (l_h coupled)
-│   ├── derive_points.m         # ✅ derive A/B/H/T from minimal state
-│   ├── predict_swept.m         # ✅ 3-tier swept polygon (envelope)
-│   ├── point_in_poly.m         # ✅ ray-casting point-in-polygon
-│   ├── run_phase1_demo.m       # ✅ Phase-1 top demo: CSV → replay → predict → error report
-│   ├── load_pid_scenario.m     # ✅ Read CSV exported by pid工况仿真导出器.html
-│   ├── guacheweixianqu.m       # Legacy monolithic semi-trailer sim
-│   ├── pid3.m                  # Legacy single-vehicle sim
-│   └── (TODO: sim_replay.m / risk_eval.m)
-├── OpenMV/                     # TODO: vision coprocessor python
-├── overtrack.pdf               # Research / context
-├── PCB原理图.png                # Hardware schematic
-├── latex代码.txt                # Paper / proposal LaTeX draft
-├── 预测模型与对照模型构建思路.md   # 📘 Top-level modeling philosophy
-├── pid工况仿真导出器.html         # PID scenario generator (interactive web UI)
-├── desktop-main.js              # Optional Electron wrapper for the HTML above
-├── package.json                 # Electron build config (node_modules ignored)
+├── 工具/                        # Independent apps, simulations and their results/logs
+│   ├── PID工况仿真导出器/
+│   ├── TTC预警复盘软件/
+│   ├── 转弯全过程盲区分析软件/
+│   ├── CFG配置生成器/
+│   ├── alpha一阶保持仿真/        # Phase-1 baseline MATLAB implementation
+│   ├── alpha线性外推仿真/ ...
+│   ├── 正交路口出弯状态机仿真/
+│   ├── R3诊断/
+│   └── 验收目标集/
+├── 固件/OpenMV/                 # TODO: vision coprocessor firmware
+├── 项目文档/                    # Design, algorithm and project-management docs
+├── 申报与答辩/                  # Defense, proposal and business-plan deliverables
+├── 参考资料/                    # Papers and hardware references
+├── 开发资源/                    # Document/PPT scripts and generated artifacts
+├── 历史归档/                    # Legacy MATLAB and superseded documents
 ├── README.md
 ├── CLAUDE.md
 ├── AGENTS.md
@@ -126,37 +123,37 @@ PID-driven scenario generator is bundled in the repo:
 
 | File | Role |
 |---|---|
-| `pid工况仿真导出器.html` | Standalone web UI: configure vehicle params / reference heading / PID gains, simulate, export discrete CSV `(t, v, alpha, phi, ...)` |
-| `desktop-main.js` + `package.json` | Optional Electron desktop wrapper. Run with `npm install && npm run desktop:dev`. Not required — the HTML can be opened directly in any browser. |
-| `启动PID工况导出器.bat` | Windows one-click launcher. Double-click to start the Electron desktop wrapper without touching npm or PowerShell. Requires `trae/node_modules/electron/` to be present. |
-| `Matlab/load_pid_scenario.m` | MATLAB loader: returns a struct with `params / inputs / states / points / summary` |
+| `工具/PID工况仿真导出器/pid工况仿真导出器.html` | Standalone web UI: configure vehicle params / reference heading / PID gains, simulate, export discrete CSV `(t, v, alpha, phi, ...)` |
+| `工具/PID工况仿真导出器/desktop-main.js` + `package.json` | Optional Electron desktop wrapper. Run from that directory with `npm install && npm run desktop:dev`. |
+| `工具/PID工况仿真导出器/启动PID工况导出器.bat` | Windows one-click launcher using the Electron dependency installed in the same tool directory. |
+| `工具/alpha一阶保持仿真/load_pid_scenario.m` | MATLAB loader: returns a struct with `params / inputs / states / points / summary` |
 
 **UI design**: Industrial SCADA/HMI control-panel aesthetic with dark/light theme toggle (persisted via `localStorage`). Three launch-method badges displayed at the top (Web / BAT / Desktop shortcut). Standalone single-file HTML, zero external dependencies.
 
 **Recommended Phase-1 workflow**:
 
 ```
-1. Open  pid工况仿真导出器.html        → tune scenario, click "Export CSV"
-   ├─ Electron launcher: save dialog defaults to Matlab/scenarios/
-   └─ Plain browser   : downloads to Downloads/, move to Matlab/scenarios/ manually
+1. Open  工具/PID工况仿真导出器/pid工况仿真导出器.html        → tune scenario, click "Export CSV"
+   ├─ Electron launcher: save dialog defaults to 工具/PID工况仿真导出器/Matlab/scenarios/
+   └─ Plain browser   : downloads to Downloads/
+   Copy the chosen CSV into the target simulation tool's scenarios/ directory.
 2. MATLAB:  scenario = load_pid_scenario('pid_scenario_*.csv');
-   ├─ filename only   → auto-resolved under Matlab/scenarios/
+   ├─ filename only   → auto-resolved under 工具/alpha一阶保持仿真/scenarios/
    ├─ full path       → used as-is
-   └─ no argument     → file picker opens at Matlab/scenarios/
+   └─ no argument     → file picker opens at 工具/alpha一阶保持仿真/scenarios/
 3. Treat scenario.inputs.{v_mps, alpha_rad, phi_rad} as virtual sensor data
 4. Feed into the new short-horizon predictor and compare swept area against
    scenario.points.{A,B,H,T} (the PID ground truth)
 ```
 
-**Unified directory**: all PID scenario CSVs live in `Matlab/scenarios/`; both the loader and the Electron exporter default to this path.
+**Directory rule**: the PID exporter keeps its own exports under `工具/PID工况仿真导出器/Matlab/scenarios/`. Each MATLAB simulation keeps the inputs used for its runs in that tool's own `scenarios/` directory.
 
 **Constraints**:
 
 - The generated CSV is *not* real-world driver data — it is a smooth, controllable
   surrogate. Do not over-claim accuracy in papers based on this alone.
 - Never commit `node_modules/`, `package-lock.json`, or `desktop-dist/` (already in `.gitignore`).
-- The `trae/` directory (trae IDE sandbox) is also ignored; useful artifacts in it
-  are mirrored to the repo root manually when promoted.
+- The `trae/` directory, when present, is an ignored IDE sandbox and is not a project entry point.
 
 ---
 
@@ -221,7 +218,7 @@ Body frame: origin at tractor rear-axle center **B**, x forward, y leftward.
 # Arduino IDE 2.x (recommended)
 # Board: "ESP32S3 Dev Module"
 # Flash: 16 MB, PSRAM: OPI 8MB, Partition: Default with PSRAM
-# Open: ArduinoIDE/ESP32TruckOverTrackingWarningSystem.ino
+# Open: 固件/ESP32/ESP32TruckOverTrackingWarningSystem.ino
 # Build & Upload via Arduino IDE GUI
 ```
 
@@ -309,7 +306,7 @@ Risk_total = max_i Risk_i
 
 ### Turn Whole-Process Blindspot Analysis Tool
 
-`转弯全过程盲区分析软件/` is a desktop/HTML analysis tool derived from the former turn-exit timing tester. It is used to find right-turn swept-boundary points where the online PolyW warning happens without enough reaction time.
+`工具/转弯全过程盲区分析软件/` is a desktop/HTML analysis tool derived from the former turn-exit timing tester. It is used to find right-turn swept-boundary points where the online PolyW warning happens without enough reaction time.
 
 In this tool, "blindspot" is a temporal safety definition, not merely a static visual occlusion:
 
@@ -329,15 +326,15 @@ Rules to preserve:
 Fixed desktop export folders:
 
 ```text
-转弯全过程盲区分析软件/目标点CSV/
-转弯全过程盲区分析软件/边界点盲区日志/
-转弯全过程盲区分析软件/logs/
+工具/转弯全过程盲区分析软件/目标点CSV/
+工具/转弯全过程盲区分析软件/边界点盲区日志/
+工具/转弯全过程盲区分析软件/logs/
 ```
 
 MATLAB threshold scan:
 
 ```matlab
-cd('C:/Users/Admin/Desktop/小挑资料/转弯全过程盲区分析软件')
+cd('E:/大创内轮差项目/工具/转弯全过程盲区分析软件')
 out = scan_ttc_threshold_blindspots();
 ```
 
@@ -364,7 +361,7 @@ This creates `threshold_blindspot_overlay_le_2.0s.png`, `..._le_1.5s.png`, and `
 The software now supports importing/exporting a strategy CFG JSON. The CFG defines online state-machine thresholds and per-state prediction windows (`T_h_W / T_h_A / T_h_I / dt_pred`). The example file is:
 
 ```text
-转弯全过程盲区分析软件/CFG配置/default_exit_window_cfg.json
+工具/转弯全过程盲区分析软件/CFG配置/default_exit_window_cfg.json
 ```
 
 Currently implemented strategies are `default` and `EXIT`; EXIT can enlarge prediction horizons. `alpha_mode` is recorded but currently executes as `hold`; `safety_expand_m / safety_expand_enabled` are stored in CFG and logs but geometry inflation is intentionally not enabled yet.
@@ -373,11 +370,11 @@ Target CSV import/export convention: newly exported target CSVs include `samplin
 
 Scenario CSV and target CSV must remain decoupled: scenario CSVs contain only vehicle motion/vehicle parameters; target CSVs are independent. Switching scenario CSVs or using the built-in scenario must not clear imported targets. The software should keep targets and recompute `trueContactIdx` plus warning logs against the new trajectory.
 
-`CFG配置生成器/` is a separate minimal white-background Windows-style CFG builder. It generates strategy CFG JSON files for the blindspot analysis software. Launch via the desktop shortcut `CFG配置生成器.lnk` or `CFG配置生成器/启动CFG配置生成器.bat`. In desktop mode, `保存 CFG` writes to `转弯全过程盲区分析软件/CFG配置/`.
+`工具/CFG配置生成器/` is a separate minimal white-background Windows-style CFG builder. It generates strategy CFG JSON files for the blindspot analysis software. Launch via the desktop shortcut `CFG配置生成器.lnk` or `工具/CFG配置生成器/启动CFG配置生成器.bat`. In desktop mode, `保存 CFG` writes to `工具/转弯全过程盲区分析软件/CFG配置/`.
 
 Blindspot analysis logs use `hit_method=segment_swept`: statistical hit testing splits the prediction window into adjacent-step right-edge swept quadrilaterals instead of one large polygon. This preserves horizon monotonicity; extending EXIT from 2s to 3s only adds later swept segments. The online prediction panel has a display-mode selector: default `segment_swept 判定区` draws the actual swept quadrilaterals used by logs/statistics; `Poly 大多边形参考` keeps the old large-Poly outline as a visual reference. Realtime hit dots follow the selected display mode, while logs and blindspot counts always use `segment_swept`.
 
-CFG expansion consistency checklist lives at `docs/CFG扩窗算法一致性说明.md`. The required synchronized chain is `转弯全过程盲区分析软件/index.html`, `validate_turn_exit_targets.m`, `scan_ttc_threshold_blindspots.m`, and `CFG配置生成器/index.html`; `正交路口出弯状态机仿真/run_phase1_demo.m` is a MATLAB visualization/comparison demo and must also read the same CFG. MATLAB validation accepts a 6th `strategy_cfg_json` argument; threshold scanning accepts `opts.strategy_cfg_json`; the orthogonal-intersection demo accepts a 3rd `strategy_cfg_json` argument. The orthogonal-intersection demo uses `segment_swept` for statistical hits, logs, and risk levels, but its MATLAB figures intentionally still draw large PolyW/A/I polygons as shape references and do not yet include the web app's `segment_swept / Poly` display switch. `TTC预警复盘软件` and `alpha一阶保持仿真/truck_slider_sim.py` remain true-TTC/visual replay tools, not CFG expansion statistical judges.
+CFG expansion consistency checklist lives at `项目文档/02_算法说明/CFG扩窗算法一致性说明.md`. The required synchronized chain is `工具/转弯全过程盲区分析软件/index.html`, `validate_turn_exit_targets.m`, `scan_ttc_threshold_blindspots.m`, and `工具/CFG配置生成器/index.html`; `工具/正交路口出弯状态机仿真/run_phase1_demo.m` is a MATLAB visualization/comparison demo and must also read the same CFG. MATLAB validation accepts a 6th `strategy_cfg_json` argument; threshold scanning accepts `opts.strategy_cfg_json`; the orthogonal-intersection demo accepts a 3rd `strategy_cfg_json` argument. The orthogonal-intersection demo uses `segment_swept` for statistical hits, logs, and risk levels, but its MATLAB figures intentionally still draw large PolyW/A/I polygons as shape references and do not yet include the web app's `segment_swept / Poly` display switch. `TTC预警复盘软件` and `工具/alpha一阶保持仿真/truck_slider_sim.py` remain true-TTC/visual replay tools, not CFG expansion statistical judges.
 
 ### Alarm FSM (debouncing)
 
@@ -425,11 +422,11 @@ Memory: <5 KB heap for polygons + target buffers.
 
 ### Phase 1 — MATLAB / C++ kinematics parity (v0.1)
 
-- [ ] `Matlab/vehicle_params.m` with `l, l_h, L, W, phi_max`
-- [ ] `Matlab/kinematics_step.m` (signature-match with C++)
-- [ ] `Matlab/predict_swept.m`
+- [ ] `工具/alpha一阶保持仿真/vehicle_params.m` with `l, l_h, L, W, phi_max`
+- [ ] `工具/alpha一阶保持仿真/kinematics_step.m` (signature-match with C++)
+- [ ] `工具/alpha一阶保持仿真/predict_swept.m`
 - [ ] Refactor `guacheweixianqu.m` to use the above
-- [ ] `ArduinoIDE/predictor.{h,cpp}`
+- [ ] `固件/ESP32/predictor.{h,cpp}`
 - [ ] **Gate**: identical input -> polygon vertex error < 1 mm vs. MATLAB
 
 ### Phase 2 — Sensor / decoder wiring (v0.2)
@@ -465,7 +462,7 @@ Memory: <5 KB heap for polygons + target buffers.
 5. **Never** print all polygon vertices over Serial in main loop (diagnostics only, gated by a flag).
 6. **Never** modify kinematics on one side (MATLAB or C++) without mirror-updating the other.
 7. **Never** commit ADC raw dumps, video files, or large `.bag` to git (use cloud + link).
-8. **Never** put Chinese paths inside Windows `.bat` files using raw `cmd if exist` checks. cmd.exe defaults to GBK; a UTF-8 BAT shows as garbled bytes, a GBK BAT can't be safely edited by modern IDEs/AI tools. **Correct pattern**: keep BAT to a single line `powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0launch.ps1"` and put all path / discovery logic inside `launch.ps1` (PowerShell is Unicode-safe). See `TTC预警复盘软件/launch.ps1` and `转弯全过程盲区分析软件/launch.ps1`.
+8. **Never** put Chinese paths inside Windows `.bat` files using raw `cmd if exist` checks. cmd.exe defaults to GBK; a UTF-8 BAT shows as garbled bytes, a GBK BAT can't be safely edited by modern IDEs/AI tools. **Correct pattern**: keep BAT to a single line `powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0launch.ps1"` and put all path / discovery logic inside `launch.ps1` (PowerShell is Unicode-safe). See `工具/TTC预警复盘软件/launch.ps1` and `工具/转弯全过程盲区分析软件/launch.ps1`.
 
 ---
 

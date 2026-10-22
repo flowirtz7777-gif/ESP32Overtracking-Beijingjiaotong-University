@@ -1,0 +1,466 @@
+{
+  "status": "running",
+  "completed": 9,
+  "total": 9,
+  "rows": [
+    {
+      "frame_count": 1494,
+      "duration_s": 29.86,
+      "theta_end_rad": -1.062497608986944e-13,
+      "phi_max_deg": 26.93706933515389,
+      "reference_edge_error_005_vs_0025_m": 1.0965077380131831e-10,
+      "right_contacts": 14850,
+      "right_by_stratum": {
+        "0": 10037,
+        "1": 4813,
+        "2": 0
+      },
+      "front_ignored": 7984,
+      "negative_count": 11666,
+      "edge_counts": {
+        "NONCONTACT": 11666,
+        "FRONT": 7005,
+        "RIGHT": 14850,
+        "REAR": 32,
+        "LEFT": 465,
+        "FRONT_RIGHT_CORNER": 816,
+        "REAR_RIGHT_CORNER": 1,
+        "FRONT_LEFT_CORNER": 163,
+        "REAR_LEFT_CORNER": 2
+      },
+      "pool": {
+        "spacing_m": 0.025,
+        "capacity": [
+          31930,
+          524344,
+          148469
+        ],
+        "stratum_counts": [
+          11667,
+          11667,
+          11666
+        ],
+        "seed": 2026101401,
+        "strata": [
+          "right_boundary_neighborhood",
+          "swept_interior",
+          "near_noncontact"
+        ],
+        "boundary_definition": "within_0_20m_of_final_body_union_boundary_and_right_sweep_neighborhood",
+        "negative_max_distance_m": 0.5,
+        "negative_min_distance_m": 0.05
+      },
+      "target_count": 35000,
+      "id": "v3_r2_fast_entry",
+      "wall_s": 16.474429800000507
+    },
+    {
+      "frame_count": 1649,
+      "duration_s": 32.96,
+      "theta_end_rad": 9.156512979670376e-13,
+      "phi_max_deg": 28.448037716729488,
+      "reference_edge_error_005_vs_0025_m": 1.890269115414571e-10,
+      "right_contacts": 16147,
+      "right_by_stratum": {
+        "0": 10737,
+        "1": 5410,
+        "2": 0
+      },
+      "front_ignored": 6538,
+      "negative_count": 11666,
+      "edge_counts": {
+        "NONCONTACT": 11666,
+        "FRONT": 5878,
+        "RIGHT": 16147,
+        "REAR": 61,
+        "LEFT": 582,
+        "FRONT_RIGHT_CORNER": 523,
+        "REAR_RIGHT_CORNER": 4,
+        "FRONT_LEFT_CORNER": 137,
+        "REAR_LEFT_CORNER": 2
+      },
+      "pool": {
+        "spacing_m": 0.025,
+        "capacity": [
+          30141,
+          432199,
+          114614
+        ],
+        "stratum_counts": [
+          11667,
+          11667,
+          11666
+        ],
+        "seed": 2026101401,
+        "strata": [
+          "right_boundary_neighborhood",
+          "swept_interior",
+          "near_noncontact"
+        ],
+        "boundary_definition": "within_0_20m_of_final_body_union_boundary_and_right_sweep_neighborhood",
+        "negative_max_distance_m": 0.5,
+        "negative_min_distance_m": 0.05
+      },
+      "target_count": 35000,
+      "id": "v2_r8_fast_return",
+      "wall_s": 21.511527799986652
+    },
+    {
+      "frame_count": 1697,
+      "duration_s": 33.92,
+      "theta_end_rad": -1.560729174957947e-13,
+      "phi_max_deg": 28.092255809510178,
+      "reference_edge_error_005_vs_0025_m": 1.6518070053463437e-10,
+      "right_contacts": 16083,
+      "right_by_stratum": {
+        "0": 10728,
+        "1": 5355,
+        "2": 0
+      },
+      "front_ignored": 6621,
+      "negative_count": 11666,
+      "edge_counts": {
+        "NONCONTACT": 11666,
+        "FRONT": 5939,
+        "RIGHT": 16083,
+        "REAR": 61,
+        "LEFT": 564,
+        "FRONT_RIGHT_CORNER": 546,
+        "REAR_RIGHT_CORNER": 3,
+        "FRONT_LEFT_CORNER": 136,
+        "REAR_LEFT_CORNER": 2
+      },
+      "pool": {
+        "spacing_m": 0.025,
+        "capacity": [
+          30890,
+          440554,
+          117386
+        ],
+        "stratum_counts": [
+          11667,
+          11667,
+          11666
+        ],
+        "seed": 2026101401,
+        "strata": [
+          "right_boundary_neighborhood",
+          "swept_interior",
+          "near_noncontact"
+        ],
+        "boundary_definition": "within_0_20m_of_final_body_union_boundary_and_right_sweep_neighborhood",
+        "negative_max_distance_m": 0.5,
+        "negative_min_distance_m": 0.05
+      },
+      "target_count": 35000,
+      "id": "v2_r4_fast_entry",
+      "wall_s": 22.14567719999468
+    },
+    {
+      "frame_count": 1854,
+      "duration_s": 37.06,
+      "theta_end_rad": 2.5186804551276157e-15,
+      "phi_max_deg": 27.48907551950481,
+      "reference_edge_error_005_vs_0025_m": 1.754135892439961e-11,
+      "right_contacts": 15655,
+      "right_by_stratum": {
+        "0": 10450,
+        "1": 5205,
+        "2": 0
+      },
+      "front_ignored": 7083,
+      "negative_count": 11666,
+      "edge_counts": {
+        "NONCONTACT": 11666,
+        "FRONT": 6330,
+        "RIGHT": 15655,
+        "REAR": 60,
+        "LEFT": 531,
+        "FRONT_RIGHT_CORNER": 626,
+        "REAR_RIGHT_CORNER": 3,
+        "FRONT_LEFT_CORNER": 127,
+        "REAR_LEFT_CORNER": 2
+      },
+      "pool": {
+        "spacing_m": 0.025,
+        "capacity": [
+          33432,
+          462315,
+          126425
+        ],
+        "stratum_counts": [
+          11667,
+          11667,
+          11666
+        ],
+        "seed": 2026101401,
+        "strata": [
+          "right_boundary_neighborhood",
+          "swept_interior",
+          "near_noncontact"
+        ],
+        "boundary_definition": "within_0_20m_of_final_body_union_boundary_and_right_sweep_neighborhood",
+        "negative_max_distance_m": 0.5,
+        "negative_min_distance_m": 0.05
+      },
+      "target_count": 35000,
+      "id": "v2_r2_symmetric",
+      "wall_s": 22.541020200005732
+    },
+    {
+      "frame_count": 1400,
+      "duration_s": 27.98,
+      "theta_end_rad": 7.2980003829246e-14,
+      "phi_max_deg": 28.17689706877626,
+      "reference_edge_error_005_vs_0025_m": 5.253133376953848e-11,
+      "right_contacts": 15044,
+      "right_by_stratum": {
+        "0": 10082,
+        "1": 4962,
+        "2": 0
+      },
+      "front_ignored": 7766,
+      "negative_count": 11666,
+      "edge_counts": {
+        "NONCONTACT": 11666,
+        "FRONT": 6869,
+        "RIGHT": 15044,
+        "REAR": 34,
+        "LEFT": 487,
+        "FRONT_RIGHT_CORNER": 744,
+        "REAR_RIGHT_CORNER": 1,
+        "FRONT_LEFT_CORNER": 153,
+        "REAR_LEFT_CORNER": 2
+      },
+      "pool": {
+        "spacing_m": 0.025,
+        "capacity": [
+          29673,
+          503925,
+          140282
+        ],
+        "stratum_counts": [
+          11667,
+          11667,
+          11666
+        ],
+        "seed": 2026101401,
+        "strata": [
+          "right_boundary_neighborhood",
+          "swept_interior",
+          "near_noncontact"
+        ],
+        "boundary_definition": "within_0_20m_of_final_body_union_boundary_and_right_sweep_neighborhood",
+        "negative_max_distance_m": 0.5,
+        "negative_min_distance_m": 0.05
+      },
+      "target_count": 35000,
+      "id": "v3_r4_fast_return",
+      "wall_s": 19.313284400006523
+    },
+    {
+      "frame_count": 1283,
+      "duration_s": 25.64,
+      "theta_end_rad": -2.68908127221728e-13,
+      "phi_max_deg": 27.484484323568143,
+      "reference_edge_error_005_vs_0025_m": 3.098801156924781e-10,
+      "right_contacts": 13671,
+      "right_by_stratum": {
+        "0": 9182,
+        "1": 4489,
+        "2": 0
+      },
+      "front_ignored": 9186,
+      "negative_count": 11666,
+      "edge_counts": {
+        "NONCONTACT": 11666,
+        "FRONT": 8036,
+        "RIGHT": 13671,
+        "REAR": 42,
+        "LEFT": 430,
+        "FRONT_RIGHT_CORNER": 996,
+        "REAR_RIGHT_CORNER": 3,
+        "FRONT_LEFT_CORNER": 154,
+        "REAR_LEFT_CORNER": 2
+      },
+      "pool": {
+        "spacing_m": 0.025,
+        "capacity": [
+          44813,
+          557857,
+          166894
+        ],
+        "stratum_counts": [
+          11667,
+          11667,
+          11666
+        ],
+        "seed": 2026101401,
+        "strata": [
+          "right_boundary_neighborhood",
+          "swept_interior",
+          "near_noncontact"
+        ],
+        "boundary_definition": "within_0_20m_of_final_body_union_boundary_and_right_sweep_neighborhood",
+        "negative_max_distance_m": 0.5,
+        "negative_min_distance_m": 0.05
+      },
+      "target_count": 35000,
+      "id": "v4_r4_symmetric",
+      "wall_s": 15.569801300007384
+    },
+    {
+      "frame_count": 1345,
+      "duration_s": 26.88,
+      "theta_end_rad": 1.0994567105603705e-13,
+      "phi_max_deg": 27.245854191570263,
+      "reference_edge_error_005_vs_0025_m": 1.0289033442851392e-10,
+      "right_contacts": 13515,
+      "right_by_stratum": {
+        "0": 9158,
+        "1": 4357,
+        "2": 0
+      },
+      "front_ignored": 9343,
+      "negative_count": 11666,
+      "edge_counts": {
+        "NONCONTACT": 11666,
+        "FRONT": 8178,
+        "RIGHT": 13515,
+        "REAR": 41,
+        "LEFT": 430,
+        "FRONT_RIGHT_CORNER": 976,
+        "REAR_RIGHT_CORNER": 3,
+        "FRONT_LEFT_CORNER": 189,
+        "REAR_LEFT_CORNER": 2
+      },
+      "pool": {
+        "spacing_m": 0.025,
+        "capacity": [
+          46849,
+          572963,
+          174095
+        ],
+        "stratum_counts": [
+          11667,
+          11667,
+          11666
+        ],
+        "seed": 2026101401,
+        "strata": [
+          "right_boundary_neighborhood",
+          "swept_interior",
+          "near_noncontact"
+        ],
+        "boundary_definition": "within_0_20m_of_final_body_union_boundary_and_right_sweep_neighborhood",
+        "negative_max_distance_m": 0.5,
+        "negative_min_distance_m": 0.05
+      },
+      "target_count": 35000,
+      "id": "v4_r2_fast_return",
+      "wall_s": 16.200478699989617
+    },
+    {
+      "frame_count": 1368,
+      "duration_s": 27.34,
+      "theta_end_rad": 2.0552302778858886e-13,
+      "phi_max_deg": 28.20554852199314,
+      "reference_edge_error_005_vs_0025_m": 1.0703615983747337e-10,
+      "right_contacts": 15166,
+      "right_by_stratum": {
+        "0": 10210,
+        "1": 4956,
+        "2": 0
+      },
+      "front_ignored": 7642,
+      "negative_count": 11666,
+      "edge_counts": {
+        "NONCONTACT": 11666,
+        "FRONT": 6757,
+        "RIGHT": 15166,
+        "REAR": 35,
+        "LEFT": 488,
+        "FRONT_RIGHT_CORNER": 734,
+        "REAR_RIGHT_CORNER": 1,
+        "FRONT_LEFT_CORNER": 151,
+        "REAR_LEFT_CORNER": 2
+      },
+      "pool": {
+        "spacing_m": 0.025,
+        "capacity": [
+          28896,
+          498210,
+          137494
+        ],
+        "stratum_counts": [
+          11667,
+          11667,
+          11666
+        ],
+        "seed": 2026101401,
+        "strata": [
+          "right_boundary_neighborhood",
+          "swept_interior",
+          "near_noncontact"
+        ],
+        "boundary_definition": "within_0_20m_of_final_body_union_boundary_and_right_sweep_neighborhood",
+        "negative_max_distance_m": 0.5,
+        "negative_min_distance_m": 0.05
+      },
+      "target_count": 35000,
+      "id": "v3_r8_symmetric",
+      "wall_s": 18.091500400012592
+    },
+    {
+      "frame_count": 1204,
+      "duration_s": 24.060000000000002,
+      "theta_end_rad": -7.224769879807816e-13,
+      "phi_max_deg": 28.083129025811086,
+      "reference_edge_error_005_vs_0025_m": 2.8363861275284537e-10,
+      "right_contacts": 13919,
+      "right_by_stratum": {
+        "0": 9376,
+        "1": 4543,
+        "2": 0
+      },
+      "front_ignored": 8912,
+      "negative_count": 11666,
+      "edge_counts": {
+        "NONCONTACT": 11666,
+        "FRONT": 7762,
+        "RIGHT": 13919,
+        "REAR": 47,
+        "LEFT": 451,
+        "FRONT_RIGHT_CORNER": 972,
+        "REAR_RIGHT_CORNER": 3,
+        "FRONT_LEFT_CORNER": 178,
+        "REAR_LEFT_CORNER": 2
+      },
+      "pool": {
+        "spacing_m": 0.025,
+        "capacity": [
+          42251,
+          537974,
+          157750
+        ],
+        "stratum_counts": [
+          11667,
+          11667,
+          11666
+        ],
+        "seed": 2026101401,
+        "strata": [
+          "right_boundary_neighborhood",
+          "swept_interior",
+          "near_noncontact"
+        ],
+        "boundary_definition": "within_0_20m_of_final_body_union_boundary_and_right_sweep_neighborhood",
+        "negative_max_distance_m": 0.5,
+        "negative_min_distance_m": 0.05
+      },
+      "target_count": 35000,
+      "id": "v4_r8_fast_entry",
+      "wall_s": 12.698070400001598
+    }
+  ]
+}
