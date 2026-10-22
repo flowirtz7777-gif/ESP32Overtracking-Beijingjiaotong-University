@@ -57,9 +57,19 @@ apply_style()
 TIER_COLOR = {"A": PALETTE["delta_up"], "B": PALETTE["orange"], "C": PALETTE["red_strong"]}
 MODEL_COLOR = {"基线": PALETTE["neutral_light"], "Ridge": "#7884B4", "逻辑回归": "#7884B4",
                "随机森林": "#484878", "梯度提升": PALETTE["blue_main"]}
-METHOD_COLOR = {"hold": PALETTE["neutral_mid"], "linear": PALETTE["teal"],
-                "damped_linear": PALETTE["blue_main"], "bounded_second_order": PALETTE["red_strong"]}
+# 全项目统一的方法配色（skill：蓝 = 主推方法，红 = 基线，其余为强调色）
+METHOD_COLOR = {"hold": PALETTE["red_strong"], "linear": PALETTE["teal"],
+                "damped_linear": PALETTE["blue_main"], "bounded_second_order": PALETTE["violet"]}
 METHOD_LABEL = {"hold": "保持", "linear": "线性", "damped_linear": "衰减线性", "bounded_second_order": "受限二阶"}
+TEMPLATE_COLOR = {"symmetric": PALETTE["neutral_mid"], "fast_entry": PALETTE["blue_main"], "fast_return": PALETTE["orange"]}
+TEMPLATE_LABEL = {"symmetric": "对称动作", "fast_entry": "较快入弯", "fast_return": "较快回正"}
+QUAL = [PALETTE["blue_main"], PALETTE["red_strong"], PALETTE["teal"], PALETTE["violet"], PALETTE["orange"], PALETTE["neutral_mid"]]
+
+
+def is_dark(rgba) -> bool:
+    """背景色是否偏暗（用于决定格子里的文字用白色还是黑色）。"""
+    r, g, b = rgba[:3]
+    return 0.299 * r + 0.587 * g + 0.114 * b < 0.5
 
 
 def footnote(fig, text, y=-0.02):

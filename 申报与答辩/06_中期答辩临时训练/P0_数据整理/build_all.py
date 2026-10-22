@@ -272,31 +272,51 @@ def build(mon) -> dict:
     return {"row_conservation": manifest["row_conservation"]}
 
 
-# ---------------- 探索图 ----------------
+# ---------------- 探索图（nature-figure skill 规范） ----------------
 def explore(mon, data: dict):
-    from common.plotting import footnote, plt, save
+    from common.plotting import (DIV_CMAP, PALETTE, SEQ_CMAP, apply_style, footnote, is_dark, panel_label, plt, save)
 
+    apply_style()
     FIG.mkdir(parents=True, exist_ok=True)
     foot = HEADER
+    letters = "abcdefgh"
 
     # 1 目标分布
     targets = ["right_pct", "right_miss_rate", "right_lead_p10_s", "negative_fp_pct", "frame_fpr_pct",
                "common_2s_fpr_pct", "geom_2.0_mean", "geom_2.0_p95"]
     for name in ("D1", "D2", "D3", "D4", "D5"):
         df = data[name]
-        fig, axes = plt.subplots(2, 4, figsize=(15, 6))
-        for ax, t in zip(axes.flat, targets):
+        fig, axes = plt.subplots(2, 4, figsize=(7.2, 3.6))
+        fig.subplots_adjust(wspace=0.45, hspace=0.75)
+        for k, (ax, t) in enumerate(zip(axes.flat, targets)):
             v = df.drop_duplicates("job_id")[t] if t.startswith("geom") else df[t]
-            ax.hist(v.dropna(), bins=40, color="#4c72b0", alpha=0.8)
-            ax.set_title(target_label(t), fontsize=9)
-        fig.suptitle(f"{name} 目标分布（{len(df)} 行，{df.case_id.nunique()} 条轨迹）")
-        footnote(fig, foot + " 端点误差按作业去重。")
+            ax.hist(v.dropna(), bins=40, color=PALETTE["blue_main"])
+            ax.set_title(target_label(t), fontsize=6.8)
+            ax.tick_params(labelsize=6)
+            panel_label(ax, letters[k], x=-0.28, y=1.03)
+        fig.suptitle(f"{name} 目标分布（{len(df):,} 行，{df.case_id.nunique()} 条轨迹）", fontsize=8.5, y=1.02)
+        footnote(fig, foot + " 纵轴为行数；端点误差（g、h）按作业去重，因为同一作业的 12 个后处理变体共用一次预测。", y=-0.02)
         save(fig, FIG / f"01_目标分布_{name}.png")
         mon.tick(1, f"探索图 目标分布 {name}")
 
     # 2 输入相关矩阵 / 3 输出相关矩阵
     inputs = ["v_B_mps", "entry_rate_deg_s", "return_rate_deg_s", "gain_eff", "decay_eff_s", "accel_eff_s",
               "noise_level", "delay_ms", "EXIT_W_s", "margin_m", "confirmation_s"]
+    cmap = plt.get_cmap(DIV_CMAP)
+
+    def heat(ax, corr, labels, fs):
+        im = ax.imshow(corr.to_numpy(), cmap=cmap, vmin=-1, vmax=1)
+        ax.set_xticks(range(len(labels)), labels, rotation=55, ha="right", fontsize=fs)
+        ax.set_yticks(range(len(labels)), labels, fontsize=fs)
+        for i in range(len(labels)):
+            for j in range(len(labels)):
+                val = corr.iat[i, j]
+                ax.text(j, i, f"{val:.2f}", ha="center", va="center", fontsize=fs - 1,
+                        color="white" if is_dark(cmap((val + 1) / 2)) else "black")
+        for sp in ax.spines.values():
+            sp.set_visible(False)
+        return im
+
     for name in ("D1", "D2", "D3", "D4", "D5"):
         df = data[name]
         cols = [c for c in inputs if df[c].nunique() > 1]
@@ -309,31 +329,22 @@ def explore(mon, data: dict):
                 X[f"proc={p}"] = (df.processor == p).astype(int)
         corr = X.corr(method="spearman")
         labels = [FEATURE_LABEL.get(c, c) for c in corr.columns]
-        fig, ax = plt.subplots(figsize=(0.55 * len(labels) + 3, 0.5 * len(labels) + 2))
-        im = ax.imshow(corr.to_numpy(), cmap="coolwarm", vmin=-1, vmax=1)
-        ax.set_xticks(range(len(labels)), labels, rotation=60, ha="right", fontsize=8)
-        ax.set_yticks(range(len(labels)), labels, fontsize=8)
-        for i in range(len(labels)):
-            for j in range(len(labels)):
-                ax.text(j, i, f"{corr.iat[i, j]:.2f}", ha="center", va="center", fontsize=6.5)
+        n = len(labels)
+        fig, ax = plt.subplots(figsize=(0.36 * n + 1.8, 0.32 * n + 1.2))
+        im = heat(ax, corr, labels, 6.5)
         fig.colorbar(im, ax=ax, shrink=0.8, label="Spearman 相关")
-        ax.set_title(f"{name} 输入相关矩阵：实验设计下各因素是否可分开估计")
-        footnote(fig, foot + " 方法专属参数与方法类别天然相关（不适用时为 0）。", y=-0.05)
+        ax.set_title(f"{name} 输入相关矩阵：实验设计下各因素能否分开估计", fontsize=8)
+        footnote(fig, foot + " 方法专属参数（增益、衰减时间、二阶生效时长）不适用时记为 0，因此与方法类别天然相关。", y=-0.04)
         save(fig, FIG / f"02_输入相关矩阵_{name}.png")
 
         outs = [t for t in targets if df[t].nunique() > 1]
         corr = df[outs].corr(method="spearman")
         labels = [target_label(c) for c in outs]
-        fig, ax = plt.subplots(figsize=(8, 6.5))
-        im = ax.imshow(corr.to_numpy(), cmap="coolwarm", vmin=-1, vmax=1)
-        ax.set_xticks(range(len(labels)), labels, rotation=45, ha="right", fontsize=8)
-        ax.set_yticks(range(len(labels)), labels, fontsize=8)
-        for i in range(len(labels)):
-            for j in range(len(labels)):
-                ax.text(j, i, f"{corr.iat[i, j]:.2f}", ha="center", va="center", fontsize=7.5)
+        fig, ax = plt.subplots(figsize=(4.6, 3.8))
+        im = heat(ax, corr, labels, 6.5)
         fig.colorbar(im, ax=ax, shrink=0.8, label="Spearman 相关")
-        ax.set_title(f"{name} 输出相关矩阵：哪些指标此消彼长")
-        footnote(fig, foot, y=-0.08)
+        ax.set_title(f"{name} 输出相关矩阵：哪些指标同涨同落、哪些此消彼长", fontsize=8)
+        footnote(fig, foot, y=-0.06)
         save(fig, FIG / f"03_输出相关矩阵_{name}.png")
         mon.tick(1, f"探索图 相关矩阵 {name}")
 
@@ -341,39 +352,80 @@ def explore(mon, data: dict):
     from scipy.cluster.hierarchy import leaves_list, linkage
 
     df = data["D3"][data["D3"].method != "hold"]
-    fig, axes = plt.subplots(1, 2, figsize=(17, 8))
-    for ax, t in zip(axes, ("right_pct", "negative_fp_pct")):
+    fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.9))
+    fig.subplots_adjust(wspace=0.55)
+    for k, (ax, t) in enumerate(zip(axes, ("right_pct", "negative_fp_pct"))):
         piv = df.pivot_table(index="case_id", columns=["config_id", "condition", "variant"], values=t)
         corr = piv.T.corr(method="spearman")
         order = leaves_list(linkage(corr.to_numpy(), method="average"))
         corr = corr.iloc[order, order]
-        im = ax.imshow(corr.to_numpy(), cmap="viridis", vmin=corr.to_numpy().min(), vmax=1)
-        ax.set_xticks(range(len(corr)), corr.columns, rotation=90, fontsize=6)
-        ax.set_yticks(range(len(corr)), corr.index, fontsize=6)
-        ax.set_title(f"按 {target_label(t)} 的轨迹相似度（聚类排序）", fontsize=10)
-        fig.colorbar(im, ax=ax, shrink=0.7)
-    footnote(fig, foot + " 每条轨迹以 2 方法 × 8 条件 × 12 变体的指标向量表示；sel_ 开头为选择集。", y=-0.01)
+        im = ax.imshow(corr.to_numpy(), cmap=SEQ_CMAP, vmin=corr.to_numpy().min(), vmax=1)
+        ax.set_xticks(range(len(corr)), corr.columns, rotation=90, fontsize=3.8)
+        ax.set_yticks(range(len(corr)), corr.index, fontsize=3.8)
+        for sp in ax.spines.values():
+            sp.set_visible(False)
+        ax.set_title(f"按{target_label(t)}的轨迹相似度（聚类排序）", fontsize=7.5)
+        fig.colorbar(im, ax=ax, shrink=0.7, label="Spearman 相关")
+        panel_label(ax, letters[k], x=-0.32, y=1.02)
+    footnote(fig, foot + " 每条轨迹用 2 方法 × 8 条件 × 12 变体共 192 个指标值组成的向量表示；sel_ 开头为选择集。", y=-0.01)
     save(fig, FIG / "04_轨迹相似度_D3.png")
     mon.tick(1, "探索图 轨迹相似度")
 
     # 5 特征与目标关系（D3 开发集）
     df = data["D3"][(data["D3"].partition == "development_v2_n70000") & (data["D3"].method != "hold")]
     feats = ["v_B_mps", "entry_rate_deg_s", "noise_level", "delay_ms", "EXIT_W_s", "margin_m", "confirmation_s", "method"]
-    fig, axes = plt.subplots(2, len(feats), figsize=(2.3 * len(feats), 6.5), sharey="row")
+    short = {"damped_linear": "衰减", "linear": "线性"}
+    fig, axes = plt.subplots(2, len(feats), figsize=(7.2, 3.6), sharey="row")
+    fig.subplots_adjust(wspace=0.15, hspace=0.35)
+    box_kw = dict(showfliers=False, widths=0.6, patch_artist=True,
+                  boxprops=dict(facecolor=PALETTE["blue_secondary"], edgecolor=PALETTE["neutral_dark"], lw=0.6, alpha=0.55),
+                  medianprops=dict(color=PALETTE["neutral_black"], lw=0.9),
+                  whiskerprops=dict(lw=0.6), capprops=dict(lw=0.6))
     for j, f in enumerate(feats):
         for i, t in enumerate(("right_pct", "negative_fp_pct")):
             groups = sorted(df[f].unique(), key=str)
-            axes[i, j].boxplot([df.loc[df[f] == g, t] for g in groups], showfliers=False)
-            axes[i, j].set_xticks(range(1, len(groups) + 1), [f"{g:g}" if isinstance(g, float) else str(g)[:6] for g in groups], fontsize=7)
+            axes[i, j].boxplot([df.loc[df[f] == g, t] for g in groups], **box_kw)
+            axes[i, j].set_xticks(range(1, len(groups) + 1),
+                                  [f"{g:g}" if isinstance(g, float) else short.get(str(g), str(g)[:4]) for g in groups], fontsize=5.5)
+            axes[i, j].tick_params(axis="y", labelsize=6)
             if i == 1:
-                axes[i, j].set_xlabel(FEATURE_LABEL.get(f, f), fontsize=8)
-        axes[0, 0].set_ylabel(target_label("right_pct"))
-        axes[1, 0].set_ylabel(target_label("negative_fp_pct"))
-    fig.suptitle("D3 开发集：各输入与 RIGHT 不足率、近场误报率的关系（箱线图）")
-    footnote(fig, foot, y=-0.01)
+                axes[i, j].set_xlabel(FEATURE_LABEL.get(f, f), fontsize=6)
+    axes[0, 0].set_ylabel(target_label("right_pct"), fontsize=6.5)
+    axes[1, 0].set_ylabel(target_label("negative_fp_pct"), fontsize=6.5)
+    panel_label(axes[0, 0], "a", x=-0.7, y=1.02)
+    panel_label(axes[1, 0], "b", x=-0.7, y=1.02)
+    fig.suptitle("D3 开发集：各输入取值下的 RIGHT 不足率（a）与近场点误报率（b）", fontsize=8.5, y=0.99)
+    footnote(fig, foot + " 箱体为四分位范围，中线为中位数，须线为 1.5 倍四分位距；每格包含该取值下的全部评分行（不是独立车辆试验）。", y=-0.01)
     save(fig, FIG / "05_特征与目标关系_D3.png")
     mon.tick(1, "探索图 特征与目标关系")
 
 
+class _Quiet:
+    """不显示进度的空监视器（供 explore_from_saved 使用）。"""
+
+    def tick(self, *a, **k):
+        pass
+
+    def set_stage(self, *a, **k):
+        pass
+
+    def line(self, *a, **k):
+        pass
+
+
+def explore_from_saved():
+    """不重建数据：直接读取 data/ 中已保存的 D1–D5，重画全部 17 张探索图。返回图片路径列表。"""
+    import shutil
+
+    if FIG.exists():
+        shutil.rmtree(FIG)
+    data = {n: pd.read_csv(DATA / f"{n}.csv", low_memory=False) for n in ("D1", "D2", "D3", "D4", "D5")}
+    explore(_Quiet(), data)
+    return sorted(FIG.glob("*.png"))
+
+
 if __name__ == "__main__":
+    if "--figures-only" in sys.argv:
+        print(f"重画 {len(explore_from_saved())} 张探索图")
+        sys.exit(0)
     sys.exit(run_main("P0", 7 + 1 + 5 + 5 + 5 + 5 + 1 + 1, build))
