@@ -1,0 +1,76 @@
+{
+  "header": "中期答辩临时训练：基于接触标签纠错前评分，非冻结科研资产。",
+  "case": "v4_r8_fast_entry",
+  "fig13": {
+    "frame_k": 310,
+    "time_s": 6.2,
+    "phase": "入弯",
+    "missed_hold_m2": 8.197008358161165,
+    "missed_damped_m2": 0.19310657152079858,
+    "recovered_m2": 8.003905623356749,
+    "targets_gained": 1481
+  },
+  "fig14": {
+    "cases": [
+      {
+        "case": "改善案例",
+        "idx": 94,
+        "xy": [
+          1.175,
+          19.650000000000002
+        ],
+        "contact_s": 7.175,
+        "valid_hold": 6.46,
+        "valid_damped_d1000": 6.16
+      },
+      {
+        "case": "失败案例",
+        "idx": 17975,
+        "xy": [
+          1.1,
+          18.025000000000002
+        ],
+        "contact_s": 6.855,
+        "valid_hold": 6.38,
+        "valid_damped_d1000": 6.140000000000001
+      }
+    ],
+    "checks": [
+      {
+        "case": "改善案例",
+        "method": "hold",
+        "recomputed_valid_s": 6.46,
+        "stored_valid_s": 6.46,
+        "match": true
+      },
+      {
+        "case": "改善案例",
+        "method": "damped_d1000",
+        "recomputed_valid_s": 6.16,
+        "stored_valid_s": 6.16,
+        "match": true
+      },
+      {
+        "case": "失败案例",
+        "method": "hold",
+        "recomputed_valid_s": 6.38,
+        "stored_valid_s": 6.38,
+        "match": true
+      },
+      {
+        "case": "失败案例",
+        "method": "damped_d1000",
+        "recomputed_valid_s": 6.140000000000001,
+        "stored_valid_s": 6.140000000000001,
+        "match": true
+      }
+    ],
+    "steering_onset_s": 6.12,
+    "n_improved": 340,
+    "n_still_late": 512,
+    "still_late_contact_within_1s_of_onset_share": 0.955078125,
+    "right_targets": 20369,
+    "median_lead_hold_s": 1.9900000000000002,
+    "median_lead_damped_s": 1.9900000000000002
+  }
+}

@@ -107,6 +107,8 @@ def work(mon):
     mon.set_stage("描述性图表")
     run_sub(ROOT / "描述性图表" / "make_figures.py", "描述性图表", mon)
     mon.tick(1)
+    mon.set_stage("案例图（预测区叠加、报警—接触时间轴）")
+    run_sub(ROOT / "描述性图表" / "make_case_figures.py", "案例图", mon)
     mon.set_stage("汇集全部图表")
     run_sub(OUT / "collect_figures.py", "汇集全部图表", mon)
     mon.tick(1)
