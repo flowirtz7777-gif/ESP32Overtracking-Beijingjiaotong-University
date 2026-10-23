@@ -58,11 +58,16 @@
       \begin{enumerate}\small
         \item 为什么做代理模型
         \item 参数编码与输入向量
+        \item 轨迹相似度：样本够不够像
         \item 分组验证方案
         \item 五个模型族
-        \item 结果：分档与外部检验
-        \item 参数重要性
+        \item M1 结果：分档与折外检验
+        \item M3 主模型与外部检验
+        \item 混淆矩阵：三个分类任务
+        \item 参数重要性与部分依赖
       \end{enumerate}
+      \vspace{0.3em}
+      {\scriptsize\color{black!62}共 14 页：B1--B14。}
     \end{column}
   \end{columns}
   \vspace{0.6em}
@@ -595,7 +600,44 @@
   方法专属参数按掩码处理：不适用时记 0。}
 \end{frame}
 
-\begin{frame}{B3\ \ 训练与验证：按完整轨迹隔离}
+\begin{frame}{B3\ \ 39 条轨迹有多像：相似度矩阵}
+  \vspace{-0.55em}
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \begin{center}
+      \includegraphics[width=\textwidth,height=0.795\textheight,keepaspectratio]{img/b5_similarity.png}
+      \end{center}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \footnotesize
+      \textbf{怎么算}\par
+      每条轨迹用 2 方法 $\times$ 8 观测条件 $\times$ 12 后处理变体
+      $=$ \textbf{192 个评分}组成向量，两两求 Spearman 相关，
+      再按层次聚类排序。越亮越像，对角线恒为 1。
+      蓝色标签是 12 条\textbf{选择轨迹}。
+
+      \vspace{0.8em}
+      \textbf{① 轨迹之间高度一致}\par
+      两两相似度\textbf{中位数 0.95}、最低 0.74（近场误报率是 0.97）。
+      不同轨迹对同一组设置的反应几乎一样——
+      \textbf{这是代理模型能推广到新轨迹的前提}。
+
+      \vspace{0.8em}
+      \textbf{② 离群的是极端工况}\par
+      最不典型的是 2\,m/s、2\,°/s 的\textbf{低速慢转三条}
+      （迟报本来就少，小数值排序容易乱），
+      以及最难的 \texttt{v4\_r8\_fast\_entry}（右侧那块暗带）。
+
+      \vspace{0.8em}
+      \textbf{③ 选择集没有单独成簇}\par
+      12 条选择轨迹按车速和转向速率\textbf{穿插}在开发集里，
+      最相似的轨迹只有 \textbf{2/12} 来自开发集。
+      所以外部检验是\textbf{同一几何内部的内插}。
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{B4\ \ 训练与验证：按完整轨迹隔离}
   \vspace{-0.4em}
   \begin{center}
     \includegraphics[width=0.95\textwidth,height=0.74\textheight,keepaspectratio]{img/arch_training.png}
@@ -606,7 +648,7 @@
   另设\textbf{留一动作模板}（每次留出 9 条同模板轨迹）作泛化诊断。}
 \end{frame}
 
-\begin{frame}{B4\ \ 五个模型族与数据}
+\begin{frame}{B5\ \ 五个模型族与数据}
   \centering
   \scriptsize
   \setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.40}
@@ -645,7 +687,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{B5\ \ M1：S1 的 9 个任务全部可学（A 档）}
+\begin{frame}{B6\ \ M1：S1 的 9 个任务全部可学（A 档）}
   \vspace{-0.4em}
   \begin{columns}[T]
     \begin{column}{0.54\textwidth}
@@ -692,7 +734,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{B6\ \ M1：折外预测紧贴对角线}
+\begin{frame}{B7\ \ M1：折外预测紧贴对角线}
   \vspace{-0.45em}
   \begin{columns}[T]
     \begin{column}{0.50\textwidth}
@@ -728,7 +770,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{B7\ \ M1：置换重要性}
+\begin{frame}{B8\ \ M1：置换重要性}
   \vspace{-0.45em}
   \begin{columns}[T]
     \begin{column}{0.53\textwidth}
@@ -761,7 +803,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{B8\ \ M3（主模型）：19 个任务全部 A 档}
+\begin{frame}{B9\ \ M3（主模型）：19 个任务全部 A 档}
   \vspace{-0.5em}
   \begin{columns}[T]
     \begin{column}{0.47\textwidth}
@@ -818,7 +860,7 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{B9\ \ M3：外部检验——规律能推广到新轨迹}
+\begin{frame}{B10\ \ M3：外部检验——规律能推广到新轨迹}
   \vspace{-0.45em}
   \begin{columns}[T]
     \begin{column}{0.50\textwidth}
@@ -855,7 +897,47 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{B10\ \ M3：后处理参数的部分依赖}
+\begin{frame}{B11\ \ M3 的三个分类任务：混淆矩阵}
+  \vspace{-0.55em}
+  \begin{center}
+  \includegraphics[width=0.955\textwidth,height=0.415\textheight,keepaspectratio]{img/b11_confusion.png}
+  \end{center}
+  \vspace{-0.25em}
+  {\scriptsize\color{black!62}\textbf{纵轴$=$实际，横轴$=$预测。}安全优先阈值（目标召回 $\ge$90\%），外部检验的 12 条选择轨迹共 2{,}400 个目标；阈值只用开发集折外预测确定，不在被评估的这批上选。\par}
+  \vspace{0.55em}
+  \begin{columns}[T]
+    \begin{column}{0.50\textwidth}
+      \scriptsize
+      \renewcommand{\arraystretch}{1.22}
+      \begin{tabular}{@{}lcc@{}}
+        \toprule
+        \textbf{任务} & \textbf{默认 0.5} & \textbf{安全优先} \\
+        \midrule
+        出现窗口漏报 & 1.00 / 0.80 & 1.00 / 0.80 \\
+        接触前完全无报警 & 0.96 / 0.79 & 0.99 / 0.76 \\
+        误报预算达标 & 1.00 / 0.88 & 0.97 / 0.91 \\
+        \bottomrule
+      \end{tabular}
+      \vspace{0.3em}
+
+      {\tiny\color{black!62}表中为 召回 / 精确。}
+    \end{column}
+    \begin{column}{0.47\textwidth}
+      \footnotesize
+      \textbf{三个任务为什么放在一起}\par
+      它们都是\textbf{「会不会出问题」}的是非题，不是连续量。
+      漏报是安全指标，宁可多报；误报预算是成本指标，宁可少报。
+      \textbf{同一套模型配两种阈值即可}，不需要分别训练。
+
+      \vspace{0.6em}
+      \textbf{最值得说的一格}\par
+      改阈值后「接触前完全无报警」的漏判从 \textbf{16 个降到 5 个}，
+      精确率只从 0.79 掉到 0.76——\textbf{多报 22 个换回 11 个不漏}。
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{B12\ \ M3：后处理参数的部分依赖}
   \vspace{-0.55em}
   \begin{center}
   \includegraphics[width=0.80\textwidth,height=0.655\textheight,keepaspectratio]{img/m3_f10_pdp_crop.png}
@@ -869,7 +951,7 @@
   代理模型独立复现了 S3 的配对效应方向。}
 \end{frame}
 
-\begin{frame}{B11\ \ 全部 64 个任务的临时表现分档}
+\begin{frame}{B13\ \ 全部 64 个任务的临时表现分档}
   \vspace{-0.45em}
   \begin{center}
   \includegraphics[width=0.97\textwidth,height=0.585\textheight,keepaspectratio]{img/all_f11_tiers.png}
@@ -883,7 +965,7 @@
   分档只衡量\textbf{对已有评分的预测能力}，不是科研准入。}
 \end{frame}
 
-\begin{frame}{B12\ \ 这一部分想说明什么}
+\begin{frame}{B14\ \ 这一部分想说明什么}
   \begin{columns}[T]
     \begin{column}{0.48\textwidth}
       \begin{block}{已经说明的}
